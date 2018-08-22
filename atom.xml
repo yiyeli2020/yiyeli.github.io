@@ -63,32 +63,6 @@
   </entry>
   
   <entry>
-    <title>Hexo+github搭建个人博客问题总结</title>
-    <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
-    <published>2018-08-21T01:58:44.000Z</published>
-    <updated>2018-08-22T10:14:19.065Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="Hexo-github搭建个人博客问题总结"><a href="#Hexo-github搭建个人博客问题总结" class="headerlink" title="Hexo+github搭建个人博客问题总结"></a>Hexo+github搭建个人博客问题总结</h4><p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><a id="more"></a><h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;Hexo-github搭建个人博客问题总结&quot;&gt;&lt;a href=&quot;#Hexo-github搭建个人博客问题总结&quot; class=&quot;headerlink&quot; title=&quot;Hexo+github搭建个人博客问题总结&quot;&gt;&lt;/a&gt;Hexo+github搭建个人博客问题总结&lt;/h4&gt;&lt;p&gt;总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
-    
-      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
     <title>股票交易问题通解小结</title>
     <link href="http://yoursite.com/2018/08/21/%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93%E9%97%AE%E9%A2%98%E9%80%9A%E8%A7%A3%E5%B0%8F%E7%BB%93/"/>
     <id>http://yoursite.com/2018/08/21/股票交易问题通解小结/</id>
@@ -111,6 +85,32 @@
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo+github搭建个人博客问题总结</title>
+    <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
+    <published>2018-08-21T01:58:44.000Z</published>
+    <updated>2018-08-22T10:14:19.065Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="Hexo-github搭建个人博客问题总结"><a href="#Hexo-github搭建个人博客问题总结" class="headerlink" title="Hexo+github搭建个人博客问题总结"></a>Hexo+github搭建个人博客问题总结</h4><p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><a id="more"></a><h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;Hexo-github搭建个人博客问题总结&quot;&gt;&lt;a href=&quot;#Hexo-github搭建个人博客问题总结&quot; class=&quot;headerlink&quot; title=&quot;Hexo+github搭建个人博客问题总结&quot;&gt;&lt;/a&gt;Hexo+github搭建个人博客问题总结&lt;/h4&gt;&lt;p&gt;总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   
