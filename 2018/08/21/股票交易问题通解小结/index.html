@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>股票交易问题通解小结 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="股票交易问题通解小结本文的主要部分来自于leetcode讨论区,后面加上了一点个人的理解和扩展延伸，Leetcode中的股票交易问题共有下列几道：">
+<meta name="keywords" content="LeetCode,Algorithm,Dynamic Programming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="股票交易问题通解小结">
+<meta property="og:url" content="http://yoursite.com/2018/08/21/股票交易问题通解小结/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="股票交易问题通解小结本文的主要部分来自于leetcode讨论区,后面加上了一点个人的理解和扩展延伸，Leetcode中的股票交易问题共有下列几道：">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-22T10:14:24.659Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="股票交易问题通解小结">
+<meta name="twitter:description" content="股票交易问题通解小结本文的主要部分来自于leetcode讨论区,后面加上了一点个人的理解和扩展延伸，Leetcode中的股票交易问题共有下列几道：">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">网址导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/Dynamic-Programming/" style="font-size: 10px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱代码，爱吉他,热爱挑战新事物</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">网址导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-股票交易问题通解小结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/21/股票交易问题通解小结/" class="article-date">
+      <time datetime="2018-08-21T01:58:44.000Z" itemprop="datePublished">2018-08-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      股票交易问题通解小结
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="股票交易问题通解小结"><a href="#股票交易问题通解小结" class="headerlink" title="股票交易问题通解小结"></a>股票交易问题通解小结</h1><p>本文的主要部分来自于leetcode讨论区,后面加上了一点个人的理解和扩展延伸，Leetcode中的股票交易问题共有下列几道：</p>
+<a id="more"></a>
+<pre><code>121.Best Time to Buy and Sell Stock
+122.Best Time to Buy and Sell Stock II
+123.Best Time to Buy and Sell Stock III
+188.Best Time to Buy and Sell Stock IV
+309.Best Time to Buy and Sell Stock with Cooldown
+714.Best Time to Buy and Sell Stock with Transaction Fee
+</code></pre><h2 id="I-–常见情况"><a href="#I-–常见情况" class="headerlink" title="I –常见情况"></a>I –常见情况</h2><p>本文的想法来自于下列的问题：给定一个代表每天股票价格的数组，是什么决定了我们能得到的最大利润？</p>
+<p>大多数人会很快产生类似“那取决于我们处在第几天和我们被允许最多完成多少次交易”。</p>
+<p>当然，这些是重要的因素因为它们在问题描述中就被显示出来。然而，在判断最大利润中有一个隐含因素不是那么明显但却至关重要，它将在下文中被阐述出来。</p>
+<p>首先让我们确定符号来简化我们的分析，令prices作为长度为n的股票价格数组，i标记为第i天（i会从0到n-1)，k标记为被允许完成的最大交易次数,T[i][k]是在第i天的结尾经过最多k次交易所能获得的最大利润。很明显我们有基准情况：T[-1][k]=T[i][0]=0, 那就是没有股票或者没有交易导致没有利润（标记第1天为i=0因此i=0意味着没有股票）。</p>
+<p>现在如果我们能够把T[i][k]和它的子问题T[i-1][k],T[i][k-1],T[i-1][k-1],…，我们会有一个可行的递推关系式<br>使得问题能够递归解决，所以我们怎样实现它呢？<br>最常见的直接方式是看第i天的行动，我们有多少种选择方式？答案是三种：买，卖，休息。我们应该采取哪种呢？</p>
+<p>答案是：我们并不真的知道，但是可以去找哪一种最简单。假设没有其它的约束，我们可以尝试每种选择然后选择使得我们利润最大的一种。</p>
+<p>可是我们确实有一个额外的约束，就是不能在同一时间进行重复交易，意味着如果我们决定在第i天购买，那么我们手中就应该不持有股票；如果我们决定在第i天出售，我们手中应该恰好有一只股票。我们手中<br>的股票数量是上文中提到的会影响我们第i天行为的因素同时也会影响最大利润。</p>
+<p>因此我们对T[i][k]的定义应该被分割成两部分:T[i][k][0]和T[i][k][1],前者标记在最多k次交易和行动后我们手中没有股票的情况下第i天结尾时的最大利润，后者标记在最多k次交易和行动后我们手中只有一只股票的情况下第i天结尾时的最大利润，现在基准情况和递推关系可以被写作：</p>
+<h3 id="1-基准情况："><a href="#1-基准情况：" class="headerlink" title="1.基准情况："></a>1.基准情况：</h3><pre><code>T[-1][k][0]=0, T[-1][k][1]=-Infinity
+T[i][0][0]=0, T[i][0][1]=-Infinity
+</code></pre><h3 id="2-递推关系："><a href="#2-递推关系：" class="headerlink" title="2.递推关系："></a>2.递推关系：</h3><pre><code>T[i][k][0]=max(T[i-1][k][0],T[i-1][k][1]+prices[i])
+T[i][k][1]=max(T[i-1][k][1],T[i-1][k-1][0]-prices[i])
+</code></pre><p>对于基准情况，T[-1][k][0] = T[i][0][0] = 0有同样的含义正如之前当T[-1][k][1] = T[i][0][1] = -Infinity强调了事实对于我们来说如果没有可获得的股票或不被允许交易那么就不可能手中有一只股票。</p>
+<p>对于递推式中的T[i][k][0]，在第i天能采取的行动只有休息和卖，因为我们在一天结束时手中没有股票。T[i-1][k][0]是当采取行动休息时的最大利润，<br>而T[i-1][k][1] + prices[i]则是当行动卖被采取时的最大利润。</p>
+<p>如果最大被允许的交易次数保持不变，由于一次交易包含两种成对的行为-买和卖。只有行为买会改变被允许的最大交易次数。（此处还有一种替代的解释）<br>对于递推式中的T[i][k][1]，在第i天能采取的行动只有休息和买，因为我们在一天结束时手中只有一只股票。T[i-1][k][1]是当采取行动休息时的最大利润，而T[i-1][k-1][0] - prices[i]是当采取购买行为时的最大利润。要注意被允许的最大交易次数会减一，因为在第i天的购买行为会使用掉一次交易次数。</p>
+<p>为了找到最后一天结束时的最大利润，我们能够简化循环通过数组prices并且通过上面的递推关系式更新T[i][k][0]和T[i][k][1]。最终的答案是T[i][k][0]（我们总是有更大的利润如果我们以手中0只股票结束）</p>
+<h2 id="II-–-对特殊情况的应用"><a href="#II-–-对特殊情况的应用" class="headerlink" title="II – 对特殊情况的应用"></a>II – 对特殊情况的应用</h2><p>前面提及的六种股票问题能够被k的值分类，k是被允许的最大交易次数（最后两个也有额外的要求例如冷却期或者交易费）。我会一个接一个的把通用解应用到这些问题上。</p>
+<h3 id="情况I：k-1"><a href="#情况I：k-1" class="headerlink" title="情况I：k=1"></a>情况I：k=1</h3><p>对于这个情况，我们在每天都真的有两个未知变量：T[i][1][0]和T[i][1][1]，递推关系式表示：</p>
+<pre><code>T[i][1][0] = max(T[i-1][1][0], T[i-1][1][1] + prices[i])
+T[i][1][1] = max(T[i-1][1][1], T[i-1][0][0] - prices[i]) = max(T[i-1][1][1], -prices[i])
+</code></pre><p>在第二个方程中我们充分利用了基准情况T[i][0][0]=0。<br>很容易直接写出O(n)时间复杂度和O(n)空间复杂度的解，基于上面的两个方程。可是，如果你注意到在第i天的最大利润事实上只依赖于那些在第i-1天的利润，<br>那么空间复杂度降为O(1)。这是空间最优的解法：</p>
+<pre><code>public int maxProfit(int[] prices){
+    int T_i10=0,T_i11=Integer.MIN_VALUE;
+    for(int price:prices){
+        T_i10=Math.max(T_i10,T_i11 + price);
+        T_i11=Math.max(T_i11,-price);
+    }
+    return T_i10;
+}
+</code></pre><h3 id="情况-II-k-Infinity"><a href="#情况-II-k-Infinity" class="headerlink" title="情况 II: k=+Infinity"></a>情况 II: k=+Infinity</h3><p>如果k是正无穷的，那么在k和k-1之间没有任何真正区别，暗示了T[i-1][k-1][0] = T[i-1][k][0]和T[i-1][k-1][1] = T[i-1][k][1]，因此我们仍然在每天有两个未知变量：T[i][k][0]和T[i][k][1]，k=+Infinity,递推关系式如下：</p>
+<pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])
+T[i][k][1] = max(T[i-1][k][1], T[i-1][k-1][0] - prices[i]) = max(T[i-1][k][1], T[i-1][k][0] - prices[i])
+</code></pre><p>在第二个方程中我们会充分利用T[i-1][k-1][0] = T[i-1][k][0]，O(n)时间复杂度和O(1)空间复杂度的解法如下：</p>
+<pre><code>public int maxProfit(int[] prices) {
+    int T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;
+
+    for (int price : prices) {
+        int T_ik0_old = T_ik0;
+        T_ik0 = Math.max(T_ik0, T_ik1 + price);
+        T_ik1 = Math.max(T_ik1, T_ik0_old - price);
+    }
+
+    return T_ik0;
+}
+</code></pre><p>(注意: 旧值缓存的T_ik0,是变量T_ik0_old,是不可能的，特别感谢0x0101和elvina澄清这一点）</p>
+<p>这个解法提出了一种贪心的策略来获取最大利润：只要可能，在每个最小值出买股票然后在下一个局部最大值时迅速卖出。这等同于在prices中找到递增子序列，在每个子序列中的开头买入，在每个子序列的结尾卖出。这很容易展示这等同于只要有利可图时就积累利润，如<a href="https://discuss.leetcode.com/topic/726/is-this-question-a-joke中提到的。" target="_blank" rel="noopener">https://discuss.leetcode.com/topic/726/is-this-question-a-joke中提到的。</a></p>
+<h3 id="情况-III-k-2"><a href="#情况-III-k-2" class="headerlink" title="情况 III: k=2"></a>情况 III: k=2</h3><p>与k=1的情况类似，除了现在我们每天有四个而不是两个变量：T[i][1][0], T[i][1][1], T[i][2][0], T[i][2][1]，递推关系式如下：</p>
+<pre><code>T[i][2][0] = max(T[i-1][2][0], T[i-1][2][1] + prices[i])
+T[i][2][1] = max(T[i-1][2][1], T[i-1][1][0] - prices[i])
+T[i][1][0] = max(T[i-1][1][0], T[i-1][1][1] + prices[i])
+T[i][1][1] = max(T[i-1][1][1], -prices[i])
+</code></pre><p>在最后一个方程中我们充分利用了基准情况T[i][0][0]=0，下列解有O(n)的空间复杂度和O(1)</p>
+<pre><code>public int maxProfit(int[] prices) {
+    int T_i10 = 0, T_i11 = Integer.MIN_VALUE, T_i20 = 0, T_i21 = Integer.MIN_VALUE;
+
+    for (int price : prices) {
+        T_i20 = Math.max(T_i20, T_i21 + price);
+        T_i21 = Math.max(T_i21, T_i10 - price);
+        T_i10 = Math.max(T_i10, T_i11 + price);
+        T_i11 = Math.max(T_i11, -price);
+    }
+
+    return T_i20;
+}
+</code></pre><h3 id="情况-IV：-k是任意的"><a href="#情况-IV：-k是任意的" class="headerlink" title="情况 IV： k是任意的"></a>情况 IV： k是任意的</h3><p>这是最通用的情况所以在每天我们都需要更新所有的有不同k值的最大利润对应在每天结尾时我们手中有0或1只股票。</p>
+<p>可是，有一个微小的优化我们能够做的是如果k超出了一些临界值，超出了最大的利润不再依赖于允许交易的次数而是被可获得的股票数量限制（prices数组的长度），让我们计算出临界值会是什么。</p>
+<p>一个获利交易花费至少两天（一天买另一天卖，买入价格不少于卖出价格)，如果prices数组的长度是n，最大的获利交易数量是n/2，在这之后没有可能的获益交易，<br>这暗示着最大的利润会保持不变。</p>
+<p>因此，临界k值是n/2，如果给定的k值不小于这个值的时候，换句话说，k&gt;=n/2，我们能够把k拓展到正无穷，问题等价于情况II。</p>
+<p>下列是时间复杂度为O(kn)，空间复杂度O(k)的解，没有优化，代码能够满足大K值时的时间约束。</p>
+<pre><code>public int maxProfit(int k, int[] prices) {
+    if (k &gt;= prices.length &gt;&gt;&gt; 1) {
+    int T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;
+
+    for (int price : prices) {
+    int T_ik0_old = T_ik0;
+    T_ik0 = Math.max(T_ik0, T_ik1 + price);
+    T_ik1 = Math.max(T_ik1, T_ik0_old - price);
+    }
+
+    return T_ik0;
+}
+
+    int[] T_ik0 = new int[k + 1];
+    int[] T_ik1 = new int[k + 1];
+    Arrays.fill(T_ik1, Integer.MIN_VALUE);
+
+    for (int price : prices) {
+        for (int j = k; j &gt; 0; j--) {
+            T_ik0[j] = Math.max(T_ik0[j], T_ik1[j] + price);
+            T_ik1[j] = Math.max(T_ik1[j], T_ik0[j - 1] - price);
+        }
+    }
+
+    return T_ik0[k];
+}
+</code></pre><p>解法类似于<a href="https://discuss.leetcode.com/topic/8984/a-concise-dp-solution-in-java帖子中的解法，这里我使用了T数组的反向循环来避免使用临时变量。它也被证明不使用临时变量做前向循环也是可能的。" target="_blank" rel="noopener">https://discuss.leetcode.com/topic/8984/a-concise-dp-solution-in-java帖子中的解法，这里我使用了T数组的反向循环来避免使用临时变量。它也被证明不使用临时变量做前向循环也是可能的。</a></p>
+<h3 id="情况-V：k-Infinity-有冷却期"><a href="#情况-V：k-Infinity-有冷却期" class="headerlink" title="情况 V：k=+Infinity 有冷却期"></a>情况 V：k=+Infinity 有冷却期</h3><p>这个例子相似于情况II更多是由于他们有同样的k值，除了递推式需要简单的修改来满足冷却期的要求。情况II中给出的原始递推式是：</p>
+<pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])
+T[i][k][1] = max(T[i-1][k][1], T[i-1][k][0] - prices[i])
+</code></pre><p>  但是由于冷却期，我们不能在第i天买入股票如果在第i-1天股票被卖出，因此，在上面的第二个方程中，我们事实上应该用T[i-2][k][0]而不是T[i-1][k][0]<br>如果我们打算在第i天买。其他所有都保持不变并且新的递推式是：</p>
+<pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])
+T[i][k][1] = max(T[i-1][k][1], T[i-2][k][0] - prices[i])
+</code></pre><p>下面是O（n）时间复杂度和O（1）空间复杂度的解法：</p>
+<pre><code>public int maxProfit(int[] prices) {
+    int T_ik0_pre = 0, T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;
+
+    for (int price : prices) {
+        int T_ik0_old = T_ik0;
+        T_ik0 = Math.max(T_ik0, T_ik1 + price);
+        T_ik1 = Math.max(T_ik1, T_ik0_pre - price);
+        T_ik0_pre = T_ik0_old;
+    }
+
+    return T_ik0;
+}
+</code></pre><p>dietpepsi分享了一种非常好的解法，被证明和上述方法相同<a href="https://discuss.leetcode.com/topic/30421/share-my-thinking-process" target="_blank" rel="noopener">https://discuss.leetcode.com/topic/30421/share-my-thinking-process</a></p>
+<h3 id="情况-VI-k-Infinity-但有交易费用"><a href="#情况-VI-k-Infinity-但有交易费用" class="headerlink" title="情况 VI:k=+Infinity 但有交易费用"></a>情况 VI:k=+Infinity 但有交易费用</h3><p>再一次的这个例子等同于情况ＩＩ因为它们有同样的ｋ值，除了现在的递推关系式需要轻微修改来满足交易费的要求。情况ＩＩ给出的原始递推关系式如下：</p>
+<pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])
+T[i][k][1] = max(T[i-1][k][1], T[i-1][k][0] - prices[i])
+</code></pre><p>因为现在我们需要为每次的交易行为付费，在第ｉ天的购买和出售股票获利中应该减去这个值，因此新的递推关系式应该为下面的任意一种：</p>
+<pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])
+T[i][k][1] = max(T[i-1][k][1], T[i-1][k][0] - prices[i] - fee)
+</code></pre><p>或</p>
+<pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i] - fee)
+T[i][k][1] = max(T[i-1][k][1], T[i-1][k][0] - prices[i])
+</code></pre><p>注意当我们减去费用时我们有两个选项，这是因为每次交易都会表征为两个成对出现的行为－－买和卖<br>费用能够被支付当我们买股票（第一组方程）或当我们卖股票（第二组方程），下列是Ｏ(n)时间复杂度和Ｏ(1)空间复杂度的解法对应于这两项选择，第二个解法我们需要注意可能的溢出。</p>
+<h4 id="解法I－－当买入股票时支付交易费"><a href="#解法I－－当买入股票时支付交易费" class="headerlink" title="解法I－－当买入股票时支付交易费"></a>解法I－－当买入股票时支付交易费</h4><pre><code>public int maxProfit(int[] prices, int fee) {
+    int T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;
+
+    for (int price : prices) {
+        int T_ik0_old = T_ik0;
+        T_ik0 = Math.max(T_ik0, T_ik1 + price);
+        T_ik1 = Math.max(T_ik1, T_ik0_old - price - fee);
+    }
+
+    return T_ik0;
+}
+</code></pre><h4 id="解法II－－当售出股票时支付交易费"><a href="#解法II－－当售出股票时支付交易费" class="headerlink" title="解法II－－当售出股票时支付交易费"></a>解法II－－当售出股票时支付交易费</h4><pre><code>public int maxProfit(int[] prices, int fee) {
+    long T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;
+
+    for (int price : prices) {
+        long T_ik0_old = T_ik0;
+        T_ik0 = Math.max(T_ik0, T_ik1 + price - fee);
+        T_ik1 = Math.max(T_ik1, T_ik0_old - price);
+    }
+
+    return (int)T_ik0;
+}
+</code></pre><h1 id="III延伸拓展"><a href="#III延伸拓展" class="headerlink" title="III延伸拓展"></a>III延伸拓展</h1><p>在121. Best Time to Buy and Sell Stock中也可以将其转换成求最大子列和的问题，对于原数组，如果我们将arr[i]-arr[i-1]，也就是股票某日与前一日价格差，依次排列成一个数组，那么所求问题的答案就变成了求这个新数组的最大子列和。</p>
+<p>在求解最大子列和问题时，使用Kadane算法。算法复杂度O（N）,kadane算法利用了数学归纳法的思想。简而言之，给定一个现成的数组，比如说−2, 1, −3, 4, −1, 2, 1, −5, 4，求其中的最大子列和，并不是容易的事情。但如果我们能从第一个数开始，随着数组的扩充，始终对其最大子列和保持跟踪，就可以求出任意一个数组的最大子列和。</p>
+<p>详细的分析一下，往一个长度为i的数组后面插入第i+1个数，这时，数组的最大子列只有两种情况，要么包括第i+1个数，要么不包括第i+1个数。</p>
+<p>即：<br>maxsubarraum = max(以第i+1个数结尾的子列和， 不以第i+1个数结尾的子列和)。</p>
+<p>先计算前者，以第i+1个数结尾的子列和怎么算呢？很简单，要么它是以第i个数结尾的子列作为前缀，要么它不以之作为前缀。假设第i+1个数为x，那么：<br>以第i+1个数结尾的子列和 = max（x，以第i个数结尾的子列和+x)。</p>
+<p>对于kadane算法的扩展还可以见于<code>hihocoder#1800 : 玩具设计师</code>一题中求二维数组的最大矩形和</p>
+<h1 id="IV－－总结"><a href="#IV－－总结" class="headerlink" title="IV－－总结"></a>IV－－总结</h1><p> 总之，最通用的股票问题解法能够被表征为三个因素，ｉ天的序号，最大允许的交易次数ｋ和每天结束后我们手中持有的股票数。</p>
+<p>上文已经展示了最大利润和他们终止情况的递推式，Ｏ(nk)时间复杂度和Ｏ(k)空间复杂度。结果被依次应用于六个例子，后两个由于额外的要求做了轻微的修改。<a href="https://discuss.leetcode.com/user/peterleetcode也介绍了一个很好的解法对于任意k值通用。如果有兴趣可以继续看一下。" target="_blank" rel="noopener">https://discuss.leetcode.com/user/peterleetcode也介绍了一个很好的解法对于任意k值通用。如果有兴趣可以继续看一下。</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2018年08月21日 - 09时58分</p>
+        <p><span>最后更新:</span>2018年08月22日 - 18时14分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/21/股票交易问题通解小结/" title="股票交易问题通解小结">http://yoursite.com/2018/08/21/股票交易问题通解小结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/21/股票交易问题通解小结/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/08/21/Hexo+github搭建个人博客问题总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Hexo+github搭建个人博客问题总结
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#股票交易问题通解小结"><span class="toc-number">1.</span> <span class="toc-text">股票交易问题通解小结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-–常见情况"><span class="toc-number">1.1.</span> <span class="toc-text">I –常见情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-基准情况："><span class="toc-number">1.1.1.</span> <span class="toc-text">1.基准情况：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-递推关系："><span class="toc-number">1.1.2.</span> <span class="toc-text">2.递推关系：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#II-–-对特殊情况的应用"><span class="toc-number">1.2.</span> <span class="toc-text">II – 对特殊情况的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#情况I：k-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">情况I：k=1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况-II-k-Infinity"><span class="toc-number">1.2.2.</span> <span class="toc-text">情况 II: k=+Infinity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况-III-k-2"><span class="toc-number">1.2.3.</span> <span class="toc-text">情况 III: k=2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况-IV：-k是任意的"><span class="toc-number">1.2.4.</span> <span class="toc-text">情况 IV： k是任意的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况-V：k-Infinity-有冷却期"><span class="toc-number">1.2.5.</span> <span class="toc-text">情况 V：k=+Infinity 有冷却期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#情况-VI-k-Infinity-但有交易费用"><span class="toc-number">1.2.6.</span> <span class="toc-text">情况 VI:k=+Infinity 但有交易费用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解法I－－当买入股票时支付交易费"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">解法I－－当买入股票时支付交易费</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解法II－－当售出股票时支付交易费"><span class="toc-number">1.2.6.2.</span> <span class="toc-text">解法II－－当售出股票时支付交易费</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#III延伸拓展"><span class="toc-number">2.</span> <span class="toc-text">III延伸拓展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IV－－总结"><span class="toc-number">3.</span> <span class="toc-text">IV－－总结</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/08/21/Hexo+github搭建个人博客问题总结/" title="上一篇: Hexo+github搭建个人博客问题总结">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Yiye Li
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
