@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-22T12:33:17.376Z</updated>
+  <updated>2018-08-23T01:30:21.787Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在浏览器地址栏输入URL，按下回车后发生了什么</title>
+    <link href="http://yoursite.com/2018/08/23/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5URL%EF%BC%8C%E6%8C%89%E4%B8%8B%E5%9B%9E%E8%BD%A6%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"/>
+    <id>http://yoursite.com/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/</id>
+    <published>2018-08-23T01:06:12.000Z</published>
+    <updated>2018-08-23T01:30:21.787Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="在浏览器地址栏输入URL，按下回车后发生了什么"><a href="#在浏览器地址栏输入URL，按下回车后发生了什么" class="headerlink" title="在浏览器地址栏输入URL，按下回车后发生了什么"></a>在浏览器地址栏输入URL，按下回车后发生了什么</h1><p>这道题目没有所谓的完全的正确答案，这个题目可以让你在任意的一个点深入下去， 只要你对这个点是熟悉的。以下是一个大概流程：</p><a id="more"></a><h2 id="解答1："><a href="#解答1：" class="headerlink" title="解答1："></a>解答1：</h2><h3 id="1-浏览器向DNS服务器查找输入URL对应的IP地址。"><a href="#1-浏览器向DNS服务器查找输入URL对应的IP地址。" class="headerlink" title="1.浏览器向DNS服务器查找输入URL对应的IP地址。"></a>1.浏览器向DNS服务器查找输入URL对应的IP地址。</h3><h3 id="2-DNS服务器返回网站的IP地址。"><a href="#2-DNS服务器返回网站的IP地址。" class="headerlink" title="2.DNS服务器返回网站的IP地址。"></a>2.DNS服务器返回网站的IP地址。</h3><h3 id="3-浏览器根据IP地址与目标web服务器在80端口上建立TCP连接"><a href="#3-浏览器根据IP地址与目标web服务器在80端口上建立TCP连接" class="headerlink" title="3.浏览器根据IP地址与目标web服务器在80端口上建立TCP连接"></a>3.浏览器根据IP地址与目标web服务器在80端口上建立TCP连接</h3><h3 id="4-浏览器获取请求页面的html代码。"><a href="#4-浏览器获取请求页面的html代码。" class="headerlink" title="4.浏览器获取请求页面的html代码。"></a>4.浏览器获取请求页面的html代码。</h3><h3 id="5-浏览器在显示窗口内渲染HTML。"><a href="#5-浏览器在显示窗口内渲染HTML。" class="headerlink" title="5.浏览器在显示窗口内渲染HTML。"></a>5.浏览器在显示窗口内渲染HTML。</h3><h3 id="6-窗口关闭时，浏览器终止与服务器的连接。"><a href="#6-窗口关闭时，浏览器终止与服务器的连接。" class="headerlink" title="6.窗口关闭时，浏览器终止与服务器的连接。"></a>6.窗口关闭时，浏览器终止与服务器的连接。</h3><p>这其中最有趣的是第1步和第2步(域名解析)。我们输入的网址(域名)是IP地址的一个别名， 在一个DNS内，一个域名对应一个IP地址。域名系统(DNS) 的工作就是将域名与它的IP地址对应起来。DNS是分布式的，同时也是具有层级关系的。</p><h2 id="解答2："><a href="#解答2：" class="headerlink" title="解答2："></a>解答2：</h2><p>当我们用浏览器访问一个网页时，浏览器先尝试从Host文件中获取 <a href="http://www.baidu.com/对应的IP地址，如何不能取到就是用DNS协议来获取IP。在DNS协议中PC会向你的本地DNS服务器求助（一般是路由器），希望从本地DNS服务器那里得到百度的IP，如果得不到本地DNS服务器会向更高层次的DNS服务器求助.......,最终总能得到百度的IP。" target="_blank" rel="noopener">http://www.baidu.com/对应的IP地址，如何不能取到就是用DNS协议来获取IP。在DNS协议中PC会向你的本地DNS服务器求助（一般是路由器），希望从本地DNS服务器那里得到百度的IP，如果得不到本地DNS服务器会向更高层次的DNS服务器求助.......,最终总能得到百度的IP。</a></p><p>得到百度的IP，下一步使用TCP协议，建立TCP连接。在TCP协议中建立TCP需要与百度服务器握手三次，你先告诉服务器你要给服务器发东西（SYN），服务器应答你并告诉你它也要给你发东西（SYN，ACK），然后你向应答服务器（SYN，ACK）做出应答，总共来回了三次，成为3次握手。不过，建立TCP连接有个前提，你必须能够成功地把消息发到服务器上。</p><p>为了将消息从你的PC上传到服务器上，需要用到IP协议、ARP协议和OSPF协议。我们都知道，你的PC和百度服务器之间一般会有许多路由器之类的东西，IP协议指定了出发地和目的地；你的数据会经过一个又一个路由器，OSPF决定了会经过哪些路由器（用一种路由算法，找出最佳路径）从一个路由器怎么传给下一个路由器，这是ARP协议的工作，ARP负责求下一个节点的地址。IP协议使用的是IP地址，整个发送过程中只涉及出发地和目的地2个IP地址，而ARP协议使用的是MAC地址，整个发送过程中涉及到每一个节点的MAC地址。</p><p>现在，我们能和服务器通信，还建立TCP连接，下一步就是用HTTP协议请求网页内容了。你发个http请求报文给服务器，如果服务器禁止你访问就给你回个“forbidden”，如果他暂时挂掉了就给你回个“内部服务错误”，如果它正常才给你回个“OK”，并将你要的数据传给你；如果你有其他需要的东西再去给他要。你收到了服务器的回复，是一坨html的文本，浏览器必须能够理解文本的内容，并快速的渲染到屏幕上。渲染出来后，就可以看到网页了。</p><h2 id="解答3"><a href="#解答3" class="headerlink" title="解答3"></a>解答3</h2><h3 id="基本流程："><a href="#基本流程：" class="headerlink" title="基本流程："></a>基本流程：</h3><p>①查询ip地址</p><p>②建立tcp连接，接入服务器</p><p>③浏览器发起http请求</p><p>④服务器后台操作并做出http响应</p><p>⑤网页的解析与渲染</p><h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><p>查询ip地址<br>①浏览器解析出url中的域名。</p><p>②查询浏览器的DNS缓存。</p><p>③浏览器中没有DNS缓存，则查找本地客户端hosts文件有无对应的ip地址。</p><p>④hosts中无，则查找本地DNS服务器（运营商提供的DNS服务器）有无对应的DNS缓存。</p><p>⑤若本地DNS没有DNS缓存，则向根服务器查询，进行递归查找。</p><p>⑥递归查找从顶级域名开始（如.com）,一步步缩小范围，最终客户端取得ip地址。</p><p>tcp连接与http连接<br>①http协议建立在tcp协议之上，http请求前，需先进行tcp连接，形成客户端到服务器的稳定的通道。俗称TCP的三次握手。</p><p>②tcp连接完成后，http请求开始，请求有多种方式，常见的有get，post等。</p><p>③http请求包含请求头，也可能包含请求体两部分，请求头中包含我们希望对请求文件的操作的信息，请求体中包含传递给后台的参数。</p><p>④服务器收到http请求后，后台开始工作，如负载平衡，跨域等，这里就是后端的工作了。</p><p>⑤文件处理完毕，生成响应数据包，响应也包含两部分，响应头和相应体，响应体就是我们所请求的文件。</p><p>⑥经过网络传输，文件被下载到本地客户端，客户端开始加载。</p><p>html渲染<br>①客户端浏览器加载了html文件后，由上到下解析html为DOM树（DOM Tree）。</p><p>②遇到css文件，css中的url发起http请求。</p><p>③这是第二次http请求，由于http1.1协议增加了Connection: keep-alive声明，故tcp连接不会关闭，可以复用。</p><p>④http连接是无状态连接，客户端与服务器端需要重新发起请求–响应。</p><p>在请求css的过程中，解析器继续解析html，然后到了script标签。</p><p>⑤由于script可能会改变DOM结构，故解析器停止生成DOM树，解析器被js阻塞，等待js文件发起http请求，然后加载。这是第三次http请求。js执行完成后解析器继续解析。</p><p>⑥由于css文件可能会影响js文件的执行结果，因此需等css文件加载完成后再执行。</p><p>⑦浏览器收到css文件后，开始解析css文件为CSSOM树（CSS Rule Tree）。</p><p>⑧CSSOM树生成后，DOM Tree与CSS Rule Tree结合生成渲染树（Render Tree）。</p><p>⑨Render Tree会被css文件阻塞，渲染树生成后，先布局，绘制渲染树中节点的属性(位置，宽度，大小等)，然后渲染，页面就会呈现信息。</p><p>⑩继续边解析边渲染，遇到了另一个js文件，js文件执行后改变了DOM树，渲染树从被改变的dom开始再次渲染。</p><p>⑪继续向下渲染，碰到一个img标签，浏览器发起http请求，不会等待img加载完成，继续向下渲染，之后再重新渲染此部分。</p><p>⑫DOM树遇到html结束标签，停止解析，进而渲染结束。</p><h3 id="扩展思考"><a href="#扩展思考" class="headerlink" title="扩展思考"></a>扩展思考</h3><p>有那些网站优化的方法？<br>①减少DNS查询:将服务器域名的ip信息加入本地host文件。</p><p>②减少http请求数量，对于图片使用雪碧图,对于html文件和css文件，js文件分别进行合并操作。</p><p>③减少下载时间：压缩图片，使用压缩应用压缩文档中的空格，删除文件多余的语句和注释，创造自己的js精简库和精简框架,使用本地浏览器缓存。</p><p>④提前渲染开始时间：将css链接放在html头部。</p><p>⑤减轻解析器的阻塞：将js链接放在body尾部</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;在浏览器地址栏输入URL，按下回车后发生了什么&quot;&gt;&lt;a href=&quot;#在浏览器地址栏输入URL，按下回车后发生了什么&quot; class=&quot;headerlink&quot; title=&quot;在浏览器地址栏输入URL，按下回车后发生了什么&quot;&gt;&lt;/a&gt;在浏览器地址栏输入URL，按下回车后发生了什么&lt;/h1&gt;&lt;p&gt;这道题目没有所谓的完全的正确答案，这个题目可以让你在任意的一个点深入下去， 只要你对这个点是熟悉的。以下是一个大概流程：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="TCPIP" scheme="http://yoursite.com/tags/TCPIP/"/>
+    
+      <category term="Web" scheme="http://yoursite.com/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</title>
+    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87Offer59.%E5%AF%B9%E7%A7%B0%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    <id>http://yoursite.com/2018/08/23/剑指Offer59.对称的二叉树/</id>
+    <published>2018-08-23T00:45:12.000Z</published>
+    <updated>2018-08-23T01:03:55.666Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="59-SymmetricalBinaryTree对称的二叉树-CodingInterview"><a href="#59-SymmetricalBinaryTree对称的二叉树-CodingInterview" class="headerlink" title="59.SymmetricalBinaryTree对称的二叉树(CodingInterview)"></a>59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</h1><p>与其类似的一道题是LeetCode上的101. Symmetric Tree</p><p>请实现一个函数，用来判断一颗二叉树是不是对称的。<br>注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。</p><a id="more"></a><h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>定义一种对称的前序遍历算法，即先遍历父节点，再遍历它的右子节点，最后遍历它的左子节点。</p><p>可以通过对比二叉树的前序遍历序列和对称前序遍历序列来判断二叉树是不是对称的。如果两个序列是一样的那么二叉树是对称的。</p><pre><code>#include&lt;iostream&gt;#include &lt;cstdio&gt;#include &quot;BinaryTree.h&quot;using namespace std;bool isSymmetrical(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2);bool isSymmetrical(BinaryTreeNode* pRoot){    return isSymmetrical(pRoot, pRoot);}bool isSymmetrical(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2){    if (pRoot1 == NULL &amp;&amp; pRoot2 == NULL) return true;    else if (pRoot1 == NULL || pRoot2 == NULL) return false;    else if (pRoot1-&gt;m_nValue != pRoot2-&gt;m_nValue) return false;    return isSymmetrical(pRoot1-&gt;m_pLeft, pRoot2-&gt;m_pRight) &amp;&amp; isSymmetrical(pRoot2-&gt;m_pRight, pRoot1-&gt;m_pLeft);}// ====================测试代码====================void Test(char* testName, BinaryTreeNode* pRoot, bool expected){    if (testName != nullptr)        printf(&quot;%s begins: &quot;, testName);    if (isSymmetrical(pRoot) == expected)        printf(&quot;Passed.\n&quot;);    else        printf(&quot;FAILED.\n&quot;);}//            8//        6      6//       5 7    7 5void Test1(){    BinaryTreeNode* pNode8 = CreateBinaryTreeNode(8);    BinaryTreeNode* pNode61 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode62 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode51 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode71 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode72 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode52 = CreateBinaryTreeNode(5);    ConnectTreeNodes(pNode8, pNode61, pNode62);    ConnectTreeNodes(pNode61, pNode51, pNode71);    ConnectTreeNodes(pNode62, pNode72, pNode52);    Test(&quot;Test1&quot;, pNode8, true);    DestroyTree(pNode8);}//            8//        6      9//       5 7    7 5void Test2(){    BinaryTreeNode* pNode8 = CreateBinaryTreeNode(8);    BinaryTreeNode* pNode61 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode9 = CreateBinaryTreeNode(9);    BinaryTreeNode* pNode51 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode71 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode72 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode52 = CreateBinaryTreeNode(5);    ConnectTreeNodes(pNode8, pNode61, pNode9);    ConnectTreeNodes(pNode61, pNode51, pNode71);    ConnectTreeNodes(pNode9, pNode72, pNode52);    Test(&quot;Test2&quot;, pNode8, false);    DestroyTree(pNode8);}//            8//        6      6//       5 7    7void Test3(){    BinaryTreeNode* pNode8 = CreateBinaryTreeNode(8);    BinaryTreeNode* pNode61 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode62 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode51 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode71 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode72 = CreateBinaryTreeNode(7);    ConnectTreeNodes(pNode8, pNode61, pNode62);    ConnectTreeNodes(pNode61, pNode51, pNode71);    ConnectTreeNodes(pNode62, pNode72, nullptr);    Test(&quot;Test3&quot;, pNode8, false);    DestroyTree(pNode8);}//               5//              / \//             3   3//            /     \//           4       4//          /         \//         2           2//        /             \//       1               1void Test4(){    BinaryTreeNode* pNode5 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode21 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode11 = CreateBinaryTreeNode(1);    BinaryTreeNode* pNode12 = CreateBinaryTreeNode(1);    ConnectTreeNodes(pNode5, pNode31, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, nullptr, pNode42);    ConnectTreeNodes(pNode41, pNode21, nullptr);    ConnectTreeNodes(pNode42, nullptr, pNode22);    ConnectTreeNodes(pNode21, pNode11, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode12);    Test(&quot;Test4&quot;, pNode5, true);    DestroyTree(pNode5);}//               5//              / \//             3   3//            /     \//           4       4//          /         \//         6           2//        /             \//       1               1void Test5(){    BinaryTreeNode* pNode5 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode6 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode11 = CreateBinaryTreeNode(1);    BinaryTreeNode* pNode12 = CreateBinaryTreeNode(1);    ConnectTreeNodes(pNode5, pNode31, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, nullptr, pNode42);    ConnectTreeNodes(pNode41, pNode6, nullptr);    ConnectTreeNodes(pNode42, nullptr, pNode22);    ConnectTreeNodes(pNode6, pNode11, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode12);    Test(&quot;Test5&quot;, pNode5, false);    DestroyTree(pNode5);}//               5//              / \//             3   3//            /     \//           4       4//          /         \//         2           2//                      \//                       1void Test6(){    BinaryTreeNode* pNode5 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode21 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode12 = CreateBinaryTreeNode(1);    ConnectTreeNodes(pNode5, pNode31, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, nullptr, pNode42);    ConnectTreeNodes(pNode41, pNode21, nullptr);    ConnectTreeNodes(pNode42, nullptr, pNode22);    ConnectTreeNodes(pNode21, nullptr, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode12);    Test(&quot;Test6&quot;, pNode5, false);    DestroyTree(pNode5);}// 只有一个结点void Test7(){    BinaryTreeNode* pNode1 = CreateBinaryTreeNode(1);    Test(&quot;Test7&quot;, pNode1, true);    DestroyTree(pNode1);}// 没有结点void Test8(){    Test(&quot;Test8&quot;, nullptr, true);}// 所有结点都有相同的值，树对称//               5//              / \//             5   5//            /     \//           5       5//          /         \//         5           5void Test9(){    BinaryTreeNode* pNode1 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode21 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(5);    ConnectTreeNodes(pNode1, pNode21, pNode22);    ConnectTreeNodes(pNode21, pNode31, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, nullptr, pNode42);    ConnectTreeNodes(pNode41, nullptr, nullptr);    ConnectTreeNodes(pNode42, nullptr, nullptr);    Test(&quot;Test9&quot;, pNode1, true);    DestroyTree(pNode1);}// 所有结点都有相同的值，树不对称//               5//              / \//             5   5//            /     \//           5       5//          /       ///         5       5void Test10(){    BinaryTreeNode* pNode1 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode21 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(5);    ConnectTreeNodes(pNode1, pNode21, pNode22);    ConnectTreeNodes(pNode21, pNode31, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, pNode42, nullptr);    ConnectTreeNodes(pNode41, nullptr, nullptr);    ConnectTreeNodes(pNode42, nullptr, nullptr);    Test(&quot;Test10&quot;, pNode1, false);    DestroyTree(pNode1);}void main(int argc, char* argv[]){    Test1();    Test2();    Test3();    Test4();    Test5();    Test6();    Test7();    Test8();    Test9();    Test10();}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;59-SymmetricalBinaryTree对称的二叉树-CodingInterview&quot;&gt;&lt;a href=&quot;#59-SymmetricalBinaryTree对称的二叉树-CodingInterview&quot; class=&quot;headerlink&quot; title=&quot;59.SymmetricalBinaryTree对称的二叉树(CodingInterview)&quot;&gt;&lt;/a&gt;59.SymmetricalBinaryTree对称的二叉树(CodingInterview)&lt;/h1&gt;&lt;p&gt;与其类似的一道题是LeetCode上的101. Symmetric Tree&lt;/p&gt;
+&lt;p&gt;请实现一个函数，用来判断一颗二叉树是不是对称的。&lt;br&gt;注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
+    
+      <category term="BinaryTree" scheme="http://yoursite.com/tags/BinaryTree/"/>
+    
+  </entry>
   
   <entry>
     <title>300. Longest Increasing Subsequence最长上升子序列</title>
@@ -45,6 +94,38 @@
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>64.StreamMedian数据流中的中位数(Coding Interviews )</title>
+    <link href="http://yoursite.com/2018/08/22/%E5%89%91%E6%8C%87Offer64.%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/"/>
+    <id>http://yoursite.com/2018/08/22/剑指Offer64.数据流中的中位数/</id>
+    <published>2018-08-22T01:58:44.000Z</published>
+    <updated>2018-08-23T00:32:07.649Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="64-StreamMedian数据流中的中位数-Coding-Interviews"><a href="#64-StreamMedian数据流中的中位数-Coding-Interviews" class="headerlink" title="64.StreamMedian数据流中的中位数(Coding Interviews )"></a>64.StreamMedian数据流中的中位数(Coding Interviews )</h1><p>/* </p><ul><li>Question Description:</li><li>(Question 69 in <coding intervies="">) How do you find the median from a stream of numbers? </coding></li><li>The median of a set of numbers is the middle one when they are arranged in order. If the </li><li>count of numbers is even, the median is defined as the average value of the two numbers in the middle.<br>*/</li></ul><a id="more"></a><p>将数据在容器中排序，将整个数据容器分隔成两部分。位于容器左边部分的数据比右边的数据小。中位数可以由两个指针指向的数据得到。如果容器中数据的数目是奇数，那么两个指针指向同一个数据。指针P1指向左边部分最大的数，指针P2指向右边部分最小的数。</p><p>如果能保证数据容器左边的数据都小于右边的数据，即使左右两边内部的数据没有排序，也可以根据左边最大的数及右边最小的数得到中位数。</p><p>使用一个最大堆来实现左边的数据容器，使用最小堆实现右边的数据容器。往堆中插入一个数据的时间效率是O(logn).由于只需要O(1）时间就可以得到位于堆顶的数据，因此得到中位数的时间效率是O(1)。</p><p>为了保证数据平均分配到两个堆中，可以在数据的总数目是偶数时把新数据插入到最小堆中，否则插入到最大堆中。</p><p>还要保证最大堆中里的所有数据都要小于最小堆中的数据。当数据的总数目是偶数时，按照前面的分配规则会把新的数据插入到最小堆中。如果此时这个新的数据比最大堆中的一些数据要小，那么</p><p>首先可以把这个新的数据插入到最大堆中，</p><p>接着把最大堆中的最大的数字拿出来插入到最小堆中。</p><p>由于最终插入到最小堆的数字是原最大堆中最大的数字，这样就保证了最小堆中所有数字都大于最大堆中的数字。</p><h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><pre><code>#include &lt;stdio.h&gt;#include &lt;algorithm&gt;#include &lt;vector&gt;#include &lt;functional&gt;using namespace std;template&lt;typename T&gt; class DynamicArray{public:    void Insert(T num)    {        if (((min.size() + max.size()) &amp; 1) == 0) {// even length             if (max.size() &gt; 0 &amp;&amp; num &lt; max[0]) {//new num is lower than  some numbers in the maxheap                max.push_back(num);                push_heap(max.begin(), max.end(), less&lt;T&gt;());// make the max heap                num = max[0];                pop_heap(max.begin(), max.end(), less&lt;T&gt;());                max.pop_heap();            }            min.push_heap(num);            push_heap(min.begin(), min.end(), greater&lt;T&gt;());//make the min heap        }        else {//odd length            if (min.size() &gt; 0 &amp;&amp; min[0] &lt; num) {                min.push_back(num);                push_heap(min, begin(), min.end(), greater&lt;T&gt;());                num = min[0];                pop_heap(min.begin(), min.end(), greater&lt;T&gt;());                min.pop_heap();            }            max.push_back(num);            push_heap(max.begin(), max.end(), less&lt;T&gt;());        }    }    T GetMedian()    {         int size = min.size() + max.size();        if (size == 0) throw exception(&quot;No numbers are available&quot;);        T median = 0;        if ((size &amp; 1) == 1) meidan = min[0];// only has one number        else median = (min[0] + max[0]) / 2;        return median;    }private:    vector&lt;T&gt; min;//min heap    vector&lt;T&gt; max;//max heap};// ==================== Test Code ====================void Test(char* testName, DynamicArray&lt;double&gt;&amp; numbers, double expected){    if(testName != NULL)        printf(&quot;%s begins: &quot;, testName);    if(abs(numbers.GetMedian() - expected) &lt; 0.0000001)        printf(&quot;Passed.\n&quot;);    else        printf(&quot;FAILED.\n&quot;);}int main(int argc, char* argv[]){    DynamicArray&lt;double&gt; numbers;    printf(&quot;Test1 begins: &quot;);    try    {        numbers.GetMedian();        printf(&quot;FAILED.\n&quot;);    }    catch(exception e)    {        printf(&quot;Passed.\n&quot;);    }    numbers.Insert(5);    Test(&quot;Test2&quot;, numbers, 5);    numbers.Insert(2);    Test(&quot;Test3&quot;, numbers, 3.5);    numbers.Insert(3);    Test(&quot;Test4&quot;, numbers, 3);    numbers.Insert(4);    Test(&quot;Test6&quot;, numbers, 3.5);    numbers.Insert(1);    Test(&quot;Test5&quot;, numbers, 3);    numbers.Insert(6);    Test(&quot;Test7&quot;, numbers, 3.5);    numbers.Insert(7);    Test(&quot;Test8&quot;, numbers, 4);    numbers.Insert(0);    Test(&quot;Test9&quot;, numbers, 3.5);    numbers.Insert(8);    Test(&quot;Test10&quot;, numbers, 4);    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;64-StreamMedian数据流中的中位数-Coding-Interviews&quot;&gt;&lt;a href=&quot;#64-StreamMedian数据流中的中位数-Coding-Interviews&quot; class=&quot;headerlink&quot; title=&quot;64.StreamMedian数据流中的中位数(Coding Interviews )&quot;&gt;&lt;/a&gt;64.StreamMedian数据流中的中位数(Coding Interviews )&lt;/h1&gt;&lt;p&gt;/* &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Question Description:&lt;/li&gt;
+&lt;li&gt;(Question 69 in &lt;coding intervies=&quot;&quot;&gt;) How do you find the median from a stream of numbers? &lt;/coding&gt;&lt;/li&gt;
+&lt;li&gt;The median of a set of numbers is the middle one when they are arranged in order. If the &lt;/li&gt;
+&lt;li&gt;count of numbers is even, the median is defined as the average value of the two numbers in the middle.&lt;br&gt;*/&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
+    
+      <category term="Max Heap" scheme="http://yoursite.com/tags/Max-Heap/"/>
+    
+      <category term="Template" scheme="http://yoursite.com/tags/Template/"/>
     
   </entry>
   
@@ -167,9 +248,9 @@
     
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
   </entry>
   
