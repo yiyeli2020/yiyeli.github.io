@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>697. Degree of an Array数组的度 | Yiye Li</title>
+  <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="697. Degree of an Array数组的度给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。 你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。">
-<meta name="keywords" content="LeetCode,Array">
+  <meta name="description" content="538. Convert BST to Greater Tree把二叉搜索树转换为累加树给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。">
+<meta name="keywords" content="LeetCode,Binary Search Tree">
 <meta property="og:type" content="article">
-<meta property="og:title" content="697. Degree of an Array数组的度">
-<meta property="og:url" content="http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/index.html">
+<meta property="og:title" content="538. Convert BST to Greater Tree把二叉搜索树转换为累加树">
+<meta property="og:url" content="http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="697. Degree of an Array数组的度给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。 你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。">
+<meta property="og:description" content="538. Convert BST to Greater Tree把二叉搜索树转换为累加树给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-24T07:05:54.170Z">
+<meta property="og:updated_time" content="2018-08-24T13:02:28.972Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="697. Degree of an Array数组的度">
-<meta name="twitter:description" content="697. Degree of an Array数组的度给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。 你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。">
+<meta name="twitter:title" content="538. Convert BST to Greater Tree把二叉搜索树转换为累加树">
+<meta name="twitter:description" content="538. Convert BST to Greater Tree把二叉搜索树转换为累加树给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -214,10 +214,10 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-697. Degree of an Array数组的度" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-538. Convert BST to Greater Tree把二叉搜索树转换为累加树" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/24/697. Degree of an Array数组的度/" class="article-date">
+      <a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" class="article-date">
       <time datetime="2018-08-24T05:36:12.000Z" itemprop="datePublished">2018-08-24</time>
 </a>
     </div>
@@ -231,7 +231,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      697. Degree of an Array数组的度
+      538. Convert BST to Greater Tree把二叉搜索树转换为累加树
     </h1>
   
 
@@ -246,7 +246,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search-Tree/">Binary Search Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -256,66 +256,26 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="697-Degree-of-an-Array数组的度"><a href="#697-Degree-of-an-Array数组的度" class="headerlink" title="697. Degree of an Array数组的度"></a>697. Degree of an Array数组的度</h1><p>给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。</p>
-<p>你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。</p>
+        <h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p>
 <a id="more"></a>
-<p>示例 1:</p>
-<p>输入: </p>
-<pre><code>[1, 2, 2, 3, 1]
-</code></pre><p>输出: 2<br>解释:<br>输入数组的度是2，因为元素1和2的出现频数最大，均为2.<br>连续子数组里面拥有相同度的有如下所示:</p>
-<pre><code>[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]
-</code></pre><p>最短连续子数组[2, 2]的长度为2，所以返回2.<br>示例 2:</p>
-<p>输入: </p>
-<pre><code>[1,2,2,3,1,4,2]
-</code></pre><p>输出: 6<br>注意:</p>
-<p>nums.length 在1到50,000区间范围内。<br>nums[i] 是一个在0到49,999范围内的整数。</p>
-<!-- more -->
-<h2 id="Brute-Force思路"><a href="#Brute-Force思路" class="headerlink" title="Brute Force思路"></a>Brute Force思路</h2><p>穷举所有的子数组然后将其度与原数组的度比较，相等则更新最小长度。但会超时。</p>
+<p>例如：</p>
+<p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p>
+<p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p>
 <pre><code>class Solution {
+private:
+    int cur_sum = 0;
 public:
-    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {
-        int minlen=nums.size();
-        int degree=getdegree(nums,0,nums.size()-1);
-        for(int i=0;i&lt;nums.size();i++){
-            for(int j=i+1;j&lt;nums.size();j++){
-                if(getdegree(nums,i,j)==degree) minlen=min(minlen,j-i+1);
-            }
-        }
-        return minlen;
+    void travel(TreeNode* root){
+        if (!root) return;
+        if (root-&gt;right) travel(root-&gt;right);
 
+        root-&gt;val = (cur_sum += root-&gt;val);
+        if (root-&gt;left) travel(root-&gt;left);
     }
-    int getdegree(vector&lt;int&gt;&amp; arr,int begin,int end){
-        int degree=0;
-        unordered_map&lt;int,int&gt; fre;
-        for(int i=begin;i&lt;=end;i++){
-            fre[arr[i]]++;
-        }
-        for(auto d:fre){
-            degree=max(degree,d.second);
-        }
-        return degree;
-    }
-};
-</code></pre><h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><p>使用两个哈希表，一个记录字符的开始位置，另一个记录字符的出现频率<br>一旦一个特定字符的频率大于其他的，我们更新这个变量的长度，当两个变量有同样的频率，只比较它们的长度选择较短的一个</p>
-<pre><code>class Solution {
-public:
-    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {
-        unordered_map&lt;int,int&gt; startindex,frequency;
-        int fre=0,len=nums.size();
-        for(int i=0;i&lt;nums.size();i++){
-            frequency[nums[i]]++;
-            if(startindex.count(nums[i])==0) startindex[nums[i]]=i;//first appear
-            if(frequency[nums[i]]==fre){//第i个字符的度与截止到当前的数组度相同
-                len=min(len,i-startindex[nums[i]]+1);
-
-            }
-            else if(frequency[nums[i]]&gt;fre){//需要更新度和长度
-                fre=frequency[nums[i]];
-                len=i-startindex[nums[i]]+1;
-            }
-        }
-
-        return len;
+    TreeNode* convertBST(TreeNode* root) {
+        travel(root);
+        return root;
     }
 };
 </code></pre>
@@ -373,13 +333,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
         <p><span>发布时间:</span>2018年08月24日 - 13时36分</p>
-        <p><span>最后更新:</span>2018年08月24日 - 15时05分</p>
+        <p><span>最后更新:</span>2018年08月24日 - 21时02分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/24/697. Degree of an Array数组的度/" title="697. Degree of an Array数组的度">http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树">http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -392,18 +352,9 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          538. Convert BST to Greater Tree把二叉搜索树转换为累加树
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/24/485. Max Consecutive Ones/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">485. Max Consecutive Ones最大连续1的个数</div>
+    <a href="/2018/08/24/697. Degree of an Array数组的度/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">697. Degree of an Array数组的度</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -414,7 +365,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#697-Degree-of-an-Array数组的度"><span class="toc-number">1.</span> <span class="toc-text">697. Degree of an Array数组的度</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Brute-Force思路"><span class="toc-number">1.1.</span> <span class="toc-text">Brute Force思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#O-n-解法"><span class="toc-number">1.2.</span> <span class="toc-text">O(n)解法</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><span class="toc-number">1.</span> <span class="toc-text">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -480,13 +431,11 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" title="上一篇: 538. Convert BST to Greater Tree把二叉搜索树转换为累加树">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/24/485. Max Consecutive Ones/" title="下一篇: 485. Max Consecutive Ones最大连续1的个数">
+            <a href="/2018/08/24/697. Degree of an Array数组的度/" title="下一篇: 697. Degree of an Array数组的度">
                 <i class="fa fa-angle-right"></i>
             </a>
         
