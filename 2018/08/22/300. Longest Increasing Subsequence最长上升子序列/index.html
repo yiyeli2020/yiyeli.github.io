@@ -5,18 +5,18 @@
   
   <title>300. Longest Increasing Subsequence最长上升子序列 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="300. Longest Increasing Subsequence最长上升子序列给定一个无序的整数数组，找到其中最长上升子序列的长度。 示例: 输入:    [10,9,2,5,3,7,101,18] 输出: 4  解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。 说明: 可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。">
+  <meta name="description" content="300. Longest Increasing Subsequence最长上升子序列给定一个无序的整数数组，找到其中最长上升子序列的长度。">
 <meta name="keywords" content="LeetCode,Dynamic Programming,Binary Search">
 <meta property="og:type" content="article">
 <meta property="og:title" content="300. Longest Increasing Subsequence最长上升子序列">
 <meta property="og:url" content="http://yoursite.com/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="300. Longest Increasing Subsequence最长上升子序列给定一个无序的整数数组，找到其中最长上升子序列的长度。 示例: 输入:    [10,9,2,5,3,7,101,18] 输出: 4  解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。 说明: 可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。">
+<meta property="og:description" content="300. Longest Increasing Subsequence最长上升子序列给定一个无序的整数数组，找到其中最长上升子序列的长度。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-22T12:33:17.376Z">
+<meta property="og:updated_time" content="2018-08-24T07:08:41.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="300. Longest Increasing Subsequence最长上升子序列">
-<meta name="twitter:description" content="300. Longest Increasing Subsequence最长上升子序列给定一个无序的整数数组，找到其中最长上升子序列的长度。 示例: 输入:    [10,9,2,5,3,7,101,18] 输出: 4  解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。 说明: 可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n2) 。">
+<meta name="twitter:description" content="300. Longest Increasing Subsequence最长上升子序列给定一个无序的整数数组，找到其中最长上升子序列的长度。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -142,7 +142,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Algorithm/" style="font-size: 13.33px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 10px;">Array</a> <a href="/tags/Binary-Search/" style="font-size: 13.33px;">Binary Search</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 20px;">Coding Interviews</a> <a href="/tags/Dynamic-Programming/" style="font-size: 16.67px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeetCode/" style="font-size: 16.67px;">LeetCode</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10px;">Template</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a>
+                        <a href="/tags/Algorithm/" style="font-size: 12px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 18px;">Array</a> <a href="/tags/Binary-Search/" style="font-size: 12px;">Binary Search</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/C/" style="font-size: 12px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 16px;">Coding Interviews</a> <a href="/tags/Dynamic-Programming/" style="font-size: 14px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10px;">Template</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a>
                     </div>
                 </section>
                 
@@ -257,13 +257,13 @@
       
           
         <h1 id="300-Longest-Increasing-Subsequence最长上升子序列"><a href="#300-Longest-Increasing-Subsequence最长上升子序列" class="headerlink" title="300. Longest Increasing Subsequence最长上升子序列"></a>300. Longest Increasing Subsequence最长上升子序列</h1><p>给定一个无序的整数数组，找到其中最长上升子序列的长度。</p>
+<a id="more"></a>
 <p>示例:</p>
 <p>输入:<br>    [10,9,2,5,3,7,101,18]</p>
 <p>输出: 4 </p>
 <p>解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。</p>
 <p>说明:</p>
 <p>可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。<br>你算法的时间复杂度应该为 O(n2) 。</p>
-<a id="more"></a>
 <p>进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?</p>
 <h2 id="动态规划解法："><a href="#动态规划解法：" class="headerlink" title="动态规划解法："></a>动态规划解法：</h2><p>首先来看一种动态规划Dynamic Programming的解法，这种解法的时间复杂度为O(n^2)，类似brute force的解法，我们维护一个一维dp数组，其中dp[i]表示以nums[i]为结尾的最长递增子串的长度，对于每一个nums[i]，我们从第一个数再搜索到i，如果发现某个数小于nums[i]，我们更新dp[i]，更新方法为dp[i] = max(dp[i], dp[j] + 1)，即比较当前dp[i]的值和那个小于num[i]的数的dp值加1的大小，我们就这样不断的更新dp数组，到最后dp数组中最大的值就是我们要返回的LIS的长度，参见代码如下：</p>
 <pre><code>class Solution {
@@ -386,7 +386,7 @@ public:
         <p><span>本文标题:</span><a href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
         <p><span>发布时间:</span>2018年08月22日 - 20时30分</p>
-        <p><span>最后更新:</span>2018年08月22日 - 20时33分</p>
+        <p><span>最后更新:</span>2018年08月24日 - 15时08分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/" title="300. Longest Increasing Subsequence最长上升子序列">http://yoursite.com/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -501,7 +501,7 @@ public:
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");

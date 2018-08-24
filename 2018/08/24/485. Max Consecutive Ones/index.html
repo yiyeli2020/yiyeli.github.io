@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo+github搭建个人博客问题总结 | Yiye Li</title>
+  <title>485. Max Consecutive Ones最大连续1的个数 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hexo+github搭建个人博客问题总结总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法">
-<meta name="keywords" content="Hexo,Github,Git">
+  <meta name="description" content="485. Max Consecutive Ones最大连续1的个数给定一个二进制数组， 计算其中最大连续1的个数。">
+<meta name="keywords" content="LeetCode,Array">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo+github搭建个人博客问题总结">
-<meta property="og:url" content="http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/index.html">
+<meta property="og:title" content="485. Max Consecutive Ones最大连续1的个数">
+<meta property="og:url" content="http://yoursite.com/2018/08/24/485. Max Consecutive Ones/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="Hexo+github搭建个人博客问题总结总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法">
+<meta property="og:description" content="485. Max Consecutive Ones最大连续1的个数给定一个二进制数组， 计算其中最大连续1的个数。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-22T10:14:19.065Z">
+<meta property="og:updated_time" content="2018-08-24T07:05:48.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo+github搭建个人博客问题总结">
-<meta name="twitter:description" content="Hexo+github搭建个人博客问题总结总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法">
+<meta name="twitter:title" content="485. Max Consecutive Ones最大连续1的个数">
+<meta name="twitter:description" content="485. Max Consecutive Ones最大连续1的个数给定一个二进制数组， 计算其中最大连续1的个数。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -214,11 +214,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Hexo+github搭建个人博客问题总结" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-485. Max Consecutive Ones" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/21/Hexo+github搭建个人博客问题总结/" class="article-date">
-      <time datetime="2018-08-21T01:58:44.000Z" itemprop="datePublished">2018-08-21</time>
+      <a href="/2018/08/24/485. Max Consecutive Ones/" class="article-date">
+      <time datetime="2018-08-24T05:36:12.000Z" itemprop="datePublished">2018-08-24</time>
 </a>
     </div>
   
@@ -231,7 +231,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hexo+github搭建个人博客问题总结
+      485. Max Consecutive Ones最大连续1的个数
     </h1>
   
 
@@ -246,7 +246,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -256,33 +256,28 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="Hexo-github搭建个人博客问题总结"><a href="#Hexo-github搭建个人博客问题总结" class="headerlink" title="Hexo+github搭建个人博客问题总结"></a>Hexo+github搭建个人博客问题总结</h4><p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p>
+        <h1 id="485-Max-Consecutive-Ones最大连续1的个数"><a href="#485-Max-Consecutive-Ones最大连续1的个数" class="headerlink" title="485. Max Consecutive Ones最大连续1的个数"></a>485. Max Consecutive Ones最大连续1的个数</h1><p>给定一个二进制数组， 计算其中最大连续1的个数。</p>
 <a id="more"></a>
-<h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p>
-<pre><code>remote: Permission to B/B.github.io.git denied to A.
-fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403
-FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
-Error: remote: Permission to B/B.github.io.git denied to A.
-fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403
-</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p>
-<pre><code># 该配置用于账户A
-Host A # Host 服务器别名
-HostName github.com  # HostName 服务器ip地址或机器名
-User A # User连接服务器的用户名
-IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径
-# 该配置用于账户B
-Host B # Host 服务器别名
-HostName github.com # HostName 服务器ip地址或机器名
-User B # User连接服务器的用户名
-IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径
-</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p>
-<h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p>
-<h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p>
-<pre><code>nothing to commit (working directory clean)
-</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p>
-<pre><code>rm -rf .deploy_git
-hexo generater
-hexo deploy
+<p>示例 1:</p>
+<p>输入: </p>
+<pre><code>[1,1,0,1,1,1]
+</code></pre><p>输出: 3<br>解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.<br>注意：</p>
+<p>输入的数组只包含 0 和1。<br>输入数组的长度是正整数，且不超过 10,000。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>定义局部最大和全局最大</p>
+<pre><code>class Solution {
+public:
+    int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) {
+        int maxlen=0,locallen=0;
+        for(auto n:nums){
+            if((n&amp;1)==0) locallen=0;
+            else {
+                locallen++;
+                maxlen=max(maxlen,locallen);
+            }
+        }
+        return maxlen;
+    }
+};
 </code></pre>
       
       
@@ -338,13 +333,13 @@ hexo deploy
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月21日 - 09时58分</p>
-        <p><span>最后更新:</span>2018年08月22日 - 18时14分</p>
+        <p><span>发布时间:</span>2018年08月24日 - 13时36分</p>
+        <p><span>最后更新:</span>2018年08月24日 - 15时05分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/21/Hexo+github搭建个人博客问题总结/" title="Hexo+github搭建个人博客问题总结">http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/24/485. Max Consecutive Ones/" title="485. Max Consecutive Ones最大连续1的个数">http://yoursite.com/2018/08/24/485. Max Consecutive Ones/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/24/485. Max Consecutive Ones/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -357,18 +352,18 @@ hexo deploy
 
 <nav id="article-nav">
   
-    <a href="/2018/08/21/C++基础概念II/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/08/24/697. Degree of an Array数组的度/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          C++基础概念II
+          697. Degree of an Array数组的度
         
       </div>
     </a>
   
   
-    <a href="/2017/11/16/前言/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">前言</div>
+    <a href="/2018/08/24/885. Spiral Matrix III/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">885. Spiral Matrix III螺旋矩阵 III</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -379,7 +374,7 @@ hexo deploy
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Hexo-github搭建个人博客问题总结"><span class="toc-number">1.</span> <span class="toc-text">Hexo+github搭建个人博客问题总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题1：本地同时配置多个github账号导致博客部署失败"><span class="toc-number"></span> <span class="toc-text">问题1：本地同时配置多个github账号导致博客部署失败</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题2：历史删除文件仍存在于repository中"><span class="toc-number"></span> <span class="toc-text">问题2：历史删除文件仍存在于repository中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题3：Hexo-deploy-发布不成功"><span class="toc-number"></span> <span class="toc-text">问题3：Hexo deploy 发布不成功</span></a>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#485-Max-Consecutive-Ones最大连续1的个数"><span class="toc-number">1.</span> <span class="toc-text">485. Max Consecutive Ones最大连续1的个数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.1.</span> <span class="toc-text">思路</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -445,13 +440,13 @@ hexo deploy
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/21/C++基础概念II/" title="上一篇: C++基础概念II">
+            <a href="/2018/08/24/697. Degree of an Array数组的度/" title="上一篇: 697. Degree of an Array数组的度">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/11/16/前言/" title="下一篇: 前言">
+            <a href="/2018/08/24/885. Spiral Matrix III/" title="下一篇: 885. Spiral Matrix III螺旋矩阵 III">
                 <i class="fa fa-angle-right"></i>
             </a>
         
