@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-24T07:05:54.170Z</updated>
+  <updated>2018-08-24T07:05:48.492Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>485. Max Consecutive Ones最大连续1的个数</title>
+    <link href="http://yoursite.com/2018/08/24/485.%20Max%20Consecutive%20Ones/"/>
+    <id>http://yoursite.com/2018/08/24/485. Max Consecutive Ones/</id>
+    <published>2018-08-24T05:36:12.000Z</published>
+    <updated>2018-08-24T07:05:48.492Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="485-Max-Consecutive-Ones最大连续1的个数"><a href="#485-Max-Consecutive-Ones最大连续1的个数" class="headerlink" title="485. Max Consecutive Ones最大连续1的个数"></a>485. Max Consecutive Ones最大连续1的个数</h1><p>给定一个二进制数组， 计算其中最大连续1的个数。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1,1,0,1,1,1]</code></pre><p>输出: 3<br>解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.<br>注意：</p><p>输入的数组只包含 0 和1。<br>输入数组的长度是正整数，且不超过 10,000。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>定义局部最大和全局最大</p><pre><code>class Solution {public:    int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) {        int maxlen=0,locallen=0;        for(auto n:nums){            if((n&amp;1)==0) locallen=0;            else {                locallen++;                maxlen=max(maxlen,locallen);            }        }        return maxlen;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;485-Max-Consecutive-Ones最大连续1的个数&quot;&gt;&lt;a href=&quot;#485-Max-Consecutive-Ones最大连续1的个数&quot; class=&quot;headerlink&quot; title=&quot;485. Max Consecutive Ones最大连续1的个数&quot;&gt;&lt;/a&gt;485. Max Consecutive Ones最大连续1的个数&lt;/h1&gt;&lt;p&gt;给定一个二进制数组， 计算其中最大连续1的个数。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
   
   <entry>
     <title>697. Degree of an Array数组的度</title>
@@ -42,37 +66,13 @@
   </entry>
   
   <entry>
-    <title>485. Max Consecutive Ones最大连续1的个数</title>
-    <link href="http://yoursite.com/2018/08/24/485.%20Max%20Consecutive%20Ones/"/>
-    <id>http://yoursite.com/2018/08/24/485. Max Consecutive Ones/</id>
-    <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T07:05:48.492Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="485-Max-Consecutive-Ones最大连续1的个数"><a href="#485-Max-Consecutive-Ones最大连续1的个数" class="headerlink" title="485. Max Consecutive Ones最大连续1的个数"></a>485. Max Consecutive Ones最大连续1的个数</h1><p>给定一个二进制数组， 计算其中最大连续1的个数。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1,1,0,1,1,1]</code></pre><p>输出: 3<br>解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.<br>注意：</p><p>输入的数组只包含 0 和1。<br>输入数组的长度是正整数，且不超过 10,000。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>定义局部最大和全局最大</p><pre><code>class Solution {public:    int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) {        int maxlen=0,locallen=0;        for(auto n:nums){            if((n&amp;1)==0) locallen=0;            else {                locallen++;                maxlen=max(maxlen,locallen);            }        }        return maxlen;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;485-Max-Consecutive-Ones最大连续1的个数&quot;&gt;&lt;a href=&quot;#485-Max-Consecutive-Ones最大连续1的个数&quot; class=&quot;headerlink&quot; title=&quot;485. Max Consecutive Ones最大连续1的个数&quot;&gt;&lt;/a&gt;485. Max Consecutive Ones最大连续1的个数&lt;/h1&gt;&lt;p&gt;给定一个二进制数组， 计算其中最大连续1的个数。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-  </entry>
-  
-  <entry>
     <title>885. Spiral Matrix III螺旋矩阵 III</title>
     <link href="http://yoursite.com/2018/08/24/885.%20Spiral%20Matrix%20III/"/>
     <id>http://yoursite.com/2018/08/24/885. Spiral Matrix III/</id>
     <published>2018-08-24T02:32:12.000Z</published>
-    <updated>2018-08-24T07:06:10.821Z</updated>
+    <updated>2018-08-24T12:41:36.470Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="885-Spiral-Matrix-III螺旋矩阵-III"><a href="#885-Spiral-Matrix-III螺旋矩阵-III" class="headerlink" title="885. Spiral Matrix III螺旋矩阵 III"></a>885. Spiral Matrix III螺旋矩阵 III</h1><p>在 R 行 C 列的矩阵上，我们从 (r0, c0) 面朝东面开始</p><p>这里，网格的西北角位于第一行第一列，网格的东南角位于最后一行最后一列。</p><p>现在，我们以顺时针按螺旋状行走，访问此网格中的每个位置。</p><p>每当我们移动到网格的边界之外时，我们会继续在网格之外行走（但稍后可能会返回到网格边界）。</p><p>最终，我们到过网格的所有 R * C 个空间。</p><p>按照访问顺序返回表示网格位置的坐标列表。</p><a id="more"></a><p>示例 1：</p><pre><code>输入：R = 1, C = 4, r0 = 0, c0 = 0输出：[[0,0],[0,1],[0,2],[0,3]]![](https://image.ibb.co/b8y6zT/example_1.png)</code></pre><p>示例 2：</p><pre><code>输入：R = 5, C = 6, r0 = 1, c0 = 4输出：[[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]https://image.ibb.co/bGVEm8/example_2.png</code></pre><p>提示：</p><p>1 &lt;= R &lt;= 100<br>1 &lt;= C &lt;= 100<br>0 &lt;= r0 &lt; R<br>0 &lt;= c0 &lt; C</p><h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>分步走，如果位置在格子内则将它加入res</p><p>观察运动轨迹：<br>右移一步，向右转<br>下移一步，向右转</p><p>左移两步，向右转<br>上移两步，向右转</p><p>右移三步，向右转<br>下移三步，向右转</p><p>左移四步，向右转<br>上移四步，向右转</p><p>所以问题变为如何生成序列：1，1，2，2，3，3，4，4，5，5…<br>和如何向右转</p><p>生成序列：<br>a[index]=index/2+1</p><p>右转：<br>使用叉乘假设当前的方向在平面中是（x,y),在空间中则为(x,y,0)<br>那么右转后的方向是(x,y,0)X(0,0,1)=(y,-x,0)<br>变成代码：temp=x;x=y;y=-temp;</p><p>方向数组是：<br>(0,1),(1,0),(0,-1),(-1,0)，可以用两个变量来表示</p><p>时间复杂度：<br>O(max(M,N) ^ 2)</p><pre><code>vector&lt;vector&lt;int&gt;&gt; spiralMatrixIII(int R, int C, int r, int c) {    vector&lt;vector&lt;int&gt;&gt; res = {{r, c}};    int x = 0, y = 1, tmp;    for (int n = 0; res.size() &lt; R * C; n++) {//every position        for (int i = 0; i &lt; n / 2 + 1; i++) {//on one direction            r += x, c += y;            if (0 &lt;= r &amp;&amp; r &lt; R &amp;&amp; 0 &lt;= c &amp;&amp; c &lt; C)                res.push_back({r, c});        }        tmp = x, x = y, y = -tmp;    }    return res;}</code></pre><h2 id="思路2："><a href="#思路2：" class="headerlink" title="思路2："></a>思路2：</h2><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; spiralMatrixIII(int R, int C, int r0, int c0) {        int rpos=r0,cpos=c0,dir=0,go=1;//dir is the direction in the dr[4] and dc[4]        int distan=0,total=0;        int dr[4]={0,1,0,-1};        int dc[4]={1,0,-1,0};        vector&lt;vector&lt;int&gt;&gt; res;        res.push_back({rpos,cpos});//push back the start position        total++;        while(total&lt;R*C){//total is the total visit numbers            for(int i=1;i&lt;=go;i++){                rpos+=dr[dir];//start to go                cpos+=dc[dir];                if(rpos&gt;=0 &amp;&amp; rpos&lt;R &amp;&amp; cpos&gt;=0 &amp;&amp; cpos&lt;C){// push back the eanswer if it is in the grid                    res.push_back({rpos,cpos});                    total++;                }            }            if(distan &amp;1){//每隔两次访问步数加1，即恰好为奇数时访问步数加1                go++;            }            distan++;            dir++;            dir%=4;//change direction        }        return res;    }};</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="885-Spiral-Matrix-III螺旋矩阵-III"><a href="#885-Spiral-Matrix-III螺旋矩阵-III" class="headerlink" title="885. Spiral Matrix III螺旋矩阵 III"></a>885. Spiral Matrix III螺旋矩阵 III</h1><p>在 R 行 C 列的矩阵上，我们从 (r0, c0) 面朝东面开始</p><p>这里，网格的西北角位于第一行第一列，网格的东南角位于最后一行最后一列。</p><p>现在，我们以顺时针按螺旋状行走，访问此网格中的每个位置。</p><p>每当我们移动到网格的边界之外时，我们会继续在网格之外行走（但稍后可能会返回到网格边界）。</p><p>最终，我们到过网格的所有 R * C 个空间。</p><p>按照访问顺序返回表示网格位置的坐标列表。</p><a id="more"></a><p>示例 1：</p><pre><code>输入：R = 1, C = 4, r0 = 0, c0 = 0输出：[[0,0],[0,1],[0,2],[0,3]]![image](https://ws1.sinaimg.cn/large/0071ouepgy1ful2oluezbj304u02rglf.jpg)</code></pre><p>示例 2：</p><pre><code>输入：R = 5, C = 6, r0 = 1, c0 = 4输出：[[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]![image](https://ws1.sinaimg.cn/large/0071ouepgy1ful2oluezbj304u02rglf.jpg)</code></pre><p>提示：</p><p>1 &lt;= R &lt;= 100<br>1 &lt;= C &lt;= 100<br>0 &lt;= r0 &lt; R<br>0 &lt;= c0 &lt; C</p><h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>分步走，如果位置在格子内则将它加入res</p><p>观察运动轨迹：<br>右移一步，向右转<br>下移一步，向右转</p><p>左移两步，向右转<br>上移两步，向右转</p><p>右移三步，向右转<br>下移三步，向右转</p><p>左移四步，向右转<br>上移四步，向右转</p><p>所以问题变为如何生成序列：1，1，2，2，3，3，4，4，5，5…<br>和如何向右转</p><p>生成序列：<br>a[index]=index/2+1</p><p>右转：<br>使用叉乘假设当前的方向在平面中是（x,y),在空间中则为(x,y,0)<br>那么右转后的方向是(x,y,0)X(0,0,1)=(y,-x,0)<br>变成代码：temp=x;x=y;y=-temp;</p><p>方向数组是：<br>(0,1),(1,0),(0,-1),(-1,0)，可以用两个变量来表示</p><p>时间复杂度：<br>O(max(M,N) ^ 2)</p><pre><code>vector&lt;vector&lt;int&gt;&gt; spiralMatrixIII(int R, int C, int r, int c) {    vector&lt;vector&lt;int&gt;&gt; res = {{r, c}};    int x = 0, y = 1, tmp;    for (int n = 0; res.size() &lt; R * C; n++) {//every position        for (int i = 0; i &lt; n / 2 + 1; i++) {//on one direction            r += x, c += y;            if (0 &lt;= r &amp;&amp; r &lt; R &amp;&amp; 0 &lt;= c &amp;&amp; c &lt; C)                res.push_back({r, c});        }        tmp = x, x = y, y = -tmp;    }    return res;}</code></pre><h2 id="思路2："><a href="#思路2：" class="headerlink" title="思路2："></a>思路2：</h2><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; spiralMatrixIII(int R, int C, int r0, int c0) {        int rpos=r0,cpos=c0,dir=0,go=1;//dir is the direction in the dr[4] and dc[4]        int distan=0,total=0;        int dr[4]={0,1,0,-1};        int dc[4]={1,0,-1,0};        vector&lt;vector&lt;int&gt;&gt; res;        res.push_back({rpos,cpos});//push back the start position        total++;        while(total&lt;R*C){//total is the total visit numbers            for(int i=1;i&lt;=go;i++){                rpos+=dr[dir];//start to go                cpos+=dc[dir];                if(rpos&gt;=0 &amp;&amp; rpos&lt;R &amp;&amp; cpos&gt;=0 &amp;&amp; cpos&lt;C){// push back the eanswer if it is in the grid                    res.push_back({rpos,cpos});                    total++;                }            }            if(distan &amp;1){//每隔两次访问步数加1，即恰好为奇数时访问步数加1                go++;            }            distan++;            dir++;            dir%=4;//change direction        }        return res;    }};</code></pre>]]></content>
     
     <summary type="html">
     
@@ -296,32 +296,6 @@
   </entry>
   
   <entry>
-    <title>Hexo+github搭建个人博客问题总结</title>
-    <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
-    <published>2018-08-21T01:58:44.000Z</published>
-    <updated>2018-08-22T10:14:19.065Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="Hexo-github搭建个人博客问题总结"><a href="#Hexo-github搭建个人博客问题总结" class="headerlink" title="Hexo+github搭建个人博客问题总结"></a>Hexo+github搭建个人博客问题总结</h4><p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><a id="more"></a><h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;Hexo-github搭建个人博客问题总结&quot;&gt;&lt;a href=&quot;#Hexo-github搭建个人博客问题总结&quot; class=&quot;headerlink&quot; title=&quot;Hexo+github搭建个人博客问题总结&quot;&gt;&lt;/a&gt;Hexo+github搭建个人博客问题总结&lt;/h4&gt;&lt;p&gt;总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
-    
-      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
     <title>C++基础概念II</title>
     <link href="http://yoursite.com/2018/08/21/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5II/"/>
     <id>http://yoursite.com/2018/08/21/C++基础概念II/</id>
@@ -390,6 +364,32 @@
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo+github搭建个人博客问题总结</title>
+    <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
+    <published>2018-08-21T01:58:44.000Z</published>
+    <updated>2018-08-22T10:14:19.065Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="Hexo-github搭建个人博客问题总结"><a href="#Hexo-github搭建个人博客问题总结" class="headerlink" title="Hexo+github搭建个人博客问题总结"></a>Hexo+github搭建个人博客问题总结</h4><p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><a id="more"></a><h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;Hexo-github搭建个人博客问题总结&quot;&gt;&lt;a href=&quot;#Hexo-github搭建个人博客问题总结&quot; class=&quot;headerlink&quot; title=&quot;Hexo+github搭建个人博客问题总结&quot;&gt;&lt;/a&gt;Hexo+github搭建个人博客问题总结&lt;/h4&gt;&lt;p&gt;总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   
