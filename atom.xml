@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-26T12:07:12.750Z</updated>
+  <updated>2018-08-26T13:16:42.609Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>626. Exchange Seats换座位</title>
+    <link href="http://yoursite.com/2018/08/26/626.%20Exchange%20Seats%E6%8D%A2%E5%BA%A7%E4%BD%8D/"/>
+    <id>http://yoursite.com/2018/08/26/626. Exchange Seats换座位/</id>
+    <published>2018-08-26T12:33:12.000Z</published>
+    <updated>2018-08-26T13:16:42.609Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="626-Exchange-Seats换座位"><a href="#626-Exchange-Seats换座位" class="headerlink" title="626. Exchange Seats换座位"></a>626. Exchange Seats换座位</h1><p>小美是一所中学的信息科技老师，她有一张 seat 座位表，平时用来储存学生名字和与他们相对应的座位 id。</p><p>其中纵列的 id 是连续递增的</p><p>小美想改变相邻俩学生的座位。</p><p>你能不能帮她写一个 SQL query 来输出小美想要的结果呢？</p><a id="more"></a><p>示例：</p><pre><code>+---------+---------+|    id   | student |+---------+---------+|    1    | Abbot   ||    2    | Doris   ||    3    | Emerson ||    4    | Green   ||    5    | Jeames  |+---------+---------+</code></pre><p>假如数据输入的是上表，则输出结果如下：</p><pre><code>+---------+---------+|    id   | student |+---------+---------+|    1    | Doris   ||    2    | Abbot   ||    3    | Green   ||    4    | Emerson ||    5    | Jeames  |+---------+---------+</code></pre><p>注意：</p><p>如果学生人数是奇数，则不需要改变最后一个同学的座位。</p><h2 id="思路I：使用流控制语句CASE"><a href="#思路I：使用流控制语句CASE" class="headerlink" title="思路I：使用流控制语句CASE"></a>思路I：使用流控制语句CASE</h2><h3 id="算法："><a href="#算法：" class="headerlink" title="算法："></a>算法：</h3><p>对于奇数ID的学生，交换后新的ID是（ID+1），最后一个座位的学生除外。</p><p>对于偶数ID的学生，新的ID是（ID-1），为了查询ID数量，可以使用查询：</p><pre><code>SELECT    COUNT(*) AS countsFROM    seat</code></pre><p>然后我们可以使用CASE语句和MOD()函数来为每个学生交换座位</p><h3 id="MYSQL"><a href="#MYSQL" class="headerlink" title="MYSQL"></a>MYSQL</h3><pre><code>SELECT    (CASE        WHEN MOD(id,2) != 0 AND counts !=id THEN id+1        WHEN MOD(id,2) !=0 AND counts =id THEN id        ELSE id-1    END) AS id,    studentFROM    seat,    (SELECT COUNT(*) AS counts    FROM        seat) AS seat_countsORDER BY id ASC;</code></pre><h2 id="思路II：使用位运算和COALESCE"><a href="#思路II：使用位运算和COALESCE" class="headerlink" title="思路II：使用位运算和COALESCE()"></a>思路II：使用位运算和COALESCE()</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>位运算表达式(id+1)^1-1能够计算交换后的新的id</p><pre><code>SELECT id,(id+1)^1-1, student FROM seat;| id | (id+1)^1-1 | student ||----|------------|---------|| 1  | 2          | Abbot   || 2  | 1          | Doris   || 3  | 4          | Emerson || 4  | 3          | Green   || 5  | 6          | Jeames  |</code></pre><p>然后我们能够用一个临时的表将座位填入</p><pre><code>SELECT    *FROM    seat s1        LEFT JOIN    seat s2 ON (s1.id+1)^1-1 = s2.idORDER BY s1.id;| id | student | id | student ||----|---------|----|---------|| 1  | Abbot   | 2  | Doris   || 2  | Doris   | 1  | Abbot   || 3  | Emerson | 4  | Green   || 4  | Green   | 3  | Emerson || 5  | Jeames  |    |         |</code></pre><p>前两列来自s1后两列来自s2</p><p>最后我们可以输出s1.id 和 s2.student。可是s2.student时空的当id为末尾时，因此我们可以使用函数COALESCE()来生成最后一个记录的正确输出</p><h3 id="MYSQL-1"><a href="#MYSQL-1" class="headerlink" title="MYSQL"></a>MYSQL</h3><p>SELECT<br>    s1.id, COALESCE(s2.student,s1.student) AS student<br>FROM<br>    seat s1<br>        LEFT JOIN<br>    seat s2 ON ((S1.id+1)^1)-1= s2.id<br>ORDER BY s1.id;</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;626-Exchange-Seats换座位&quot;&gt;&lt;a href=&quot;#626-Exchange-Seats换座位&quot; class=&quot;headerlink&quot; title=&quot;626. Exchange Seats换座位&quot;&gt;&lt;/a&gt;626. Exchange Seats换座位&lt;/h1&gt;&lt;p&gt;小美是一所中学的信息科技老师，她有一张 seat 座位表，平时用来储存学生名字和与他们相对应的座位 id。&lt;/p&gt;
+&lt;p&gt;其中纵列的 id 是连续递增的&lt;/p&gt;
+&lt;p&gt;小美想改变相邻俩学生的座位。&lt;/p&gt;
+&lt;p&gt;你能不能帮她写一个 SQL query 来输出小美想要的结果呢？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="SQL" scheme="http://yoursite.com/tags/SQL/"/>
+    
+  </entry>
   
   <entry>
     <title>Kickstart-Round-E-2018-ProblemA.Yogurt</title>
@@ -72,30 +99,6 @@
   </entry>
   
   <entry>
-    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
-    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
-    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
-    <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T13:02:28.972Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
-    
-  </entry>
-  
-  <entry>
     <title>697. Degree of an Array数组的度</title>
     <link href="http://yoursite.com/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/"/>
     <id>http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</id>
@@ -141,6 +144,30 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
+    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
+    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
+    <published>2018-08-24T05:36:12.000Z</published>
+    <updated>2018-08-24T13:02:28.972Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
     
   </entry>
   
@@ -199,6 +226,30 @@
   </entry>
   
   <entry>
+    <title>59. Spiral Matrix II螺旋矩阵 II</title>
+    <link href="http://yoursite.com/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/"/>
+    <id>http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</id>
+    <published>2018-08-24T01:30:12.000Z</published>
+    <updated>2018-08-24T07:09:48.754Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="59-Spiral-Matrix-II螺旋矩阵-II"><a href="#59-Spiral-Matrix-II螺旋矩阵-II" class="headerlink" title="59. Spiral Matrix II螺旋矩阵 II"></a>59. Spiral Matrix II螺旋矩阵 II</h1><p>给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p><a id="more"></a><p>示例:</p><p>输入: 3<br>输出:</p><pre><code>[ [ 1, 2, 3 ], [ 8, 9, 4 ], [ 7, 6, 5 ]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题可以参见剑指Offer20.PrintMatrix顺时针打印矩阵(CodingInterview)和54. Spiral Matrix螺旋矩阵</p><p>所不同的是可以先生成一个n*n规模的矩阵然后螺旋将数字填入，时间复杂度是O(n^2)。</p><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {        vector&lt;vector&lt;int&gt;&gt; res(n,vector&lt;int&gt;(n,0));        int start=0;        int num=1;        while(start*2&lt;n){            generate(res,start,num,n);            start++;        }        return res;    }    void generate(vector&lt;vector&lt;int&gt;&gt; &amp;res,int start,int &amp;num,int n){        int endy=n-start-1;        int endx=n-start-1;        for(int j=start;j&lt;=endy;j++){            res[start][j]=num;            num++;        }        for(int i=start+1;i&lt;=endx;i++){            res[i][endy]=num;            num++;        }        for(int j=endy-1;j&gt;=start;j--){            res[endx][j]=num;            num++;        }        for(int i=endx-1;i&gt;start;i--){            res[i][start]=num;            num++;        }    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;59-Spiral-Matrix-II螺旋矩阵-II&quot;&gt;&lt;a href=&quot;#59-Spiral-Matrix-II螺旋矩阵-II&quot; class=&quot;headerlink&quot; title=&quot;59. Spiral Matrix II螺旋矩阵 II&quot;&gt;&lt;/a&gt;59. Spiral Matrix II螺旋矩阵 II&lt;/h1&gt;&lt;p&gt;给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
     <title>650. 2 Keys Keyboard只有两个键的键盘</title>
     <link href="http://yoursite.com/2018/08/24/650.%202%20Keys%20Keyboard%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98/"/>
     <id>http://yoursite.com/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/</id>
@@ -220,30 +271,6 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>59. Spiral Matrix II螺旋矩阵 II</title>
-    <link href="http://yoursite.com/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/"/>
-    <id>http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</id>
-    <published>2018-08-24T01:30:12.000Z</published>
-    <updated>2018-08-24T07:09:48.754Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="59-Spiral-Matrix-II螺旋矩阵-II"><a href="#59-Spiral-Matrix-II螺旋矩阵-II" class="headerlink" title="59. Spiral Matrix II螺旋矩阵 II"></a>59. Spiral Matrix II螺旋矩阵 II</h1><p>给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p><a id="more"></a><p>示例:</p><p>输入: 3<br>输出:</p><pre><code>[ [ 1, 2, 3 ], [ 8, 9, 4 ], [ 7, 6, 5 ]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题可以参见剑指Offer20.PrintMatrix顺时针打印矩阵(CodingInterview)和54. Spiral Matrix螺旋矩阵</p><p>所不同的是可以先生成一个n*n规模的矩阵然后螺旋将数字填入，时间复杂度是O(n^2)。</p><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {        vector&lt;vector&lt;int&gt;&gt; res(n,vector&lt;int&gt;(n,0));        int start=0;        int num=1;        while(start*2&lt;n){            generate(res,start,num,n);            start++;        }        return res;    }    void generate(vector&lt;vector&lt;int&gt;&gt; &amp;res,int start,int &amp;num,int n){        int endy=n-start-1;        int endx=n-start-1;        for(int j=start;j&lt;=endy;j++){            res[start][j]=num;            num++;        }        for(int i=start+1;i&lt;=endx;i++){            res[i][endy]=num;            num++;        }        for(int j=endy-1;j&gt;=start;j--){            res[endx][j]=num;            num++;        }        for(int i=endx-1;i&gt;start;i--){            res[i][start]=num;            num++;        }    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;59-Spiral-Matrix-II螺旋矩阵-II&quot;&gt;&lt;a href=&quot;#59-Spiral-Matrix-II螺旋矩阵-II&quot; class=&quot;headerlink&quot; title=&quot;59. Spiral Matrix II螺旋矩阵 II&quot;&gt;&lt;/a&gt;59. Spiral Matrix II螺旋矩阵 II&lt;/h1&gt;&lt;p&gt;给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
   </entry>
   
@@ -347,32 +374,6 @@
   </entry>
   
   <entry>
-    <title>64.StreamMedian数据流中的中位数(Coding Interviews )</title>
-    <link href="http://yoursite.com/2018/08/22/%E5%89%91%E6%8C%87Offer64.%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/"/>
-    <id>http://yoursite.com/2018/08/22/剑指Offer64.数据流中的中位数/</id>
-    <published>2018-08-22T01:58:44.000Z</published>
-    <updated>2018-08-24T07:08:32.067Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="64-StreamMedian数据流中的中位数-Coding-Interviews"><a href="#64-StreamMedian数据流中的中位数-Coding-Interviews" class="headerlink" title="64.StreamMedian数据流中的中位数(Coding Interviews )"></a>64.StreamMedian数据流中的中位数(Coding Interviews )</h1><p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。</p><a id="more"></a><p>将数据在容器中排序，将整个数据容器分隔成两部分。位于容器左边部分的数据比右边的数据小。中位数可以由两个指针指向的数据得到。如果容器中数据的数目是奇数，那么两个指针指向同一个数据。指针P1指向左边部分最大的数，指针P2指向右边部分最小的数。</p><p>如果能保证数据容器左边的数据都小于右边的数据，即使左右两边内部的数据没有排序，也可以根据左边最大的数及右边最小的数得到中位数。</p><p>使用一个最大堆来实现左边的数据容器，使用最小堆实现右边的数据容器。往堆中插入一个数据的时间效率是O(logn).由于只需要O(1）时间就可以得到位于堆顶的数据，因此得到中位数的时间效率是O(1)。</p><p>为了保证数据平均分配到两个堆中，可以在数据的总数目是偶数时把新数据插入到最小堆中，否则插入到最大堆中。</p><p>还要保证最大堆中里的所有数据都要小于最小堆中的数据。当数据的总数目是偶数时，按照前面的分配规则会把新的数据插入到最小堆中。如果此时这个新的数据比最大堆中的一些数据要小，那么</p><p>首先可以把这个新的数据插入到最大堆中，</p><p>接着把最大堆中的最大的数字拿出来插入到最小堆中。</p><p>由于最终插入到最小堆的数字是原最大堆中最大的数字，这样就保证了最小堆中所有数字都大于最大堆中的数字。</p><h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><pre><code>#include &lt;stdio.h&gt;#include &lt;algorithm&gt;#include &lt;vector&gt;#include &lt;functional&gt;using namespace std;template&lt;typename T&gt; class DynamicArray{public:    void Insert(T num)    {        if (((min.size() + max.size()) &amp; 1) == 0) {// even length             if (max.size() &gt; 0 &amp;&amp; num &lt; max[0]) {//new num is lower than  some numbers in the maxheap                max.push_back(num);                push_heap(max.begin(), max.end(), less&lt;T&gt;());// make the max heap                num = max[0];                pop_heap(max.begin(), max.end(), less&lt;T&gt;());                max.pop_heap();            }            min.push_heap(num);            push_heap(min.begin(), min.end(), greater&lt;T&gt;());//make the min heap        }        else {//odd length            if (min.size() &gt; 0 &amp;&amp; min[0] &lt; num) {                min.push_back(num);                push_heap(min, begin(), min.end(), greater&lt;T&gt;());                num = min[0];                pop_heap(min.begin(), min.end(), greater&lt;T&gt;());                min.pop_heap();            }            max.push_back(num);            push_heap(max.begin(), max.end(), less&lt;T&gt;());        }    }    T GetMedian()    {         int size = min.size() + max.size();        if (size == 0) throw exception(&quot;No numbers are available&quot;);        T median = 0;        if ((size &amp; 1) == 1) meidan = min[0];// only has one number        else median = (min[0] + max[0]) / 2;        return median;    }private:    vector&lt;T&gt; min;//min heap    vector&lt;T&gt; max;//max heap};// ==================== Test Code ====================void Test(char* testName, DynamicArray&lt;double&gt;&amp; numbers, double expected){    if(testName != NULL)        printf(&quot;%s begins: &quot;, testName);    if(abs(numbers.GetMedian() - expected) &lt; 0.0000001)        printf(&quot;Passed.\n&quot;);    else        printf(&quot;FAILED.\n&quot;);}int main(int argc, char* argv[]){    DynamicArray&lt;double&gt; numbers;    printf(&quot;Test1 begins: &quot;);    try    {        numbers.GetMedian();        printf(&quot;FAILED.\n&quot;);    }    catch(exception e)    {        printf(&quot;Passed.\n&quot;);    }    numbers.Insert(5);    Test(&quot;Test2&quot;, numbers, 5);    numbers.Insert(2);    Test(&quot;Test3&quot;, numbers, 3.5);    numbers.Insert(3);    Test(&quot;Test4&quot;, numbers, 3);    numbers.Insert(4);    Test(&quot;Test6&quot;, numbers, 3.5);    numbers.Insert(1);    Test(&quot;Test5&quot;, numbers, 3);    numbers.Insert(6);    Test(&quot;Test7&quot;, numbers, 3.5);    numbers.Insert(7);    Test(&quot;Test8&quot;, numbers, 4);    numbers.Insert(0);    Test(&quot;Test9&quot;, numbers, 3.5);    numbers.Insert(8);    Test(&quot;Test10&quot;, numbers, 4);    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;64-StreamMedian数据流中的中位数-Coding-Interviews&quot;&gt;&lt;a href=&quot;#64-StreamMedian数据流中的中位数-Coding-Interviews&quot; class=&quot;headerlink&quot; title=&quot;64.StreamMedian数据流中的中位数(Coding Interviews )&quot;&gt;&lt;/a&gt;64.StreamMedian数据流中的中位数(Coding Interviews )&lt;/h1&gt;&lt;p&gt;如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
-    
-      <category term="Max Heap" scheme="http://yoursite.com/tags/Max-Heap/"/>
-    
-      <category term="Template" scheme="http://yoursite.com/tags/Template/"/>
-    
-  </entry>
-  
-  <entry>
     <title>354. Russian Doll Envelopes俄罗斯套娃</title>
     <link href="http://yoursite.com/2018/08/22/354.%20Russian%20Doll%20Envelopes%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81/"/>
     <id>http://yoursite.com/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/</id>
@@ -396,6 +397,32 @@
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>64.StreamMedian数据流中的中位数(Coding Interviews )</title>
+    <link href="http://yoursite.com/2018/08/22/%E5%89%91%E6%8C%87Offer64.%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/"/>
+    <id>http://yoursite.com/2018/08/22/剑指Offer64.数据流中的中位数/</id>
+    <published>2018-08-22T01:58:44.000Z</published>
+    <updated>2018-08-24T07:08:32.067Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="64-StreamMedian数据流中的中位数-Coding-Interviews"><a href="#64-StreamMedian数据流中的中位数-Coding-Interviews" class="headerlink" title="64.StreamMedian数据流中的中位数(Coding Interviews )"></a>64.StreamMedian数据流中的中位数(Coding Interviews )</h1><p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。</p><a id="more"></a><p>将数据在容器中排序，将整个数据容器分隔成两部分。位于容器左边部分的数据比右边的数据小。中位数可以由两个指针指向的数据得到。如果容器中数据的数目是奇数，那么两个指针指向同一个数据。指针P1指向左边部分最大的数，指针P2指向右边部分最小的数。</p><p>如果能保证数据容器左边的数据都小于右边的数据，即使左右两边内部的数据没有排序，也可以根据左边最大的数及右边最小的数得到中位数。</p><p>使用一个最大堆来实现左边的数据容器，使用最小堆实现右边的数据容器。往堆中插入一个数据的时间效率是O(logn).由于只需要O(1）时间就可以得到位于堆顶的数据，因此得到中位数的时间效率是O(1)。</p><p>为了保证数据平均分配到两个堆中，可以在数据的总数目是偶数时把新数据插入到最小堆中，否则插入到最大堆中。</p><p>还要保证最大堆中里的所有数据都要小于最小堆中的数据。当数据的总数目是偶数时，按照前面的分配规则会把新的数据插入到最小堆中。如果此时这个新的数据比最大堆中的一些数据要小，那么</p><p>首先可以把这个新的数据插入到最大堆中，</p><p>接着把最大堆中的最大的数字拿出来插入到最小堆中。</p><p>由于最终插入到最小堆的数字是原最大堆中最大的数字，这样就保证了最小堆中所有数字都大于最大堆中的数字。</p><h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><pre><code>#include &lt;stdio.h&gt;#include &lt;algorithm&gt;#include &lt;vector&gt;#include &lt;functional&gt;using namespace std;template&lt;typename T&gt; class DynamicArray{public:    void Insert(T num)    {        if (((min.size() + max.size()) &amp; 1) == 0) {// even length             if (max.size() &gt; 0 &amp;&amp; num &lt; max[0]) {//new num is lower than  some numbers in the maxheap                max.push_back(num);                push_heap(max.begin(), max.end(), less&lt;T&gt;());// make the max heap                num = max[0];                pop_heap(max.begin(), max.end(), less&lt;T&gt;());                max.pop_heap();            }            min.push_heap(num);            push_heap(min.begin(), min.end(), greater&lt;T&gt;());//make the min heap        }        else {//odd length            if (min.size() &gt; 0 &amp;&amp; min[0] &lt; num) {                min.push_back(num);                push_heap(min, begin(), min.end(), greater&lt;T&gt;());                num = min[0];                pop_heap(min.begin(), min.end(), greater&lt;T&gt;());                min.pop_heap();            }            max.push_back(num);            push_heap(max.begin(), max.end(), less&lt;T&gt;());        }    }    T GetMedian()    {         int size = min.size() + max.size();        if (size == 0) throw exception(&quot;No numbers are available&quot;);        T median = 0;        if ((size &amp; 1) == 1) meidan = min[0];// only has one number        else median = (min[0] + max[0]) / 2;        return median;    }private:    vector&lt;T&gt; min;//min heap    vector&lt;T&gt; max;//max heap};// ==================== Test Code ====================void Test(char* testName, DynamicArray&lt;double&gt;&amp; numbers, double expected){    if(testName != NULL)        printf(&quot;%s begins: &quot;, testName);    if(abs(numbers.GetMedian() - expected) &lt; 0.0000001)        printf(&quot;Passed.\n&quot;);    else        printf(&quot;FAILED.\n&quot;);}int main(int argc, char* argv[]){    DynamicArray&lt;double&gt; numbers;    printf(&quot;Test1 begins: &quot;);    try    {        numbers.GetMedian();        printf(&quot;FAILED.\n&quot;);    }    catch(exception e)    {        printf(&quot;Passed.\n&quot;);    }    numbers.Insert(5);    Test(&quot;Test2&quot;, numbers, 5);    numbers.Insert(2);    Test(&quot;Test3&quot;, numbers, 3.5);    numbers.Insert(3);    Test(&quot;Test4&quot;, numbers, 3);    numbers.Insert(4);    Test(&quot;Test6&quot;, numbers, 3.5);    numbers.Insert(1);    Test(&quot;Test5&quot;, numbers, 3);    numbers.Insert(6);    Test(&quot;Test7&quot;, numbers, 3.5);    numbers.Insert(7);    Test(&quot;Test8&quot;, numbers, 4);    numbers.Insert(0);    Test(&quot;Test9&quot;, numbers, 3.5);    numbers.Insert(8);    Test(&quot;Test10&quot;, numbers, 4);    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;64-StreamMedian数据流中的中位数-Coding-Interviews&quot;&gt;&lt;a href=&quot;#64-StreamMedian数据流中的中位数-Coding-Interviews&quot; class=&quot;headerlink&quot; title=&quot;64.StreamMedian数据流中的中位数(Coding Interviews )&quot;&gt;&lt;/a&gt;64.StreamMedian数据流中的中位数(Coding Interviews )&lt;/h1&gt;&lt;p&gt;如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
+    
+      <category term="Max Heap" scheme="http://yoursite.com/tags/Max-Heap/"/>
+    
+      <category term="Template" scheme="http://yoursite.com/tags/Template/"/>
     
   </entry>
   
@@ -494,29 +521,6 @@
     
     
       <category term="C++" scheme="http://yoursite.com/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前言</title>
-    <link href="http://yoursite.com/2017/11/16/%E5%89%8D%E8%A8%80/"/>
-    <id>http://yoursite.com/2017/11/16/前言/</id>
-    <published>2017-11-16T13:14:20.000Z</published>
-    <updated>2018-08-22T10:48:55.651Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>附上最近感触很深的一段话作为博客的序章</p><p>　　生命过程中能否成就事业，关键要看意志力的性质和力量，这一点比其他任何因素都来得重要．整天呼喊着＂给我机会，给我机会＂的人本质上是脆弱的，甚至是不堪一击的，因为在能够主宰一切的意志力面前，机会多得数不胜数．平庸和默默无闻很大程度上都是自己造成的，要抱怨只能抱怨自己．</p><a id="more"></a><p>　　格莱斯顿对＂平凡的人＂抱着极高的期望，他真诚的写道：＂从某种意义上说，世界上的每个人与生俱来就具备成就非凡业绩的素质，每个人都是如此．不只是那些天资聪颖，才华横溢的人，也不只是那些敏捷伶俐，遇事沉着的人，能够成就事业；那些木讷寡言，不善圆通的人，甚至那些资质鲁钝，反应迟缓的人，也能成就事业．＂<br>　　每一位受过教育的正常人都在心里深深地明白，在人生的旅途中只要采取适当的行为，就容易使自己成为了不起的人－－至少可以赢得某种程度的成功．但是，＂放松和惰性＂是事物的自然法则，他往往逐渐地屈服于这条法则的支配，慢慢地消磨了自己的棱角和锋芒，变得胸无大志，得过且过．他变得慵懒闲散，再也不能因为心中的高尚目标而受到激励，去发奋实现自己的梦想．然而，正是在这个时候，意志力应该一刻不停地发挥作用．</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;附上最近感触很深的一段话作为博客的序章&lt;/p&gt;
-&lt;p&gt;　　生命过程中能否成就事业，关键要看意志力的性质和力量，这一点比其他任何因素都来得重要．整天呼喊着＂给我机会，给我机会＂的人本质上是脆弱的，甚至是不堪一击的，因为在能够主宰一切的意志力面前，机会多得数不胜数．平庸和默默无闻很大程度上都是自己造成的，要抱怨只能抱怨自己．&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2017年11月" scheme="http://yoursite.com/categories/2017%E5%B9%B411%E6%9C%88/"/>
-    
-    
-      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
     
   </entry>
   
