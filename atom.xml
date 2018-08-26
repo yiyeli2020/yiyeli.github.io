@@ -199,30 +199,6 @@
   </entry>
   
   <entry>
-    <title>59. Spiral Matrix II螺旋矩阵 II</title>
-    <link href="http://yoursite.com/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/"/>
-    <id>http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</id>
-    <published>2018-08-24T01:30:12.000Z</published>
-    <updated>2018-08-24T07:09:48.754Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="59-Spiral-Matrix-II螺旋矩阵-II"><a href="#59-Spiral-Matrix-II螺旋矩阵-II" class="headerlink" title="59. Spiral Matrix II螺旋矩阵 II"></a>59. Spiral Matrix II螺旋矩阵 II</h1><p>给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p><a id="more"></a><p>示例:</p><p>输入: 3<br>输出:</p><pre><code>[ [ 1, 2, 3 ], [ 8, 9, 4 ], [ 7, 6, 5 ]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题可以参见剑指Offer20.PrintMatrix顺时针打印矩阵(CodingInterview)和54. Spiral Matrix螺旋矩阵</p><p>所不同的是可以先生成一个n*n规模的矩阵然后螺旋将数字填入，时间复杂度是O(n^2)。</p><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {        vector&lt;vector&lt;int&gt;&gt; res(n,vector&lt;int&gt;(n,0));        int start=0;        int num=1;        while(start*2&lt;n){            generate(res,start,num,n);            start++;        }        return res;    }    void generate(vector&lt;vector&lt;int&gt;&gt; &amp;res,int start,int &amp;num,int n){        int endy=n-start-1;        int endx=n-start-1;        for(int j=start;j&lt;=endy;j++){            res[start][j]=num;            num++;        }        for(int i=start+1;i&lt;=endx;i++){            res[i][endy]=num;            num++;        }        for(int j=endy-1;j&gt;=start;j--){            res[endx][j]=num;            num++;        }        for(int i=endx-1;i&gt;start;i--){            res[i][start]=num;            num++;        }    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;59-Spiral-Matrix-II螺旋矩阵-II&quot;&gt;&lt;a href=&quot;#59-Spiral-Matrix-II螺旋矩阵-II&quot; class=&quot;headerlink&quot; title=&quot;59. Spiral Matrix II螺旋矩阵 II&quot;&gt;&lt;/a&gt;59. Spiral Matrix II螺旋矩阵 II&lt;/h1&gt;&lt;p&gt;给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-  </entry>
-  
-  <entry>
     <title>650. 2 Keys Keyboard只有两个键的键盘</title>
     <link href="http://yoursite.com/2018/08/24/650.%202%20Keys%20Keyboard%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98/"/>
     <id>http://yoursite.com/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/</id>
@@ -248,6 +224,30 @@
   </entry>
   
   <entry>
+    <title>59. Spiral Matrix II螺旋矩阵 II</title>
+    <link href="http://yoursite.com/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/"/>
+    <id>http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</id>
+    <published>2018-08-24T01:30:12.000Z</published>
+    <updated>2018-08-24T07:09:48.754Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="59-Spiral-Matrix-II螺旋矩阵-II"><a href="#59-Spiral-Matrix-II螺旋矩阵-II" class="headerlink" title="59. Spiral Matrix II螺旋矩阵 II"></a>59. Spiral Matrix II螺旋矩阵 II</h1><p>给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p><a id="more"></a><p>示例:</p><p>输入: 3<br>输出:</p><pre><code>[ [ 1, 2, 3 ], [ 8, 9, 4 ], [ 7, 6, 5 ]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题可以参见剑指Offer20.PrintMatrix顺时针打印矩阵(CodingInterview)和54. Spiral Matrix螺旋矩阵</p><p>所不同的是可以先生成一个n*n规模的矩阵然后螺旋将数字填入，时间复杂度是O(n^2)。</p><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {        vector&lt;vector&lt;int&gt;&gt; res(n,vector&lt;int&gt;(n,0));        int start=0;        int num=1;        while(start*2&lt;n){            generate(res,start,num,n);            start++;        }        return res;    }    void generate(vector&lt;vector&lt;int&gt;&gt; &amp;res,int start,int &amp;num,int n){        int endy=n-start-1;        int endx=n-start-1;        for(int j=start;j&lt;=endy;j++){            res[start][j]=num;            num++;        }        for(int i=start+1;i&lt;=endx;i++){            res[i][endy]=num;            num++;        }        for(int j=endy-1;j&gt;=start;j--){            res[endx][j]=num;            num++;        }        for(int i=endx-1;i&gt;start;i--){            res[i][start]=num;            num++;        }    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;59-Spiral-Matrix-II螺旋矩阵-II&quot;&gt;&lt;a href=&quot;#59-Spiral-Matrix-II螺旋矩阵-II&quot; class=&quot;headerlink&quot; title=&quot;59. Spiral Matrix II螺旋矩阵 II&quot;&gt;&lt;/a&gt;59. Spiral Matrix II螺旋矩阵 II&lt;/h1&gt;&lt;p&gt;给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
     <title>在浏览器地址栏输入URL，按下回车后发生了什么</title>
     <link href="http://yoursite.com/2018/08/23/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5URL%EF%BC%8C%E6%8C%89%E4%B8%8B%E5%9B%9E%E8%BD%A6%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"/>
     <id>http://yoursite.com/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/</id>
@@ -268,6 +268,30 @@
       <category term="TCPIP" scheme="http://yoursite.com/tags/TCPIP/"/>
     
       <category term="Web" scheme="http://yoursite.com/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>剑指offer思路总结</title>
+    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87offer%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/08/23/剑指offer思路总结/</id>
+    <published>2018-08-23T00:45:12.000Z</published>
+    <updated>2018-08-23T03:26:40.658Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="剑指offer思路总结"><a href="#剑指offer思路总结" class="headerlink" title="剑指offer思路总结"></a>剑指offer思路总结</h1><p>剑指offer已经刷过两遍，总结一下思路方便回忆</p><a id="more"></a><h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13.在O(1)时间删除链表结点"></a>13.在O(1)时间删除链表结点</h2><pre><code>分情况讨论：先在链表中顺序搜索要删除的节点i不是尾结点：{    先将i的下一个结点j的内容复制到i    然后把i的指针指向结点j的下一个结点；    此时再删除结点j}链表只有一个结点{    则删除该结点    然后将其置为NULL    将头结点置为空}链表有多个结点而且要删除的结点是尾结点{    从头结点顺序遍历，只要找到该结点i的前序结点就可以，然后执行删除操作}</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p><h3 id="初级解法"><a href="#初级解法" class="headerlink" title="初级解法"></a>初级解法</h3><p>双指针指向头尾部分，头偶尾奇则交换两个数字</p><h3 id="可扩展解法"><a href="#可扩展解法" class="headerlink" title="可扩展解法"></a>可扩展解法</h3><p>仍使用头尾指针，但用函数指针的方法将判断奇偶的函数解耦出来，整体逻辑框架不需要改动</p><h2 id="15-链表中倒数第K个节点"><a href="#15-链表中倒数第K个节点" class="headerlink" title="15.链表中倒数第K个节点"></a>15.链表中倒数第K个节点</h2><p>快慢指针，快指针比慢指针领先k-1步出发，快指针到尾节点时慢指针指向的是所求</p><h3 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h3><h4 id="1-求链表中间结点"><a href="#1-求链表中间结点" class="headerlink" title="1.求链表中间结点"></a>1.求链表中间结点</h4><p>快慢指针，快指针每次走两步，慢指针每次走一步，快指针到末尾时慢指针指向中间结点</p><h4 id="2-判断单向链表是否成环"><a href="#2-判断单向链表是否成环" class="headerlink" title="2.判断单向链表是否成环"></a>2.判断单向链表是否成环</h4><p>同前面，若快指针追上慢指针则成环</p><h2 id="16-反转链表"><a href="#16-反转链表" class="headerlink" title="16.反转链表"></a>16.反转链表</h2><p>需要定义三个指针，指向当前遍历的结点，前一个结点和后一个结点,先要找到反转链表后的头结点即原始链表的尾节点，需要满足的条件是后结点为空</p><pre><code>////Non-RecursiveListNode* ReverseList(ListNode* pHead){    ListNode* pReversedHead = nullptr;    ListNode* pNode = pHead;    ListNode* pPrev = nullptr;    while (pNode != nullptr)    {        ListNode *pNext = pNode-&gt;m_pNext;        if (pNext == NULL) {//find the last node            pReversedHead = pNode;        }        pNode-&gt;m_pNext = pPrev;//Revserse        pPrev = pNode;// forward        pNode = pNext;    }    return pReversedHead;}ListNode* ReverseList(ListNode* pHead){    if (pHead == NULL || pHead-&gt;m_pNext == nullptr) return pHead;    ListNode *PReverseHead = pHead;    pHead=ReverseList(pHead-&gt;m_pNext);    PReverseHead-&gt;m_pNext-&gt;m_pNext = PReverseHead;//进入尾节点    PReverseHead-&gt;m_pNext = NULL;    return pHead;}</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;剑指offer思路总结&quot;&gt;&lt;a href=&quot;#剑指offer思路总结&quot; class=&quot;headerlink&quot; title=&quot;剑指offer思路总结&quot;&gt;&lt;/a&gt;剑指offer思路总结&lt;/h1&gt;&lt;p&gt;剑指offer已经刷过两遍，总结一下思路方便回忆&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
     
   </entry>
   
@@ -297,30 +321,6 @@
   </entry>
   
   <entry>
-    <title>剑指offer思路总结</title>
-    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87offer%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2018/08/23/剑指offer思路总结/</id>
-    <published>2018-08-23T00:45:12.000Z</published>
-    <updated>2018-08-23T03:26:40.658Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="剑指offer思路总结"><a href="#剑指offer思路总结" class="headerlink" title="剑指offer思路总结"></a>剑指offer思路总结</h1><p>剑指offer已经刷过两遍，总结一下思路方便回忆</p><a id="more"></a><h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13.在O(1)时间删除链表结点"></a>13.在O(1)时间删除链表结点</h2><pre><code>分情况讨论：先在链表中顺序搜索要删除的节点i不是尾结点：{    先将i的下一个结点j的内容复制到i    然后把i的指针指向结点j的下一个结点；    此时再删除结点j}链表只有一个结点{    则删除该结点    然后将其置为NULL    将头结点置为空}链表有多个结点而且要删除的结点是尾结点{    从头结点顺序遍历，只要找到该结点i的前序结点就可以，然后执行删除操作}</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p><h3 id="初级解法"><a href="#初级解法" class="headerlink" title="初级解法"></a>初级解法</h3><p>双指针指向头尾部分，头偶尾奇则交换两个数字</p><h3 id="可扩展解法"><a href="#可扩展解法" class="headerlink" title="可扩展解法"></a>可扩展解法</h3><p>仍使用头尾指针，但用函数指针的方法将判断奇偶的函数解耦出来，整体逻辑框架不需要改动</p><h2 id="15-链表中倒数第K个节点"><a href="#15-链表中倒数第K个节点" class="headerlink" title="15.链表中倒数第K个节点"></a>15.链表中倒数第K个节点</h2><p>快慢指针，快指针比慢指针领先k-1步出发，快指针到尾节点时慢指针指向的是所求</p><h3 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h3><h4 id="1-求链表中间结点"><a href="#1-求链表中间结点" class="headerlink" title="1.求链表中间结点"></a>1.求链表中间结点</h4><p>快慢指针，快指针每次走两步，慢指针每次走一步，快指针到末尾时慢指针指向中间结点</p><h4 id="2-判断单向链表是否成环"><a href="#2-判断单向链表是否成环" class="headerlink" title="2.判断单向链表是否成环"></a>2.判断单向链表是否成环</h4><p>同前面，若快指针追上慢指针则成环</p><h2 id="16-反转链表"><a href="#16-反转链表" class="headerlink" title="16.反转链表"></a>16.反转链表</h2><p>需要定义三个指针，指向当前遍历的结点，前一个结点和后一个结点,先要找到反转链表后的头结点即原始链表的尾节点，需要满足的条件是后结点为空</p><pre><code>////Non-RecursiveListNode* ReverseList(ListNode* pHead){    ListNode* pReversedHead = nullptr;    ListNode* pNode = pHead;    ListNode* pPrev = nullptr;    while (pNode != nullptr)    {        ListNode *pNext = pNode-&gt;m_pNext;        if (pNext == NULL) {//find the last node            pReversedHead = pNode;        }        pNode-&gt;m_pNext = pPrev;//Revserse        pPrev = pNode;// forward        pNode = pNext;    }    return pReversedHead;}ListNode* ReverseList(ListNode* pHead){    if (pHead == NULL || pHead-&gt;m_pNext == nullptr) return pHead;    ListNode *PReverseHead = pHead;    pHead=ReverseList(pHead-&gt;m_pNext);    PReverseHead-&gt;m_pNext-&gt;m_pNext = PReverseHead;//进入尾节点    PReverseHead-&gt;m_pNext = NULL;    return pHead;}</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;剑指offer思路总结&quot;&gt;&lt;a href=&quot;#剑指offer思路总结&quot; class=&quot;headerlink&quot; title=&quot;剑指offer思路总结&quot;&gt;&lt;/a&gt;剑指offer思路总结&lt;/h1&gt;&lt;p&gt;剑指offer已经刷过两遍，总结一下思路方便回忆&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
-      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
-    
-  </entry>
-  
-  <entry>
     <title>300. Longest Increasing Subsequence最长上升子序列</title>
     <link href="http://yoursite.com/2018/08/22/300.%20Longest%20Increasing%20Subsequence%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/"/>
     <id>http://yoursite.com/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/</id>
@@ -332,33 +332,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;300-Longest-Increasing-Subsequence最长上升子序列&quot;&gt;&lt;a href=&quot;#300-Longest-Increasing-Subsequence最长上升子序列&quot; class=&quot;headerlink&quot; title=&quot;300. Longest Increasing Subsequence最长上升子序列&quot;&gt;&lt;/a&gt;300. Longest Increasing Subsequence最长上升子序列&lt;/h1&gt;&lt;p&gt;给定一个无序的整数数组，找到其中最长上升子序列的长度。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-      <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>354. Russian Doll Envelopes俄罗斯套娃</title>
-    <link href="http://yoursite.com/2018/08/22/354.%20Russian%20Doll%20Envelopes%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81/"/>
-    <id>http://yoursite.com/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/</id>
-    <published>2018-08-22T01:58:44.000Z</published>
-    <updated>2018-08-22T13:15:14.247Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="354-Russian-Doll-Envelopes俄罗斯套娃"><a href="#354-Russian-Doll-Envelopes俄罗斯套娃" class="headerlink" title="354. Russian Doll Envelopes俄罗斯套娃"></a>354. Russian Doll Envelopes俄罗斯套娃</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p><p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p><a id="more"></a><p>说明:<br>不允许旋转信封。</p><p>示例:</p><p>输入: envelopes = [[5,4],[6,4],[6,7],[2,3]]<br>输出: 3<br>解释: 最多信封的个数为 3, 组合为: [2,3] =&gt; [5,4] =&gt; [6,7]。</p><h2 id="动态规划解法"><a href="#动态规划解法" class="headerlink" title="动态规划解法"></a>动态规划解法</h2><p>这道题给了我们一堆大小不一的信封，让我们像套俄罗斯娃娃那样把这些信封都给套起来，这道题实际上是之前那道Longest Increasing Subsequence的具体应用，而且难度增加了，从一维变成了两维，但是万变不离其宗，解法还是一样的，首先来看DP的解法，这是一种brute force的解法，首先要给所有的信封按从小到大排序，首先根据宽度从小到大排，如果宽度相同，那么高度小的再前面，这是STL里面sort的默认排法，所以我们不用写其他的comparator，直接排就可以了，然后我们开始遍历，对于每一个信封，我们都遍历其前面所有的信封，如果当前信封的长和宽都比前面那个信封的大，那么我们更新dp数组，通过dp[i] = max(dp[i], dp[j] + 1)。然后我们每遍历完一个信封，都更新一下结果res，参见代码如下；</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        int res=0,n=envelopes.size();        vector&lt;int&gt; dp(n,1);        sort(envelopes.begin(),envelopes.end());        for(int i=0;i&lt;n;i++){            for(int j=0;j&lt;i;j++){                if(envelopes[i].first&gt;envelopes[j].first &amp;&amp; envelopes[i].second&gt; envelopes[j].second){                    dp[i]=max(dp[i],dp[j]+1);                }            }            res=max(res,dp[i]);        }        return res;    }};</code></pre><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><p>可以使用二分查找法来优化速度，我们首先要做的还是给信封排序，但是这次排序和上面有些不同，信封的宽度还是从小到大排，但是宽度相等时，我们让高度大的在前面。那么现在问题就简化了成了找高度数字中的LIS，完全就和之前那道Longest Increasing Subsequence一样了，所以我们还是使用之前那题解法来做，参见代码如下：</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {              vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,const pair&lt;int,int&gt; &amp;b){            if(a.first==b.first) return a.second&gt; b.second;            return a.first &lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            int left=0,right=dp.size(),t=envelopes[i].second;            while(left&lt;right){                int mid=left+(right-left)/2;                if(dp[mid]&lt; t) left=mid+1;                else right=mid;            }            if(right&gt;=dp.size()) dp.push_back(t);            else dp[right]=t;        }        return dp.size();    }};</code></pre><h2 id="使用STL函数lower-bound的二分查找法"><a href="#使用STL函数lower-bound的二分查找法" class="headerlink" title="使用STL函数lower_bound的二分查找法"></a>使用STL函数lower_bound的二分查找法</h2><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,cosnt pair&lt;int,int&gt; &amp;b){           if(a.first==b.first) return a.second&gt;b.second;            return a.first&lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            auto it=lower_bound(dp.begin(),dp.end(),enveloeps[i].second);            if(it==dp.end()) dp.push_back(envelopes[i].second);            else *it=envelopes[i].second;        }        return dp.size();    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;354-Russian-Doll-Envelopes俄罗斯套娃&quot;&gt;&lt;a href=&quot;#354-Russian-Doll-Envelopes俄罗斯套娃&quot; class=&quot;headerlink&quot; title=&quot;354. Russian Doll Envelopes俄罗斯套娃&quot;&gt;&lt;/a&gt;354. Russian Doll Envelopes俄罗斯套娃&lt;/h1&gt;&lt;p&gt;给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。&lt;/p&gt;
-&lt;p&gt;请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。&lt;/p&gt;
     
     </summary>
     
@@ -396,6 +369,59 @@
       <category term="Max Heap" scheme="http://yoursite.com/tags/Max-Heap/"/>
     
       <category term="Template" scheme="http://yoursite.com/tags/Template/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>354. Russian Doll Envelopes俄罗斯套娃</title>
+    <link href="http://yoursite.com/2018/08/22/354.%20Russian%20Doll%20Envelopes%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81/"/>
+    <id>http://yoursite.com/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/</id>
+    <published>2018-08-22T01:58:44.000Z</published>
+    <updated>2018-08-22T13:15:14.247Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="354-Russian-Doll-Envelopes俄罗斯套娃"><a href="#354-Russian-Doll-Envelopes俄罗斯套娃" class="headerlink" title="354. Russian Doll Envelopes俄罗斯套娃"></a>354. Russian Doll Envelopes俄罗斯套娃</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p><p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p><a id="more"></a><p>说明:<br>不允许旋转信封。</p><p>示例:</p><p>输入: envelopes = [[5,4],[6,4],[6,7],[2,3]]<br>输出: 3<br>解释: 最多信封的个数为 3, 组合为: [2,3] =&gt; [5,4] =&gt; [6,7]。</p><h2 id="动态规划解法"><a href="#动态规划解法" class="headerlink" title="动态规划解法"></a>动态规划解法</h2><p>这道题给了我们一堆大小不一的信封，让我们像套俄罗斯娃娃那样把这些信封都给套起来，这道题实际上是之前那道Longest Increasing Subsequence的具体应用，而且难度增加了，从一维变成了两维，但是万变不离其宗，解法还是一样的，首先来看DP的解法，这是一种brute force的解法，首先要给所有的信封按从小到大排序，首先根据宽度从小到大排，如果宽度相同，那么高度小的再前面，这是STL里面sort的默认排法，所以我们不用写其他的comparator，直接排就可以了，然后我们开始遍历，对于每一个信封，我们都遍历其前面所有的信封，如果当前信封的长和宽都比前面那个信封的大，那么我们更新dp数组，通过dp[i] = max(dp[i], dp[j] + 1)。然后我们每遍历完一个信封，都更新一下结果res，参见代码如下；</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        int res=0,n=envelopes.size();        vector&lt;int&gt; dp(n,1);        sort(envelopes.begin(),envelopes.end());        for(int i=0;i&lt;n;i++){            for(int j=0;j&lt;i;j++){                if(envelopes[i].first&gt;envelopes[j].first &amp;&amp; envelopes[i].second&gt; envelopes[j].second){                    dp[i]=max(dp[i],dp[j]+1);                }            }            res=max(res,dp[i]);        }        return res;    }};</code></pre><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><p>可以使用二分查找法来优化速度，我们首先要做的还是给信封排序，但是这次排序和上面有些不同，信封的宽度还是从小到大排，但是宽度相等时，我们让高度大的在前面。那么现在问题就简化了成了找高度数字中的LIS，完全就和之前那道Longest Increasing Subsequence一样了，所以我们还是使用之前那题解法来做，参见代码如下：</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {              vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,const pair&lt;int,int&gt; &amp;b){            if(a.first==b.first) return a.second&gt; b.second;            return a.first &lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            int left=0,right=dp.size(),t=envelopes[i].second;            while(left&lt;right){                int mid=left+(right-left)/2;                if(dp[mid]&lt; t) left=mid+1;                else right=mid;            }            if(right&gt;=dp.size()) dp.push_back(t);            else dp[right]=t;        }        return dp.size();    }};</code></pre><h2 id="使用STL函数lower-bound的二分查找法"><a href="#使用STL函数lower-bound的二分查找法" class="headerlink" title="使用STL函数lower_bound的二分查找法"></a>使用STL函数lower_bound的二分查找法</h2><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,cosnt pair&lt;int,int&gt; &amp;b){           if(a.first==b.first) return a.second&gt;b.second;            return a.first&lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            auto it=lower_bound(dp.begin(),dp.end(),enveloeps[i].second);            if(it==dp.end()) dp.push_back(envelopes[i].second);            else *it=envelopes[i].second;        }        return dp.size();    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;354-Russian-Doll-Envelopes俄罗斯套娃&quot;&gt;&lt;a href=&quot;#354-Russian-Doll-Envelopes俄罗斯套娃&quot; class=&quot;headerlink&quot; title=&quot;354. Russian Doll Envelopes俄罗斯套娃&quot;&gt;&lt;/a&gt;354. Russian Doll Envelopes俄罗斯套娃&lt;/h1&gt;&lt;p&gt;给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。&lt;/p&gt;
+&lt;p&gt;请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+      <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo+github搭建个人博客问题总结</title>
+    <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
+    <published>2018-08-21T01:58:44.000Z</published>
+    <updated>2018-08-22T10:14:19.065Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="Hexo-github搭建个人博客问题总结"><a href="#Hexo-github搭建个人博客问题总结" class="headerlink" title="Hexo+github搭建个人博客问题总结"></a>Hexo+github搭建个人博客问题总结</h4><p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><a id="more"></a><h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;Hexo-github搭建个人博客问题总结&quot;&gt;&lt;a href=&quot;#Hexo-github搭建个人博客问题总结&quot; class=&quot;headerlink&quot; title=&quot;Hexo+github搭建个人博客问题总结&quot;&gt;&lt;/a&gt;Hexo+github搭建个人博客问题总结&lt;/h4&gt;&lt;p&gt;总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   
@@ -445,32 +471,6 @@
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
       <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo+github搭建个人博客问题总结</title>
-    <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
-    <published>2018-08-21T01:58:44.000Z</published>
-    <updated>2018-08-22T10:14:19.065Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="Hexo-github搭建个人博客问题总结"><a href="#Hexo-github搭建个人博客问题总结" class="headerlink" title="Hexo+github搭建个人博客问题总结"></a>Hexo+github搭建个人博客问题总结</h4><p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><a id="more"></a><h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;Hexo-github搭建个人博客问题总结&quot;&gt;&lt;a href=&quot;#Hexo-github搭建个人博客问题总结&quot; class=&quot;headerlink&quot; title=&quot;Hexo+github搭建个人博客问题总结&quot;&gt;&lt;/a&gt;Hexo+github搭建个人博客问题总结&lt;/h4&gt;&lt;p&gt;总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
-    
-      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   
