@@ -42,30 +42,6 @@
   </entry>
   
   <entry>
-    <title>139. Word Break单词拆分</title>
-    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
-    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
-    <published>2018-08-26T12:33:12.000Z</published>
-    <updated>2018-08-27T14:08:19.153Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
     <title>626. Exchange Seats换座位</title>
     <link href="http://yoursite.com/2018/08/26/626.%20Exchange%20Seats%E6%8D%A2%E5%BA%A7%E4%BD%8D/"/>
     <id>http://yoursite.com/2018/08/26/626. Exchange Seats换座位/</id>
@@ -89,6 +65,30 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="SQL" scheme="http://yoursite.com/tags/SQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>139. Word Break单词拆分</title>
+    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
+    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
+    <published>2018-08-26T12:33:12.000Z</published>
+    <updated>2018-08-27T14:08:19.153Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
   </entry>
   
@@ -348,6 +348,30 @@
   </entry>
   
   <entry>
+    <title>剑指offer思路总结</title>
+    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87offer%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/08/23/剑指offer思路总结/</id>
+    <published>2018-08-23T00:45:12.000Z</published>
+    <updated>2018-08-23T03:26:40.658Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="剑指offer思路总结"><a href="#剑指offer思路总结" class="headerlink" title="剑指offer思路总结"></a>剑指offer思路总结</h1><p>剑指offer已经刷过两遍，总结一下思路方便回忆</p><a id="more"></a><h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13.在O(1)时间删除链表结点"></a>13.在O(1)时间删除链表结点</h2><pre><code>分情况讨论：先在链表中顺序搜索要删除的节点i不是尾结点：{    先将i的下一个结点j的内容复制到i    然后把i的指针指向结点j的下一个结点；    此时再删除结点j}链表只有一个结点{    则删除该结点    然后将其置为NULL    将头结点置为空}链表有多个结点而且要删除的结点是尾结点{    从头结点顺序遍历，只要找到该结点i的前序结点就可以，然后执行删除操作}</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p><h3 id="初级解法"><a href="#初级解法" class="headerlink" title="初级解法"></a>初级解法</h3><p>双指针指向头尾部分，头偶尾奇则交换两个数字</p><h3 id="可扩展解法"><a href="#可扩展解法" class="headerlink" title="可扩展解法"></a>可扩展解法</h3><p>仍使用头尾指针，但用函数指针的方法将判断奇偶的函数解耦出来，整体逻辑框架不需要改动</p><h2 id="15-链表中倒数第K个节点"><a href="#15-链表中倒数第K个节点" class="headerlink" title="15.链表中倒数第K个节点"></a>15.链表中倒数第K个节点</h2><p>快慢指针，快指针比慢指针领先k-1步出发，快指针到尾节点时慢指针指向的是所求</p><h3 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h3><h4 id="1-求链表中间结点"><a href="#1-求链表中间结点" class="headerlink" title="1.求链表中间结点"></a>1.求链表中间结点</h4><p>快慢指针，快指针每次走两步，慢指针每次走一步，快指针到末尾时慢指针指向中间结点</p><h4 id="2-判断单向链表是否成环"><a href="#2-判断单向链表是否成环" class="headerlink" title="2.判断单向链表是否成环"></a>2.判断单向链表是否成环</h4><p>同前面，若快指针追上慢指针则成环</p><h2 id="16-反转链表"><a href="#16-反转链表" class="headerlink" title="16.反转链表"></a>16.反转链表</h2><p>需要定义三个指针，指向当前遍历的结点，前一个结点和后一个结点,先要找到反转链表后的头结点即原始链表的尾节点，需要满足的条件是后结点为空</p><pre><code>////Non-RecursiveListNode* ReverseList(ListNode* pHead){    ListNode* pReversedHead = nullptr;    ListNode* pNode = pHead;    ListNode* pPrev = nullptr;    while (pNode != nullptr)    {        ListNode *pNext = pNode-&gt;m_pNext;        if (pNext == NULL) {//find the last node            pReversedHead = pNode;        }        pNode-&gt;m_pNext = pPrev;//Revserse        pPrev = pNode;// forward        pNode = pNext;    }    return pReversedHead;}ListNode* ReverseList(ListNode* pHead){    if (pHead == NULL || pHead-&gt;m_pNext == nullptr) return pHead;    ListNode *PReverseHead = pHead;    pHead=ReverseList(pHead-&gt;m_pNext);    PReverseHead-&gt;m_pNext-&gt;m_pNext = PReverseHead;//进入尾节点    PReverseHead-&gt;m_pNext = NULL;    return pHead;}</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;剑指offer思路总结&quot;&gt;&lt;a href=&quot;#剑指offer思路总结&quot; class=&quot;headerlink&quot; title=&quot;剑指offer思路总结&quot;&gt;&lt;/a&gt;剑指offer思路总结&lt;/h1&gt;&lt;p&gt;剑指offer已经刷过两遍，总结一下思路方便回忆&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
+    
+  </entry>
+  
+  <entry>
     <title>59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</title>
     <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87Offer59.%E5%AF%B9%E7%A7%B0%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     <id>http://yoursite.com/2018/08/23/剑指Offer59.对称的二叉树/</id>
@@ -373,30 +397,6 @@
   </entry>
   
   <entry>
-    <title>剑指offer思路总结</title>
-    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87offer%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2018/08/23/剑指offer思路总结/</id>
-    <published>2018-08-23T00:45:12.000Z</published>
-    <updated>2018-08-23T03:26:40.658Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="剑指offer思路总结"><a href="#剑指offer思路总结" class="headerlink" title="剑指offer思路总结"></a>剑指offer思路总结</h1><p>剑指offer已经刷过两遍，总结一下思路方便回忆</p><a id="more"></a><h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13.在O(1)时间删除链表结点"></a>13.在O(1)时间删除链表结点</h2><pre><code>分情况讨论：先在链表中顺序搜索要删除的节点i不是尾结点：{    先将i的下一个结点j的内容复制到i    然后把i的指针指向结点j的下一个结点；    此时再删除结点j}链表只有一个结点{    则删除该结点    然后将其置为NULL    将头结点置为空}链表有多个结点而且要删除的结点是尾结点{    从头结点顺序遍历，只要找到该结点i的前序结点就可以，然后执行删除操作}</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p><h3 id="初级解法"><a href="#初级解法" class="headerlink" title="初级解法"></a>初级解法</h3><p>双指针指向头尾部分，头偶尾奇则交换两个数字</p><h3 id="可扩展解法"><a href="#可扩展解法" class="headerlink" title="可扩展解法"></a>可扩展解法</h3><p>仍使用头尾指针，但用函数指针的方法将判断奇偶的函数解耦出来，整体逻辑框架不需要改动</p><h2 id="15-链表中倒数第K个节点"><a href="#15-链表中倒数第K个节点" class="headerlink" title="15.链表中倒数第K个节点"></a>15.链表中倒数第K个节点</h2><p>快慢指针，快指针比慢指针领先k-1步出发，快指针到尾节点时慢指针指向的是所求</p><h3 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h3><h4 id="1-求链表中间结点"><a href="#1-求链表中间结点" class="headerlink" title="1.求链表中间结点"></a>1.求链表中间结点</h4><p>快慢指针，快指针每次走两步，慢指针每次走一步，快指针到末尾时慢指针指向中间结点</p><h4 id="2-判断单向链表是否成环"><a href="#2-判断单向链表是否成环" class="headerlink" title="2.判断单向链表是否成环"></a>2.判断单向链表是否成环</h4><p>同前面，若快指针追上慢指针则成环</p><h2 id="16-反转链表"><a href="#16-反转链表" class="headerlink" title="16.反转链表"></a>16.反转链表</h2><p>需要定义三个指针，指向当前遍历的结点，前一个结点和后一个结点,先要找到反转链表后的头结点即原始链表的尾节点，需要满足的条件是后结点为空</p><pre><code>////Non-RecursiveListNode* ReverseList(ListNode* pHead){    ListNode* pReversedHead = nullptr;    ListNode* pNode = pHead;    ListNode* pPrev = nullptr;    while (pNode != nullptr)    {        ListNode *pNext = pNode-&gt;m_pNext;        if (pNext == NULL) {//find the last node            pReversedHead = pNode;        }        pNode-&gt;m_pNext = pPrev;//Revserse        pPrev = pNode;// forward        pNode = pNext;    }    return pReversedHead;}ListNode* ReverseList(ListNode* pHead){    if (pHead == NULL || pHead-&gt;m_pNext == nullptr) return pHead;    ListNode *PReverseHead = pHead;    pHead=ReverseList(pHead-&gt;m_pNext);    PReverseHead-&gt;m_pNext-&gt;m_pNext = PReverseHead;//进入尾节点    PReverseHead-&gt;m_pNext = NULL;    return pHead;}</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;剑指offer思路总结&quot;&gt;&lt;a href=&quot;#剑指offer思路总结&quot; class=&quot;headerlink&quot; title=&quot;剑指offer思路总结&quot;&gt;&lt;/a&gt;剑指offer思路总结&lt;/h1&gt;&lt;p&gt;剑指offer已经刷过两遍，总结一下思路方便回忆&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
-  </entry>
-  
-  <entry>
     <title>300. Longest Increasing Subsequence最长上升子序列</title>
     <link href="http://yoursite.com/2018/08/22/300.%20Longest%20Increasing%20Subsequence%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/"/>
     <id>http://yoursite.com/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/</id>
@@ -408,33 +408,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;300-Longest-Increasing-Subsequence最长上升子序列&quot;&gt;&lt;a href=&quot;#300-Longest-Increasing-Subsequence最长上升子序列&quot; class=&quot;headerlink&quot; title=&quot;300. Longest Increasing Subsequence最长上升子序列&quot;&gt;&lt;/a&gt;300. Longest Increasing Subsequence最长上升子序列&lt;/h1&gt;&lt;p&gt;给定一个无序的整数数组，找到其中最长上升子序列的长度。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-      <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>354. Russian Doll Envelopes俄罗斯套娃</title>
-    <link href="http://yoursite.com/2018/08/22/354.%20Russian%20Doll%20Envelopes%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81/"/>
-    <id>http://yoursite.com/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/</id>
-    <published>2018-08-22T01:58:44.000Z</published>
-    <updated>2018-08-22T13:15:14.247Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="354-Russian-Doll-Envelopes俄罗斯套娃"><a href="#354-Russian-Doll-Envelopes俄罗斯套娃" class="headerlink" title="354. Russian Doll Envelopes俄罗斯套娃"></a>354. Russian Doll Envelopes俄罗斯套娃</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p><p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p><a id="more"></a><p>说明:<br>不允许旋转信封。</p><p>示例:</p><p>输入: envelopes = [[5,4],[6,4],[6,7],[2,3]]<br>输出: 3<br>解释: 最多信封的个数为 3, 组合为: [2,3] =&gt; [5,4] =&gt; [6,7]。</p><h2 id="动态规划解法"><a href="#动态规划解法" class="headerlink" title="动态规划解法"></a>动态规划解法</h2><p>这道题给了我们一堆大小不一的信封，让我们像套俄罗斯娃娃那样把这些信封都给套起来，这道题实际上是之前那道Longest Increasing Subsequence的具体应用，而且难度增加了，从一维变成了两维，但是万变不离其宗，解法还是一样的，首先来看DP的解法，这是一种brute force的解法，首先要给所有的信封按从小到大排序，首先根据宽度从小到大排，如果宽度相同，那么高度小的再前面，这是STL里面sort的默认排法，所以我们不用写其他的comparator，直接排就可以了，然后我们开始遍历，对于每一个信封，我们都遍历其前面所有的信封，如果当前信封的长和宽都比前面那个信封的大，那么我们更新dp数组，通过dp[i] = max(dp[i], dp[j] + 1)。然后我们每遍历完一个信封，都更新一下结果res，参见代码如下；</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        int res=0,n=envelopes.size();        vector&lt;int&gt; dp(n,1);        sort(envelopes.begin(),envelopes.end());        for(int i=0;i&lt;n;i++){            for(int j=0;j&lt;i;j++){                if(envelopes[i].first&gt;envelopes[j].first &amp;&amp; envelopes[i].second&gt; envelopes[j].second){                    dp[i]=max(dp[i],dp[j]+1);                }            }            res=max(res,dp[i]);        }        return res;    }};</code></pre><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><p>可以使用二分查找法来优化速度，我们首先要做的还是给信封排序，但是这次排序和上面有些不同，信封的宽度还是从小到大排，但是宽度相等时，我们让高度大的在前面。那么现在问题就简化了成了找高度数字中的LIS，完全就和之前那道Longest Increasing Subsequence一样了，所以我们还是使用之前那题解法来做，参见代码如下：</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {              vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,const pair&lt;int,int&gt; &amp;b){            if(a.first==b.first) return a.second&gt; b.second;            return a.first &lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            int left=0,right=dp.size(),t=envelopes[i].second;            while(left&lt;right){                int mid=left+(right-left)/2;                if(dp[mid]&lt; t) left=mid+1;                else right=mid;            }            if(right&gt;=dp.size()) dp.push_back(t);            else dp[right]=t;        }        return dp.size();    }};</code></pre><h2 id="使用STL函数lower-bound的二分查找法"><a href="#使用STL函数lower-bound的二分查找法" class="headerlink" title="使用STL函数lower_bound的二分查找法"></a>使用STL函数lower_bound的二分查找法</h2><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,cosnt pair&lt;int,int&gt; &amp;b){           if(a.first==b.first) return a.second&gt;b.second;            return a.first&lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            auto it=lower_bound(dp.begin(),dp.end(),enveloeps[i].second);            if(it==dp.end()) dp.push_back(envelopes[i].second);            else *it=envelopes[i].second;        }        return dp.size();    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;354-Russian-Doll-Envelopes俄罗斯套娃&quot;&gt;&lt;a href=&quot;#354-Russian-Doll-Envelopes俄罗斯套娃&quot; class=&quot;headerlink&quot; title=&quot;354. Russian Doll Envelopes俄罗斯套娃&quot;&gt;&lt;/a&gt;354. Russian Doll Envelopes俄罗斯套娃&lt;/h1&gt;&lt;p&gt;给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。&lt;/p&gt;
-&lt;p&gt;请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。&lt;/p&gt;
     
     </summary>
     
@@ -476,6 +449,33 @@
   </entry>
   
   <entry>
+    <title>354. Russian Doll Envelopes俄罗斯套娃</title>
+    <link href="http://yoursite.com/2018/08/22/354.%20Russian%20Doll%20Envelopes%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81/"/>
+    <id>http://yoursite.com/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/</id>
+    <published>2018-08-22T01:58:44.000Z</published>
+    <updated>2018-08-22T13:15:14.247Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="354-Russian-Doll-Envelopes俄罗斯套娃"><a href="#354-Russian-Doll-Envelopes俄罗斯套娃" class="headerlink" title="354. Russian Doll Envelopes俄罗斯套娃"></a>354. Russian Doll Envelopes俄罗斯套娃</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p><p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p><a id="more"></a><p>说明:<br>不允许旋转信封。</p><p>示例:</p><p>输入: envelopes = [[5,4],[6,4],[6,7],[2,3]]<br>输出: 3<br>解释: 最多信封的个数为 3, 组合为: [2,3] =&gt; [5,4] =&gt; [6,7]。</p><h2 id="动态规划解法"><a href="#动态规划解法" class="headerlink" title="动态规划解法"></a>动态规划解法</h2><p>这道题给了我们一堆大小不一的信封，让我们像套俄罗斯娃娃那样把这些信封都给套起来，这道题实际上是之前那道Longest Increasing Subsequence的具体应用，而且难度增加了，从一维变成了两维，但是万变不离其宗，解法还是一样的，首先来看DP的解法，这是一种brute force的解法，首先要给所有的信封按从小到大排序，首先根据宽度从小到大排，如果宽度相同，那么高度小的再前面，这是STL里面sort的默认排法，所以我们不用写其他的comparator，直接排就可以了，然后我们开始遍历，对于每一个信封，我们都遍历其前面所有的信封，如果当前信封的长和宽都比前面那个信封的大，那么我们更新dp数组，通过dp[i] = max(dp[i], dp[j] + 1)。然后我们每遍历完一个信封，都更新一下结果res，参见代码如下；</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        int res=0,n=envelopes.size();        vector&lt;int&gt; dp(n,1);        sort(envelopes.begin(),envelopes.end());        for(int i=0;i&lt;n;i++){            for(int j=0;j&lt;i;j++){                if(envelopes[i].first&gt;envelopes[j].first &amp;&amp; envelopes[i].second&gt; envelopes[j].second){                    dp[i]=max(dp[i],dp[j]+1);                }            }            res=max(res,dp[i]);        }        return res;    }};</code></pre><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><p>可以使用二分查找法来优化速度，我们首先要做的还是给信封排序，但是这次排序和上面有些不同，信封的宽度还是从小到大排，但是宽度相等时，我们让高度大的在前面。那么现在问题就简化了成了找高度数字中的LIS，完全就和之前那道Longest Increasing Subsequence一样了，所以我们还是使用之前那题解法来做，参见代码如下：</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {              vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,const pair&lt;int,int&gt; &amp;b){            if(a.first==b.first) return a.second&gt; b.second;            return a.first &lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            int left=0,right=dp.size(),t=envelopes[i].second;            while(left&lt;right){                int mid=left+(right-left)/2;                if(dp[mid]&lt; t) left=mid+1;                else right=mid;            }            if(right&gt;=dp.size()) dp.push_back(t);            else dp[right]=t;        }        return dp.size();    }};</code></pre><h2 id="使用STL函数lower-bound的二分查找法"><a href="#使用STL函数lower-bound的二分查找法" class="headerlink" title="使用STL函数lower_bound的二分查找法"></a>使用STL函数lower_bound的二分查找法</h2><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,cosnt pair&lt;int,int&gt; &amp;b){           if(a.first==b.first) return a.second&gt;b.second;            return a.first&lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            auto it=lower_bound(dp.begin(),dp.end(),enveloeps[i].second);            if(it==dp.end()) dp.push_back(envelopes[i].second);            else *it=envelopes[i].second;        }        return dp.size();    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;354-Russian-Doll-Envelopes俄罗斯套娃&quot;&gt;&lt;a href=&quot;#354-Russian-Doll-Envelopes俄罗斯套娃&quot; class=&quot;headerlink&quot; title=&quot;354. Russian Doll Envelopes俄罗斯套娃&quot;&gt;&lt;/a&gt;354. Russian Doll Envelopes俄罗斯套娃&lt;/h1&gt;&lt;p&gt;给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。&lt;/p&gt;
+&lt;p&gt;请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+      <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hexo+github搭建个人博客问题总结</title>
     <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
@@ -502,18 +502,18 @@
   </entry>
   
   <entry>
-    <title>C++基础概念I</title>
-    <link href="http://yoursite.com/2018/08/21/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5I/"/>
-    <id>http://yoursite.com/2018/08/21/C++基础概念I/</id>
+    <title>C++基础概念II</title>
+    <link href="http://yoursite.com/2018/08/21/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5II/"/>
+    <id>http://yoursite.com/2018/08/21/C++基础概念II/</id>
     <published>2018-08-21T01:58:44.000Z</published>
-    <updated>2018-08-22T10:13:35.573Z</updated>
+    <updated>2018-08-22T10:14:14.908Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="C-基础概念I"><a href="#C-基础概念I" class="headerlink" title="C++基础概念I"></a>C++基础概念I</h1><p>总结C++基础概念</p><h2 id="1-C-面向对象的三大特征"><a href="#1-C-面向对象的三大特征" class="headerlink" title="1.C++面向对象的三大特征"></a>1.C++面向对象的三大特征</h2><a id="more"></a><h3 id="1-封装"><a href="#1-封装" class="headerlink" title="(1)封装:"></a>(1)封装:</h3><p>将客观事物封装成抽象的类,并且设计者可以对类的成员进行访问控制权限控制. 这样一方面可以做到数据的隐藏,保护数据安全;另一方面,封装可以修改类的内部实现而不用修改调用了该类的用户的代码.同时封装还有利于代码的 方便复用；</p><h3 id="2-继承"><a href="#2-继承" class="headerlink" title="(2)继承:"></a>(2)继承:</h3><h4 id="a"><a href="#a" class="headerlink" title="a."></a>a.</h4><p>继承具有这样一种功能,它可以使用现有类的所有功能；并且可以在不重新编写原有类的情况下对类的功能进行扩展.继承的过程是一般到特殊的过程,即是它们是is-a的关系;基类或父类是一般,而子类或派生类是基类的特殊表现;要实现继承可以通过继承和组合来实现;</p><h4 id="b"><a href="#b" class="headerlink" title="b."></a>b.</h4><p>广义上的继承分成三大类:实现继承:使用基类的属性和方法而无需额外编码的能力;接口继承:接口继承是指仅使用基类的属性和方法的名称,而具体的实现子类必须自己完成的能力;可视继承:子窗体(类)使用父窗体(类)的外观和实现代码的能力;</p><h3 id="3-多态"><a href="#3-多态" class="headerlink" title="(3)多态:"></a>(3)多态:</h3><h4 id="a-1"><a href="#a-1" class="headerlink" title="a."></a>a.</h4><p>多态的实现分成两种,一种是编译时的多态,主要是通过函数重载和运算符重</p><p>另外一种是运行时多态,主要是通过函数覆盖来实现的,它需要满足3个条件:基类函数必须是虚函数,并且基类的指针或引用指向子类的时候,当子类中对原有的虚函数进行重新定义之后形成一个更加严格的重载版本的时候,就会形成多态;它是通过动态联编实现的;</p><h4 id="b-1"><a href="#b-1" class="headerlink" title="b."></a>b.</h4><p>运行时的多态可以让基类的指针或引用指向不同的对象的时候表现出来不同的特性;</p><h2 id="2-简述C-C-程序编译时的内存分配情况"><a href="#2-简述C-C-程序编译时的内存分配情况" class="headerlink" title="2.简述C/C++程序编译时的内存分配情况"></a>2.简述C/C++程序编译时的内存分配情况</h2><h3 id="1-一般一个c-c-程序编译的时候内存布局如下-地址从低到高的顺序"><a href="#1-一般一个c-c-程序编译的时候内存布局如下-地址从低到高的顺序" class="headerlink" title="(1)一般一个c/c++程序编译的时候内存布局如下(地址从低到高的顺序)"></a>(1)一般一个c/c++程序编译的时候内存布局如下(地址从低到高的顺序)</h3><h4 id="a-代码区"><a href="#a-代码区" class="headerlink" title="a.代码区:"></a>a.代码区:</h4><p>存放程序的二进制代码.</p><h4 id="b-常量区"><a href="#b-常量区" class="headerlink" title="b.常量区:"></a>b.常量区:</h4><p>这个区和代码区的距离很近,主要存放一些非局部常量值和字符串字面值,一般不允许修改,程序结束由系统释放;具有常属性并且初始化的全局和静态变量也放在这个区.</p><h4 id="c-数据区"><a href="#c-数据区" class="headerlink" title="c.数据区:"></a>c.数据区:</h4><p>赋过初值的且不具有常属性的静态和全局变量在数据区.它和BSS段统称为静态区;程序结束后由系统释放;</p><h4 id="d-BSS段"><a href="#d-BSS段" class="headerlink" title="d.BSS段:"></a>d.BSS段:</h4><p>没有初始化的静态和全局变量;进程一旦被加载这个区所有的数据都被清0;</p><h4 id="e-堆区"><a href="#e-堆区" class="headerlink" title="e.堆区:"></a>e.堆区:</h4><p>   动态分配的内存;由程序员分配和释放,程序结束的时候如果没有释放,则由OS回收;</p><h4 id="f-栈区"><a href="#f-栈区" class="headerlink" title="f.栈区:"></a>f.栈区:</h4><p>   由编译器自动分配和释放,不使用的时候会自动的释放.主要用来存放非静态的局部变量,函数的参数和返回值, 临时变量等.</p><h4 id="g-命令行参数和环境变量区"><a href="#g-命令行参数和环境变量区" class="headerlink" title="g.命令行参数和环境变量区;"></a>g.命令行参数和环境变量区;</h4><p>下面是对应一段经典的代码:</p><pre><code>#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;unistd.h&gt;  //unix下的头文件const int const_global = 10; //常全局变量int init_global = 10;        //初始化的全局变量int uninit_global;           //未初始化的全局白能量int main(int argc,char * argv[]){    const static int const_static = 10;//常属性的静态变量，不可以被赋值，初始化    static int init_static = 10;    //初始化静态变量    static int uninit_static;       //未初始化静态变量    const int const_local = 10;    // 常属性的局部变量    int  prev_local = 1;//前局部变量    int  next_local = 5;//后局部变量    int* prev_heap = malloc(sizeof(int));//前面分配的堆变量    int* next_heap = malloc(sizeof(int));//后面分配的堆变量    const char* literal = &quot;literal&quot;;      //字符串字面值，字面值常量    extern char** environ;               // 环境变量    printf(&quot;----地址最高断命令行参数和环境变量-------\n&quot;);    printf(&quot;        环境变量:%p\n&quot;,environ);    printf(&quot;      命令行参数:%p\n&quot;,argv);    printf(&quot;---------------栈区-----------------------\n&quot;);    printf(&quot;      常局部变量:%p\n&quot;,&amp;const_local);    printf(&quot;      前局部变量:%p\n&quot;,&amp;prev_local);    printf(&quot;      后局部变量:%p\n&quot;,&amp;next_local);    printf(&quot;--------------------堆--------------------\n&quot;);    printf(&quot;        前堆变量:%p\n&quot;,prev_heap);    printf(&quot;        后堆变量:%p\n&quot;,next_heap);    printf(&quot;--------------------BSS--------------------\n&quot;);    printf(&quot;未初始化全局变量:%p\n&quot;,&amp;uninit_global);    printf(&quot;未初始化静态变量:%p\n&quot;,&amp;uninit_static);    printf(&quot;----------------数据------------------------\n&quot;);    printf(&quot;  初始化全局变量:%p\n&quot;,&amp;init_static);    printf(&quot;  初始化全局变量:%p\n&quot;,&amp;init_global);    printf(&quot;----------------代码区----------------------\n&quot;);    printf(&quot;     常静态变量:%p\n&quot;,&amp;const_static);    printf(&quot;     字面值常量:%p\n&quot;,&amp;literal);    printf(&quot;     常全局变量:%p\n&quot;,&amp;const_global);    printf(&quot;           函数:%p\n&quot;,main);    return 0;}</code></pre><h3 id="2-从上面可以看出c-c-的内存分配方式主要有三种"><a href="#2-从上面可以看出c-c-的内存分配方式主要有三种" class="headerlink" title="(2)从上面可以看出c/c++的内存分配方式主要有三种"></a>(2)从上面可以看出c/c++的内存分配方式主要有三种</h3><h4 id="a-从静态存储区域分配"><a href="#a-从静态存储区域分配" class="headerlink" title="a.从静态存储区域分配:"></a>a.从静态存储区域分配:</h4><p>   内存在程序编译时已经分配好,这块内存在程序的整个运行期间都存在.速度快,不容易出错.因为由系统会善后.</p><h4 id="b-在栈上分配内存"><a href="#b-在栈上分配内存" class="headerlink" title="b.在栈上分配内存:"></a>b.在栈上分配内存:</h4><p>   在执行函数的时候,函数内非静态局部变量的存储单元都是在栈上创建,函数执行结束的时候这些存储单元自动被释放.栈内存分配内置于处理器的指令集中,效率很高但是分配的内容有限.</p><h4 id="c-从堆中分配内存"><a href="#c-从堆中分配内存" class="headerlink" title="c.从堆中分配内存:"></a>c.从堆中分配内存:</h4><p>即是动态分配内存.程序在运行的时候使用malloc/new申请任意大小的内存,程序员自己负责在何时用free/delete释放内存.动态内存的生存期由程序员决定,使用非常的灵活.如果在堆上分配了内存,就有责任去回收它,否则运行程序会出现内存泄漏,另外频繁的分配和释放不同大小的堆空间将会产生堆内碎片.不易管理;</p><h3 id="3-堆和栈之间的主要的区别是什么"><a href="#3-堆和栈之间的主要的区别是什么" class="headerlink" title="(3)堆和栈之间的主要的区别是什么?"></a>(3)堆和栈之间的主要的区别是什么?</h3><h4 id="a-管理方式不同"><a href="#a-管理方式不同" class="headerlink" title="a.管理方式不同:"></a>a.管理方式不同:</h4><p>栈是由编译器自动分配和释放,使用方便;而对于堆来说,分配和释放都必须由程序员来手动完成,不易管理,容易造成内存泄漏和内存碎片.</p><h4 id="b-可用内存空间不同"><a href="#b-可用内存空间不同" class="headerlink" title="b.可用内存空间不同:"></a>b.可用内存空间不同:</h4><p>对于栈来说,它可用的内存空间比较小;而对于堆来说它可以使用的空间比栈要大的多.</p><h4 id="c-能否产生碎片不同"><a href="#c-能否产生碎片不同" class="headerlink" title="c.能否产生碎片不同:"></a>c.能否产生碎片不同:</h4><p>由于栈采用的是后进先出的机制,所以栈空间没有内存碎片的产生;而对于堆来说,由于频繁的使用new/delete势必会造成内存空间分配的不连续,从而造成大量的碎片,使程序的效率降低.</p><h4 id="d-生长方向不同"><a href="#d-生长方向不同" class="headerlink" title="d.生长方向不同:"></a>d.生长方向不同:</h4><p>对于堆来说,它一般是向上的;即是向着地址增加的方向增长;对于栈来说,它一般是向下的,即向着地址减小的方向增长.</p><h4 id="e-分配的方式不同"><a href="#e-分配的方式不同" class="headerlink" title="e.分配的方式不同:"></a>e.分配的方式不同:</h4><p>对于堆来说,它只能是动态分配的;而对于栈来说,它分为静态分配和动态分配;静态分配由编译器来进行管理,而动态分配的栈和堆也是不一样的,动态分配的栈由编译器进行释放,无需我们程序员来释放.</p><h4 id="f-分配的效率不同"><a href="#f-分配的效率不同" class="headerlink" title="f.分配的效率不同:"></a>f.分配的效率不同:</h4><p>栈是机器系统提供的数据结构,计算机会在底层对栈提供支持:为栈分配专门的寄存器.压栈和出栈都由专门的指令进行.因此它的效率会很高;而堆则是由c/c++库函数实现的,机制是非常的负责的;例如要分配一块内存的时候,库函数会利用特定的算法在堆内存中搜索可用大小的内存空间;如果没有足够大的内存空间,就会调用系统功能去增加数据段的内存空间.这样才能得到足够大的可用的内存空间,因此堆内存的分配的效率比栈要低得多. </p><h3 id="4-new-malloc以及free-delete之间的区别"><a href="#4-new-malloc以及free-delete之间的区别" class="headerlink" title="(4)new/malloc以及free/delete之间的区别"></a>(4)new/malloc以及free/delete之间的区别</h3><h4 id="a-2"><a href="#a-2" class="headerlink" title="a."></a>a.</h4><p>new/delete是运算符,只能在C++中使用,它可以重载;mallloc/free是C的标准库函数,在C/C++中都可以使用.</p><h4 id="b-2"><a href="#b-2" class="headerlink" title="b."></a>b.</h4><p>对于非内部的数据类型的对象而言,光用malloc/free是无法满足动态对象的要求的.对象在创建的时候需要执行构造函数,对象在消亡之前需要执行析构函数.而molloc/free是库函数而不是运算符,不在编译器的控制范围之内,编译器不能将执行构造函数和析构函数的任务强加给malloc/free.因此C++需要一个能够完成动态分配内存和初始化的new,以及一个能够完成清理和释放内存的运算符delete.</p><h4 id="c"><a href="#c" class="headerlink" title="c."></a>c.</h4><p>new的返回值是指定类型的指针,可以自动的计算所需要分配的内存大小.而malloc的返回值是一个void类型的指针,我们在使用的时候要进行强制类型转换,并且分配的大小也要程序员手动的计算.</p><h4 id="d"><a href="#d" class="headerlink" title="d."></a>d.</h4><p>new/delete完全覆盖了malloc/free的功能,只所以还要保留malloc/free,是因为我们的C++程序有时要调用用C编写的而C中又没有new/delete,只能使用malloc/free.</p><h2 id="3-指针和引用之间的区别和联系"><a href="#3-指针和引用之间的区别和联系" class="headerlink" title="3.指针和引用之间的区别和联系"></a>3.指针和引用之间的区别和联系</h2><h3 id="联系"><a href="#联系" class="headerlink" title="联系:"></a>联系:</h3><h4 id="a-3"><a href="#a-3" class="headerlink" title="a."></a>a.</h4><p>指针和引用本质上都是地址的概念,引用在内部其实是用const指针来实现的.</p><h4 id="b-3"><a href="#b-3" class="headerlink" title="b."></a>b.</h4><p>给函数传递参数的时候,一级指针和引用作为函数参数的时候可以达到相同的效果.</p><h4 id="c-1"><a href="#c-1" class="headerlink" title="c."></a>c.</h4><p>指针的大部分效果都可以通过引用来实现。</p><h4 id="d-1"><a href="#d-1" class="headerlink" title="d."></a>d.</h4><p>二级指针作为参数的时候就是希望在函数的内部修改指针的指向.这个时候利用指针的引用可以达到同样的效果.</p><h3 id="区别"><a href="#区别" class="headerlink" title="区别:"></a>区别:</h3><h4 id="a-4"><a href="#a-4" class="headerlink" title="a."></a>a.</h4><p>定义引用的时候必须初始化,定义指针的时候可以不初始化.</p><h4 id="b-4"><a href="#b-4" class="headerlink" title="b."></a>b.</h4><p>引用不能引用空,但是指针可以指向空.</p><h4 id="c-2"><a href="#c-2" class="headerlink" title="c."></a>c.</h4><p>引用的关系一旦确定,就无法改变;引用永远指向的是用来对它初始化的对象;而非常属性的指针是可以改变指向的.</p><h4 id="d-2"><a href="#d-2" class="headerlink" title="d."></a>d.</h4><p>指针是一个实体变量,在32位操作系统上面都是4个字节.而引用只是一个别名,其大小和其应用的对象的类型有关系.</p><h4 id="e"><a href="#e" class="headerlink" title="e."></a>e.</h4><p>有指向指针的指针,但是没有引用引用的引用;因为引用一旦建立,它就表示初始化它的对象.</p><h4 id="f"><a href="#f" class="headerlink" title="f."></a>f.</h4><p>有引用指针的引用,但是没有指向引用的指针；</p><h4 id="g"><a href="#g" class="headerlink" title="g."></a>g.</h4><p>有指针数组,但是没有引用数组,但是有数组的引用.<br>下面是一段代码非常的全面:</p><pre><code>#include &lt;iostream&gt;using namespace std;void foo(int a[3])/*这个地方传递的是数组的首地址*/{     cout &lt;&lt; sizeof(a)/sizeof(a[0]) &lt;&lt; endl;}void bar(int (&amp;a)[3])/*这里传参的时候就是数组的整体*/{     cout &lt;&lt; sizeof(a)/sizeof(a[0]) &lt;&lt; endl;}int main(void){     int a;     int* p = &amp;a;     int** pp = &amp;p;/*存在指向指针的指针*/     int&amp; r  = a;     int&amp;&amp; rr = r;/*error没有引用引用的引用*/     int*&amp;  rp = p; /*有引用指针的引用(指针引用)*/     int&amp;* pr = &amp;r; /*没有指向引用的指针(引用指针)*/     int x, y, z;     int* pa[] = {&amp;x,&amp;y,&amp;z};/*指针数组*/     int&amp; ra[] = {x,y,z};/*引用数组是不存在的因为引用不是一个实体*/     int arr[3] = {0};     int (&amp;ar)[3] = arr;/*数组引用(先近后远,先右后左)*/     foo(arr);/*这里传递的是数组的第一个元素的首地址*/     cout &lt;&lt; sizeof(arr)/sizeof(arr[0]) &lt;&lt; endl;     /*这里的数组名代表的是真个数组*/     int (*parr)[3] = &amp;arr;/*对数组名取地址得到的是一个数组指针                             这个时候arr代表的是数组的整体;*/     bar(arr);/*这里传递的就是数组的整体*/     return 0;}</code></pre><h2 id="4-类和结构体的区别"><a href="#4-类和结构体的区别" class="headerlink" title="4.类和结构体的区别"></a>4.类和结构体的区别</h2><p>结构体在默认情况下的成员都是public的,而类在默认情况下的成员是private的。</p><p>结构体和类都必须使用new创建，struct保证成员按照声明顺序在内存在存储，而类不保证。</p><p>C++结构体的继承默认是public，而c++类的继承默认是private。</p><h2 id="5-C-和C定义结构体区别"><a href="#5-C-和C定义结构体区别" class="headerlink" title="5.C++和C定义结构体区别"></a>5.C++和C定义结构体区别</h2><p>C++中的结构和类其实具备几乎一样的功能，结构体内也是可以声明函数，C++的结构体和类默认具有不一样的访问属性</p><h2 id="6-const常量与define宏定义的区别"><a href="#6-const常量与define宏定义的区别" class="headerlink" title="6.const常量与define宏定义的区别"></a>6.const常量与define宏定义的区别</h2><h3 id="1-编译器处理方式不同。"><a href="#1-编译器处理方式不同。" class="headerlink" title="(1) 编译器处理方式不同。"></a>(1) 编译器处理方式不同。</h3><p>define宏是在预处理阶段展开，生命周期止于编译期。只是一个常数、一个命令中的参数，没有实际的存在。#define常量存在于程序的代码段。const常量是编译运行阶段使用，const常量存在于程序的数据段.</p><h3 id="2-类型和安全检查不同。"><a href="#2-类型和安全检查不同。" class="headerlink" title="(2)类型和安全检查不同。"></a>(2)类型和安全检查不同。</h3><p>define宏没有类型，不做任何类型检查，仅仅是展开。const常量有具体的类型，在编译阶段会执行类型检查。</p><h3 id="3-存储方式不同。"><a href="#3-存储方式不同。" class="headerlink" title="(3)存储方式不同。"></a>(3)存储方式不同。</h3><p>define宏仅仅是展开，有多少地方使用，就展开多少次，不会分配内存。const常量会在内存中分配(可以是堆中也可以是栈中)</p><h2 id="7-memset-memcpy-和strcpy-的根本区别"><a href="#7-memset-memcpy-和strcpy-的根本区别" class="headerlink" title="7.memset ,memcpy 和strcpy 的根本区别"></a>7.memset ,memcpy 和strcpy 的根本区别</h2><p>memset用来对一段内存空间全部设置为某个字符，一般用在对定义的字符串进行初始化为’ ‘或’’；</p><p>它对较大的结构体或数组进行清零操作的一种最快方法。</p><pre><code>char temp[30];     memset(temp,&apos;\0&apos;,sizeof(temp));</code></pre><p>char temp[30]只是分配了一定的内存空间给该字符数组，但并未初始化该内存空间，即数组。所以，需要使用memset()来进行初始化。</p><p>memcpy用来做内存拷贝，你可以拿它拷贝任何数据类型的对象，可以指定拷贝的数据长度；</p><p>strcpy就只能拷贝字符串了，它遇到’\0’就结束拷贝；例如：<br>    char a[100],b[50];strcpy(a,b);</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="C-基础概念II"><a href="#C-基础概念II" class="headerlink" title="C++基础概念II"></a>C++基础概念II</h1><p>总结C++基础概念</p><h2 id="1-C-的四种强制类型转换关键字，及它们的特点和使用的场合"><a href="#1-C-的四种强制类型转换关键字，及它们的特点和使用的场合" class="headerlink" title="1.C++的四种强制类型转换关键字，及它们的特点和使用的场合"></a>1.C++的四种强制类型转换关键字，及它们的特点和使用的场合</h2><a id="more"></a><p>C语言中的强制类型转换可以随意的转换我们想要的类型了,格式如下</p><pre><code>(类型) 变量名;</code></pre><p>为什么c++还要引入新的4种类型转换呢?</p><p>  这是因为新的类型转换控制符可以很好的控制类型转换的过程,允许控制各种类型不同的转换.</p><p>  还有一点好处是C++的类型转换控制符能告诉程序员或读者我们这个转换的目的是什么,我们<br> 只要看一下代码的类型转换控制符,就能明白我们想要达到什么样的目的.</p><h3 id="1-static-cast-lt-T-gt-content-静态转换-在编译期间处理"><a href="#1-static-cast-lt-T-gt-content-静态转换-在编译期间处理" class="headerlink" title="1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理"></a>1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理</h3><p>   它主要用于C++中内置的基本数据类型之间的转换.但是没有运行时类型的检测来保证转换的安全性.</p><p>   为什么需要static_cast类型的转换?</p><h4 id="a-用于基类和子类之间的指针或引用的转换。"><a href="#a-用于基类和子类之间的指针或引用的转换。" class="headerlink" title="a.用于基类和子类之间的指针或引用的转换。"></a>a.用于基类和子类之间的指针或引用的转换。</h4><p>这种转换把子类的指针或引用转换为基类表示是安全的;进行下行转换,把基类的指针或引用转换为子类表示时,由于没有进行动态类型检测,所以是不安全的;</p><h4 id="b-把void类型的指针转换成目标类型的指针-不安全"><a href="#b-把void类型的指针转换成目标类型的指针-不安全" class="headerlink" title="b.把void类型的指针转换成目标类型的指针(不安全)."></a>b.把void类型的指针转换成目标类型的指针(不安全).</h4><h4 id="c-用于内置的基本的数据类型之间的转换"><a href="#c-用于内置的基本的数据类型之间的转换" class="headerlink" title="c.用于内置的基本的数据类型之间的转换."></a>c.用于内置的基本的数据类型之间的转换.</h4><h4 id="d-把任何类型的表达式转换成void类型的"><a href="#d-把任何类型的表达式转换成void类型的" class="headerlink" title="d.把任何类型的表达式转换成void类型的."></a>d.把任何类型的表达式转换成void类型的.</h4><p>   注意:static_cast不会转换掉content的const,volatile,__unaligned属性</p><h3 id="2-static-const-lt-T-gt-content-去常转换-编译时执行"><a href="#2-static-const-lt-T-gt-content-去常转换-编译时执行" class="headerlink" title="2)static_const&lt;T*&gt;(content):去常转换;编译时执行;"></a>2)static_const&lt;T*&gt;(content):去常转换;编译时执行;</h3><p>  它主要作用同一个类型之间的去常和添加常属性之间的转换.不能用做不同的类型之间的转换.</p><p>  它可以把一个不是常属性的转换成常属性的,同时它也可以对一个本是常属性的类型进行去常.</p><h3 id="3-dynamic-cast-lt-T-gt-content-动态类型转换-也是向下安全转型-是在运行的时候执行"><a href="#3-dynamic-cast-lt-T-gt-content-动态类型转换-也是向下安全转型-是在运行的时候执行" class="headerlink" title="3)dynamic_cast&lt;T*&gt;(content) 动态类型转换;也是向下安全转型;是在运行的时候执行;"></a>3)dynamic_cast&lt;T*&gt;(content) 动态类型转换;也是向下安全转型;是在运行的时候执行;</h3><p>   通常用于基类和派生类之间的转换.转换时会进行类型安全检查。</p><h4 id="a"><a href="#a" class="headerlink" title="a."></a>a.</h4><p>不能用于内置的基本数据类型之间的转换.</p><h4 id="b"><a href="#b" class="headerlink" title="b."></a>b.</h4><p>dynamic_cast转换成功的话返回的是类的指针或引用,失败返回null;</p><h4 id="c"><a href="#c" class="headerlink" title="c."></a>c.</h4><p>dynamic_cast进行的转换的时候基类中一定要有虚函数,因为只有类中有了虚函数, 才说明它希望让基类指针或引用指向其派生类对象的情况,这样才有意义.这是由于运行时类型检查需要运行时类型的信息,而这些信息存储在虚函数表中.</p><h4 id="d"><a href="#d" class="headerlink" title="d."></a>d.</h4><p>在类的转换时,在类层次间进行转换的时候,dynamic_cast和static_cast进行上行转换的时候效果是一样的；但是在进行下行转换的时候,dynamic_cast会进行类型检查所以它更安全.它可以让指向基类的指针转换为指向其子类的指针或是其兄弟类的指针;</p><h3 id="4-reinterpret-cast-lt-T-gt-content-重解释类型转换"><a href="#4-reinterpret-cast-lt-T-gt-content-重解释类型转换" class="headerlink" title="4)reinterpret_cast&lt;T*&gt;(content)重解释类型转换;"></a>4)reinterpret_cast&lt;T*&gt;(content)重解释类型转换;</h3><p>   它有着和C风格强制类型转换同样的功能;它可以转化任何的内置数据类型为其他的类型, 同时它也可以把任何类型的指针转化为其他的类型;它的机理是对二进制数据进行重新的的解释,不会改变原来的格式,而static_cast会改变原来的格式;</p><h2 id="2-请说出static和const关键字尽可能多的作用"><a href="#2-请说出static和const关键字尽可能多的作用" class="headerlink" title="2.请说出static和const关键字尽可能多的作用"></a>2.请说出static和const关键字尽可能多的作用</h2><h3 id="static关键字至少有下列n个作用："><a href="#static关键字至少有下列n个作用：" class="headerlink" title="static关键字至少有下列n个作用："></a>static关键字至少有下列n个作用：</h3><h4 id="（1）"><a href="#（1）" class="headerlink" title="（1）"></a>（1）</h4><p>函数体内static变量的作用范围为该函数体，不同于auto变量，该变量的内存只被分配一次，因此其值在下次调用时仍维持上次的值；</p><h4 id="（2）"><a href="#（2）" class="headerlink" title="（2）"></a>（2）</h4><p>在模块内的static全局变量可以被模块内所用函数访问，但不能被模块外其它函数访问；</p><h4 id="（3）"><a href="#（3）" class="headerlink" title="（3）"></a>（3）</h4><p>在模块内的static函数只可被这一模块内的其它函数调用，这个函数的使用范围被限制在声明它的模块内；</p><h4 id="（4）"><a href="#（4）" class="headerlink" title="（4）"></a>（4）</h4><p>在类中的static成员变量属于整个类所拥有，对类的所有对象只有一份拷贝；</p><h4 id="（5）"><a href="#（5）" class="headerlink" title="（5）"></a>（5）</h4><p>在类中的static成员函数属于整个类所拥有，这个函数不接收this指针，因而只能访问类的static成员变量。</p><h3 id="const关键字至少有下列n个作用："><a href="#const关键字至少有下列n个作用：" class="headerlink" title="const关键字至少有下列n个作用："></a>const关键字至少有下列n个作用：</h3><h4 id="（1）-1"><a href="#（1）-1" class="headerlink" title="（1）"></a>（1）</h4><p>欲阻止一个变量被改变，可以使用const关键字。在定义该const变量时，通常需要对它进行初始化，因为以后就没有机会再去改变它了；</p><h4 id="（2）-1"><a href="#（2）-1" class="headerlink" title="（2）"></a>（2）</h4><p>对指针来说，可以指定指针本身为const，也可以指定指针所指的数据为const，或二者同时指定为const；</p><h4 id="（3）-1"><a href="#（3）-1" class="headerlink" title="（3）"></a>（3）</h4><p>在一个函数声明中，const可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值；</p><h4 id="（4）-1"><a href="#（4）-1" class="headerlink" title="（4）"></a>（4）</h4><p>对于类的成员函数，若指定其为const类型，则表明其是一个常函数，不能修改类的成员变量；</p><h4 id="（5）-1"><a href="#（5）-1" class="headerlink" title="（5）"></a>（5）</h4><p>对于类的成员函数，有时候必须指定其返回值为const类型，以使得其返回值不为“左值”。例如：<br>const classA operator<em>(const classA&amp; a1,const classA&amp; a2);<br>　　operator</em>的返回结果必须是一个const对象。如果不是，这样的变态代码也不会编译出错：</p><p>classA a, b, c;<br>(a <em> b) = c; // 对a</em>b的结果赋值<br>　　操作(a * b) = c显然不符合编程者的初衷，也没有任何意义。</p><p>剖析：<br>　　惊讶吗？小小的static和const居然有这么多功能，我们能回答几个？如果只能回答1~2个，那还真得闭关再好好修炼修炼。</p><p>　　这个题可以考查面试者对程序设计知识的掌握程度是初级、中级还是比较深入，没有一定的知识广度和深度，不可能对这个问题给出全面的解答。大多数人只能回答出static和const关键字的部分功能。</p>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;C-基础概念I&quot;&gt;&lt;a href=&quot;#C-基础概念I&quot; class=&quot;headerlink&quot; title=&quot;C++基础概念I&quot;&gt;&lt;/a&gt;C++基础概念I&lt;/h1&gt;&lt;p&gt;总结C++基础概念&lt;/p&gt;
-&lt;h2 id=&quot;1-C-面向对象的三大特征&quot;&gt;&lt;a href=&quot;#1-C-面向对象的三大特征&quot; class=&quot;headerlink&quot; title=&quot;1.C++面向对象的三大特征&quot;&gt;&lt;/a&gt;1.C++面向对象的三大特征&lt;/h2&gt;
+      &lt;h1 id=&quot;C-基础概念II&quot;&gt;&lt;a href=&quot;#C-基础概念II&quot; class=&quot;headerlink&quot; title=&quot;C++基础概念II&quot;&gt;&lt;/a&gt;C++基础概念II&lt;/h1&gt;&lt;p&gt;总结C++基础概念&lt;/p&gt;
+&lt;h2 id=&quot;1-C-的四种强制类型转换关键字，及它们的特点和使用的场合&quot;&gt;&lt;a href=&quot;#1-C-的四种强制类型转换关键字，及它们的特点和使用的场合&quot; class=&quot;headerlink&quot; title=&quot;1.C++的四种强制类型转换关键字，及它们的特点和使用的场合&quot;&gt;&lt;/a&gt;1.C++的四种强制类型转换关键字，及它们的特点和使用的场合&lt;/h2&gt;
     
     </summary>
     
