@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-26T13:27:54.554Z</updated>
+  <updated>2018-08-27T13:03:04.729Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>688. Knight Probability in Chessboard“马”在棋盘上的概率</title>
+    <link href="http://yoursite.com/2018/08/27/688.%20Knight%20Probability%20in%20Chessboard%E2%80%9C%E9%A9%AC%E2%80%9D%E5%9C%A8%E6%A3%8B%E7%9B%98%E4%B8%8A%E7%9A%84%E6%A6%82%E7%8E%87/"/>
+    <id>http://yoursite.com/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/</id>
+    <published>2018-08-27T10:48:10.000Z</published>
+    <updated>2018-08-27T13:03:04.729Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="688-Knight-Probability-in-Chessboard“马”在棋盘上的概率"><a href="#688-Knight-Probability-in-Chessboard“马”在棋盘上的概率" class="headerlink" title="688. Knight Probability in Chessboard“马”在棋盘上的概率"></a>688. Knight Probability in Chessboard“马”在棋盘上的概率</h1><p> 已知一个 NxN 的国际象棋棋盘，棋盘的行号和列号都是从0开始。即最左上角的格子记为 (0, 0), 最右下角的记为 (N-1, N-1)。 </p><p>现有一个“马”（也译作“骑士”）位于 (r, c) ，并打算进行 K 次移动。 </p><a id="more"></a><p>如下图所示，国际象棋的“马”每一步先沿水平或垂直方向移动2个格子，然后向与之相垂直的方向再移动1个格子，共有8个可选的位置。</p><p><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fuogeyhztfj30ba0baq32.jpg" alt="image"></p><p>现在“马”每一步都从可选的位置（包括棋盘外部的）中独立随机地选择一个进行移动，直到移动了 K 次或跳到了棋盘外面。</p><p>求移动结束后，“马”仍留在棋盘上的概率。</p><p>例:</p><p>输入: </p><pre><code>3, 2, 0, 0</code></pre><p>输出: 0.0625<br>解释:<br>输入的数据依次为 N, K, r, c<br>第1步时，有且只有2种走法令“马”可以留在棋盘上(跳到(1,2)或(2,1))。对于以上的两种情况，各自在第2步均有且只有2种走法令“马”仍然留在棋盘上。<br>所以“马”在结束后仍在棋盘上的概率为0.0625。<br>注意:</p><p>N 的取值范围为 [1, 25]<br>K 的取值范围为 [0, 100]<br>开始时，“马”总是位于棋盘上</p><h2 id="解法：动态规划"><a href="#解法：动态规划" class="headerlink" title="解法：动态规划"></a>解法：动态规划</h2><p>令f[r][c][steps]成为在第steps步后落在区域(r,c)的概率，递推式如下：</p><pre><code>\$\$ f[r][c][steps]=∑_​{dr,dc​​} f[r+dr][c+dc][steps−1]/8.0 \$\$  </code></pre><p>(dr,dc)包括八个可能（2,1), (2, -1),(2,−1), (-2, 1),(−2,1), (-2, -1),(−2,−1), (1, 2),(1,2), (1, -2),(1,−2), (-1, 2),(−1,2), (-1, -2)(−1,−2)</p><p>为了不使用三维数组f，我们会使用两个二维dp,dp2，存储最近使用的两层，其中dp2会代表f[][][steps],dp会代表f[][][steps-1]</p><p>时间复杂度：<br>O(KN^​2)<br>空间复杂度：<br>O(N^​2)</p><pre><code>class Solution {    public double knightProbability(int N, int K, int sr, int sc) {        double[][] dp = new double[N][N];        int[] dr = new int[]{2, 2, 1, 1, -1, -1, -2, -2};        int[] dc = new int[]{1, -1, 2, -2, 2, -2, 1, -1};        dp[sr][sc] = 1;        for (; K &gt; 0; K--) {            double[][] dp2 = new double[N][N];            for (int r = 0; r &lt; N; r++) {                for (int c = 0; c &lt; N; c++) {                    for (int k = 0; k &lt; 8; k++) {                        int cr = r + dr[k];                        int cc = c + dc[k];                        if (0 &lt;= cr &amp;&amp; cr &lt; N &amp;&amp; 0 &lt;= cc &amp;&amp; cc &lt; N) {                            dp2[cr][cc] += dp[r][c] / 8.0;                        }                    }                }            }            dp = dp2;        }        double ans = 0.0;        for (double[] row: dp) {            for (double x: row) ans += x;        }        return ans;    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;688-Knight-Probability-in-Chessboard“马”在棋盘上的概率&quot;&gt;&lt;a href=&quot;#688-Knight-Probability-in-Chessboard“马”在棋盘上的概率&quot; class=&quot;headerlink&quot; title=&quot;688. Knight Probability in Chessboard“马”在棋盘上的概率&quot;&gt;&lt;/a&gt;688. Knight Probability in Chessboard“马”在棋盘上的概率&lt;/h1&gt;&lt;p&gt; 已知一个 NxN 的国际象棋棋盘，棋盘的行号和列号都是从0开始。即最左上角的格子记为 (0, 0), 最右下角的记为 (N-1, N-1)。 &lt;/p&gt;
+&lt;p&gt;现有一个“马”（也译作“骑士”）位于 (r, c) ，并打算进行 K 次移动。 &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+  </entry>
   
   <entry>
     <title>626. Exchange Seats换座位</title>
@@ -63,11 +88,11 @@
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
       <category term="Kickstart" scheme="http://yoursite.com/tags/Kickstart/"/>
     
       <category term="Google" scheme="http://yoursite.com/tags/Google/"/>
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
   </entry>
   
@@ -99,30 +124,6 @@
   </entry>
   
   <entry>
-    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
-    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
-    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
-    <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T13:02:28.972Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
-    
-  </entry>
-  
-  <entry>
     <title>697. Degree of an Array数组的度</title>
     <link href="http://yoursite.com/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/"/>
     <id>http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</id>
@@ -144,6 +145,30 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
+    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
+    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
+    <published>2018-08-24T05:36:12.000Z</published>
+    <updated>2018-08-24T13:02:28.972Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
     
   </entry>
   
@@ -226,30 +251,6 @@
   </entry>
   
   <entry>
-    <title>59. Spiral Matrix II螺旋矩阵 II</title>
-    <link href="http://yoursite.com/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/"/>
-    <id>http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</id>
-    <published>2018-08-24T01:30:12.000Z</published>
-    <updated>2018-08-24T07:09:48.754Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="59-Spiral-Matrix-II螺旋矩阵-II"><a href="#59-Spiral-Matrix-II螺旋矩阵-II" class="headerlink" title="59. Spiral Matrix II螺旋矩阵 II"></a>59. Spiral Matrix II螺旋矩阵 II</h1><p>给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p><a id="more"></a><p>示例:</p><p>输入: 3<br>输出:</p><pre><code>[ [ 1, 2, 3 ], [ 8, 9, 4 ], [ 7, 6, 5 ]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题可以参见剑指Offer20.PrintMatrix顺时针打印矩阵(CodingInterview)和54. Spiral Matrix螺旋矩阵</p><p>所不同的是可以先生成一个n*n规模的矩阵然后螺旋将数字填入，时间复杂度是O(n^2)。</p><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {        vector&lt;vector&lt;int&gt;&gt; res(n,vector&lt;int&gt;(n,0));        int start=0;        int num=1;        while(start*2&lt;n){            generate(res,start,num,n);            start++;        }        return res;    }    void generate(vector&lt;vector&lt;int&gt;&gt; &amp;res,int start,int &amp;num,int n){        int endy=n-start-1;        int endx=n-start-1;        for(int j=start;j&lt;=endy;j++){            res[start][j]=num;            num++;        }        for(int i=start+1;i&lt;=endx;i++){            res[i][endy]=num;            num++;        }        for(int j=endy-1;j&gt;=start;j--){            res[endx][j]=num;            num++;        }        for(int i=endx-1;i&gt;start;i--){            res[i][start]=num;            num++;        }    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;59-Spiral-Matrix-II螺旋矩阵-II&quot;&gt;&lt;a href=&quot;#59-Spiral-Matrix-II螺旋矩阵-II&quot; class=&quot;headerlink&quot; title=&quot;59. Spiral Matrix II螺旋矩阵 II&quot;&gt;&lt;/a&gt;59. Spiral Matrix II螺旋矩阵 II&lt;/h1&gt;&lt;p&gt;给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-  </entry>
-  
-  <entry>
     <title>650. 2 Keys Keyboard只有两个键的键盘</title>
     <link href="http://yoursite.com/2018/08/24/650.%202%20Keys%20Keyboard%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98/"/>
     <id>http://yoursite.com/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/</id>
@@ -271,6 +272,30 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>59. Spiral Matrix II螺旋矩阵 II</title>
+    <link href="http://yoursite.com/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/"/>
+    <id>http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</id>
+    <published>2018-08-24T01:30:12.000Z</published>
+    <updated>2018-08-24T07:09:48.754Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="59-Spiral-Matrix-II螺旋矩阵-II"><a href="#59-Spiral-Matrix-II螺旋矩阵-II" class="headerlink" title="59. Spiral Matrix II螺旋矩阵 II"></a>59. Spiral Matrix II螺旋矩阵 II</h1><p>给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p><a id="more"></a><p>示例:</p><p>输入: 3<br>输出:</p><pre><code>[ [ 1, 2, 3 ], [ 8, 9, 4 ], [ 7, 6, 5 ]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题可以参见剑指Offer20.PrintMatrix顺时针打印矩阵(CodingInterview)和54. Spiral Matrix螺旋矩阵</p><p>所不同的是可以先生成一个n*n规模的矩阵然后螺旋将数字填入，时间复杂度是O(n^2)。</p><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {        vector&lt;vector&lt;int&gt;&gt; res(n,vector&lt;int&gt;(n,0));        int start=0;        int num=1;        while(start*2&lt;n){            generate(res,start,num,n);            start++;        }        return res;    }    void generate(vector&lt;vector&lt;int&gt;&gt; &amp;res,int start,int &amp;num,int n){        int endy=n-start-1;        int endx=n-start-1;        for(int j=start;j&lt;=endy;j++){            res[start][j]=num;            num++;        }        for(int i=start+1;i&lt;=endx;i++){            res[i][endy]=num;            num++;        }        for(int j=endy-1;j&gt;=start;j--){            res[endx][j]=num;            num++;        }        for(int i=endx-1;i&gt;start;i--){            res[i][start]=num;            num++;        }    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;59-Spiral-Matrix-II螺旋矩阵-II&quot;&gt;&lt;a href=&quot;#59-Spiral-Matrix-II螺旋矩阵-II&quot; class=&quot;headerlink&quot; title=&quot;59. Spiral Matrix II螺旋矩阵 II&quot;&gt;&lt;/a&gt;59. Spiral Matrix II螺旋矩阵 II&lt;/h1&gt;&lt;p&gt;给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
   </entry>
   
@@ -316,9 +341,9 @@
       <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
     
     
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
       <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
   </entry>
   
@@ -427,6 +452,32 @@
   </entry>
   
   <entry>
+    <title>Hexo+github搭建个人博客问题总结</title>
+    <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
+    <published>2018-08-21T01:58:44.000Z</published>
+    <updated>2018-08-22T10:14:19.065Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="Hexo-github搭建个人博客问题总结"><a href="#Hexo-github搭建个人博客问题总结" class="headerlink" title="Hexo+github搭建个人博客问题总结"></a>Hexo+github搭建个人博客问题总结</h4><p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><a id="more"></a><h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;Hexo-github搭建个人博客问题总结&quot;&gt;&lt;a href=&quot;#Hexo-github搭建个人博客问题总结&quot; class=&quot;headerlink&quot; title=&quot;Hexo+github搭建个人博客问题总结&quot;&gt;&lt;/a&gt;Hexo+github搭建个人博客问题总结&lt;/h4&gt;&lt;p&gt;总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>股票交易问题通解小结</title>
     <link href="http://yoursite.com/2018/08/21/%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93%E9%97%AE%E9%A2%98%E9%80%9A%E8%A7%A3%E5%B0%8F%E7%BB%93/"/>
     <id>http://yoursite.com/2018/08/21/股票交易问题通解小结/</id>
@@ -465,55 +516,6 @@
     
       &lt;h1 id=&quot;C-基础概念II&quot;&gt;&lt;a href=&quot;#C-基础概念II&quot; class=&quot;headerlink&quot; title=&quot;C++基础概念II&quot;&gt;&lt;/a&gt;C++基础概念II&lt;/h1&gt;&lt;p&gt;总结C++基础概念&lt;/p&gt;
 &lt;h2 id=&quot;1-C-的四种强制类型转换关键字，及它们的特点和使用的场合&quot;&gt;&lt;a href=&quot;#1-C-的四种强制类型转换关键字，及它们的特点和使用的场合&quot; class=&quot;headerlink&quot; title=&quot;1.C++的四种强制类型转换关键字，及它们的特点和使用的场合&quot;&gt;&lt;/a&gt;1.C++的四种强制类型转换关键字，及它们的特点和使用的场合&lt;/h2&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo+github搭建个人博客问题总结</title>
-    <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
-    <published>2018-08-21T01:58:44.000Z</published>
-    <updated>2018-08-22T10:14:19.065Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="Hexo-github搭建个人博客问题总结"><a href="#Hexo-github搭建个人博客问题总结" class="headerlink" title="Hexo+github搭建个人博客问题总结"></a>Hexo+github搭建个人博客问题总结</h4><p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><a id="more"></a><h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;Hexo-github搭建个人博客问题总结&quot;&gt;&lt;a href=&quot;#Hexo-github搭建个人博客问题总结&quot; class=&quot;headerlink&quot; title=&quot;Hexo+github搭建个人博客问题总结&quot;&gt;&lt;/a&gt;Hexo+github搭建个人博客问题总结&lt;/h4&gt;&lt;p&gt;总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
-    
-      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++基础概念I</title>
-    <link href="http://yoursite.com/2018/08/21/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5I/"/>
-    <id>http://yoursite.com/2018/08/21/C++基础概念I/</id>
-    <published>2018-08-21T01:58:44.000Z</published>
-    <updated>2018-08-22T10:13:35.573Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="C-基础概念I"><a href="#C-基础概念I" class="headerlink" title="C++基础概念I"></a>C++基础概念I</h1><p>总结C++基础概念</p><h2 id="1-C-面向对象的三大特征"><a href="#1-C-面向对象的三大特征" class="headerlink" title="1.C++面向对象的三大特征"></a>1.C++面向对象的三大特征</h2><a id="more"></a><h3 id="1-封装"><a href="#1-封装" class="headerlink" title="(1)封装:"></a>(1)封装:</h3><p>将客观事物封装成抽象的类,并且设计者可以对类的成员进行访问控制权限控制. 这样一方面可以做到数据的隐藏,保护数据安全;另一方面,封装可以修改类的内部实现而不用修改调用了该类的用户的代码.同时封装还有利于代码的 方便复用；</p><h3 id="2-继承"><a href="#2-继承" class="headerlink" title="(2)继承:"></a>(2)继承:</h3><h4 id="a"><a href="#a" class="headerlink" title="a."></a>a.</h4><p>继承具有这样一种功能,它可以使用现有类的所有功能；并且可以在不重新编写原有类的情况下对类的功能进行扩展.继承的过程是一般到特殊的过程,即是它们是is-a的关系;基类或父类是一般,而子类或派生类是基类的特殊表现;要实现继承可以通过继承和组合来实现;</p><h4 id="b"><a href="#b" class="headerlink" title="b."></a>b.</h4><p>广义上的继承分成三大类:实现继承:使用基类的属性和方法而无需额外编码的能力;接口继承:接口继承是指仅使用基类的属性和方法的名称,而具体的实现子类必须自己完成的能力;可视继承:子窗体(类)使用父窗体(类)的外观和实现代码的能力;</p><h3 id="3-多态"><a href="#3-多态" class="headerlink" title="(3)多态:"></a>(3)多态:</h3><h4 id="a-1"><a href="#a-1" class="headerlink" title="a."></a>a.</h4><p>多态的实现分成两种,一种是编译时的多态,主要是通过函数重载和运算符重</p><p>另外一种是运行时多态,主要是通过函数覆盖来实现的,它需要满足3个条件:基类函数必须是虚函数,并且基类的指针或引用指向子类的时候,当子类中对原有的虚函数进行重新定义之后形成一个更加严格的重载版本的时候,就会形成多态;它是通过动态联编实现的;</p><h4 id="b-1"><a href="#b-1" class="headerlink" title="b."></a>b.</h4><p>运行时的多态可以让基类的指针或引用指向不同的对象的时候表现出来不同的特性;</p><h2 id="2-简述C-C-程序编译时的内存分配情况"><a href="#2-简述C-C-程序编译时的内存分配情况" class="headerlink" title="2.简述C/C++程序编译时的内存分配情况"></a>2.简述C/C++程序编译时的内存分配情况</h2><h3 id="1-一般一个c-c-程序编译的时候内存布局如下-地址从低到高的顺序"><a href="#1-一般一个c-c-程序编译的时候内存布局如下-地址从低到高的顺序" class="headerlink" title="(1)一般一个c/c++程序编译的时候内存布局如下(地址从低到高的顺序)"></a>(1)一般一个c/c++程序编译的时候内存布局如下(地址从低到高的顺序)</h3><h4 id="a-代码区"><a href="#a-代码区" class="headerlink" title="a.代码区:"></a>a.代码区:</h4><p>存放程序的二进制代码.</p><h4 id="b-常量区"><a href="#b-常量区" class="headerlink" title="b.常量区:"></a>b.常量区:</h4><p>这个区和代码区的距离很近,主要存放一些非局部常量值和字符串字面值,一般不允许修改,程序结束由系统释放;具有常属性并且初始化的全局和静态变量也放在这个区.</p><h4 id="c-数据区"><a href="#c-数据区" class="headerlink" title="c.数据区:"></a>c.数据区:</h4><p>赋过初值的且不具有常属性的静态和全局变量在数据区.它和BSS段统称为静态区;程序结束后由系统释放;</p><h4 id="d-BSS段"><a href="#d-BSS段" class="headerlink" title="d.BSS段:"></a>d.BSS段:</h4><p>没有初始化的静态和全局变量;进程一旦被加载这个区所有的数据都被清0;</p><h4 id="e-堆区"><a href="#e-堆区" class="headerlink" title="e.堆区:"></a>e.堆区:</h4><p>   动态分配的内存;由程序员分配和释放,程序结束的时候如果没有释放,则由OS回收;</p><h4 id="f-栈区"><a href="#f-栈区" class="headerlink" title="f.栈区:"></a>f.栈区:</h4><p>   由编译器自动分配和释放,不使用的时候会自动的释放.主要用来存放非静态的局部变量,函数的参数和返回值, 临时变量等.</p><h4 id="g-命令行参数和环境变量区"><a href="#g-命令行参数和环境变量区" class="headerlink" title="g.命令行参数和环境变量区;"></a>g.命令行参数和环境变量区;</h4><p>下面是对应一段经典的代码:</p><pre><code>#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;unistd.h&gt;  //unix下的头文件const int const_global = 10; //常全局变量int init_global = 10;        //初始化的全局变量int uninit_global;           //未初始化的全局白能量int main(int argc,char * argv[]){    const static int const_static = 10;//常属性的静态变量，不可以被赋值，初始化    static int init_static = 10;    //初始化静态变量    static int uninit_static;       //未初始化静态变量    const int const_local = 10;    // 常属性的局部变量    int  prev_local = 1;//前局部变量    int  next_local = 5;//后局部变量    int* prev_heap = malloc(sizeof(int));//前面分配的堆变量    int* next_heap = malloc(sizeof(int));//后面分配的堆变量    const char* literal = &quot;literal&quot;;      //字符串字面值，字面值常量    extern char** environ;               // 环境变量    printf(&quot;----地址最高断命令行参数和环境变量-------\n&quot;);    printf(&quot;        环境变量:%p\n&quot;,environ);    printf(&quot;      命令行参数:%p\n&quot;,argv);    printf(&quot;---------------栈区-----------------------\n&quot;);    printf(&quot;      常局部变量:%p\n&quot;,&amp;const_local);    printf(&quot;      前局部变量:%p\n&quot;,&amp;prev_local);    printf(&quot;      后局部变量:%p\n&quot;,&amp;next_local);    printf(&quot;--------------------堆--------------------\n&quot;);    printf(&quot;        前堆变量:%p\n&quot;,prev_heap);    printf(&quot;        后堆变量:%p\n&quot;,next_heap);    printf(&quot;--------------------BSS--------------------\n&quot;);    printf(&quot;未初始化全局变量:%p\n&quot;,&amp;uninit_global);    printf(&quot;未初始化静态变量:%p\n&quot;,&amp;uninit_static);    printf(&quot;----------------数据------------------------\n&quot;);    printf(&quot;  初始化全局变量:%p\n&quot;,&amp;init_static);    printf(&quot;  初始化全局变量:%p\n&quot;,&amp;init_global);    printf(&quot;----------------代码区----------------------\n&quot;);    printf(&quot;     常静态变量:%p\n&quot;,&amp;const_static);    printf(&quot;     字面值常量:%p\n&quot;,&amp;literal);    printf(&quot;     常全局变量:%p\n&quot;,&amp;const_global);    printf(&quot;           函数:%p\n&quot;,main);    return 0;}</code></pre><h3 id="2-从上面可以看出c-c-的内存分配方式主要有三种"><a href="#2-从上面可以看出c-c-的内存分配方式主要有三种" class="headerlink" title="(2)从上面可以看出c/c++的内存分配方式主要有三种"></a>(2)从上面可以看出c/c++的内存分配方式主要有三种</h3><h4 id="a-从静态存储区域分配"><a href="#a-从静态存储区域分配" class="headerlink" title="a.从静态存储区域分配:"></a>a.从静态存储区域分配:</h4><p>   内存在程序编译时已经分配好,这块内存在程序的整个运行期间都存在.速度快,不容易出错.因为由系统会善后.</p><h4 id="b-在栈上分配内存"><a href="#b-在栈上分配内存" class="headerlink" title="b.在栈上分配内存:"></a>b.在栈上分配内存:</h4><p>   在执行函数的时候,函数内非静态局部变量的存储单元都是在栈上创建,函数执行结束的时候这些存储单元自动被释放.栈内存分配内置于处理器的指令集中,效率很高但是分配的内容有限.</p><h4 id="c-从堆中分配内存"><a href="#c-从堆中分配内存" class="headerlink" title="c.从堆中分配内存:"></a>c.从堆中分配内存:</h4><p>即是动态分配内存.程序在运行的时候使用malloc/new申请任意大小的内存,程序员自己负责在何时用free/delete释放内存.动态内存的生存期由程序员决定,使用非常的灵活.如果在堆上分配了内存,就有责任去回收它,否则运行程序会出现内存泄漏,另外频繁的分配和释放不同大小的堆空间将会产生堆内碎片.不易管理;</p><h3 id="3-堆和栈之间的主要的区别是什么"><a href="#3-堆和栈之间的主要的区别是什么" class="headerlink" title="(3)堆和栈之间的主要的区别是什么?"></a>(3)堆和栈之间的主要的区别是什么?</h3><h4 id="a-管理方式不同"><a href="#a-管理方式不同" class="headerlink" title="a.管理方式不同:"></a>a.管理方式不同:</h4><p>栈是由编译器自动分配和释放,使用方便;而对于堆来说,分配和释放都必须由程序员来手动完成,不易管理,容易造成内存泄漏和内存碎片.</p><h4 id="b-可用内存空间不同"><a href="#b-可用内存空间不同" class="headerlink" title="b.可用内存空间不同:"></a>b.可用内存空间不同:</h4><p>对于栈来说,它可用的内存空间比较小;而对于堆来说它可以使用的空间比栈要大的多.</p><h4 id="c-能否产生碎片不同"><a href="#c-能否产生碎片不同" class="headerlink" title="c.能否产生碎片不同:"></a>c.能否产生碎片不同:</h4><p>由于栈采用的是后进先出的机制,所以栈空间没有内存碎片的产生;而对于堆来说,由于频繁的使用new/delete势必会造成内存空间分配的不连续,从而造成大量的碎片,使程序的效率降低.</p><h4 id="d-生长方向不同"><a href="#d-生长方向不同" class="headerlink" title="d.生长方向不同:"></a>d.生长方向不同:</h4><p>对于堆来说,它一般是向上的;即是向着地址增加的方向增长;对于栈来说,它一般是向下的,即向着地址减小的方向增长.</p><h4 id="e-分配的方式不同"><a href="#e-分配的方式不同" class="headerlink" title="e.分配的方式不同:"></a>e.分配的方式不同:</h4><p>对于堆来说,它只能是动态分配的;而对于栈来说,它分为静态分配和动态分配;静态分配由编译器来进行管理,而动态分配的栈和堆也是不一样的,动态分配的栈由编译器进行释放,无需我们程序员来释放.</p><h4 id="f-分配的效率不同"><a href="#f-分配的效率不同" class="headerlink" title="f.分配的效率不同:"></a>f.分配的效率不同:</h4><p>栈是机器系统提供的数据结构,计算机会在底层对栈提供支持:为栈分配专门的寄存器.压栈和出栈都由专门的指令进行.因此它的效率会很高;而堆则是由c/c++库函数实现的,机制是非常的负责的;例如要分配一块内存的时候,库函数会利用特定的算法在堆内存中搜索可用大小的内存空间;如果没有足够大的内存空间,就会调用系统功能去增加数据段的内存空间.这样才能得到足够大的可用的内存空间,因此堆内存的分配的效率比栈要低得多. </p><h3 id="4-new-malloc以及free-delete之间的区别"><a href="#4-new-malloc以及free-delete之间的区别" class="headerlink" title="(4)new/malloc以及free/delete之间的区别"></a>(4)new/malloc以及free/delete之间的区别</h3><h4 id="a-2"><a href="#a-2" class="headerlink" title="a."></a>a.</h4><p>new/delete是运算符,只能在C++中使用,它可以重载;mallloc/free是C的标准库函数,在C/C++中都可以使用.</p><h4 id="b-2"><a href="#b-2" class="headerlink" title="b."></a>b.</h4><p>对于非内部的数据类型的对象而言,光用malloc/free是无法满足动态对象的要求的.对象在创建的时候需要执行构造函数,对象在消亡之前需要执行析构函数.而molloc/free是库函数而不是运算符,不在编译器的控制范围之内,编译器不能将执行构造函数和析构函数的任务强加给malloc/free.因此C++需要一个能够完成动态分配内存和初始化的new,以及一个能够完成清理和释放内存的运算符delete.</p><h4 id="c"><a href="#c" class="headerlink" title="c."></a>c.</h4><p>new的返回值是指定类型的指针,可以自动的计算所需要分配的内存大小.而malloc的返回值是一个void类型的指针,我们在使用的时候要进行强制类型转换,并且分配的大小也要程序员手动的计算.</p><h4 id="d"><a href="#d" class="headerlink" title="d."></a>d.</h4><p>new/delete完全覆盖了malloc/free的功能,只所以还要保留malloc/free,是因为我们的C++程序有时要调用用C编写的而C中又没有new/delete,只能使用malloc/free.</p><h2 id="3-指针和引用之间的区别和联系"><a href="#3-指针和引用之间的区别和联系" class="headerlink" title="3.指针和引用之间的区别和联系"></a>3.指针和引用之间的区别和联系</h2><h3 id="联系"><a href="#联系" class="headerlink" title="联系:"></a>联系:</h3><h4 id="a-3"><a href="#a-3" class="headerlink" title="a."></a>a.</h4><p>指针和引用本质上都是地址的概念,引用在内部其实是用const指针来实现的.</p><h4 id="b-3"><a href="#b-3" class="headerlink" title="b."></a>b.</h4><p>给函数传递参数的时候,一级指针和引用作为函数参数的时候可以达到相同的效果.</p><h4 id="c-1"><a href="#c-1" class="headerlink" title="c."></a>c.</h4><p>指针的大部分效果都可以通过引用来实现。</p><h4 id="d-1"><a href="#d-1" class="headerlink" title="d."></a>d.</h4><p>二级指针作为参数的时候就是希望在函数的内部修改指针的指向.这个时候利用指针的引用可以达到同样的效果.</p><h3 id="区别"><a href="#区别" class="headerlink" title="区别:"></a>区别:</h3><h4 id="a-4"><a href="#a-4" class="headerlink" title="a."></a>a.</h4><p>定义引用的时候必须初始化,定义指针的时候可以不初始化.</p><h4 id="b-4"><a href="#b-4" class="headerlink" title="b."></a>b.</h4><p>引用不能引用空,但是指针可以指向空.</p><h4 id="c-2"><a href="#c-2" class="headerlink" title="c."></a>c.</h4><p>引用的关系一旦确定,就无法改变;引用永远指向的是用来对它初始化的对象;而非常属性的指针是可以改变指向的.</p><h4 id="d-2"><a href="#d-2" class="headerlink" title="d."></a>d.</h4><p>指针是一个实体变量,在32位操作系统上面都是4个字节.而引用只是一个别名,其大小和其应用的对象的类型有关系.</p><h4 id="e"><a href="#e" class="headerlink" title="e."></a>e.</h4><p>有指向指针的指针,但是没有引用引用的引用;因为引用一旦建立,它就表示初始化它的对象.</p><h4 id="f"><a href="#f" class="headerlink" title="f."></a>f.</h4><p>有引用指针的引用,但是没有指向引用的指针；</p><h4 id="g"><a href="#g" class="headerlink" title="g."></a>g.</h4><p>有指针数组,但是没有引用数组,但是有数组的引用.<br>下面是一段代码非常的全面:</p><pre><code>#include &lt;iostream&gt;using namespace std;void foo(int a[3])/*这个地方传递的是数组的首地址*/{     cout &lt;&lt; sizeof(a)/sizeof(a[0]) &lt;&lt; endl;}void bar(int (&amp;a)[3])/*这里传参的时候就是数组的整体*/{     cout &lt;&lt; sizeof(a)/sizeof(a[0]) &lt;&lt; endl;}int main(void){     int a;     int* p = &amp;a;     int** pp = &amp;p;/*存在指向指针的指针*/     int&amp; r  = a;     int&amp;&amp; rr = r;/*error没有引用引用的引用*/     int*&amp;  rp = p; /*有引用指针的引用(指针引用)*/     int&amp;* pr = &amp;r; /*没有指向引用的指针(引用指针)*/     int x, y, z;     int* pa[] = {&amp;x,&amp;y,&amp;z};/*指针数组*/     int&amp; ra[] = {x,y,z};/*引用数组是不存在的因为引用不是一个实体*/     int arr[3] = {0};     int (&amp;ar)[3] = arr;/*数组引用(先近后远,先右后左)*/     foo(arr);/*这里传递的是数组的第一个元素的首地址*/     cout &lt;&lt; sizeof(arr)/sizeof(arr[0]) &lt;&lt; endl;     /*这里的数组名代表的是真个数组*/     int (*parr)[3] = &amp;arr;/*对数组名取地址得到的是一个数组指针                             这个时候arr代表的是数组的整体;*/     bar(arr);/*这里传递的就是数组的整体*/     return 0;}</code></pre><h2 id="4-类和结构体的区别"><a href="#4-类和结构体的区别" class="headerlink" title="4.类和结构体的区别"></a>4.类和结构体的区别</h2><p>结构体在默认情况下的成员都是public的,而类在默认情况下的成员是private的。</p><p>结构体和类都必须使用new创建，struct保证成员按照声明顺序在内存在存储，而类不保证。</p><p>C++结构体的继承默认是public，而c++类的继承默认是private。</p><h2 id="5-C-和C定义结构体区别"><a href="#5-C-和C定义结构体区别" class="headerlink" title="5.C++和C定义结构体区别"></a>5.C++和C定义结构体区别</h2><p>C++中的结构和类其实具备几乎一样的功能，结构体内也是可以声明函数，C++的结构体和类默认具有不一样的访问属性</p><h2 id="6-const常量与define宏定义的区别"><a href="#6-const常量与define宏定义的区别" class="headerlink" title="6.const常量与define宏定义的区别"></a>6.const常量与define宏定义的区别</h2><h3 id="1-编译器处理方式不同。"><a href="#1-编译器处理方式不同。" class="headerlink" title="(1) 编译器处理方式不同。"></a>(1) 编译器处理方式不同。</h3><p>define宏是在预处理阶段展开，生命周期止于编译期。只是一个常数、一个命令中的参数，没有实际的存在。#define常量存在于程序的代码段。const常量是编译运行阶段使用，const常量存在于程序的数据段.</p><h3 id="2-类型和安全检查不同。"><a href="#2-类型和安全检查不同。" class="headerlink" title="(2)类型和安全检查不同。"></a>(2)类型和安全检查不同。</h3><p>define宏没有类型，不做任何类型检查，仅仅是展开。const常量有具体的类型，在编译阶段会执行类型检查。</p><h3 id="3-存储方式不同。"><a href="#3-存储方式不同。" class="headerlink" title="(3)存储方式不同。"></a>(3)存储方式不同。</h3><p>define宏仅仅是展开，有多少地方使用，就展开多少次，不会分配内存。const常量会在内存中分配(可以是堆中也可以是栈中)</p><h2 id="7-memset-memcpy-和strcpy-的根本区别"><a href="#7-memset-memcpy-和strcpy-的根本区别" class="headerlink" title="7.memset ,memcpy 和strcpy 的根本区别"></a>7.memset ,memcpy 和strcpy 的根本区别</h2><p>memset用来对一段内存空间全部设置为某个字符，一般用在对定义的字符串进行初始化为’ ‘或’’；</p><p>它对较大的结构体或数组进行清零操作的一种最快方法。</p><pre><code>char temp[30];     memset(temp,&apos;\0&apos;,sizeof(temp));</code></pre><p>char temp[30]只是分配了一定的内存空间给该字符数组，但并未初始化该内存空间，即数组。所以，需要使用memset()来进行初始化。</p><p>memcpy用来做内存拷贝，你可以拿它拷贝任何数据类型的对象，可以指定拷贝的数据长度；</p><p>strcpy就只能拷贝字符串了，它遇到’\0’就结束拷贝；例如：<br>    char a[100],b[50];strcpy(a,b);</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;C-基础概念I&quot;&gt;&lt;a href=&quot;#C-基础概念I&quot; class=&quot;headerlink&quot; title=&quot;C++基础概念I&quot;&gt;&lt;/a&gt;C++基础概念I&lt;/h1&gt;&lt;p&gt;总结C++基础概念&lt;/p&gt;
-&lt;h2 id=&quot;1-C-面向对象的三大特征&quot;&gt;&lt;a href=&quot;#1-C-面向对象的三大特征&quot; class=&quot;headerlink&quot; title=&quot;1.C++面向对象的三大特征&quot;&gt;&lt;/a&gt;1.C++面向对象的三大特征&lt;/h2&gt;
     
     </summary>
     

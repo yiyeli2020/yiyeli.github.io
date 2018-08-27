@@ -3,20 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>64.StreamMedian数据流中的中位数(Coding Interviews ) | Yiye Li</title>
+  <title>688. Knight Probability in Chessboard“马”在棋盘上的概率 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="64.StreamMedian数据流中的中位数(Coding Interviews )如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。">
-<meta name="keywords" content="Coding Interviews,Max Heap,Template">
+  <meta name="description" content="688. Knight Probability in Chessboard“马”在棋盘上的概率 已知一个 NxN 的国际象棋棋盘，棋盘的行号和列号都是从0开始。即最左上角的格子记为 (0, 0), 最右下角的记为 (N-1, N-1)。  现有一个“马”（也译作“骑士”）位于 (r, c) ，并打算进行 K 次移动。">
+<meta name="keywords" content="LeetCode,Dynamic Programming">
 <meta property="og:type" content="article">
-<meta property="og:title" content="64.StreamMedian数据流中的中位数(Coding Interviews )">
-<meta property="og:url" content="http://yoursite.com/2018/08/22/剑指Offer64.数据流中的中位数/index.html">
+<meta property="og:title" content="688. Knight Probability in Chessboard“马”在棋盘上的概率">
+<meta property="og:url" content="http://yoursite.com/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="64.StreamMedian数据流中的中位数(Coding Interviews )如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。">
+<meta property="og:description" content="688. Knight Probability in Chessboard“马”在棋盘上的概率 已知一个 NxN 的国际象棋棋盘，棋盘的行号和列号都是从0开始。即最左上角的格子记为 (0, 0), 最右下角的记为 (N-1, N-1)。  现有一个“马”（也译作“骑士”）位于 (r, c) ，并打算进行 K 次移动。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-24T07:08:32.067Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fuogeyhztfj30ba0baq32.jpg">
+<meta property="og:updated_time" content="2018-08-27T13:03:04.729Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="64.StreamMedian数据流中的中位数(Coding Interviews )">
-<meta name="twitter:description" content="64.StreamMedian数据流中的中位数(Coding Interviews )如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。">
+<meta name="twitter:title" content="688. Knight Probability in Chessboard“马”在棋盘上的概率">
+<meta name="twitter:description" content="688. Knight Probability in Chessboard“马”在棋盘上的概率 已知一个 NxN 的国际象棋棋盘，棋盘的行号和列号都是从0开始。即最左上角的格子记为 (0, 0), 最右下角的记为 (N-1, N-1)。  现有一个“马”（也译作“骑士”）位于 (r, c) ，并打算进行 K 次移动。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fuogeyhztfj30ba0baq32.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -214,11 +216,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-剑指Offer64.数据流中的中位数" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-688. Knight Probability in Chessboard“马”在棋盘上的概率" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/22/剑指Offer64.数据流中的中位数/" class="article-date">
-      <time datetime="2018-08-22T01:58:44.000Z" itemprop="datePublished">2018-08-22</time>
+      <a href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/" class="article-date">
+      <time datetime="2018-08-27T10:48:10.000Z" itemprop="datePublished">2018-08-27</time>
 </a>
     </div>
   
@@ -231,7 +233,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      64.StreamMedian数据流中的中位数(Coding Interviews )
+      688. Knight Probability in Chessboard“马”在棋盘上的概率
     </h1>
   
 
@@ -246,7 +248,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coding-Interviews/">Coding Interviews</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Max-Heap/">Max Heap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Template/">Template</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -256,127 +258,51 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="64-StreamMedian数据流中的中位数-Coding-Interviews"><a href="#64-StreamMedian数据流中的中位数-Coding-Interviews" class="headerlink" title="64.StreamMedian数据流中的中位数(Coding Interviews )"></a>64.StreamMedian数据流中的中位数(Coding Interviews )</h1><p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。</p>
+        <h1 id="688-Knight-Probability-in-Chessboard“马”在棋盘上的概率"><a href="#688-Knight-Probability-in-Chessboard“马”在棋盘上的概率" class="headerlink" title="688. Knight Probability in Chessboard“马”在棋盘上的概率"></a>688. Knight Probability in Chessboard“马”在棋盘上的概率</h1><p> 已知一个 NxN 的国际象棋棋盘，棋盘的行号和列号都是从0开始。即最左上角的格子记为 (0, 0), 最右下角的记为 (N-1, N-1)。 </p>
+<p>现有一个“马”（也译作“骑士”）位于 (r, c) ，并打算进行 K 次移动。 </p>
 <a id="more"></a>
-<p>将数据在容器中排序，将整个数据容器分隔成两部分。位于容器左边部分的数据比右边的数据小。中位数可以由两个指针指向的数据得到。如果容器中数据的数目是奇数，那么两个指针指向同一个数据。指针P1指向左边部分最大的数，指针P2指向右边部分最小的数。</p>
-<p>如果能保证数据容器左边的数据都小于右边的数据，即使左右两边内部的数据没有排序，也可以根据左边最大的数及右边最小的数得到中位数。</p>
-<p>使用一个最大堆来实现左边的数据容器，使用最小堆实现右边的数据容器。往堆中插入一个数据的时间效率是O(logn).由于只需要O(1）时间就可以得到位于堆顶的数据，因此得到中位数的时间效率是O(1)。</p>
-<p>为了保证数据平均分配到两个堆中，可以在数据的总数目是偶数时把新数据插入到最小堆中，否则插入到最大堆中。</p>
-<p>还要保证最大堆中里的所有数据都要小于最小堆中的数据。当数据的总数目是偶数时，按照前面的分配规则会把新的数据插入到最小堆中。如果此时这个新的数据比最大堆中的一些数据要小，那么</p>
-<p>首先可以把这个新的数据插入到最大堆中，</p>
-<p>接着把最大堆中的最大的数字拿出来插入到最小堆中。</p>
-<p>由于最终插入到最小堆的数字是原最大堆中最大的数字，这样就保证了最小堆中所有数字都大于最大堆中的数字。</p>
-<h3 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h3><pre><code>#include &lt;stdio.h&gt;
-#include &lt;algorithm&gt;
-#include &lt;vector&gt;
-#include &lt;functional&gt;
+<p>如下图所示，国际象棋的“马”每一步先沿水平或垂直方向移动2个格子，然后向与之相垂直的方向再移动1个格子，共有8个可选的位置。</p>
+<p><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fuogeyhztfj30ba0baq32.jpg" alt="image"></p>
+<p>现在“马”每一步都从可选的位置（包括棋盘外部的）中独立随机地选择一个进行移动，直到移动了 K 次或跳到了棋盘外面。</p>
+<p>求移动结束后，“马”仍留在棋盘上的概率。</p>
+<p>例:</p>
+<p>输入: </p>
+<pre><code>3, 2, 0, 0
+</code></pre><p>输出: 0.0625<br>解释:<br>输入的数据依次为 N, K, r, c<br>第1步时，有且只有2种走法令“马”可以留在棋盘上(跳到(1,2)或(2,1))。对于以上的两种情况，各自在第2步均有且只有2种走法令“马”仍然留在棋盘上。<br>所以“马”在结束后仍在棋盘上的概率为0.0625。<br>注意:</p>
+<p>N 的取值范围为 [1, 25]<br>K 的取值范围为 [0, 100]<br>开始时，“马”总是位于棋盘上</p>
+<h2 id="解法：动态规划"><a href="#解法：动态规划" class="headerlink" title="解法：动态规划"></a>解法：动态规划</h2><p>令f[r][c][steps]成为在第steps步后落在区域(r,c)的概率，递推式如下：</p>
+<pre><code>\$\$ f[r][c][steps]=∑_​{dr,dc​​} f[r+dr][c+dc][steps−1]/8.0 \$\$  
+</code></pre><p>(dr,dc)包括八个可能（2,1), (2, -1),(2,−1), (-2, 1),(−2,1), (-2, -1),(−2,−1), (1, 2),(1,2), (1, -2),(1,−2), (-1, 2),(−1,2), (-1, -2)(−1,−2)</p>
+<p>为了不使用三维数组f，我们会使用两个二维dp,dp2，存储最近使用的两层，其中dp2会代表f[][][steps],dp会代表f[][][steps-1]</p>
+<p>时间复杂度：<br>O(KN^​2)<br>空间复杂度：<br>O(N^​2)</p>
+<pre><code>class Solution {
+    public double knightProbability(int N, int K, int sr, int sc) {
+        double[][] dp = new double[N][N];
+        int[] dr = new int[]{2, 2, 1, 1, -1, -1, -2, -2};
+        int[] dc = new int[]{1, -1, 2, -2, 2, -2, 1, -1};
 
-using namespace std;
-
-template&lt;typename T&gt; class DynamicArray
-{
-public:
-    void Insert(T num)
-    {
-        if (((min.size() + max.size()) &amp; 1) == 0) {// even length 
-            if (max.size() &gt; 0 &amp;&amp; num &lt; max[0]) {//new num is lower than  some numbers in the maxheap
-                max.push_back(num);
-                push_heap(max.begin(), max.end(), less&lt;T&gt;());// make the max heap
-
-                num = max[0];
-
-                pop_heap(max.begin(), max.end(), less&lt;T&gt;());
-                max.pop_heap();
+        dp[sr][sc] = 1;
+        for (; K &gt; 0; K--) {
+            double[][] dp2 = new double[N][N];
+            for (int r = 0; r &lt; N; r++) {
+                for (int c = 0; c &lt; N; c++) {
+                    for (int k = 0; k &lt; 8; k++) {
+                        int cr = r + dr[k];
+                        int cc = c + dc[k];
+                        if (0 &lt;= cr &amp;&amp; cr &lt; N &amp;&amp; 0 &lt;= cc &amp;&amp; cc &lt; N) {
+                            dp2[cr][cc] += dp[r][c] / 8.0;
+                        }
+                    }
+                }
             }
-            min.push_heap(num);
-            push_heap(min.begin(), min.end(), greater&lt;T&gt;());//make the min heap
+            dp = dp2;
         }
-        else {//odd length
-            if (min.size() &gt; 0 &amp;&amp; min[0] &lt; num) {
-                min.push_back(num);
-                push_heap(min, begin(), min.end(), greater&lt;T&gt;());
-
-                num = min[0];
-
-                pop_heap(min.begin(), min.end(), greater&lt;T&gt;());
-                min.pop_heap();
-            }
-
-            max.push_back(num);
-            push_heap(max.begin(), max.end(), less&lt;T&gt;());
+        double ans = 0.0;
+        for (double[] row: dp) {
+            for (double x: row) ans += x;
         }
+        return ans;
     }
-
-    T GetMedian()
-    { 
-        int size = min.size() + max.size();
-        if (size == 0) throw exception(&quot;No numbers are available&quot;);
-        T median = 0;
-        if ((size &amp; 1) == 1) meidan = min[0];// only has one number
-        else median = (min[0] + max[0]) / 2;
-        return median;
-    }
-
-private:
-    vector&lt;T&gt; min;//min heap
-    vector&lt;T&gt; max;//max heap
-};
-
-// ==================== Test Code ====================
-void Test(char* testName, DynamicArray&lt;double&gt;&amp; numbers, double expected)
-{
-    if(testName != NULL)
-        printf(&quot;%s begins: &quot;, testName);
-
-    if(abs(numbers.GetMedian() - expected) &lt; 0.0000001)
-        printf(&quot;Passed.\n&quot;);
-    else
-        printf(&quot;FAILED.\n&quot;);
-}
-
-int main(int argc, char* argv[])
-{
-    DynamicArray&lt;double&gt; numbers;
-
-    printf(&quot;Test1 begins: &quot;);
-    try
-    {
-        numbers.GetMedian();
-        printf(&quot;FAILED.\n&quot;);
-    }
-    catch(exception e)
-    {
-        printf(&quot;Passed.\n&quot;);
-    }
-
-    numbers.Insert(5);
-    Test(&quot;Test2&quot;, numbers, 5);
-
-    numbers.Insert(2);
-    Test(&quot;Test3&quot;, numbers, 3.5);
-
-    numbers.Insert(3);
-    Test(&quot;Test4&quot;, numbers, 3);
-
-    numbers.Insert(4);
-    Test(&quot;Test6&quot;, numbers, 3.5);
-
-    numbers.Insert(1);
-    Test(&quot;Test5&quot;, numbers, 3);
-
-    numbers.Insert(6);
-    Test(&quot;Test7&quot;, numbers, 3.5);
-
-    numbers.Insert(7);
-    Test(&quot;Test8&quot;, numbers, 4);
-
-    numbers.Insert(0);
-    Test(&quot;Test9&quot;, numbers, 3.5);
-
-    numbers.Insert(8);
-    Test(&quot;Test10&quot;, numbers, 4);
-
-    return 0;
 }
 </code></pre>
       
@@ -433,13 +359,13 @@ int main(int argc, char* argv[])
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月22日 - 09时58分</p>
-        <p><span>最后更新:</span>2018年08月24日 - 15时08分</p>
+        <p><span>发布时间:</span>2018年08月27日 - 18时48分</p>
+        <p><span>最后更新:</span>2018年08月27日 - 21时03分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/22/剑指Offer64.数据流中的中位数/" title="64.StreamMedian数据流中的中位数(Coding Interviews )">http://yoursite.com/2018/08/22/剑指Offer64.数据流中的中位数/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/22/剑指Offer64.数据流中的中位数/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/" title="688. Knight Probability in Chessboard“马”在棋盘上的概率">http://yoursite.com/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -452,18 +378,9 @@ int main(int argc, char* argv[])
 
 <nav id="article-nav">
   
-    <a href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          354. Russian Doll Envelopes俄罗斯套娃
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/21/Hexo+github搭建个人博客问题总结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hexo+github搭建个人博客问题总结</div>
+    <a href="/2018/08/26/626. Exchange Seats换座位/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">626. Exchange Seats换座位</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -474,7 +391,7 @@ int main(int argc, char* argv[])
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#64-StreamMedian数据流中的中位数-Coding-Interviews"><span class="toc-number">1.</span> <span class="toc-text">64.StreamMedian数据流中的中位数(Coding Interviews )</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码如下："><span class="toc-number">1.0.1.</span> <span class="toc-text">代码如下：</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#688-Knight-Probability-in-Chessboard“马”在棋盘上的概率"><span class="toc-number">1.</span> <span class="toc-text">688. Knight Probability in Chessboard“马”在棋盘上的概率</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#解法：动态规划"><span class="toc-number">1.1.</span> <span class="toc-text">解法：动态规划</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -540,13 +457,11 @@ int main(int argc, char* argv[])
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/" title="上一篇: 354. Russian Doll Envelopes俄罗斯套娃">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/21/Hexo+github搭建个人博客问题总结/" title="下一篇: Hexo+github搭建个人博客问题总结">
+            <a href="/2018/08/26/626. Exchange Seats换座位/" title="下一篇: 626. Exchange Seats换座位">
                 <i class="fa fa-angle-right"></i>
             </a>
         
