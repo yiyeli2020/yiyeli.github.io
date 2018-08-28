@@ -42,6 +42,30 @@
   </entry>
   
   <entry>
+    <title>139. Word Break单词拆分</title>
+    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
+    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
+    <published>2018-08-26T12:33:12.000Z</published>
+    <updated>2018-08-27T14:08:19.153Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+  </entry>
+  
+  <entry>
     <title>626. Exchange Seats换座位</title>
     <link href="http://yoursite.com/2018/08/26/626.%20Exchange%20Seats%E6%8D%A2%E5%BA%A7%E4%BD%8D/"/>
     <id>http://yoursite.com/2018/08/26/626. Exchange Seats换座位/</id>
@@ -65,30 +89,6 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="SQL" scheme="http://yoursite.com/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>139. Word Break单词拆分</title>
-    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
-    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
-    <published>2018-08-26T12:33:12.000Z</published>
-    <updated>2018-08-27T14:08:19.153Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
   </entry>
   
@@ -148,30 +148,6 @@
   </entry>
   
   <entry>
-    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
-    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
-    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
-    <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T13:02:28.972Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
-    
-  </entry>
-  
-  <entry>
     <title>485. Max Consecutive Ones最大连续1的个数</title>
     <link href="http://yoursite.com/2018/08/24/485.%20Max%20Consecutive%20Ones/"/>
     <id>http://yoursite.com/2018/08/24/485. Max Consecutive Ones/</id>
@@ -192,6 +168,30 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
+    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
+    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
+    <published>2018-08-24T05:36:12.000Z</published>
+    <updated>2018-08-24T13:02:28.972Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
     
   </entry>
   
@@ -348,30 +348,6 @@
   </entry>
   
   <entry>
-    <title>剑指offer思路总结</title>
-    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87offer%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2018/08/23/剑指offer思路总结/</id>
-    <published>2018-08-23T00:45:12.000Z</published>
-    <updated>2018-08-23T03:26:40.658Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="剑指offer思路总结"><a href="#剑指offer思路总结" class="headerlink" title="剑指offer思路总结"></a>剑指offer思路总结</h1><p>剑指offer已经刷过两遍，总结一下思路方便回忆</p><a id="more"></a><h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13.在O(1)时间删除链表结点"></a>13.在O(1)时间删除链表结点</h2><pre><code>分情况讨论：先在链表中顺序搜索要删除的节点i不是尾结点：{    先将i的下一个结点j的内容复制到i    然后把i的指针指向结点j的下一个结点；    此时再删除结点j}链表只有一个结点{    则删除该结点    然后将其置为NULL    将头结点置为空}链表有多个结点而且要删除的结点是尾结点{    从头结点顺序遍历，只要找到该结点i的前序结点就可以，然后执行删除操作}</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p><h3 id="初级解法"><a href="#初级解法" class="headerlink" title="初级解法"></a>初级解法</h3><p>双指针指向头尾部分，头偶尾奇则交换两个数字</p><h3 id="可扩展解法"><a href="#可扩展解法" class="headerlink" title="可扩展解法"></a>可扩展解法</h3><p>仍使用头尾指针，但用函数指针的方法将判断奇偶的函数解耦出来，整体逻辑框架不需要改动</p><h2 id="15-链表中倒数第K个节点"><a href="#15-链表中倒数第K个节点" class="headerlink" title="15.链表中倒数第K个节点"></a>15.链表中倒数第K个节点</h2><p>快慢指针，快指针比慢指针领先k-1步出发，快指针到尾节点时慢指针指向的是所求</p><h3 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h3><h4 id="1-求链表中间结点"><a href="#1-求链表中间结点" class="headerlink" title="1.求链表中间结点"></a>1.求链表中间结点</h4><p>快慢指针，快指针每次走两步，慢指针每次走一步，快指针到末尾时慢指针指向中间结点</p><h4 id="2-判断单向链表是否成环"><a href="#2-判断单向链表是否成环" class="headerlink" title="2.判断单向链表是否成环"></a>2.判断单向链表是否成环</h4><p>同前面，若快指针追上慢指针则成环</p><h2 id="16-反转链表"><a href="#16-反转链表" class="headerlink" title="16.反转链表"></a>16.反转链表</h2><p>需要定义三个指针，指向当前遍历的结点，前一个结点和后一个结点,先要找到反转链表后的头结点即原始链表的尾节点，需要满足的条件是后结点为空</p><pre><code>////Non-RecursiveListNode* ReverseList(ListNode* pHead){    ListNode* pReversedHead = nullptr;    ListNode* pNode = pHead;    ListNode* pPrev = nullptr;    while (pNode != nullptr)    {        ListNode *pNext = pNode-&gt;m_pNext;        if (pNext == NULL) {//find the last node            pReversedHead = pNode;        }        pNode-&gt;m_pNext = pPrev;//Revserse        pPrev = pNode;// forward        pNode = pNext;    }    return pReversedHead;}ListNode* ReverseList(ListNode* pHead){    if (pHead == NULL || pHead-&gt;m_pNext == nullptr) return pHead;    ListNode *PReverseHead = pHead;    pHead=ReverseList(pHead-&gt;m_pNext);    PReverseHead-&gt;m_pNext-&gt;m_pNext = PReverseHead;//进入尾节点    PReverseHead-&gt;m_pNext = NULL;    return pHead;}</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;剑指offer思路总结&quot;&gt;&lt;a href=&quot;#剑指offer思路总结&quot; class=&quot;headerlink&quot; title=&quot;剑指offer思路总结&quot;&gt;&lt;/a&gt;剑指offer思路总结&lt;/h1&gt;&lt;p&gt;剑指offer已经刷过两遍，总结一下思路方便回忆&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
-      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
-    
-  </entry>
-  
-  <entry>
     <title>59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</title>
     <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87Offer59.%E5%AF%B9%E7%A7%B0%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     <id>http://yoursite.com/2018/08/23/剑指Offer59.对称的二叉树/</id>
@@ -393,6 +369,30 @@
       <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
     
       <category term="BinaryTree" scheme="http://yoursite.com/tags/BinaryTree/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>剑指offer思路总结</title>
+    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87offer%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/08/23/剑指offer思路总结/</id>
+    <published>2018-08-23T00:45:12.000Z</published>
+    <updated>2018-08-23T03:26:40.658Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="剑指offer思路总结"><a href="#剑指offer思路总结" class="headerlink" title="剑指offer思路总结"></a>剑指offer思路总结</h1><p>剑指offer已经刷过两遍，总结一下思路方便回忆</p><a id="more"></a><h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13.在O(1)时间删除链表结点"></a>13.在O(1)时间删除链表结点</h2><pre><code>分情况讨论：先在链表中顺序搜索要删除的节点i不是尾结点：{    先将i的下一个结点j的内容复制到i    然后把i的指针指向结点j的下一个结点；    此时再删除结点j}链表只有一个结点{    则删除该结点    然后将其置为NULL    将头结点置为空}链表有多个结点而且要删除的结点是尾结点{    从头结点顺序遍历，只要找到该结点i的前序结点就可以，然后执行删除操作}</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p><h3 id="初级解法"><a href="#初级解法" class="headerlink" title="初级解法"></a>初级解法</h3><p>双指针指向头尾部分，头偶尾奇则交换两个数字</p><h3 id="可扩展解法"><a href="#可扩展解法" class="headerlink" title="可扩展解法"></a>可扩展解法</h3><p>仍使用头尾指针，但用函数指针的方法将判断奇偶的函数解耦出来，整体逻辑框架不需要改动</p><h2 id="15-链表中倒数第K个节点"><a href="#15-链表中倒数第K个节点" class="headerlink" title="15.链表中倒数第K个节点"></a>15.链表中倒数第K个节点</h2><p>快慢指针，快指针比慢指针领先k-1步出发，快指针到尾节点时慢指针指向的是所求</p><h3 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h3><h4 id="1-求链表中间结点"><a href="#1-求链表中间结点" class="headerlink" title="1.求链表中间结点"></a>1.求链表中间结点</h4><p>快慢指针，快指针每次走两步，慢指针每次走一步，快指针到末尾时慢指针指向中间结点</p><h4 id="2-判断单向链表是否成环"><a href="#2-判断单向链表是否成环" class="headerlink" title="2.判断单向链表是否成环"></a>2.判断单向链表是否成环</h4><p>同前面，若快指针追上慢指针则成环</p><h2 id="16-反转链表"><a href="#16-反转链表" class="headerlink" title="16.反转链表"></a>16.反转链表</h2><p>需要定义三个指针，指向当前遍历的结点，前一个结点和后一个结点,先要找到反转链表后的头结点即原始链表的尾节点，需要满足的条件是后结点为空</p><pre><code>////Non-RecursiveListNode* ReverseList(ListNode* pHead){    ListNode* pReversedHead = nullptr;    ListNode* pNode = pHead;    ListNode* pPrev = nullptr;    while (pNode != nullptr)    {        ListNode *pNext = pNode-&gt;m_pNext;        if (pNext == NULL) {//find the last node            pReversedHead = pNode;        }        pNode-&gt;m_pNext = pPrev;//Revserse        pPrev = pNode;// forward        pNode = pNext;    }    return pReversedHead;}ListNode* ReverseList(ListNode* pHead){    if (pHead == NULL || pHead-&gt;m_pNext == nullptr) return pHead;    ListNode *PReverseHead = pHead;    pHead=ReverseList(pHead-&gt;m_pNext);    PReverseHead-&gt;m_pNext-&gt;m_pNext = PReverseHead;//进入尾节点    PReverseHead-&gt;m_pNext = NULL;    return pHead;}</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;剑指offer思路总结&quot;&gt;&lt;a href=&quot;#剑指offer思路总结&quot; class=&quot;headerlink&quot; title=&quot;剑指offer思路总结&quot;&gt;&lt;/a&gt;剑指offer思路总结&lt;/h1&gt;&lt;p&gt;剑指offer已经刷过两遍，总结一下思路方便回忆&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
     
   </entry>
   
@@ -476,6 +476,29 @@
   </entry>
   
   <entry>
+    <title>C++基础概念II</title>
+    <link href="http://yoursite.com/2018/08/21/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5II/"/>
+    <id>http://yoursite.com/2018/08/21/C++基础概念II/</id>
+    <published>2018-08-21T01:58:44.000Z</published>
+    <updated>2018-08-22T10:14:14.908Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="C-基础概念II"><a href="#C-基础概念II" class="headerlink" title="C++基础概念II"></a>C++基础概念II</h1><p>总结C++基础概念</p><h2 id="1-C-的四种强制类型转换关键字，及它们的特点和使用的场合"><a href="#1-C-的四种强制类型转换关键字，及它们的特点和使用的场合" class="headerlink" title="1.C++的四种强制类型转换关键字，及它们的特点和使用的场合"></a>1.C++的四种强制类型转换关键字，及它们的特点和使用的场合</h2><a id="more"></a><p>C语言中的强制类型转换可以随意的转换我们想要的类型了,格式如下</p><pre><code>(类型) 变量名;</code></pre><p>为什么c++还要引入新的4种类型转换呢?</p><p>  这是因为新的类型转换控制符可以很好的控制类型转换的过程,允许控制各种类型不同的转换.</p><p>  还有一点好处是C++的类型转换控制符能告诉程序员或读者我们这个转换的目的是什么,我们<br> 只要看一下代码的类型转换控制符,就能明白我们想要达到什么样的目的.</p><h3 id="1-static-cast-lt-T-gt-content-静态转换-在编译期间处理"><a href="#1-static-cast-lt-T-gt-content-静态转换-在编译期间处理" class="headerlink" title="1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理"></a>1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理</h3><p>   它主要用于C++中内置的基本数据类型之间的转换.但是没有运行时类型的检测来保证转换的安全性.</p><p>   为什么需要static_cast类型的转换?</p><h4 id="a-用于基类和子类之间的指针或引用的转换。"><a href="#a-用于基类和子类之间的指针或引用的转换。" class="headerlink" title="a.用于基类和子类之间的指针或引用的转换。"></a>a.用于基类和子类之间的指针或引用的转换。</h4><p>这种转换把子类的指针或引用转换为基类表示是安全的;进行下行转换,把基类的指针或引用转换为子类表示时,由于没有进行动态类型检测,所以是不安全的;</p><h4 id="b-把void类型的指针转换成目标类型的指针-不安全"><a href="#b-把void类型的指针转换成目标类型的指针-不安全" class="headerlink" title="b.把void类型的指针转换成目标类型的指针(不安全)."></a>b.把void类型的指针转换成目标类型的指针(不安全).</h4><h4 id="c-用于内置的基本的数据类型之间的转换"><a href="#c-用于内置的基本的数据类型之间的转换" class="headerlink" title="c.用于内置的基本的数据类型之间的转换."></a>c.用于内置的基本的数据类型之间的转换.</h4><h4 id="d-把任何类型的表达式转换成void类型的"><a href="#d-把任何类型的表达式转换成void类型的" class="headerlink" title="d.把任何类型的表达式转换成void类型的."></a>d.把任何类型的表达式转换成void类型的.</h4><p>   注意:static_cast不会转换掉content的const,volatile,__unaligned属性</p><h3 id="2-static-const-lt-T-gt-content-去常转换-编译时执行"><a href="#2-static-const-lt-T-gt-content-去常转换-编译时执行" class="headerlink" title="2)static_const&lt;T*&gt;(content):去常转换;编译时执行;"></a>2)static_const&lt;T*&gt;(content):去常转换;编译时执行;</h3><p>  它主要作用同一个类型之间的去常和添加常属性之间的转换.不能用做不同的类型之间的转换.</p><p>  它可以把一个不是常属性的转换成常属性的,同时它也可以对一个本是常属性的类型进行去常.</p><h3 id="3-dynamic-cast-lt-T-gt-content-动态类型转换-也是向下安全转型-是在运行的时候执行"><a href="#3-dynamic-cast-lt-T-gt-content-动态类型转换-也是向下安全转型-是在运行的时候执行" class="headerlink" title="3)dynamic_cast&lt;T*&gt;(content) 动态类型转换;也是向下安全转型;是在运行的时候执行;"></a>3)dynamic_cast&lt;T*&gt;(content) 动态类型转换;也是向下安全转型;是在运行的时候执行;</h3><p>   通常用于基类和派生类之间的转换.转换时会进行类型安全检查。</p><h4 id="a"><a href="#a" class="headerlink" title="a."></a>a.</h4><p>不能用于内置的基本数据类型之间的转换.</p><h4 id="b"><a href="#b" class="headerlink" title="b."></a>b.</h4><p>dynamic_cast转换成功的话返回的是类的指针或引用,失败返回null;</p><h4 id="c"><a href="#c" class="headerlink" title="c."></a>c.</h4><p>dynamic_cast进行的转换的时候基类中一定要有虚函数,因为只有类中有了虚函数, 才说明它希望让基类指针或引用指向其派生类对象的情况,这样才有意义.这是由于运行时类型检查需要运行时类型的信息,而这些信息存储在虚函数表中.</p><h4 id="d"><a href="#d" class="headerlink" title="d."></a>d.</h4><p>在类的转换时,在类层次间进行转换的时候,dynamic_cast和static_cast进行上行转换的时候效果是一样的；但是在进行下行转换的时候,dynamic_cast会进行类型检查所以它更安全.它可以让指向基类的指针转换为指向其子类的指针或是其兄弟类的指针;</p><h3 id="4-reinterpret-cast-lt-T-gt-content-重解释类型转换"><a href="#4-reinterpret-cast-lt-T-gt-content-重解释类型转换" class="headerlink" title="4)reinterpret_cast&lt;T*&gt;(content)重解释类型转换;"></a>4)reinterpret_cast&lt;T*&gt;(content)重解释类型转换;</h3><p>   它有着和C风格强制类型转换同样的功能;它可以转化任何的内置数据类型为其他的类型, 同时它也可以把任何类型的指针转化为其他的类型;它的机理是对二进制数据进行重新的的解释,不会改变原来的格式,而static_cast会改变原来的格式;</p><h2 id="2-请说出static和const关键字尽可能多的作用"><a href="#2-请说出static和const关键字尽可能多的作用" class="headerlink" title="2.请说出static和const关键字尽可能多的作用"></a>2.请说出static和const关键字尽可能多的作用</h2><h3 id="static关键字至少有下列n个作用："><a href="#static关键字至少有下列n个作用：" class="headerlink" title="static关键字至少有下列n个作用："></a>static关键字至少有下列n个作用：</h3><h4 id="（1）"><a href="#（1）" class="headerlink" title="（1）"></a>（1）</h4><p>函数体内static变量的作用范围为该函数体，不同于auto变量，该变量的内存只被分配一次，因此其值在下次调用时仍维持上次的值；</p><h4 id="（2）"><a href="#（2）" class="headerlink" title="（2）"></a>（2）</h4><p>在模块内的static全局变量可以被模块内所用函数访问，但不能被模块外其它函数访问；</p><h4 id="（3）"><a href="#（3）" class="headerlink" title="（3）"></a>（3）</h4><p>在模块内的static函数只可被这一模块内的其它函数调用，这个函数的使用范围被限制在声明它的模块内；</p><h4 id="（4）"><a href="#（4）" class="headerlink" title="（4）"></a>（4）</h4><p>在类中的static成员变量属于整个类所拥有，对类的所有对象只有一份拷贝；</p><h4 id="（5）"><a href="#（5）" class="headerlink" title="（5）"></a>（5）</h4><p>在类中的static成员函数属于整个类所拥有，这个函数不接收this指针，因而只能访问类的static成员变量。</p><h3 id="const关键字至少有下列n个作用："><a href="#const关键字至少有下列n个作用：" class="headerlink" title="const关键字至少有下列n个作用："></a>const关键字至少有下列n个作用：</h3><h4 id="（1）-1"><a href="#（1）-1" class="headerlink" title="（1）"></a>（1）</h4><p>欲阻止一个变量被改变，可以使用const关键字。在定义该const变量时，通常需要对它进行初始化，因为以后就没有机会再去改变它了；</p><h4 id="（2）-1"><a href="#（2）-1" class="headerlink" title="（2）"></a>（2）</h4><p>对指针来说，可以指定指针本身为const，也可以指定指针所指的数据为const，或二者同时指定为const；</p><h4 id="（3）-1"><a href="#（3）-1" class="headerlink" title="（3）"></a>（3）</h4><p>在一个函数声明中，const可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值；</p><h4 id="（4）-1"><a href="#（4）-1" class="headerlink" title="（4）"></a>（4）</h4><p>对于类的成员函数，若指定其为const类型，则表明其是一个常函数，不能修改类的成员变量；</p><h4 id="（5）-1"><a href="#（5）-1" class="headerlink" title="（5）"></a>（5）</h4><p>对于类的成员函数，有时候必须指定其返回值为const类型，以使得其返回值不为“左值”。例如：<br>const classA operator<em>(const classA&amp; a1,const classA&amp; a2);<br>　　operator</em>的返回结果必须是一个const对象。如果不是，这样的变态代码也不会编译出错：</p><p>classA a, b, c;<br>(a <em> b) = c; // 对a</em>b的结果赋值<br>　　操作(a * b) = c显然不符合编程者的初衷，也没有任何意义。</p><p>剖析：<br>　　惊讶吗？小小的static和const居然有这么多功能，我们能回答几个？如果只能回答1~2个，那还真得闭关再好好修炼修炼。</p><p>　　这个题可以考查面试者对程序设计知识的掌握程度是初级、中级还是比较深入，没有一定的知识广度和深度，不可能对这个问题给出全面的解答。大多数人只能回答出static和const关键字的部分功能。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;C-基础概念II&quot;&gt;&lt;a href=&quot;#C-基础概念II&quot; class=&quot;headerlink&quot; title=&quot;C++基础概念II&quot;&gt;&lt;/a&gt;C++基础概念II&lt;/h1&gt;&lt;p&gt;总结C++基础概念&lt;/p&gt;
+&lt;h2 id=&quot;1-C-的四种强制类型转换关键字，及它们的特点和使用的场合&quot;&gt;&lt;a href=&quot;#1-C-的四种强制类型转换关键字，及它们的特点和使用的场合&quot; class=&quot;headerlink&quot; title=&quot;1.C++的四种强制类型转换关键字，及它们的特点和使用的场合&quot;&gt;&lt;/a&gt;1.C++的四种强制类型转换关键字，及它们的特点和使用的场合&lt;/h2&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hexo+github搭建个人博客问题总结</title>
     <link href="http://yoursite.com/2018/08/21/Hexo+github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2018/08/21/Hexo+github搭建个人博客问题总结/</id>
@@ -498,29 +521,6 @@
       <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
     
       <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++基础概念II</title>
-    <link href="http://yoursite.com/2018/08/21/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5II/"/>
-    <id>http://yoursite.com/2018/08/21/C++基础概念II/</id>
-    <published>2018-08-21T01:58:44.000Z</published>
-    <updated>2018-08-22T10:14:14.908Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="C-基础概念II"><a href="#C-基础概念II" class="headerlink" title="C++基础概念II"></a>C++基础概念II</h1><p>总结C++基础概念</p><h2 id="1-C-的四种强制类型转换关键字，及它们的特点和使用的场合"><a href="#1-C-的四种强制类型转换关键字，及它们的特点和使用的场合" class="headerlink" title="1.C++的四种强制类型转换关键字，及它们的特点和使用的场合"></a>1.C++的四种强制类型转换关键字，及它们的特点和使用的场合</h2><a id="more"></a><p>C语言中的强制类型转换可以随意的转换我们想要的类型了,格式如下</p><pre><code>(类型) 变量名;</code></pre><p>为什么c++还要引入新的4种类型转换呢?</p><p>  这是因为新的类型转换控制符可以很好的控制类型转换的过程,允许控制各种类型不同的转换.</p><p>  还有一点好处是C++的类型转换控制符能告诉程序员或读者我们这个转换的目的是什么,我们<br> 只要看一下代码的类型转换控制符,就能明白我们想要达到什么样的目的.</p><h3 id="1-static-cast-lt-T-gt-content-静态转换-在编译期间处理"><a href="#1-static-cast-lt-T-gt-content-静态转换-在编译期间处理" class="headerlink" title="1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理"></a>1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理</h3><p>   它主要用于C++中内置的基本数据类型之间的转换.但是没有运行时类型的检测来保证转换的安全性.</p><p>   为什么需要static_cast类型的转换?</p><h4 id="a-用于基类和子类之间的指针或引用的转换。"><a href="#a-用于基类和子类之间的指针或引用的转换。" class="headerlink" title="a.用于基类和子类之间的指针或引用的转换。"></a>a.用于基类和子类之间的指针或引用的转换。</h4><p>这种转换把子类的指针或引用转换为基类表示是安全的;进行下行转换,把基类的指针或引用转换为子类表示时,由于没有进行动态类型检测,所以是不安全的;</p><h4 id="b-把void类型的指针转换成目标类型的指针-不安全"><a href="#b-把void类型的指针转换成目标类型的指针-不安全" class="headerlink" title="b.把void类型的指针转换成目标类型的指针(不安全)."></a>b.把void类型的指针转换成目标类型的指针(不安全).</h4><h4 id="c-用于内置的基本的数据类型之间的转换"><a href="#c-用于内置的基本的数据类型之间的转换" class="headerlink" title="c.用于内置的基本的数据类型之间的转换."></a>c.用于内置的基本的数据类型之间的转换.</h4><h4 id="d-把任何类型的表达式转换成void类型的"><a href="#d-把任何类型的表达式转换成void类型的" class="headerlink" title="d.把任何类型的表达式转换成void类型的."></a>d.把任何类型的表达式转换成void类型的.</h4><p>   注意:static_cast不会转换掉content的const,volatile,__unaligned属性</p><h3 id="2-static-const-lt-T-gt-content-去常转换-编译时执行"><a href="#2-static-const-lt-T-gt-content-去常转换-编译时执行" class="headerlink" title="2)static_const&lt;T*&gt;(content):去常转换;编译时执行;"></a>2)static_const&lt;T*&gt;(content):去常转换;编译时执行;</h3><p>  它主要作用同一个类型之间的去常和添加常属性之间的转换.不能用做不同的类型之间的转换.</p><p>  它可以把一个不是常属性的转换成常属性的,同时它也可以对一个本是常属性的类型进行去常.</p><h3 id="3-dynamic-cast-lt-T-gt-content-动态类型转换-也是向下安全转型-是在运行的时候执行"><a href="#3-dynamic-cast-lt-T-gt-content-动态类型转换-也是向下安全转型-是在运行的时候执行" class="headerlink" title="3)dynamic_cast&lt;T*&gt;(content) 动态类型转换;也是向下安全转型;是在运行的时候执行;"></a>3)dynamic_cast&lt;T*&gt;(content) 动态类型转换;也是向下安全转型;是在运行的时候执行;</h3><p>   通常用于基类和派生类之间的转换.转换时会进行类型安全检查。</p><h4 id="a"><a href="#a" class="headerlink" title="a."></a>a.</h4><p>不能用于内置的基本数据类型之间的转换.</p><h4 id="b"><a href="#b" class="headerlink" title="b."></a>b.</h4><p>dynamic_cast转换成功的话返回的是类的指针或引用,失败返回null;</p><h4 id="c"><a href="#c" class="headerlink" title="c."></a>c.</h4><p>dynamic_cast进行的转换的时候基类中一定要有虚函数,因为只有类中有了虚函数, 才说明它希望让基类指针或引用指向其派生类对象的情况,这样才有意义.这是由于运行时类型检查需要运行时类型的信息,而这些信息存储在虚函数表中.</p><h4 id="d"><a href="#d" class="headerlink" title="d."></a>d.</h4><p>在类的转换时,在类层次间进行转换的时候,dynamic_cast和static_cast进行上行转换的时候效果是一样的；但是在进行下行转换的时候,dynamic_cast会进行类型检查所以它更安全.它可以让指向基类的指针转换为指向其子类的指针或是其兄弟类的指针;</p><h3 id="4-reinterpret-cast-lt-T-gt-content-重解释类型转换"><a href="#4-reinterpret-cast-lt-T-gt-content-重解释类型转换" class="headerlink" title="4)reinterpret_cast&lt;T*&gt;(content)重解释类型转换;"></a>4)reinterpret_cast&lt;T*&gt;(content)重解释类型转换;</h3><p>   它有着和C风格强制类型转换同样的功能;它可以转化任何的内置数据类型为其他的类型, 同时它也可以把任何类型的指针转化为其他的类型;它的机理是对二进制数据进行重新的的解释,不会改变原来的格式,而static_cast会改变原来的格式;</p><h2 id="2-请说出static和const关键字尽可能多的作用"><a href="#2-请说出static和const关键字尽可能多的作用" class="headerlink" title="2.请说出static和const关键字尽可能多的作用"></a>2.请说出static和const关键字尽可能多的作用</h2><h3 id="static关键字至少有下列n个作用："><a href="#static关键字至少有下列n个作用：" class="headerlink" title="static关键字至少有下列n个作用："></a>static关键字至少有下列n个作用：</h3><h4 id="（1）"><a href="#（1）" class="headerlink" title="（1）"></a>（1）</h4><p>函数体内static变量的作用范围为该函数体，不同于auto变量，该变量的内存只被分配一次，因此其值在下次调用时仍维持上次的值；</p><h4 id="（2）"><a href="#（2）" class="headerlink" title="（2）"></a>（2）</h4><p>在模块内的static全局变量可以被模块内所用函数访问，但不能被模块外其它函数访问；</p><h4 id="（3）"><a href="#（3）" class="headerlink" title="（3）"></a>（3）</h4><p>在模块内的static函数只可被这一模块内的其它函数调用，这个函数的使用范围被限制在声明它的模块内；</p><h4 id="（4）"><a href="#（4）" class="headerlink" title="（4）"></a>（4）</h4><p>在类中的static成员变量属于整个类所拥有，对类的所有对象只有一份拷贝；</p><h4 id="（5）"><a href="#（5）" class="headerlink" title="（5）"></a>（5）</h4><p>在类中的static成员函数属于整个类所拥有，这个函数不接收this指针，因而只能访问类的static成员变量。</p><h3 id="const关键字至少有下列n个作用："><a href="#const关键字至少有下列n个作用：" class="headerlink" title="const关键字至少有下列n个作用："></a>const关键字至少有下列n个作用：</h3><h4 id="（1）-1"><a href="#（1）-1" class="headerlink" title="（1）"></a>（1）</h4><p>欲阻止一个变量被改变，可以使用const关键字。在定义该const变量时，通常需要对它进行初始化，因为以后就没有机会再去改变它了；</p><h4 id="（2）-1"><a href="#（2）-1" class="headerlink" title="（2）"></a>（2）</h4><p>对指针来说，可以指定指针本身为const，也可以指定指针所指的数据为const，或二者同时指定为const；</p><h4 id="（3）-1"><a href="#（3）-1" class="headerlink" title="（3）"></a>（3）</h4><p>在一个函数声明中，const可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值；</p><h4 id="（4）-1"><a href="#（4）-1" class="headerlink" title="（4）"></a>（4）</h4><p>对于类的成员函数，若指定其为const类型，则表明其是一个常函数，不能修改类的成员变量；</p><h4 id="（5）-1"><a href="#（5）-1" class="headerlink" title="（5）"></a>（5）</h4><p>对于类的成员函数，有时候必须指定其返回值为const类型，以使得其返回值不为“左值”。例如：<br>const classA operator<em>(const classA&amp; a1,const classA&amp; a2);<br>　　operator</em>的返回结果必须是一个const对象。如果不是，这样的变态代码也不会编译出错：</p><p>classA a, b, c;<br>(a <em> b) = c; // 对a</em>b的结果赋值<br>　　操作(a * b) = c显然不符合编程者的初衷，也没有任何意义。</p><p>剖析：<br>　　惊讶吗？小小的static和const居然有这么多功能，我们能回答几个？如果只能回答1~2个，那还真得闭关再好好修炼修炼。</p><p>　　这个题可以考查面试者对程序设计知识的掌握程度是初级、中级还是比较深入，没有一定的知识广度和深度，不可能对这个问题给出全面的解答。大多数人只能回答出static和const关键字的部分功能。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;C-基础概念II&quot;&gt;&lt;a href=&quot;#C-基础概念II&quot; class=&quot;headerlink&quot; title=&quot;C++基础概念II&quot;&gt;&lt;/a&gt;C++基础概念II&lt;/h1&gt;&lt;p&gt;总结C++基础概念&lt;/p&gt;
-&lt;h2 id=&quot;1-C-的四种强制类型转换关键字，及它们的特点和使用的场合&quot;&gt;&lt;a href=&quot;#1-C-的四种强制类型转换关键字，及它们的特点和使用的场合&quot; class=&quot;headerlink&quot; title=&quot;1.C++的四种强制类型转换关键字，及它们的特点和使用的场合&quot;&gt;&lt;/a&gt;1.C++的四种强制类型转换关键字，及它们的特点和使用的场合&lt;/h2&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
     
   </entry>
   
