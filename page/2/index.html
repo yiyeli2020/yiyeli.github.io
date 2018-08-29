@@ -140,7 +140,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 18px;">Array</a> <a href="/tags/Binary-Search/" style="font-size: 12px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/C/" style="font-size: 12px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 16px;">Coding Interviews</a> <a href="/tags/Dynamic-Programming/" style="font-size: 18px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Operating-System/" style="font-size: 10px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10px;">Template</a> <a href="/tags/Tree/" style="font-size: 10px;">Tree</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a>
+                        <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 18px;">Array</a> <a href="/tags/Binary-Search/" style="font-size: 12px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/C/" style="font-size: 14px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 16px;">Coding Interviews</a> <a href="/tags/Dynamic-Programming/" style="font-size: 18px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Operating-System/" style="font-size: 10px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10px;">Template</a> <a href="/tags/Tree/" style="font-size: 10px;">Tree</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a>
                     </div>
                 </section>
                 
@@ -213,6 +213,78 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-885. Spiral Matrix III" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/24/885. Spiral Matrix III/" class="article-date">
+      <time datetime="2018-08-24T02:32:12.000Z" itemprop="datePublished">2018-08-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="885-Spiral-Matrix-III螺旋矩阵-III"><a href="#885-Spiral-Matrix-III螺旋矩阵-III" class="headerlink" title="885. Spiral Matrix III螺旋矩阵 III"></a>885. Spiral Matrix III螺旋矩阵 III</h1><p>在 R 行 C 列的矩阵上，我们从 (r0, c0) 面朝东面开始</p>
+<p>这里，网格的西北角位于第一行第一列，网格的东南角位于最后一行最后一列。</p>
+<p>现在，我们以顺时针按螺旋状行走，访问此网格中的每个位置。</p>
+<p>每当我们移动到网格的边界之外时，我们会继续在网格之外行走（但稍后可能会返回到网格边界）。</p>
+<p>最终，我们到过网格的所有 R * C 个空间。</p>
+<p>按照访问顺序返回表示网格位置的坐标列表。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2018/08/24/885. Spiral Matrix III/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-剑指Offer20.顺时针打印矩阵" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -686,74 +758,6 @@
 
 
   
-    <article id="post-354. Russian Doll Envelopes俄罗斯套娃信封" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/" class="article-date">
-      <time datetime="2018-08-22T01:58:44.000Z" itemprop="datePublished">2018-08-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h1 id="354-Russian-Doll-Envelopes俄罗斯套娃"><a href="#354-Russian-Doll-Envelopes俄罗斯套娃" class="headerlink" title="354. Russian Doll Envelopes俄罗斯套娃"></a>354. Russian Doll Envelopes俄罗斯套娃</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p>
-<p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search/">Binary Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-剑指Offer64.数据流中的中位数" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -821,11 +825,11 @@
 
 
   
-    <article id="post-股票交易问题通解小结" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-354. Russian Doll Envelopes俄罗斯套娃信封" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/21/股票交易问题通解小结/" class="article-date">
-      <time datetime="2018-08-21T01:58:44.000Z" itemprop="datePublished">2018-08-21</time>
+      <a href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/" class="article-date">
+      <time datetime="2018-08-22T01:58:44.000Z" itemprop="datePublished">2018-08-22</time>
 </a>
     </div>
   
@@ -838,7 +842,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a>
+      <a class="article-title" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a>
     </h1>
   
 
@@ -848,7 +852,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="股票交易问题通解小结"><a href="#股票交易问题通解小结" class="headerlink" title="股票交易问题通解小结"></a>股票交易问题通解小结</h1><p>本文的主要部分来自于leetcode讨论区,后面加上了一点个人的理解和扩展延伸，Leetcode中的股票交易问题共有下列几道：</p>
+              <h1 id="354-Russian-Doll-Envelopes俄罗斯套娃"><a href="#354-Russian-Doll-Envelopes俄罗斯套娃" class="headerlink" title="354. Russian Doll Envelopes俄罗斯套娃"></a>354. Russian Doll Envelopes俄罗斯套娃</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p>
+<p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p>
           
       
       
@@ -864,12 +869,12 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search/">Binary Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
     </div>
 
       
         <p class="article-more-link">
-          <a  href="/2018/08/21/股票交易问题通解小结/#more">阅读全文 >></a>
+          <a  href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>

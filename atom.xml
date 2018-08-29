@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-28T02:42:36.855Z</updated>
+  <updated>2018-08-29T02:41:27.063Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++输入总结</title>
+    <link href="http://yoursite.com/2018/08/29/C++%E8%BE%93%E5%85%A5/"/>
+    <id>http://yoursite.com/2018/08/29/C++输入/</id>
+    <published>2018-08-29T02:33:12.000Z</published>
+    <updated>2018-08-29T02:41:27.063Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="C-输入总结"><a href="#C-输入总结" class="headerlink" title="C++输入总结"></a>C++输入总结</h1><p>总结常用的C++输入</p><a id="more"></a><p>总结下常用的C++字符，字符串，数字输入方法和问题：</p><h3 id="1-while里面用cin-gt-gt-val如何结束"><a href="#1-while里面用cin-gt-gt-val如何结束" class="headerlink" title="1.while里面用cin &gt;&gt; val如何结束"></a>1.while里面用cin &gt;&gt; val如何结束</h3><h3 id="2-如何在while（cin-gt-gt-val）跳出循环后能继续执行程序中其他的输入操作"><a href="#2-如何在while（cin-gt-gt-val）跳出循环后能继续执行程序中其他的输入操作" class="headerlink" title="2.如何在while（cin &gt;&gt; val）跳出循环后能继续执行程序中其他的输入操作"></a>2.如何在while（cin &gt;&gt; val）跳出循环后能继续执行程序中其他的输入操作</h3><h3 id="3-getline和cin-getline-的区别及使用方法"><a href="#3-getline和cin-getline-的区别及使用方法" class="headerlink" title="3.getline和cin.getline()的区别及使用方法"></a>3.getline和cin.getline()的区别及使用方法</h3><pre><code>#include&lt;iostream&gt;#include&lt;vector&gt;#include&lt;map&gt;#include&lt;cctype&gt;#include&lt;string&gt;using namespace std;int main(){    /*    Q1:    while里面用cin &gt;&gt; val是什么意思，用这个当条件的话，通过检测其流的状态来判断结束；    （1）若流是有效的，即流未遇到错误，那么检测成功；    （2）若遇到文件结束符，或遇到一个无效的输入时（例如输入的值不是一个整数），istream对象的状态会变为无效，条件就为假；    怎样才是文件结束符呢？    不同的操作系统有不同的约定，在windows系统中，输入文件结束符的方法是先按Ctrl+Z，然后再按Enter；在UNIX系统中，包括Mac OS X系统中，文件结束输入为Ctrl+D;     */    //freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);    int val;    vector&lt;int&gt;nums;      while (cin &gt;&gt; val ) {//在键盘输入时要ctrl+z再按回车,文件输入则不用         nums.push_back(val);    }    for (auto n : nums) cout &lt;&lt; n &lt;&lt; &quot;  &quot;;    cout &lt;&lt; endl;    /*    Q2:    如何在while（cin &gt;&gt; val）跳出循环后能继续执行程序中其他的输入操作:    输入ctrl+z使程序跳出了while(cin&gt;&gt;val)的循环，但是它并不能继续执行循环外的输入操作也就是直接退出了程序。    那这是为什么呢？    要理清这件事首先我们要对了解的处理机制，cin遇到ctrl+z便认为输入结束，也就是不再接受键盘的输入（但是它会读取缓冲区已经存在的数据），    但是ctrl+z还是会留在缓冲区内    也就是说当我们输入换行+（ctrl+z）+换行后。程序跳出while循环，但是ctrl+z还在缓冲区内，当程序继续执行时，    当cin再去读的时候，发现缓冲区存在ctrl+z（上次跳出循环遗留下的），于是它就走了，也就是什么都没读到。所以用户也无法输入。    解决方法很简单    就是及时清除缓冲区    也就是在程序跳出循环后利用函数    cin.clear();    cin.ignore();    */    cin.clear();    cin.ignore();    string str;    getline(cin, str);    cout &lt;&lt; str &lt;&lt; endl;    /*    用于string类的。使用需包含头文件#include&lt;string&gt;。getline(cin,string s)，接收一个字符串，可以接收空格、回车等    与cin.getline()的区别：1.cin.getline()接收输入字符串的是数组，getline（）是string类型。    2.cin.getline()可以接收空格，但不能接收回车；getline()可以接收空格和回车    3.cin.getline()会在数组结尾是&apos;\0&apos;，getline()不会    */    char s[20];    cin.getline(s,20);    cout &lt;&lt; s &lt;&lt; endl;    /*实际是cin.getline(接收字符串到m，接收个数n，结束字符)。接收一个字符串，可以接收空格等，最后一个字符为‘\0’。结束符可以通过设置第三个参数自己设置，默认是回车。m不能为string类型。    注意：实际接收到的要比n少一个，因为最后一个字符为&apos;\0&apos;。    */    char c;    cin.get(c);    cout &lt;&lt; c &lt;&lt; endl;    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;C-输入总结&quot;&gt;&lt;a href=&quot;#C-输入总结&quot; class=&quot;headerlink&quot; title=&quot;C++输入总结&quot;&gt;&lt;/a&gt;C++输入总结&lt;/h1&gt;&lt;p&gt;总结常用的C++输入&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+      <category term="stdin" scheme="http://yoursite.com/tags/stdin/"/>
+    
+  </entry>
   
   <entry>
     <title>操作系统基础概念I</title>
@@ -64,30 +88,6 @@
   </entry>
   
   <entry>
-    <title>139. Word Break单词拆分</title>
-    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
-    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
-    <published>2018-08-26T12:33:12.000Z</published>
-    <updated>2018-08-27T14:08:19.153Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
     <title>626. Exchange Seats换座位</title>
     <link href="http://yoursite.com/2018/08/26/626.%20Exchange%20Seats%E6%8D%A2%E5%BA%A7%E4%BD%8D/"/>
     <id>http://yoursite.com/2018/08/26/626. Exchange Seats换座位/</id>
@@ -115,6 +115,30 @@
   </entry>
   
   <entry>
+    <title>139. Word Break单词拆分</title>
+    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
+    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
+    <published>2018-08-26T12:33:12.000Z</published>
+    <updated>2018-08-27T14:08:19.153Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kickstart-Round-E-2018-ProblemA.Yogurt</title>
     <link href="http://yoursite.com/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/"/>
     <id>http://yoursite.com/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/</id>
@@ -134,11 +158,11 @@
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
       <category term="Kickstart" scheme="http://yoursite.com/tags/Kickstart/"/>
     
       <category term="Google" scheme="http://yoursite.com/tags/Google/"/>
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
   </entry>
   
@@ -194,18 +218,17 @@
   </entry>
   
   <entry>
-    <title>697. Degree of an Array数组的度</title>
-    <link href="http://yoursite.com/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/"/>
-    <id>http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</id>
+    <title>485. Max Consecutive Ones最大连续1的个数</title>
+    <link href="http://yoursite.com/2018/08/24/485.%20Max%20Consecutive%20Ones/"/>
+    <id>http://yoursite.com/2018/08/24/485. Max Consecutive Ones/</id>
     <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T07:05:54.170Z</updated>
+    <updated>2018-08-24T07:05:48.492Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="697-Degree-of-an-Array数组的度"><a href="#697-Degree-of-an-Array数组的度" class="headerlink" title="697. Degree of an Array数组的度"></a>697. Degree of an Array数组的度</h1><p>给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。</p><p>你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1, 2, 2, 3, 1]</code></pre><p>输出: 2<br>解释:<br>输入数组的度是2，因为元素1和2的出现频数最大，均为2.<br>连续子数组里面拥有相同度的有如下所示:</p><pre><code>[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]</code></pre><p>最短连续子数组[2, 2]的长度为2，所以返回2.<br>示例 2:</p><p>输入: </p><pre><code>[1,2,2,3,1,4,2]</code></pre><p>输出: 6<br>注意:</p><p>nums.length 在1到50,000区间范围内。<br>nums[i] 是一个在0到49,999范围内的整数。</p><!-- more --><h2 id="Brute-Force思路"><a href="#Brute-Force思路" class="headerlink" title="Brute Force思路"></a>Brute Force思路</h2><p>穷举所有的子数组然后将其度与原数组的度比较，相等则更新最小长度。但会超时。</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        int minlen=nums.size();        int degree=getdegree(nums,0,nums.size()-1);        for(int i=0;i&lt;nums.size();i++){            for(int j=i+1;j&lt;nums.size();j++){                if(getdegree(nums,i,j)==degree) minlen=min(minlen,j-i+1);            }        }        return minlen;    }    int getdegree(vector&lt;int&gt;&amp; arr,int begin,int end){        int degree=0;        unordered_map&lt;int,int&gt; fre;        for(int i=begin;i&lt;=end;i++){            fre[arr[i]]++;        }        for(auto d:fre){            degree=max(degree,d.second);        }        return degree;    }};</code></pre><h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><p>使用两个哈希表，一个记录字符的开始位置，另一个记录字符的出现频率<br>一旦一个特定字符的频率大于其他的，我们更新这个变量的长度，当两个变量有同样的频率，只比较它们的长度选择较短的一个</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        unordered_map&lt;int,int&gt; startindex,frequency;        int fre=0,len=nums.size();        for(int i=0;i&lt;nums.size();i++){            frequency[nums[i]]++;            if(startindex.count(nums[i])==0) startindex[nums[i]]=i;//first appear            if(frequency[nums[i]]==fre){//第i个字符的度与截止到当前的数组度相同                len=min(len,i-startindex[nums[i]]+1);            }            else if(frequency[nums[i]]&gt;fre){//需要更新度和长度                fre=frequency[nums[i]];                len=i-startindex[nums[i]]+1;            }        }        return len;    }};</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="485-Max-Consecutive-Ones最大连续1的个数"><a href="#485-Max-Consecutive-Ones最大连续1的个数" class="headerlink" title="485. Max Consecutive Ones最大连续1的个数"></a>485. Max Consecutive Ones最大连续1的个数</h1><p>给定一个二进制数组， 计算其中最大连续1的个数。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1,1,0,1,1,1]</code></pre><p>输出: 3<br>解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.<br>注意：</p><p>输入的数组只包含 0 和1。<br>输入数组的长度是正整数，且不超过 10,000。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>定义局部最大和全局最大</p><pre><code>class Solution {public:    int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) {        int maxlen=0,locallen=0;        for(auto n:nums){            if((n&amp;1)==0) locallen=0;            else {                locallen++;                maxlen=max(maxlen,locallen);            }        }        return maxlen;    }};</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;697-Degree-of-an-Array数组的度&quot;&gt;&lt;a href=&quot;#697-Degree-of-an-Array数组的度&quot; class=&quot;headerlink&quot; title=&quot;697. Degree of an Array数组的度&quot;&gt;&lt;/a&gt;697. Degree of an Array数组的度&lt;/h1&gt;&lt;p&gt;给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。&lt;/p&gt;
-&lt;p&gt;你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。&lt;/p&gt;
+      &lt;h1 id=&quot;485-Max-Consecutive-Ones最大连续1的个数&quot;&gt;&lt;a href=&quot;#485-Max-Consecutive-Ones最大连续1的个数&quot; class=&quot;headerlink&quot; title=&quot;485. Max Consecutive Ones最大连续1的个数&quot;&gt;&lt;/a&gt;485. Max Consecutive Ones最大连续1的个数&lt;/h1&gt;&lt;p&gt;给定一个二进制数组， 计算其中最大连续1的个数。&lt;/p&gt;
     
     </summary>
     
@@ -219,17 +242,18 @@
   </entry>
   
   <entry>
-    <title>485. Max Consecutive Ones最大连续1的个数</title>
-    <link href="http://yoursite.com/2018/08/24/485.%20Max%20Consecutive%20Ones/"/>
-    <id>http://yoursite.com/2018/08/24/485. Max Consecutive Ones/</id>
+    <title>697. Degree of an Array数组的度</title>
+    <link href="http://yoursite.com/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/"/>
+    <id>http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</id>
     <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T07:05:48.492Z</updated>
+    <updated>2018-08-24T07:05:54.170Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="485-Max-Consecutive-Ones最大连续1的个数"><a href="#485-Max-Consecutive-Ones最大连续1的个数" class="headerlink" title="485. Max Consecutive Ones最大连续1的个数"></a>485. Max Consecutive Ones最大连续1的个数</h1><p>给定一个二进制数组， 计算其中最大连续1的个数。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1,1,0,1,1,1]</code></pre><p>输出: 3<br>解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.<br>注意：</p><p>输入的数组只包含 0 和1。<br>输入数组的长度是正整数，且不超过 10,000。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>定义局部最大和全局最大</p><pre><code>class Solution {public:    int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) {        int maxlen=0,locallen=0;        for(auto n:nums){            if((n&amp;1)==0) locallen=0;            else {                locallen++;                maxlen=max(maxlen,locallen);            }        }        return maxlen;    }};</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="697-Degree-of-an-Array数组的度"><a href="#697-Degree-of-an-Array数组的度" class="headerlink" title="697. Degree of an Array数组的度"></a>697. Degree of an Array数组的度</h1><p>给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。</p><p>你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1, 2, 2, 3, 1]</code></pre><p>输出: 2<br>解释:<br>输入数组的度是2，因为元素1和2的出现频数最大，均为2.<br>连续子数组里面拥有相同度的有如下所示:</p><pre><code>[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]</code></pre><p>最短连续子数组[2, 2]的长度为2，所以返回2.<br>示例 2:</p><p>输入: </p><pre><code>[1,2,2,3,1,4,2]</code></pre><p>输出: 6<br>注意:</p><p>nums.length 在1到50,000区间范围内。<br>nums[i] 是一个在0到49,999范围内的整数。</p><!-- more --><h2 id="Brute-Force思路"><a href="#Brute-Force思路" class="headerlink" title="Brute Force思路"></a>Brute Force思路</h2><p>穷举所有的子数组然后将其度与原数组的度比较，相等则更新最小长度。但会超时。</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        int minlen=nums.size();        int degree=getdegree(nums,0,nums.size()-1);        for(int i=0;i&lt;nums.size();i++){            for(int j=i+1;j&lt;nums.size();j++){                if(getdegree(nums,i,j)==degree) minlen=min(minlen,j-i+1);            }        }        return minlen;    }    int getdegree(vector&lt;int&gt;&amp; arr,int begin,int end){        int degree=0;        unordered_map&lt;int,int&gt; fre;        for(int i=begin;i&lt;=end;i++){            fre[arr[i]]++;        }        for(auto d:fre){            degree=max(degree,d.second);        }        return degree;    }};</code></pre><h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><p>使用两个哈希表，一个记录字符的开始位置，另一个记录字符的出现频率<br>一旦一个特定字符的频率大于其他的，我们更新这个变量的长度，当两个变量有同样的频率，只比较它们的长度选择较短的一个</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        unordered_map&lt;int,int&gt; startindex,frequency;        int fre=0,len=nums.size();        for(int i=0;i&lt;nums.size();i++){            frequency[nums[i]]++;            if(startindex.count(nums[i])==0) startindex[nums[i]]=i;//first appear            if(frequency[nums[i]]==fre){//第i个字符的度与截止到当前的数组度相同                len=min(len,i-startindex[nums[i]]+1);            }            else if(frequency[nums[i]]&gt;fre){//需要更新度和长度                fre=frequency[nums[i]];                len=i-startindex[nums[i]]+1;            }        }        return len;    }};</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;485-Max-Consecutive-Ones最大连续1的个数&quot;&gt;&lt;a href=&quot;#485-Max-Consecutive-Ones最大连续1的个数&quot; class=&quot;headerlink&quot; title=&quot;485. Max Consecutive Ones最大连续1的个数&quot;&gt;&lt;/a&gt;485. Max Consecutive Ones最大连续1的个数&lt;/h1&gt;&lt;p&gt;给定一个二进制数组， 计算其中最大连续1的个数。&lt;/p&gt;
+      &lt;h1 id=&quot;697-Degree-of-an-Array数组的度&quot;&gt;&lt;a href=&quot;#697-Degree-of-an-Array数组的度&quot; class=&quot;headerlink&quot; title=&quot;697. Degree of an Array数组的度&quot;&gt;&lt;/a&gt;697. Degree of an Array数组的度&lt;/h1&gt;&lt;p&gt;给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。&lt;/p&gt;
+&lt;p&gt;你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。&lt;/p&gt;
     
     </summary>
     
@@ -412,9 +436,9 @@
       <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
     
     
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
       <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
+    
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
   </entry>
   
@@ -430,33 +454,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;300-Longest-Increasing-Subsequence最长上升子序列&quot;&gt;&lt;a href=&quot;#300-Longest-Increasing-Subsequence最长上升子序列&quot; class=&quot;headerlink&quot; title=&quot;300. Longest Increasing Subsequence最长上升子序列&quot;&gt;&lt;/a&gt;300. Longest Increasing Subsequence最长上升子序列&lt;/h1&gt;&lt;p&gt;给定一个无序的整数数组，找到其中最长上升子序列的长度。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-      <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>354. Russian Doll Envelopes俄罗斯套娃</title>
-    <link href="http://yoursite.com/2018/08/22/354.%20Russian%20Doll%20Envelopes%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81/"/>
-    <id>http://yoursite.com/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/</id>
-    <published>2018-08-22T01:58:44.000Z</published>
-    <updated>2018-08-22T13:15:14.247Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="354-Russian-Doll-Envelopes俄罗斯套娃"><a href="#354-Russian-Doll-Envelopes俄罗斯套娃" class="headerlink" title="354. Russian Doll Envelopes俄罗斯套娃"></a>354. Russian Doll Envelopes俄罗斯套娃</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p><p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p><a id="more"></a><p>说明:<br>不允许旋转信封。</p><p>示例:</p><p>输入: envelopes = [[5,4],[6,4],[6,7],[2,3]]<br>输出: 3<br>解释: 最多信封的个数为 3, 组合为: [2,3] =&gt; [5,4] =&gt; [6,7]。</p><h2 id="动态规划解法"><a href="#动态规划解法" class="headerlink" title="动态规划解法"></a>动态规划解法</h2><p>这道题给了我们一堆大小不一的信封，让我们像套俄罗斯娃娃那样把这些信封都给套起来，这道题实际上是之前那道Longest Increasing Subsequence的具体应用，而且难度增加了，从一维变成了两维，但是万变不离其宗，解法还是一样的，首先来看DP的解法，这是一种brute force的解法，首先要给所有的信封按从小到大排序，首先根据宽度从小到大排，如果宽度相同，那么高度小的再前面，这是STL里面sort的默认排法，所以我们不用写其他的comparator，直接排就可以了，然后我们开始遍历，对于每一个信封，我们都遍历其前面所有的信封，如果当前信封的长和宽都比前面那个信封的大，那么我们更新dp数组，通过dp[i] = max(dp[i], dp[j] + 1)。然后我们每遍历完一个信封，都更新一下结果res，参见代码如下；</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        int res=0,n=envelopes.size();        vector&lt;int&gt; dp(n,1);        sort(envelopes.begin(),envelopes.end());        for(int i=0;i&lt;n;i++){            for(int j=0;j&lt;i;j++){                if(envelopes[i].first&gt;envelopes[j].first &amp;&amp; envelopes[i].second&gt; envelopes[j].second){                    dp[i]=max(dp[i],dp[j]+1);                }            }            res=max(res,dp[i]);        }        return res;    }};</code></pre><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><p>可以使用二分查找法来优化速度，我们首先要做的还是给信封排序，但是这次排序和上面有些不同，信封的宽度还是从小到大排，但是宽度相等时，我们让高度大的在前面。那么现在问题就简化了成了找高度数字中的LIS，完全就和之前那道Longest Increasing Subsequence一样了，所以我们还是使用之前那题解法来做，参见代码如下：</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {              vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,const pair&lt;int,int&gt; &amp;b){            if(a.first==b.first) return a.second&gt; b.second;            return a.first &lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            int left=0,right=dp.size(),t=envelopes[i].second;            while(left&lt;right){                int mid=left+(right-left)/2;                if(dp[mid]&lt; t) left=mid+1;                else right=mid;            }            if(right&gt;=dp.size()) dp.push_back(t);            else dp[right]=t;        }        return dp.size();    }};</code></pre><h2 id="使用STL函数lower-bound的二分查找法"><a href="#使用STL函数lower-bound的二分查找法" class="headerlink" title="使用STL函数lower_bound的二分查找法"></a>使用STL函数lower_bound的二分查找法</h2><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,cosnt pair&lt;int,int&gt; &amp;b){           if(a.first==b.first) return a.second&gt;b.second;            return a.first&lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            auto it=lower_bound(dp.begin(),dp.end(),enveloeps[i].second);            if(it==dp.end()) dp.push_back(envelopes[i].second);            else *it=envelopes[i].second;        }        return dp.size();    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;354-Russian-Doll-Envelopes俄罗斯套娃&quot;&gt;&lt;a href=&quot;#354-Russian-Doll-Envelopes俄罗斯套娃&quot; class=&quot;headerlink&quot; title=&quot;354. Russian Doll Envelopes俄罗斯套娃&quot;&gt;&lt;/a&gt;354. Russian Doll Envelopes俄罗斯套娃&lt;/h1&gt;&lt;p&gt;给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。&lt;/p&gt;
-&lt;p&gt;请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。&lt;/p&gt;
     
     </summary>
     
@@ -498,17 +495,18 @@
   </entry>
   
   <entry>
-    <title>股票交易问题通解小结</title>
-    <link href="http://yoursite.com/2018/08/21/%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93%E9%97%AE%E9%A2%98%E9%80%9A%E8%A7%A3%E5%B0%8F%E7%BB%93/"/>
-    <id>http://yoursite.com/2018/08/21/股票交易问题通解小结/</id>
-    <published>2018-08-21T01:58:44.000Z</published>
-    <updated>2018-08-22T10:14:24.659Z</updated>
+    <title>354. Russian Doll Envelopes俄罗斯套娃</title>
+    <link href="http://yoursite.com/2018/08/22/354.%20Russian%20Doll%20Envelopes%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81/"/>
+    <id>http://yoursite.com/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/</id>
+    <published>2018-08-22T01:58:44.000Z</published>
+    <updated>2018-08-22T13:15:14.247Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="股票交易问题通解小结"><a href="#股票交易问题通解小结" class="headerlink" title="股票交易问题通解小结"></a>股票交易问题通解小结</h1><p>本文的主要部分来自于leetcode讨论区,后面加上了一点个人的理解和扩展延伸，Leetcode中的股票交易问题共有下列几道：</p><a id="more"></a><pre><code>121.Best Time to Buy and Sell Stock122.Best Time to Buy and Sell Stock II123.Best Time to Buy and Sell Stock III188.Best Time to Buy and Sell Stock IV309.Best Time to Buy and Sell Stock with Cooldown714.Best Time to Buy and Sell Stock with Transaction Fee</code></pre><h2 id="I-–常见情况"><a href="#I-–常见情况" class="headerlink" title="I –常见情况"></a>I –常见情况</h2><p>本文的想法来自于下列的问题：给定一个代表每天股票价格的数组，是什么决定了我们能得到的最大利润？</p><p>大多数人会很快产生类似“那取决于我们处在第几天和我们被允许最多完成多少次交易”。</p><p>当然，这些是重要的因素因为它们在问题描述中就被显示出来。然而，在判断最大利润中有一个隐含因素不是那么明显但却至关重要，它将在下文中被阐述出来。</p><p>首先让我们确定符号来简化我们的分析，令prices作为长度为n的股票价格数组，i标记为第i天（i会从0到n-1)，k标记为被允许完成的最大交易次数,T[i][k]是在第i天的结尾经过最多k次交易所能获得的最大利润。很明显我们有基准情况：T[-1][k]=T[i][0]=0, 那就是没有股票或者没有交易导致没有利润（标记第1天为i=0因此i=0意味着没有股票）。</p><p>现在如果我们能够把T[i][k]和它的子问题T[i-1][k],T[i][k-1],T[i-1][k-1],…，我们会有一个可行的递推关系式<br>使得问题能够递归解决，所以我们怎样实现它呢？<br>最常见的直接方式是看第i天的行动，我们有多少种选择方式？答案是三种：买，卖，休息。我们应该采取哪种呢？</p><p>答案是：我们并不真的知道，但是可以去找哪一种最简单。假设没有其它的约束，我们可以尝试每种选择然后选择使得我们利润最大的一种。</p><p>可是我们确实有一个额外的约束，就是不能在同一时间进行重复交易，意味着如果我们决定在第i天购买，那么我们手中就应该不持有股票；如果我们决定在第i天出售，我们手中应该恰好有一只股票。我们手中<br>的股票数量是上文中提到的会影响我们第i天行为的因素同时也会影响最大利润。</p><p>因此我们对T[i][k]的定义应该被分割成两部分:T[i][k][0]和T[i][k][1],前者标记在最多k次交易和行动后我们手中没有股票的情况下第i天结尾时的最大利润，后者标记在最多k次交易和行动后我们手中只有一只股票的情况下第i天结尾时的最大利润，现在基准情况和递推关系可以被写作：</p><h3 id="1-基准情况："><a href="#1-基准情况：" class="headerlink" title="1.基准情况："></a>1.基准情况：</h3><pre><code>T[-1][k][0]=0, T[-1][k][1]=-InfinityT[i][0][0]=0, T[i][0][1]=-Infinity</code></pre><h3 id="2-递推关系："><a href="#2-递推关系：" class="headerlink" title="2.递推关系："></a>2.递推关系：</h3><pre><code>T[i][k][0]=max(T[i-1][k][0],T[i-1][k][1]+prices[i])T[i][k][1]=max(T[i-1][k][1],T[i-1][k-1][0]-prices[i])</code></pre><p>对于基准情况，T[-1][k][0] = T[i][0][0] = 0有同样的含义正如之前当T[-1][k][1] = T[i][0][1] = -Infinity强调了事实对于我们来说如果没有可获得的股票或不被允许交易那么就不可能手中有一只股票。</p><p>对于递推式中的T[i][k][0]，在第i天能采取的行动只有休息和卖，因为我们在一天结束时手中没有股票。T[i-1][k][0]是当采取行动休息时的最大利润，<br>而T[i-1][k][1] + prices[i]则是当行动卖被采取时的最大利润。</p><p>如果最大被允许的交易次数保持不变，由于一次交易包含两种成对的行为-买和卖。只有行为买会改变被允许的最大交易次数。（此处还有一种替代的解释）<br>对于递推式中的T[i][k][1]，在第i天能采取的行动只有休息和买，因为我们在一天结束时手中只有一只股票。T[i-1][k][1]是当采取行动休息时的最大利润，而T[i-1][k-1][0] - prices[i]是当采取购买行为时的最大利润。要注意被允许的最大交易次数会减一，因为在第i天的购买行为会使用掉一次交易次数。</p><p>为了找到最后一天结束时的最大利润，我们能够简化循环通过数组prices并且通过上面的递推关系式更新T[i][k][0]和T[i][k][1]。最终的答案是T[i][k][0]（我们总是有更大的利润如果我们以手中0只股票结束）</p><h2 id="II-–-对特殊情况的应用"><a href="#II-–-对特殊情况的应用" class="headerlink" title="II – 对特殊情况的应用"></a>II – 对特殊情况的应用</h2><p>前面提及的六种股票问题能够被k的值分类，k是被允许的最大交易次数（最后两个也有额外的要求例如冷却期或者交易费）。我会一个接一个的把通用解应用到这些问题上。</p><h3 id="情况I：k-1"><a href="#情况I：k-1" class="headerlink" title="情况I：k=1"></a>情况I：k=1</h3><p>对于这个情况，我们在每天都真的有两个未知变量：T[i][1][0]和T[i][1][1]，递推关系式表示：</p><pre><code>T[i][1][0] = max(T[i-1][1][0], T[i-1][1][1] + prices[i])T[i][1][1] = max(T[i-1][1][1], T[i-1][0][0] - prices[i]) = max(T[i-1][1][1], -prices[i])</code></pre><p>在第二个方程中我们充分利用了基准情况T[i][0][0]=0。<br>很容易直接写出O(n)时间复杂度和O(n)空间复杂度的解，基于上面的两个方程。可是，如果你注意到在第i天的最大利润事实上只依赖于那些在第i-1天的利润，<br>那么空间复杂度降为O(1)。这是空间最优的解法：</p><pre><code>public int maxProfit(int[] prices){    int T_i10=0,T_i11=Integer.MIN_VALUE;    for(int price:prices){        T_i10=Math.max(T_i10,T_i11 + price);        T_i11=Math.max(T_i11,-price);    }    return T_i10;}</code></pre><h3 id="情况-II-k-Infinity"><a href="#情况-II-k-Infinity" class="headerlink" title="情况 II: k=+Infinity"></a>情况 II: k=+Infinity</h3><p>如果k是正无穷的，那么在k和k-1之间没有任何真正区别，暗示了T[i-1][k-1][0] = T[i-1][k][0]和T[i-1][k-1][1] = T[i-1][k][1]，因此我们仍然在每天有两个未知变量：T[i][k][0]和T[i][k][1]，k=+Infinity,递推关系式如下：</p><pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])T[i][k][1] = max(T[i-1][k][1], T[i-1][k-1][0] - prices[i]) = max(T[i-1][k][1], T[i-1][k][0] - prices[i])</code></pre><p>在第二个方程中我们会充分利用T[i-1][k-1][0] = T[i-1][k][0]，O(n)时间复杂度和O(1)空间复杂度的解法如下：</p><pre><code>public int maxProfit(int[] prices) {    int T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;    for (int price : prices) {        int T_ik0_old = T_ik0;        T_ik0 = Math.max(T_ik0, T_ik1 + price);        T_ik1 = Math.max(T_ik1, T_ik0_old - price);    }    return T_ik0;}</code></pre><p>(注意: 旧值缓存的T_ik0,是变量T_ik0_old,是不可能的，特别感谢0x0101和elvina澄清这一点）</p><p>这个解法提出了一种贪心的策略来获取最大利润：只要可能，在每个最小值出买股票然后在下一个局部最大值时迅速卖出。这等同于在prices中找到递增子序列，在每个子序列中的开头买入，在每个子序列的结尾卖出。这很容易展示这等同于只要有利可图时就积累利润，如<a href="https://discuss.leetcode.com/topic/726/is-this-question-a-joke中提到的。" target="_blank" rel="noopener">https://discuss.leetcode.com/topic/726/is-this-question-a-joke中提到的。</a></p><h3 id="情况-III-k-2"><a href="#情况-III-k-2" class="headerlink" title="情况 III: k=2"></a>情况 III: k=2</h3><p>与k=1的情况类似，除了现在我们每天有四个而不是两个变量：T[i][1][0], T[i][1][1], T[i][2][0], T[i][2][1]，递推关系式如下：</p><pre><code>T[i][2][0] = max(T[i-1][2][0], T[i-1][2][1] + prices[i])T[i][2][1] = max(T[i-1][2][1], T[i-1][1][0] - prices[i])T[i][1][0] = max(T[i-1][1][0], T[i-1][1][1] + prices[i])T[i][1][1] = max(T[i-1][1][1], -prices[i])</code></pre><p>在最后一个方程中我们充分利用了基准情况T[i][0][0]=0，下列解有O(n)的空间复杂度和O(1)</p><pre><code>public int maxProfit(int[] prices) {    int T_i10 = 0, T_i11 = Integer.MIN_VALUE, T_i20 = 0, T_i21 = Integer.MIN_VALUE;    for (int price : prices) {        T_i20 = Math.max(T_i20, T_i21 + price);        T_i21 = Math.max(T_i21, T_i10 - price);        T_i10 = Math.max(T_i10, T_i11 + price);        T_i11 = Math.max(T_i11, -price);    }    return T_i20;}</code></pre><h3 id="情况-IV：-k是任意的"><a href="#情况-IV：-k是任意的" class="headerlink" title="情况 IV： k是任意的"></a>情况 IV： k是任意的</h3><p>这是最通用的情况所以在每天我们都需要更新所有的有不同k值的最大利润对应在每天结尾时我们手中有0或1只股票。</p><p>可是，有一个微小的优化我们能够做的是如果k超出了一些临界值，超出了最大的利润不再依赖于允许交易的次数而是被可获得的股票数量限制（prices数组的长度），让我们计算出临界值会是什么。</p><p>一个获利交易花费至少两天（一天买另一天卖，买入价格不少于卖出价格)，如果prices数组的长度是n，最大的获利交易数量是n/2，在这之后没有可能的获益交易，<br>这暗示着最大的利润会保持不变。</p><p>因此，临界k值是n/2，如果给定的k值不小于这个值的时候，换句话说，k&gt;=n/2，我们能够把k拓展到正无穷，问题等价于情况II。</p><p>下列是时间复杂度为O(kn)，空间复杂度O(k)的解，没有优化，代码能够满足大K值时的时间约束。</p><pre><code>public int maxProfit(int k, int[] prices) {    if (k &gt;= prices.length &gt;&gt;&gt; 1) {    int T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;    for (int price : prices) {    int T_ik0_old = T_ik0;    T_ik0 = Math.max(T_ik0, T_ik1 + price);    T_ik1 = Math.max(T_ik1, T_ik0_old - price);    }    return T_ik0;}    int[] T_ik0 = new int[k + 1];    int[] T_ik1 = new int[k + 1];    Arrays.fill(T_ik1, Integer.MIN_VALUE);    for (int price : prices) {        for (int j = k; j &gt; 0; j--) {            T_ik0[j] = Math.max(T_ik0[j], T_ik1[j] + price);            T_ik1[j] = Math.max(T_ik1[j], T_ik0[j - 1] - price);        }    }    return T_ik0[k];}</code></pre><p>解法类似于<a href="https://discuss.leetcode.com/topic/8984/a-concise-dp-solution-in-java帖子中的解法，这里我使用了T数组的反向循环来避免使用临时变量。它也被证明不使用临时变量做前向循环也是可能的。" target="_blank" rel="noopener">https://discuss.leetcode.com/topic/8984/a-concise-dp-solution-in-java帖子中的解法，这里我使用了T数组的反向循环来避免使用临时变量。它也被证明不使用临时变量做前向循环也是可能的。</a></p><h3 id="情况-V：k-Infinity-有冷却期"><a href="#情况-V：k-Infinity-有冷却期" class="headerlink" title="情况 V：k=+Infinity 有冷却期"></a>情况 V：k=+Infinity 有冷却期</h3><p>这个例子相似于情况II更多是由于他们有同样的k值，除了递推式需要简单的修改来满足冷却期的要求。情况II中给出的原始递推式是：</p><pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])T[i][k][1] = max(T[i-1][k][1], T[i-1][k][0] - prices[i])</code></pre><p>  但是由于冷却期，我们不能在第i天买入股票如果在第i-1天股票被卖出，因此，在上面的第二个方程中，我们事实上应该用T[i-2][k][0]而不是T[i-1][k][0]<br>如果我们打算在第i天买。其他所有都保持不变并且新的递推式是：</p><pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])T[i][k][1] = max(T[i-1][k][1], T[i-2][k][0] - prices[i])</code></pre><p>下面是O（n）时间复杂度和O（1）空间复杂度的解法：</p><pre><code>public int maxProfit(int[] prices) {    int T_ik0_pre = 0, T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;    for (int price : prices) {        int T_ik0_old = T_ik0;        T_ik0 = Math.max(T_ik0, T_ik1 + price);        T_ik1 = Math.max(T_ik1, T_ik0_pre - price);        T_ik0_pre = T_ik0_old;    }    return T_ik0;}</code></pre><p>dietpepsi分享了一种非常好的解法，被证明和上述方法相同<a href="https://discuss.leetcode.com/topic/30421/share-my-thinking-process" target="_blank" rel="noopener">https://discuss.leetcode.com/topic/30421/share-my-thinking-process</a></p><h3 id="情况-VI-k-Infinity-但有交易费用"><a href="#情况-VI-k-Infinity-但有交易费用" class="headerlink" title="情况 VI:k=+Infinity 但有交易费用"></a>情况 VI:k=+Infinity 但有交易费用</h3><p>再一次的这个例子等同于情况ＩＩ因为它们有同样的ｋ值，除了现在的递推关系式需要轻微修改来满足交易费的要求。情况ＩＩ给出的原始递推关系式如下：</p><pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])T[i][k][1] = max(T[i-1][k][1], T[i-1][k][0] - prices[i])</code></pre><p>因为现在我们需要为每次的交易行为付费，在第ｉ天的购买和出售股票获利中应该减去这个值，因此新的递推关系式应该为下面的任意一种：</p><pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])T[i][k][1] = max(T[i-1][k][1], T[i-1][k][0] - prices[i] - fee)</code></pre><p>或</p><pre><code>T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i] - fee)T[i][k][1] = max(T[i-1][k][1], T[i-1][k][0] - prices[i])</code></pre><p>注意当我们减去费用时我们有两个选项，这是因为每次交易都会表征为两个成对出现的行为－－买和卖<br>费用能够被支付当我们买股票（第一组方程）或当我们卖股票（第二组方程），下列是Ｏ(n)时间复杂度和Ｏ(1)空间复杂度的解法对应于这两项选择，第二个解法我们需要注意可能的溢出。</p><h4 id="解法I－－当买入股票时支付交易费"><a href="#解法I－－当买入股票时支付交易费" class="headerlink" title="解法I－－当买入股票时支付交易费"></a>解法I－－当买入股票时支付交易费</h4><pre><code>public int maxProfit(int[] prices, int fee) {    int T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;    for (int price : prices) {        int T_ik0_old = T_ik0;        T_ik0 = Math.max(T_ik0, T_ik1 + price);        T_ik1 = Math.max(T_ik1, T_ik0_old - price - fee);    }    return T_ik0;}</code></pre><h4 id="解法II－－当售出股票时支付交易费"><a href="#解法II－－当售出股票时支付交易费" class="headerlink" title="解法II－－当售出股票时支付交易费"></a>解法II－－当售出股票时支付交易费</h4><pre><code>public int maxProfit(int[] prices, int fee) {    long T_ik0 = 0, T_ik1 = Integer.MIN_VALUE;    for (int price : prices) {        long T_ik0_old = T_ik0;        T_ik0 = Math.max(T_ik0, T_ik1 + price - fee);        T_ik1 = Math.max(T_ik1, T_ik0_old - price);    }    return (int)T_ik0;}</code></pre><h1 id="III延伸拓展"><a href="#III延伸拓展" class="headerlink" title="III延伸拓展"></a>III延伸拓展</h1><p>在121. Best Time to Buy and Sell Stock中也可以将其转换成求最大子列和的问题，对于原数组，如果我们将arr[i]-arr[i-1]，也就是股票某日与前一日价格差，依次排列成一个数组，那么所求问题的答案就变成了求这个新数组的最大子列和。</p><p>在求解最大子列和问题时，使用Kadane算法。算法复杂度O（N）,kadane算法利用了数学归纳法的思想。简而言之，给定一个现成的数组，比如说−2, 1, −3, 4, −1, 2, 1, −5, 4，求其中的最大子列和，并不是容易的事情。但如果我们能从第一个数开始，随着数组的扩充，始终对其最大子列和保持跟踪，就可以求出任意一个数组的最大子列和。</p><p>详细的分析一下，往一个长度为i的数组后面插入第i+1个数，这时，数组的最大子列只有两种情况，要么包括第i+1个数，要么不包括第i+1个数。</p><p>即：<br>maxsubarraum = max(以第i+1个数结尾的子列和， 不以第i+1个数结尾的子列和)。</p><p>先计算前者，以第i+1个数结尾的子列和怎么算呢？很简单，要么它是以第i个数结尾的子列作为前缀，要么它不以之作为前缀。假设第i+1个数为x，那么：<br>以第i+1个数结尾的子列和 = max（x，以第i个数结尾的子列和+x)。</p><p>对于kadane算法的扩展还可以见于<code>hihocoder#1800 : 玩具设计师</code>一题中求二维数组的最大矩形和</p><h1 id="IV－－总结"><a href="#IV－－总结" class="headerlink" title="IV－－总结"></a>IV－－总结</h1><p> 总之，最通用的股票问题解法能够被表征为三个因素，ｉ天的序号，最大允许的交易次数ｋ和每天结束后我们手中持有的股票数。</p><p>上文已经展示了最大利润和他们终止情况的递推式，Ｏ(nk)时间复杂度和Ｏ(k)空间复杂度。结果被依次应用于六个例子，后两个由于额外的要求做了轻微的修改。<a href="https://discuss.leetcode.com/user/peterleetcode也介绍了一个很好的解法对于任意k值通用。如果有兴趣可以继续看一下。" target="_blank" rel="noopener">https://discuss.leetcode.com/user/peterleetcode也介绍了一个很好的解法对于任意k值通用。如果有兴趣可以继续看一下。</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="354-Russian-Doll-Envelopes俄罗斯套娃"><a href="#354-Russian-Doll-Envelopes俄罗斯套娃" class="headerlink" title="354. Russian Doll Envelopes俄罗斯套娃"></a>354. Russian Doll Envelopes俄罗斯套娃</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p><p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p><a id="more"></a><p>说明:<br>不允许旋转信封。</p><p>示例:</p><p>输入: envelopes = [[5,4],[6,4],[6,7],[2,3]]<br>输出: 3<br>解释: 最多信封的个数为 3, 组合为: [2,3] =&gt; [5,4] =&gt; [6,7]。</p><h2 id="动态规划解法"><a href="#动态规划解法" class="headerlink" title="动态规划解法"></a>动态规划解法</h2><p>这道题给了我们一堆大小不一的信封，让我们像套俄罗斯娃娃那样把这些信封都给套起来，这道题实际上是之前那道Longest Increasing Subsequence的具体应用，而且难度增加了，从一维变成了两维，但是万变不离其宗，解法还是一样的，首先来看DP的解法，这是一种brute force的解法，首先要给所有的信封按从小到大排序，首先根据宽度从小到大排，如果宽度相同，那么高度小的再前面，这是STL里面sort的默认排法，所以我们不用写其他的comparator，直接排就可以了，然后我们开始遍历，对于每一个信封，我们都遍历其前面所有的信封，如果当前信封的长和宽都比前面那个信封的大，那么我们更新dp数组，通过dp[i] = max(dp[i], dp[j] + 1)。然后我们每遍历完一个信封，都更新一下结果res，参见代码如下；</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        int res=0,n=envelopes.size();        vector&lt;int&gt; dp(n,1);        sort(envelopes.begin(),envelopes.end());        for(int i=0;i&lt;n;i++){            for(int j=0;j&lt;i;j++){                if(envelopes[i].first&gt;envelopes[j].first &amp;&amp; envelopes[i].second&gt; envelopes[j].second){                    dp[i]=max(dp[i],dp[j]+1);                }            }            res=max(res,dp[i]);        }        return res;    }};</code></pre><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><p>可以使用二分查找法来优化速度，我们首先要做的还是给信封排序，但是这次排序和上面有些不同，信封的宽度还是从小到大排，但是宽度相等时，我们让高度大的在前面。那么现在问题就简化了成了找高度数字中的LIS，完全就和之前那道Longest Increasing Subsequence一样了，所以我们还是使用之前那题解法来做，参见代码如下：</p><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {              vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,const pair&lt;int,int&gt; &amp;b){            if(a.first==b.first) return a.second&gt; b.second;            return a.first &lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            int left=0,right=dp.size(),t=envelopes[i].second;            while(left&lt;right){                int mid=left+(right-left)/2;                if(dp[mid]&lt; t) left=mid+1;                else right=mid;            }            if(right&gt;=dp.size()) dp.push_back(t);            else dp[right]=t;        }        return dp.size();    }};</code></pre><h2 id="使用STL函数lower-bound的二分查找法"><a href="#使用STL函数lower-bound的二分查找法" class="headerlink" title="使用STL函数lower_bound的二分查找法"></a>使用STL函数lower_bound的二分查找法</h2><pre><code>class Solution {public:    int maxEnvelopes(vector&lt;pair&lt;int, int&gt;&gt;&amp; envelopes) {        vector&lt;int&gt; dp;        sort(envelopes.begin(),envelopes.end(),[](const pair&lt;int,int&gt; &amp;a,cosnt pair&lt;int,int&gt; &amp;b){           if(a.first==b.first) return a.second&gt;b.second;            return a.first&lt;b.first;        });        for(int i=0;i&lt;envelopes.size();i++){            auto it=lower_bound(dp.begin(),dp.end(),enveloeps[i].second);            if(it==dp.end()) dp.push_back(envelopes[i].second);            else *it=envelopes[i].second;        }        return dp.size();    }};</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;股票交易问题通解小结&quot;&gt;&lt;a href=&quot;#股票交易问题通解小结&quot; class=&quot;headerlink&quot; title=&quot;股票交易问题通解小结&quot;&gt;&lt;/a&gt;股票交易问题通解小结&lt;/h1&gt;&lt;p&gt;本文的主要部分来自于leetcode讨论区,后面加上了一点个人的理解和扩展延伸，Leetcode中的股票交易问题共有下列几道：&lt;/p&gt;
+      &lt;h1 id=&quot;354-Russian-Doll-Envelopes俄罗斯套娃&quot;&gt;&lt;a href=&quot;#354-Russian-Doll-Envelopes俄罗斯套娃&quot; class=&quot;headerlink&quot; title=&quot;354. Russian Doll Envelopes俄罗斯套娃&quot;&gt;&lt;/a&gt;354. Russian Doll Envelopes俄罗斯套娃&lt;/h1&gt;&lt;p&gt;给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。&lt;/p&gt;
+&lt;p&gt;请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。&lt;/p&gt;
     
     </summary>
     
@@ -519,7 +517,7 @@
     
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+      <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
   </entry>
   
