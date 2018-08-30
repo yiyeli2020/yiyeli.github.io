@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>300. Longest Increasing Subsequence最长上升子序列 | Yiye Li</title>
+  <title>数据库基础概念I | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="300. Longest Increasing Subsequence最长上升子序列给定一个无序的整数数组，找到其中最长上升子序列的长度。">
-<meta name="keywords" content="LeetCode,Dynamic Programming,Binary Search">
+  <meta name="description" content="数据库基础概念I总结数据库基础概念">
+<meta name="keywords" content="Database">
 <meta property="og:type" content="article">
-<meta property="og:title" content="300. Longest Increasing Subsequence最长上升子序列">
-<meta property="og:url" content="http://yoursite.com/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/index.html">
+<meta property="og:title" content="数据库基础概念I">
+<meta property="og:url" content="http://yoursite.com/2018/08/24/数据库基础概念I/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="300. Longest Increasing Subsequence最长上升子序列给定一个无序的整数数组，找到其中最长上升子序列的长度。">
+<meta property="og:description" content="数据库基础概念I总结数据库基础概念">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-24T07:08:41.770Z">
+<meta property="og:updated_time" content="2018-08-29T12:04:46.477Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="300. Longest Increasing Subsequence最长上升子序列">
-<meta name="twitter:description" content="300. Longest Increasing Subsequence最长上升子序列给定一个无序的整数数组，找到其中最长上升子序列的长度。">
+<meta name="twitter:title" content="数据库基础概念I">
+<meta name="twitter:description" content="数据库基础概念I总结数据库基础概念">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -214,11 +214,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-300. Longest Increasing Subsequence最长上升子序列" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据库基础概念I" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/" class="article-date">
-      <time datetime="2018-08-22T12:30:12.000Z" itemprop="datePublished">2018-08-22</time>
+      <a href="/2018/08/24/数据库基础概念I/" class="article-date">
+      <time datetime="2018-08-24T02:08:12.000Z" itemprop="datePublished">2018-08-24</time>
 </a>
     </div>
   
@@ -231,7 +231,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      300. Longest Increasing Subsequence最长上升子序列
+      数据库基础概念I
     </h1>
   
 
@@ -246,7 +246,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search/">Binary Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -256,79 +256,36 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="300-Longest-Increasing-Subsequence最长上升子序列"><a href="#300-Longest-Increasing-Subsequence最长上升子序列" class="headerlink" title="300. Longest Increasing Subsequence最长上升子序列"></a>300. Longest Increasing Subsequence最长上升子序列</h1><p>给定一个无序的整数数组，找到其中最长上升子序列的长度。</p>
+        <h1 id="数据库基础概念I"><a href="#数据库基础概念I" class="headerlink" title="数据库基础概念I"></a>数据库基础概念I</h1><p>总结数据库基础概念</p>
 <a id="more"></a>
-<p>示例:</p>
-<p>输入:<br>    [10,9,2,5,3,7,101,18]</p>
-<p>输出: 4 </p>
-<p>解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。</p>
-<p>说明:</p>
-<p>可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。<br>你算法的时间复杂度应该为 O(n2) 。</p>
-<p>进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?</p>
-<h2 id="动态规划解法："><a href="#动态规划解法：" class="headerlink" title="动态规划解法："></a>动态规划解法：</h2><p>首先来看一种动态规划Dynamic Programming的解法，这种解法的时间复杂度为O(n^2)，类似brute force的解法，我们维护一个一维dp数组，其中dp[i]表示以nums[i]为结尾的最长递增子串的长度，对于每一个nums[i]，我们从第一个数再搜索到i，如果发现某个数小于nums[i]，我们更新dp[i]，更新方法为dp[i] = max(dp[i], dp[j] + 1)，即比较当前dp[i]的值和那个小于num[i]的数的dp值加1的大小，我们就这样不断的更新dp数组，到最后dp数组中最大的值就是我们要返回的LIS的长度，参见代码如下：</p>
-<pre><code>class Solution {
-public:
-    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {
-        vector&lt;int&gt; dp(nums.size(),1);
-        int res=0;
-        for(int i=0;i&lt;nums.size();i++){
-            for(int j=0;j&lt;i;j++){
-                if(nums[i]&gt;nums[j]){
-                    dp[i]=max(dp[i],dp[j]+1);
-                }
-            }
-            res=max(res,dp[i]);
-        }
-        return res;
-    }
-};
-</code></pre><h2 id="进阶：二分查找法"><a href="#进阶：二分查找法" class="headerlink" title="进阶：二分查找法"></a>进阶：二分查找法</h2><p>我们来看一种思路更清晰的二分查找法，跟上面那种方法很类似，思路是先建立一个空的dp数组，然后开始遍历原数组，对于每一个遍历到的数字，我们用二分查找法在dp数组找第一个不小于它的数字，如果这个数字不存在，那么直接在dp数组后面加上遍历到的数字，如果存在，则将这个数字更新为当前遍历到的数字，最后返回dp数字的长度即可.</p>
-<p>特别注意的是dp数组的值可能不是一个真实的LIS。{4， 2， 4， 5， 3， 7}，那么算完后的ends数组为{2， 3， 5， 7}，可以发现它不是一个原数组的LIS，只是长度相等而已参见代码如下：</p>
-<pre><code>class Solution {
-public:
-    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {
-        vector&lt;int&gt; dp;
-        for(int i=0;i&lt;nums.size();i++){
-            int left=0,right=dp.size();
-            while(left&lt;right){
-                int mid=left+(right-left)/2;
-                if(dp[mid]&lt;nums[i]) left=mid+1;
-                else right=mid;
-            }
-            if(right&gt;=dp.size()) dp.push_back(nums[i]);
-            else dp[right]=nums[i];
-        }
-        return dp.size();
-    }
-};
-</code></pre><h2 id="进阶：利用lowerbound函数的二分查找法"><a href="#进阶：利用lowerbound函数的二分查找法" class="headerlink" title="进阶：利用lowerbound函数的二分查找法"></a>进阶：利用lowerbound函数的二分查找法</h2><p>还有一种比较tricky的二分查找法，利用到了C++中STL的lower_bound函数，lower_bound返回数组中第一个不小于指定值的元素，跟上面的算法类似，我们还需要一个一维数组v，然后对于遍历到的nums中每一个元素，找其lower_bound，如果没有lower_bound，说明新元素比一维数组的尾元素还要大，直接添加到数组v中，跟之前解法的思路相同了。如果有lower_bound，说明新元素不是最大的，将其lower_bound替换为新元素，这个过程跟之前解法的二分查找法的部分实现相同功能，最后也是返回数组v的长度，注意数组v也不一定是真实的LIS，参见代码如下：</p>
-<pre><code>class Solution {
-public:
-    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {
-        vector&lt;int&gt; dp;
-        for(auto n:nums){
-            auto it=lower_bound(dp.begin(),dp.end(),n);
-            if(it == dp.end()) dp.push_back(n);
-            else *it=n;
-        }
-        return dp.size();
-    }
-};
-</code></pre><h2 id="进阶：利用upperbound函数的二分查找法"><a href="#进阶：利用upperbound函数的二分查找法" class="headerlink" title="进阶：利用upperbound函数的二分查找法"></a>进阶：利用upperbound函数的二分查找法</h2><p>upper_bound是返回数组中第一个大于指定值的元素，和lower_bound的区别时，它不能返回和指定值相等的元素，那么当新进来的数和数组中尾元素一样大时，upper_bound无法返回这个元素，那么按之前算法的处理方法是加到数组中，这样就不是严格的递增子串了，所以我们要做个处理，在处理每个新进来的元素时，先判断数组v中有无此元素，有的话直接跳过，这样就避免了相同数字的情况，参见代码如下：</p>
-<pre><code>class Solution {
-public:
-    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {
-        vector&lt;int&gt; dp;
-        for(auto n:nums){
-            if(find(dp.begin(),dp.end(),n)!=dp.end()) continue;
-            auto it=upper_bound(dp.begin(),dp.end(),n);
-            if(it==dp.end()) dp.push_back(n);
-            else *it=n;
-        }
-        return dp.size();
-    }
-};
-</code></pre>
+<h2 id="（一）什么是存储过程？有哪些优缺点？"><a href="#（一）什么是存储过程？有哪些优缺点？" class="headerlink" title="（一）什么是存储过程？有哪些优缺点？"></a>（一）什么是存储过程？有哪些优缺点？</h2><p>存储过程是一些预编译的SQL语句。</p>
+<p>更加直白的理解：存储过程可以说是一个记录集，它是由一些T-SQL语句组成的代码块，这些T-SQL语句代码像一个方法一样实现一些功能（对单表或多表的增删改查），然后再给这个代码块取一个名字，在用到这个功能的时候调用他就行了。</p>
+<p>存储过程是一个预编译的代码块，执行效率比较高<br>一个存储过程替代大量T_SQL语句 ，可以降低网络通信量，提高通信速率<br>可以一定程度上确保数据安全<br>如果你对存储过程不熟悉，建议阅读：<a href="http://www.cnblogs.com/knowledgesea/archive/2013/01/02/2841588.html" target="_blank" rel="noopener">存储过程详解-博客园</a></p>
+<h2 id="（二）索引是什么？有什么作用以及优缺点？"><a href="#（二）索引是什么？有什么作用以及优缺点？" class="headerlink" title="（二）索引是什么？有什么作用以及优缺点？"></a>（二）索引是什么？有什么作用以及优缺点？</h2><p>索引是对数据库表中一或多个列的值进行排序的结构，是帮助MySQL高效获取数据的数据结构</p>
+<p>你也可以这样理解：索引就是加快检索表中数据的方法。数据库的索引类似于书籍的索引。在书籍中，索引允许用户不必翻阅完整个书就能迅速地找到所需要的信息。在数据库中，索引也允许数据库程序迅速地找到表中的数据，而不必扫描整个数据库。</p>
+<p>MySQL数据库几个基本的索引类型：普通索引、唯一索引、主键索引、全文索引</p>
+<p>索引加快数据库的检索速度<br>索引降低了插入、删除、修改等维护任务的速度<br>唯一索引可以确保每一行数据的唯一性<br>通过使用索引，可以在查询的过程中使用优化隐藏器，提高 系统的性能<br>索引需要占物理和数据空间<br>如果你对索引还不太熟悉，建议阅读：<a href="https://kb.cnblogs.com/page/45712/" target="_blank" rel="noopener">漫谈数据库索引</a></p>
+<h2 id="（三）什么是事务？"><a href="#（三）什么是事务？" class="headerlink" title="（三）什么是事务？"></a>（三）什么是事务？</h2><p>事务（Transaction）是并发控制的基本单位。所谓的事务，它是一个操作序列，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。事务是数据库维护数据一致性的单位，在每个事务结束时，都能保持数据一致性。</p>
+<p>如果你对索引还不太熟悉，建议阅读：<a href="https://blog.csdn.net/zdwzzu2006/article/details/5947062" target="_blank" rel="noopener">数据库事务 - Mr. David 专栏</a></p>
+<h2 id="（四）数据库的乐观锁和悲观锁是什么？"><a href="#（四）数据库的乐观锁和悲观锁是什么？" class="headerlink" title="（四）数据库的乐观锁和悲观锁是什么？"></a>（四）数据库的乐观锁和悲观锁是什么？</h2><p>数据库管理系统（DBMS）中的并发控制的任务是确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性。</p>
+<p>乐观并发控制(乐观锁)和悲观并发控制（悲观锁）是并发控制主要采用的技术手段。</p>
+<p>悲观锁：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作<br>乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。<br>如果你对两种锁还不太熟悉，建议阅读：<a href="http://www.open-open.com/lib/view/open1452046967245.html" target="_blank" rel="noopener">深入理解乐观锁与悲观锁</a></p>
+<h2 id="（五）-使用索引查询一定能提高查询的性能吗？为什么"><a href="#（五）-使用索引查询一定能提高查询的性能吗？为什么" class="headerlink" title="（五） 使用索引查询一定能提高查询的性能吗？为什么"></a>（五） 使用索引查询一定能提高查询的性能吗？为什么</h2><p>通常,通过索引查询数据比全表扫描要快.但是我们也必须注意到它的代价.</p>
+<p>索引需要空间来存储,也需要定期维护, 每当有记录在表中增减或索引列被修改时,索引本身也会被修改. 这意味着每条记录的INSERT,DELETE,UPDATE将为此多付出4,5 次的磁盘I/O. 因为索引需要额外的存储空间和处理,那些不必要的索引反而会使查询反应时间变慢.使用索引查询不一定能提高查询性能,索引范围查询(INDEX RANGE SCAN)适用于两种情况:</p>
+<p>基于一个范围的检索,一般查询返回结果集小于表中记录数的30%<br>基于非唯一性索引的检索</p>
+<h2 id="（六）简单说一说drop、delete与truncate的区别"><a href="#（六）简单说一说drop、delete与truncate的区别" class="headerlink" title="（六）简单说一说drop、delete与truncate的区别"></a>（六）简单说一说drop、delete与truncate的区别</h2><p>SQL中的drop、delete、truncate都表示删除，但是三者有一些差别</p>
+<p>delete和truncate只删除表的数据不删除表的结构<br>速度,一般来说: drop&gt; truncate &gt;delete<br>delete语句是dml,这个操作会放到rollback segement中,事务提交之后才生效;<br>如果有相应的trigger,执行的时候将被触发. truncate,drop是ddl, 操作立即生效,原数据不放到rollback segment中,不能回滚. 操作不触发trigger.<br>如果你对这三者的用法还不太熟悉，建议阅读： <a href="https://blog.csdn.net/ws0513/article/details/49980547" target="_blank" rel="noopener">drop、truncate和delete的区别</a></p>
+<h2 id="（七）drop、delete与truncate分别在什么场景之下使用？"><a href="#（七）drop、delete与truncate分别在什么场景之下使用？" class="headerlink" title="（七）drop、delete与truncate分别在什么场景之下使用？"></a>（七）drop、delete与truncate分别在什么场景之下使用？</h2><p>不再需要一张表的时候，用drop<br>想删除部分数据行时候，用delete，并且带上where子句<br>保留表而删除所有数据的时候用truncate</p>
+<h2 id="（八）-超键、候选键、主键、外键分别是什么？"><a href="#（八）-超键、候选键、主键、外键分别是什么？" class="headerlink" title="（八） 超键、候选键、主键、外键分别是什么？"></a>（八） 超键、候选键、主键、外键分别是什么？</h2><p>超键：在关系中能唯一标识元组的属性集称为关系模式的超键。一个属性可以为作为一个超键，多个属性组合在一起也可以作为一个超键。超键包含候选键和主键。</p>
+<p>候选键：是最小超键，即没有冗余元素的超键。</p>
+<p>主键：数据库表中对储存数据对象予以唯一和完整标识的数据列或属性的组合。一个数据列只能有一个主键，且主键的取值不能缺失，即不能为空值（Null）。</p>
+<p>外键：在一个表中存在的另一个表的主键称此表的外键。</p>
+<h2 id="（九）什么是视图？以及视图的使用场景有哪些？"><a href="#（九）什么是视图？以及视图的使用场景有哪些？" class="headerlink" title="（九）什么是视图？以及视图的使用场景有哪些？"></a>（九）什么是视图？以及视图的使用场景有哪些？</h2><p>视图是一种虚拟的表，具有和物理表相同的功能。可以对视图进行增，改，查，操作，试图通常是有一个表或者多个表的行或列的子集。对视图的修改不影响基本表。它使得我们获取数据更容易，相比多表查询。</p>
+<p>只暴露部分字段给访问者，所以就建一个虚表，就是视图。<br>查询的数据来源于不同的表，而查询者希望以统一的方式查询，这样也可以建立一个视图，把多个表查询结果联合起来，查询者只需要直接从视图中获取数据，不必考虑数据来源于不同表所带来的差异</p>
+<h2 id="（十）说一说三个范式。"><a href="#（十）说一说三个范式。" class="headerlink" title="（十）说一说三个范式。"></a>（十）说一说三个范式。</h2><p>第一范式（1NF）：数据库表中的字段都是单一属性的，不可再分。这个单一属性由基本类型构成，包括整型、实数、字符型、逻辑型、日期型等。</p>
+<p>第二范式（2NF）：数据库表中不存在非关键字段对任一候选关键字段的部分函数依赖（部分函数依赖指的是存在组合关键字中的某些字段决定非关键字段的情况），也即所有非关键字段都完全依赖于任意一组候选关键字。<br>第三范式（3NF）：在第二范式的基础上，数据表中如果不存在非关键字段对任一候选关键字段的传递函数依赖则符合第三范式。所谓传递函数依赖，指的是如 果存在”A → B → C”的决定关系，则C传递函数依赖于A。因此，满足第三范式的数据库表应该不存在如下依赖关系： 关键字段 → 非关键字段 x → 非关键字段y</p>
+<p>如果你对三个还不太了解，建议阅读：<a href="https://www.zhihu.com/question/24696366" target="_blank" rel="noopener">解释一下关系数据库的第一第二第三范式？</a></p>
+
       
       
         <div class="page-reward">
@@ -383,13 +340,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月22日 - 20时30分</p>
-        <p><span>最后更新:</span>2018年08月24日 - 15时08分</p>
+        <p><span>发布时间:</span>2018年08月24日 - 10时08分</p>
+        <p><span>最后更新:</span>2018年08月29日 - 20时04分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/" title="300. Longest Increasing Subsequence最长上升子序列">http://yoursite.com/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/24/数据库基础概念I/" title="数据库基础概念I">http://yoursite.com/2018/08/24/数据库基础概念I/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/24/数据库基础概念I/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -402,18 +359,18 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/08/23/剑指Offer59.对称的二叉树/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/08/24/885. Spiral Matrix III/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          59.SymmetricalBinaryTree对称的二叉树(CodingInterview)
+          885. Spiral Matrix III螺旋矩阵 III
         
       </div>
     </a>
   
   
-    <a href="/2018/08/22/剑指Offer64.数据流中的中位数/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">64.StreamMedian数据流中的中位数(Coding Interviews )</div>
+    <a href="/2018/08/24/计算机网络概念I/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">计算机网络概念I</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -424,7 +381,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#300-Longest-Increasing-Subsequence最长上升子序列"><span class="toc-number">1.</span> <span class="toc-text">300. Longest Increasing Subsequence最长上升子序列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态规划解法："><span class="toc-number">1.1.</span> <span class="toc-text">动态规划解法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶：二分查找法"><span class="toc-number">1.2.</span> <span class="toc-text">进阶：二分查找法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶：利用lowerbound函数的二分查找法"><span class="toc-number">1.3.</span> <span class="toc-text">进阶：利用lowerbound函数的二分查找法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶：利用upperbound函数的二分查找法"><span class="toc-number">1.4.</span> <span class="toc-text">进阶：利用upperbound函数的二分查找法</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库基础概念I"><span class="toc-number">1.</span> <span class="toc-text">数据库基础概念I</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（一）什么是存储过程？有哪些优缺点？"><span class="toc-number">1.1.</span> <span class="toc-text">（一）什么是存储过程？有哪些优缺点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（二）索引是什么？有什么作用以及优缺点？"><span class="toc-number">1.2.</span> <span class="toc-text">（二）索引是什么？有什么作用以及优缺点？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（三）什么是事务？"><span class="toc-number">1.3.</span> <span class="toc-text">（三）什么是事务？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（四）数据库的乐观锁和悲观锁是什么？"><span class="toc-number">1.4.</span> <span class="toc-text">（四）数据库的乐观锁和悲观锁是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（五）-使用索引查询一定能提高查询的性能吗？为什么"><span class="toc-number">1.5.</span> <span class="toc-text">（五） 使用索引查询一定能提高查询的性能吗？为什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（六）简单说一说drop、delete与truncate的区别"><span class="toc-number">1.6.</span> <span class="toc-text">（六）简单说一说drop、delete与truncate的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（七）drop、delete与truncate分别在什么场景之下使用？"><span class="toc-number">1.7.</span> <span class="toc-text">（七）drop、delete与truncate分别在什么场景之下使用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（八）-超键、候选键、主键、外键分别是什么？"><span class="toc-number">1.8.</span> <span class="toc-text">（八） 超键、候选键、主键、外键分别是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（九）什么是视图？以及视图的使用场景有哪些？"><span class="toc-number">1.9.</span> <span class="toc-text">（九）什么是视图？以及视图的使用场景有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（十）说一说三个范式。"><span class="toc-number">1.10.</span> <span class="toc-text">（十）说一说三个范式。</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -490,13 +447,13 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/23/剑指Offer59.对称的二叉树/" title="上一篇: 59.SymmetricalBinaryTree对称的二叉树(CodingInterview)">
+            <a href="/2018/08/24/885. Spiral Matrix III/" title="上一篇: 885. Spiral Matrix III螺旋矩阵 III">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/22/剑指Offer64.数据流中的中位数/" title="下一篇: 64.StreamMedian数据流中的中位数(Coding Interviews )">
+            <a href="/2018/08/24/计算机网络概念I/" title="下一篇: 计算机网络概念I">
                 <i class="fa fa-angle-right"></i>
             </a>
         
