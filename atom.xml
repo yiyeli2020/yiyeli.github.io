@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-29T02:41:27.063Z</updated>
+  <updated>2018-08-30T04:45:57.821Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>542. 01 Matrix 01 矩阵</title>
+    <link href="http://yoursite.com/2018/08/30/542.%2001%20Matrix%2001%20%E7%9F%A9%E9%98%B5/"/>
+    <id>http://yoursite.com/2018/08/30/542. 01 Matrix 01 矩阵/</id>
+    <published>2018-08-30T04:45:43.000Z</published>
+    <updated>2018-08-30T04:45:57.821Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="542-01-Matrix-01-矩阵"><a href="#542-01-Matrix-01-矩阵" class="headerlink" title="542. 01 Matrix 01 矩阵"></a>542. 01 Matrix 01 矩阵</h1><p>给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。</p><p>两个相邻元素间的距离为 1 。</p><a id="more"></a><p>示例 1:<br>输入:</p><pre><code>0 0 00 1 00 0 0</code></pre><p>输出:</p><pre><code>0 0 00 1 00 0 0</code></pre><p>示例 2:<br>输入:</p><pre><code>0 0 00 1 01 1 1</code></pre><p>输出:</p><pre><code>0 0 00 1 01 2 1</code></pre><p>注意:</p><p>给定矩阵的元素个数不超过 10000。<br>给定矩阵中至少有一个元素是 0。<br>矩阵中的元素只在四个方向上相邻: 上、下、左、右。</p><h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>计算的距离是<a href="https://baike.baidu.com/item/%E6%9B%BC%E5%93%88%E9%A1%BF%E8%B7%9D%E7%A6%BB/743092?fr=aladdin" target="_blank" rel="noopener">曼哈顿距离</a></p><p>因为这道题是求值为1的点到值为0的区域的最短距离，因为是在图上求最短距离，所以可以用广度优先搜索方法求解，该方法在求最小生成树和迪杰斯特拉最短路径算法的思想中都有体现。本质上是有一个已知最优路线（最优一般指距离最短）区域，这个区域被放进queue中，这道题的这个区域就是0区域，所以一开始要将0区域都找出来，并把它们push进queue里，然后开始BFS，每遇到一个<strong>未访问过的点（matrix[i][j]值为-1）和合法的点（不超过map）</strong>的区域，就将它加一并push进queue中，这样，图map总会被遍历完，而且总是最小值。</p><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; updateMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {        int m=matrix.size();        int n=matrix[0].size();        queue&lt;pair&lt;int,int&gt;&gt; que;        for(int i=0;i&lt;m;i++){            for(int j=0;j&lt;n;j++){                if(matrix[i][j]==0) que.push(make_pair(i,j));                else matrix[i][j]=-1;            }        }        vector&lt;vector&lt;int&gt;&gt; dirs={            {-1,0},            {1,0},            {0,-1},            {0,1}        };        while(!que.empty()){            auto q=que.front();            que.pop();            for(int d=0;d&lt;4;d++){                int r=q.first+dirs[d][0];                int c=q.second+dirs[d][1];                if(r&gt;=0 &amp;&amp; r&lt;m &amp;&amp; c&gt;=0 &amp;&amp; c&lt;n &amp;&amp; matrix[r][c]==-1 ) {                que.push(make_pair(r,c));                matrix[r][c]=matrix[q.first][q.second]+1; //distance++                                                                                             }            }        }        return matrix;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;542-01-Matrix-01-矩阵&quot;&gt;&lt;a href=&quot;#542-01-Matrix-01-矩阵&quot; class=&quot;headerlink&quot; title=&quot;542. 01 Matrix 01 矩阵&quot;&gt;&lt;/a&gt;542. 01 Matrix 01 矩阵&lt;/h1&gt;&lt;p&gt;给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。&lt;/p&gt;
+&lt;p&gt;两个相邻元素间的距离为 1 。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="BFS" scheme="http://yoursite.com/tags/BFS/"/>
+    
+      <category term="DFS" scheme="http://yoursite.com/tags/DFS/"/>
+    
+  </entry>
   
   <entry>
     <title>C++输入总结</title>
@@ -158,11 +185,11 @@
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
       <category term="Kickstart" scheme="http://yoursite.com/tags/Kickstart/"/>
     
       <category term="Google" scheme="http://yoursite.com/tags/Google/"/>
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
   </entry>
   
@@ -218,30 +245,6 @@
   </entry>
   
   <entry>
-    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
-    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
-    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
-    <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T13:02:28.972Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
-    
-  </entry>
-  
-  <entry>
     <title>697. Degree of an Array数组的度</title>
     <link href="http://yoursite.com/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/"/>
     <id>http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</id>
@@ -263,6 +266,30 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
+    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
+    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
+    <published>2018-08-24T05:36:12.000Z</published>
+    <updated>2018-08-24T13:02:28.972Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
     
   </entry>
   
@@ -365,6 +392,30 @@
   </entry>
   
   <entry>
+    <title>59. Spiral Matrix II螺旋矩阵 II</title>
+    <link href="http://yoursite.com/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/"/>
+    <id>http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</id>
+    <published>2018-08-24T01:30:12.000Z</published>
+    <updated>2018-08-24T07:09:48.754Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="59-Spiral-Matrix-II螺旋矩阵-II"><a href="#59-Spiral-Matrix-II螺旋矩阵-II" class="headerlink" title="59. Spiral Matrix II螺旋矩阵 II"></a>59. Spiral Matrix II螺旋矩阵 II</h1><p>给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p><a id="more"></a><p>示例:</p><p>输入: 3<br>输出:</p><pre><code>[ [ 1, 2, 3 ], [ 8, 9, 4 ], [ 7, 6, 5 ]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题可以参见剑指Offer20.PrintMatrix顺时针打印矩阵(CodingInterview)和54. Spiral Matrix螺旋矩阵</p><p>所不同的是可以先生成一个n*n规模的矩阵然后螺旋将数字填入，时间复杂度是O(n^2)。</p><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {        vector&lt;vector&lt;int&gt;&gt; res(n,vector&lt;int&gt;(n,0));        int start=0;        int num=1;        while(start*2&lt;n){            generate(res,start,num,n);            start++;        }        return res;    }    void generate(vector&lt;vector&lt;int&gt;&gt; &amp;res,int start,int &amp;num,int n){        int endy=n-start-1;        int endx=n-start-1;        for(int j=start;j&lt;=endy;j++){            res[start][j]=num;            num++;        }        for(int i=start+1;i&lt;=endx;i++){            res[i][endy]=num;            num++;        }        for(int j=endy-1;j&gt;=start;j--){            res[endx][j]=num;            num++;        }        for(int i=endx-1;i&gt;start;i--){            res[i][start]=num;            num++;        }    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;59-Spiral-Matrix-II螺旋矩阵-II&quot;&gt;&lt;a href=&quot;#59-Spiral-Matrix-II螺旋矩阵-II&quot; class=&quot;headerlink&quot; title=&quot;59. Spiral Matrix II螺旋矩阵 II&quot;&gt;&lt;/a&gt;59. Spiral Matrix II螺旋矩阵 II&lt;/h1&gt;&lt;p&gt;给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
     <title>650. 2 Keys Keyboard只有两个键的键盘</title>
     <link href="http://yoursite.com/2018/08/24/650.%202%20Keys%20Keyboard%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98/"/>
     <id>http://yoursite.com/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/</id>
@@ -386,30 +437,6 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>59. Spiral Matrix II螺旋矩阵 II</title>
-    <link href="http://yoursite.com/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/"/>
-    <id>http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</id>
-    <published>2018-08-24T01:30:12.000Z</published>
-    <updated>2018-08-24T07:09:48.754Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="59-Spiral-Matrix-II螺旋矩阵-II"><a href="#59-Spiral-Matrix-II螺旋矩阵-II" class="headerlink" title="59. Spiral Matrix II螺旋矩阵 II"></a>59. Spiral Matrix II螺旋矩阵 II</h1><p>给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p><a id="more"></a><p>示例:</p><p>输入: 3<br>输出:</p><pre><code>[ [ 1, 2, 3 ], [ 8, 9, 4 ], [ 7, 6, 5 ]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题可以参见剑指Offer20.PrintMatrix顺时针打印矩阵(CodingInterview)和54. Spiral Matrix螺旋矩阵</p><p>所不同的是可以先生成一个n*n规模的矩阵然后螺旋将数字填入，时间复杂度是O(n^2)。</p><pre><code>class Solution {public:    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {        vector&lt;vector&lt;int&gt;&gt; res(n,vector&lt;int&gt;(n,0));        int start=0;        int num=1;        while(start*2&lt;n){            generate(res,start,num,n);            start++;        }        return res;    }    void generate(vector&lt;vector&lt;int&gt;&gt; &amp;res,int start,int &amp;num,int n){        int endy=n-start-1;        int endx=n-start-1;        for(int j=start;j&lt;=endy;j++){            res[start][j]=num;            num++;        }        for(int i=start+1;i&lt;=endx;i++){            res[i][endy]=num;            num++;        }        for(int j=endy-1;j&gt;=start;j--){            res[endx][j]=num;            num++;        }        for(int i=endx-1;i&gt;start;i--){            res[i][start]=num;            num++;        }    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;59-Spiral-Matrix-II螺旋矩阵-II&quot;&gt;&lt;a href=&quot;#59-Spiral-Matrix-II螺旋矩阵-II&quot; class=&quot;headerlink&quot; title=&quot;59. Spiral Matrix II螺旋矩阵 II&quot;&gt;&lt;/a&gt;59. Spiral Matrix II螺旋矩阵 II&lt;/h1&gt;&lt;p&gt;给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
   </entry>
   
@@ -480,35 +507,9 @@
       <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
     
     
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
       <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
     
-  </entry>
-  
-  <entry>
-    <title>300. Longest Increasing Subsequence最长上升子序列</title>
-    <link href="http://yoursite.com/2018/08/22/300.%20Longest%20Increasing%20Subsequence%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/"/>
-    <id>http://yoursite.com/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/</id>
-    <published>2018-08-22T12:30:12.000Z</published>
-    <updated>2018-08-24T07:08:41.770Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="300-Longest-Increasing-Subsequence最长上升子序列"><a href="#300-Longest-Increasing-Subsequence最长上升子序列" class="headerlink" title="300. Longest Increasing Subsequence最长上升子序列"></a>300. Longest Increasing Subsequence最长上升子序列</h1><p>给定一个无序的整数数组，找到其中最长上升子序列的长度。</p><a id="more"></a><p>示例:</p><p>输入:<br>    [10,9,2,5,3,7,101,18]</p><p>输出: 4 </p><p>解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。</p><p>说明:</p><p>可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。<br>你算法的时间复杂度应该为 O(n2) 。</p><p>进阶: 你能将算法的时间复杂度降低到 O(n log n) 吗?</p><h2 id="动态规划解法："><a href="#动态规划解法：" class="headerlink" title="动态规划解法："></a>动态规划解法：</h2><p>首先来看一种动态规划Dynamic Programming的解法，这种解法的时间复杂度为O(n^2)，类似brute force的解法，我们维护一个一维dp数组，其中dp[i]表示以nums[i]为结尾的最长递增子串的长度，对于每一个nums[i]，我们从第一个数再搜索到i，如果发现某个数小于nums[i]，我们更新dp[i]，更新方法为dp[i] = max(dp[i], dp[j] + 1)，即比较当前dp[i]的值和那个小于num[i]的数的dp值加1的大小，我们就这样不断的更新dp数组，到最后dp数组中最大的值就是我们要返回的LIS的长度，参见代码如下：</p><pre><code>class Solution {public:    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {        vector&lt;int&gt; dp(nums.size(),1);        int res=0;        for(int i=0;i&lt;nums.size();i++){            for(int j=0;j&lt;i;j++){                if(nums[i]&gt;nums[j]){                    dp[i]=max(dp[i],dp[j]+1);                }            }            res=max(res,dp[i]);        }        return res;    }};</code></pre><h2 id="进阶：二分查找法"><a href="#进阶：二分查找法" class="headerlink" title="进阶：二分查找法"></a>进阶：二分查找法</h2><p>我们来看一种思路更清晰的二分查找法，跟上面那种方法很类似，思路是先建立一个空的dp数组，然后开始遍历原数组，对于每一个遍历到的数字，我们用二分查找法在dp数组找第一个不小于它的数字，如果这个数字不存在，那么直接在dp数组后面加上遍历到的数字，如果存在，则将这个数字更新为当前遍历到的数字，最后返回dp数字的长度即可.</p><p>特别注意的是dp数组的值可能不是一个真实的LIS。{4， 2， 4， 5， 3， 7}，那么算完后的ends数组为{2， 3， 5， 7}，可以发现它不是一个原数组的LIS，只是长度相等而已参见代码如下：</p><pre><code>class Solution {public:    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {        vector&lt;int&gt; dp;        for(int i=0;i&lt;nums.size();i++){            int left=0,right=dp.size();            while(left&lt;right){                int mid=left+(right-left)/2;                if(dp[mid]&lt;nums[i]) left=mid+1;                else right=mid;            }            if(right&gt;=dp.size()) dp.push_back(nums[i]);            else dp[right]=nums[i];        }        return dp.size();    }};</code></pre><h2 id="进阶：利用lowerbound函数的二分查找法"><a href="#进阶：利用lowerbound函数的二分查找法" class="headerlink" title="进阶：利用lowerbound函数的二分查找法"></a>进阶：利用lowerbound函数的二分查找法</h2><p>还有一种比较tricky的二分查找法，利用到了C++中STL的lower_bound函数，lower_bound返回数组中第一个不小于指定值的元素，跟上面的算法类似，我们还需要一个一维数组v，然后对于遍历到的nums中每一个元素，找其lower_bound，如果没有lower_bound，说明新元素比一维数组的尾元素还要大，直接添加到数组v中，跟之前解法的思路相同了。如果有lower_bound，说明新元素不是最大的，将其lower_bound替换为新元素，这个过程跟之前解法的二分查找法的部分实现相同功能，最后也是返回数组v的长度，注意数组v也不一定是真实的LIS，参见代码如下：</p><pre><code>class Solution {public:    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {        vector&lt;int&gt; dp;        for(auto n:nums){            auto it=lower_bound(dp.begin(),dp.end(),n);            if(it == dp.end()) dp.push_back(n);            else *it=n;        }        return dp.size();    }};</code></pre><h2 id="进阶：利用upperbound函数的二分查找法"><a href="#进阶：利用upperbound函数的二分查找法" class="headerlink" title="进阶：利用upperbound函数的二分查找法"></a>进阶：利用upperbound函数的二分查找法</h2><p>upper_bound是返回数组中第一个大于指定值的元素，和lower_bound的区别时，它不能返回和指定值相等的元素，那么当新进来的数和数组中尾元素一样大时，upper_bound无法返回这个元素，那么按之前算法的处理方法是加到数组中，这样就不是严格的递增子串了，所以我们要做个处理，在处理每个新进来的元素时，先判断数组v中有无此元素，有的话直接跳过，这样就避免了相同数字的情况，参见代码如下：</p><pre><code>class Solution {public:    int lengthOfLIS(vector&lt;int&gt;&amp; nums) {        vector&lt;int&gt; dp;        for(auto n:nums){            if(find(dp.begin(),dp.end(),n)!=dp.end()) continue;            auto it=upper_bound(dp.begin(),dp.end(),n);            if(it==dp.end()) dp.push_back(n);            else *it=n;        }        return dp.size();    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;300-Longest-Increasing-Subsequence最长上升子序列&quot;&gt;&lt;a href=&quot;#300-Longest-Increasing-Subsequence最长上升子序列&quot; class=&quot;headerlink&quot; title=&quot;300. Longest Increasing Subsequence最长上升子序列&quot;&gt;&lt;/a&gt;300. Longest Increasing Subsequence最长上升子序列&lt;/h1&gt;&lt;p&gt;给定一个无序的整数数组，找到其中最长上升子序列的长度。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-      <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
   </entry>
   

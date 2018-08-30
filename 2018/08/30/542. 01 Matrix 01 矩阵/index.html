@@ -3,23 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>885. Spiral Matrix III螺旋矩阵 III | Yiye Li</title>
+  <title>542. 01 Matrix 01 矩阵 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="885. Spiral Matrix III螺旋矩阵 III在 R 行 C 列的矩阵上，我们从 (r0, c0) 面朝东面开始 这里，网格的西北角位于第一行第一列，网格的东南角位于最后一行最后一列。 现在，我们以顺时针按螺旋状行走，访问此网格中的每个位置。 每当我们移动到网格的边界之外时，我们会继续在网格之外行走（但稍后可能会返回到网格边界）。 最终，我们到过网格的所有 R * C 个空间。 按照">
-<meta name="keywords" content="LeetCode,Array">
+  <meta name="description" content="542. 01 Matrix 01 矩阵给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。 两个相邻元素间的距离为 1 。">
+<meta name="keywords" content="LeetCode,BFS,DFS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="885. Spiral Matrix III螺旋矩阵 III">
-<meta property="og:url" content="http://yoursite.com/2018/08/24/885. Spiral Matrix III/index.html">
+<meta property="og:title" content="542. 01 Matrix 01 矩阵">
+<meta property="og:url" content="http://yoursite.com/2018/08/30/542. 01 Matrix 01 矩阵/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="885. Spiral Matrix III螺旋矩阵 III在 R 行 C 列的矩阵上，我们从 (r0, c0) 面朝东面开始 这里，网格的西北角位于第一行第一列，网格的东南角位于最后一行最后一列。 现在，我们以顺时针按螺旋状行走，访问此网格中的每个位置。 每当我们移动到网格的边界之外时，我们会继续在网格之外行走（但稍后可能会返回到网格边界）。 最终，我们到过网格的所有 R * C 个空间。 按照">
+<meta property="og:description" content="542. 01 Matrix 01 矩阵给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。 两个相邻元素间的距离为 1 。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/0071ouepgy1ful2oluezbj304u02rglf.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/0071ouepgy1ful2oluezbj304u02rglf.jpg">
-<meta property="og:updated_time" content="2018-08-24T12:53:30.507Z">
+<meta property="og:updated_time" content="2018-08-30T04:45:57.821Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="885. Spiral Matrix III螺旋矩阵 III">
-<meta name="twitter:description" content="885. Spiral Matrix III螺旋矩阵 III在 R 行 C 列的矩阵上，我们从 (r0, c0) 面朝东面开始 这里，网格的西北角位于第一行第一列，网格的东南角位于最后一行最后一列。 现在，我们以顺时针按螺旋状行走，访问此网格中的每个位置。 每当我们移动到网格的边界之外时，我们会继续在网格之外行走（但稍后可能会返回到网格边界）。 最终，我们到过网格的所有 R * C 个空间。 按照">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/0071ouepgy1ful2oluezbj304u02rglf.jpg">
+<meta name="twitter:title" content="542. 01 Matrix 01 矩阵">
+<meta name="twitter:description" content="542. 01 Matrix 01 矩阵给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。 两个相邻元素间的距离为 1 。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -217,11 +214,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-885. Spiral Matrix III" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-542. 01 Matrix 01 矩阵" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/24/885. Spiral Matrix III/" class="article-date">
-      <time datetime="2018-08-24T02:32:12.000Z" itemprop="datePublished">2018-08-24</time>
+      <a href="/2018/08/30/542. 01 Matrix 01 矩阵/" class="article-date">
+      <time datetime="2018-08-30T04:45:43.000Z" itemprop="datePublished">2018-08-30</time>
 </a>
     </div>
   
@@ -234,7 +231,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      885. Spiral Matrix III螺旋矩阵 III
+      542. 01 Matrix 01 矩阵
     </h1>
   
 
@@ -249,7 +246,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -259,76 +256,62 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="885-Spiral-Matrix-III螺旋矩阵-III"><a href="#885-Spiral-Matrix-III螺旋矩阵-III" class="headerlink" title="885. Spiral Matrix III螺旋矩阵 III"></a>885. Spiral Matrix III螺旋矩阵 III</h1><p>在 R 行 C 列的矩阵上，我们从 (r0, c0) 面朝东面开始</p>
-<p>这里，网格的西北角位于第一行第一列，网格的东南角位于最后一行最后一列。</p>
-<p>现在，我们以顺时针按螺旋状行走，访问此网格中的每个位置。</p>
-<p>每当我们移动到网格的边界之外时，我们会继续在网格之外行走（但稍后可能会返回到网格边界）。</p>
-<p>最终，我们到过网格的所有 R * C 个空间。</p>
-<p>按照访问顺序返回表示网格位置的坐标列表。</p>
+        <h1 id="542-01-Matrix-01-矩阵"><a href="#542-01-Matrix-01-矩阵" class="headerlink" title="542. 01 Matrix 01 矩阵"></a>542. 01 Matrix 01 矩阵</h1><p>给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。</p>
+<p>两个相邻元素间的距离为 1 。</p>
 <a id="more"></a>
-<p>示例 1：</p>
-<pre><code>输入：R = 1, C = 4, r0 = 0, c0 = 0
-输出：[[0,0],[0,1],[0,2],[0,3]]
-</code></pre><p><img src="https://ws1.sinaimg.cn/large/0071ouepgy1ful2oluezbj304u02rglf.jpg" alt="image"></p>
-<p>示例 2：</p>
-<pre><code>输入：R = 5, C = 6, r0 = 1, c0 = 4
-输出：[[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]
-</code></pre><p><img src="https://ws1.sinaimg.cn/large/0071ouepgy1ful2oluezbj304u02rglf.jpg" alt="image"></p>
-<p>提示：</p>
-<p>1 &lt;= R &lt;= 100<br>1 &lt;= C &lt;= 100<br>0 &lt;= r0 &lt; R<br>0 &lt;= c0 &lt; C</p>
-<h2 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h2><p>分步走，如果位置在格子内则将它加入res</p>
-<p>观察运动轨迹：<br>右移一步，向右转<br>下移一步，向右转</p>
-<p>左移两步，向右转<br>上移两步，向右转</p>
-<p>右移三步，向右转<br>下移三步，向右转</p>
-<p>左移四步，向右转<br>上移四步，向右转</p>
-<p>所以问题变为如何生成序列：1，1，2，2，3，3，4，4，5，5…<br>和如何向右转</p>
-<p>生成序列：<br>a[index]=index/2+1</p>
-<p>右转：<br>使用叉乘假设当前的方向在平面中是（x,y),在空间中则为(x,y,0)<br>那么右转后的方向是(x,y,0)X(0,0,1)=(y,-x,0)<br>变成代码：temp=x;x=y;y=-temp;</p>
-<p>方向数组是：<br>(0,1),(1,0),(0,-1),(-1,0)，可以用两个变量来表示</p>
-<p>时间复杂度：<br>O(max(M,N) ^ 2)</p>
-<pre><code>vector&lt;vector&lt;int&gt;&gt; spiralMatrixIII(int R, int C, int r, int c) {
-    vector&lt;vector&lt;int&gt;&gt; res = {{r, c}};
-    int x = 0, y = 1, tmp;
-    for (int n = 0; res.size() &lt; R * C; n++) {//every position
-        for (int i = 0; i &lt; n / 2 + 1; i++) {//on one direction
-            r += x, c += y;
-            if (0 &lt;= r &amp;&amp; r &lt; R &amp;&amp; 0 &lt;= c &amp;&amp; c &lt; C)
-                res.push_back({r, c});
-        }
-        tmp = x, x = y, y = -tmp;
-    }
-    return res;
-}
-</code></pre><h2 id="思路2："><a href="#思路2：" class="headerlink" title="思路2："></a>思路2：</h2><pre><code>class Solution {
+<p>示例 1:<br>输入:</p>
+<pre><code>0 0 0
+0 1 0
+0 0 0
+</code></pre><p>输出:</p>
+<pre><code>0 0 0
+0 1 0
+0 0 0
+</code></pre><p>示例 2:<br>输入:</p>
+<pre><code>0 0 0
+0 1 0
+1 1 1
+</code></pre><p>输出:</p>
+<pre><code>0 0 0
+0 1 0
+1 2 1
+</code></pre><p>注意:</p>
+<p>给定矩阵的元素个数不超过 10000。<br>给定矩阵中至少有一个元素是 0。<br>矩阵中的元素只在四个方向上相邻: 上、下、左、右。</p>
+<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>计算的距离是<a href="https://baike.baidu.com/item/%E6%9B%BC%E5%93%88%E9%A1%BF%E8%B7%9D%E7%A6%BB/743092?fr=aladdin" target="_blank" rel="noopener">曼哈顿距离</a></p>
+<p>因为这道题是求值为1的点到值为0的区域的最短距离，因为是在图上求最短距离，所以可以用广度优先搜索方法求解，该方法在求最小生成树和迪杰斯特拉最短路径算法的思想中都有体现。本质上是有一个已知最优路线（最优一般指距离最短）区域，这个区域被放进queue中，这道题的这个区域就是0区域，所以一开始要将0区域都找出来，并把它们push进queue里，然后开始BFS，每遇到一个<strong>未访问过的点（matrix[i][j]值为-1）和合法的点（不超过map）</strong>的区域，就将它加一并push进queue中，这样，图map总会被遍历完，而且总是最小值。</p>
+<pre><code>class Solution {
 public:
-    vector&lt;vector&lt;int&gt;&gt; spiralMatrixIII(int R, int C, int r0, int c0) {
-        int rpos=r0,cpos=c0,dir=0,go=1;//dir is the direction in the dr[4] and dc[4]
-        int distan=0,total=0;
-        int dr[4]={0,1,0,-1};
-        int dc[4]={1,0,-1,0};
-        vector&lt;vector&lt;int&gt;&gt; res;
-
-        res.push_back({rpos,cpos});//push back the start position
-        total++;
-        while(total&lt;R*C){//total is the total visit numbers
-            for(int i=1;i&lt;=go;i++){
-                rpos+=dr[dir];//start to go
-                cpos+=dc[dir];
-                if(rpos&gt;=0 &amp;&amp; rpos&lt;R &amp;&amp; cpos&gt;=0 &amp;&amp; cpos&lt;C){// push back the eanswer if it is in the grid
-                    res.push_back({rpos,cpos});
-                    total++;
-                }
+    vector&lt;vector&lt;int&gt;&gt; updateMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        int m=matrix.size();
+        int n=matrix[0].size();
+        queue&lt;pair&lt;int,int&gt;&gt; que;
+        for(int i=0;i&lt;m;i++){
+            for(int j=0;j&lt;n;j++){
+                if(matrix[i][j]==0) que.push(make_pair(i,j));
+                else matrix[i][j]=-1;
             }
-
-            if(distan &amp;1){//每隔两次访问步数加1，即恰好为奇数时访问步数加1
-                go++;
-            }
-            distan++;
-
-            dir++;
-            dir%=4;//change direction
         }
-        return res;
+
+        vector&lt;vector&lt;int&gt;&gt; dirs={
+            {-1,0},
+            {1,0},
+            {0,-1},
+            {0,1}
+        };
+        while(!que.empty()){
+            auto q=que.front();
+            que.pop();
+            for(int d=0;d&lt;4;d++){
+                int r=q.first+dirs[d][0];
+                int c=q.second+dirs[d][1];
+                if(r&gt;=0 &amp;&amp; r&lt;m &amp;&amp; c&gt;=0 &amp;&amp; c&lt;n &amp;&amp; matrix[r][c]==-1 ) {
+                que.push(make_pair(r,c));
+                matrix[r][c]=matrix[q.first][q.second]+1; //distance++
+                                                                                             }
+
+            }
+        }
+        return matrix;
     }
 };
 </code></pre>
@@ -386,13 +369,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月24日 - 10时32分</p>
-        <p><span>最后更新:</span>2018年08月24日 - 20时53分</p>
+        <p><span>发布时间:</span>2018年08月30日 - 12时45分</p>
+        <p><span>最后更新:</span>2018年08月30日 - 12时45分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/24/885. Spiral Matrix III/" title="885. Spiral Matrix III螺旋矩阵 III">http://yoursite.com/2018/08/24/885. Spiral Matrix III/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/24/885. Spiral Matrix III/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/30/542. 01 Matrix 01 矩阵/" title="542. 01 Matrix 01 矩阵">http://yoursite.com/2018/08/30/542. 01 Matrix 01 矩阵/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/30/542. 01 Matrix 01 矩阵/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -405,18 +388,9 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          538. Convert BST to Greater Tree把二叉搜索树转换为累加树
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/24/计算机网络概念I/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">计算机网络概念I</div>
+    <a href="/2018/08/29/C++输入/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++输入总结</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -427,7 +401,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#885-Spiral-Matrix-III螺旋矩阵-III"><span class="toc-number">1.</span> <span class="toc-text">885. Spiral Matrix III螺旋矩阵 III</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路1"><span class="toc-number">1.1.</span> <span class="toc-text">思路1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路2："><span class="toc-number">1.2.</span> <span class="toc-text">思路2：</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#542-01-Matrix-01-矩阵"><span class="toc-number">1.</span> <span class="toc-text">542. 01 Matrix 01 矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BFS"><span class="toc-number">1.1.</span> <span class="toc-text">BFS</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -493,13 +467,11 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" title="上一篇: 538. Convert BST to Greater Tree把二叉搜索树转换为累加树">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/24/计算机网络概念I/" title="下一篇: 计算机网络概念I">
+            <a href="/2018/08/29/C++输入/" title="下一篇: C++输入总结">
                 <i class="fa fa-angle-right"></i>
             </a>
         
