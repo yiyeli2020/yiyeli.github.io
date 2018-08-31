@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-30T07:31:46.924Z</updated>
+  <updated>2018-08-31T02:59:59.513Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++基础概念IV</title>
+    <link href="http://yoursite.com/2018/08/31/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5IV/"/>
+    <id>http://yoursite.com/2018/08/31/C++基础概念IV/</id>
+    <published>2018-08-31T02:01:30.000Z</published>
+    <updated>2018-08-31T02:59:59.513Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="C-基础概念IV"><a href="#C-基础概念IV" class="headerlink" title="C++基础概念IV"></a>C++基础概念IV</h1><p>重点探讨类的大小，使用sizeof</p><p>1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。</p><p>2.普通成员函数与sizeof无关。</p><p>3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。</p><p>4.类的总大小也遵守类似class字节对齐的，调整规则。</p><a id="more"></a><h2 id="1-空类"><a href="#1-空类" class="headerlink" title="1.空类"></a>1.空类</h2><pre><code>#include&lt;iostream&gt;using namespace std;class A {};class B {public:    B() { };    ~B() {};};int main() {    cout &lt;&lt; &quot;sizeof A=&quot; &lt;&lt; sizeof(A) &lt;&lt; endl;    cout &lt;&lt; &quot;sizeof B=&quot; &lt;&lt; sizeof(B) &lt;&lt; endl;}</code></pre><p>空类的大小都为1<br>   因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址，每个实例在内存中都有独一无二的地址。同样空类也会被实例化，所以编译器会给空类隐含的添加一个字节，这样空类实例化之后就有了独一无二的地址了。所以空类的sizeof为1。</p><p>   而析构函数，跟构造函数这些成员函数，是跟sizeof无关的，也不难理解因为我们的sizeof是针对实例，而普通成员函数，是针对类体的，一个类的成员函数，多个实例也共用相同的函数指针，所以自然不能归为实例的大小</p><h2 id="2-含有静态变量和虚析构函数的类"><a href="#2-含有静态变量和虚析构函数的类" class="headerlink" title="2.含有静态变量和虚析构函数的类"></a>2.含有静态变量和虚析构函数的类</h2><pre><code>class Base  {  public:      Base();                      virtual ~Base();         //每个实例都有虚函数表      void set_num(int num)    //普通成员函数，为各实例公有，不归入sizeof统计      {          a=num;      }  private:      int  a;                  //占4字节      char *p;                 //4字节指针  };  class Derive:public Base  {  public:      Derive():Base(){};           ~Derive(){};  private:      static int st;         //非实例独占      int  d;                     //占4字节      char *p;                    //4字节指针  };  int main()   {       cout&lt;&lt;sizeof(Base)&lt;&lt;endl;      cout&lt;&lt;sizeof(Derive)&lt;&lt;endl;      return 0;  } </code></pre><p>Base类里的int  a;char *p;占8个字节。</p><p>而虚析构函数virtual ~Base();的指针占4子字节。</p><p>其他成员函数不归入sizeof统计。</p><p>Derive类首先要具有Base类的部分，也就是占12字节。</p><p>int  d;char *p;占8字节</p><p>static int st;不归入sizeof统计</p><p>所以一共是20字节。</p><h2 id="3-字节对齐原则"><a href="#3-字节对齐原则" class="headerlink" title="3. 字节对齐原则"></a>3. 字节对齐原则</h2><pre><code>class Derive:public Base  {  public:      Derive():Base(){};      ~Derive(){};  private:      static int st;      int  d;      char *p;      char c;  };  </code></pre><p>一个char c;增加了4字节（char本身占1个字节），说明类的大小也遵守类似class字节对齐的补齐规则。<br>一般来说，普通继承的空间计算结果应当是sizeof(基类)+sizeof(派生类)，然后考虑对齐，内存空间必须是类中数据成员所占用最大空间的整数倍。不过这是一般情况，具体怎么算要看编译器，比如将上述代码中的两个数据成员交换位置，结果则可能不同。</p><h2 id="4-含虚函数的子类普通继承含虚函数的父类"><a href="#4-含虚函数的子类普通继承含虚函数的父类" class="headerlink" title="4.含虚函数的子类普通继承含虚函数的父类"></a>4.含虚函数的子类普通继承含虚函数的父类</h2><pre><code>class Test{public:    int a;    virtual void get(){}};class Test2 : public Test{public:    int a;    virtual void set(){}};</code></pre><p>虽然子类和父类都包含虚函数， 但它们存放于同一个虚表中，因此只需要一个指针，在普通继承下，不管是子类还是父类包含虚函数，子类的<strong>sizeof=sizeof(基类非静态数据成员)+sizeof(派生类非静态数据成员)+sizeof(指针)</strong>。</p><h2 id="5-子类虚继承父类-C-中虚拟继承的概念"><a href="#5-子类虚继承父类-C-中虚拟继承的概念" class="headerlink" title="5.子类虚继承父类(C++中虚拟继承的概念)"></a>5.子类虚继承父类(C++中虚拟继承的概念)</h2><h3 id="5-1-C-中虚拟继承的概念"><a href="#5-1-C-中虚拟继承的概念" class="headerlink" title="5.1.C++中虚拟继承的概念"></a>5.1.C++中虚拟继承的概念</h3><p>为了解决从不同途径继承来的同名的数据成员在内存中有不同的拷贝造成数据不一致问题，将共同基类设置为虚基类。这时从不同的路径继承过来的同名数据成员在内存中就只有一个拷贝，同一个函数名也只有一个映射。这样不仅就解决了二义性问题，也节省了内存，避免了数据不一致的问题。</p><pre><code>class 派生类名：virtual 继承方式  基类名</code></pre><p>virtual是关键字，声明该基类为派生类的虚基类。<br>在多继承情况下，虚基类关键字的作用范围和继承方式关键字相同，只对紧跟其后的基类起作用。<br>声明了虚基类之后，虚基类在进一步派生过程中始终和派生类一起，维护同一个基类子对象的拷贝。</p><p>执行顺序</p><pre><code>首先执行虚基类的构造函数，多个虚基类的构造函数按照被继承的顺序构造；执行基类的构造函数，多个基类的构造函数按照被继承的顺序构造；执行成员对象的构造函数，多个成员对象的构造函数按照申明的顺序构造；执行派生类自己的构造函数；析构以与构造相反的顺序执行；</code></pre><h3 id="5-2-子类虚继承父类"><a href="#5-2-子类虚继承父类" class="headerlink" title="5.2.子类虚继承父类"></a>5.2.子类虚继承父类</h3><p>虚继承比较特别，一般的计算公式应当是<strong>sizeof(子类)=sizeof(基类)+sizeof(虚表指针)+sizeof(子类非静态数据成员)</strong></p><pre><code>class A{public:    int a;};class B : virtual public A{public:        int b;};</code></pre><p>sizeof结果都是12，基类A大小为4，子类B数据成员为4，因为是虚继承，可能需要一个指向虚基类的指针，再占用4字节，得到12。</p><p>然而，对于包含虚函数的子类虚继承不含虚函数的父类时，结果发生了变化</p><pre><code>class A{public:    int a;};class B : virtual public A{public:    int a;    virtual void set(){}};</code></pre><p>在Codeblocks下结果仍为12，VS2010下却为16。子类增加了一个虚函数，Codeblocks下结果不变，在VS下结果却发生了变化。</p><p>可以这样认为，在VS下，计算公式可能如下：<strong>sizeof(子类)=sizeof(基类)+sizeof(指示虚基类的指针)+sizeof(子类非静态数据成员)+sizeof(虚表指针)</strong>。在CB下可能对内存进行了优化（个人推测）</p><p>对于子类和父类中都含虚函数的虚继承，结果如下：</p><pre><code>class Test{public:    int a;    virtual void get(){}};class Test2 : virtual Test{public:    int a;    virtual void set(){}};</code></pre><p>在Codeblocks下结果为16，VS2010下为20。<br>这是因为，使用了虚继承，子类和父类的虚函数存放在不同的虚表中，因此子类和父类都需要一个指向虚表的指针。</p><h2 id="6-多重继承"><a href="#6-多重继承" class="headerlink" title="6.多重继承"></a>6.多重继承</h2><pre><code>#include&lt;iostream&gt;using namespace std;class A{public:    int a;};class B : public A{public:    int b;};class C : public A{public:    int c;};class D : public B, public C{public:    int d;};int main() {    cout &lt;&lt; &quot;sizeof A=&quot; &lt;&lt; sizeof(A) &lt;&lt; endl;    cout &lt;&lt; &quot;sizeof B=&quot; &lt;&lt; sizeof(B) &lt;&lt; endl;    cout &lt;&lt; &quot;sizeof C=&quot; &lt;&lt; sizeof(C) &lt;&lt; endl;    cout &lt;&lt; &quot;sizeof D=&quot; &lt;&lt; sizeof(D) &lt;&lt; endl;}</code></pre><p>就是基类的相加。<strong>sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)</strong></p><pre><code>sizeof A=4sizeof B=8sizeof C=8sizeof D=20请按任意键继续. . .</code></pre><h2 id="7-多重虚继承"><a href="#7-多重虚继承" class="headerlink" title="7.多重虚继承"></a>7.多重虚继承</h2><p>虚继承存在的意义就是为了减少内存开销和二义性，实现对象共享。</p><pre><code>class A{public:    int a;};class B :  virtual public A{public:        int b;};class C : virtual public A{public:    int c;};class D : public B, public C{public:    int d;};</code></pre><p>sizeof(D)在CB和VS下都是24。D中包含a,b,c,d四个数据成员，还包含两个指向虚基类A的指针，这种情况下，VS和CB都没有将两个指针合为一个。这种情况也可以这样考虑，sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)，但由于是虚继承，虚基类A中数据成员a只需要保留一份，而我们算了两次，所以还需要减去A的数据成员，所以公式应当是sizeof(D)=sizeof(B)+sizeof(C)-sizeof(A的非静态数据成员)+sizeof(子类非静态数据成员)。</p><h2 id="8-字节对齐"><a href="#8-字节对齐" class="headerlink" title="8.字节对齐"></a>8.字节对齐</h2><p>１:数据成员对齐规则：结构(struct)(或联合(union))的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置要从该成员大小或者成员的子成员大小（只要该成员有子成员，比如说是数组，结构体等）的整数倍开始(比如int在32位机为４字节,则要从４的整数倍地址开始存储。</p><p>２:结构体作为成员:如果一个结构里有某些结构体成员,则结构体成员要从其内部最大元素大小的整数倍地址开始存储.(struct a里存有struct b,b里有char,int ,double等元素,那b应该从8的整数倍开始存储.)</p><p>３:收尾工作:结构体的总大小,也就是sizeof的结果,.必须是其内部最大成员的整数倍.不足的要补齐.</p><p>4:在代码前加一句#pragma pack(1),告诉编译器,所有的对齐都按照1的整数倍对齐,换句话说就是没有对齐规则.如果#pragma pack (n)中指定的n大于结构体中最大成员的size，则其不起作用，结构体仍然按照size最大的成员进行对界</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;C-基础概念IV&quot;&gt;&lt;a href=&quot;#C-基础概念IV&quot; class=&quot;headerlink&quot; title=&quot;C++基础概念IV&quot;&gt;&lt;/a&gt;C++基础概念IV&lt;/h1&gt;&lt;p&gt;重点探讨类的大小，使用sizeof&lt;/p&gt;
+&lt;p&gt;1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。&lt;/p&gt;
+&lt;p&gt;2.普通成员函数与sizeof无关。&lt;/p&gt;
+&lt;p&gt;3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。&lt;/p&gt;
+&lt;p&gt;4.类的总大小也遵守类似class字节对齐的，调整规则。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+      <category term="sizeof" scheme="http://yoursite.com/tags/sizeof/"/>
+    
+  </entry>
   
   <entry>
     <title>682. Baseball Game棒球比赛</title>
@@ -139,30 +167,6 @@
   </entry>
   
   <entry>
-    <title>139. Word Break单词拆分</title>
-    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
-    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
-    <published>2018-08-26T12:33:12.000Z</published>
-    <updated>2018-08-27T14:08:19.153Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
     <title>626. Exchange Seats换座位</title>
     <link href="http://yoursite.com/2018/08/26/626.%20Exchange%20Seats%E6%8D%A2%E5%BA%A7%E4%BD%8D/"/>
     <id>http://yoursite.com/2018/08/26/626. Exchange Seats换座位/</id>
@@ -186,6 +190,30 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="SQL" scheme="http://yoursite.com/tags/SQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>139. Word Break单词拆分</title>
+    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
+    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
+    <published>2018-08-26T12:33:12.000Z</published>
+    <updated>2018-08-27T14:08:19.153Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
   </entry>
   
@@ -485,30 +513,6 @@
       <category term="TCPIP" scheme="http://yoursite.com/tags/TCPIP/"/>
     
       <category term="Web" scheme="http://yoursite.com/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>剑指offer思路总结</title>
-    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87offer%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2018/08/23/剑指offer思路总结/</id>
-    <published>2018-08-23T00:45:12.000Z</published>
-    <updated>2018-08-23T03:26:40.658Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="剑指offer思路总结"><a href="#剑指offer思路总结" class="headerlink" title="剑指offer思路总结"></a>剑指offer思路总结</h1><p>剑指offer已经刷过两遍，总结一下思路方便回忆</p><a id="more"></a><h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13.在O(1)时间删除链表结点"></a>13.在O(1)时间删除链表结点</h2><pre><code>分情况讨论：先在链表中顺序搜索要删除的节点i不是尾结点：{    先将i的下一个结点j的内容复制到i    然后把i的指针指向结点j的下一个结点；    此时再删除结点j}链表只有一个结点{    则删除该结点    然后将其置为NULL    将头结点置为空}链表有多个结点而且要删除的结点是尾结点{    从头结点顺序遍历，只要找到该结点i的前序结点就可以，然后执行删除操作}</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p><h3 id="初级解法"><a href="#初级解法" class="headerlink" title="初级解法"></a>初级解法</h3><p>双指针指向头尾部分，头偶尾奇则交换两个数字</p><h3 id="可扩展解法"><a href="#可扩展解法" class="headerlink" title="可扩展解法"></a>可扩展解法</h3><p>仍使用头尾指针，但用函数指针的方法将判断奇偶的函数解耦出来，整体逻辑框架不需要改动</p><h2 id="15-链表中倒数第K个节点"><a href="#15-链表中倒数第K个节点" class="headerlink" title="15.链表中倒数第K个节点"></a>15.链表中倒数第K个节点</h2><p>快慢指针，快指针比慢指针领先k-1步出发，快指针到尾节点时慢指针指向的是所求</p><h3 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h3><h4 id="1-求链表中间结点"><a href="#1-求链表中间结点" class="headerlink" title="1.求链表中间结点"></a>1.求链表中间结点</h4><p>快慢指针，快指针每次走两步，慢指针每次走一步，快指针到末尾时慢指针指向中间结点</p><h4 id="2-判断单向链表是否成环"><a href="#2-判断单向链表是否成环" class="headerlink" title="2.判断单向链表是否成环"></a>2.判断单向链表是否成环</h4><p>同前面，若快指针追上慢指针则成环</p><h2 id="16-反转链表"><a href="#16-反转链表" class="headerlink" title="16.反转链表"></a>16.反转链表</h2><p>需要定义三个指针，指向当前遍历的结点，前一个结点和后一个结点,先要找到反转链表后的头结点即原始链表的尾节点，需要满足的条件是后结点为空</p><pre><code>////Non-RecursiveListNode* ReverseList(ListNode* pHead){    ListNode* pReversedHead = nullptr;    ListNode* pNode = pHead;    ListNode* pPrev = nullptr;    while (pNode != nullptr)    {        ListNode *pNext = pNode-&gt;m_pNext;        if (pNext == NULL) {//find the last node            pReversedHead = pNode;        }        pNode-&gt;m_pNext = pPrev;//Revserse        pPrev = pNode;// forward        pNode = pNext;    }    return pReversedHead;}ListNode* ReverseList(ListNode* pHead){    if (pHead == NULL || pHead-&gt;m_pNext == nullptr) return pHead;    ListNode *PReverseHead = pHead;    pHead=ReverseList(pHead-&gt;m_pNext);    PReverseHead-&gt;m_pNext-&gt;m_pNext = PReverseHead;//进入尾节点    PReverseHead-&gt;m_pNext = NULL;    return pHead;}</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;剑指offer思路总结&quot;&gt;&lt;a href=&quot;#剑指offer思路总结&quot; class=&quot;headerlink&quot; title=&quot;剑指offer思路总结&quot;&gt;&lt;/a&gt;剑指offer思路总结&lt;/h1&gt;&lt;p&gt;剑指offer已经刷过两遍，总结一下思路方便回忆&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
-    
-      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
     
   </entry>
   
