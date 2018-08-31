@@ -139,6 +139,30 @@
   </entry>
   
   <entry>
+    <title>139. Word Break单词拆分</title>
+    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
+    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
+    <published>2018-08-26T12:33:12.000Z</published>
+    <updated>2018-08-27T14:08:19.153Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+  </entry>
+  
+  <entry>
     <title>626. Exchange Seats换座位</title>
     <link href="http://yoursite.com/2018/08/26/626.%20Exchange%20Seats%E6%8D%A2%E5%BA%A7%E4%BD%8D/"/>
     <id>http://yoursite.com/2018/08/26/626. Exchange Seats换座位/</id>
@@ -162,30 +186,6 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="SQL" scheme="http://yoursite.com/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>139. Word Break单词拆分</title>
-    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
-    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
-    <published>2018-08-26T12:33:12.000Z</published>
-    <updated>2018-08-27T14:08:19.153Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
   </entry>
   
@@ -245,17 +245,18 @@
   </entry>
   
   <entry>
-    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
-    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
-    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
+    <title>697. Degree of an Array数组的度</title>
+    <link href="http://yoursite.com/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/"/>
+    <id>http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</id>
     <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T13:02:28.972Z</updated>
+    <updated>2018-08-24T07:05:54.170Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="697-Degree-of-an-Array数组的度"><a href="#697-Degree-of-an-Array数组的度" class="headerlink" title="697. Degree of an Array数组的度"></a>697. Degree of an Array数组的度</h1><p>给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。</p><p>你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1, 2, 2, 3, 1]</code></pre><p>输出: 2<br>解释:<br>输入数组的度是2，因为元素1和2的出现频数最大，均为2.<br>连续子数组里面拥有相同度的有如下所示:</p><pre><code>[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]</code></pre><p>最短连续子数组[2, 2]的长度为2，所以返回2.<br>示例 2:</p><p>输入: </p><pre><code>[1,2,2,3,1,4,2]</code></pre><p>输出: 6<br>注意:</p><p>nums.length 在1到50,000区间范围内。<br>nums[i] 是一个在0到49,999范围内的整数。</p><!-- more --><h2 id="Brute-Force思路"><a href="#Brute-Force思路" class="headerlink" title="Brute Force思路"></a>Brute Force思路</h2><p>穷举所有的子数组然后将其度与原数组的度比较，相等则更新最小长度。但会超时。</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        int minlen=nums.size();        int degree=getdegree(nums,0,nums.size()-1);        for(int i=0;i&lt;nums.size();i++){            for(int j=i+1;j&lt;nums.size();j++){                if(getdegree(nums,i,j)==degree) minlen=min(minlen,j-i+1);            }        }        return minlen;    }    int getdegree(vector&lt;int&gt;&amp; arr,int begin,int end){        int degree=0;        unordered_map&lt;int,int&gt; fre;        for(int i=begin;i&lt;=end;i++){            fre[arr[i]]++;        }        for(auto d:fre){            degree=max(degree,d.second);        }        return degree;    }};</code></pre><h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><p>使用两个哈希表，一个记录字符的开始位置，另一个记录字符的出现频率<br>一旦一个特定字符的频率大于其他的，我们更新这个变量的长度，当两个变量有同样的频率，只比较它们的长度选择较短的一个</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        unordered_map&lt;int,int&gt; startindex,frequency;        int fre=0,len=nums.size();        for(int i=0;i&lt;nums.size();i++){            frequency[nums[i]]++;            if(startindex.count(nums[i])==0) startindex[nums[i]]=i;//first appear            if(frequency[nums[i]]==fre){//第i个字符的度与截止到当前的数组度相同                len=min(len,i-startindex[nums[i]]+1);            }            else if(frequency[nums[i]]&gt;fre){//需要更新度和长度                fre=frequency[nums[i]];                len=i-startindex[nums[i]]+1;            }        }        return len;    }};</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
+      &lt;h1 id=&quot;697-Degree-of-an-Array数组的度&quot;&gt;&lt;a href=&quot;#697-Degree-of-an-Array数组的度&quot; class=&quot;headerlink&quot; title=&quot;697. Degree of an Array数组的度&quot;&gt;&lt;/a&gt;697. Degree of an Array数组的度&lt;/h1&gt;&lt;p&gt;给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。&lt;/p&gt;
+&lt;p&gt;你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。&lt;/p&gt;
     
     </summary>
     
@@ -264,7 +265,7 @@
     
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
-      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
   </entry>
   
@@ -293,18 +294,17 @@
   </entry>
   
   <entry>
-    <title>697. Degree of an Array数组的度</title>
-    <link href="http://yoursite.com/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/"/>
-    <id>http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</id>
+    <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</title>
+    <link href="http://yoursite.com/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/"/>
+    <id>http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</id>
     <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T07:05:54.170Z</updated>
+    <updated>2018-08-24T13:02:28.972Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="697-Degree-of-an-Array数组的度"><a href="#697-Degree-of-an-Array数组的度" class="headerlink" title="697. Degree of an Array数组的度"></a>697. Degree of an Array数组的度</h1><p>给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。</p><p>你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1, 2, 2, 3, 1]</code></pre><p>输出: 2<br>解释:<br>输入数组的度是2，因为元素1和2的出现频数最大，均为2.<br>连续子数组里面拥有相同度的有如下所示:</p><pre><code>[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]</code></pre><p>最短连续子数组[2, 2]的长度为2，所以返回2.<br>示例 2:</p><p>输入: </p><pre><code>[1,2,2,3,1,4,2]</code></pre><p>输出: 6<br>注意:</p><p>nums.length 在1到50,000区间范围内。<br>nums[i] 是一个在0到49,999范围内的整数。</p><!-- more --><h2 id="Brute-Force思路"><a href="#Brute-Force思路" class="headerlink" title="Brute Force思路"></a>Brute Force思路</h2><p>穷举所有的子数组然后将其度与原数组的度比较，相等则更新最小长度。但会超时。</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        int minlen=nums.size();        int degree=getdegree(nums,0,nums.size()-1);        for(int i=0;i&lt;nums.size();i++){            for(int j=i+1;j&lt;nums.size();j++){                if(getdegree(nums,i,j)==degree) minlen=min(minlen,j-i+1);            }        }        return minlen;    }    int getdegree(vector&lt;int&gt;&amp; arr,int begin,int end){        int degree=0;        unordered_map&lt;int,int&gt; fre;        for(int i=begin;i&lt;=end;i++){            fre[arr[i]]++;        }        for(auto d:fre){            degree=max(degree,d.second);        }        return degree;    }};</code></pre><h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><p>使用两个哈希表，一个记录字符的开始位置，另一个记录字符的出现频率<br>一旦一个特定字符的频率大于其他的，我们更新这个变量的长度，当两个变量有同样的频率，只比较它们的长度选择较短的一个</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        unordered_map&lt;int,int&gt; startindex,frequency;        int fre=0,len=nums.size();        for(int i=0;i&lt;nums.size();i++){            frequency[nums[i]]++;            if(startindex.count(nums[i])==0) startindex[nums[i]]=i;//first appear            if(frequency[nums[i]]==fre){//第i个字符的度与截止到当前的数组度相同                len=min(len,i-startindex[nums[i]]+1);            }            else if(frequency[nums[i]]&gt;fre){//需要更新度和长度                fre=frequency[nums[i]];                len=i-startindex[nums[i]]+1;            }        }        return len;    }};</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树"><a href="#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树" class="headerlink" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树"></a>538. Convert BST to Greater Tree把二叉搜索树转换为累加树</h1><p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p><a id="more"></a><p>例如：</p><p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p><p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p><pre><code>class Solution {private:    int cur_sum = 0;public:    void travel(TreeNode* root){        if (!root) return;        if (root-&gt;right) travel(root-&gt;right);        root-&gt;val = (cur_sum += root-&gt;val);        if (root-&gt;left) travel(root-&gt;left);    }    TreeNode* convertBST(TreeNode* root) {        travel(root);        return root;    }};</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;697-Degree-of-an-Array数组的度&quot;&gt;&lt;a href=&quot;#697-Degree-of-an-Array数组的度&quot; class=&quot;headerlink&quot; title=&quot;697. Degree of an Array数组的度&quot;&gt;&lt;/a&gt;697. Degree of an Array数组的度&lt;/h1&gt;&lt;p&gt;给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。&lt;/p&gt;
-&lt;p&gt;你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。&lt;/p&gt;
+      &lt;h1 id=&quot;538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot;&gt;&lt;a href=&quot;#538-Convert-BST-to-Greater-Tree把二叉搜索树转换为累加树&quot; class=&quot;headerlink&quot; title=&quot;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&quot;&gt;&lt;/a&gt;538. Convert BST to Greater Tree把二叉搜索树转换为累加树&lt;/h1&gt;&lt;p&gt;给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。&lt;/p&gt;
     
     </summary>
     
@@ -313,7 +313,7 @@
     
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+      <category term="Binary Search Tree" scheme="http://yoursite.com/tags/Binary-Search-Tree/"/>
     
   </entry>
   
@@ -489,27 +489,26 @@
   </entry>
   
   <entry>
-    <title>59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</title>
-    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87Offer59.%E5%AF%B9%E7%A7%B0%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    <id>http://yoursite.com/2018/08/23/剑指Offer59.对称的二叉树/</id>
+    <title>剑指offer思路总结</title>
+    <link href="http://yoursite.com/2018/08/23/%E5%89%91%E6%8C%87offer%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/08/23/剑指offer思路总结/</id>
     <published>2018-08-23T00:45:12.000Z</published>
-    <updated>2018-08-24T02:04:28.134Z</updated>
+    <updated>2018-08-23T03:26:40.658Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="59-SymmetricalBinaryTree对称的二叉树-CodingInterview"><a href="#59-SymmetricalBinaryTree对称的二叉树-CodingInterview" class="headerlink" title="59.SymmetricalBinaryTree对称的二叉树(CodingInterview)"></a>59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</h1><p>与其类似的一道题是LeetCode上的101. Symmetric Tree</p><p>请实现一个函数，用来判断一颗二叉树是不是对称的。<br>注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。</p><a id="more"></a><h2 id="Recursive递归解法："><a href="#Recursive递归解法：" class="headerlink" title="Recursive递归解法："></a>Recursive递归解法：</h2><p>定义一种对称的前序遍历算法，即先遍历父节点，再遍历它的右子节点，最后遍历它的左子节点。</p><p>可以通过对比二叉树的前序遍历序列和对称前序遍历序列来判断二叉树是不是对称的。如果两个序列是一样的那么二叉树是对称的。</p><pre><code>bool isSymmetrical(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2);bool isSymmetrical(BinaryTreeNode* pRoot){    return isSymmetrical(pRoot, pRoot);}bool isSymmetrical(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2){    if (pRoot1 == NULL &amp;&amp; pRoot2 == NULL) return true;    else if (pRoot1 == NULL || pRoot2 == NULL) return false;    else if (pRoot1-&gt;m_nValue != pRoot2-&gt;m_nValue) return false;    return isSymmetrical(pRoot1-&gt;m_pLeft, pRoot2-&gt;m_pRight) &amp;&amp; isSymmetrical(pRoot2-&gt;m_pRight, pRoot1-&gt;m_pLeft);}</code></pre><h2 id="Non-Recursive-use-queue-非递归解法"><a href="#Non-Recursive-use-queue-非递归解法" class="headerlink" title="Non-Recursive(use queue)非递归解法:"></a>Non-Recursive(use queue)非递归解法:</h2><p>使用队列进行层次遍历，当队列非空的时候对队列中的结点进行判断，再每次将下一层的所有节点按照对称的顺序入队</p><pre><code>#include&lt;iostream&gt;#include &lt;cstdio&gt;#include &quot;BinaryTree.h&quot;using namespace std;bool isSymmetrical(BinaryTreeNode* pRoot){    if (pRoot == NULL) return true;    queue&lt;BinaryTreeNode*&gt; queue;    queue.push(pRoot-&gt;m_pLeft);    queue.push(pRoot-&gt;m_pRight);    while (!queue.empty())    {        BinaryTreeNode *left = queue.front(); queue.pop();        BinaryTreeNode *right = queue.front(); queue.pop();        if (!left &amp;&amp; !right) continue;        else if (!left || !right) return false;        else if (left-&gt;m_nValue != right-&gt;m_nValue) return false;        queue.push(left-&gt;m_pLeft);        queue.push(right-&gt;m_pRight);        queue.push(left-&gt;m_pRight);        queue.push(right-&gt;m_pLeft);    }    return true;}// ====================测试代码====================void Test(char* testName, BinaryTreeNode* pRoot, bool expected){    if (testName != nullptr)        printf(&quot;%s begins: &quot;, testName);    if (isSymmetrical(pRoot) == expected)        printf(&quot;Passed.\n&quot;);    else        printf(&quot;FAILED.\n&quot;);}//            8//        6      6//       5 7    7 5void Test1(){    BinaryTreeNode* pNode8 = CreateBinaryTreeNode(8);    BinaryTreeNode* pNode61 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode62 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode51 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode71 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode72 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode52 = CreateBinaryTreeNode(5);    ConnectTreeNodes(pNode8, pNode61, pNode62);    ConnectTreeNodes(pNode61, pNode51, pNode71);    ConnectTreeNodes(pNode62, pNode72, pNode52);    Test(&quot;Test1&quot;, pNode8, true);    DestroyTree(pNode8);}//            8//        6      9//       5 7    7 5void Test2(){    BinaryTreeNode* pNode8 = CreateBinaryTreeNode(8);    BinaryTreeNode* pNode61 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode9 = CreateBinaryTreeNode(9);    BinaryTreeNode* pNode51 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode71 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode72 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode52 = CreateBinaryTreeNode(5);    ConnectTreeNodes(pNode8, pNode61, pNode9);    ConnectTreeNodes(pNode61, pNode51, pNode71);    ConnectTreeNodes(pNode9, pNode72, pNode52);    Test(&quot;Test2&quot;, pNode8, false);    DestroyTree(pNode8);}//            8//        6      6//       5 7    7void Test3(){    BinaryTreeNode* pNode8 = CreateBinaryTreeNode(8);    BinaryTreeNode* pNode61 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode62 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode51 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode71 = CreateBinaryTreeNode(7);    BinaryTreeNode* pNode72 = CreateBinaryTreeNode(7);    ConnectTreeNodes(pNode8, pNode61, pNode62);    ConnectTreeNodes(pNode61, pNode51, pNode71);    ConnectTreeNodes(pNode62, pNode72, nullptr);    Test(&quot;Test3&quot;, pNode8, false);    DestroyTree(pNode8);}//               5//              / \//             3   3//            /     \//           4       4//          /         \//         2           2//        /             \//       1               1void Test4(){    BinaryTreeNode* pNode5 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode21 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode11 = CreateBinaryTreeNode(1);    BinaryTreeNode* pNode12 = CreateBinaryTreeNode(1);    ConnectTreeNodes(pNode5, pNode31, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, nullptr, pNode42);    ConnectTreeNodes(pNode41, pNode21, nullptr);    ConnectTreeNodes(pNode42, nullptr, pNode22);    ConnectTreeNodes(pNode21, pNode11, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode12);    Test(&quot;Test4&quot;, pNode5, true);    DestroyTree(pNode5);}//               5//              / \//             3   3//            /     \//           4       4//          /         \//         6           2//        /             \//       1               1void Test5(){    BinaryTreeNode* pNode5 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode6 = CreateBinaryTreeNode(6);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode11 = CreateBinaryTreeNode(1);    BinaryTreeNode* pNode12 = CreateBinaryTreeNode(1);    ConnectTreeNodes(pNode5, pNode31, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, nullptr, pNode42);    ConnectTreeNodes(pNode41, pNode6, nullptr);    ConnectTreeNodes(pNode42, nullptr, pNode22);    ConnectTreeNodes(pNode6, pNode11, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode12);    Test(&quot;Test5&quot;, pNode5, false);    DestroyTree(pNode5);}//               5//              / \//             3   3//            /     \//           4       4//          /         \//         2           2//                      \//                       1void Test6(){    BinaryTreeNode* pNode5 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(3);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(4);    BinaryTreeNode* pNode21 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(2);    BinaryTreeNode* pNode12 = CreateBinaryTreeNode(1);    ConnectTreeNodes(pNode5, pNode31, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, nullptr, pNode42);    ConnectTreeNodes(pNode41, pNode21, nullptr);    ConnectTreeNodes(pNode42, nullptr, pNode22);    ConnectTreeNodes(pNode21, nullptr, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode12);    Test(&quot;Test6&quot;, pNode5, false);    DestroyTree(pNode5);}// 只有一个结点void Test7(){    BinaryTreeNode* pNode1 = CreateBinaryTreeNode(1);    Test(&quot;Test7&quot;, pNode1, true);    DestroyTree(pNode1);}// 没有结点void Test8(){    Test(&quot;Test8&quot;, nullptr, true);}// 所有结点都有相同的值，树对称//               5//              / \//             5   5//            /     \//           5       5//          /         \//         5           5void Test9(){    BinaryTreeNode* pNode1 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode21 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(5);    ConnectTreeNodes(pNode1, pNode21, pNode22);    ConnectTreeNodes(pNode21, pNode31, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, nullptr, pNode42);    ConnectTreeNodes(pNode41, nullptr, nullptr);    ConnectTreeNodes(pNode42, nullptr, nullptr);    Test(&quot;Test9&quot;, pNode1, true);    DestroyTree(pNode1);}// 所有结点都有相同的值，树不对称//               5//              / \//             5   5//            /     \//           5       5//          /       ///         5       5void Test10(){    BinaryTreeNode* pNode1 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode21 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode22 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode31 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode32 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode41 = CreateBinaryTreeNode(5);    BinaryTreeNode* pNode42 = CreateBinaryTreeNode(5);    ConnectTreeNodes(pNode1, pNode21, pNode22);    ConnectTreeNodes(pNode21, pNode31, nullptr);    ConnectTreeNodes(pNode22, nullptr, pNode32);    ConnectTreeNodes(pNode31, pNode41, nullptr);    ConnectTreeNodes(pNode32, pNode42, nullptr);    ConnectTreeNodes(pNode41, nullptr, nullptr);    ConnectTreeNodes(pNode42, nullptr, nullptr);    Test(&quot;Test10&quot;, pNode1, false);    DestroyTree(pNode1);}void main(int argc, char* argv[]){    Test1();    Test2();    Test3();    Test4();    Test5();    Test6();    Test7();    Test8();    Test9();    Test10();}</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="剑指offer思路总结"><a href="#剑指offer思路总结" class="headerlink" title="剑指offer思路总结"></a>剑指offer思路总结</h1><p>剑指offer已经刷过两遍，总结一下思路方便回忆</p><a id="more"></a><h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13.在O(1)时间删除链表结点"></a>13.在O(1)时间删除链表结点</h2><pre><code>分情况讨论：先在链表中顺序搜索要删除的节点i不是尾结点：{    先将i的下一个结点j的内容复制到i    然后把i的指针指向结点j的下一个结点；    此时再删除结点j}链表只有一个结点{    则删除该结点    然后将其置为NULL    将头结点置为空}链表有多个结点而且要删除的结点是尾结点{    从头结点顺序遍历，只要找到该结点i的前序结点就可以，然后执行删除操作}</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p><h3 id="初级解法"><a href="#初级解法" class="headerlink" title="初级解法"></a>初级解法</h3><p>双指针指向头尾部分，头偶尾奇则交换两个数字</p><h3 id="可扩展解法"><a href="#可扩展解法" class="headerlink" title="可扩展解法"></a>可扩展解法</h3><p>仍使用头尾指针，但用函数指针的方法将判断奇偶的函数解耦出来，整体逻辑框架不需要改动</p><h2 id="15-链表中倒数第K个节点"><a href="#15-链表中倒数第K个节点" class="headerlink" title="15.链表中倒数第K个节点"></a>15.链表中倒数第K个节点</h2><p>快慢指针，快指针比慢指针领先k-1步出发，快指针到尾节点时慢指针指向的是所求</p><h3 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h3><h4 id="1-求链表中间结点"><a href="#1-求链表中间结点" class="headerlink" title="1.求链表中间结点"></a>1.求链表中间结点</h4><p>快慢指针，快指针每次走两步，慢指针每次走一步，快指针到末尾时慢指针指向中间结点</p><h4 id="2-判断单向链表是否成环"><a href="#2-判断单向链表是否成环" class="headerlink" title="2.判断单向链表是否成环"></a>2.判断单向链表是否成环</h4><p>同前面，若快指针追上慢指针则成环</p><h2 id="16-反转链表"><a href="#16-反转链表" class="headerlink" title="16.反转链表"></a>16.反转链表</h2><p>需要定义三个指针，指向当前遍历的结点，前一个结点和后一个结点,先要找到反转链表后的头结点即原始链表的尾节点，需要满足的条件是后结点为空</p><pre><code>////Non-RecursiveListNode* ReverseList(ListNode* pHead){    ListNode* pReversedHead = nullptr;    ListNode* pNode = pHead;    ListNode* pPrev = nullptr;    while (pNode != nullptr)    {        ListNode *pNext = pNode-&gt;m_pNext;        if (pNext == NULL) {//find the last node            pReversedHead = pNode;        }        pNode-&gt;m_pNext = pPrev;//Revserse        pPrev = pNode;// forward        pNode = pNext;    }    return pReversedHead;}ListNode* ReverseList(ListNode* pHead){    if (pHead == NULL || pHead-&gt;m_pNext == nullptr) return pHead;    ListNode *PReverseHead = pHead;    pHead=ReverseList(pHead-&gt;m_pNext);    PReverseHead-&gt;m_pNext-&gt;m_pNext = PReverseHead;//进入尾节点    PReverseHead-&gt;m_pNext = NULL;    return pHead;}</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;59-SymmetricalBinaryTree对称的二叉树-CodingInterview&quot;&gt;&lt;a href=&quot;#59-SymmetricalBinaryTree对称的二叉树-CodingInterview&quot; class=&quot;headerlink&quot; title=&quot;59.SymmetricalBinaryTree对称的二叉树(CodingInterview)&quot;&gt;&lt;/a&gt;59.SymmetricalBinaryTree对称的二叉树(CodingInterview)&lt;/h1&gt;&lt;p&gt;与其类似的一道题是LeetCode上的101. Symmetric Tree&lt;/p&gt;
-&lt;p&gt;请实现一个函数，用来判断一颗二叉树是不是对称的。&lt;br&gt;注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。&lt;/p&gt;
+      &lt;h1 id=&quot;剑指offer思路总结&quot;&gt;&lt;a href=&quot;#剑指offer思路总结&quot; class=&quot;headerlink&quot; title=&quot;剑指offer思路总结&quot;&gt;&lt;/a&gt;剑指offer思路总结&lt;/h1&gt;&lt;p&gt;剑指offer已经刷过两遍，总结一下思路方便回忆&lt;/p&gt;
     
     </summary>
     
       <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
     
     
-      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
+      <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
     
-      <category term="BinaryTree" scheme="http://yoursite.com/tags/BinaryTree/"/>
+      <category term="Coding Interviews" scheme="http://yoursite.com/tags/Coding-Interviews/"/>
     
   </entry>
   
