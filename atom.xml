@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-31T02:59:59.513Z</updated>
+  <updated>2018-09-06T02:49:54.368Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>486. Predict the Winner预测赢家</title>
+    <link href="http://yoursite.com/2018/09/06/486.%20Predict%20the%20Winner%E9%A2%84%E6%B5%8B%E8%B5%A2%E5%AE%B6/"/>
+    <id>http://yoursite.com/2018/09/06/486. Predict the Winner预测赢家/</id>
+    <published>2018-09-06T01:18:05.000Z</published>
+    <updated>2018-09-06T02:49:54.368Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="486-Predict-the-Winner预测赢家"><a href="#486-Predict-the-Winner预测赢家" class="headerlink" title="486. Predict the Winner预测赢家"></a>486. Predict the Winner预测赢家</h1><p>给定一个表示分数的非负整数数组。 玩家1从数组任意一端拿取一个分数，随后玩家2继续从剩余数组任意一端拿取分数，然后玩家1拿，……。每次一个玩家只能拿取一个分数，分数被拿取之后不再可取。直到没有剩余分数可取时游戏结束。最终获得分数总和最多的玩家获胜。</p><a id="more"></a><p>给定一个表示分数的数组，预测玩家1是否会成为赢家。你可以假设每个玩家的玩法都会使他的分数最大化。</p><p>示例 1:</p><pre><code>输入: [1, 5, 2]输出: False解释: 一开始，玩家1可以从1和2中进行选择。如果他选择2（或者1），那么玩家2可以从1（或者2）和5中进行选择。如果玩家2选择了5，那么玩家1则只剩下1（或者2）可选。所以，玩家1的最终分数为 1 + 2 = 3，而玩家2为 5。因此，玩家1永远不会成为赢家，返回 False。</code></pre><p>示例 2:</p><pre><code>输入: [1, 5, 233, 7]输出: True解释: 玩家1一开始选择1。然后玩家2必须从5和7中进行选择。无论玩家2选择了哪个，玩家1都可以选择233。最终，玩家1（234分）比玩家2（12分）获得更多的分数，所以返回 True，表示玩家1可以成为赢家。</code></pre><p>注意:</p><p>1 &lt;= 给定的数组长度 &lt;= 20.<br>数组里所有分数都为非负数且不会大于10000000。<br>如果最终两个玩家的分数相等，那么玩家1仍为赢家。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>存储玩家1能从任意子数组[i,j]中获得的最大分数</p><p>给定一个数组A[i,j]，玩家1能够取一个数A[i]或者A[j]，在那之后，形成了一个新的数组A[i+1,j]或者A[i,j-1]，轮到玩家2挑选。玩家1能从子数组中得到的是玩家2剩下的最大分数。<br>DP公式：</p><pre><code>dp(i, j) = max(sum(i, j-1) - dp(i, j-1) + nums[j], sum(i+1, j) - dp(i+1, j) + nums[i])</code></pre><p>也可以将sum(i,j)从公式中消除，我们可以存储玩家1和玩家2的差而不是存储玩家1从每个子数组中能得到的最大值，例如，如果玩家1得到A，玩家2得到B，我们可以使用dp来存储A-B<br>如果A=dp(i,j)，那么B=sum(i,j)-dp(i,j)<br>因此</p><pre><code>dp&apos;(i, j) = dp(i, j) - ( sum(i, j) - dp(i, j) ) = 2*dp(i, j) - sum(i, j), </code></pre><p>所以</p><pre><code>2*dp(i, j) = dp&apos;(i, j) + sum(i, j) (this will be used below)dp&apos;(i, j) = dp(i, j) - ( sum(i, j) - dp(i, j) ) = 2dp(i, j) - sum(i, j)= 2 * max( sum(i, j) - dp(i, j-1), sum(i, j) - dp(i+1, j) ) - sum(i, j)= max(sum(i, j) - 2*dp(i, j-1), sum(i, j) - 2*dp(i+1, j) )= max(sum(i, j) - ( dp&apos;(i, j-1) + sum(i, j-1) ), sum(i, j) - ( dp&apos;(i+1, j) + sum(i+1, j)))= max(sum(i, j) - sum(i, j-1) - dp&apos;(i, j-1), sum(i, j) - sum(i+1, j) - dp&apos;(i+1, j))= max(nums[j] - dp&apos;(i, j-1), nums[i] - dp&apos;(i+1, j))</code></pre><p>最后的公式: </p><pre><code>dp(i, j) = max(nums[j] - dp(i, j-1), nums[i] - dp(i+1, j))</code></pre><p>代码如下：</p><pre><code>class Solution{public: bool PredictTheWinner(vector&lt;int&gt;&amp; nums) {        int n = nums.size();        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n)); // use to keep the score gap between player1 and player2        for (int i = 0; i &lt; n; i++) dp[i][i] = nums[i];        for (int i = 1; i &lt; n; i++) {            for (int j = 0; j+i &lt; n; j++) {                dp[j][j+i] = max(nums[j+i]-dp[j][j+i-1], nums[j]-dp[j+1][j+i]);            }        }        return dp[0][n-1] &gt;= 0; // player1 get more score points than player2    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;486-Predict-the-Winner预测赢家&quot;&gt;&lt;a href=&quot;#486-Predict-the-Winner预测赢家&quot; class=&quot;headerlink&quot; title=&quot;486. Predict the Winner预测赢家&quot;&gt;&lt;/a&gt;486. Predict the Winner预测赢家&lt;/h1&gt;&lt;p&gt;给定一个表示分数的非负整数数组。 玩家1从数组任意一端拿取一个分数，随后玩家2继续从剩余数组任意一端拿取分数，然后玩家1拿，……。每次一个玩家只能拿取一个分数，分数被拿取之后不再可取。直到没有剩余分数可取时游戏结束。最终获得分数总和最多的玩家获胜。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年9月" scheme="http://yoursite.com/categories/2018%E5%B9%B49%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+      <category term="Minimax" scheme="http://yoursite.com/tags/Minimax/"/>
+    
+  </entry>
   
   <entry>
     <title>C++基础概念IV</title>
@@ -167,6 +193,30 @@
   </entry>
   
   <entry>
+    <title>139. Word Break单词拆分</title>
+    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
+    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
+    <published>2018-08-26T12:33:12.000Z</published>
+    <updated>2018-08-27T14:08:19.153Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
+    
+  </entry>
+  
+  <entry>
     <title>626. Exchange Seats换座位</title>
     <link href="http://yoursite.com/2018/08/26/626.%20Exchange%20Seats%E6%8D%A2%E5%BA%A7%E4%BD%8D/"/>
     <id>http://yoursite.com/2018/08/26/626. Exchange Seats换座位/</id>
@@ -190,30 +240,6 @@
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="SQL" scheme="http://yoursite.com/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>139. Word Break单词拆分</title>
-    <link href="http://yoursite.com/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/"/>
-    <id>http://yoursite.com/2018/08/26/139. Word Break单词拆分/</id>
-    <published>2018-08-26T12:33:12.000Z</published>
-    <updated>2018-08-27T14:08:19.153Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="139-Word-Break单词拆分"><a href="#139-Word-Break单词拆分" class="headerlink" title="139. Word Break单词拆分"></a>139. Word Break单词拆分</h1><p>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。</p><a id="more"></a><p>说明：</p><p>拆分时可以重复使用字典中的单词。<br>你可以假设字典中没有重复的单词。<br>示例 1：</p><pre><code>输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]输出: true解释: 返回 true 因为 &quot;leetcode&quot; 可以被拆分成 &quot;leet code&quot;。</code></pre><p>示例 2：</p><pre><code>输入: s = &quot;applepenapple&quot;, wordDict = [&quot;apple&quot;, &quot;pen&quot;]输出: true解释: 返回 true 因为 &quot;applepenapple&quot; 可以被拆分成 &quot;apple pen apple&quot;。     注意你可以重复使用字典中的单词。</code></pre><p>示例 3：</p><pre><code>输入: s = &quot;catsandog&quot;, wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]输出: false</code></pre><h2 id="思路：动态规划"><a href="#思路：动态规划" class="headerlink" title="思路：动态规划"></a>思路：动态规划</h2><p>使用一个bool型的数组dp,dp[i]被设置为真如果一个有效词在这里终结。优化方法是从当前位置i逆向搜索只要找到dp[j]==true的位置就截取之后的子字符串搜索是否在字典中</p><pre><code>class Solution {public:    bool wordBreak(string s, vector&lt;string&gt;&amp; wordDict) {        if(s.size()&lt;=0) return false;        vector&lt;bool&gt; dp(s.size()+1,false);        dp[0]=true;        for(int i=1;i&lt;=s.size();i++){            for(int j=i-1;j&gt;=0;j--){                if(dp[j]){                    string word=s.substr(j,i-j);                    if(findword(wordDict,word)){                        dp[i]=true;                        break;//next i                    }                }            }        }        return dp[s.size()];    }    bool findword(vector&lt;string&gt;&amp; wordDict,string word){        for(int i=0;i&lt;wordDict.size();i++){            if(wordDict[i]==word) return true;        }        return false;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;139-Word-Break单词拆分&quot;&gt;&lt;a href=&quot;#139-Word-Break单词拆分&quot; class=&quot;headerlink&quot; title=&quot;139. Word Break单词拆分&quot;&gt;&lt;/a&gt;139. Word Break单词拆分&lt;/h1&gt;&lt;p&gt;给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
   </entry>
   
@@ -273,17 +299,18 @@
   </entry>
   
   <entry>
-    <title>485. Max Consecutive Ones最大连续1的个数</title>
-    <link href="http://yoursite.com/2018/08/24/485.%20Max%20Consecutive%20Ones/"/>
-    <id>http://yoursite.com/2018/08/24/485. Max Consecutive Ones/</id>
+    <title>697. Degree of an Array数组的度</title>
+    <link href="http://yoursite.com/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/"/>
+    <id>http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</id>
     <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T07:05:48.492Z</updated>
+    <updated>2018-08-24T07:05:54.170Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="485-Max-Consecutive-Ones最大连续1的个数"><a href="#485-Max-Consecutive-Ones最大连续1的个数" class="headerlink" title="485. Max Consecutive Ones最大连续1的个数"></a>485. Max Consecutive Ones最大连续1的个数</h1><p>给定一个二进制数组， 计算其中最大连续1的个数。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1,1,0,1,1,1]</code></pre><p>输出: 3<br>解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.<br>注意：</p><p>输入的数组只包含 0 和1。<br>输入数组的长度是正整数，且不超过 10,000。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>定义局部最大和全局最大</p><pre><code>class Solution {public:    int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) {        int maxlen=0,locallen=0;        for(auto n:nums){            if((n&amp;1)==0) locallen=0;            else {                locallen++;                maxlen=max(maxlen,locallen);            }        }        return maxlen;    }};</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="697-Degree-of-an-Array数组的度"><a href="#697-Degree-of-an-Array数组的度" class="headerlink" title="697. Degree of an Array数组的度"></a>697. Degree of an Array数组的度</h1><p>给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。</p><p>你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1, 2, 2, 3, 1]</code></pre><p>输出: 2<br>解释:<br>输入数组的度是2，因为元素1和2的出现频数最大，均为2.<br>连续子数组里面拥有相同度的有如下所示:</p><pre><code>[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]</code></pre><p>最短连续子数组[2, 2]的长度为2，所以返回2.<br>示例 2:</p><p>输入: </p><pre><code>[1,2,2,3,1,4,2]</code></pre><p>输出: 6<br>注意:</p><p>nums.length 在1到50,000区间范围内。<br>nums[i] 是一个在0到49,999范围内的整数。</p><!-- more --><h2 id="Brute-Force思路"><a href="#Brute-Force思路" class="headerlink" title="Brute Force思路"></a>Brute Force思路</h2><p>穷举所有的子数组然后将其度与原数组的度比较，相等则更新最小长度。但会超时。</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        int minlen=nums.size();        int degree=getdegree(nums,0,nums.size()-1);        for(int i=0;i&lt;nums.size();i++){            for(int j=i+1;j&lt;nums.size();j++){                if(getdegree(nums,i,j)==degree) minlen=min(minlen,j-i+1);            }        }        return minlen;    }    int getdegree(vector&lt;int&gt;&amp; arr,int begin,int end){        int degree=0;        unordered_map&lt;int,int&gt; fre;        for(int i=begin;i&lt;=end;i++){            fre[arr[i]]++;        }        for(auto d:fre){            degree=max(degree,d.second);        }        return degree;    }};</code></pre><h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><p>使用两个哈希表，一个记录字符的开始位置，另一个记录字符的出现频率<br>一旦一个特定字符的频率大于其他的，我们更新这个变量的长度，当两个变量有同样的频率，只比较它们的长度选择较短的一个</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        unordered_map&lt;int,int&gt; startindex,frequency;        int fre=0,len=nums.size();        for(int i=0;i&lt;nums.size();i++){            frequency[nums[i]]++;            if(startindex.count(nums[i])==0) startindex[nums[i]]=i;//first appear            if(frequency[nums[i]]==fre){//第i个字符的度与截止到当前的数组度相同                len=min(len,i-startindex[nums[i]]+1);            }            else if(frequency[nums[i]]&gt;fre){//需要更新度和长度                fre=frequency[nums[i]];                len=i-startindex[nums[i]]+1;            }        }        return len;    }};</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;485-Max-Consecutive-Ones最大连续1的个数&quot;&gt;&lt;a href=&quot;#485-Max-Consecutive-Ones最大连续1的个数&quot; class=&quot;headerlink&quot; title=&quot;485. Max Consecutive Ones最大连续1的个数&quot;&gt;&lt;/a&gt;485. Max Consecutive Ones最大连续1的个数&lt;/h1&gt;&lt;p&gt;给定一个二进制数组， 计算其中最大连续1的个数。&lt;/p&gt;
+      &lt;h1 id=&quot;697-Degree-of-an-Array数组的度&quot;&gt;&lt;a href=&quot;#697-Degree-of-an-Array数组的度&quot; class=&quot;headerlink&quot; title=&quot;697. Degree of an Array数组的度&quot;&gt;&lt;/a&gt;697. Degree of an Array数组的度&lt;/h1&gt;&lt;p&gt;给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。&lt;/p&gt;
+&lt;p&gt;你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。&lt;/p&gt;
     
     </summary>
     
@@ -297,18 +324,17 @@
   </entry>
   
   <entry>
-    <title>697. Degree of an Array数组的度</title>
-    <link href="http://yoursite.com/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/"/>
-    <id>http://yoursite.com/2018/08/24/697. Degree of an Array数组的度/</id>
+    <title>485. Max Consecutive Ones最大连续1的个数</title>
+    <link href="http://yoursite.com/2018/08/24/485.%20Max%20Consecutive%20Ones/"/>
+    <id>http://yoursite.com/2018/08/24/485. Max Consecutive Ones/</id>
     <published>2018-08-24T05:36:12.000Z</published>
-    <updated>2018-08-24T07:05:54.170Z</updated>
+    <updated>2018-08-24T07:05:48.492Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="697-Degree-of-an-Array数组的度"><a href="#697-Degree-of-an-Array数组的度" class="headerlink" title="697. Degree of an Array数组的度"></a>697. Degree of an Array数组的度</h1><p>给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。</p><p>你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1, 2, 2, 3, 1]</code></pre><p>输出: 2<br>解释:<br>输入数组的度是2，因为元素1和2的出现频数最大，均为2.<br>连续子数组里面拥有相同度的有如下所示:</p><pre><code>[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]</code></pre><p>最短连续子数组[2, 2]的长度为2，所以返回2.<br>示例 2:</p><p>输入: </p><pre><code>[1,2,2,3,1,4,2]</code></pre><p>输出: 6<br>注意:</p><p>nums.length 在1到50,000区间范围内。<br>nums[i] 是一个在0到49,999范围内的整数。</p><!-- more --><h2 id="Brute-Force思路"><a href="#Brute-Force思路" class="headerlink" title="Brute Force思路"></a>Brute Force思路</h2><p>穷举所有的子数组然后将其度与原数组的度比较，相等则更新最小长度。但会超时。</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        int minlen=nums.size();        int degree=getdegree(nums,0,nums.size()-1);        for(int i=0;i&lt;nums.size();i++){            for(int j=i+1;j&lt;nums.size();j++){                if(getdegree(nums,i,j)==degree) minlen=min(minlen,j-i+1);            }        }        return minlen;    }    int getdegree(vector&lt;int&gt;&amp; arr,int begin,int end){        int degree=0;        unordered_map&lt;int,int&gt; fre;        for(int i=begin;i&lt;=end;i++){            fre[arr[i]]++;        }        for(auto d:fre){            degree=max(degree,d.second);        }        return degree;    }};</code></pre><h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><p>使用两个哈希表，一个记录字符的开始位置，另一个记录字符的出现频率<br>一旦一个特定字符的频率大于其他的，我们更新这个变量的长度，当两个变量有同样的频率，只比较它们的长度选择较短的一个</p><pre><code>class Solution {public:    int findShortestSubArray(vector&lt;int&gt;&amp; nums) {        unordered_map&lt;int,int&gt; startindex,frequency;        int fre=0,len=nums.size();        for(int i=0;i&lt;nums.size();i++){            frequency[nums[i]]++;            if(startindex.count(nums[i])==0) startindex[nums[i]]=i;//first appear            if(frequency[nums[i]]==fre){//第i个字符的度与截止到当前的数组度相同                len=min(len,i-startindex[nums[i]]+1);            }            else if(frequency[nums[i]]&gt;fre){//需要更新度和长度                fre=frequency[nums[i]];                len=i-startindex[nums[i]]+1;            }        }        return len;    }};</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="485-Max-Consecutive-Ones最大连续1的个数"><a href="#485-Max-Consecutive-Ones最大连续1的个数" class="headerlink" title="485. Max Consecutive Ones最大连续1的个数"></a>485. Max Consecutive Ones最大连续1的个数</h1><p>给定一个二进制数组， 计算其中最大连续1的个数。</p><a id="more"></a><p>示例 1:</p><p>输入: </p><pre><code>[1,1,0,1,1,1]</code></pre><p>输出: 3<br>解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.<br>注意：</p><p>输入的数组只包含 0 和1。<br>输入数组的长度是正整数，且不超过 10,000。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>定义局部最大和全局最大</p><pre><code>class Solution {public:    int findMaxConsecutiveOnes(vector&lt;int&gt;&amp; nums) {        int maxlen=0,locallen=0;        for(auto n:nums){            if((n&amp;1)==0) locallen=0;            else {                locallen++;                maxlen=max(maxlen,locallen);            }        }        return maxlen;    }};</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;697-Degree-of-an-Array数组的度&quot;&gt;&lt;a href=&quot;#697-Degree-of-an-Array数组的度&quot; class=&quot;headerlink&quot; title=&quot;697. Degree of an Array数组的度&quot;&gt;&lt;/a&gt;697. Degree of an Array数组的度&lt;/h1&gt;&lt;p&gt;给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。&lt;/p&gt;
-&lt;p&gt;你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。&lt;/p&gt;
+      &lt;h1 id=&quot;485-Max-Consecutive-Ones最大连续1的个数&quot;&gt;&lt;a href=&quot;#485-Max-Consecutive-Ones最大连续1的个数&quot; class=&quot;headerlink&quot; title=&quot;485. Max Consecutive Ones最大连续1的个数&quot;&gt;&lt;/a&gt;485. Max Consecutive Ones最大连续1的个数&lt;/h1&gt;&lt;p&gt;给定一个二进制数组， 计算其中最大连续1的个数。&lt;/p&gt;
     
     </summary>
     
@@ -375,28 +401,6 @@
   </entry>
   
   <entry>
-    <title>数据库基础概念I</title>
-    <link href="http://yoursite.com/2018/08/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5I/"/>
-    <id>http://yoursite.com/2018/08/24/数据库基础概念I/</id>
-    <published>2018-08-24T02:08:12.000Z</published>
-    <updated>2018-08-29T12:04:46.477Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="数据库基础概念I"><a href="#数据库基础概念I" class="headerlink" title="数据库基础概念I"></a>数据库基础概念I</h1><p>总结数据库基础概念</p><a id="more"></a><h2 id="（一）什么是存储过程？有哪些优缺点？"><a href="#（一）什么是存储过程？有哪些优缺点？" class="headerlink" title="（一）什么是存储过程？有哪些优缺点？"></a>（一）什么是存储过程？有哪些优缺点？</h2><p>存储过程是一些预编译的SQL语句。</p><p>更加直白的理解：存储过程可以说是一个记录集，它是由一些T-SQL语句组成的代码块，这些T-SQL语句代码像一个方法一样实现一些功能（对单表或多表的增删改查），然后再给这个代码块取一个名字，在用到这个功能的时候调用他就行了。</p><p>存储过程是一个预编译的代码块，执行效率比较高<br>一个存储过程替代大量T_SQL语句 ，可以降低网络通信量，提高通信速率<br>可以一定程度上确保数据安全<br>如果你对存储过程不熟悉，建议阅读：<a href="http://www.cnblogs.com/knowledgesea/archive/2013/01/02/2841588.html" target="_blank" rel="noopener">存储过程详解-博客园</a></p><h2 id="（二）索引是什么？有什么作用以及优缺点？"><a href="#（二）索引是什么？有什么作用以及优缺点？" class="headerlink" title="（二）索引是什么？有什么作用以及优缺点？"></a>（二）索引是什么？有什么作用以及优缺点？</h2><p>索引是对数据库表中一或多个列的值进行排序的结构，是帮助MySQL高效获取数据的数据结构</p><p>你也可以这样理解：索引就是加快检索表中数据的方法。数据库的索引类似于书籍的索引。在书籍中，索引允许用户不必翻阅完整个书就能迅速地找到所需要的信息。在数据库中，索引也允许数据库程序迅速地找到表中的数据，而不必扫描整个数据库。</p><p>MySQL数据库几个基本的索引类型：普通索引、唯一索引、主键索引、全文索引</p><p>索引加快数据库的检索速度<br>索引降低了插入、删除、修改等维护任务的速度<br>唯一索引可以确保每一行数据的唯一性<br>通过使用索引，可以在查询的过程中使用优化隐藏器，提高 系统的性能<br>索引需要占物理和数据空间<br>如果你对索引还不太熟悉，建议阅读：<a href="https://kb.cnblogs.com/page/45712/" target="_blank" rel="noopener">漫谈数据库索引</a></p><h2 id="（三）什么是事务？"><a href="#（三）什么是事务？" class="headerlink" title="（三）什么是事务？"></a>（三）什么是事务？</h2><p>事务（Transaction）是并发控制的基本单位。所谓的事务，它是一个操作序列，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。事务是数据库维护数据一致性的单位，在每个事务结束时，都能保持数据一致性。</p><p>如果你对索引还不太熟悉，建议阅读：<a href="https://blog.csdn.net/zdwzzu2006/article/details/5947062" target="_blank" rel="noopener">数据库事务 - Mr. David 专栏</a></p><h2 id="（四）数据库的乐观锁和悲观锁是什么？"><a href="#（四）数据库的乐观锁和悲观锁是什么？" class="headerlink" title="（四）数据库的乐观锁和悲观锁是什么？"></a>（四）数据库的乐观锁和悲观锁是什么？</h2><p>数据库管理系统（DBMS）中的并发控制的任务是确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性。</p><p>乐观并发控制(乐观锁)和悲观并发控制（悲观锁）是并发控制主要采用的技术手段。</p><p>悲观锁：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作<br>乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。<br>如果你对两种锁还不太熟悉，建议阅读：<a href="http://www.open-open.com/lib/view/open1452046967245.html" target="_blank" rel="noopener">深入理解乐观锁与悲观锁</a></p><h2 id="（五）-使用索引查询一定能提高查询的性能吗？为什么"><a href="#（五）-使用索引查询一定能提高查询的性能吗？为什么" class="headerlink" title="（五） 使用索引查询一定能提高查询的性能吗？为什么"></a>（五） 使用索引查询一定能提高查询的性能吗？为什么</h2><p>通常,通过索引查询数据比全表扫描要快.但是我们也必须注意到它的代价.</p><p>索引需要空间来存储,也需要定期维护, 每当有记录在表中增减或索引列被修改时,索引本身也会被修改. 这意味着每条记录的INSERT,DELETE,UPDATE将为此多付出4,5 次的磁盘I/O. 因为索引需要额外的存储空间和处理,那些不必要的索引反而会使查询反应时间变慢.使用索引查询不一定能提高查询性能,索引范围查询(INDEX RANGE SCAN)适用于两种情况:</p><p>基于一个范围的检索,一般查询返回结果集小于表中记录数的30%<br>基于非唯一性索引的检索</p><h2 id="（六）简单说一说drop、delete与truncate的区别"><a href="#（六）简单说一说drop、delete与truncate的区别" class="headerlink" title="（六）简单说一说drop、delete与truncate的区别"></a>（六）简单说一说drop、delete与truncate的区别</h2><p>SQL中的drop、delete、truncate都表示删除，但是三者有一些差别</p><p>delete和truncate只删除表的数据不删除表的结构<br>速度,一般来说: drop&gt; truncate &gt;delete<br>delete语句是dml,这个操作会放到rollback segement中,事务提交之后才生效;<br>如果有相应的trigger,执行的时候将被触发. truncate,drop是ddl, 操作立即生效,原数据不放到rollback segment中,不能回滚. 操作不触发trigger.<br>如果你对这三者的用法还不太熟悉，建议阅读： <a href="https://blog.csdn.net/ws0513/article/details/49980547" target="_blank" rel="noopener">drop、truncate和delete的区别</a></p><h2 id="（七）drop、delete与truncate分别在什么场景之下使用？"><a href="#（七）drop、delete与truncate分别在什么场景之下使用？" class="headerlink" title="（七）drop、delete与truncate分别在什么场景之下使用？"></a>（七）drop、delete与truncate分别在什么场景之下使用？</h2><p>不再需要一张表的时候，用drop<br>想删除部分数据行时候，用delete，并且带上where子句<br>保留表而删除所有数据的时候用truncate</p><h2 id="（八）-超键、候选键、主键、外键分别是什么？"><a href="#（八）-超键、候选键、主键、外键分别是什么？" class="headerlink" title="（八） 超键、候选键、主键、外键分别是什么？"></a>（八） 超键、候选键、主键、外键分别是什么？</h2><p>超键：在关系中能唯一标识元组的属性集称为关系模式的超键。一个属性可以为作为一个超键，多个属性组合在一起也可以作为一个超键。超键包含候选键和主键。</p><p>候选键：是最小超键，即没有冗余元素的超键。</p><p>主键：数据库表中对储存数据对象予以唯一和完整标识的数据列或属性的组合。一个数据列只能有一个主键，且主键的取值不能缺失，即不能为空值（Null）。</p><p>外键：在一个表中存在的另一个表的主键称此表的外键。</p><h2 id="（九）什么是视图？以及视图的使用场景有哪些？"><a href="#（九）什么是视图？以及视图的使用场景有哪些？" class="headerlink" title="（九）什么是视图？以及视图的使用场景有哪些？"></a>（九）什么是视图？以及视图的使用场景有哪些？</h2><p>视图是一种虚拟的表，具有和物理表相同的功能。可以对视图进行增，改，查，操作，试图通常是有一个表或者多个表的行或列的子集。对视图的修改不影响基本表。它使得我们获取数据更容易，相比多表查询。</p><p>只暴露部分字段给访问者，所以就建一个虚表，就是视图。<br>查询的数据来源于不同的表，而查询者希望以统一的方式查询，这样也可以建立一个视图，把多个表查询结果联合起来，查询者只需要直接从视图中获取数据，不必考虑数据来源于不同表所带来的差异</p><h2 id="（十）说一说三个范式。"><a href="#（十）说一说三个范式。" class="headerlink" title="（十）说一说三个范式。"></a>（十）说一说三个范式。</h2><p>第一范式（1NF）：数据库表中的字段都是单一属性的，不可再分。这个单一属性由基本类型构成，包括整型、实数、字符型、逻辑型、日期型等。</p><p>第二范式（2NF）：数据库表中不存在非关键字段对任一候选关键字段的部分函数依赖（部分函数依赖指的是存在组合关键字中的某些字段决定非关键字段的情况），也即所有非关键字段都完全依赖于任意一组候选关键字。<br>第三范式（3NF）：在第二范式的基础上，数据表中如果不存在非关键字段对任一候选关键字段的传递函数依赖则符合第三范式。所谓传递函数依赖，指的是如 果存在”A → B → C”的决定关系，则C传递函数依赖于A。因此，满足第三范式的数据库表应该不存在如下依赖关系： 关键字段 → 非关键字段 x → 非关键字段y</p><p>如果你对三个还不太了解，建议阅读：<a href="https://www.zhihu.com/question/24696366" target="_blank" rel="noopener">解释一下关系数据库的第一第二第三范式？</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;数据库基础概念I&quot;&gt;&lt;a href=&quot;#数据库基础概念I&quot; class=&quot;headerlink&quot; title=&quot;数据库基础概念I&quot;&gt;&lt;/a&gt;数据库基础概念I&lt;/h1&gt;&lt;p&gt;总结数据库基础概念&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Database" scheme="http://yoursite.com/tags/Database/"/>
-    
-  </entry>
-  
-  <entry>
     <title>计算机网络概念I</title>
     <link href="http://yoursite.com/2018/08/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5I/"/>
     <id>http://yoursite.com/2018/08/24/计算机网络概念I/</id>
@@ -415,6 +419,28 @@
     
     
       <category term="Computer Network" scheme="http://yoursite.com/tags/Computer-Network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据库基础概念I</title>
+    <link href="http://yoursite.com/2018/08/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5I/"/>
+    <id>http://yoursite.com/2018/08/24/数据库基础概念I/</id>
+    <published>2018-08-24T02:08:12.000Z</published>
+    <updated>2018-08-29T12:04:46.477Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="数据库基础概念I"><a href="#数据库基础概念I" class="headerlink" title="数据库基础概念I"></a>数据库基础概念I</h1><p>总结数据库基础概念</p><a id="more"></a><h2 id="（一）什么是存储过程？有哪些优缺点？"><a href="#（一）什么是存储过程？有哪些优缺点？" class="headerlink" title="（一）什么是存储过程？有哪些优缺点？"></a>（一）什么是存储过程？有哪些优缺点？</h2><p>存储过程是一些预编译的SQL语句。</p><p>更加直白的理解：存储过程可以说是一个记录集，它是由一些T-SQL语句组成的代码块，这些T-SQL语句代码像一个方法一样实现一些功能（对单表或多表的增删改查），然后再给这个代码块取一个名字，在用到这个功能的时候调用他就行了。</p><p>存储过程是一个预编译的代码块，执行效率比较高<br>一个存储过程替代大量T_SQL语句 ，可以降低网络通信量，提高通信速率<br>可以一定程度上确保数据安全<br>如果你对存储过程不熟悉，建议阅读：<a href="http://www.cnblogs.com/knowledgesea/archive/2013/01/02/2841588.html" target="_blank" rel="noopener">存储过程详解-博客园</a></p><h2 id="（二）索引是什么？有什么作用以及优缺点？"><a href="#（二）索引是什么？有什么作用以及优缺点？" class="headerlink" title="（二）索引是什么？有什么作用以及优缺点？"></a>（二）索引是什么？有什么作用以及优缺点？</h2><p>索引是对数据库表中一或多个列的值进行排序的结构，是帮助MySQL高效获取数据的数据结构</p><p>你也可以这样理解：索引就是加快检索表中数据的方法。数据库的索引类似于书籍的索引。在书籍中，索引允许用户不必翻阅完整个书就能迅速地找到所需要的信息。在数据库中，索引也允许数据库程序迅速地找到表中的数据，而不必扫描整个数据库。</p><p>MySQL数据库几个基本的索引类型：普通索引、唯一索引、主键索引、全文索引</p><p>索引加快数据库的检索速度<br>索引降低了插入、删除、修改等维护任务的速度<br>唯一索引可以确保每一行数据的唯一性<br>通过使用索引，可以在查询的过程中使用优化隐藏器，提高 系统的性能<br>索引需要占物理和数据空间<br>如果你对索引还不太熟悉，建议阅读：<a href="https://kb.cnblogs.com/page/45712/" target="_blank" rel="noopener">漫谈数据库索引</a></p><h2 id="（三）什么是事务？"><a href="#（三）什么是事务？" class="headerlink" title="（三）什么是事务？"></a>（三）什么是事务？</h2><p>事务（Transaction）是并发控制的基本单位。所谓的事务，它是一个操作序列，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。事务是数据库维护数据一致性的单位，在每个事务结束时，都能保持数据一致性。</p><p>如果你对索引还不太熟悉，建议阅读：<a href="https://blog.csdn.net/zdwzzu2006/article/details/5947062" target="_blank" rel="noopener">数据库事务 - Mr. David 专栏</a></p><h2 id="（四）数据库的乐观锁和悲观锁是什么？"><a href="#（四）数据库的乐观锁和悲观锁是什么？" class="headerlink" title="（四）数据库的乐观锁和悲观锁是什么？"></a>（四）数据库的乐观锁和悲观锁是什么？</h2><p>数据库管理系统（DBMS）中的并发控制的任务是确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性。</p><p>乐观并发控制(乐观锁)和悲观并发控制（悲观锁）是并发控制主要采用的技术手段。</p><p>悲观锁：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作<br>乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。<br>如果你对两种锁还不太熟悉，建议阅读：<a href="http://www.open-open.com/lib/view/open1452046967245.html" target="_blank" rel="noopener">深入理解乐观锁与悲观锁</a></p><h2 id="（五）-使用索引查询一定能提高查询的性能吗？为什么"><a href="#（五）-使用索引查询一定能提高查询的性能吗？为什么" class="headerlink" title="（五） 使用索引查询一定能提高查询的性能吗？为什么"></a>（五） 使用索引查询一定能提高查询的性能吗？为什么</h2><p>通常,通过索引查询数据比全表扫描要快.但是我们也必须注意到它的代价.</p><p>索引需要空间来存储,也需要定期维护, 每当有记录在表中增减或索引列被修改时,索引本身也会被修改. 这意味着每条记录的INSERT,DELETE,UPDATE将为此多付出4,5 次的磁盘I/O. 因为索引需要额外的存储空间和处理,那些不必要的索引反而会使查询反应时间变慢.使用索引查询不一定能提高查询性能,索引范围查询(INDEX RANGE SCAN)适用于两种情况:</p><p>基于一个范围的检索,一般查询返回结果集小于表中记录数的30%<br>基于非唯一性索引的检索</p><h2 id="（六）简单说一说drop、delete与truncate的区别"><a href="#（六）简单说一说drop、delete与truncate的区别" class="headerlink" title="（六）简单说一说drop、delete与truncate的区别"></a>（六）简单说一说drop、delete与truncate的区别</h2><p>SQL中的drop、delete、truncate都表示删除，但是三者有一些差别</p><p>delete和truncate只删除表的数据不删除表的结构<br>速度,一般来说: drop&gt; truncate &gt;delete<br>delete语句是dml,这个操作会放到rollback segement中,事务提交之后才生效;<br>如果有相应的trigger,执行的时候将被触发. truncate,drop是ddl, 操作立即生效,原数据不放到rollback segment中,不能回滚. 操作不触发trigger.<br>如果你对这三者的用法还不太熟悉，建议阅读： <a href="https://blog.csdn.net/ws0513/article/details/49980547" target="_blank" rel="noopener">drop、truncate和delete的区别</a></p><h2 id="（七）drop、delete与truncate分别在什么场景之下使用？"><a href="#（七）drop、delete与truncate分别在什么场景之下使用？" class="headerlink" title="（七）drop、delete与truncate分别在什么场景之下使用？"></a>（七）drop、delete与truncate分别在什么场景之下使用？</h2><p>不再需要一张表的时候，用drop<br>想删除部分数据行时候，用delete，并且带上where子句<br>保留表而删除所有数据的时候用truncate</p><h2 id="（八）-超键、候选键、主键、外键分别是什么？"><a href="#（八）-超键、候选键、主键、外键分别是什么？" class="headerlink" title="（八） 超键、候选键、主键、外键分别是什么？"></a>（八） 超键、候选键、主键、外键分别是什么？</h2><p>超键：在关系中能唯一标识元组的属性集称为关系模式的超键。一个属性可以为作为一个超键，多个属性组合在一起也可以作为一个超键。超键包含候选键和主键。</p><p>候选键：是最小超键，即没有冗余元素的超键。</p><p>主键：数据库表中对储存数据对象予以唯一和完整标识的数据列或属性的组合。一个数据列只能有一个主键，且主键的取值不能缺失，即不能为空值（Null）。</p><p>外键：在一个表中存在的另一个表的主键称此表的外键。</p><h2 id="（九）什么是视图？以及视图的使用场景有哪些？"><a href="#（九）什么是视图？以及视图的使用场景有哪些？" class="headerlink" title="（九）什么是视图？以及视图的使用场景有哪些？"></a>（九）什么是视图？以及视图的使用场景有哪些？</h2><p>视图是一种虚拟的表，具有和物理表相同的功能。可以对视图进行增，改，查，操作，试图通常是有一个表或者多个表的行或列的子集。对视图的修改不影响基本表。它使得我们获取数据更容易，相比多表查询。</p><p>只暴露部分字段给访问者，所以就建一个虚表，就是视图。<br>查询的数据来源于不同的表，而查询者希望以统一的方式查询，这样也可以建立一个视图，把多个表查询结果联合起来，查询者只需要直接从视图中获取数据，不必考虑数据来源于不同表所带来的差异</p><h2 id="（十）说一说三个范式。"><a href="#（十）说一说三个范式。" class="headerlink" title="（十）说一说三个范式。"></a>（十）说一说三个范式。</h2><p>第一范式（1NF）：数据库表中的字段都是单一属性的，不可再分。这个单一属性由基本类型构成，包括整型、实数、字符型、逻辑型、日期型等。</p><p>第二范式（2NF）：数据库表中不存在非关键字段对任一候选关键字段的部分函数依赖（部分函数依赖指的是存在组合关键字中的某些字段决定非关键字段的情况），也即所有非关键字段都完全依赖于任意一组候选关键字。<br>第三范式（3NF）：在第二范式的基础上，数据表中如果不存在非关键字段对任一候选关键字段的传递函数依赖则符合第三范式。所谓传递函数依赖，指的是如 果存在”A → B → C”的决定关系，则C传递函数依赖于A。因此，满足第三范式的数据库表应该不存在如下依赖关系： 关键字段 → 非关键字段 x → 非关键字段y</p><p>如果你对三个还不太了解，建议阅读：<a href="https://www.zhihu.com/question/24696366" target="_blank" rel="noopener">解释一下关系数据库的第一第二第三范式？</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;数据库基础概念I&quot;&gt;&lt;a href=&quot;#数据库基础概念I&quot; class=&quot;headerlink&quot; title=&quot;数据库基础概念I&quot;&gt;&lt;/a&gt;数据库基础概念I&lt;/h1&gt;&lt;p&gt;总结数据库基础概念&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Database" scheme="http://yoursite.com/tags/Database/"/>
     
   </entry>
   
@@ -444,31 +470,6 @@
   </entry>
   
   <entry>
-    <title>650. 2 Keys Keyboard只有两个键的键盘</title>
-    <link href="http://yoursite.com/2018/08/24/650.%202%20Keys%20Keyboard%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98/"/>
-    <id>http://yoursite.com/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/</id>
-    <published>2018-08-24T01:30:12.000Z</published>
-    <updated>2018-08-26T11:12:29.003Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="650-2-Keys-Keyboard只有两个键的键盘"><a href="#650-2-Keys-Keyboard只有两个键的键盘" class="headerlink" title="650. 2 Keys Keyboard只有两个键的键盘"></a>650. 2 Keys Keyboard只有两个键的键盘</h1><p>最初在一个记事本上只有一个字符 ‘A’。你每次可以对这个记事本进行两种操作：</p><p>Copy All (复制全部) : 你可以复制这个记事本中的所有字符(部分的复制是不允许的)。<br>Paste (粘贴) : 你可以粘贴你上一次复制的字符。<br>给定一个数字 n 。你需要使用最少的操作次数，在记事本中打印出恰好 n 个 ‘A’。输出能够打印出 n 个 ‘A’ 的最少操作次数。</p><a id="more"></a><p>示例 1:</p><pre><code>输入: 3输出: 3解释:最初, 我们只有一个字符 &apos;A&apos;。第 1 步, 我们使用 Copy All 操作。第 2 步, 我们使用 Paste 操作来获得 &apos;AA&apos;。第 3 步, 我们使用 Paste 操作来获得 &apos;AAA&apos;。</code></pre><p>说明:</p><pre><code>n 的取值范围是 [1, 1000] 。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实这道题就是将N分解为M个数字的乘积，且M个数字的和最小</p><p>我们寻找一个因子d使得我们能够做d次拷贝（n/d）来得到n</p><p>做d次拷贝需要采取d步（第一步全部复制，d-1次粘贴）</p><p>我们需要通过循环来找到这个d</p><p>时间复杂度评估：<br>最好的情况下O（log(n)) ，例如n=1024时需要十次迭代<br>最差情况下当n为一些大的质数的乘积</p><pre><code>public int minSteps(int n) {       int s = 0;       for (int d = 2; d &lt;= n; d++) {           while (n % d == 0) {               s += d;               n /= d;           }       }       return s;   }</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;650-2-Keys-Keyboard只有两个键的键盘&quot;&gt;&lt;a href=&quot;#650-2-Keys-Keyboard只有两个键的键盘&quot; class=&quot;headerlink&quot; title=&quot;650. 2 Keys Keyboard只有两个键的键盘&quot;&gt;&lt;/a&gt;650. 2 Keys Keyboard只有两个键的键盘&lt;/h1&gt;&lt;p&gt;最初在一个记事本上只有一个字符 ‘A’。你每次可以对这个记事本进行两种操作：&lt;/p&gt;
-&lt;p&gt;Copy All (复制全部) : 你可以复制这个记事本中的所有字符(部分的复制是不允许的)。&lt;br&gt;Paste (粘贴) : 你可以粘贴你上一次复制的字符。&lt;br&gt;给定一个数字 n 。你需要使用最少的操作次数，在记事本中打印出恰好 n 个 ‘A’。输出能够打印出 n 个 ‘A’ 的最少操作次数。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
     <title>59. Spiral Matrix II螺旋矩阵 II</title>
     <link href="http://yoursite.com/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/"/>
     <id>http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</id>
@@ -493,26 +494,27 @@
   </entry>
   
   <entry>
-    <title>在浏览器地址栏输入URL，按下回车后发生了什么</title>
-    <link href="http://yoursite.com/2018/08/23/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5URL%EF%BC%8C%E6%8C%89%E4%B8%8B%E5%9B%9E%E8%BD%A6%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"/>
-    <id>http://yoursite.com/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/</id>
-    <published>2018-08-23T01:06:12.000Z</published>
-    <updated>2018-08-23T01:30:21.787Z</updated>
+    <title>650. 2 Keys Keyboard只有两个键的键盘</title>
+    <link href="http://yoursite.com/2018/08/24/650.%202%20Keys%20Keyboard%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98/"/>
+    <id>http://yoursite.com/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/</id>
+    <published>2018-08-24T01:30:12.000Z</published>
+    <updated>2018-08-26T11:12:29.003Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="在浏览器地址栏输入URL，按下回车后发生了什么"><a href="#在浏览器地址栏输入URL，按下回车后发生了什么" class="headerlink" title="在浏览器地址栏输入URL，按下回车后发生了什么"></a>在浏览器地址栏输入URL，按下回车后发生了什么</h1><p>这道题目没有所谓的完全的正确答案，这个题目可以让你在任意的一个点深入下去， 只要你对这个点是熟悉的。以下是一个大概流程：</p><a id="more"></a><h2 id="解答1："><a href="#解答1：" class="headerlink" title="解答1："></a>解答1：</h2><h3 id="1-浏览器向DNS服务器查找输入URL对应的IP地址。"><a href="#1-浏览器向DNS服务器查找输入URL对应的IP地址。" class="headerlink" title="1.浏览器向DNS服务器查找输入URL对应的IP地址。"></a>1.浏览器向DNS服务器查找输入URL对应的IP地址。</h3><h3 id="2-DNS服务器返回网站的IP地址。"><a href="#2-DNS服务器返回网站的IP地址。" class="headerlink" title="2.DNS服务器返回网站的IP地址。"></a>2.DNS服务器返回网站的IP地址。</h3><h3 id="3-浏览器根据IP地址与目标web服务器在80端口上建立TCP连接"><a href="#3-浏览器根据IP地址与目标web服务器在80端口上建立TCP连接" class="headerlink" title="3.浏览器根据IP地址与目标web服务器在80端口上建立TCP连接"></a>3.浏览器根据IP地址与目标web服务器在80端口上建立TCP连接</h3><h3 id="4-浏览器获取请求页面的html代码。"><a href="#4-浏览器获取请求页面的html代码。" class="headerlink" title="4.浏览器获取请求页面的html代码。"></a>4.浏览器获取请求页面的html代码。</h3><h3 id="5-浏览器在显示窗口内渲染HTML。"><a href="#5-浏览器在显示窗口内渲染HTML。" class="headerlink" title="5.浏览器在显示窗口内渲染HTML。"></a>5.浏览器在显示窗口内渲染HTML。</h3><h3 id="6-窗口关闭时，浏览器终止与服务器的连接。"><a href="#6-窗口关闭时，浏览器终止与服务器的连接。" class="headerlink" title="6.窗口关闭时，浏览器终止与服务器的连接。"></a>6.窗口关闭时，浏览器终止与服务器的连接。</h3><p>这其中最有趣的是第1步和第2步(域名解析)。我们输入的网址(域名)是IP地址的一个别名， 在一个DNS内，一个域名对应一个IP地址。域名系统(DNS) 的工作就是将域名与它的IP地址对应起来。DNS是分布式的，同时也是具有层级关系的。</p><h2 id="解答2："><a href="#解答2：" class="headerlink" title="解答2："></a>解答2：</h2><p>当我们用浏览器访问一个网页时，浏览器先尝试从Host文件中获取 <a href="http://www.baidu.com/对应的IP地址，如何不能取到就是用DNS协议来获取IP。在DNS协议中PC会向你的本地DNS服务器求助（一般是路由器），希望从本地DNS服务器那里得到百度的IP，如果得不到本地DNS服务器会向更高层次的DNS服务器求助.......,最终总能得到百度的IP。" target="_blank" rel="noopener">http://www.baidu.com/对应的IP地址，如何不能取到就是用DNS协议来获取IP。在DNS协议中PC会向你的本地DNS服务器求助（一般是路由器），希望从本地DNS服务器那里得到百度的IP，如果得不到本地DNS服务器会向更高层次的DNS服务器求助.......,最终总能得到百度的IP。</a></p><p>得到百度的IP，下一步使用TCP协议，建立TCP连接。在TCP协议中建立TCP需要与百度服务器握手三次，你先告诉服务器你要给服务器发东西（SYN），服务器应答你并告诉你它也要给你发东西（SYN，ACK），然后你向应答服务器（SYN，ACK）做出应答，总共来回了三次，成为3次握手。不过，建立TCP连接有个前提，你必须能够成功地把消息发到服务器上。</p><p>为了将消息从你的PC上传到服务器上，需要用到IP协议、ARP协议和OSPF协议。我们都知道，你的PC和百度服务器之间一般会有许多路由器之类的东西，IP协议指定了出发地和目的地；你的数据会经过一个又一个路由器，OSPF决定了会经过哪些路由器（用一种路由算法，找出最佳路径）从一个路由器怎么传给下一个路由器，这是ARP协议的工作，ARP负责求下一个节点的地址。IP协议使用的是IP地址，整个发送过程中只涉及出发地和目的地2个IP地址，而ARP协议使用的是MAC地址，整个发送过程中涉及到每一个节点的MAC地址。</p><p>现在，我们能和服务器通信，还建立TCP连接，下一步就是用HTTP协议请求网页内容了。你发个http请求报文给服务器，如果服务器禁止你访问就给你回个“forbidden”，如果他暂时挂掉了就给你回个“内部服务错误”，如果它正常才给你回个“OK”，并将你要的数据传给你；如果你有其他需要的东西再去给他要。你收到了服务器的回复，是一坨html的文本，浏览器必须能够理解文本的内容，并快速的渲染到屏幕上。渲染出来后，就可以看到网页了。</p><h2 id="解答3"><a href="#解答3" class="headerlink" title="解答3"></a>解答3</h2><h3 id="基本流程："><a href="#基本流程：" class="headerlink" title="基本流程："></a>基本流程：</h3><p>①查询ip地址</p><p>②建立tcp连接，接入服务器</p><p>③浏览器发起http请求</p><p>④服务器后台操作并做出http响应</p><p>⑤网页的解析与渲染</p><h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><p>查询ip地址<br>①浏览器解析出url中的域名。</p><p>②查询浏览器的DNS缓存。</p><p>③浏览器中没有DNS缓存，则查找本地客户端hosts文件有无对应的ip地址。</p><p>④hosts中无，则查找本地DNS服务器（运营商提供的DNS服务器）有无对应的DNS缓存。</p><p>⑤若本地DNS没有DNS缓存，则向根服务器查询，进行递归查找。</p><p>⑥递归查找从顶级域名开始（如.com）,一步步缩小范围，最终客户端取得ip地址。</p><p>tcp连接与http连接<br>①http协议建立在tcp协议之上，http请求前，需先进行tcp连接，形成客户端到服务器的稳定的通道。俗称TCP的三次握手。</p><p>②tcp连接完成后，http请求开始，请求有多种方式，常见的有get，post等。</p><p>③http请求包含请求头，也可能包含请求体两部分，请求头中包含我们希望对请求文件的操作的信息，请求体中包含传递给后台的参数。</p><p>④服务器收到http请求后，后台开始工作，如负载平衡，跨域等，这里就是后端的工作了。</p><p>⑤文件处理完毕，生成响应数据包，响应也包含两部分，响应头和相应体，响应体就是我们所请求的文件。</p><p>⑥经过网络传输，文件被下载到本地客户端，客户端开始加载。</p><p>html渲染<br>①客户端浏览器加载了html文件后，由上到下解析html为DOM树（DOM Tree）。</p><p>②遇到css文件，css中的url发起http请求。</p><p>③这是第二次http请求，由于http1.1协议增加了Connection: keep-alive声明，故tcp连接不会关闭，可以复用。</p><p>④http连接是无状态连接，客户端与服务器端需要重新发起请求–响应。</p><p>在请求css的过程中，解析器继续解析html，然后到了script标签。</p><p>⑤由于script可能会改变DOM结构，故解析器停止生成DOM树，解析器被js阻塞，等待js文件发起http请求，然后加载。这是第三次http请求。js执行完成后解析器继续解析。</p><p>⑥由于css文件可能会影响js文件的执行结果，因此需等css文件加载完成后再执行。</p><p>⑦浏览器收到css文件后，开始解析css文件为CSSOM树（CSS Rule Tree）。</p><p>⑧CSSOM树生成后，DOM Tree与CSS Rule Tree结合生成渲染树（Render Tree）。</p><p>⑨Render Tree会被css文件阻塞，渲染树生成后，先布局，绘制渲染树中节点的属性(位置，宽度，大小等)，然后渲染，页面就会呈现信息。</p><p>⑩继续边解析边渲染，遇到了另一个js文件，js文件执行后改变了DOM树，渲染树从被改变的dom开始再次渲染。</p><p>⑪继续向下渲染，碰到一个img标签，浏览器发起http请求，不会等待img加载完成，继续向下渲染，之后再重新渲染此部分。</p><p>⑫DOM树遇到html结束标签，停止解析，进而渲染结束。</p><h3 id="扩展思考"><a href="#扩展思考" class="headerlink" title="扩展思考"></a>扩展思考</h3><p>有那些网站优化的方法？<br>①减少DNS查询:将服务器域名的ip信息加入本地host文件。</p><p>②减少http请求数量，对于图片使用雪碧图,对于html文件和css文件，js文件分别进行合并操作。</p><p>③减少下载时间：压缩图片，使用压缩应用压缩文档中的空格，删除文件多余的语句和注释，创造自己的js精简库和精简框架,使用本地浏览器缓存。</p><p>④提前渲染开始时间：将css链接放在html头部。</p><p>⑤减轻解析器的阻塞：将js链接放在body尾部</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="650-2-Keys-Keyboard只有两个键的键盘"><a href="#650-2-Keys-Keyboard只有两个键的键盘" class="headerlink" title="650. 2 Keys Keyboard只有两个键的键盘"></a>650. 2 Keys Keyboard只有两个键的键盘</h1><p>最初在一个记事本上只有一个字符 ‘A’。你每次可以对这个记事本进行两种操作：</p><p>Copy All (复制全部) : 你可以复制这个记事本中的所有字符(部分的复制是不允许的)。<br>Paste (粘贴) : 你可以粘贴你上一次复制的字符。<br>给定一个数字 n 。你需要使用最少的操作次数，在记事本中打印出恰好 n 个 ‘A’。输出能够打印出 n 个 ‘A’ 的最少操作次数。</p><a id="more"></a><p>示例 1:</p><pre><code>输入: 3输出: 3解释:最初, 我们只有一个字符 &apos;A&apos;。第 1 步, 我们使用 Copy All 操作。第 2 步, 我们使用 Paste 操作来获得 &apos;AA&apos;。第 3 步, 我们使用 Paste 操作来获得 &apos;AAA&apos;。</code></pre><p>说明:</p><pre><code>n 的取值范围是 [1, 1000] 。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实这道题就是将N分解为M个数字的乘积，且M个数字的和最小</p><p>我们寻找一个因子d使得我们能够做d次拷贝（n/d）来得到n</p><p>做d次拷贝需要采取d步（第一步全部复制，d-1次粘贴）</p><p>我们需要通过循环来找到这个d</p><p>时间复杂度评估：<br>最好的情况下O（log(n)) ，例如n=1024时需要十次迭代<br>最差情况下当n为一些大的质数的乘积</p><pre><code>public int minSteps(int n) {       int s = 0;       for (int d = 2; d &lt;= n; d++) {           while (n % d == 0) {               s += d;               n /= d;           }       }       return s;   }</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;在浏览器地址栏输入URL，按下回车后发生了什么&quot;&gt;&lt;a href=&quot;#在浏览器地址栏输入URL，按下回车后发生了什么&quot; class=&quot;headerlink&quot; title=&quot;在浏览器地址栏输入URL，按下回车后发生了什么&quot;&gt;&lt;/a&gt;在浏览器地址栏输入URL，按下回车后发生了什么&lt;/h1&gt;&lt;p&gt;这道题目没有所谓的完全的正确答案，这个题目可以让你在任意的一个点深入下去， 只要你对这个点是熟悉的。以下是一个大概流程：&lt;/p&gt;
+      &lt;h1 id=&quot;650-2-Keys-Keyboard只有两个键的键盘&quot;&gt;&lt;a href=&quot;#650-2-Keys-Keyboard只有两个键的键盘&quot; class=&quot;headerlink&quot; title=&quot;650. 2 Keys Keyboard只有两个键的键盘&quot;&gt;&lt;/a&gt;650. 2 Keys Keyboard只有两个键的键盘&lt;/h1&gt;&lt;p&gt;最初在一个记事本上只有一个字符 ‘A’。你每次可以对这个记事本进行两种操作：&lt;/p&gt;
+&lt;p&gt;Copy All (复制全部) : 你可以复制这个记事本中的所有字符(部分的复制是不允许的)。&lt;br&gt;Paste (粘贴) : 你可以粘贴你上一次复制的字符。&lt;br&gt;给定一个数字 n 。你需要使用最少的操作次数，在记事本中打印出恰好 n 个 ‘A’。输出能够打印出 n 个 ‘A’ 的最少操作次数。&lt;/p&gt;
     
     </summary>
     
       <category term="2018年8月" scheme="http://yoursite.com/categories/2018%E5%B9%B48%E6%9C%88/"/>
     
     
-      <category term="TCPIP" scheme="http://yoursite.com/tags/TCPIP/"/>
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
-      <category term="Web" scheme="http://yoursite.com/tags/Web/"/>
+      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
   </entry>
   
