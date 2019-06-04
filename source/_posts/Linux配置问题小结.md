@@ -16,6 +16,7 @@ tags: [Linux]
 ## 实现功能
 1. Ubuntu 18.04 安装terminator 并在右键菜单中添加open in termintor
 2. 解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题
+3. 解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。
 
 ## Terminator安装和右键菜单添加解决方案
   题外话，安利下terminator，是Linux环境下一款非常赞的命令行管理工具，前段时间微软宣布推出名为Windows Terminal的新款命令行工具，在个人看来也是姗姗来迟的将terminator能实现的功能在windows中实现了。
