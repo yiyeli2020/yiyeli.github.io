@@ -1,13 +1,13 @@
 ---
 title: Linux配置问题小结
-date: 2019-5-30 12:47:45
-categories: 2019年5月
+date: 2019-6-3 12:47:45
+categories: 2019年6月
 tags: [Linux]
 
 ---
 #  Linux配置问题小结
 
-记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor，解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题
+记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor;解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题;解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。
 
 <!-- more -->
 
@@ -82,3 +82,53 @@ tags: [Linux]
 
 然后安装我们重新打包的输入法即可。重启之后，搜狗输入法恢复正常。
 最后要记得在设置-》区域和语言-》管理已安装的语言-》语言支持-》语言-》键盘输入法系统中选择Fcitx系统，因为搜狗输入法等都是在Fcitx系统框架下的。
+
+
+
+## LINUX下无线网卡rtl8821CE/rtl8723de驱动无法驱动解决办法
+
+### 1. 确保linux内核版本大于 4.14
+  如何查看linux 内核版本 ：终端 uname -sr
+
+  如果内核版本低于 4.14：升级linux内核 ubuntu可以参照 https://www.linuxidc.com/Linux/2017-03/141940.html
+
+  升级完记得重启
+
+### 2. 下载linux中8821CE/rtl8723de的驱动源码
+
+git原地址（rtl8821CE）：https://github.com/endlessm/linux/tree/master/drivers/net/wireless/rtl8821ce
+
+git原地址（rtl8723de）：https://github.com/endlessm/linux/tree/master/drivers/net/wireless/rtl8723de
+
+或者本地下载 https://free-1253146430.cos.ap-shanghai.myqcloud.com/rtl8821ce.zip
+
+（rtl8723de 的话 自己 去git上下吧）
+
+### 3.编译驱动
+  ***解压rtl8821ce.zip***
+
+  ***修改文件Makefile***
+
+    export TopDIR ?= $(srctree)/drivers/net/wireless/rtl8821ce
+
+从这行 “export TopDIR ?= 后面改成当前目录 例如我的：
+
+    export TopDIR ?= /home/horsun/Downloads/rtl8821ce
+
+***保存修改***
+
+  分别进行：
+
+      make
+      sudo make install
+      sudo modprobe -a 8821ce
+
+遇到问题
+
+    modprobe: ERROR: could not insert '8812au': Exec format error
+***执行***
+
+    make clean
+    make
+    sudo make install
+    sudo modprobe 8812au
