@@ -198,73 +198,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Git分区概念" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/09/06/Git分区概念/" class="article-date">
-      <time datetime="2018-09-06T14:04:12.000Z" itemprop="datePublished">2018-09-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/06/Git分区概念/">Git分区概念</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>复习一下Git的分区概念</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年9月/">2018年9月</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/09/06/Git分区概念/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-486. Predict the Winner预测赢家" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -497,81 +430,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <a id="more"></a>
-<p>你现在是棒球比赛记录员。<br>给定一个字符串列表，每个字符串可以是以下四种类型之一：<br>1.整数（一轮的得分）：直接表示您在本轮中获得的积分数。</p>
-<ol start="2">
-<li>“+”（一轮的得分）：表示本轮获得的得分是前两轮有效 回合得分的总和。</li>
-<li>“D”（一轮的得分）：表示本轮获得的得分是前一轮有效 回合得分的两倍。</li>
-<li>“C”（一个操作，这不是一个回合的分数）：表示您获得的最后一个有效 回合的分数是无效的，应该被移除。</li>
-</ol>
-<p>每一轮的操作都是永久性的，可能会对前一轮和后一轮产生影响。<br>你需要返回你在所有回合中得分的总和。</p>
-<p>示例 1:</p>
-<p>输入: [“5”,”2”,”C”,”D”,”+”]<br>输出: 30</p>
-<pre><code>解释:
-第1轮：你可以得到5分。总和是：5。
-第2轮：你可以得到2分。总和是：7。
-操作1：第2轮的数据无效。总和是：5。
-第3轮：你可以得到10分（第2轮的数据已被删除）。总数是：15。
-第4轮：你可以得到5 + 10 = 15分。总数是：30。
-</code></pre><p>示例 2:</p>
-<p>输入: [“5”,”-2”,”4”,”C”,”D”,”9”,”+”,”+”]<br>输出: 27</p>
-<pre><code>解释:
-第1轮：你可以得到5分。总和是：5。
-第2轮：你可以得到-2分。总数是：3。
-第3轮：你可以得到4分。总和是：7。
-操作1：第3轮的数据无效。总数是：3。
-第4轮：你可以得到-4分（第三轮的数据已被删除）。总和是：-1。
-第5轮：你可以得到9分。总数是：8。
-第6轮：你可以得到-4 + 9 = 5分。总数是13。
-第7轮：你可以得到9 + 5 = 14分。总数是27。
-</code></pre><p>注意：</p>
-<p>输入列表的大小将介于1和1000之间。<br>列表中的每个整数都将介于-30000和30000之间。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目很简单，用栈来存储每局得分按照规则计算即可，但一定要细心，写的时候犯了两个错误，一个是加号时要将前两局得分和入栈而不是将总分数入栈，另一个是分数为负时要将负分数入栈</p>
-<pre><code>class Solution {
-public:
-    int calPoints(vector&lt;string&gt;&amp; ops) {
-        stack&lt;int&gt; sta;
-        int sum=0;
-        for(int i=0;i&lt;ops.size();i++){
-
-            if(ops[i]==&quot;+&quot;) {
-                int s1=sta.top();sta.pop();
-                int s2=sta.top();sta.push(s1);
-                //cout&lt;&lt;&quot;sum=&quot;&lt;&lt;sum&lt;&lt;&quot;   s1=&quot;&lt;&lt;s1&lt;&lt;&quot;   s2=&quot;&lt;&lt;s2&lt;&lt;endl;
-                sum=sum+s1+s2;
-                sta.push(s1+s2);
-            }else if(ops[i]==&quot;D&quot;){
-                int s1=sta.top();
-                sum+=2*s1;
-                sta.push(2*s1);
-            }else if(ops[i]==&quot;C&quot;){
-                int s1=sta.top();
-                sum-=s1;
-                sta.pop();
-            }else{
-                if(ops[i][0]==&apos;-&apos;){
-                    int s1=0;
-                    for(int j=1;j&lt;ops[i].size();j++){
-                        s1=s1*10+(ops[i][j]-&apos;0&apos;);
-                    }
-                    sum-=s1;
-                    sta.push(-s1);
-                }
-                else{
-                    int s1=0;
-                    for(int j=0;j&lt;ops[i].size();j++){
-                        s1=s1*10+(ops[i][j]-&apos;0&apos;);
-                    }
-                    sum+=s1;
-                    sta.push(s1);
-                }
-            }
-           // cout&lt;&lt;&quot;sum=&quot;&lt;&lt;sum&lt;&lt;endl;
-        }
-        return sum;
-    }
-};
-</code></pre>
+              <p>返回你在所有回合中得分的总和。</p>
+          
       
       
     </div>
@@ -589,6 +449,10 @@ public:
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Stack/">Stack</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a  href="/2018/08/30/682. Baseball Game棒球比赛/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -928,6 +792,73 @@ public:
       
         <p class="article-more-link">
           <a  href="/2018/08/26/626. Exchange Seats换座位/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Kickstart-Round-E-2018-ProblemA.Yogurt" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/" class="article-date">
+      <time datetime="2018-08-26T07:07:00.000Z" itemprop="datePublished">2018-08-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>酸奶可以作为开胃菜、主菜或甜点的营养成分，但它必须在过期前食用，而且可能很快过期!此外，不同的酸奶会在不同的日子过期。露西很喜欢酸奶，她刚买了N杯酸奶，但她担心自己可能无法在酸奶过期前全部喝完。从今天开始，第i杯酸奶会过期，在过期当天或之后的任何一天都不能喝。虽然露西很喜欢酸奶，但她每天最多只能喝K杯酸奶。从今天开始，她最多能喝多少杯酸奶?</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google/">Google</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kickstart/">Kickstart</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
