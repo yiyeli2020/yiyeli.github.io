@@ -5,8 +5,8 @@ categories: 2018年9月
 tags: [C++,STL,vector]
 
 ---
- 
 
+总结vector的原理
 
 
 <!-- more -->
