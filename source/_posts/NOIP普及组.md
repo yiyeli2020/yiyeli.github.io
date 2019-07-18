@@ -1,7 +1,7 @@
 ---
 title: NOIP普及组
 date: 2019-7-17 12:30:12
-categories: 2019年7月18日
+categories: 2019年7月
 tags: [NOIP]
 
 ---
