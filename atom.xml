@@ -39,6 +39,28 @@
   </entry>
   
   <entry>
+    <title>NOIP普及组</title>
+    <link href="http://yoursite.com/2019/07/17/NOIP%E6%99%AE%E5%8F%8A%E7%BB%84/"/>
+    <id>http://yoursite.com/2019/07/17/NOIP普及组/</id>
+    <published>2019-07-17T04:30:12.000Z</published>
+    <updated>2019-07-18T03:37:32.613Z</updated>
+    
+    <content type="html"><![CDATA[<p>介绍NOIP考察形式和考察知识点，制定相应学习计划。</p><a id="more"></a><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;介绍NOIP考察形式和考察知识点，制定相应学习计划。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2019年7月18日" scheme="http://yoursite.com/categories/2019%E5%B9%B47%E6%9C%8818%E6%97%A5/"/>
+    
+    
+      <category term="NOIP" scheme="http://yoursite.com/tags/NOIP/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux配置问题小结</title>
     <link href="http://yoursite.com/2019/06/03/Linux%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E5%B0%8F%E7%BB%93/"/>
     <id>http://yoursite.com/2019/06/03/Linux配置问题小结/</id>
@@ -273,32 +295,6 @@
   </entry>
   
   <entry>
-    <title>102.Binary Tree Level Order Traversal二叉树的层次遍历</title>
-    <link href="http://yoursite.com/2018/10/04/102.Binary%20Tree%20Level%20Order%20Traversal%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%20/"/>
-    <id>http://yoursite.com/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /</id>
-    <published>2018-10-04T11:14:32.000Z</published>
-    <updated>2019-07-17T03:53:33.976Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="102-Binary-Tree-Level-Order-Traversal二叉树的层次遍历"><a href="#102-Binary-Tree-Level-Order-Traversal二叉树的层次遍历" class="headerlink" title="102.Binary Tree Level Order Traversal二叉树的层次遍历"></a>102.Binary Tree Level Order Traversal二叉树的层次遍历</h1><p>给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。</p><a id="more"></a><p>例如:</p><pre><code>给定二叉树: [3,9,20,null,null,15,7],    3   / \  9  20    /  \   15   7</code></pre><p>返回其层次遍历结果：</p><pre><code>[  [3],  [9,20],  [15,7]]</code></pre><h2 id="思路1-递归"><a href="#思路1-递归" class="headerlink" title="思路1:递归"></a>思路1:递归</h2><pre><code>/** * Definition for a binary tree node. * struct TreeNode { *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode(int x) : val(x), left(NULL), right(NULL) {} * }; */class Solution {public:    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) {        vector&lt;vector&lt;int&gt;&gt; res;        leveltravel(res,0,root);        return res;    }    void leveltravel(vector&lt;vector&lt;int&gt;&gt; &amp;res,int depth,TreeNode * root){         if(!root) return ;        vector&lt;int&gt; temp;        if(res.size()==depth) res.push_back(temp);        res[depth].push_back(root-&gt;val);        leveltravel(res,depth+1,root-&gt;left);        leveltravel(res,depth+1,root-&gt;right);        return;    }};</code></pre><h2 id="非递归"><a href="#非递归" class="headerlink" title="非递归"></a>非递归</h2><p>在做的过程中注意队列的大小会随时变化，因此需要将q.size()保存为一个变量</p><pre><code>/** * Definition for a binary tree node. * struct TreeNode { *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode(int x) : val(x), left(NULL), right(NULL) {} * }; */class Solution {public:    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) {        queue&lt;TreeNode *&gt; q;        vector&lt;vector&lt;int&gt;&gt; res;        if(root) {            q.push(root);        }        while(!q.empty()){         vector&lt;int&gt; temp;           int len=q.size();         for(int i=0;i&lt;len;i++){            TreeNode *cur;            cur=q.front();            temp.push_back(cur-&gt;val);            q.pop();             //cout&lt;&lt;&quot;i=&quot;&lt;&lt;i&lt;&lt;&quot;   cur-&gt;val=&quot;&lt;&lt;cur-&gt;val&lt;&lt;endl;            if(cur-&gt;left) q.push(cur-&gt;left);            if(cur-&gt;right) q.push(cur-&gt;right);            }            //cout&lt;&lt;&quot;  *********&quot;&lt;&lt;endl;            res.push_back(temp);        }    return res;    }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;102-Binary-Tree-Level-Order-Traversal二叉树的层次遍历&quot;&gt;&lt;a href=&quot;#102-Binary-Tree-Level-Order-Traversal二叉树的层次遍历&quot; class=&quot;headerlink&quot; title=&quot;102.Binary Tree Level Order Traversal二叉树的层次遍历&quot;&gt;&lt;/a&gt;102.Binary Tree Level Order Traversal二叉树的层次遍历&lt;/h1&gt;&lt;p&gt;给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年10月" scheme="http://yoursite.com/categories/2018%E5%B9%B410%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Tree" scheme="http://yoursite.com/tags/Tree/"/>
-    
-      <category term="Breadth-first Search" scheme="http://yoursite.com/tags/Breadth-first-Search/"/>
-    
-  </entry>
-  
-  <entry>
     <title>117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</title>
     <link href="http://yoursite.com/2018/10/04/117.Populating%20Next%20Right%20Pointers%20in%20Each%20NodeII%E5%A1%AB%E5%85%85%E5%90%8C%E4%B8%80%E5%B1%82%E7%9A%84%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9II/"/>
     <id>http://yoursite.com/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/</id>
@@ -332,6 +328,32 @@
   </entry>
   
   <entry>
+    <title>102.Binary Tree Level Order Traversal二叉树的层次遍历</title>
+    <link href="http://yoursite.com/2018/10/04/102.Binary%20Tree%20Level%20Order%20Traversal%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%20/"/>
+    <id>http://yoursite.com/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /</id>
+    <published>2018-10-04T11:14:32.000Z</published>
+    <updated>2019-07-17T03:53:33.976Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="102-Binary-Tree-Level-Order-Traversal二叉树的层次遍历"><a href="#102-Binary-Tree-Level-Order-Traversal二叉树的层次遍历" class="headerlink" title="102.Binary Tree Level Order Traversal二叉树的层次遍历"></a>102.Binary Tree Level Order Traversal二叉树的层次遍历</h1><p>给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。</p><a id="more"></a><p>例如:</p><pre><code>给定二叉树: [3,9,20,null,null,15,7],    3   / \  9  20    /  \   15   7</code></pre><p>返回其层次遍历结果：</p><pre><code>[  [3],  [9,20],  [15,7]]</code></pre><h2 id="思路1-递归"><a href="#思路1-递归" class="headerlink" title="思路1:递归"></a>思路1:递归</h2><pre><code>/** * Definition for a binary tree node. * struct TreeNode { *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode(int x) : val(x), left(NULL), right(NULL) {} * }; */class Solution {public:    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) {        vector&lt;vector&lt;int&gt;&gt; res;        leveltravel(res,0,root);        return res;    }    void leveltravel(vector&lt;vector&lt;int&gt;&gt; &amp;res,int depth,TreeNode * root){         if(!root) return ;        vector&lt;int&gt; temp;        if(res.size()==depth) res.push_back(temp);        res[depth].push_back(root-&gt;val);        leveltravel(res,depth+1,root-&gt;left);        leveltravel(res,depth+1,root-&gt;right);        return;    }};</code></pre><h2 id="非递归"><a href="#非递归" class="headerlink" title="非递归"></a>非递归</h2><p>在做的过程中注意队列的大小会随时变化，因此需要将q.size()保存为一个变量</p><pre><code>/** * Definition for a binary tree node. * struct TreeNode { *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode(int x) : val(x), left(NULL), right(NULL) {} * }; */class Solution {public:    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) {        queue&lt;TreeNode *&gt; q;        vector&lt;vector&lt;int&gt;&gt; res;        if(root) {            q.push(root);        }        while(!q.empty()){         vector&lt;int&gt; temp;           int len=q.size();         for(int i=0;i&lt;len;i++){            TreeNode *cur;            cur=q.front();            temp.push_back(cur-&gt;val);            q.pop();             //cout&lt;&lt;&quot;i=&quot;&lt;&lt;i&lt;&lt;&quot;   cur-&gt;val=&quot;&lt;&lt;cur-&gt;val&lt;&lt;endl;            if(cur-&gt;left) q.push(cur-&gt;left);            if(cur-&gt;right) q.push(cur-&gt;right);            }            //cout&lt;&lt;&quot;  *********&quot;&lt;&lt;endl;            res.push_back(temp);        }    return res;    }};</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;102-Binary-Tree-Level-Order-Traversal二叉树的层次遍历&quot;&gt;&lt;a href=&quot;#102-Binary-Tree-Level-Order-Traversal二叉树的层次遍历&quot; class=&quot;headerlink&quot; title=&quot;102.Binary Tree Level Order Traversal二叉树的层次遍历&quot;&gt;&lt;/a&gt;102.Binary Tree Level Order Traversal二叉树的层次遍历&lt;/h1&gt;&lt;p&gt;给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2018年10月" scheme="http://yoursite.com/categories/2018%E5%B9%B410%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Tree" scheme="http://yoursite.com/tags/Tree/"/>
+    
+      <category term="Breadth-first Search" scheme="http://yoursite.com/tags/Breadth-first-Search/"/>
+    
+  </entry>
+  
+  <entry>
     <title>199.Binary Tree Right Side View二叉树的右视图</title>
     <link href="http://yoursite.com/2018/10/04/199.Binary%20Tree%20Right%20Side%20View%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/"/>
     <id>http://yoursite.com/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/</id>
@@ -353,9 +375,9 @@
     
       <category term="Tree" scheme="http://yoursite.com/tags/Tree/"/>
     
-      <category term="Breadth-first Search" scheme="http://yoursite.com/tags/Breadth-first-Search/"/>
-    
       <category term="Depth-first Search" scheme="http://yoursite.com/tags/Depth-first-Search/"/>
+    
+      <category term="Breadth-first Search" scheme="http://yoursite.com/tags/Breadth-first-Search/"/>
     
   </entry>
   
@@ -484,30 +506,6 @@
     
     
       <category term="C++" scheme="http://yoursite.com/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>792. Number of Matching Subsequences匹配子序列的单词数</title>
-    <link href="http://yoursite.com/2018/09/20/792.%20Number%20of%20Matching%20Subsequences%E5%8C%B9%E9%85%8D%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E5%8D%95%E8%AF%8D%E6%95%B0/"/>
-    <id>http://yoursite.com/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/</id>
-    <published>2018-09-20T07:08:38.000Z</published>
-    <updated>2019-07-17T03:53:33.986Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="792-Number-of-Matching-Subsequences匹配子序列的单词数"><a href="#792-Number-of-Matching-Subsequences匹配子序列的单词数" class="headerlink" title="792. Number of Matching Subsequences匹配子序列的单词数"></a>792. Number of Matching Subsequences匹配子序列的单词数</h1><p>给定字符串 S 和单词字典 words, 求 words[i] 中是 S 的子序列的单词个数。</p><a id="more"></a><pre><code>示例:输入: S = &quot;abcde&quot;words = [&quot;a&quot;, &quot;bb&quot;, &quot;acd&quot;, &quot;ace&quot;]输出: 3解释: 有三个是 S 的子序列的单词: &quot;a&quot;, &quot;acd&quot;, &quot;ace&quot;。</code></pre><p>注意:</p><p>所有在words和 S 里的单词都只由小写字母组成。<br>S 的长度在 [1, 50000]。<br>words 的长度在 [1, 5000]。<br>words[i]的长度在[1, 50]。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><pre><code>class Solution {public:/*解法二：二分查找 4.复杂度估计O(mlogn)，m为 words 的个数，n 表示 S 的长度。*/    int numMatchingSubseq(string S, vector&lt;string&gt;&amp; words) {        //1.考虑第一种情况主要是因为字符批对的效率不够高，我们需要一位位字符批对过去。所以我们可考虑用更高效的方法去批对。        vector&lt;vector&lt;int&gt;&gt; alpha(26);//2.先记录下 S 中各个字符出现的位置，并且按顺序记录下来。        for (int i = 0; i &lt; S.size(); i++) {            alpha[S[i] - &apos;a&apos;].push_back(i);        }        int res = 0;        for (const auto word : words) {            int x = -1;//3.初始化记录当前指向 S 位置的指针为-1            bool found = true;            for (char c : word) {//对每个 word 的字符 char 去 dicts 中查找是否存在该字符，如果没有则说明子串不存在，可以跳转下一个 word               //反之，我们可以用二分查找的方式去寻找 S 中所有字符 char 的位置 中，第一个大于当前指向 S 位置的指针的位置（这边用到了贪心的思想）。如果存在，则更新指向 S 位置的指针到该位置。否则说明子串不存在。                auto it = upper_bound(alpha[c - &apos;a&apos;].begin(), alpha[c - &apos;a&apos;].end(), x); //upper_bound是用二分查找在排序数组中找到第一个大于x的数字位置，lower_bound是用二分查找找到第一个大于或等于x的数字位置                if (it == alpha[c - &apos;a&apos;].end()) {                    found = false;                }                else { x = *it; }            }            if (found) res++;        }        return res;    }    // int numMatchingSubseq(string S, vector&lt;string&gt;&amp; words) {    //     //解法三：字典树    //     vector&lt;const char*&gt; waiting[128];    //     for (auto &amp;w : words)    //     waiting[w[0]].push_back(w.c_str()); //1.把 words 里中具有相同开头的单词 word 开头字符合并，记成一个字典树。    //     for (char c : S) {    //         auto advance = waiting[c];//2.遍历 S 中的每个字符 char，    //         waiting[c].clear(); //如果 char 存在当前字典树中，则把该节点删除，    //         for (auto it : advance)    //             waiting[*++it].push_back(it);//把原本该节点的元素根据剩下字符串的开头字符重新分配，构成新的字典树。如果剩下为空字符，表示该字符串能由 S 的子串构成，计数器加1。    //     }    //     return waiting[0].size();//3.当遍历完 S ，返回计数器的的结果即是最后答案。    //   //  4.复杂度估计O(nk)，n为 S 的长度，k 表示删除一个节点后，需要重新分配字符串的平均个数。最坏情况下 k=m ， m 为 words 的个数。不过常规情况下 k&lt;&lt;m    // }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;792-Number-of-Matching-Subsequences匹配子序列的单词数&quot;&gt;&lt;a href=&quot;#792-Number-of-Matching-Subsequences匹配子序列的单词数&quot; class=&quot;headerlink&quot; title=&quot;792. Number of Matching Subsequences匹配子序列的单词数&quot;&gt;&lt;/a&gt;792. Number of Matching Subsequences匹配子序列的单词数&lt;/h1&gt;&lt;p&gt;给定字符串 S 和单词字典 words, 求 words[i] 中是 S 的子序列的单词个数。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年9月" scheme="http://yoursite.com/categories/2018%E5%B9%B49%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
   </entry>
   
