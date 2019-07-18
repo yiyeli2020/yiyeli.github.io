@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++基础概念IV | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="C++基础概念IV重点探讨类的大小，使用sizeof 1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。 2.普通成员函数与sizeof无关。 3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。 4.类的总大小也遵守类似class字节对齐的，调整规则。">
+<meta name="keywords" content="C++,sizeof">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++基础概念IV">
+<meta property="og:url" content="http://yoursite.com/2018/08/31/C++基础概念IV/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="C++基础概念IV重点探讨类的大小，使用sizeof 1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。 2.普通成员函数与sizeof无关。 3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。 4.类的总大小也遵守类似class字节对齐的，调整规则。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-17T03:53:33.989Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++基础概念IV">
+<meta name="twitter:description" content="C++基础概念IV重点探讨类的大小，使用sizeof 1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。 2.普通成员函数与sizeof无关。 3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。 4.类的总大小也遵守类似class字节对齐的，调整规则。">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 18px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 15px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 13px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 11px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 19px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 13px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 11px;">Database</a> <a href="/tags/Depth-first-Search/" style="font-size: 13px;">Depth-first Search</a> <a href="/tags/Dynamic-Programming/" style="font-size: 17px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 11px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Greedy/" style="font-size: 11px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 13px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 12px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 11px;">Hexo</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Operating-System/" style="font-size: 11px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Sort/" style="font-size: 12px;">Sort</a> <a href="/tags/Stack/" style="font-size: 11px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 11px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 16px;">Tree</a> <a href="/tags/Trie/" style="font-size: 12px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱代码，爱吉他，爱挑战新事物</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-C++基础概念IV" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/08/31/C++基础概念IV/" class="article-date">
+      <time datetime="2018-08-31T02:01:30.000Z" itemprop="datePublished">2018-08-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++基础概念IV
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sizeof/">sizeof</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="C-基础概念IV"><a href="#C-基础概念IV" class="headerlink" title="C++基础概念IV"></a>C++基础概念IV</h1><p>重点探讨类的大小，使用sizeof</p>
+<p>1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。</p>
+<p>2.普通成员函数与sizeof无关。</p>
+<p>3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。</p>
+<p>4.类的总大小也遵守类似class字节对齐的，调整规则。</p>
+<a id="more"></a>
+<h2 id="1-空类"><a href="#1-空类" class="headerlink" title="1.空类"></a>1.空类</h2><pre><code>#include&lt;iostream&gt;
+using namespace std;
+class A {
+
+};
+class B {
+public:
+    B() { };
+    ~B() {};
+};
+
+int main() {
+    cout &lt;&lt; &quot;sizeof A=&quot; &lt;&lt; sizeof(A) &lt;&lt; endl;
+    cout &lt;&lt; &quot;sizeof B=&quot; &lt;&lt; sizeof(B) &lt;&lt; endl;
+}
+</code></pre><p>空类的大小都为1<br>   因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址，每个实例在内存中都有独一无二的地址。同样空类也会被实例化，所以编译器会给空类隐含的添加一个字节，这样空类实例化之后就有了独一无二的地址了。所以空类的sizeof为1。</p>
+<p>   而析构函数，跟构造函数这些成员函数，是跟sizeof无关的，也不难理解因为我们的sizeof是针对实例，而普通成员函数，是针对类体的，一个类的成员函数，多个实例也共用相同的函数指针，所以自然不能归为实例的大小</p>
+<h2 id="2-含有静态变量和虚析构函数的类"><a href="#2-含有静态变量和虚析构函数的类" class="headerlink" title="2.含有静态变量和虚析构函数的类"></a>2.含有静态变量和虚析构函数的类</h2><pre><code>class Base  
+{  
+public:  
+    Base();                  
+    virtual ~Base();         //每个实例都有虚函数表  
+    void set_num(int num)    //普通成员函数，为各实例公有，不归入sizeof统计  
+    {  
+        a=num;  
+    }  
+private:  
+    int  a;                  //占4字节  
+    char *p;                 //4字节指针  
+};  
+
+class Derive:public Base  
+{  
+public:  
+    Derive():Base(){};       
+    ~Derive(){};  
+private:  
+    static int st;         //非实例独占  
+    int  d;                     //占4字节  
+    char *p;                    //4字节指针  
+
+};  
+
+int main()   
+{   
+    cout&lt;&lt;sizeof(Base)&lt;&lt;endl;  
+    cout&lt;&lt;sizeof(Derive)&lt;&lt;endl;  
+    return 0;  
+} 
+</code></pre><p>Base类里的int  a;char *p;占8个字节。</p>
+<p>而虚析构函数virtual ~Base();的指针占4子字节。</p>
+<p>其他成员函数不归入sizeof统计。</p>
+<p>Derive类首先要具有Base类的部分，也就是占12字节。</p>
+<p>int  d;char *p;占8字节</p>
+<p>static int st;不归入sizeof统计</p>
+<p>所以一共是20字节。</p>
+<h2 id="3-字节对齐原则"><a href="#3-字节对齐原则" class="headerlink" title="3. 字节对齐原则"></a>3. 字节对齐原则</h2><pre><code>class Derive:public Base  
+{  
+public:  
+    Derive():Base(){};  
+    ~Derive(){};  
+private:  
+    static int st;  
+    int  d;  
+    char *p;  
+    char c;  
+
+};  
+</code></pre><p>一个char c;增加了4字节（char本身占1个字节），说明类的大小也遵守类似class字节对齐的补齐规则。<br>一般来说，普通继承的空间计算结果应当是sizeof(基类)+sizeof(派生类)，然后考虑对齐，内存空间必须是类中数据成员所占用最大空间的整数倍。不过这是一般情况，具体怎么算要看编译器，比如将上述代码中的两个数据成员交换位置，结果则可能不同。</p>
+<h2 id="4-含虚函数的子类普通继承含虚函数的父类"><a href="#4-含虚函数的子类普通继承含虚函数的父类" class="headerlink" title="4.含虚函数的子类普通继承含虚函数的父类"></a>4.含虚函数的子类普通继承含虚函数的父类</h2><pre><code>class Test
+{
+public:
+    int a;
+    virtual void get(){}
+};
+class Test2 : public Test
+{
+public:
+    int a;
+    virtual void set(){}
+};
+</code></pre><p>虽然子类和父类都包含虚函数， 但它们存放于同一个虚表中，因此只需要一个指针，在普通继承下，不管是子类还是父类包含虚函数，子类的<strong>sizeof=sizeof(基类非静态数据成员)+sizeof(派生类非静态数据成员)+sizeof(指针)</strong>。</p>
+<h2 id="5-子类虚继承父类-C-中虚拟继承的概念"><a href="#5-子类虚继承父类-C-中虚拟继承的概念" class="headerlink" title="5.子类虚继承父类(C++中虚拟继承的概念)"></a>5.子类虚继承父类(C++中虚拟继承的概念)</h2><h3 id="5-1-C-中虚拟继承的概念"><a href="#5-1-C-中虚拟继承的概念" class="headerlink" title="5.1.C++中虚拟继承的概念"></a>5.1.C++中虚拟继承的概念</h3><p>为了解决从不同途径继承来的同名的数据成员在内存中有不同的拷贝造成数据不一致问题，将共同基类设置为虚基类。这时从不同的路径继承过来的同名数据成员在内存中就只有一个拷贝，同一个函数名也只有一个映射。这样不仅就解决了二义性问题，也节省了内存，避免了数据不一致的问题。</p>
+<pre><code>class 派生类名：virtual 继承方式  基类名
+</code></pre><p>virtual是关键字，声明该基类为派生类的虚基类。<br>在多继承情况下，虚基类关键字的作用范围和继承方式关键字相同，只对紧跟其后的基类起作用。<br>声明了虚基类之后，虚基类在进一步派生过程中始终和派生类一起，维护同一个基类子对象的拷贝。</p>
+<p>执行顺序</p>
+<pre><code>首先执行虚基类的构造函数，多个虚基类的构造函数按照被继承的顺序构造；
+
+执行基类的构造函数，多个基类的构造函数按照被继承的顺序构造；
+
+执行成员对象的构造函数，多个成员对象的构造函数按照申明的顺序构造；
+
+执行派生类自己的构造函数；
+
+析构以与构造相反的顺序执行；
+</code></pre><h3 id="5-2-子类虚继承父类"><a href="#5-2-子类虚继承父类" class="headerlink" title="5.2.子类虚继承父类"></a>5.2.子类虚继承父类</h3><p>虚继承比较特别，一般的计算公式应当是<strong>sizeof(子类)=sizeof(基类)+sizeof(虚表指针)+sizeof(子类非静态数据成员)
+</strong></p>
+<pre><code>class A
+{
+public:
+    int a;
+};
+class B : virtual public A
+{
+public:    
+    int b;
+};
+</code></pre><p>sizeof结果都是12，基类A大小为4，子类B数据成员为4，因为是虚继承，可能需要一个指向虚基类的指针，再占用4字节，得到12。</p>
+<p>然而，对于包含虚函数的子类虚继承不含虚函数的父类时，结果发生了变化</p>
+<pre><code>class A
+{
+public:
+    int a;
+};
+class B : virtual public A
+{
+public:
+    int a;
+    virtual void set(){}
+};
+</code></pre><p>在Codeblocks下结果仍为12，VS2010下却为16。子类增加了一个虚函数，Codeblocks下结果不变，在VS下结果却发生了变化。</p>
+<p>可以这样认为，在VS下，计算公式可能如下：<strong>sizeof(子类)=sizeof(基类)+sizeof(指示虚基类的指针)+sizeof(子类非静态数据成员)+sizeof(虚表指针)</strong>。在CB下可能对内存进行了优化（个人推测）</p>
+<p>对于子类和父类中都含虚函数的虚继承，结果如下：</p>
+<pre><code>class Test
+{
+public:
+    int a;
+    virtual void get(){}
+};
+class Test2 : virtual Test
+{
+public:
+    int a;
+    virtual void set(){}
+};
+</code></pre><p>在Codeblocks下结果为16，VS2010下为20。<br>这是因为，使用了虚继承，子类和父类的虚函数存放在不同的虚表中，因此子类和父类都需要一个指向虚表的指针。</p>
+<h2 id="6-多重继承"><a href="#6-多重继承" class="headerlink" title="6.多重继承"></a>6.多重继承</h2><pre><code>#include&lt;iostream&gt;
+using namespace std;
+class A
+{
+public:
+    int a;
+};
+class B : public A
+{
+public:
+    int b;
+};
+class C : public A
+{
+public:
+    int c;
+};
+class D : public B, public C
+{
+public:
+    int d;
+};
+
+int main() {
+    cout &lt;&lt; &quot;sizeof A=&quot; &lt;&lt; sizeof(A) &lt;&lt; endl;
+    cout &lt;&lt; &quot;sizeof B=&quot; &lt;&lt; sizeof(B) &lt;&lt; endl;
+    cout &lt;&lt; &quot;sizeof C=&quot; &lt;&lt; sizeof(C) &lt;&lt; endl;
+    cout &lt;&lt; &quot;sizeof D=&quot; &lt;&lt; sizeof(D) &lt;&lt; endl;
+}
+</code></pre><p>就是基类的相加。<strong>sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)</strong></p>
+<pre><code>sizeof A=4
+sizeof B=8
+sizeof C=8
+sizeof D=20
+请按任意键继续. . .
+</code></pre><h2 id="7-多重虚继承"><a href="#7-多重虚继承" class="headerlink" title="7.多重虚继承"></a>7.多重虚继承</h2><p>虚继承存在的意义就是为了减少内存开销和二义性，实现对象共享。</p>
+<pre><code>class A
+{
+public:
+    int a;
+};
+class B :  virtual public A
+{
+public:    
+    int b;
+};
+class C : virtual public A
+{
+public:
+    int c;
+};
+class D : public B, public C
+{
+public:
+    int d;
+};
+</code></pre><p>sizeof(D)在CB和VS下都是24。D中包含a,b,c,d四个数据成员，还包含两个指向虚基类A的指针，这种情况下，VS和CB都没有将两个指针合为一个。这种情况也可以这样考虑，sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)，但由于是虚继承，虚基类A中数据成员a只需要保留一份，而我们算了两次，所以还需要减去A的数据成员，所以公式应当是sizeof(D)=sizeof(B)+sizeof(C)-sizeof(A的非静态数据成员)+sizeof(子类非静态数据成员)。</p>
+<h2 id="8-字节对齐"><a href="#8-字节对齐" class="headerlink" title="8.字节对齐"></a>8.字节对齐</h2><p>１:数据成员对齐规则：结构(struct)(或联合(union))的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置要从该成员大小或者成员的子成员大小（只要该成员有子成员，比如说是数组，结构体等）的整数倍开始(比如int在32位机为４字节,则要从４的整数倍地址开始存储。</p>
+<p>２:结构体作为成员:如果一个结构里有某些结构体成员,则结构体成员要从其内部最大元素大小的整数倍地址开始存储.(struct a里存有struct b,b里有char,int ,double等元素,那b应该从8的整数倍开始存储.)</p>
+<p>３:收尾工作:结构体的总大小,也就是sizeof的结果,.必须是其内部最大成员的整数倍.不足的要补齐.</p>
+<p>4:在代码前加一句#pragma pack(1),告诉编译器,所有的对齐都按照1的整数倍对齐,换句话说就是没有对齐规则.如果#pragma pack (n)中指定的n大于结构体中最大成员的size，则其不起作用，结构体仍然按照size最大的成员进行对界</p>
+<h2 id="9-struct结构体变量，union共用体变量，enum枚举变量的大小"><a href="#9-struct结构体变量，union共用体变量，enum枚举变量的大小" class="headerlink" title="9.struct结构体变量，union共用体变量，enum枚举变量的大小"></a>9.struct结构体变量，union共用体变量，enum枚举变量的大小</h2><p>struct结构体变量大小等于结构体中的各个成员变量所占内存大小总和，union共用体变量大小等于共用体结构中占用内存最大的成员的内存大小。</p>
+<p>首先先明白概念：<br>数据类型，指固定内存大小的别名，如int类型为4个字节内存。<br>变量，一段连续存储空间的别名。这段连续存储空间的大小，即变量的大小，由定义该变量的数据类型决定，即该数据类型代表的固定内存大小。数据类型，是变量的模板。</p>
+<p>应用到枚举上：<br>枚举类型，指一个被命名的整型常数的集合。即枚举类型，本质上是一组常数的集合体，只是这些常数有各自的命名。枚举类型，是一种用户自定义数据类型。<br>枚举变量，由枚举类型定义的变量。枚举变量的大小，即枚举类型所占内存的大小。由于枚举变量的赋值，一次只能存放枚举结构中的某个常数。所以枚举变量的大小，实质是常数所占内存空间的大小（常数为int类型，当前主流的编译器中一般是32位机器和64位机器中int型都是4个字节），枚举类型所占内存大小也是这样。<br>另外，可以用编译器内置的指示符sizeof，计算出枚举变量（或枚举类型）的大小进行验证。</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+typedef enum
+{
+    Char,
+    Short,
+    Int,
+    Double,
+    Float,
+}TEST_TYPE;
+int main() {
+    TEST_TYPE val;
+    cout &lt;&lt; sizeof(val) &lt;&lt; endl;
+
+    //验证例程 
+    enum number {
+        one = 1,
+        two = 2,
+        three = 3,
+        four = 4
+    };
+    enum number num1;
+    cout &lt;&lt; &quot;sizeof 枚举结构 enum number =&quot; &lt;&lt; sizeof(enum number) &lt;&lt; endl;
+    cout &lt;&lt; &quot;sizeof 定义后的枚举变量 variable num1=&quot; &lt;&lt; sizeof(num1) &lt;&lt; endl;
+    num1 = three;
+    cout &lt;&lt; &quot;size of  赋值后的枚举变量 =&quot; &lt;&lt; sizeof(num1) &lt;&lt; endl;
+    return 0;
+}
+
+输出为
+4
+sizeof 枚举结构 enum number =4
+sizeof 定义后的枚举变量 variable num1=4
+size of  赋值后的枚举变量 =4
+请按任意键继续. . .
+</code></pre>
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2018年08月31日 - 10时01分</p>
+        <p><span>最后更新:</span>2019年07月17日 - 11时53分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/31/C++基础概念IV/" title="C++基础概念IV">http://yoursite.com/2018/08/31/C++基础概念IV/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/31/C++基础概念IV/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/09/01/快速排序及其优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          快速排序及其优化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/30/682. Baseball Game棒球比赛/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">682. Baseball Game棒球比赛</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-基础概念IV"><span class="toc-number">1.</span> <span class="toc-text">C++基础概念IV</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-空类"><span class="toc-number">1.1.</span> <span class="toc-text">1.空类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-含有静态变量和虚析构函数的类"><span class="toc-number">1.2.</span> <span class="toc-text">2.含有静态变量和虚析构函数的类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-字节对齐原则"><span class="toc-number">1.3.</span> <span class="toc-text">3. 字节对齐原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-含虚函数的子类普通继承含虚函数的父类"><span class="toc-number">1.4.</span> <span class="toc-text">4.含虚函数的子类普通继承含虚函数的父类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-子类虚继承父类-C-中虚拟继承的概念"><span class="toc-number">1.5.</span> <span class="toc-text">5.子类虚继承父类(C++中虚拟继承的概念)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-C-中虚拟继承的概念"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1.C++中虚拟继承的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-子类虚继承父类"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2.子类虚继承父类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-多重继承"><span class="toc-number">1.6.</span> <span class="toc-text">6.多重继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-多重虚继承"><span class="toc-number">1.7.</span> <span class="toc-text">7.多重虚继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-字节对齐"><span class="toc-number">1.8.</span> <span class="toc-text">8.字节对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-struct结构体变量，union共用体变量，enum枚举变量的大小"><span class="toc-number">1.9.</span> <span class="toc-text">9.struct结构体变量，union共用体变量，enum枚举变量的大小</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/09/01/快速排序及其优化/" title="上一篇: 快速排序及其优化">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/08/30/682. Baseball Game棒球比赛/" title="下一篇: 682. Baseball Game棒球比赛">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/510. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 Yiye Li
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux配置问题小结 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Linux配置问题小结记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor;解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题;解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux配置问题小结">
+<meta property="og:url" content="http://yoursite.com/2019/06/03/Linux配置问题小结/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="Linux配置问题小结记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor;解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题;解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-17T03:53:33.993Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux配置问题小结">
+<meta name="twitter:description" content="Linux配置问题小结记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor;解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题;解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 18px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 15px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 13px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 11px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 19px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 13px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 11px;">Database</a> <a href="/tags/Depth-first-Search/" style="font-size: 13px;">Depth-first Search</a> <a href="/tags/Dynamic-Programming/" style="font-size: 17px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 11px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Greedy/" style="font-size: 11px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 13px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 12px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 11px;">Hexo</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Operating-System/" style="font-size: 11px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Sort/" style="font-size: 12px;">Sort</a> <a href="/tags/Stack/" style="font-size: 11px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 11px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 16px;">Tree</a> <a href="/tags/Trie/" style="font-size: 12px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱代码，爱吉他，爱挑战新事物</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Linux配置问题小结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/06/03/Linux配置问题小结/" class="article-date">
+      <time datetime="2019-06-03T04:47:45.000Z" itemprop="datePublished">2019-06-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux配置问题小结
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2019年6月/">2019年6月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Linux配置问题小结"><a href="#Linux配置问题小结" class="headerlink" title="Linux配置问题小结"></a>Linux配置问题小结</h1><p>记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor;解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题;解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。</p>
+<a id="more"></a>
+<h2 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h2><ol>
+<li>Ubuntu 18.04 安装terminator 并在右键菜单中添加open in termintor</li>
+<li>解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题</li>
+<li>解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。</li>
+</ol>
+<h2 id="Terminator安装和右键菜单添加解决方案"><a href="#Terminator安装和右键菜单添加解决方案" class="headerlink" title="Terminator安装和右键菜单添加解决方案"></a>Terminator安装和右键菜单添加解决方案</h2><p>  题外话，安利下terminator，是Linux环境下一款非常赞的命令行管理工具，前段时间微软宣布推出名为Windows Terminal的新款命令行工具，在个人看来也是姗姗来迟的将terminator能实现的功能在windows中实现了。</p>
+<p>  安装terminator</p>
+<pre><code>sudo apt install terminator
+</code></pre><p>  网上大多用dconf系统配置编辑器将terminator设为默认，但在我的系统中这样在文件位置中右键打开时还是只能打开默认的终端，用起来很不方便，直到找到了这种方法（<a href="https://blog.csdn.net/bestBT/article/details/81221378）。" target="_blank" rel="noopener">https://blog.csdn.net/bestBT/article/details/81221378）。</a><br>  安装Nautilus-actions</p>
+<pre><code>sudo add-apt-repository ppa:daniel-marynicz/filemanager-actions
+sudo apt-get install filemanager-actions-nautilus-extension
+</code></pre><p>使用fma-config-tool 来配置。<br>1.新建动作，在action（动作）界面中勾选第二项Display item in location context menu。在Context label中输入想写的名字“在Terminator中打开”。<br>2.在Command（命令）界面中输入路径/usr/bin/terminator，参数中输入–working-directory=%d/%b。<br>3.这样操作完在terminator中打开还在右键的二级菜单中，所以点右上角齿轮标志（编辑您的首选项），在运行时首选项-》Nautilus菜单布局中取消勾选Create a root “FileManager-Actions” menu，这样就可以愉快的使用Terminator了。</p>
+<h2 id="搜狗拼音输入法安装问题解决方案"><a href="#搜狗拼音输入法安装问题解决方案" class="headerlink" title="搜狗拼音输入法安装问题解决方案"></a>搜狗拼音输入法安装问题解决方案</h2><p>一开始嫌麻烦所以用Linux自带的Ibus系统下的输入法，但各种问题实在忍不了，所以还是装了搜狗拼音法，中间遇到几个问题只找到这个靠谱的解决方法（<a href="https://ywnz.com/linuxjc/1476.html）。" target="_blank" rel="noopener">https://ywnz.com/linuxjc/1476.html）。</a></p>
+<p>在根据指导方法安装搜狗拼音输入法后，会遇到很多依赖问题，一路折腾后会发现搜狗拼音依赖的fcitx-libs-qt这个包在ubuntu18.04的源里面是不存在的。替代品似乎是libfcitx-qt0，但也很难搞。</p>
+<h3 id="下载旧版"><a href="#下载旧版" class="headerlink" title="下载旧版"></a>下载旧版</h3><p>搜狗官方的最新版（sogoupinyin_2.2.0.0102_amd64.deb）是不能用的，原因不作深究。需要下载一个旧版本（sogoupinyin_2.1.0.0086_amd64.deb）。<br>将该deb包放置于一个空目录。</p>
+<h3 id="创建软件包目录"><a href="#创建软件包目录" class="headerlink" title="创建软件包目录"></a>创建软件包目录</h3><pre><code>mkdir -p extract/DEBIAN
+</code></pre><h3 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h3><pre><code>dpkg-deb -x sogoupinyin_2.1.0.0086_amd64.deb extract/
+
+dpkg-deb -e sogoupinyin_2.1.0.0086_amd64.deb extract/DEBIAN
+</code></pre><h3 id="修改control文件"><a href="#修改control文件" class="headerlink" title="修改control文件"></a>修改control文件</h3><p>用任意文本编辑器打开extract/DEBIAN/control 找到Depends行，删除fcitx-libs和fcitx-libs-qt，保存退出。<br>其中要找的Depends行长这个样子</p>
+<pre><code>Depends: fcitx (&gt;= 1:4.2.8.3-3~), fcitx-frontend-gtk2, fcitx-frontend-gtk3, fcitx-frontend-qt4, fcitx-module-kimpanel, im-config, libopencc2 | libopencc1, lsb-release, unzip, x11-utils, libc6 (&gt;= 2.8), libgcc1 (&gt;= 1:4.1.1), libgdk-pixbuf2.0-0 (&gt;= 2.22.0), libglib2.0-0 (&gt;= 2.16.0), libidn11 (&gt;= 1.13), libnotify4 (&gt;= 0.7.0), libqt4-dbus (&gt;= 4:4.8.0), libqt4-declarative (&gt;= 4:4.8.0), libqt4-network (&gt;= 4:4.8.0), libqtcore4 (&gt;= 4:4.8.0), libqtgui4 (&gt;= 4:4.8.0), libstdc++6 (&gt;= 4.6), libx11-6, zlib1g (&gt;= 1:1.2.0)
+</code></pre><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><pre><code>mkdir build
+
+dpkg-deb -b extract/ build/
+</code></pre><p>执行完毕build目录下会生成一个新的deb包。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>先彻底卸载掉搜狗输入法，并删除以下配置文件：</p>
+<p>.sogouinput</p>
+<p>.config/fcitx</p>
+<p>.config/sogou-qimpanel</p>
+<p>.config/SogouPY</p>
+<p>.config/SogouPY.users</p>
+<p>.config/fcitx-qimpanel</p>
+<p>然后安装我们重新打包的输入法即可。重启之后，搜狗输入法恢复正常。<br>最后要记得在设置-》区域和语言-》管理已安装的语言-》语言支持-》语言-》键盘输入法系统中选择Fcitx系统，因为搜狗输入法等都是在Fcitx系统框架下的。</p>
+<h2 id="LINUX下无线网卡rtl8821CE-rtl8723de驱动无法驱动解决办法"><a href="#LINUX下无线网卡rtl8821CE-rtl8723de驱动无法驱动解决办法" class="headerlink" title="LINUX下无线网卡rtl8821CE/rtl8723de驱动无法驱动解决办法"></a>LINUX下无线网卡rtl8821CE/rtl8723de驱动无法驱动解决办法</h2><h3 id="1-确保linux内核版本大于-4-14"><a href="#1-确保linux内核版本大于-4-14" class="headerlink" title="1. 确保linux内核版本大于 4.14"></a>1. 确保linux内核版本大于 4.14</h3><p>  如何查看linux 内核版本 ：终端 uname -sr</p>
+<p>  如果内核版本低于 4.14：升级linux内核 ubuntu可以参照 <a href="https://www.linuxidc.com/Linux/2017-03/141940.html" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2017-03/141940.html</a></p>
+<p>  升级完记得重启</p>
+<h3 id="2-下载linux中8821CE-rtl8723de的驱动源码"><a href="#2-下载linux中8821CE-rtl8723de的驱动源码" class="headerlink" title="2. 下载linux中8821CE/rtl8723de的驱动源码"></a>2. 下载linux中8821CE/rtl8723de的驱动源码</h3><p>git原地址（rtl8821CE）：<a href="https://github.com/endlessm/linux/tree/master/drivers/net/wireless/rtl8821ce" target="_blank" rel="noopener">https://github.com/endlessm/linux/tree/master/drivers/net/wireless/rtl8821ce</a></p>
+<p>git原地址（rtl8723de）：<a href="https://github.com/endlessm/linux/tree/master/drivers/net/wireless/rtl8723de" target="_blank" rel="noopener">https://github.com/endlessm/linux/tree/master/drivers/net/wireless/rtl8723de</a></p>
+<p>或者本地下载 <a href="https://free-1253146430.cos.ap-shanghai.myqcloud.com/rtl8821ce.zip" target="_blank" rel="noopener">https://free-1253146430.cos.ap-shanghai.myqcloud.com/rtl8821ce.zip</a></p>
+<p>（rtl8723de 的话 自己 去git上下吧）</p>
+<h3 id="3-编译驱动"><a href="#3-编译驱动" class="headerlink" title="3.编译驱动"></a>3.编译驱动</h3><p>  <strong><em>解压rtl8821ce.zip</em></strong></p>
+<p>  <strong><em>修改文件Makefile</em></strong></p>
+<pre><code>export TopDIR ?= $(srctree)/drivers/net/wireless/rtl8821ce
+</code></pre><p>从这行 “export TopDIR ?= 后面改成当前目录 例如我的：</p>
+<pre><code>export TopDIR ?= /home/horsun/Downloads/rtl8821ce
+</code></pre><p><strong><em>保存修改</em></strong></p>
+<p>  分别进行：</p>
+<pre><code>make
+sudo make install
+sudo modprobe -a 8821ce
+</code></pre><p>遇到问题</p>
+<pre><code>modprobe: ERROR: could not insert &apos;8812au&apos;: Exec format error
+</code></pre><p><strong><em>执行</em></strong></p>
+<pre><code>make clean
+make
+sudo make install
+sudo modprobe 8812au
+</code></pre>
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2019年06月03日 - 12时47分</p>
+        <p><span>最后更新:</span>2019年07月17日 - 11时53分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/06/03/Linux配置问题小结/" title="Linux配置问题小结">http://yoursite.com/2019/06/03/Linux配置问题小结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/06/03/Linux配置问题小结/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/02/操作系统基础概念I/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">操作系统基础概念I</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux配置问题小结"><span class="toc-number">1.</span> <span class="toc-text">Linux配置问题小结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现功能"><span class="toc-number">1.1.</span> <span class="toc-text">实现功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Terminator安装和右键菜单添加解决方案"><span class="toc-number">1.2.</span> <span class="toc-text">Terminator安装和右键菜单添加解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜狗拼音输入法安装问题解决方案"><span class="toc-number">1.3.</span> <span class="toc-text">搜狗拼音输入法安装问题解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载旧版"><span class="toc-number">1.3.1.</span> <span class="toc-text">下载旧版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建软件包目录"><span class="toc-number">1.3.2.</span> <span class="toc-text">创建软件包目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解包"><span class="toc-number">1.3.3.</span> <span class="toc-text">解包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改control文件"><span class="toc-number">1.3.4.</span> <span class="toc-text">修改control文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包"><span class="toc-number">1.3.5.</span> <span class="toc-text">打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">1.3.6.</span> <span class="toc-text">安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LINUX下无线网卡rtl8821CE-rtl8723de驱动无法驱动解决办法"><span class="toc-number">1.4.</span> <span class="toc-text">LINUX下无线网卡rtl8821CE/rtl8723de驱动无法驱动解决办法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-确保linux内核版本大于-4-14"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 确保linux内核版本大于 4.14</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-下载linux中8821CE-rtl8723de的驱动源码"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 下载linux中8821CE/rtl8723de的驱动源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-编译驱动"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.编译驱动</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/06/02/操作系统基础概念I/" title="下一篇: 操作系统基础概念I">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/510. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 Yiye Li
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>计算机网络面试高频题 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="计算机网络面试高频题整理一下互联网公司计算机网络面试高频题">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络面试高频题">
+<meta property="og:url" content="http://yoursite.com/2018/09/19/计算机网络面试高频题/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="计算机网络面试高频题整理一下互联网公司计算机网络面试高频题">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fuqwow0id9j30cb06gq38.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fuqwq2b646j30k00mb0u1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fuqwrg1lunj30gh07b75e.jpg">
+<meta property="og:updated_time" content="2019-07-17T03:53:33.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络面试高频题">
+<meta name="twitter:description" content="计算机网络面试高频题整理一下互联网公司计算机网络面试高频题">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fuqwow0id9j30cb06gq38.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 18px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 15px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 13px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 11px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 19px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 13px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 11px;">Database</a> <a href="/tags/Depth-first-Search/" style="font-size: 13px;">Depth-first Search</a> <a href="/tags/Dynamic-Programming/" style="font-size: 17px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 11px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Greedy/" style="font-size: 11px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 13px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 12px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 11px;">Hexo</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Operating-System/" style="font-size: 11px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Sort/" style="font-size: 12px;">Sort</a> <a href="/tags/Stack/" style="font-size: 11px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 11px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 16px;">Tree</a> <a href="/tags/Trie/" style="font-size: 12px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱代码，爱吉他，爱挑战新事物</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-计算机网络面试高频题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/09/19/计算机网络面试高频题/" class="article-date">
+      <time datetime="2018-09-19T09:12:13.000Z" itemprop="datePublished">2018-09-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      计算机网络面试高频题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2018年9月/">2018年9月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="计算机网络面试高频题"><a href="#计算机网络面试高频题" class="headerlink" title="计算机网络面试高频题"></a>计算机网络面试高频题</h1><p>整理一下互联网公司计算机网络面试高频题</p>
+<a id="more"></a>
+<h2 id="（1）-建立TCP服务器的各个系统调用"><a href="#（1）-建立TCP服务器的各个系统调用" class="headerlink" title="（1） 建立TCP服务器的各个系统调用"></a>（1） 建立TCP服务器的各个系统调用</h2><h2 id="（2）-继上一题，说明socket网络编程有哪些系统调用？其中close是一次就能直接关闭的吗，半关闭状态是怎么产生的？"><a href="#（2）-继上一题，说明socket网络编程有哪些系统调用？其中close是一次就能直接关闭的吗，半关闭状态是怎么产生的？" class="headerlink" title="（2） 继上一题，说明socket网络编程有哪些系统调用？其中close是一次就能直接关闭的吗，半关闭状态是怎么产生的？"></a>（2） 继上一题，说明socket网络编程有哪些系统调用？其中close是一次就能直接关闭的吗，半关闭状态是怎么产生的？</h2><h2 id="（3）-对路由协议的了解与介绍。内部网关协议IGP包括RIP，OSPF，和外部网关协议EGP和BGP"><a href="#（3）-对路由协议的了解与介绍。内部网关协议IGP包括RIP，OSPF，和外部网关协议EGP和BGP" class="headerlink" title="（3） 对路由协议的了解与介绍。内部网关协议IGP包括RIP，OSPF，和外部网关协议EGP和BGP."></a>（3） 对路由协议的了解与介绍。内部网关协议IGP包括RIP，OSPF，和外部网关协议EGP和BGP.</h2><h2 id="（4）-路由协议所使用的算法。"><a href="#（4）-路由协议所使用的算法。" class="headerlink" title="（4） 路由协议所使用的算法。"></a>（4） 路由协议所使用的算法。</h2><h2 id="（5）-TCP和UDP的区别"><a href="#（5）-TCP和UDP的区别" class="headerlink" title="（5） TCP和UDP的区别"></a>（5） TCP和UDP的区别</h2><p>TCP和UDP是OSI模型中的运输层中的协议。TCP提供可靠的通信传输，而UDP则常被用于让广播和细节控制交给应用的通信传输。</p>
+<p>两者的区别大致如下：</p>
+<p>TCP面向连接，UDP面向非连接即发送数据前不需要建立链接<br>TCP提供可靠的服务（数据传输），UDP无法保证<br>TCP面向字节流，UDP面向报文<br>TCP数据传输慢，UDP数据传输快<br>如果还不是太了解这两者的区别，点击阅读：<a href="https://blog.csdn.net/yipiankongbai/article/details/24435977" target="_blank" rel="noopener">TCP与UDP的区别</a></p>
+<h2 id="（6）-TCP和UDP相关的协议与端口号"><a href="#（6）-TCP和UDP相关的协议与端口号" class="headerlink" title="（6） TCP和UDP相关的协议与端口号"></a>（6） TCP和UDP相关的协议与端口号</h2><p><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fuqwow0id9j30cb06gq38.jpg" alt="image"></p>
+<p>了解更多的端口，点击阅读：<a href="http://blog.sina.com.cn/s/blog_66ea0e2801011vb3.html" target="_blank" rel="noopener">常用端口号与对应的服务以及端口关闭</a></p>
+<h2 id="（7）-TCP（UDP，IP）等首部的认识（http请求报文构成）"><a href="#（7）-TCP（UDP，IP）等首部的认识（http请求报文构成）" class="headerlink" title="（7） TCP（UDP，IP）等首部的认识（http请求报文构成）"></a>（7） TCP（UDP，IP）等首部的认识（http请求报文构成）</h2><h2 id="（8）-网页解析的过程与实现方法"><a href="#（8）-网页解析的过程与实现方法" class="headerlink" title="（8） 网页解析的过程与实现方法"></a>（8） 网页解析的过程与实现方法</h2><h2 id="（9）-在浏览器中输入URL后执行的全部过程（如www-baidu-com）"><a href="#（9）-在浏览器中输入URL后执行的全部过程（如www-baidu-com）" class="headerlink" title="（9）    在浏览器中输入URL后执行的全部过程（如www.baidu.com）"></a>（9）    在浏览器中输入URL后执行的全部过程（如<a href="http://www.baidu.com）" target="_blank" rel="noopener">www.baidu.com）</a></h2><h2 id="（10）-网络层分片的原因与具体实现"><a href="#（10）-网络层分片的原因与具体实现" class="headerlink" title="（10） 网络层分片的原因与具体实现"></a>（10） 网络层分片的原因与具体实现</h2><h2 id="（11）-TCP的三次握手与四次挥手的详细介绍（TCP连接建立与断开是热门问题）"><a href="#（11）-TCP的三次握手与四次挥手的详细介绍（TCP连接建立与断开是热门问题）" class="headerlink" title="（11） TCP的三次握手与四次挥手的详细介绍（TCP连接建立与断开是热门问题）"></a>（11） TCP的三次握手与四次挥手的详细介绍（TCP连接建立与断开是热门问题）</h2><p>在TCP/IP协议中，TCP协议提供可靠的连接服务，连接是通过三次握手进行初始化的。三次握手的目的是同步连接双方的序列号和确认号并交换 TCP窗口大小信息。</p>
+<p>下面详细说一下三次握手（来自简析TCP的三次握手与四次分手）<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fuqwq2b646j30k00mb0u1.jpg" alt="image"></p>
+<p><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fuqwrg1lunj30gh07b75e.jpg" alt="image"></p>
+<p>更加深入的了解TCP的三次握手与四次分手：<a href="https://www.jellythink.com/archives/705" target="_blank" rel="noopener">简析TCP的三次握手与四次分手</a></p>
+<h2 id="（12）-TCP握手以及每一次握手客户端和服务器端处于哪个状态（11种状态）"><a href="#（12）-TCP握手以及每一次握手客户端和服务器端处于哪个状态（11种状态）" class="headerlink" title="（12） TCP握手以及每一次握手客户端和服务器端处于哪个状态（11种状态）"></a>（12） TCP握手以及每一次握手客户端和服务器端处于哪个状态（11种状态）</h2><h2 id="（13）-为什么使用三次握手，两次握手可不可以？"><a href="#（13）-为什么使用三次握手，两次握手可不可以？" class="headerlink" title="（13） 为什么使用三次握手，两次握手可不可以？"></a>（13） 为什么使用三次握手，两次握手可不可以？</h2><h2 id="（14）-TIME-WAIT的意义（为什么要等于2MSL）"><a href="#（14）-TIME-WAIT的意义（为什么要等于2MSL）" class="headerlink" title="（14） TIME_WAIT的意义（为什么要等于2MSL）"></a>（14） TIME_WAIT的意义（为什么要等于2MSL）</h2><h2 id="（15）-超时重传机制（不太高频）"><a href="#（15）-超时重传机制（不太高频）" class="headerlink" title="（15） 超时重传机制（不太高频）"></a>（15） 超时重传机制（不太高频）</h2><h2 id="（16）-TCP怎么保证可靠性（面向字节流，超时重传，应答机制，滑动窗口，拥塞控制，校验等）？"><a href="#（16）-TCP怎么保证可靠性（面向字节流，超时重传，应答机制，滑动窗口，拥塞控制，校验等）？" class="headerlink" title="（16） TCP怎么保证可靠性（面向字节流，超时重传，应答机制，滑动窗口，拥塞控制，校验等）？"></a>（16） TCP怎么保证可靠性（面向字节流，超时重传，应答机制，滑动窗口，拥塞控制，校验等）？</h2><h2 id="（17）-流量控制的介绍，采用滑动窗口会有什么问题（死锁可能，糊涂窗口综合征）？"><a href="#（17）-流量控制的介绍，采用滑动窗口会有什么问题（死锁可能，糊涂窗口综合征）？" class="headerlink" title="（17） 流量控制的介绍，采用滑动窗口会有什么问题（死锁可能，糊涂窗口综合征）？"></a>（17） 流量控制的介绍，采用滑动窗口会有什么问题（死锁可能，糊涂窗口综合征）？</h2><h2 id="（18）-tcp滑动窗口协议"><a href="#（18）-tcp滑动窗口协议" class="headerlink" title="（18） tcp滑动窗口协议"></a>（18） tcp滑动窗口协议</h2><h2 id="（19）-拥塞控制和流量控制的区别"><a href="#（19）-拥塞控制和流量控制的区别" class="headerlink" title="（19） 拥塞控制和流量控制的区别"></a>（19） 拥塞控制和流量控制的区别</h2><p>拥塞控制</p>
+<p>网络拥塞现象是指到达通信子网中某一部分的分组数量过多,使得该部分网络来不及处理,以致引起这部分乃至整个网络性能下降的现象,严重时甚至会导致网络通信业务陷入停顿,即出现死锁现象。拥塞控制是处理网络拥塞现象的一种机制。<br>流量控制数据的传送与接收过程当中很可能出现收方来不及接收的情况,这时就需要对发方进行控制,以免数据丢失。            </p>
+<p>流量控制机制：</p>
+<p>流量控制用于防止在端口阻塞的情况下丢帧，这种方法是当发送或接收缓冲区开始溢出时通过将阻塞信号发送回源地址实现的。流量控制可以有效的防止由于网络中瞬间的大量数据对网络带来的冲击，保证用户网络高效而稳定的运行。</p>
+<h2 id="（20）-TCP拥塞控制，算法名字？（极其重要）"><a href="#（20）-TCP拥塞控制，算法名字？（极其重要）" class="headerlink" title="（20） TCP拥塞控制，算法名字？（极其重要）"></a>（20） TCP拥塞控制，算法名字？（极其重要）</h2><p>TCP的拥塞控制            </p>
+<ol>
+<li>引言<pre><code>TCP是Internet上通用的传输层协议之一，是目前应用最广泛的传输控制协议，其核心是拥塞控制机制。基于Internet的交换机的通信信道、处理速度及缓冲存储空间通常是网上所有主机共享的资源，也是网络系统潜在的瓶颈。随着信源主机数以及信源业务端业务量的不断增多，瓶颈处就有可能发生资源竞争，从而导致网络拥塞。TCP的一个重要组成部分是执行拥塞控制和拥塞恢复的算法集合。TCP拥塞控制算法的目标是最大限度利用网络带宽，同时不产生数据流传输中的拥塞现象。因此，自从上个世纪80年代出现第一次拥塞崩溃以来，TCP拥塞控制策略就在不断地进行完善和改进。
+</code></pre></li>
+<li>传统的TCP拥塞控制机制<pre><code>传统的TCP中的拥塞控制机制主要是基于Van Jacobson提出的&quot;慢启动&quot;算法、&quot;拥塞避免&quot;算法和一个用于估计周转RTT(round trip time)的算法。
+慢启动算法通过观察到新分组进入网络的速率应该与另一端返回确认的速率相同而进行工作。慢启动为发送方的TCP增加了另一个窗口：拥塞窗口(congestion window)， 记为cwnd。当与另一个网络的主机建立TCP连接时，拥塞窗口被初始化为1个报文段（即另一端通告的报文段大小）。每收到一个ACK，拥塞窗口就增加一个报文段（cwnd以字节为单位，但是慢启动以报文段大小为单位进行增加）。发送方取拥塞窗口与通告窗口中的最小值作为发送上限。拥塞窗口是发送方使用的流量控制，而通告窗口则是接收方使用的流量控制。发送方开始时发送一个报文段，然后等待ACK。当收到该ACK时，拥塞窗口从1增加为2，即可以发送两个报文段。当收到这两个报文段的ACK时，拥塞窗口就增加为4，这是一种指数增加的关系。在某些点上可能达到了互联网的容量，于是中间路由器开始丢弃分组。拥塞避免算法是一种处理丢失分组的方法。该算法假定由于分组受到损坏引起的丢失是非常少的（远小于1%），因此分组丢失就意味着在源主机和目的主机之间的某处网络上发生了拥塞。有两种分组丢失的指示：发生超时和接收到重复的确认。拥塞避免算法和慢启动算法是两个目的不同、独立的算法。但是当拥塞发生时，我们希望降低分组进入网络的传输速率，于是可以调用慢启动来作到这一点。在实际中这两个算法通常在一起实现。1990年出现的TCP Reno版本增加了&quot;快速重传&quot;算法、&quot;快速恢复&quot;算法，避免了当网络拥塞不够严重时采用&quot;慢启动&quot;算法而造成过大地减小发送窗口尺寸的现象。
+</code></pre></li>
+<li><p>拥塞控制的四个阶段</p>
+<pre><code>a．慢启动阶段(slow start)：发送方一开始便向网络发送多个报文段，直至达到接收方通告的窗口大小为止。当发送方和接收方处于同一个局域网时，这种方式是可以的。但是如果在发送方和接收方之间存在多个路由器和速率较慢的链路时，就有可能出现一些问题。一些中间路由器必须缓存分组，并有可能耗尽存储器的空间。
+b．拥塞避免阶段（congestion avoidance）：当发现超时或收到3个相同ACK确认帧时，则表示有丢包事件，此时网络已发生拥塞现象，此时要进行相应的拥塞控制。将慢启动阈值设置为当前拥塞窗口的一半；如检测到超时，拥塞窗口就被置为l。如果拥塞窗口小于或等于慢启动阈值，TCP重新进人慢启动阶段；如果拥塞窗口大于慢启动阈值，TCP执行拥塞避免算法。
+ c．快速重传阶段(fast retransmit)：当TCP源端收到到三个相同的ACK副本时，即认为有数据包丢失，则源端重传丢失的数据包，而不必等待RTO超时。同时将ssthresh设置为当前cwnd值的一半，并且将cwnd减为原先的一半。
+ d．快速恢复阶段(fast recovery) ：当&quot;旧&quot;数据包离开网络后，才能发送&quot;新&quot;数据包进入网络，即同一时刻在网络中传输的数据包数量是恒定的。如果发送方收到一个重复的ACK，则认为已经有一个数据包离开了网络，于是将拥塞窗口加1。                       
+</code></pre></li>
+<li><p>对传统TCP拥塞控制机制的发展及改进</p>
+<pre><code>4.1 对慢启动的改进　　
+慢启动(slow start)算法通过逐渐增加cwnd的大小来探测可用的网络容量，防止连接开始时采用不合适的发送量导致网络拥塞。然而有时该算法也会浪费可用的网络容量，因为慢启动算法总是从cwnd＝l开始，每收到一个ACK，cwnd增加l，对RTT时间长的网络，为使cwnd达到一个合适的值，需要花很长的时间，特别是网络实际容量很大时，会造成浪费。为此可采用大的初始窗口，大的初始窗口避免了延迟ACK机制下单个报文段初始窗口的等待超时问题，缩短了小TCP流的传输时间和大延迟链路上的慢启动时间。
+ 在慢启动阶段，在每个RTT时间内，cwnd增加一倍，这样当cwnd增加到一定的值时，就可能导致以网络能够处理的最大容量的2倍来发送数据，从而淹没网络。Hoe建议使用packet-pair算法和测量RTT来为ssthresh估计合适值，以此来适时地结束慢启动阶段。但是由于受各方面干扰，估算合理的ssthresh值并不容易，因此这个方法的效果是有限的。而Smooth-start较为平滑地从慢启动过渡到拥塞避免阶段，减少了报文段丢失和突发通讯量，提高了TCP拥塞控制的性能。
+</code></pre><p>4.2 对重传与恢复的改进</p>
+<pre><code>为了避免不必要的重传超时，有人提出了一种受限传输机制：如果接收方的广播窗口允许的话，发送方接收到一个或者两个重复的ACK(acknowledgment)后，继续传输新的数据报文段。受限的传输机制允许具有较小窗口的TCP连接进行错误恢复，而且避免了不必要的重传。
+有很多情况下，数据报文段并没有丢失，但TCP发送方可能会误判数据报文段丢失，然后调用拥塞控制规程减少拥塞窗口的大小。比如当重传定时器过早溢出时，发送方在重传数据报文段时不必要地减少了拥塞窗口，而这时并没有数据报文段丢失。如果是由于数据报文段的重新组织而不是数据报文段丢失，而导致3个重复的确认，同样会导致发送方不必要地在快速重传数据报文段后减少拥塞窗口。
+ 如果TCP的发送方在重传数据报文段一个RTT后发现接收方接收到了重传数据报文段的两个拷贝，则可以推断重传是不必要的。这时，TCP的发送方可以撤销对拥塞窗口的减少。发送方可以通过将慢启动门限增加到原始值，调用慢启动规程使拥塞窗口恢复原先值。除了恢复拥塞窗口，TCP发送方还可以调整重复确认门限或者重传超时参数来避免由于多次不必要的重传而浪费带宽。
+</code></pre><p>4.3 对公平性的改进 </p>
+<pre><code>在拥塞避免阶段，如果没有发生丢包事件，则TCP发送方的cwnd在每个RTT时间内大约可以增加一个报文段大小，但这样会造成具有不同RTT时间或窗口尺寸的多个连接在瓶颈处对带宽竞争的不公平性，RTT时间或窗口小的连接，相应的cwnd增长速度也相对缓慢，所以只能得到很小一部分带宽。
+要解决上述问题，可以通过在路由器处使用公平队列和TCP友好缓存管理来进行控制以增加公平性。然而如没有路由器的参与，要增加公平性，就要求TCP发送端的拥塞控制进行相应的改变，在拥塞避免阶段使共享同一资源的各个TCP连接以相同速度发送数据，从而确保了各个连接间的公平性。
+</code></pre><ol start="5">
+<li>结论<br>  该文在研究和分析各种基于TCP的数据流拥塞控制算法和参考有关文档的基础上，对以TCP为核心的拥塞控制机制进行了发展和改进，这些改进将使TCP的性能在不同的网络中取得更好的性能。其中避免不必要的重传超时、撤销不必要的拥塞控制等是随着网络技术的发展而对TCP的改进，它们通过不同的方式改进了TCP的性能，具有更广泛的适应性。 </li>
+</ol>
+</li>
+</ol>
+<h2 id="（21）-http协议与TCP联系"><a href="#（21）-http协议与TCP联系" class="headerlink" title="（21） http协议与TCP联系"></a>（21） http协议与TCP联系</h2><h2 id="（22）-http-1-0和http-1-1的区别"><a href="#（22）-http-1-0和http-1-1的区别" class="headerlink" title="（22） http/1.0和http/1.1的区别"></a>（22） http/1.0和http/1.1的区别</h2><h2 id="（23）-http的请求方法有哪些？get和post的区别。"><a href="#（23）-http的请求方法有哪些？get和post的区别。" class="headerlink" title="（23） http的请求方法有哪些？get和post的区别。"></a>（23） http的请求方法有哪些？get和post的区别。</h2><h2 id="（24）-http的状态码"><a href="#（24）-http的状态码" class="headerlink" title="（24） http的状态码"></a>（24） http的状态码</h2><h2 id="（25）-http和https的区别，由http升级为https需要做哪些操作"><a href="#（25）-http和https的区别，由http升级为https需要做哪些操作" class="headerlink" title="（25） http和https的区别，由http升级为https需要做哪些操作"></a>（25） http和https的区别，由http升级为https需要做哪些操作</h2><h2 id="（26）-https的具体实现，怎么确保安全性"><a href="#（26）-https的具体实现，怎么确保安全性" class="headerlink" title="（26） https的具体实现，怎么确保安全性"></a>（26） https的具体实现，怎么确保安全性</h2><h2 id="（27）-http中浏览器一个URL的流程，这个过程中浏览器做了什么，URL包括哪三个部分？"><a href="#（27）-http中浏览器一个URL的流程，这个过程中浏览器做了什么，URL包括哪三个部分？" class="headerlink" title="（27） http中浏览器一个URL的流程，这个过程中浏览器做了什么，URL包括哪三个部分？"></a>（27） http中浏览器一个URL的流程，这个过程中浏览器做了什么，URL包括哪三个部分？</h2><h2 id="（28）-一个机器能够使用的端口号上限是多少，为什么？可以改变吗？那如果想要用的端口超过这个限制怎么办？"><a href="#（28）-一个机器能够使用的端口号上限是多少，为什么？可以改变吗？那如果想要用的端口超过这个限制怎么办？" class="headerlink" title="（28） 一个机器能够使用的端口号上限是多少，为什么？可以改变吗？那如果想要用的端口超过这个限制怎么办？"></a>（28） 一个机器能够使用的端口号上限是多少，为什么？可以改变吗？那如果想要用的端口超过这个限制怎么办？</h2><h2 id="（29）-对称密码和非对称密码体系"><a href="#（29）-对称密码和非对称密码体系" class="headerlink" title="（29） 对称密码和非对称密码体系"></a>（29） 对称密码和非对称密码体系</h2><h2 id="（30）-数字证书的了解（高频）"><a href="#（30）-数字证书的了解（高频）" class="headerlink" title="（30） 数字证书的了解（高频）"></a>（30） 数字证书的了解（高频）</h2><h2 id="（31）-客户端为什么信任第三方证书"><a href="#（31）-客户端为什么信任第三方证书" class="headerlink" title="（31） 客户端为什么信任第三方证书"></a>（31） 客户端为什么信任第三方证书</h2><h2 id="（32）-RSA加密算法，MD5原理（MD5不算加密算法）"><a href="#（32）-RSA加密算法，MD5原理（MD5不算加密算法）" class="headerlink" title="（32） RSA加密算法，MD5原理（MD5不算加密算法）"></a>（32） RSA加密算法，MD5原理（MD5不算加密算法）</h2><h2 id="（33）-单条记录高并发访问的优化"><a href="#（33）-单条记录高并发访问的优化" class="headerlink" title="（33） 单条记录高并发访问的优化"></a>（33） 单条记录高并发访问的优化</h2><h2 id="（34）-介绍一下ping的过程，分别用到了哪些协议"><a href="#（34）-介绍一下ping的过程，分别用到了哪些协议" class="headerlink" title="（34） 介绍一下ping的过程，分别用到了哪些协议"></a>（34） 介绍一下ping的过程，分别用到了哪些协议</h2><h2 id="（35）-TCP-IP的分片粘包过程"><a href="#（35）-TCP-IP的分片粘包过程" class="headerlink" title="（35） TCP/IP的分片粘包过程"></a>（35） TCP/IP的分片粘包过程</h2><h2 id="（36）-有没有抓过TCP包，描述一下"><a href="#（36）-有没有抓过TCP包，描述一下" class="headerlink" title="（36） 有没有抓过TCP包，描述一下"></a>（36） 有没有抓过TCP包，描述一下</h2><h2 id="（37）-一个ip配置多个域名，靠什么识别？"><a href="#（37）-一个ip配置多个域名，靠什么识别？" class="headerlink" title="（37） 一个ip配置多个域名，靠什么识别？"></a>（37） 一个ip配置多个域名，靠什么识别？</h2><h2 id="（38）-服务器攻击（DDos攻击）"><a href="#（38）-服务器攻击（DDos攻击）" class="headerlink" title="（38） 服务器攻击（DDos攻击）"></a>（38） 服务器攻击（DDos攻击）</h2>
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2018年09月19日 - 17时12分</p>
+        <p><span>最后更新:</span>2019年07月17日 - 11时53分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/19/计算机网络面试高频题/" title="计算机网络面试高频题">http://yoursite.com/2018/09/19/计算机网络面试高频题/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/19/计算机网络面试高频题/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/09/19/设计模式面试高频题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式面试高频题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/19/回溯法问题通解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回溯法问题通解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#计算机网络面试高频题"><span class="toc-number">1.</span> <span class="toc-text">计算机网络面试高频题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#（1）-建立TCP服务器的各个系统调用"><span class="toc-number">1.1.</span> <span class="toc-text">（1） 建立TCP服务器的各个系统调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（2）-继上一题，说明socket网络编程有哪些系统调用？其中close是一次就能直接关闭的吗，半关闭状态是怎么产生的？"><span class="toc-number">1.2.</span> <span class="toc-text">（2） 继上一题，说明socket网络编程有哪些系统调用？其中close是一次就能直接关闭的吗，半关闭状态是怎么产生的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（3）-对路由协议的了解与介绍。内部网关协议IGP包括RIP，OSPF，和外部网关协议EGP和BGP"><span class="toc-number">1.3.</span> <span class="toc-text">（3） 对路由协议的了解与介绍。内部网关协议IGP包括RIP，OSPF，和外部网关协议EGP和BGP.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（4）-路由协议所使用的算法。"><span class="toc-number">1.4.</span> <span class="toc-text">（4） 路由协议所使用的算法。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（5）-TCP和UDP的区别"><span class="toc-number">1.5.</span> <span class="toc-text">（5） TCP和UDP的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（6）-TCP和UDP相关的协议与端口号"><span class="toc-number">1.6.</span> <span class="toc-text">（6） TCP和UDP相关的协议与端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（7）-TCP（UDP，IP）等首部的认识（http请求报文构成）"><span class="toc-number">1.7.</span> <span class="toc-text">（7） TCP（UDP，IP）等首部的认识（http请求报文构成）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（8）-网页解析的过程与实现方法"><span class="toc-number">1.8.</span> <span class="toc-text">（8） 网页解析的过程与实现方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（9）-在浏览器中输入URL后执行的全部过程（如www-baidu-com）"><span class="toc-number">1.9.</span> <span class="toc-text">（9）    在浏览器中输入URL后执行的全部过程（如www.baidu.com）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（10）-网络层分片的原因与具体实现"><span class="toc-number">1.10.</span> <span class="toc-text">（10） 网络层分片的原因与具体实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（11）-TCP的三次握手与四次挥手的详细介绍（TCP连接建立与断开是热门问题）"><span class="toc-number">1.11.</span> <span class="toc-text">（11） TCP的三次握手与四次挥手的详细介绍（TCP连接建立与断开是热门问题）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（12）-TCP握手以及每一次握手客户端和服务器端处于哪个状态（11种状态）"><span class="toc-number">1.12.</span> <span class="toc-text">（12） TCP握手以及每一次握手客户端和服务器端处于哪个状态（11种状态）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（13）-为什么使用三次握手，两次握手可不可以？"><span class="toc-number">1.13.</span> <span class="toc-text">（13） 为什么使用三次握手，两次握手可不可以？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（14）-TIME-WAIT的意义（为什么要等于2MSL）"><span class="toc-number">1.14.</span> <span class="toc-text">（14） TIME_WAIT的意义（为什么要等于2MSL）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（15）-超时重传机制（不太高频）"><span class="toc-number">1.15.</span> <span class="toc-text">（15） 超时重传机制（不太高频）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（16）-TCP怎么保证可靠性（面向字节流，超时重传，应答机制，滑动窗口，拥塞控制，校验等）？"><span class="toc-number">1.16.</span> <span class="toc-text">（16） TCP怎么保证可靠性（面向字节流，超时重传，应答机制，滑动窗口，拥塞控制，校验等）？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（17）-流量控制的介绍，采用滑动窗口会有什么问题（死锁可能，糊涂窗口综合征）？"><span class="toc-number">1.17.</span> <span class="toc-text">（17） 流量控制的介绍，采用滑动窗口会有什么问题（死锁可能，糊涂窗口综合征）？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（18）-tcp滑动窗口协议"><span class="toc-number">1.18.</span> <span class="toc-text">（18） tcp滑动窗口协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（19）-拥塞控制和流量控制的区别"><span class="toc-number">1.19.</span> <span class="toc-text">（19） 拥塞控制和流量控制的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（20）-TCP拥塞控制，算法名字？（极其重要）"><span class="toc-number">1.20.</span> <span class="toc-text">（20） TCP拥塞控制，算法名字？（极其重要）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（21）-http协议与TCP联系"><span class="toc-number">1.21.</span> <span class="toc-text">（21） http协议与TCP联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（22）-http-1-0和http-1-1的区别"><span class="toc-number">1.22.</span> <span class="toc-text">（22） http/1.0和http/1.1的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（23）-http的请求方法有哪些？get和post的区别。"><span class="toc-number">1.23.</span> <span class="toc-text">（23） http的请求方法有哪些？get和post的区别。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（24）-http的状态码"><span class="toc-number">1.24.</span> <span class="toc-text">（24） http的状态码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（25）-http和https的区别，由http升级为https需要做哪些操作"><span class="toc-number">1.25.</span> <span class="toc-text">（25） http和https的区别，由http升级为https需要做哪些操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（26）-https的具体实现，怎么确保安全性"><span class="toc-number">1.26.</span> <span class="toc-text">（26） https的具体实现，怎么确保安全性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（27）-http中浏览器一个URL的流程，这个过程中浏览器做了什么，URL包括哪三个部分？"><span class="toc-number">1.27.</span> <span class="toc-text">（27） http中浏览器一个URL的流程，这个过程中浏览器做了什么，URL包括哪三个部分？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（28）-一个机器能够使用的端口号上限是多少，为什么？可以改变吗？那如果想要用的端口超过这个限制怎么办？"><span class="toc-number">1.28.</span> <span class="toc-text">（28） 一个机器能够使用的端口号上限是多少，为什么？可以改变吗？那如果想要用的端口超过这个限制怎么办？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（29）-对称密码和非对称密码体系"><span class="toc-number">1.29.</span> <span class="toc-text">（29） 对称密码和非对称密码体系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（30）-数字证书的了解（高频）"><span class="toc-number">1.30.</span> <span class="toc-text">（30） 数字证书的了解（高频）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（31）-客户端为什么信任第三方证书"><span class="toc-number">1.31.</span> <span class="toc-text">（31） 客户端为什么信任第三方证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（32）-RSA加密算法，MD5原理（MD5不算加密算法）"><span class="toc-number">1.32.</span> <span class="toc-text">（32） RSA加密算法，MD5原理（MD5不算加密算法）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（33）-单条记录高并发访问的优化"><span class="toc-number">1.33.</span> <span class="toc-text">（33） 单条记录高并发访问的优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（34）-介绍一下ping的过程，分别用到了哪些协议"><span class="toc-number">1.34.</span> <span class="toc-text">（34） 介绍一下ping的过程，分别用到了哪些协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（35）-TCP-IP的分片粘包过程"><span class="toc-number">1.35.</span> <span class="toc-text">（35） TCP/IP的分片粘包过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（36）-有没有抓过TCP包，描述一下"><span class="toc-number">1.36.</span> <span class="toc-text">（36） 有没有抓过TCP包，描述一下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（37）-一个ip配置多个域名，靠什么识别？"><span class="toc-number">1.37.</span> <span class="toc-text">（37） 一个ip配置多个域名，靠什么识别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（38）-服务器攻击（DDos攻击）"><span class="toc-number">1.38.</span> <span class="toc-text">（38） 服务器攻击（DDos攻击）</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/09/19/设计模式面试高频题/" title="上一篇: 设计模式面试高频题">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/09/19/回溯法问题通解/" title="下一篇: 回溯法问题通解">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/510. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 Yiye Li
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

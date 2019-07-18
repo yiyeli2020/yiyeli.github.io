@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++面试高频题 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="C++面试高频题整理一下互联网公司语言基础（C++）面试高频题">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++面试高频题">
+<meta property="og:url" content="http://yoursite.com/2018/09/21/C++面试高频题/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="C++面试高频题整理一下互联网公司语言基础（C++）面试高频题">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fv5pefakcgj30as088my3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fv5tyr1p07j30h20by41b.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fv5ua8ciphj30i90ahgns.jpg">
+<meta property="og:updated_time" content="2019-07-17T03:53:33.991Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++面试高频题">
+<meta name="twitter:description" content="C++面试高频题整理一下互联网公司语言基础（C++）面试高频题">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0071ouepgy1fv5pefakcgj30as088my3.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 18px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 15px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 13px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 11px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 19px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 13px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 11px;">Database</a> <a href="/tags/Depth-first-Search/" style="font-size: 13px;">Depth-first Search</a> <a href="/tags/Dynamic-Programming/" style="font-size: 17px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 11px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Greedy/" style="font-size: 11px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 13px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 12px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 11px;">Hexo</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Operating-System/" style="font-size: 11px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Sort/" style="font-size: 12px;">Sort</a> <a href="/tags/Stack/" style="font-size: 11px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 11px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 16px;">Tree</a> <a href="/tags/Trie/" style="font-size: 12px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱代码，爱吉他，爱挑战新事物</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-C++面试高频题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/09/21/C++面试高频题/" class="article-date">
+      <time datetime="2018-09-21T09:12:13.000Z" itemprop="datePublished">2018-09-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++面试高频题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2018年9月/">2018年9月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="C-面试高频题"><a href="#C-面试高频题" class="headerlink" title="C++面试高频题"></a>C++面试高频题</h1><p>整理一下互联网公司语言基础（C++）面试高频题</p>
+<a id="more"></a>
+<p>##（1） 指针和引用的区别</p>
+<h3 id="联系"><a href="#联系" class="headerlink" title="联系:"></a>联系:</h3><h4 id="a"><a href="#a" class="headerlink" title="a."></a>a.</h4><p>指针和引用本质上都是地址的概念,引用在内部其实是用const指针来实现的.</p>
+<h4 id="b"><a href="#b" class="headerlink" title="b."></a>b.</h4><p>给函数传递参数的时候,一级指针和引用作为函数参数的时候可以达到相同的效果.</p>
+<h4 id="c"><a href="#c" class="headerlink" title="c."></a>c.</h4><p>指针的大部分效果都可以通过引用来实现。</p>
+<h4 id="d"><a href="#d" class="headerlink" title="d."></a>d.</h4><p>二级指针作为参数的时候就是希望在函数的内部修改指针的指向.这个时候利用指针的引用可以达到同样的效果.</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别:"></a>区别:</h3><h4 id="a-1"><a href="#a-1" class="headerlink" title="a."></a>a.</h4><p>定义引用的时候必须初始化,定义指针的时候可以不初始化.</p>
+<h4 id="b-1"><a href="#b-1" class="headerlink" title="b."></a>b.</h4><p>引用不能引用空,但是指针可以指向空.</p>
+<h4 id="c-1"><a href="#c-1" class="headerlink" title="c."></a>c.</h4><p>引用的关系一旦确定,就无法改变;引用永远指向的是用来对它初始化的对象;而非常属性的指针是可以改变指向的.</p>
+<h4 id="d-1"><a href="#d-1" class="headerlink" title="d."></a>d.</h4><p>指针是一个实体变量,在32位操作系统上面都是4个字节.而引用只是一个别名,其大小和其应用的对象的类型有关系.</p>
+<h4 id="e"><a href="#e" class="headerlink" title="e."></a>e.</h4><p>有指向指针的指针,但是没有引用引用的引用;因为引用一旦建立,它就表示初始化它的对象.</p>
+<h4 id="f"><a href="#f" class="headerlink" title="f."></a>f.</h4><p>有引用指针的引用,但是没有指向引用的指针；</p>
+<h4 id="g"><a href="#g" class="headerlink" title="g."></a>g.</h4><p>有指针数组,但是没有引用数组,但是有数组的引用.</p>
+<h3 id="参考答案2："><a href="#参考答案2：" class="headerlink" title="参考答案2："></a>参考答案2：</h3><h4 id="1"><a href="#1" class="headerlink" title="1)"></a>1)</h4><p>指针是一个实体，需要分配内存空间。引用只是变量的别名，不需要分配内存空间。</p>
+<h4 id="2"><a href="#2" class="headerlink" title="2)"></a>2)</h4><p>引用在定义的时候必须进行初始化，并且不能够改变。指针在定义的时候不一定要初始化，并且指向的空间可变。（注：不能有引用的值不能为NULL）</p>
+<h4 id="3"><a href="#3" class="headerlink" title="3)"></a>3)</h4><p>有多级指针，但是没有多级引用，只能有一级引用。</p>
+<h4 id="4"><a href="#4" class="headerlink" title="4)"></a>4)</h4><p>指针和引用的自增运算结果不一样。（指针是指向下一个空间，引用时引用的变量值加1）</p>
+<h4 id="5"><a href="#5" class="headerlink" title="5)"></a>5)</h4><p>sizeof 引用得到的是所指向的变量（对象）的大小，而sizeof 指针得到的是指针本身的大小。</p>
+<h4 id="6"><a href="#6" class="headerlink" title="6)"></a>6)</h4><p>引用访问一个变量是直接访问，而指针访问一个变量是间接访问。</p>
+<h4 id="7"><a href="#7" class="headerlink" title="7)"></a>7)</h4><p>使用指针前最好做类型检查，防止野指针的出现；</p>
+<h4 id="8"><a href="#8" class="headerlink" title="8)"></a>8)</h4><p>引用底层是通过指针实现的；</p>
+<h4 id="9"><a href="#9" class="headerlink" title="9)"></a>9)</h4><p>作为参数时也不同，传指针的实质是传值，传递的值是指针的地址；传引用的实质是传地址，传递的是变量的地址。</p>
+<p>下面是一段代码非常的全面:</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+void foo(int a[3])/*这个地方传递的是数组的首地址*/
+{
+     cout &lt;&lt; sizeof(a)/sizeof(a[0]) &lt;&lt; endl;
+}
+void bar(int (&amp;a)[3])/*这里传参的时候就是数组的整体*/
+{
+     cout &lt;&lt; sizeof(a)/sizeof(a[0]) &lt;&lt; endl;
+}
+int main(void)
+{
+     int a;
+     int* p = &amp;a;
+     int** pp = &amp;p;/*存在指向指针的指针*/
+     int&amp; r  = a;
+     int&amp;&amp; rr = r;/*error没有引用引用的引用*/
+     int*&amp;  rp = p; /*有引用指针的引用(指针引用)*/
+     int&amp;* pr = &amp;r; /*没有指向引用的指针(引用指针)*/
+     int x, y, z;
+     int* pa[] = {&amp;x,&amp;y,&amp;z};/*指针数组*/
+     int&amp; ra[] = {x,y,z};/*引用数组是不存在的因为引用不是一个实体*/
+     int arr[3] = {0};
+     int (&amp;ar)[3] = arr;/*数组引用(先近后远,先右后左)*/
+     foo(arr);/*这里传递的是数组的第一个元素的首地址*/
+     cout &lt;&lt; sizeof(arr)/sizeof(arr[0]) &lt;&lt; endl;
+     /*这里的数组名代表的是真个数组*/
+     int (*parr)[3] = &amp;arr;/*对数组名取地址得到的是一个数组指针
+                             这个时候arr代表的是数组的整体;*/
+     bar(arr);/*这里传递的就是数组的整体*/
+     return 0;
+}
+</code></pre><p>##（2） 堆和栈的区别</p>
+<h4 id="a-管理方式不同"><a href="#a-管理方式不同" class="headerlink" title="a.管理方式不同:"></a>a.管理方式不同:</h4><p>栈是由编译器自动分配和释放,使用方便;而对于堆来说,分配和释放都必须由程序员来手动完成,不易管理,容易造成内存泄漏和内存碎片.</p>
+<h4 id="b-可用内存空间不同"><a href="#b-可用内存空间不同" class="headerlink" title="b.可用内存空间不同:"></a>b.可用内存空间不同:</h4><p>对于栈来说,它可用的内存空间比较小;而对于堆来说它可以使用的空间比栈要大的多.</p>
+<h4 id="c-能否产生碎片不同"><a href="#c-能否产生碎片不同" class="headerlink" title="c.能否产生碎片不同:"></a>c.能否产生碎片不同:</h4><p>由于栈采用的是后进先出的机制,所以栈空间没有内存碎片的产生;而对于堆来说,由于频繁的使用new/delete势必会造成内存空间分配的不连续,从而造成大量的碎片,使程序的效率降低.</p>
+<h4 id="d-生长方向不同"><a href="#d-生长方向不同" class="headerlink" title="d.生长方向不同:"></a>d.生长方向不同:</h4><p>对于堆来说,它一般是向上的;即是向着地址增加的方向增长;对于栈来说,它一般是向下的,即向着地址减小的方向增长.</p>
+<h4 id="e-分配的方式不同"><a href="#e-分配的方式不同" class="headerlink" title="e.分配的方式不同:"></a>e.分配的方式不同:</h4><p>对于堆来说,它只能是动态分配的;而对于栈来说,它分为静态分配和动态分配;静态分配由编译器来进行管理,而动态分配的栈和堆也是不一样的,动态分配的栈由编译器进行释放,无需我们程序员来释放.</p>
+<h4 id="f-分配的效率不同"><a href="#f-分配的效率不同" class="headerlink" title="f.分配的效率不同:"></a>f.分配的效率不同:</h4><p>栈是机器系统提供的数据结构,计算机会在底层对栈提供支持:为栈分配专门的寄存器.压栈和出栈都由专门的指令进行.因此它的效率会很高;而堆则是由c/c++库函数实现的,机制是非常的负责的;例如要分配一块内存的时候,库函数会利用特定的算法在堆内存中搜索可用大小的内存空间;如果没有足够大的内存空间,就会调用系统功能去增加数据段的内存空间.这样才能得到足够大的可用的内存空间,因此堆内存的分配的效率比栈要低得多. </p>
+<p>##（3） new和delete是如何实现的，new 与 malloc的异同处</p>
+<h4 id="a-运算符和库函数的区别"><a href="#a-运算符和库函数的区别" class="headerlink" title="a.运算符和库函数的区别"></a>a.运算符和库函数的区别</h4><p>new/delete是运算符,只能在C++中使用,它可以重载;mallloc/free是C的标准库函数,在C/C++中都可以使用.</p>
+<h4 id="b-2"><a href="#b-2" class="headerlink" title="b."></a>b.</h4><p>对于非内部的数据类型的对象而言,光用malloc/free是无法满足动态对象的要求的.对象在创建的时候需要执行构造函数,对象在消亡之前需要执行析构函数.而molloc/free是库函数而不是运算符,不在编译器的控制范围之内,编译器不能将执行构造函数和析构函数的任务强加给malloc/free.因此C++需要一个能够完成动态分配内存和初始化的new,以及一个能够完成清理和释放内存的运算符delete.</p>
+<h4 id="c-2"><a href="#c-2" class="headerlink" title="c."></a>c.</h4><p>new的返回值是指定类型的指针,可以自动的计算所需要分配的内存大小.而malloc的返回值是一个void类型的指针,我们在使用的时候要进行强制类型转换,并且分配的大小也要程序员手动的计算.</p>
+<h4 id="d-2"><a href="#d-2" class="headerlink" title="d."></a>d.</h4><p>new/delete完全覆盖了malloc/free的功能,只所以还要保留malloc/free,是因为我们的C++程序有时要调用用C编写的而C中又没有new/delete,只能使用malloc/free.</p>
+<p>##（4） C和C++的区别</p>
+<p>C/C++的联系：</p>
+<p>C++是C的超集，兼容大部分C的语法的结构；<br>联系嘛我只能想到这个，毕竟cplusplus嘛！<br>C/C++区别：</p>
+<p>第一点就应该想到C是面向过程的语言，而C++是面向对象的语言</p>
+<p>C和C++动态管理内存的方法不一样，C是使用malloc/free函数，而C++除此之外还有new/delete关键字；（关于malooc/free与new/delete的不同又可以说一大堆，最后的扩展_1部分列出十大区别）；</p>
+<p>接下来就不得不谈到C中的struct和C++的类，C++的类是C所没有的，但是C中的struct是可以在C++中正常使用的，并且C++对struct进行了进一步的扩展，使struct在C++中可以和class一样当做类使用，而唯一和class不同的地方在于struct的成员默认访问修饰符是public,而class默认的是private;</p>
+<p>C++支持函数重载，而C不支持函数重载，而C++支持重载的依仗就在于C++的名字修饰与C不同，例如在C++中函数int fun(int ,int)经过名字修饰之后变为 _fun_int_int ,而C是<br>_fun，一般是这样的，所以C++才会支持不同的参数调用不同的函数；</p>
+<p>C++中有引用，而C没有；这样就不得不提一下引用和指针的区别;</p>
+<p>当然还有C++全部变量的默认链接属性是外链接，而C是内连接；</p>
+<p>C 中用const修饰的变量不可以用在定义数组时的大小，但是C++用const修饰的变量可以（如果不进行&amp;,解引用的操作的话，是存放在符号表的，不开辟内存）；</p>
+<p>当然还有局部变量的声明规则不同，多态，C++特有输入输出流之类的，很多，下面就不再列出来了； </p>
+<p>##（5） C++、Java的联系与区别，包括语言特性、垃圾回收、应用场景等（java的垃圾回收机制）</p>
+<p>通常，我们聊到Java，第一印象“面向对象”，“没有指针，编写效率高，执行效率较低”。更深入、专业一点就谈论 “java内存自动回收(GC垃圾回收机制)，多线程编程”。<strong><br>java的三大特性是封装、继承和多态。</strong></p>
+<p>总结如下：</p>
+<p>1、 JAVA的应用在高层，C++在中间件和底层</p>
+<p>2、 JAVA离不开业务逻辑，而C++可以离开业务为JAVA们服务</p>
+<p>3、 java语言给开发人员提供了更为简洁的语法；取消了指针带来更高的代码质量；完全面向对象，独特的运行机制是其具有天然的可移植性。</p>
+<p>4、 java 是运行在JVM上的，之所以说它的可移植性强，是因为jvm可以安装到任何的系统</p>
+<p>5、 c++不是不能在其他系统运行，而是c++在不同的系统上运行，需要不同的编码（这一点不如java，只编写一次代码，到处运行）。java程序一般都是生成字节码，在JVM里面运行得到结果。</p>
+<p>6、 java 在web 应用上具有c++ 无可比拟的优势</p>
+<p>7、 java在桌面程序上不如c++实用，C++可以直接编译成exe文件，指针是c++的优势，可以直接对内存的操作，但同时具有危险性 。（操作内存的确是一项非常危险的事情，一旦指针指向的位置发生错误，或者误删除了内存中某个地址单元存放的重要数据，后果是可想而知的）。</p>
+<p>8、 垃圾回收机制的区别。c++用析构函数回收垃圾，java自动回收（GC算法）,写C和C++程序时一定要注意内存的申请和释放。</p>
+<p>9、 java 丰富的插件是java 发展如此迅速的原因<br>10、 java 很大的沿袭了c++的一些实用结构<br>11、 对于底层程序的编程以及控制方面的编程，c++很灵活，因为有句柄的存在。</p>
+<p>Java并不仅仅是C++语言的一个变种，它们在某些本质问题上有根本的不同：</p>
+<p>(1)Java比C++程序可靠性更高。有人曾估计每50行C++程序中至少有一个BUG。姑且不去讨论这个数字是否夸张，但是任何一个C++程序员都不得不承认C++语言在提供强大的功能的同时也提高了程序含BUG的可能性。Java语言通过改变语言的特性大大提高了程序的可靠性。</p>
+<p>(2)Java语言不需要程序对内存进行分配和回收。Java丢弃了C++ 中很少使用的、很难理解的、令人迷惑的那些特性，如操作符重载、多继承、自动的强制类型转换。特别地，Java语言不使用指针，并提供了自动的废料收集，在Java语言中，内存的分配和回收都是自动进行的，程序员无须考虑内存碎片的问题。</p>
+<p>(3)Java语言中没有指针的概念，引入了真正的数组。不同于C++中利用指针实现的“伪数组”，Java引入了真正的数组，同时将容易造成麻烦的指针从语言中去掉，这将有利于防止在c++程序中常见的因为数组操作越界等指针操作而对系统数据进行非法读写带来的不安全问题。</p>
+<p>(4)Java用接口(Interface)技术取代C++程序中的多继承性。接口与多继承有同样的功能，但是省却了多继承在实现和维护上的复杂性。</p>
+<h2 id="（6）-Struct和class的联系和区别"><a href="#（6）-Struct和class的联系和区别" class="headerlink" title="（6） Struct和class的联系和区别"></a>（6） Struct和class的联系和区别</h2><h3 id="联系-1"><a href="#联系-1" class="headerlink" title="联系"></a>联系</h3><p>1，定义和使用非常相似<br>2，两者都是container类型，这表示它们可以包含其他数据类型作为成员。</p>
+<p>3，两者都拥有成员，包括：构造函数、方法、属性、字段、常量、枚举类型、事件、以及事件处理函数。</p>
+<p>4，两者的成员都有其各自的存取范围。例如，可以将某一个成员声明为Public，而将另一个成员声明为Private。</p>
+<p>5，两者都可以实现接口。</p>
+<p>6，两者都可以公开一个默认属性，然而前提是这个属性至少要取得一个自变量。</p>
+<p>7，两者都可以声明和触发事件，而且两者都可以声明委托（Delegate）。</p>
+<h3 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h3><p>1，结构是实值类型（Value Types），而类则是引用类型（Reference Types）。</p>
+<p>2，结构使用栈存储（Stack Allocation），而类使用堆存储（Heap Allocation）。</p>
+<p>3，所有结构成员默认都是Public，而类的变量和常量数则默认位Private，不过其他类成员默认都是Public。</p>
+<p>4，结构成员不能被声明位Protected，而类成员可以。</p>
+<p>5，结构变量声明不能指定初始值、使用New关键字货对数组进行初始化，但是类变量声明可以。</p>
+<p>6，结构不能声明默认的构造函数，也就是不拥有参数的非共享构造函数，但是类则无此限制。</p>
+<p>7，二者都可以拥有共享构造函数，结构的共享构造函数不能带有参数，但是类的共享构造函数则可以带或者不带参数。</p>
+<p>8，结构不允许声明析构函数（Destructor），类则无此限制。</p>
+<p>9，结构的实例（Instance）声明，不允许对包含的变量进行初始化设定，类则可以在声明类的实例时，同时进行变量初始化。</p>
+<p>10，结构是隐式继承自ValueType类，而且不能继承任何其他类型，类则可以继续自ValueType以外的任何类。</p>
+<p>11，结构是无法被继承的，类则可以。</p>
+<p>12，结构永远不会终止，因此CLR不会在任何结构上调用Finalize方法。类则是由内存回收进程加以终止，当内存回收进程检测到没有任何作用的类时，它就会调用类的Finalize方法。</p>
+<p>13，结构不需要构造函数，类则需要构造函数。</p>
+<p>14，结构只能在一种情况下使用非共享构造函数，那就是非共享构造函数会接受参数。但是类则无此限制，它可以使用带参数或不带参数的非共享构造函数。</p>
+<p>14，每一个结构都具有无参数的隐含公共构造函数，此构造函数会将结构的所有成员初始化为其默认值。不需要重新定义这个行为。</p>
+<p>在“实例和变量”层面上，由于结构是数值类型的，因此每一个结构变量会永远的绑定到结构实例上。然而类是引用类型的，而且对象变量可引用不同的类实例，在此方面的区别，会对使用将结构和类造成如下的影响：</p>
+<p>15，结构变量会隐式的使用结构的无参数构造函数来初始化成员，这就意味语句 Struct S = new Struct（）。</p>
+<p>16，当您将一个结构变量赋值给另一个，或者将结构实例传递到程序变量时，所有变量成员的值会复制到新的结构中。当您将一个对象变量赋值给另一个，或者将对象变量传递给程序时，则只是复制指针。</p>
+<p>17，您可以将Null值赋值给结构变量，但是该实例会一直与该变量保持关联。虽然变量成员会因此赋值而重新初始化，但是您还是可以调用变量的方法并访问其数据成员。相反的，如果您将对象变量设定为Null，您就会中断它与任何类型实例的关联，而且除非您再将另一个实例赋值给它，否则无法通过变量访问任何成员。</p>
+<p>18，您可以在不同时间将不同的类的实例赋值给同一个对象变量，而且在同一时间可有好几个对象变量引用相同的类实例，如果您对类成员值做了改变，则其他指向相同实例的对象变量也会发生改变。然而，结构成员则会封装在他们自己的实例中，变更结构成员值并不会对其他任何结构变量的成员造成影响，甚至也不会影响相同结构声明的其他实例。</p>
+<p>19，两个结构必须以成员对成员的比较方式来执行相等比较。两个对象变量可以使用Equals方法来加以比较。Equals会判断两个变量是否指向相同的实例。</p>
+<h2 id="（7）-define-和const的区别（编译阶段、安全性、内存占用等）"><a href="#（7）-define-和const的区别（编译阶段、安全性、内存占用等）" class="headerlink" title="（7） define 和const的区别（编译阶段、安全性、内存占用等）"></a>（7） define 和const的区别（编译阶段、安全性、内存占用等）</h2><h3 id="1-编译器处理方式不同。"><a href="#1-编译器处理方式不同。" class="headerlink" title="(1) 编译器处理方式不同。"></a>(1) 编译器处理方式不同。</h3><p>define宏是在预处理阶段展开，生命周期止于编译期。只是一个常数、一个命令中的参数，没有实际的存在。#define常量存在于程序的代码段。const常量是编译运行阶段使用，const常量存在于程序的数据段.</p>
+<h3 id="2-类型和安全检查不同。"><a href="#2-类型和安全检查不同。" class="headerlink" title="(2)类型和安全检查不同。"></a>(2)类型和安全检查不同。</h3><p>define宏没有类型，不做任何类型检查，仅仅是展开。const常量有具体的类型，在编译阶段会执行类型检查。</p>
+<h3 id="3-存储方式不同。"><a href="#3-存储方式不同。" class="headerlink" title="(3)存储方式不同。"></a>(3)存储方式不同。</h3><p>define宏仅仅是展开，有多少地方使用，就展开多少次，不会分配内存。const常量会在内存中分配(可以是堆中也可以是栈中)</p>
+<h2 id="（8）-在C-中const和static的用法（定义，用途）"><a href="#（8）-在C-中const和static的用法（定义，用途）" class="headerlink" title="（8） 在C++中const和static的用法（定义，用途）"></a>（8） 在C++中const和static的用法（定义，用途）</h2><h3 id="static关键字至少有下列n个作用："><a href="#static关键字至少有下列n个作用：" class="headerlink" title="static关键字至少有下列n个作用："></a>static关键字至少有下列n个作用：</h3><h4 id="（1）"><a href="#（1）" class="headerlink" title="（1）"></a>（1）</h4><p>函数体内static变量的作用范围为该函数体，不同于auto变量，该变量的内存只被分配一次，因此其值在下次调用时仍维持上次的值；</p>
+<h4 id="（2）"><a href="#（2）" class="headerlink" title="（2）"></a>（2）</h4><p>在模块内的static全局变量可以被模块内所用函数访问，但不能被模块外其它函数访问；</p>
+<h4 id="（3）"><a href="#（3）" class="headerlink" title="（3）"></a>（3）</h4><p>在模块内的static函数只可被这一模块内的其它函数调用，这个函数的使用范围被限制在声明它的模块内；</p>
+<h4 id="（4）"><a href="#（4）" class="headerlink" title="（4）"></a>（4）</h4><p>在类中的static成员变量属于整个类所拥有，对类的所有对象只有一份拷贝；</p>
+<h4 id="（5）"><a href="#（5）" class="headerlink" title="（5）"></a>（5）</h4><p>在类中的static成员函数属于整个类所拥有，这个函数不接收this指针，因而只能访问类的static成员变量。</p>
+<h3 id="const关键字至少有下列n个作用："><a href="#const关键字至少有下列n个作用：" class="headerlink" title="const关键字至少有下列n个作用："></a>const关键字至少有下列n个作用：</h3><h4 id="（1）-1"><a href="#（1）-1" class="headerlink" title="（1）"></a>（1）</h4><p>欲阻止一个变量被改变，可以使用const关键字。在定义该const变量时，通常需要对它进行初始化，因为以后就没有机会再去改变它了；</p>
+<h4 id="（2）-1"><a href="#（2）-1" class="headerlink" title="（2）"></a>（2）</h4><p>对指针来说，可以指定指针本身为const，也可以指定指针所指的数据为const，或二者同时指定为const；</p>
+<h4 id="（3）-1"><a href="#（3）-1" class="headerlink" title="（3）"></a>（3）</h4><p>在一个函数声明中，const可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值；</p>
+<h4 id="（4）-1"><a href="#（4）-1" class="headerlink" title="（4）"></a>（4）</h4><p>对于类的成员函数，若指定其为const类型，则表明其是一个常函数，不能修改类的成员变量；</p>
+<h4 id="（5）-1"><a href="#（5）-1" class="headerlink" title="（5）"></a>（5）</h4><p>对于类的成员函数，有时候必须指定其返回值为const类型，以使得其返回值不为“左值”。例如：<br>const classA operator<em>(const classA&amp; a1,const classA&amp; a2);<br>　　operator</em>的返回结果必须是一个const对象。如果不是，这样的变态代码也不会编译出错：</p>
+<p>classA a, b, c;<br>(a <em> b) = c; // 对a</em>b的结果赋值<br>　　操作(a * b) = c显然不符合编程者的初衷，也没有任何意义。</p>
+<h2 id="（9）-const和static在类中使用的注意事项（定义、初始化和使用）"><a href="#（9）-const和static在类中使用的注意事项（定义、初始化和使用）" class="headerlink" title="（9） const和static在类中使用的注意事项（定义、初始化和使用）"></a>（9） const和static在类中使用的注意事项（定义、初始化和使用）</h2><h2 id="（10）-C-中的const类成员函数（用法和意义）"><a href="#（10）-C-中的const类成员函数（用法和意义）" class="headerlink" title="（10） C++中的const类成员函数（用法和意义）"></a>（10） C++中的const类成员函数（用法和意义）</h2><p>常量成员函数声明：如：int get() const;</p>
+<h3 id="规则："><a href="#规则：" class="headerlink" title="规则："></a>规则：</h3><p>1.常量成员函数不修改对象。<br>2.常量成员函数在定义和声明中都应加const限定<br>3.非常量成员函数不能被常量成员函数调用，但构造函数和析构函数除外。<br>4.常量（const对象）对象只能调用常量成员函数。（const对象的数据成员在对象寿命周期内不能改变，因此其只能调用常量成员函数）。</p>
+<h3 id="意义："><a href="#意义：" class="headerlink" title="意义："></a>意义：</h3><p>1.使成员函数的意义更加清楚，将成员函数分修改对象和不修改对象两类。<br>2.增加程序的健壮性，常量成员函数企图修改数据成员或调用非常量成员函数，编译器会指出错误。</p>
+<h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><p>对于X类型的非常量成员函数而言，其this指针的类型是 X <em> const，该指针自身是常量；但是对于X类型的常量成员函数而言，其this指针的类型是const X </em> const，是一个常量指针。</p>
+<h2 id="（11）-计算下面几个类的大小："><a href="#（11）-计算下面几个类的大小：" class="headerlink" title="（11） 计算下面几个类的大小："></a>（11） 计算下面几个类的大小：</h2><pre><code>class A {};: sizeof(A) = 1;
+class A { virtual Fun(){} };: sizeof(A) = 4(32位机器)/8(64位机器);
+class A { static int a; };: sizeof(A) = 1;
+class A { int a; };: sizeof(A) = 4;
+class A { static int a; int b; };: sizeof(A) = 4;
+</code></pre><p>（12） 给一个代码，求输出结果</p>
+<pre><code>class A
+{
+public:
+A(int x){}
+}
+</code></pre><p>问：A a = 1;是否正确, 如果正确, 那么它调用了哪些函数？<br>这类题目更常见的是在基类和子类有不同实现方法。（虚函数相关，栗子很多，不多说了）</p>
+<h2 id="（13）-C-的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等"><a href="#（13）-C-的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等" class="headerlink" title="（13） C++的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等"></a>（13） C++的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等</h2><h2 id="（14）-STL源码中的hash表的实现"><a href="#（14）-STL源码中的hash表的实现" class="headerlink" title="（14） STL源码中的hash表的实现"></a>（14） STL源码中的hash表的实现</h2><p><a href="https://blog.csdn.net/c602273091/article/details/54798805" target="_blank" rel="noopener">https://blog.csdn.net/c602273091/article/details/54798805</a><br>哈希表（Hash table，也叫散列表）， 是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。</p>
+<p>哈希表hash table(key，value) 的做法其实很简单，就是把Key通过一个固定的算法函数既所谓的哈希函数转换成一个整型数字，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在以该数字为下标的数组空间里。</p>
+<p>而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位。</p>
+<p>哈希表最大的优点，就是把数据的存储和查找消耗的时间大大降低，几乎可以看成是常数时间；而代价仅仅是消耗比较多的内存。然而在当前可利用内存越来越多的情况下，用空间换时间的做法是值得的。另外，编码比较容易也是它的特点之一。 哈希表又叫做散列表，分为“开散列” 和“闭散列”。</p>
+<p>我们使用一个下标范围比较大的数组来存储元素。可以设计一个函数（哈希函数， 也叫做散列函数），使得每个元素的关键字都与一个函数值（即数组下标）相对应，于是用这个数组单元来存储这个元素；也可以简单的理解为，按照关键字为每一 个元素“分类”，然后将这个元素存储在相应“类”所对应的地方。</p>
+<p>但是，不能够保证每个元素的关键字与函数值是一一对应的，因此极有可能出现对于不同的元素，却计算出了相同的函数值，这样就产生了“冲突”，换句话说，就是把不同的元素分在了相同的“类”之中。后面我们将看到一种解决“冲突”的简便做法。 总的来说，“直接定址”与“解决冲突”是哈希表的两大特点。</p>
+<p>哈希函数构造<br>就是映射函数构造，看某个元素具体属于哪一个类别。<br>除余法： 选择一个适当的正整数 p ，令 h(k ) = k mod p ，这里， p 如果选取的是比较大的素数，效果比较好。而且此法非常容易实现，因此是最常用的方法。最直观的一种，上图使用的就是这种散列法，公式：<br>index = value % 16<br>学过汇编的都知道，求模数其实是通过一个除法运算得到的，所以叫“除法散列法”。</p>
+<p>平方散列法<br>求index是非常频繁的操作，而乘法的运算要比除法来得省时（对现在的CPU来说，估计我们感觉不出来），所以我们考虑把除法换成乘法和一个位移操作。公式：<br>index = (value * value) &gt;&gt; 28 （ 右移，除以2^28。记法：左移变大，是乘。右移变小，是除）</p>
+<p>数字选择法： 如果关键字的位数比较多，超过长整型范围而无法直接运算，可以选择其中数字分布比较均匀的若干位，所组成的新的值作为关键字或者直接作为函数值。</p>
+<p>斐波那契（Fibonacci）散列法：平方散列法的缺点是显而易见的，所以我们能不能找出一个理想的乘数，而不是拿value本身当作乘数呢？答案是肯定的。<br>1，对于16位整数而言，这个乘数是40503<br>2，对于32位整数而言，这个乘数是2654435769<br>3，对于64位整数而言，这个乘数是11400714819323198485<br>这几个“理想乘数”是如何得出来的呢？这跟一个法则有关，叫黄金分割法则，而描述黄金分割法则的最经典表达式无疑就是著名的斐波那契数列，即如此形式的序列：0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233,377, 610， 987, 1597, 2584, 4181, 6765, 10946，…。另外，斐波那契数列的值和太阳系八大行星的轨道半径的比例出奇吻合。<br>对我们常见的32位整数而言，公式：<br>index = (value * 2654435769) &gt;&gt; 28</p>
+<p>冲突处理<br>线性重新散列技术易于实现且可以较好的达到目的。令数组元素个数为 S ，则当 h(k) 已经存储了元素的时候，依次探查 (h(k)+i) mod S , i=1,2,3…… ，直到找到空的存储单元为止（或者从头到尾扫描一圈仍未发现空单元，这就是哈希表已经满了，发生了错误。当然这是可以通过扩大数组范围避免的）。</p>
+<h2 id="（15）-STL中unordered-map和map的区别"><a href="#（15）-STL中unordered-map和map的区别" class="headerlink" title="（15） STL中unordered_map和map的区别"></a>（15） STL中unordered_map和map的区别</h2><h3 id="内部实现机理"><a href="#内部实现机理" class="headerlink" title="内部实现机理"></a>内部实现机理</h3><h4 id="map："><a href="#map：" class="headerlink" title="map："></a>map：</h4><p>map内部实现了一个红黑树，该结构具有自动排序的功能，因此map内部的所有元素都是有序的，红黑树的每一个节点都代表着map的一个元素，因此，对于map进行的查找，删除，添加等一系列的操作都相当于是对红黑树进行这样的操作，故红黑树的效率决定了map的效率。</p>
+<h4 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map:"></a>unordered_map:</h4><p>unordered_map内部实现了一个哈希表，因此其元素的排列顺序是杂乱的，无序的</p>
+<h3 id="优缺点以及适用处"><a href="#优缺点以及适用处" class="headerlink" title="优缺点以及适用处"></a>优缺点以及适用处</h3><h4 id="map-优点："><a href="#map-优点：" class="headerlink" title="map 优点："></a>map 优点：</h4><p>有序性，这是map结构最大的优点，其元素的有序性在很多应用中都会简化很多的操作<br>红黑树，内部实现一个红黑书使得map的很多操作在lgn的时间复杂度下就可以实现，因此效率非常的高</p>
+<h4 id="map-缺点："><a href="#map-缺点：" class="headerlink" title="map 缺点："></a>map 缺点：</h4><p>空间占用率高，因为map内部实现了红黑树，虽然提高了运行效率，但是因为每一个节点都需要额外保存父节点，孩子节点以及红/黑性质，使得每一个节点都占用大量的空间<br>适用处，对于那些有顺序要求的问题，用map会更高效一些</p>
+<h4 id="unordered-map-优点："><a href="#unordered-map-优点：" class="headerlink" title="unordered_map 优点："></a>unordered_map 优点：</h4><p>因为内部实现了哈希表，因此其查找速度非常的快</p>
+<h4 id="unordered-map-缺点："><a href="#unordered-map-缺点：" class="headerlink" title="unordered_map 缺点："></a>unordered_map 缺点：</h4><p>哈希表的建立比较耗费时间<br>适用处，对于查找问题，unordered_map会更加高效一些，因此遇到查找问题，常会考虑一下用unordered_map</p>
+<h2 id="（16）-STL中vector的实现"><a href="#（16）-STL中vector的实现" class="headerlink" title="（16） STL中vector的实现"></a>（16） STL中vector的实现</h2><h3 id="一、vector的定义"><a href="#一、vector的定义" class="headerlink" title="一、vector的定义"></a>一、vector的定义</h3><pre><code>template&lt;class _Ty,class _Ax&gt;
+class vector:public _Vector_val&lt;_Ty,_Ax&gt;{
+public:
+    /******/
+protected:
+    pointer _Myfirst;//pointer to beginning of array
+    pointer _Mylast;//pointer to current end of sequence
+    pointer _Myend;//pointer to end of array
+};
+</code></pre><p>示意图如下：<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5pefakcgj30as088my3.jpg" alt="image"></p>
+<p>两个关键大小：<br>大小：size=_Mylast - _Myfirst；<br>容量：capacity=_Myend - _Myfirst；<br>分别对应于resize()、reserve()两个函数。<br>size表示vector中已有元素的个数，容量表示vector最多可存储的元素的个数；为了降低二次分配时的成本，vector实际配置的大小可能比客户需求的更大一些，以备将来扩充，这就是容量的概念。即capacity&gt;=size，当等于时，容器此时已满，若再要加入新的元素时，就要重新进行内存分配，整个vector的数据都要移动到新内存。二次分配成本较高，在实际操作时，应尽量预留一定空间，避免二次分配。</p>
+<h3 id="二、构造与析构"><a href="#二、构造与析构" class="headerlink" title="二、构造与析构"></a>二、构造与析构</h3><h3 id="1、构造"><a href="#1、构造" class="headerlink" title="1、构造"></a>1、构造</h3><p>vector的构造函数主要有以下几种：</p>
+<pre><code>vector(): _Mybase(){
+    //construct empty vector
+    _Buy(0);
+}
+explicit vector(size_type _Count): _Mybase(){
+    //construct from _Count * _Ty()
+    _Construct_n(_Count, _Ty());
+}
+vector(size_type _Count,const _Ty&amp; _Val): _Mybase(){
+    //construct from _Count * _Val
+    _Construct_n(_Count,_Val);
+}
+vector(const _Myt&amp; _Right) : _Mybase(_Right._Alval){
+    //construct by copying _Right
+    if(_Buy(_Right.size()))
+        _Mylast=_Ucopy(_Right.begin(),_Right.end(),_Myfirst);
+}
+</code></pre><p>vector优异性能的秘诀之一，就是配置比其所容纳的元素所需更多的内存，一般在使用vector之前，就先预留足够空间，以避免二次分配，这样可以使vector的性能达到最佳。因此元素个数_Count是个远比元素值 _Val重要的参数，因此当构造一个vector时，首要参数一定是元素个数。<br>由上各构造函数可知，基本上所有构造函数都是基于_Construct _n() 的</p>
+<pre><code>bool _Buy(size_type _Capacity){
+    //allocate array with _Capacity elements
+    _Myfirst=0,_Mylast=0,_Myend=0;
+    if(_Capacity==0)// _Count为0时直接返回
+        return (false);
+    else{
+        //nonempty array,allocate storage
+        _Myfirst=this-&gt;_Alval.allocate(_Capacity);//分配内存，并更新成员变量
+        _Mylast=_Myfirst;
+        _Myend=_Myfirst+_Capacity;
+    }
+    return (true);
+}
+void _Construct_n(size_type _Count,const _Ty&amp; _Val){
+    //构造含有_Count个值为_Val的元素的容器
+    if(_Buy(_Count))
+        _Mylast= _Ufill(_Myfirst,_Count,_Val);
+}
+</code></pre><h3 id="2、析构"><a href="#2、析构" class="headerlink" title="2、析构"></a>2、析构</h3><p>vector的析构函数很简单，就是先销毁所有已存在的元素，然后释放所有内存</p>
+<pre><code>void _Tidy()
+    {   // free all storage
+    if (_Myfirst != 0)
+        {   // something to free, destroy and deallocate it
+        _Destroy(_Myfirst, _Mylast);
+        this-&gt;_Alval.deallocate(_Myfirst, _Myend - _Myfirst);
+        }
+    _Myfirst = 0, _Mylast = 0, _Myend = 0;
+    }
+</code></pre><h3 id="三、插入和删除元素"><a href="#三、插入和删除元素" class="headerlink" title="三、插入和删除元素"></a>三、插入和删除元素</h3><p>vector的插入和删除元素是通过push_ back () 、 pop_back()两个接口来实现的，他们的内部实现也非常简单</p>
+<pre><code>void push_back(const _Ty&amp; _Val)
+    {   // insert element at end
+    if (size() &lt; capacity())
+        _Mylast = _Ufill(_Mylast, 1, _Val);
+    else
+        insert(end(), _Val);    //空间不足时，就会触发内存的二次分配
+    }
+
+void pop_back()
+    {   // erase element at end
+    if (!empty())
+        {   // erase last element
+        _Destroy(_Mylast - 1, _Mylast);
+        --_Mylast;
+        }
+    }
+</code></pre><p>当没有备用空间时候，push_back将调用insert进行扩容。将内存扩充原来2倍，然后将原数据复制过来，然后释放掉原数据，最后调整三个迭代器的数值_Myfirst,_Mylast,_Myend。所以扩容之后，指向原vector的迭代器会失效，必须重新调用成员函数获取才可以，所以使用迭代器最好时时刻刻重新获取，否则可能引发错误。</p>
+<pre><code>template &lt;class T, class Alloc&gt;
+void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
+  if (_Mylast != _Myend) {//还有备用空间
+    construct(_Mylast, *(_Mylast - 1));//
+    ++_Mylast;
+    T x_copy = x;
+    copy_backward(position, _Mylast - 2, _Mylast - 1);
+    *position = x_copy;//调整迭代器指向
+  }
+  else {//没有备用空间
+    const size_type old_size = size();
+    const size_type len = old_size != 0 ? 2 * old_size : 1;
+    /*
+        如果原大小为0，则为1，否则扩大为2倍。    
+    */
+    iterator new_start = data_allocator::allocate(len);//分配,并返回首部迭代器
+    iterator new_finish = new_start;
+    __STL_TRY {
+      new_finish = uninitialized_copy(_Myfirst, position, new_start);//将原来数据拷贝到new_start，并返回尾部迭代器
+      construct(new_finish, x);//在尾部构造新元素
+      ++new_finish;//新的尾部加1
+
+      new_finish = uninitialized_copy(position, _Mylast, new_finish);//这句话没有任何用。
+    }
+    destroy(begin(), end());//析构
+    deallocate();//释放原来vector内存空间
+
+    //迭代器调整
+    _Myfirst = new_start;
+    _Mylast = new_finish;
+    _Myend = new_start + len;
+  }
+}
+</code></pre><h3 id="四、其他接口"><a href="#四、其他接口" class="headerlink" title="四、其他接口"></a>四、其他接口</h3><h3 id="1、reserve-操作"><a href="#1、reserve-操作" class="headerlink" title="1、reserve()操作"></a>1、reserve()操作</h3><p>之前提到过reserve（Count） 函数主要是预留Count大小的空间，对应的是容器的容量，目的是保证（_Myend - _Myfirst）&gt;=Count。只有当空间不足时，才会操作，即重新分配一块内存，将原有元素拷贝到新内存，并销毁原有内存</p>
+<pre><code>void reserve(size_type _Count)
+    {   // determine new minimum length of allocated storage
+    if (capacity() &lt; _Count)
+        {   // not enough room, reallocate
+        pointer _Ptr = this-&gt;_Alval.allocate(_Count);
+        _Umove(begin(), end(), _Ptr);
+        size_type _Size = size();
+        if (_Myfirst != 0)
+            {   // destroy and deallocate old array
+            _Destroy(_Myfirst, _Mylast);
+            this-&gt;_Alval.deallocate(_Myfirst, _Myend - _Myfirst);
+            }
+        _Myend = _Ptr + _Count;
+        _Mylast = _Ptr + _Size;
+        _Myfirst = _Ptr;
+        }
+    }
+</code></pre><h3 id="2、resize-操作"><a href="#2、resize-操作" class="headerlink" title="2、resize()操作"></a>2、resize()操作</h3><p>resize（Count） 函数主要是用于改变size的，也就是改变vector的大小，最终改变的是（_Mylast - _Myfirst）的值，当size &lt; Count时,就插入元素，当size &gt;Count时，就擦除元素。</p>
+<pre><code>void resize(size_type _Newsize, _Ty _Val)
+    {   // determine new length, padding with _Val elements as needed
+    if (size() &lt; _Newsize)
+        _Insert_n(end(), _Newsize - size(), _Val);
+    else if (_Newsize &lt; size())
+        erase(begin() + _Newsize, end());
+    }
+</code></pre><h3 id="3、-Insert-n-操作"><a href="#3、-Insert-n-操作" class="headerlink" title="3、_Insert_n()操作"></a>3、_Insert_n()操作</h3><p>resize()操作和insert()操作都会利用到_Insert_n()这个函数，这个函数非常重要，也比其他函数稍微复杂一点<br>虽然_Insert_n(_where, _Count, _Val ) 函数比较长，但是操作都非常简单，主要可以分为以下几种情况：</p>
+<p>1、_Count == 0，不需要插入，直接返回</p>
+<p>2、max_size() - size() &lt; _Count，超过系统设置的最大容量，会溢出，造成Xlen（）异常</p>
+<p>3、_Capacity &lt; size() + _Count，vector的容量不足以插入Count个元素，需要进行二次分配，扩大vector的容量。 在VS下，vector容量会扩大50%，即 _Capacity = _Capacity + _Capacity / 2;<br>若仍不足，则 _Capacity = size() + _Count;</p>
+<pre><code>else if (_Capacity &lt; size() + _Count)
+       {   // not enough room, reallocate
+       _Capacity = max_size() - _Capacity / 2 &lt; _Capacity
+           ? 0 : _Capacity + _Capacity / 2;    // try to grow by 50%
+       if (_Capacity &lt; size() + _Count)
+           _Capacity = size() + _Count;
+       pointer _Newvec = this-&gt;_Alval.allocate(_Capacity);
+       pointer _Ptr = _Newvec;
+       _Ptr = _Umove(_Myfirst, _VEC_ITER_BASE(_Where),_Newvec);    // copy prefix
+       _Ptr = _Ufill(_Ptr, _Count, _Val);  // add new stuff
+       _Umove(_VEC_ITER_BASE(_Where), _Mylast, _Ptr);  // copy suffix
+       //内存释放与变量更新
+       }
+</code></pre><p>这种情况下，数据从原始容器移动到新分配内存时是从前到后移动的<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5tyr1p07j30h20by41b.jpg" alt="image"><br>4、空间足够，且被插入元素的位置比较靠近_Mylast,即已有元素的尾部</p>
+<p>这种情况下不需要再次进行内存分配，且数据是从后往前操作的。首先是将where~last向后移动，为待插入数据预留Count大小的空间，然后从_Mylast处开始填充，然后将从where处开始填充剩余元素</p>
+<pre><code>else if ((size_type)(_Mylast - _VEC_ITER_BASE(_Where)) &lt; _Count)
+        {   // new stuff spills off end
+        _Umove(_VEC_ITER_BASE(_Where), _Mylast,
+            _VEC_ITER_BASE(_Where) + _Count);   // copy suffix
+        _Ufill(_Mylast, _Count - (_Mylast - _VEC_ITER_BASE(_Where)),
+            _Val);  // insert new stuff off end
+        _Mylast += _Count;
+        std::fill(_VEC_ITER_BASE(_Where), _Mylast - _Count,
+            _Val);  // insert up to old end
+        }
+</code></pre><p>5、空间足够，但插入的位置比较靠前<br>            {   // new stuff can all be assigned<br>            _Ty _Tmp = _Val;    // in case _Val is in sequence</p>
+<pre><code>pointer _Oldend = _Mylast;
+_Mylast = _Umove(_Oldend - _Count, _Oldend,
+    _Mylast);   // copy suffix
+_STDEXT _Unchecked_move_backward(_VEC_ITER_BASE(_Where), _Oldend - _Count,
+    _Oldend);   // copy hole
+std::fill(_VEC_ITER_BASE(_Where), _VEC_ITER_BASE(_Where) + _Count,
+    _Tmp);  // insert into hole
+}
+</code></pre><h3 id="4、erase-操作"><a href="#4、erase-操作" class="headerlink" title="4、erase()操作"></a>4、erase()操作</h3><pre><code>iterator erase(const_iterator _First_arg,
+    const_iterator _Last_arg)
+    {   // erase [_First, _Last)
+    iterator _First = _Make_iter(_First_arg);
+    iterator _Last = _Make_iter(_Last_arg);
+
+    if (_First != _Last)
+        {   // worth doing, copy down over hole
+        pointer _Ptr = _STDEXT unchecked_copy(_VEC_ITER_BASE(_Last), _Mylast,
+            _VEC_ITER_BASE(_First));
+
+        _Destroy(_Ptr, _Mylast);
+        _Mylast = _Ptr;
+        }
+    return (_First);
+    }
+</code></pre><p>主要操作就是将后半部分的有效元素向前拷贝，并将后面空间的无效元素析构，并更新_Mylast变量<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5ua8ciphj30i90ahgns.jpg" alt="image"></p>
+<h3 id="5、assign-操作"><a href="#5、assign-操作" class="headerlink" title="5、assign()操作"></a>5、assign()操作</h3><p>assign()操作最终都会调用到下面的函数，主要操作是首先擦除容器中已有的全部元素，在从头开始插入Count个Val元素</p>
+<pre><code>void _Assign_n(size_type _Count, const _Ty&amp; _Val)
+    {   // assign _Count * _Val
+    _Ty _Tmp = _Val;    // in case _Val is in sequence
+    erase(begin(), end());
+    insert(begin(), _Count, _Tmp);
+    }
+</code></pre><h2 id="（17）-vector使用的注意点及其原因，频繁对vector调用push-back-对性能的影响和原因。"><a href="#（17）-vector使用的注意点及其原因，频繁对vector调用push-back-对性能的影响和原因。" class="headerlink" title="（17） vector使用的注意点及其原因，频繁对vector调用push_back()对性能的影响和原因。"></a>（17） vector使用的注意点及其原因，频繁对vector调用push_back()对性能的影响和原因。</h2><p>vector使用注意事项：</p>
+<p>（1）max_size函数返回的是vector中的内存分配器allocator能够分配的最大内存空间，即vector所能管控的最大序列长度，注意和capacity的区别。</p>
+<p>（2）resize重新调整大小，既可以减小也可以增加size（数组的有效长度），但是内存并不一定减小。</p>
+<p>（3）insert是在所指的元素之前进行插入，erase返回的迭代器指向被最后删除的元素的下一个元素。</p>
+<p>（4）注意插入和删除元素后迭代器失效的问题。</p>
+<p>（5）当预先知道所需的存储空间时，可以使用reserve预先分配内存。</p>
+<p>（6）vector对象作为一个高效的栈使用时，应该让容器保持一定的预留存储空间，频繁的重新分配内存会影响栈的性能，可以使用reserve预分配内存，使用push_back、pop_back和back插入、删除和读取最后一个元素。</p>
+<p>（7）clear只是保证了析构所有的元素，即size()=0，但并不保证释放所有的存储空间，即capacity不一定等于0，可以使用如下方式释放所有内存：</p>
+<pre><code>vec.swap(vector&lt;T&gt;());
+</code></pre><p>在原来空间不够存储新值时，每次调用push_back方法都会重新分配新的空间以满足新数据的添加操作。</p>
+<p>如果在程序中频繁进行这种操作，还是比较消耗性能的。</p>
+<h2 id="（18）-C-中的重载和重写的区别："><a href="#（18）-C-中的重载和重写的区别：" class="headerlink" title="（18） C++中的重载和重写的区别："></a>（18） C++中的重载和重写的区别：</h2><p><a href="https://blog.csdn.net/zx3517288/article/details/48976097" target="_blank" rel="noopener">https://blog.csdn.net/zx3517288/article/details/48976097</a><br>重载：是指同一可访问区内被声明的几个具有不同参数列（参数的类型，个数，顺序不同）的同名函数，根据参数列表确定调用哪个函数，重载不关心函数返回类型。</p>
+<p>示例：</p>
+<pre><code>class A{
+public:
+  void test(int i);
+  void test(double i);//overload
+  void test(int i, double j);//overload
+  void test(double i, int j);//overload
+  int test(int i);         //错误，非重载。注意重载不关心函数返回类型。
+};
+</code></pre><p>重写(覆盖)：是指派生类中存在重新定义的函数。其函数名，参数列表，返回值类型，所有都必须同基类中被重写的函数一致。只有函数体不同（花括号内），派生类调用时会调用派生类的重写函数，不会调用被重写函数。重写的基类中被重写的函数必须有virtual修饰。</p>
+<p>示例：</p>
+<pre><code>#include&lt;iostream&gt;
+
+using namespace std;
+
+class Base
+{
+public:
+    virtual void fun(int i){ cout &lt;&lt; &quot;Base::fun(int) : &quot; &lt;&lt; i &lt;&lt; endl;}
+};
+
+class Derived : public Base
+{
+public:
+    virtual void fun(int i){ cout &lt;&lt; &quot;Derived::fun(int) : &quot; &lt;&lt; i &lt;&lt; endl;}
+};
+int main()
+{
+    Base b;
+    Base * pb = new Derived();
+    pb-&gt;fun(3);//Derived::fun(int)
+
+    system(&quot;pause&quot;);
+    return 0;
+</code></pre><p>重载和重写的区别：</p>
+<p>（1）范围区别：重写和被重写的函数在不同的类中，重载和被重载的函数在同一类中。</p>
+<p>（2）参数区别：重写与被重写的函数参数列表一定相同，重载和被重载的函数参数列表一定不同。</p>
+<p>（3）virtual的区别：重写的基类必须要有virtual修饰，重载函数和被重载函数可以被virtual修饰，也可以没有。</p>
+<p>隐藏和重写，重载的区别：</p>
+<p>（1）与重载范围不同：隐藏函数和被隐藏函数在不同类中。</p>
+<p>（2）参数的区别：隐藏函数和被隐藏函数参数列表可以相同，也可以不同，但函数名一定同；当参数不同时，无论基类中的函数是否被virtual修饰，基类函数都是被隐藏，而不是被重写。<br>示例</p>
+<h2 id="（19）-C-内存管理（热门问题）"><a href="#（19）-C-内存管理（热门问题）" class="headerlink" title="（19） C ++内存管理（热门问题）"></a>（19） C ++内存管理（热门问题）</h2><p>内存分配方式<br>（1）从静态存储区域分配。内存在程序编译的时候就已经分配好了（已经编址）这些内存在程序的整个运行期间都存在，如全局变量，static变量<br>（2）在堆栈上分配。在函数执行期间，函数内局部变量（包括形参）的存储单元都创建在堆栈上，函数结束时这些存储单元都会自动释放（堆栈清退）。堆栈内存分配运算内置于处理器的指令集中，效率很高，并且一般不存在失败的危险，但是分配的内存容量有限，可能出现堆栈溢出。<br>（3）从堆或者自由存储空间上分配，亦称动态内存分配。程序在运行期间用malloc()或new申请任意数量的内存，程序猿自己掌握释放内存的恰当时机（使用free()或delete)动态内存的生存期由程序猿决定，使用非常灵活，但也最容易产生问题。<br>一般的原则是：如果使用堆栈存储和静态存储就能满足应用要求，就不要使用动态存储。因为在堆栈上动态分配内存需要很可观的额外开销：<br>应用程序将调用操作系统中内存管理模块的堆管理器，搜索其中是否有符合要求的连续字节内存块。特别是在经过多次动态分配后，对会出现大量的闲散内存碎片，此时需要首先将碎片合并，然后才能分配成功，在这种情况下动态分配需要很长时间<br>如果动态分配失败，需要检查返回值或者捕获异常，这也需要额外开销。<br>动态创建的对象可能被删除多次，甚至在删除后还会继续使用，或者根本就不会被删除，于是出现运行时错误或程序“吃”内存的对象<br>常见的内存错误及其对策<br>内存分配未成功，却使用了它<br>内存分配成功，但是尚未初始化就使用它<br>内存分配成功并且已经初始化，但操作越过了内存的边界<br>忘记了释放内存或者只释放了部分内存，因此造成内存泄漏。（含有这种错误的函数每调用一次就丢失一块内存）比如无意中修改了指向动态数组的指针，致使释放出错，或者使用了错误的动态数组释放语法。<br>（5）释放了内存却还在继续使用它。<br>程序中的对象调用关系过于复杂，实在难以搞清楚某个对象（重新设计数据结构，从根本上解决对象管理的混乱局面）<br>函数的return语句写错了，注意不要返回指向“栈内存”的指针或者引用，因为该内存在函数结束时被自动释放<br>使用free（）或delete释放了内存后，没有将指针设置为NULL，产生野指针<br>多次释放同一块内存<br>用malloc或new申请内存之后，应该立即检查指针值是否为NULL或者进行异常处理，以防止使用值为NULL的指针<br>不要忘记初始化指针，数组和动态内存，防止将未初始化的内存作为右值使用<br>避免数组或指针的下标越界，特别要当心的是++或者–操作<br>用free或者delete释放了内存之后，立即将指针设置为NULL，防止产生野指针</p>
+<h3 id="1-一般一个c-c-程序编译的时候内存布局如下-地址从低到高的顺序"><a href="#1-一般一个c-c-程序编译的时候内存布局如下-地址从低到高的顺序" class="headerlink" title="(1)一般一个c/c++程序编译的时候内存布局如下(地址从低到高的顺序)"></a>(1)一般一个c/c++程序编译的时候内存布局如下(地址从低到高的顺序)</h3><h4 id="a-代码区"><a href="#a-代码区" class="headerlink" title="a.代码区:"></a>a.代码区:</h4><p>存放程序的二进制代码.</p>
+<h4 id="b-常量区"><a href="#b-常量区" class="headerlink" title="b.常量区:"></a>b.常量区:</h4><p>这个区和代码区的距离很近,主要存放一些非局部常量值和字符串字面值,一般不允许修改,程序结束由系统释放;具有常属性并且初始化的全局和静态变量也放在这个区.</p>
+<h4 id="c-数据区"><a href="#c-数据区" class="headerlink" title="c.数据区:"></a>c.数据区:</h4><p>赋过初值的且不具有常属性的静态和全局变量在数据区.它和BSS段统称为静态区;程序结束后由系统释放;</p>
+<h4 id="d-BSS段"><a href="#d-BSS段" class="headerlink" title="d.BSS段:"></a>d.BSS段:</h4><p>没有初始化的静态和全局变量;进程一旦被加载这个区所有的数据都被清0;</p>
+<h4 id="e-堆区"><a href="#e-堆区" class="headerlink" title="e.堆区:"></a>e.堆区:</h4><p>   动态分配的内存;由程序员分配和释放,程序结束的时候如果没有释放,则由OS回收;</p>
+<h4 id="f-栈区"><a href="#f-栈区" class="headerlink" title="f.栈区:"></a>f.栈区:</h4><p>   由编译器自动分配和释放,不使用的时候会自动的释放.主要用来存放非静态的局部变量,函数的参数和返回值, 临时变量等.</p>
+<h4 id="g-命令行参数和环境变量区"><a href="#g-命令行参数和环境变量区" class="headerlink" title="g.命令行参数和环境变量区;"></a>g.命令行参数和环境变量区;</h4><p>下面是对应一段经典的代码:</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;  //unix下的头文件
+const int const_global = 10; //常全局变量
+int init_global = 10;        //初始化的全局变量
+int uninit_global;           //未初始化的全局变量
+
+int main(int argc,char * argv[])
+{
+    const static int const_static = 10;//常属性的静态变量，不可以被赋值，初始化
+    static int init_static = 10;    //初始化静态变量
+    static int uninit_static;       //未初始化静态变量
+    const int const_local = 10;    // 常属性的局部变量
+    int  prev_local = 1;//前局部变量
+    int  next_local = 5;//后局部变量
+    int* prev_heap = malloc(sizeof(int));//前面分配的堆变量
+    int* next_heap = malloc(sizeof(int));//后面分配的堆变量
+    const char* literal = &quot;literal&quot;;      //字符串字面值，字面值常量
+    extern char** environ;               // 环境变量
+
+    printf(&quot;----地址最高断命令行参数和环境变量-------\n&quot;);
+    printf(&quot;        环境变量:%p\n&quot;,environ);
+    printf(&quot;      命令行参数:%p\n&quot;,argv);
+    printf(&quot;---------------栈区-----------------------\n&quot;);
+    printf(&quot;      常局部变量:%p\n&quot;,&amp;const_local);
+    printf(&quot;      前局部变量:%p\n&quot;,&amp;prev_local);
+    printf(&quot;      后局部变量:%p\n&quot;,&amp;next_local);
+    printf(&quot;--------------------堆--------------------\n&quot;);
+    printf(&quot;        前堆变量:%p\n&quot;,prev_heap);
+    printf(&quot;        后堆变量:%p\n&quot;,next_heap);
+    printf(&quot;--------------------BSS--------------------\n&quot;);
+    printf(&quot;未初始化全局变量:%p\n&quot;,&amp;uninit_global);
+    printf(&quot;未初始化静态变量:%p\n&quot;,&amp;uninit_static);
+    printf(&quot;----------------数据------------------------\n&quot;);
+    printf(&quot;  初始化全局变量:%p\n&quot;,&amp;init_static);
+    printf(&quot;  初始化全局变量:%p\n&quot;,&amp;init_global);
+    printf(&quot;----------------代码区----------------------\n&quot;);
+    printf(&quot;     常静态变量:%p\n&quot;,&amp;const_static);
+    printf(&quot;     字面值常量:%p\n&quot;,&amp;literal);
+    printf(&quot;     常全局变量:%p\n&quot;,&amp;const_global);
+    printf(&quot;           函数:%p\n&quot;,main);
+    return 0;
+}
+</code></pre><h3 id="2-从上面可以看出c-c-的内存分配方式主要有三种"><a href="#2-从上面可以看出c-c-的内存分配方式主要有三种" class="headerlink" title="(2)从上面可以看出c/c++的内存分配方式主要有三种"></a>(2)从上面可以看出c/c++的内存分配方式主要有三种</h3><h4 id="a-从静态存储区域分配"><a href="#a-从静态存储区域分配" class="headerlink" title="a.从静态存储区域分配:"></a>a.从静态存储区域分配:</h4><p>   内存在程序编译时已经分配好,这块内存在程序的整个运行期间都存在.速度快,不容易出错.因为由系统会善后.</p>
+<h4 id="b-在栈上分配内存"><a href="#b-在栈上分配内存" class="headerlink" title="b.在栈上分配内存:"></a>b.在栈上分配内存:</h4><p>   在执行函数的时候,函数内非静态局部变量的存储单元都是在栈上创建,函数执行结束的时候这些存储单元自动被释放.栈内存分配内置于处理器的指令集中,效率很高但是分配的内容有限.</p>
+<h4 id="c-从堆中分配内存"><a href="#c-从堆中分配内存" class="headerlink" title="c.从堆中分配内存:"></a>c.从堆中分配内存:</h4><p>即是动态分配内存.程序在运行的时候使用malloc/new申请任意大小的内存,程序员自己负责在何时用free/delete释放内存.动态内存的生存期由程序员决定,使用非常的灵活.如果在堆上分配了内存,就有责任去回收它,否则运行程序会出现内存泄漏,另外频繁的分配和释放不同大小的堆空间将会产生堆内碎片.不易管理;</p>
+<h2 id="（20）-介绍面向对象的三大特性，并且举例说明每一个。"><a href="#（20）-介绍面向对象的三大特性，并且举例说明每一个。" class="headerlink" title="（20） 介绍面向对象的三大特性，并且举例说明每一个。"></a>（20） 介绍面向对象的三大特性，并且举例说明每一个。</h2><h3 id="1-封装"><a href="#1-封装" class="headerlink" title="(1)封装:"></a>(1)封装:</h3><p>将客观事物封装成抽象的类,并且设计者可以对类的成员进行访问控制权限控制. 这样一方面可以做到数据的隐藏,保护数据安全;另一方面,封装可以修改类的内部实现而不用修改调用了该类的用户的代码.同时封装还有利于代码的 方便复用；</p>
+<h3 id="2-继承"><a href="#2-继承" class="headerlink" title="(2)继承:"></a>(2)继承:</h3><h4 id="a-2"><a href="#a-2" class="headerlink" title="a."></a>a.</h4><p>继承具有这样一种功能,它可以使用现有类的所有功能；并且可以在不重新编写原有类的情况下对类的功能进行扩展.继承的过程是一般到特殊的过程,即是它们是is-a的关系;基类或父类是一般,而子类或派生类是基类的特殊表现;要实现继承可以通过继承和组合来实现;</p>
+<h4 id="b-3"><a href="#b-3" class="headerlink" title="b."></a>b.</h4><p>广义上的继承分成三大类:实现继承:使用基类的属性和方法而无需额外编码的能力;接口继承:接口继承是指仅使用基类的属性和方法的名称,而具体的实现子类必须自己完成的能力;可视继承:子窗体(类)使用父窗体(类)的外观和实现代码的能力;</p>
+<h3 id="3-多态"><a href="#3-多态" class="headerlink" title="(3)多态:"></a>(3)多态:</h3><h4 id="a-3"><a href="#a-3" class="headerlink" title="a."></a>a.</h4><p>多态的实现分成两种,一种是编译时的多态,主要是通过函数重载和运算符重</p>
+<p>另外一种是运行时多态,主要是通过函数覆盖来实现的,它需要满足3个条件:基类函数必须是虚函数,并且基类的指针或引用指向子类的时候,当子类中对原有的虚函数进行重新定义之后形成一个更加严格的重载版本的时候,就会形成多态;它是通过动态联编实现的;</p>
+<h4 id="b-4"><a href="#b-4" class="headerlink" title="b."></a>b.</h4><p>运行时的多态可以让基类的指针或引用指向不同的对象的时候表现出来不同的特性;</p>
+<h2 id="（21）-多态的实现（和下个问题一起回答）"><a href="#（21）-多态的实现（和下个问题一起回答）" class="headerlink" title="（21） 多态的实现（和下个问题一起回答）"></a>（21） 多态的实现（和下个问题一起回答）</h2><p> 首先，什么是多态，什么又是虚函数呢？先来看看维基百科对多态的解释：</p>
+<p>“多态（英语：polymorphism），是指计算机程序运行时，相同的消息可能会送给多个不同的类别之对象，而系统可依据对象所属类别，引发对应类别的方法，而有不同的行为。简单来说，所谓多态意指相同的消息给予不同的对象会引发不同的动作称之。”其实更简单地来说，就是“在用父类指针调用函数时，实际调用的是指针指向的实际类型（子类）的成员函数”。多态性使得程序调用的函数是在运行时动态确定的，而不是在编译时静态确定的。而虚函数则是加了virtual修饰词的类的成员函数。</p>
+<h3 id="c-的多态性就是通过晚绑定技术来实现的。"><a href="#c-的多态性就是通过晚绑定技术来实现的。" class="headerlink" title="c++的多态性就是通过晚绑定技术来实现的。"></a>c++的多态性就是通过晚绑定技术来实现的。</h3><p>　　c++的多态性用一句话概括就是:在基类的函数前加上virtual关键字，在派生类中重写该函数，运行时将会根据对象的实际类型来调用相应的函数，如果对象类型是派生类，就调用派生类的函数，如果对象类型是基类，就调用基类的函数。</p>
+<h2 id="（22）-C-虚函数相关（虚函数表，虚函数指针），虚函数的实现原理（热门，重要）"><a href="#（22）-C-虚函数相关（虚函数表，虚函数指针），虚函数的实现原理（热门，重要）" class="headerlink" title="（22） C++虚函数相关（虚函数表，虚函数指针），虚函数的实现原理（热门，重要）"></a>（22） C++虚函数相关（虚函数表，虚函数指针），虚函数的实现原理（热门，重要）</h2><p>每一个拥有virtual function的类实例化对象时，都会额外申请一块内存存储虚函数表存储所有虚函数地址，并在对象某个位置存储一个vptr指针指向该表起始地址。这个指针具体放在什么位置，虚函数表怎么组织，怎么索引各个虚函数，这些都是编译器在编译期间决定的，在不同编译环境下不见得相同。</p>
+<p>虚函数在c++中的实现机制就是用虚表和虚指针，但是具体是怎样的呢？从more effecive c++其中一篇文章里面可以知道：是每个类用了一个虚表，每个类的对象用了一个虚指针。</p>
+<pre><code>class A
+{
+public:
+    virtual void f();
+    virtual void g();
+private:
+    int a
+};
+
+class B : public A
+{
+public:
+    void g();
+private:
+    int b;
+};
+
+//A，B的实现省略
+</code></pre><p>因为A有virtual void f（），和g（），所以编译器为A类准备了一个虚表vtableA，内容如下：</p>
+<pre><code>A::f 的地址
+A::g 的地址
+</code></pre><p>B因为继承了A，所以编译器也为B准备了一个虚表vtableB，内容如下：</p>
+<pre><code>A::f 的地址
+B::g 的地址
+</code></pre><p>注意：因为B::ｇ是重写了的，所以B的虚表的g放的是B::g的入口地址，但是f是从上面的A继承下来的，所以f的地址是A::f的入口地址。</p>
+<p>然后某处有语句 B bB;的时候，编译器分配空间时，除了A的int a，B的成员int b；以外，还分配了一个虚指针vptr，指向B的虚表vtableB，bB的布局如下：</p>
+<pre><code>vptr ： 指向B的虚表vtableB
+int a： 继承A的成员
+int b： B成员
+</code></pre><p>当如下语句的时候：</p>
+<pre><code>A *pa = &amp;bB;
+</code></pre><p>pa的结构就是A的布局（就是说用pa只能访问的到bB对象的前两项，访问不到第三项int b）</p>
+<p>那么pa-&gt;g()中，编译器知道的是，g是一个声明为virtual的成员函数，而且其入口地址放在表格（无论是vtalbeA表还是vtalbeB表）的第2项，那么编译器编译这条语句的时候就如是转换：</p>
+<pre><code>call *(pa-&gt;vptr)[1]（C语言的数组索引从0开始）。
+</code></pre><p>这一项放的是B：：g()的入口地址，则就实现了多态。（注意bB的vptr指向的是B的虚表vtableB）</p>
+<p>另外要注意的是，如上的实现并不是唯一的，C++标准只要求用这种机制实现多态，至于虚指针vptr到底放在一个对象布局的哪里，标准没有要求，每个编译器自己决定。以上的结果是根据g++ 4.3.4经过反汇编分析出来的。</p>
+<h2 id="（23）-实现编译器处理虚函数表应该如何处理"><a href="#（23）-实现编译器处理虚函数表应该如何处理" class="headerlink" title="（23） 实现编译器处理虚函数表应该如何处理"></a>（23） 实现编译器处理虚函数表应该如何处理</h2><h2 id="（24）-析构函数一般写成虚函数的原因"><a href="#（24）-析构函数一般写成虚函数的原因" class="headerlink" title="（24） 析构函数一般写成虚函数的原因"></a>（24） 析构函数一般写成虚函数的原因</h2><p><strong>构造函数不能是虚函数，析构函数可以是虚函数且推荐最好设置为虚函数。</strong>下面我们来看看为什么。</p>
+<p>那么为什么析构函数推荐最好设置为虚函数呢？当我们delete(a)的时候，如果析构函数不是虚函数，那么调用的将会是基类base的析构函数。而当继承的时候，通常派生类会在基类的基础上定义自己的成员，此时我们当时是希望可以调用派生类的析构函数对新定义的成员也进行析构啦。</p>
+<p>所以，析构函数推荐最好设置为虚函数是为了当用一个基类的指针删除一个派生类的对象时，派生类的析构函数会被调用。<br>当然，并不是要把所有类的析构函数都写成虚函数。因为当类里面有虚函数的时候，编译器会给类添加一个虚函数表，里面来存放虚函数指针，这样就会增加类的存储空间。所以，只有当一个类被用来作为基类的时候，才把析构函数写成虚函数。</p>
+<h2 id="（25）-构造函数为什么一般不定义为虚函数"><a href="#（25）-构造函数为什么一般不定义为虚函数" class="headerlink" title="（25） 构造函数为什么一般不定义为虚函数"></a>（25） 构造函数为什么一般不定义为虚函数</h2><p>首先，我们已经知道虚函数的实现则是通过对象内存中的虚函数表指针vptr来实现的。而构造函数是用来实例化一个对象的，通俗来讲就是为对象内存中的值做初始化操作。那么在构造函数完成之前，vptr是没有值的，也就无法通过vptr找到作为虚函数的构造函数所在的代码区，所以构造函数只能作为普通函数存放在类所指定的代码区中。</p>
+<p>子类构造时各个初始化步骤的调用顺序<br>构造顺序：</p>
+<pre><code>1．构造子类构造函数的参数
+2．子类调用基类构造函数
+3．基类设置vptr
+4．基类初始化列表内容进行构造
+5.基类函数体调用
+6.子类设置vptr
+7.子类初始化列表内容进行构造
+8.子类构造函数体调用
+（注意一点，初始化列表内的数据不按书写顺序，而是按类内部的定义顺序）
+析构的顺序恰好相反，所以也不要在析构函数中调用虚函数，那样也是没有意义的。
+</code></pre><h2 id="（26）-构造函数或者析构函数中调用虚函数会怎样"><a href="#（26）-构造函数或者析构函数中调用虚函数会怎样" class="headerlink" title="（26） 构造函数或者析构函数中调用虚函数会怎样"></a>（26） 构造函数或者析构函数中调用虚函数会怎样</h2><p>对于构造函数和析构函数与虚函数的关系我们也可以从另一方面来理解。通常是如例子中base *a=new(A)这样创建一个对象时调用构造函数，此时我们是在new函数中直接指定类名字的，当然会直接调用对应类的构造函数，不会出现基类类型实际指向子类的情况出现。而调用析构函数通常是针对对象的操作，如delete(a)，此时我们当然希望可以调用到a实际指向的类型（类A）的析构函数，故需要设置为虚函数。</p>
+<pre><code>class ClxBase
+{
+public:
+    ClxBase() {};
+    virtual ~ClxBase() {};
+
+    virtual void DoSomething() { cout &lt;&lt; &quot;Do something in class ClxBase!&quot; &lt;&lt; endl; };
+};
+
+class ClxDerived : public ClxBase
+{
+public:
+    ClxDerived() {};
+    ~ClxDerived() { cout &lt;&lt; &quot;Output from the destructor of class ClxDerived!&quot; &lt;&lt; endl; }; 
+
+    void DoSomething() { cout &lt;&lt; &quot;Do something in class ClxDerived!&quot; &lt;&lt; endl; };
+};
+
+ClxBase *pTest = new ClxDerived;
+pTest-&gt;DoSomething();
+delete pTest;
+</code></pre><p> 输出结果是：</p>
+<pre><code>Do something in class ClxDerived!
+Output from the destructor of class ClxDerived!
+</code></pre><p>而如果去掉基类中析构函数的virtual关键字输出则变成</p>
+<pre><code>Do something in class ClxDerived!
+Output from the destructor of class ClxDerived!
+</code></pre><p>也就是说，类ClxDerived的析构函数根本没有被调用！一般情况下类的析构函数里面都是释放内存资源，而析构函数不被调用的话就会造成内存泄漏。我想所有的C++程序员都知道这样的危险性。当然，如果在析构函数中做了其他工作的话，那你的所有努力也都是白费力气。</p>
+<h2 id="（27）-纯虚函数"><a href="#（27）-纯虚函数" class="headerlink" title="（27） 纯虚函数"></a>（27） 纯虚函数</h2><p><strong>C++纯虚函数</strong></p>
+<h3 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h3><p>　纯虚函数是在基类中声明的虚函数，它在基类中没有定义，但要求任何派生类都要定义自己的实现方法。在基类中实现纯虚函数的方法是在函数原型后加“=0”</p>
+<pre><code>　virtual void funtion1()=0
+</code></pre><h3 id="二、引入原因"><a href="#二、引入原因" class="headerlink" title="二、引入原因"></a>二、引入原因</h3><p>1、为了方便使用多态特性<br>我们常常需要在基类中定义虚拟函数。</p>
+<p>2、在很多情况下，基类本身生成对象是不合情理的。例如，动物作为一个基类可以派生出老虎、孔雀等子类，但动物本身生成对象明显不合常理。</p>
+<p>为了解决上述问题，引入了纯虚函数的概念，<strong>将函数定义为纯虚函数（方法：virtual ReturnType Function()= 0;）</strong>，则编译器要求在派生类中必须予以重写以实现多态性。<strong>同时含有纯虚拟函数的类称为抽象类，它不能生成对象。</strong>这样就很好地解决了上述两个问题。<br>声明了纯虚函数的类是一个抽象类。所以，用户不能创建类的实例，只能创建它的派生类的实例。<br>纯虚函数最显著的特征是：它们必须在继承类中重新声明函数（不要后面的＝0，否则该派生类也不能实例化），而且它们在抽象类中往往没有定义。<br>定义纯虚函数的目的在于，使派生类仅仅只是继承函数的接口。</p>
+<p>纯虚函数的意义，让所有的类对象（主要是派生类对象）都可以执行纯虚函数的动作，但类无法为纯虚函数提供一个合理的缺省实现。所以类纯虚函数的声明就是在告诉子类的设计者，“你必须提供一个纯虚函数的实现，但我不知道你会怎样实现它”。</p>
+<h3 id="抽象类的介绍"><a href="#抽象类的介绍" class="headerlink" title="抽象类的介绍"></a>抽象类的介绍</h3><p>抽象类是一种特殊的类，它是为了抽象和设计的目的为建立的，它处于继承层次结构的较上层。<br>（1）抽象类的定义：  称带有纯虚函数的类为抽象类。</p>
+<p>（2）抽象类的作用：<br>抽象类的主要作用是将有关的操作作为结果接口组织在一个继承层次结构中，由它来为派生类提供一个公共的根，派生类将具体实现在其基类中作为接口的操作。所以派生类实际上刻画了一组子类的操作接口的通用语义，这些语义也传给子类，子类可以具体实现这些语义，也可以再将这些语义传给自己的子类。</p>
+<p>（3）使用抽象类时注意：<br>•   抽象类只能作为基类来使用，其纯虚函数的实现由派生类给出。如果派生类中没有重新定义纯虚函数，而只是继承基类的纯虚函数，则这个派生类仍然还是一个抽象类。如果派生类中给出了基类纯虚函数的实现，则该派生类就不再是抽象类了，它是一个可以建立对象的具体的类。<br>•   抽象类是不能定义对象的。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>1、<strong>纯虚函数声明如下： virtual void funtion1()=0;</strong> 纯虚函数一定没有定义，纯虚函数用来规范派生类的行为，即接口。包含纯虚函数的类是抽象类，抽象类不能定义实例，但可以声明指向实现该抽象类的具体类的指针或引用。</p>
+<p>2、虚函数声明如下：virtual ReturnType FunctionName(Parameter)；虚函数必须实现，如果不实现，编译器将报错，错误提示为：<br>error LNK<em>**</em>: unresolved external symbol “public: virtual void __thiscall ClassName::virtualFunctionName(void)”</p>
+<p>3、对于虚函数来说，父类和子类都有各自的版本。由多态方式调用的时候动态绑定。</p>
+<p>4、实现了纯虚函数的子类，该纯虚函数在子类中就编程了虚函数，子类的子类即孙子类可以覆盖该虚函数，由多态方式调用的时候动态绑定。</p>
+<p>5、虚函数是C++中用于实现多态(polymorphism)的机制。核心理念就是通过基类访问派生类定义的函数。</p>
+<p>6、在有动态分配堆上内存的时候，析构函数必须是虚函数，但没有必要是纯虚的。</p>
+<p>7、友元不是成员函数，只有成员函数才可以是虚拟的，因此友元不能是虚拟函数。但可以通过让友元函数调用虚拟成员函数来解决友元的虚拟问题。</p>
+<p>8、析构函数应当是虚函数，将调用相应对象类型的析构函数，因此，如果指针指向的是子类对象，将调用子类的析构函数，然后自动调用基类的析构函数。</p>
+<p>有纯虚函数的类是抽象类，不能生成对象，只能派生。他派生的类的纯虚函数没有被改写，那么，它的派生类还是个抽象类。<br>定义纯虚函数就是为了让基类不可实例化化<br>因为实例化这样的抽象数据结构本身并没有意义。<br>或者给出实现也没有意义</p>
+<p>实际上我个人认为纯虚函数的引入，是出于两个目的<br>1、为了安全，因为避免任何需要明确但是因为不小心而导致的未知的结果，提醒子类去做应做的实现。<br>2、为了效率，不是程序执行的效率，而是为了编码的效率。</p>
+<h2 id="（28）-静态绑定和动态绑定的介绍"><a href="#（28）-静态绑定和动态绑定的介绍" class="headerlink" title="（28） 静态绑定和动态绑定的介绍"></a>（28） 静态绑定和动态绑定的介绍</h2><p>静态绑定：编译时绑定，通过对象调用<br>动态绑定：运行时绑定，通过地址实现</p>
+<p>只有采用“指针-&gt;函数()”或“引用变量.函数()”的方式调用C++类中的虚函数才会执行动态绑定。对于C++中的非虚函数，因为其不具备动态绑定的特征，所以不管采用什么样的方式调用，都不会执行动态绑定。<br>即所谓动态绑定，就是基类的指针或引用有可能指向不同的派生类对象，对于非虚函数，执行时实际调用该函数的对象类型即为该指针或引用的静态类型（基类类型）；而对于虚函数，执行时实际调用该函数的对象类型为该指针或引用所指对象的实际类型</p>
+<h2 id="（29）-引用是否能实现动态绑定，为什么引用可以实现"><a href="#（29）-引用是否能实现动态绑定，为什么引用可以实现" class="headerlink" title="（29） 引用是否能实现动态绑定，为什么引用可以实现"></a>（29） 引用是否能实现动态绑定，为什么引用可以实现</h2><p>可以实现，因为对象的类型是确定的，在编译期就确定了<br>指针或引用是在运行期根据他们绑定的具体对象确定。<br>引用和指针的静态类型和动态类型可以不一样。</p>
+<p>静态类型：变量声明时的类型或表达式生成的类型。编译时已经知道。</p>
+<p>动态类型：变量或表达式表示的内存的对象的类型。</p>
+<h2 id="（30）-深拷贝和浅拷贝的区别（举例说明深拷贝的安全性）"><a href="#（30）-深拷贝和浅拷贝的区别（举例说明深拷贝的安全性）" class="headerlink" title="（30） 深拷贝和浅拷贝的区别（举例说明深拷贝的安全性）"></a>（30） 深拷贝和浅拷贝的区别（举例说明深拷贝的安全性）</h2><p>深浅拷贝的区别：<br>    浅拷贝是将原始对象中的数据型字段拷贝到新对象中去，将引用型字段的“引用”复制到新对象中去，不把“引用的对象”复制进去，所以原始对象和新对象引用同一对象，新对象中的引用型字段发生变化会导致原始对象中的对应字段也发生变化。<br>    深拷贝是在引用方面不同，深拷贝就是创建一个新的和原始字段的内容相同的字段，是两个一样大的数据段，所以两者的引用是不同的，之后的新对象中的引用型字段发生改变，不会引起原始对象中的字段发生改变。<br>C++类在定义时，系统会提供一个默认的拷贝构造函数，这个函数属于迁拷贝，当使用该类定义对象时赋值，如：类 A = B，就要用到它。一般来说系统提供的默认拷贝函数是不能满足需求的，我们一般要自己编写拷贝构造函数。而拷贝构造函数的定义方法如下：</p>
+<pre><code>class 类名
+
+{
+
+    类名(const 类名 &amp;对象名);    // 函数定义
+
+}
+</code></pre><p>2<br>拷贝构造函数分为浅拷贝和深拷贝两种，浅拷贝和深拷贝主要区别就是复制指针时是否重新创建内存空间。</p>
+<p>如果没有没有创建内存只赋值地址为浅拷贝，创建新内存把值全部拷贝一份就是深拷贝。</p>
+<p>浅拷贝在类里面有指针成员的情况下只会复制指针的地址，会导致两个成员指针指向同一块内存，这样在要是分别delete释放时就会出现问题，因此需要用深拷贝。先看看下面的例子：</p>
+<p>3<br>例子中建立了两个猫对象，b创建时调用拷贝构造函数拷贝了名字，然后a被delete掉，再调用b的Say()方法。如果使用默认的浅拷贝拷贝构造函数将会无法输出正确的名字，所以需要定义自己的拷贝构造函数。另外值得一提的是拷贝构造函数不是赋值运算符=号，如果对象已经创建在用=号复制，需要重载=号运算符函数。</p>
+<p><a href="https://blog.csdn.net/qq_27011361/article/details/79518057" target="_blank" rel="noopener">https://blog.csdn.net/qq_27011361/article/details/79518057</a></p>
+<h2 id="（31）-对象复用的了解，零拷贝的了解"><a href="#（31）-对象复用的了解，零拷贝的了解" class="headerlink" title="（31） 对象复用的了解，零拷贝的了解"></a>（31） 对象复用的了解，零拷贝的了解</h2><p>对象池：对象池通过对象复用的方式来避免重复创建对象，它会事先创建一定数量的对象放到池中，当用户需要创建对象的时候，直接从对象池中获取即可，用完对象之后再放回到对象池中，以便复用。</p>
+<p>适用性：类的实例可重用。类的实例化过程开销较大。类的实例化的频率较高。</p>
+<p>零拷贝：emplace_back</p>
+<h2 id="（32）-介绍C-所有的构造函数"><a href="#（32）-介绍C-所有的构造函数" class="headerlink" title="（32） 介绍C++所有的构造函数"></a>（32） 介绍C++所有的构造函数</h2><h3 id="一、-构造函数是干什么的"><a href="#一、-构造函数是干什么的" class="headerlink" title="一、 构造函数是干什么的"></a>一、 构造函数是干什么的</h3><pre><code>/*   类对象被创建时，编译系统对象分配内存空间，并自动调用该构造函数-&gt;由构造函数完成成员的初始化工作
+     eg: Counter c1;
+
+     编译系统为对象c1的每个数据成员(m_value)分配内存空间，并调用构造函数Counter( )自动地初始化对象，初始化之后c1的m_value值设置为0
+
+     故：构造函数的作用：初始化对象的数据成员。*/
+
+      class Counter
+       {
+      public:       // 类Counter的构造函数，以类名作为函数名，无返回类型
+      Counter(){ 
+      m_value = 0;
+      }
+
+      private:
+      int m_value;  // 类私有的数据成员
+      }
+</code></pre><h3 id="二、-构造函数的种类"><a href="#二、-构造函数的种类" class="headerlink" title="二、 构造函数的种类"></a>二、 构造函数的种类</h3><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Complex
+{
+private :
+    double m_real;
+    double m_imag;
+
+public:
+
+//*无参数构造函数
+
+// 如果创建一个类你没有写任何构造函数,则系统会自动生成默认的无参构造函数，函数为空，什么都不做
+// 只要你写了一个下面的某一种构造函数，系统就不会再自动生成这样一个默认的构造函数，如果希望有一个这样的无参构造函数，则需要自己显示地写出来
+
+    Complex(void)
+    {   m_real = 0.0;
+        m_imag = 0.0;
+    }
+
+//*一般构造函数（也称重载构造函数）
+
+//一般构造函数可以有各种参数形式,一个类可以有多个一般构造函数，前提是参数的个数或者类型不同（基于c++的重载函数原理）
+
+//例如：你还可以写一个 Complex(int num)的构造函数出来，创建对象时根据传入的参数不同调用不同的构造函数
+
+    Complex(double real, double imag)
+    {   m_real = real;
+        m_imag = imag;
+    }
+
+//*复制构造函数（也称为拷贝构造函数）
+
+//复制构造函数参数为类对象本身的引用，用于根据一个已存在的对象复制出一个新的该类的对象，一般在函数中会将已存在对象的数据成员的值复制一份到新创建的对象中
+
+//若没有显示的写复制构造函数，则系统会默认创建一个复制构造函数，但当类中有指针成员时，由系统默认创建该复制构造函数会存在风险，具体原因在有关 “浅拷贝”、“深拷贝”的文章中论述
+
+    Complex(const Complex &amp; c)
+    {   // 将对象c中的数据成员值复制过来
+        m_real = c.m_real;
+        m_imag = c.m_imag;
+    }
+
+//*类型转换构造函数，根据一个指定的类型的对象创建一个本类的对象，需要注意的一点是，这个其实就是一般的构造函数，但是对于出现这种单参数的构造函数，C++会默认将参数对应的类型转换为该类类型，
+
+//有时候这种隐私的转换是我们所不想要的，所以需要使用explicit来限制这种转换。
+
+//例如：下面将根据一个double类型的对象创建了一个Complex对象
+
+    Complex(double r)
+    {   m_real = r;
+        m_imag = 0.0;
+    }
+
+// 等号运算符重载（也叫赋值构造函数）
+
+// 注意，这个类似复制构造函数，将=右边的本类对象的值复制给等号左边的对象，它不属于构造函数，等号左右两边的对象必须已经被创建。
+
+// 若没有显示的写 =运算符重载，则系统也会创建一个默认的=运算符重载，只做一些基本的拷贝工作
+
+    Complex &amp;operator=(const Complex &amp;rhs )
+
+    {   // 首先检测等号右边的是否就是左边的对象本身，若是本对象本身,则直接返回
+        if ( this == &amp;rhs )
+        {   return *this;
+        }
+
+        // 复制等号右边的成员到左边的对象中
+        this-&gt;m_real = rhs.m_real;
+        this-&gt;m_imag = rhs.m_imag;
+
+        // 把等号左边的对象再次传出,目的是为了支持连等 eg:a=b=c 系统首先运行 b=c 然后运行 a=(b=c的返回值,这里应该是复制c值后的b对象)
+        return *this;
+    }
+};
+</code></pre><h3 id="三、使用上面定义的类对象来说明各个构造函数的用法："><a href="#三、使用上面定义的类对象来说明各个构造函数的用法：" class="headerlink" title="三、使用上面定义的类对象来说明各个构造函数的用法："></a>三、使用上面定义的类对象来说明各个构造函数的用法：</h3><pre><code>int main()
+{   
+    // 调用了无参构造函数，数据成员初值被赋值为0.0
+    Complex c1,c2;
+
+    // 调用一般构造函数，数据成员初值分别被赋为指定值
+    Complex c3(1.0,2.5);
+
+    // 当然，也可以使用下面的形式
+    // Complex c3 = Complex(1.0,2.5);
+
+    //  把c3的数据成员的值赋值给事先被创建的对象c1
+    //  由于c1已经事先被创建，故此处不会调用任何构造函数
+    //  只会调用 = 号运算符重载函数
+    c1 = c3;  
+
+    //  调用类型转换构造函数
+    //  系统首先调用类型转换构造函数，将5.2创建为一个本类的临时对象，然后调用等号运算符重载，将该临时对象赋值给c2
+    c2 = 5.2;  
+
+    // 调用拷贝构造函数( 有下面两种调用方式)
+
+    Complex c5(c3);
+    Complex c4 = c3;
+
+    // 注意和 =运算符重载的区分,这里等号左边的对象不是事先已经创建，故需要调用拷贝构造函数，参数为c2
+    // 这一点特别重要，这儿是初始化，不是赋值。
+    // 其实这儿就涉及了C++中的两种初始化的方式：复制初始化和赋值初始化。
+    // 其中c5采用的是复制初始化，而c4采用的是赋值初始化，这两种方式都是要调用拷贝构造函数的。
+
+}
+</code></pre><h2 id="（33）-什么情况下会调用拷贝构造函数（三种情况）"><a href="#（33）-什么情况下会调用拷贝构造函数（三种情况）" class="headerlink" title="（33） 什么情况下会调用拷贝构造函数（三种情况）"></a>（33） 什么情况下会调用拷贝构造函数（三种情况）</h2><p>（1）用类的一个对象去初始化另一个对象时</p>
+<p>（2）当函数的形参是类的对象时（也就是值传递时），如果是引用传递则不会调用</p>
+<p>（3）当函数的返回值是类的对象或引用时</p>
+<p>简单示例：</p>
+<pre><code>#include &lt;iostream&gt;  
+using namespace std;  
+
+class A  
+{  
+private:  
+    int a;  
+public:  
+    A(int i){a=i;}  //内联的构造函数  
+    A(A &amp;aa);  
+    int geta(){return a;}  
+};  
+
+A::A(A &amp;aa)     //拷贝构造函数  
+{  
+    a=aa.a;  
+    cout&lt;&lt;&quot;拷贝构造函数执行！&quot;&lt;&lt;endl;  
+}  
+
+int get_a(A aa)     //参数是对象，是值传递，会调用拷贝构造函数  
+{  
+    return aa.geta();  
+}  
+
+int get_a_1(A &amp;aa)  //如果参数是引用类型，本身就是引用传递，所以不会调用拷贝构造函数  
+{  
+    return aa.geta();  
+}  
+
+A get_A()       //返回值是对象类型，会调用拷贝构造函数。会调用拷贝构造函数，因为函数体内生成的对象aa是临时的，离开这个函数就消失了。所有会调用拷贝构造函数复制一份。  
+{  
+    A aa(1);  
+    return aa;  
+}  
+
+A&amp; get_A_1()    //会调用拷贝构造函数，因为函数体内生成的对象aa是临时的，离开这个函数就消失了。所有会调用拷贝构造函数复制一份。  
+{  
+    A aa(1);  
+    return aa;  
+}  
+
+int _tmain(int argc, _TCHAR* argv[])  
+{  
+    A a1(1);  
+    A b1(a1);           //用a1初始化b1，调用拷贝构造函数  
+    A c1=a1;            //用a1初始化c1，调用拷贝构造函数  
+
+    int i=get_a(a1);        //函数形参是类的对象，调用拷贝构造函数  
+    int j=get_a_1(a1);      //函数形参类型是引用，不调用拷贝构造函数  
+
+    A d1=get_A();       //调用拷贝构造函数  
+    A e1=get_A_1();     //调用拷贝构造函数  
+
+    return 0;  
+}  
+</code></pre><h2 id="（34）-结构体内存对齐方式和为什么要进行内存对齐？"><a href="#（34）-结构体内存对齐方式和为什么要进行内存对齐？" class="headerlink" title="（34） 结构体内存对齐方式和为什么要进行内存对齐？"></a>（34） 结构体内存对齐方式和为什么要进行内存对齐？</h2><p>１:数据成员对齐规则：结构(struct)(或联合(union))的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置要从该成员大小或者成员的子成员大小（只要该成员有子成员，比如说是数组，结构体等）的整数倍开始(比如int在32位机为４字节,则要从４的整数倍地址开始存储。</p>
+<p>２:结构体作为成员:如果一个结构里有某些结构体成员,则结构体成员要从其内部最大元素大小的整数倍地址开始存储.(struct a里存有struct b,b里有char,int ,double等元素,那b应该从8的整数倍开始存储.)</p>
+<p>３:收尾工作:结构体的总大小,也就是sizeof的结果,.必须是其内部最大成员的整数倍.不足的要补齐.</p>
+<p>4:在代码前加一句#pragma pack(1),告诉编译器,所有的对齐都按照1的整数倍对齐,换句话说就是没有对齐规则.如果#pragma pack (n)中指定的n大于结构体中最大成员的size，则其不起作用，结构体仍然按照size最大的成员进行对界</p>
+<p>struct结构体变量大小等于结构体中的各个成员变量所占内存大小总和，union共用体变量大小等于共用体结构中占用内存最大的成员的内存大小。</p>
+<p>首先先明白概念：<br>数据类型，指固定内存大小的别名，如int类型为4个字节内存。<br>变量，一段连续存储空间的别名。这段连续存储空间的大小，即变量的大小，由定义该变量的数据类型决定，即该数据类型代表的固定内存大小。数据类型，是变量的模板。</p>
+<h2 id="（35）-内存泄露的定义，如何检测与避免？"><a href="#（35）-内存泄露的定义，如何检测与避免？" class="headerlink" title="（35） 内存泄露的定义，如何检测与避免？"></a>（35） 内存泄露的定义，如何检测与避免？</h2><p>申请的堆没有被释放，该内存不能在被利用。</p>
+<h2 id="（36）-手写实现智能指针类（34-37我没遇见过）"><a href="#（36）-手写实现智能指针类（34-37我没遇见过）" class="headerlink" title="（36） 手写实现智能指针类（34-37我没遇见过）"></a>（36） 手写实现智能指针类（34-37我没遇见过）</h2><h2 id="（37）-调试程序的方法"><a href="#（37）-调试程序的方法" class="headerlink" title="（37） 调试程序的方法"></a>（37） 调试程序的方法</h2><h2 id="（38）-遇到coredump要怎么调试"><a href="#（38）-遇到coredump要怎么调试" class="headerlink" title="（38） 遇到coredump要怎么调试"></a>（38） 遇到coredump要怎么调试</h2><h2 id="（39）-内存检查工具的了解"><a href="#（39）-内存检查工具的了解" class="headerlink" title="（39） 内存检查工具的了解"></a>（39） 内存检查工具的了解</h2><h2 id="（40）-模板的用法与适用场景"><a href="#（40）-模板的用法与适用场景" class="headerlink" title="（40） 模板的用法与适用场景"></a>（40） 模板的用法与适用场景</h2><h3 id="（1）函数模板"><a href="#（1）函数模板" class="headerlink" title="（1）函数模板"></a>（1）函数模板</h3><p>函数模板能够用来创建一个通用的函数。以支持多种不同的形參。避免重载函数的函数体反复设计。</p>
+<p>它的最大特点是把函数使用的数据类型作为參数。</p>
+<p>函数模板的声明形式为：</p>
+<pre><code>template&lt;typename（或class) T&gt;
+&lt;返回类型&gt;&lt;函数名&gt;(參数表)
+{
+    函数体
+}
+</code></pre><p>当中，template是定义模板函数的关键字；template后面的尖括号不能省略；typename（或class)是声明数据类型參数标识符的关键字。用以说明它后面的标识符是数据类型标识符。这样，在以后定义的这个函数中，凡希望依据实參数据类型来确定数据类型的变量，都能够用数据类型參数标识符来说明，从而使这个变量能够适应不同的数据类型。</p>
+<p>比如：</p>
+<pre><code>template&lt;typename（或class) T&gt;
+T fuc(T x, T y)
+{
+    T x;
+    //……
+}
+</code></pre><p>函数模板仅仅是声明了一个函数的描写叙述即模板。不是一个能够直接运行的函数，仅仅有依据实际情况用实參的数据类型取代类型參数标识符之后，才干产生真正的函数。</p>
+<h3 id="（2）模板函数："><a href="#（2）模板函数：" class="headerlink" title="（2）模板函数："></a>（2）模板函数：</h3><p>模板函数的生成就是将函数模板的类型形參实例化的过程。</p>
+<p>比如：</p>
+<pre><code>double d;
+    int a;
+    fuc(d,a);
+</code></pre><p>则系统将用实參d的数据类型double去取代函数模板中的T生成函数：</p>
+<pre><code>double fuc(double x,int y)
+{
+    double x;
+    //……
+}
+</code></pre><h2 id="（41）-成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？"><a href="#（41）-成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？" class="headerlink" title="（41） 成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？"></a>（41） 成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？</h2><p>概念：以一个冒号开始，接着是以逗号分隔的数据成员列表，每个数据成员后面跟一个放在括号中的初始化式，对成员进行初始化。</p>
+<p>效率：构造函数之前执行默认初始化。而成员初始化列表，可以立即初始化，所以更快些。</p>
+<p>成员是const对象和引用必须初始化。</p>
+<h2 id="（42）-用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）"><a href="#（42）-用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）" class="headerlink" title="（42） 用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）"></a>（42） 用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）</h2><p>C++11：C++11包括大量的新特性：包括lambda表达式，类型推导关键字auto、decltype，和模板的大量改进。</p>
+<h3 id="新的关键字"><a href="#新的关键字" class="headerlink" title="新的关键字"></a>新的关键字</h3><h4 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h4><p>C++11中引入auto第一种作用是为了自动类型推导</p>
+<p>auto的自动类型推导，用于从初始化表达式中推断出变量的数据类型。通过auto的自动类型推导，可以大大简化我们的编程工作</p>
+<p>auto实际上实在编译时对变量进行了类型推导，所以不会对程序的运行效率造成不良影响</p>
+<p>另外，似乎auto并不会影响编译速度，因为编译时本来也要右侧推导然后判断与左侧是否匹配。</p>
+<pre><code>auto a; // 错误，auto是通过初始化表达式进行类型推导，如果没有初始化表达式，就无法确定a的类型  
+auto i = 1;  
+auto d = 1.0;  
+auto str = &quot;Hello World&quot;;  
+auto ch = &apos;A&apos;;  
+auto func = less&lt;int&gt;();  
+vector&lt;int&gt; iv;  
+auto ite = iv.begin();  
+auto p = new foo() // 对自定义类型进行类型推导 
+</code></pre><p>auto不光有以上的应用，它在模板中也是大显身手，比如下例这个加工产品的例子中，如果不使用auto就必须声明Product这一模板参数：</p>
+<pre><code>template &lt;typename Product, typename Creator&gt;  
+void processProduct(const Creator&amp; creator) {  
+    Product* val = creator.makeObject();  
+    // do somthing with val  
+}         
+</code></pre><p>如果使用auto，则可以这样写：</p>
+<pre><code>template &lt;typename Creator&gt;  
+void processProduct(const Creator&amp; creator) {  
+    auto val = creator.makeObject();  
+    // do somthing with val  
+} 
+</code></pre><p>抛弃了麻烦的模板参数，整个代码变得更加正解了。</p>
+<h4 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h4><p>decltype实际上有点像auto的反函数，auto可以让你声明一个变量，而decltype则可以从一个变量或表达式中得到类型，有实例如下：</p>
+<pre><code>int x = 3;  
+decltype(x) y = x; 
+</code></pre><p>有人会问，decltype的实用之处在哪里呢，我们接着上边的例子继续说下去，如果上文中的加工产品的例子中我们想把产品作为返回值该怎么办呢？我们可以这样写：</p>
+<pre><code>template &lt;typename Creator&gt;  
+auto processProduct(const Creator&amp; creator) -&gt; decltype(creator.makeObject()) {  
+    auto val = creator.makeObject();  
+    // do somthing with val  
+} 
+nullptr
+</code></pre><p>nullptr是为了解决原来C++中NULL的二义性问题而引进的一种新的类型，因为NULL实际上代表的是0，</p>
+<pre><code>void F(int a){  
+    cout&lt;&lt;a&lt;&lt;endl;  
+}  
+
+void F(int *p){  
+    assert(p != NULL);  
+
+    cout&lt;&lt; p &lt;&lt;endl;  
+}  
+
+int main(){  
+
+    int *p = nullptr;  
+    int *q = NULL;  
+    bool equal = ( p == q ); // equal的值为true，说明p和q都是空指针  
+    int a = nullptr; // 编译失败，nullptr不能转型为int  
+    F(0); // 在C++98中编译失败，有二义性；在C++11中调用F（int）  
+    F(nullptr);  
+
+    return 0;  
+} 
+</code></pre><h3 id="序列for循环"><a href="#序列for循环" class="headerlink" title="序列for循环"></a>序列for循环</h3><p>在C++中for循环可以使用类似java的简化的for循环，可以用于遍历数组，容器，string以及由begin和end函数定义的序列（即有Iterator），示例代码如下：</p>
+<pre><code>map&lt;string, int&gt; m{{"a", 1}, {"b", 2}, {"c", 3}};  
+for (auto p : m){  
+    cout&lt;&lt;p.first&lt;&lt;&quot; : &quot;&lt;&lt;p.second&lt;&lt;endl;  
+} 
+</code></pre><h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>lambda表达式类似Javascript中的闭包，它可以用于创建并定义匿名的函数对象，以简化编程工作。Lambda的语法如下：</p>
+<pre><code>[函数对象参数]（操作符重载函数参数）-&gt;返回值类型{函数体}
+
+vector&lt;int&gt; iv{5, 4, 3, 2, 1};  
+int a = 2, b = 1;  
+
+for_each(iv.begin(), iv.end(), [b](int &amp;x){cout&lt;&lt;(x + b)&lt;&lt;endl;}); // (1)  
+
+for_each(iv.begin(), iv.end(), [=](int &amp;x){x *= (a + b);});     // (2)  
+
+for_each(iv.begin(), iv.end(), [=](int &amp;x)-&gt;int{return x * (a + b);});// (3) 
+</code></pre><p>[]内的参数指的是Lambda表达式可以取得的全局变量。(1)函数中的b就是指函数可以得到在Lambda表达式外的全局变量，如果在[]中传入=的话，即是可以取得所有的外部变量，如（2）和（3）Lambda表达式<br>()内的参数是每次调用函数时传入的参数。<br>-&gt;后加上的是Lambda表达式返回值的类型，如（3）中返回了一个int类型的变量</p>
+<h3 id="变长参数的模板"><a href="#变长参数的模板" class="headerlink" title="变长参数的模板"></a>变长参数的模板</h3><p>我们在C++中都用过pair，pair可以使用make_pair构造，构造一个包含两种不同类型的数据的容器。比如，如下代码：</p>
+<pre><code>auto p = make_pair(1, &quot;C++ 11&quot;); 
+由于在C++11中引入了变长参数模板，所以发明了新的数据类型：tuple，tuple是一个N元组，可以传入1个， 2个甚至多个不同类型的数据
+
+auto t1 = make_tuple(1, 2.0, &quot;C++ 11&quot;);  
+auto t2 = make_tuple(1, 2.0, &quot;C++ 11&quot;, {1, 0, 2}); 
+</code></pre><p>这样就避免了从前的pair中嵌套pair的丑陋做法，使得代码更加整洁</p>
+<p>另一个经常见到的例子是Print函数，在C语言中printf可以传入多个参数，在C++11中，我们可以用变长参数模板实现更简洁的Print</p>
+<pre><code>template&lt;typename head, typename... tail&gt;  
+void Print(Head head, typename... tail) {  
+    cout&lt;&lt; head &lt;&lt;endl;  
+    Print(tail...);  
+} 
+</code></pre><p>Print中可以传入多个不同种类的参数，如下：</p>
+<p>Print(1, 1.0, “C++11”); </p>
+<h3 id="更加优雅的初始化方法"><a href="#更加优雅的初始化方法" class="headerlink" title="更加优雅的初始化方法"></a>更加优雅的初始化方法</h3><p>在引入C++11之前，只有数组能使用初始化列表，其他容器想要使用初始化列表，只能用以下方法：</p>
+<pre><code>int arr[3] = {1, 2, 3}  
+vector&lt;int&gt; v(arr, arr + 3); 
+</code></pre><p>在C++11中，我们可以使用以下语法来进行替换：</p>
+<pre><code>int arr[3]{1, 2, 3};  
+vector&lt;int&gt; iv{1, 2, 3};  
+map&lt;int, string&gt;{{1, "a"}, {2, "b"}};  
+string str{&quot;Hello World&quot;}; 
+</code></pre><h3 id="C-14：C-14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。"><a href="#C-14：C-14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。" class="headerlink" title="C++14：C++14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。"></a>C++14：C++14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。</h3><h3 id="Lambda函数"><a href="#Lambda函数" class="headerlink" title="Lambda函数"></a>Lambda函数</h3><p>C++14的泛型Lambda使编写如下语句成为可能：</p>
+<pre><code>auto lambda = [](auto x, auto y) {return x + y;};
+</code></pre><p>而另一方面，C++11要求Lambda参数使用具体的类型声明，比如：</p>
+<pre><code>auto lambda = [](int x, int y) {return x + y;};
+</code></pre><p>此外，新标准中的std::move函数可用于捕获Lambda表达式中的变量，这是通过移动对象而非复制或引用对象实现的：</p>
+<pre><code>std::unique_ptr ptr(new int(10));
+auto lambda = [value = std::move(ptr)] {return *value;};
+</code></pre><h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>在C++11中，使用constexpr声明的函数可以在编译时执行，生成一个值，用在需要常量表达式的地方，比如作为初始化模板的整形参数。C++11的constexpr函数只能包含一个表达式，C++14放松了这些限制，支持诸如if 和switch等条件语句，支持循环，其中包括基于区间（range）的for 循环。</p>
+<h3 id="类型推导"><a href="#类型推导" class="headerlink" title="类型推导"></a>类型推导</h3><p>C++11仅支持Lambda函数的类型推导，C++14对其加以扩展，支持所有函数的返回类型推导：</p>
+<pre><code>auto DeducedReturnTypeFunction();
+</code></pre><p>因为C++14是强类型语言，有些限制需要考虑：</p>
+<p>如果一个函数的实现中有多个返回语句，这些语句一定要推导出同样的类型。<br>返回类型推导可以用在前向声明中，但是在使用它们之前，翻译单元中必须能够得到函数定义。<br>返回类型推导可以用在递归函数中，但是递归调用必须以至少一个返回语句作为先导，以便编译器推导出返回类型。<br>C++14带来的另一个类型推导方面的改进是decltype(auto)语法，它支持使用与auto同样的机制计算给定表达式的类型。auto和 decltype在C++11中就已经出现了，但是它们在推导类型时使用了不同的机制，这可能会产生不同的结果。</p>
+<p>C++14中的其他改变包括可以声明变量模板，支持使用0b或0B前缀来声明二进制字面常量。InfoQ已经介绍过C++14中可能破坏C++11程序的其他小型修改。</p>
+<h2 id="（43）-C-的调用惯例（简单一点C-函数调用的压栈过程）"><a href="#（43）-C-的调用惯例（简单一点C-函数调用的压栈过程）" class="headerlink" title="（43） C++的调用惯例（简单一点C++函数调用的压栈过程）"></a>（43） C++的调用惯例（简单一点C++函数调用的压栈过程）</h2><h2 id="（44）-C-的四种强制转换"><a href="#（44）-C-的四种强制转换" class="headerlink" title="（44） C++的四种强制转换"></a>（44） C++的四种强制转换</h2><p>C语言中的强制类型转换可以随意的转换我们想要的类型了,格式如下</p>
+<pre><code>(类型) 变量名;
+</code></pre><p>为什么c++还要引入新的4种类型转换呢?</p>
+<p>  这是因为新的类型转换控制符可以很好的控制类型转换的过程,允许控制各种类型不同的转换.</p>
+<p>  还有一点好处是C++的类型转换控制符能告诉程序员或读者我们这个转换的目的是什么,我们<br> 只要看一下代码的类型转换控制符,就能明白我们想要达到什么样的目的.</p>
+<h3 id="1-static-cast-lt-T-gt-content-静态转换-在编译期间处理"><a href="#1-static-cast-lt-T-gt-content-静态转换-在编译期间处理" class="headerlink" title="1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理"></a>1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理</h3><p>   它主要用于C++中内置的基本数据类型之间的转换.但是没有运行时类型的检测来保证转换的安全性.</p>
+<p>   为什么需要static_cast类型的转换?</p>
+<h4 id="a-用于基类和子类之间的指针或引用的转换。"><a href="#a-用于基类和子类之间的指针或引用的转换。" class="headerlink" title="a.用于基类和子类之间的指针或引用的转换。"></a>a.用于基类和子类之间的指针或引用的转换。</h4><p>这种转换把子类的指针或引用转换为基类表示是安全的;进行下行转换,把基类的指针或引用转换为子类表示时,由于没有进行动态类型检测,所以是不安全的;</p>
+<h4 id="b-把void类型的指针转换成目标类型的指针-不安全"><a href="#b-把void类型的指针转换成目标类型的指针-不安全" class="headerlink" title="b.把void类型的指针转换成目标类型的指针(不安全)."></a>b.把void类型的指针转换成目标类型的指针(不安全).</h4><h4 id="c-用于内置的基本的数据类型之间的转换"><a href="#c-用于内置的基本的数据类型之间的转换" class="headerlink" title="c.用于内置的基本的数据类型之间的转换."></a>c.用于内置的基本的数据类型之间的转换.</h4><h4 id="d-把任何类型的表达式转换成void类型的"><a href="#d-把任何类型的表达式转换成void类型的" class="headerlink" title="d.把任何类型的表达式转换成void类型的."></a>d.把任何类型的表达式转换成void类型的.</h4><p>   注意:static_cast不会转换掉content的const,volatile,__unaligned属性</p>
+<h3 id="2-static-const-lt-T-gt-content-去常转换-编译时执行"><a href="#2-static-const-lt-T-gt-content-去常转换-编译时执行" class="headerlink" title="2)static_const&lt;T*&gt;(content):去常转换;编译时执行;"></a>2)static_const&lt;T*&gt;(content):去常转换;编译时执行;</h3><p>  它主要作用同一个类型之间的去常和添加常属性之间的转换.不能用做不同的类型之间的转换.</p>
+<p>  它可以把一个不是常属性的转换成常属性的,同时它也可以对一个本是常属性的类型进行去常.</p>
+<h3 id="3-dynamic-cast-lt-T-gt-content-动态类型转换-也是向下安全转型-是在运行的时候执行"><a href="#3-dynamic-cast-lt-T-gt-content-动态类型转换-也是向下安全转型-是在运行的时候执行" class="headerlink" title="3)dynamic_cast&lt;T*&gt;(content) 动态类型转换;也是向下安全转型;是在运行的时候执行;"></a>3)dynamic_cast&lt;T*&gt;(content) 动态类型转换;也是向下安全转型;是在运行的时候执行;</h3><p>   通常用于基类和派生类之间的转换.转换时会进行类型安全检查。</p>
+<h4 id="a-4"><a href="#a-4" class="headerlink" title="a."></a>a.</h4><p>不能用于内置的基本数据类型之间的转换.</p>
+<h4 id="b-5"><a href="#b-5" class="headerlink" title="b."></a>b.</h4><p>dynamic_cast转换成功的话返回的是类的指针或引用,失败返回null;</p>
+<h4 id="c-3"><a href="#c-3" class="headerlink" title="c."></a>c.</h4><p>dynamic_cast进行的转换的时候基类中一定要有虚函数,因为只有类中有了虚函数, 才说明它希望让基类指针或引用指向其派生类对象的情况,这样才有意义.这是由于运行时类型检查需要运行时类型的信息,而这些信息存储在虚函数表中.</p>
+<h4 id="d-3"><a href="#d-3" class="headerlink" title="d."></a>d.</h4><p>在类的转换时,在类层次间进行转换的时候,dynamic_cast和static_cast进行上行转换的时候效果是一样的；但是在进行下行转换的时候,dynamic_cast会进行类型检查所以它更安全.它可以让指向基类的指针转换为指向其子类的指针或是其兄弟类的指针;</p>
+<h3 id="4-reinterpret-cast-lt-T-gt-content-重解释类型转换"><a href="#4-reinterpret-cast-lt-T-gt-content-重解释类型转换" class="headerlink" title="4)reinterpret_cast&lt;T*&gt;(content)重解释类型转换;"></a>4)reinterpret_cast&lt;T*&gt;(content)重解释类型转换;</h3><p>   它有着和C风格强制类型转换同样的功能;它可以转化任何的内置数据类型为其他的类型, 同时它也可以把任何类型的指针转化为其他的类型;它的机理是对二进制数据进行重新的的解释,不会改变原来的格式,而static_cast会改变原来的格式;</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/09/21/C++面试高频题/">C++面试高频题</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2018年09月21日 - 17时12分</p>
+        <p><span>最后更新:</span>2019年07月17日 - 11时53分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/21/C++面试高频题/" title="C++面试高频题">http://yoursite.com/2018/09/21/C++面试高频题/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/21/C++面试高频题/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/09/21/数据库面试高频题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          数据库面试高频题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">792. Number of Matching Subsequences匹配子序列的单词数</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-面试高频题"><span class="toc-number">1.</span> <span class="toc-text">C++面试高频题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#联系"><span class="toc-number">1.0.1.</span> <span class="toc-text">联系:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">a.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">b.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">c.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">d.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区别"><span class="toc-number">1.0.2.</span> <span class="toc-text">区别:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-1"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">a.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-1"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">b.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-1"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">c.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-1"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">d.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#e"><span class="toc-number">1.0.2.5.</span> <span class="toc-text">e.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#f"><span class="toc-number">1.0.2.6.</span> <span class="toc-text">f.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#g"><span class="toc-number">1.0.2.7.</span> <span class="toc-text">g.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考答案2："><span class="toc-number">1.0.3.</span> <span class="toc-text">参考答案2：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">1)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">2)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">3)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4"><span class="toc-number">1.0.3.4.</span> <span class="toc-text">4)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5"><span class="toc-number">1.0.3.5.</span> <span class="toc-text">5)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6"><span class="toc-number">1.0.3.6.</span> <span class="toc-text">6)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7"><span class="toc-number">1.0.3.7.</span> <span class="toc-text">7)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8"><span class="toc-number">1.0.3.8.</span> <span class="toc-text">8)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9"><span class="toc-number">1.0.3.9.</span> <span class="toc-text">9)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#a-管理方式不同"><span class="toc-number">1.0.3.10.</span> <span class="toc-text">a.管理方式不同:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-可用内存空间不同"><span class="toc-number">1.0.3.11.</span> <span class="toc-text">b.可用内存空间不同:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-能否产生碎片不同"><span class="toc-number">1.0.3.12.</span> <span class="toc-text">c.能否产生碎片不同:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-生长方向不同"><span class="toc-number">1.0.3.13.</span> <span class="toc-text">d.生长方向不同:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#e-分配的方式不同"><span class="toc-number">1.0.3.14.</span> <span class="toc-text">e.分配的方式不同:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#f-分配的效率不同"><span class="toc-number">1.0.3.15.</span> <span class="toc-text">f.分配的效率不同:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#a-运算符和库函数的区别"><span class="toc-number">1.0.3.16.</span> <span class="toc-text">a.运算符和库函数的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-2"><span class="toc-number">1.0.3.17.</span> <span class="toc-text">b.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-2"><span class="toc-number">1.0.3.18.</span> <span class="toc-text">c.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-2"><span class="toc-number">1.0.3.19.</span> <span class="toc-text">d.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（6）-Struct和class的联系和区别"><span class="toc-number">1.1.</span> <span class="toc-text">（6） Struct和class的联系和区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#联系-1"><span class="toc-number">1.1.1.</span> <span class="toc-text">联系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区别："><span class="toc-number">1.1.2.</span> <span class="toc-text">区别：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（7）-define-和const的区别（编译阶段、安全性、内存占用等）"><span class="toc-number">1.2.</span> <span class="toc-text">（7） define 和const的区别（编译阶段、安全性、内存占用等）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-编译器处理方式不同。"><span class="toc-number">1.2.1.</span> <span class="toc-text">(1) 编译器处理方式不同。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-类型和安全检查不同。"><span class="toc-number">1.2.2.</span> <span class="toc-text">(2)类型和安全检查不同。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-存储方式不同。"><span class="toc-number">1.2.3.</span> <span class="toc-text">(3)存储方式不同。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（8）-在C-中const和static的用法（定义，用途）"><span class="toc-number">1.3.</span> <span class="toc-text">（8） 在C++中const和static的用法（定义，用途）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#static关键字至少有下列n个作用："><span class="toc-number">1.3.1.</span> <span class="toc-text">static关键字至少有下列n个作用：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">（1）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">（2）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">（3）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">（4）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（5）"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">（5）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#const关键字至少有下列n个作用："><span class="toc-number">1.3.2.</span> <span class="toc-text">const关键字至少有下列n个作用：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）-1"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">（1）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）-1"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">（2）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）-1"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">（3）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（4）-1"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">（4）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（5）-1"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">（5）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（9）-const和static在类中使用的注意事项（定义、初始化和使用）"><span class="toc-number">1.4.</span> <span class="toc-text">（9） const和static在类中使用的注意事项（定义、初始化和使用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（10）-C-中的const类成员函数（用法和意义）"><span class="toc-number">1.5.</span> <span class="toc-text">（10） C++中的const类成员函数（用法和意义）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#规则："><span class="toc-number">1.5.1.</span> <span class="toc-text">规则：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#意义："><span class="toc-number">1.5.2.</span> <span class="toc-text">意义：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原因："><span class="toc-number">1.5.3.</span> <span class="toc-text">原因：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（11）-计算下面几个类的大小："><span class="toc-number">1.6.</span> <span class="toc-text">（11） 计算下面几个类的大小：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（13）-C-的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等"><span class="toc-number">1.7.</span> <span class="toc-text">（13） C++的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（14）-STL源码中的hash表的实现"><span class="toc-number">1.8.</span> <span class="toc-text">（14） STL源码中的hash表的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（15）-STL中unordered-map和map的区别"><span class="toc-number">1.9.</span> <span class="toc-text">（15） STL中unordered_map和map的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内部实现机理"><span class="toc-number">1.9.1.</span> <span class="toc-text">内部实现机理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#map："><span class="toc-number">1.9.1.1.</span> <span class="toc-text">map：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#unordered-map"><span class="toc-number">1.9.1.2.</span> <span class="toc-text">unordered_map:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优缺点以及适用处"><span class="toc-number">1.9.2.</span> <span class="toc-text">优缺点以及适用处</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#map-优点："><span class="toc-number">1.9.2.1.</span> <span class="toc-text">map 优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map-缺点："><span class="toc-number">1.9.2.2.</span> <span class="toc-text">map 缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#unordered-map-优点："><span class="toc-number">1.9.2.3.</span> <span class="toc-text">unordered_map 优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#unordered-map-缺点："><span class="toc-number">1.9.2.4.</span> <span class="toc-text">unordered_map 缺点：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（16）-STL中vector的实现"><span class="toc-number">1.10.</span> <span class="toc-text">（16） STL中vector的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、vector的定义"><span class="toc-number">1.10.1.</span> <span class="toc-text">一、vector的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、构造与析构"><span class="toc-number">1.10.2.</span> <span class="toc-text">二、构造与析构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、构造"><span class="toc-number">1.10.3.</span> <span class="toc-text">1、构造</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、析构"><span class="toc-number">1.10.4.</span> <span class="toc-text">2、析构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、插入和删除元素"><span class="toc-number">1.10.5.</span> <span class="toc-text">三、插入和删除元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、其他接口"><span class="toc-number">1.10.6.</span> <span class="toc-text">四、其他接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、reserve-操作"><span class="toc-number">1.10.7.</span> <span class="toc-text">1、reserve()操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、resize-操作"><span class="toc-number">1.10.8.</span> <span class="toc-text">2、resize()操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、-Insert-n-操作"><span class="toc-number">1.10.9.</span> <span class="toc-text">3、_Insert_n()操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、erase-操作"><span class="toc-number">1.10.10.</span> <span class="toc-text">4、erase()操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、assign-操作"><span class="toc-number">1.10.11.</span> <span class="toc-text">5、assign()操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（17）-vector使用的注意点及其原因，频繁对vector调用push-back-对性能的影响和原因。"><span class="toc-number">1.11.</span> <span class="toc-text">（17） vector使用的注意点及其原因，频繁对vector调用push_back()对性能的影响和原因。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（18）-C-中的重载和重写的区别："><span class="toc-number">1.12.</span> <span class="toc-text">（18） C++中的重载和重写的区别：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（19）-C-内存管理（热门问题）"><span class="toc-number">1.13.</span> <span class="toc-text">（19） C ++内存管理（热门问题）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-一般一个c-c-程序编译的时候内存布局如下-地址从低到高的顺序"><span class="toc-number">1.13.1.</span> <span class="toc-text">(1)一般一个c/c++程序编译的时候内存布局如下(地址从低到高的顺序)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-代码区"><span class="toc-number">1.13.1.1.</span> <span class="toc-text">a.代码区:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-常量区"><span class="toc-number">1.13.1.2.</span> <span class="toc-text">b.常量区:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-数据区"><span class="toc-number">1.13.1.3.</span> <span class="toc-text">c.数据区:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-BSS段"><span class="toc-number">1.13.1.4.</span> <span class="toc-text">d.BSS段:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#e-堆区"><span class="toc-number">1.13.1.5.</span> <span class="toc-text">e.堆区:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#f-栈区"><span class="toc-number">1.13.1.6.</span> <span class="toc-text">f.栈区:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#g-命令行参数和环境变量区"><span class="toc-number">1.13.1.7.</span> <span class="toc-text">g.命令行参数和环境变量区;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-从上面可以看出c-c-的内存分配方式主要有三种"><span class="toc-number">1.13.2.</span> <span class="toc-text">(2)从上面可以看出c/c++的内存分配方式主要有三种</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-从静态存储区域分配"><span class="toc-number">1.13.2.1.</span> <span class="toc-text">a.从静态存储区域分配:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-在栈上分配内存"><span class="toc-number">1.13.2.2.</span> <span class="toc-text">b.在栈上分配内存:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-从堆中分配内存"><span class="toc-number">1.13.2.3.</span> <span class="toc-text">c.从堆中分配内存:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（20）-介绍面向对象的三大特性，并且举例说明每一个。"><span class="toc-number">1.14.</span> <span class="toc-text">（20） 介绍面向对象的三大特性，并且举例说明每一个。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-封装"><span class="toc-number">1.14.1.</span> <span class="toc-text">(1)封装:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-继承"><span class="toc-number">1.14.2.</span> <span class="toc-text">(2)继承:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-2"><span class="toc-number">1.14.2.1.</span> <span class="toc-text">a.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-3"><span class="toc-number">1.14.2.2.</span> <span class="toc-text">b.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-多态"><span class="toc-number">1.14.3.</span> <span class="toc-text">(3)多态:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-3"><span class="toc-number">1.14.3.1.</span> <span class="toc-text">a.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-4"><span class="toc-number">1.14.3.2.</span> <span class="toc-text">b.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（21）-多态的实现（和下个问题一起回答）"><span class="toc-number">1.15.</span> <span class="toc-text">（21） 多态的实现（和下个问题一起回答）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#c-的多态性就是通过晚绑定技术来实现的。"><span class="toc-number">1.15.1.</span> <span class="toc-text">c++的多态性就是通过晚绑定技术来实现的。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（22）-C-虚函数相关（虚函数表，虚函数指针），虚函数的实现原理（热门，重要）"><span class="toc-number">1.16.</span> <span class="toc-text">（22） C++虚函数相关（虚函数表，虚函数指针），虚函数的实现原理（热门，重要）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（23）-实现编译器处理虚函数表应该如何处理"><span class="toc-number">1.17.</span> <span class="toc-text">（23） 实现编译器处理虚函数表应该如何处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（24）-析构函数一般写成虚函数的原因"><span class="toc-number">1.18.</span> <span class="toc-text">（24） 析构函数一般写成虚函数的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（25）-构造函数为什么一般不定义为虚函数"><span class="toc-number">1.19.</span> <span class="toc-text">（25） 构造函数为什么一般不定义为虚函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（26）-构造函数或者析构函数中调用虚函数会怎样"><span class="toc-number">1.20.</span> <span class="toc-text">（26） 构造函数或者析构函数中调用虚函数会怎样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（27）-纯虚函数"><span class="toc-number">1.21.</span> <span class="toc-text">（27） 纯虚函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、定义"><span class="toc-number">1.21.1.</span> <span class="toc-text">一、定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、引入原因"><span class="toc-number">1.21.2.</span> <span class="toc-text">二、引入原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象类的介绍"><span class="toc-number">1.21.3.</span> <span class="toc-text">抽象类的介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结："><span class="toc-number">1.21.4.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（28）-静态绑定和动态绑定的介绍"><span class="toc-number">1.22.</span> <span class="toc-text">（28） 静态绑定和动态绑定的介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（29）-引用是否能实现动态绑定，为什么引用可以实现"><span class="toc-number">1.23.</span> <span class="toc-text">（29） 引用是否能实现动态绑定，为什么引用可以实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（30）-深拷贝和浅拷贝的区别（举例说明深拷贝的安全性）"><span class="toc-number">1.24.</span> <span class="toc-text">（30） 深拷贝和浅拷贝的区别（举例说明深拷贝的安全性）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（31）-对象复用的了解，零拷贝的了解"><span class="toc-number">1.25.</span> <span class="toc-text">（31） 对象复用的了解，零拷贝的了解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（32）-介绍C-所有的构造函数"><span class="toc-number">1.26.</span> <span class="toc-text">（32） 介绍C++所有的构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、-构造函数是干什么的"><span class="toc-number">1.26.1.</span> <span class="toc-text">一、 构造函数是干什么的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、-构造函数的种类"><span class="toc-number">1.26.2.</span> <span class="toc-text">二、 构造函数的种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、使用上面定义的类对象来说明各个构造函数的用法："><span class="toc-number">1.26.3.</span> <span class="toc-text">三、使用上面定义的类对象来说明各个构造函数的用法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（33）-什么情况下会调用拷贝构造函数（三种情况）"><span class="toc-number">1.27.</span> <span class="toc-text">（33） 什么情况下会调用拷贝构造函数（三种情况）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（34）-结构体内存对齐方式和为什么要进行内存对齐？"><span class="toc-number">1.28.</span> <span class="toc-text">（34） 结构体内存对齐方式和为什么要进行内存对齐？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（35）-内存泄露的定义，如何检测与避免？"><span class="toc-number">1.29.</span> <span class="toc-text">（35） 内存泄露的定义，如何检测与避免？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（36）-手写实现智能指针类（34-37我没遇见过）"><span class="toc-number">1.30.</span> <span class="toc-text">（36） 手写实现智能指针类（34-37我没遇见过）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（37）-调试程序的方法"><span class="toc-number">1.31.</span> <span class="toc-text">（37） 调试程序的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（38）-遇到coredump要怎么调试"><span class="toc-number">1.32.</span> <span class="toc-text">（38） 遇到coredump要怎么调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（39）-内存检查工具的了解"><span class="toc-number">1.33.</span> <span class="toc-text">（39） 内存检查工具的了解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（40）-模板的用法与适用场景"><span class="toc-number">1.34.</span> <span class="toc-text">（40） 模板的用法与适用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）函数模板"><span class="toc-number">1.34.1.</span> <span class="toc-text">（1）函数模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）模板函数："><span class="toc-number">1.34.2.</span> <span class="toc-text">（2）模板函数：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（41）-成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？"><span class="toc-number">1.35.</span> <span class="toc-text">（41） 成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（42）-用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）"><span class="toc-number">1.36.</span> <span class="toc-text">（42） 用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新的关键字"><span class="toc-number">1.36.1.</span> <span class="toc-text">新的关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#auto"><span class="toc-number">1.36.1.1.</span> <span class="toc-text">auto</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#decltype"><span class="toc-number">1.36.1.2.</span> <span class="toc-text">decltype</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序列for循环"><span class="toc-number">1.36.2.</span> <span class="toc-text">序列for循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda表达式"><span class="toc-number">1.36.3.</span> <span class="toc-text">Lambda表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变长参数的模板"><span class="toc-number">1.36.4.</span> <span class="toc-text">变长参数的模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更加优雅的初始化方法"><span class="toc-number">1.36.5.</span> <span class="toc-text">更加优雅的初始化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-14：C-14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。"><span class="toc-number">1.36.6.</span> <span class="toc-text">C++14：C++14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda函数"><span class="toc-number">1.36.7.</span> <span class="toc-text">Lambda函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constexpr"><span class="toc-number">1.36.8.</span> <span class="toc-text">constexpr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型推导"><span class="toc-number">1.36.9.</span> <span class="toc-text">类型推导</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（43）-C-的调用惯例（简单一点C-函数调用的压栈过程）"><span class="toc-number">1.37.</span> <span class="toc-text">（43） C++的调用惯例（简单一点C++函数调用的压栈过程）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#（44）-C-的四种强制转换"><span class="toc-number">1.38.</span> <span class="toc-text">（44） C++的四种强制转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-static-cast-lt-T-gt-content-静态转换-在编译期间处理"><span class="toc-number">1.38.1.</span> <span class="toc-text">1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-用于基类和子类之间的指针或引用的转换。"><span class="toc-number">1.38.1.1.</span> <span class="toc-text">a.用于基类和子类之间的指针或引用的转换。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-把void类型的指针转换成目标类型的指针-不安全"><span class="toc-number">1.38.1.2.</span> <span class="toc-text">b.把void类型的指针转换成目标类型的指针(不安全).</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-用于内置的基本的数据类型之间的转换"><span class="toc-number">1.38.1.3.</span> <span class="toc-text">c.用于内置的基本的数据类型之间的转换.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-把任何类型的表达式转换成void类型的"><span class="toc-number">1.38.1.4.</span> <span class="toc-text">d.把任何类型的表达式转换成void类型的.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-static-const-lt-T-gt-content-去常转换-编译时执行"><span class="toc-number">1.38.2.</span> <span class="toc-text">2)static_const&lt;T*&gt;(content):去常转换;编译时执行;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-dynamic-cast-lt-T-gt-content-动态类型转换-也是向下安全转型-是在运行的时候执行"><span class="toc-number">1.38.3.</span> <span class="toc-text">3)dynamic_cast&lt;T*&gt;(content) 动态类型转换;也是向下安全转型;是在运行的时候执行;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-4"><span class="toc-number">1.38.3.1.</span> <span class="toc-text">a.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-5"><span class="toc-number">1.38.3.2.</span> <span class="toc-text">b.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-3"><span class="toc-number">1.38.3.3.</span> <span class="toc-text">c.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-3"><span class="toc-number">1.38.3.4.</span> <span class="toc-text">d.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-reinterpret-cast-lt-T-gt-content-重解释类型转换"><span class="toc-number">1.38.4.</span> <span class="toc-text">4)reinterpret_cast&lt;T*&gt;(content)重解释类型转换;</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/09/21/数据库面试高频题/" title="上一篇: 数据库面试高频题">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/" title="下一篇: 792. Number of Matching Subsequences匹配子序列的单词数">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/510. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 Yiye Li
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
