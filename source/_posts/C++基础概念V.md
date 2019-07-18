@@ -1,11 +1,11 @@
 ---
 title: STL源码剖析之vector
-date: 2018-9-10 21:12:23 
+date: 2018-9-10 21:12:23
 categories: 2018年9月
 tags: [C++,STL,vector]
 
 ---
-# STL源码剖析之vector
+ 
 
 
 
@@ -22,20 +22,20 @@ tags: [C++,STL,vector]
 		pointer _Mylast;//pointer to current end of sequence
 		pointer _Myend;//pointer to end of array
 	};
-	
+
 示意图如下：
 ![image](http://ww1.sinaimg.cn/large/0071ouepgy1fv5pefakcgj30as088my3.jpg)
 
-两个关键大小： 
-大小：size=_Mylast - _Myfirst； 
-容量：capacity=_Myend - _Myfirst； 
-分别对应于resize()、reserve()两个函数。 
+两个关键大小：
+大小：size=_Mylast - _Myfirst；
+容量：capacity=_Myend - _Myfirst；
+分别对应于resize()、reserve()两个函数。
 size表示vector中已有元素的个数，容量表示vector最多可存储的元素的个数；为了降低二次分配时的成本，vector实际配置的大小可能比客户需求的更大一些，以备将来扩充，这就是容量的概念。即capacity>=size，当等于时，容器此时已满，若再要加入新的元素时，就要重新进行内存分配，整个vector的数据都要移动到新内存。二次分配成本较高，在实际操作时，应尽量预留一定空间，避免二次分配。
 
 ## 二、构造与析构
-### 1、构造 
+### 1、构造
 vector的构造函数主要有以下几种：
-	
+
 	vector(): _Mybase(){
 		//construct empty vector
 		_Buy(0);
@@ -54,9 +54,9 @@ vector的构造函数主要有以下几种：
 			_Mylast=_Ucopy(_Right.begin(),_Right.end(),_Myfirst);
 	}
 
-vector优异性能的秘诀之一，就是配置比其所容纳的元素所需更多的内存，一般在使用vector之前，就先预留足够空间，以避免二次分配，这样可以使vector的性能达到最佳。因此元素个数_Count是个远比元素值 _Val重要的参数，因此当构造一个vector时，首要参数一定是元素个数。 
+vector优异性能的秘诀之一，就是配置比其所容纳的元素所需更多的内存，一般在使用vector之前，就先预留足够空间，以避免二次分配，这样可以使vector的性能达到最佳。因此元素个数_Count是个远比元素值 _Val重要的参数，因此当构造一个vector时，首要参数一定是元素个数。
 由上各构造函数可知，基本上所有构造函数都是基于_Construct _n() 的
-	
+
 	bool _Buy(size_type _Capacity){
 		//allocate array with _Capacity elements
 		_Myfirst=0,_Mylast=0,_Myend=0;
@@ -75,7 +75,7 @@ vector优异性能的秘诀之一，就是配置比其所容纳的元素所需�
 		if(_Buy(_Count))
 			_Mylast= _Ufill(_Myfirst,_Count,_Val);
 	}
-### 2、析构 
+### 2、析构
 vector的析构函数很简单，就是先销毁所有已存在的元素，然后释放所有内存
 
     void _Tidy()
@@ -131,12 +131,12 @@ vector的插入和删除元素是通过push_ back () 、 pop_back()两个接口�
 	      new_finish = uninitialized_copy(_Myfirst, position, new_start);//将原来数据拷贝到new_start，并返回尾部迭代器
 	      construct(new_finish, x);//在尾部构造新元素
 	      ++new_finish;//新的尾部加1
-	
+
 	      new_finish = uninitialized_copy(position, _Mylast, new_finish);//这句话没有任何用。
 	    }
 	    destroy(begin(), end());//析构
 	    deallocate();//释放原来vector内存空间
-	
+
 	    //迭代器调整
 	    _Myfirst = new_start;
 	    _Mylast = new_finish;
@@ -167,7 +167,7 @@ vector的插入和删除元素是通过push_ back () 、 pop_back()两个接口�
             }
         }
 
-### 2、resize()操作 
+### 2、resize()操作
 resize（Count） 函数主要是用于改变size的，也就是改变vector的大小，最终改变的是（_Mylast - _Myfirst）的值，当size < Count时,就插入元素，当size >Count时，就擦除元素。
 
     void resize(size_type _Newsize, _Ty _Val)
@@ -180,16 +180,16 @@ resize（Count） 函数主要是用于改变size的，也就是改变vector的�
 
 ### 3、_Insert_n()操作
 
-resize()操作和insert()操作都会利用到_Insert_n()这个函数，这个函数非常重要，也比其他函数稍微复杂一点 
+resize()操作和insert()操作都会利用到_Insert_n()这个函数，这个函数非常重要，也比其他函数稍微复杂一点
 虽然_Insert_n(_where, _Count, _Val ) 函数比较长，但是操作都非常简单，主要可以分为以下几种情况：
 
 1、_Count == 0，不需要插入，直接返回
 
 2、max_size() - size() < _Count，超过系统设置的最大容量，会溢出，造成Xlen（）异常
 
-3、_Capacity < size() + _Count，vector的容量不足以插入Count个元素，需要进行二次分配，扩大vector的容量。 在VS下，vector容量会扩大50%，即 _Capacity = _Capacity + _Capacity / 2; 
+3、_Capacity < size() + _Count，vector的容量不足以插入Count个元素，需要进行二次分配，扩大vector的容量。 在VS下，vector容量会扩大50%，即 _Capacity = _Capacity + _Capacity / 2;
 若仍不足，则 _Capacity = size() + _Count;
-   
+
 	 else if (_Capacity < size() + _Count)
             {   // not enough room, reallocate
             _Capacity = max_size() - _Capacity / 2 < _Capacity
@@ -204,7 +204,7 @@ resize()操作和insert()操作都会利用到_Insert_n()这个函数，这个�
             //内存释放与变量更新
             }
 
-这种情况下，数据从原始容器移动到新分配内存时是从前到后移动的 
+这种情况下，数据从原始容器移动到新分配内存时是从前到后移动的
 这里写图片描述
 ![image](http://ww1.sinaimg.cn/large/0071ouepgy1fv5tyr1p07j30h20by41b.jpg)
 4、空间足够，且被插入元素的位置比较靠近_Mylast,即已有元素的尾部
@@ -254,7 +254,7 @@ resize()操作和insert()操作都会利用到_Insert_n()这个函数，这个�
         return (_First);
         }
 
-主要操作就是将后半部分的有效元素向前拷贝，并将后面空间的无效元素析构，并更新_Mylast变量 
+主要操作就是将后半部分的有效元素向前拷贝，并将后面空间的无效元素析构，并更新_Mylast变量
 这里写图片描述
 ![image](http://ww1.sinaimg.cn/large/0071ouepgy1fv5ua8ciphj30i90ahgns.jpg)
 ### 5、assign()操作

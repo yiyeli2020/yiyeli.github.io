@@ -6,7 +6,7 @@ tags: [Coding Interviews,Array]
 
 
 ---
-# 20.PrintMatrix顺时针打印矩阵(CodingInterview)
+ 
 
 与其类似的一道题是LeetCode上的54. Spiral Matrix
 
@@ -37,45 +37,45 @@ tags: [Coding Interviews,Array]
 
 与此同时还要注意每一步的起始位置不要与上一步重合
 
- 	
+
 	//==================================================================
 	// 《剑指Offer——名企面试官精讲典型编程题》代码
- 
+
 	// 面试题29：顺时针打印矩阵
 	// 题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。
-	
+
 	#include <cstdio>
-	
+
 	void PrintMatrixInCircle(int** numbers, int columns, int rows, int start);
 	void printNumber(int number);
-	
+
 	void PrintMatrixClockwisely(int** numbers, int columns, int rows)
 	{
 	    if (numbers == nullptr || columns <= 0 || rows <= 0)
 	        return;
-	
+
 	    int start = 0;
-	
+
 	    while (columns > start * 2 && rows > start * 2)
 	    {
 	        PrintMatrixInCircle(numbers, columns, rows, start);
-	
+
 	        ++start;
 	    }
 	}
-	
+
 	void PrintMatrixInCircle(int** numbers, int columns, int rows, int start)
 	{
 	    int endX = columns - 1 - start;
 	    int endY = rows - 1 - start;
-	
+
 	    // 从左到右打印一行
 	    for (int i = start; i <= endX; ++i)
 	    {
 	        int number = numbers[start][i];
 	        printNumber(number);
 	    }
-	
+
 	    // 从上到下打印一列
 	    if (start < endY)
 	    {
@@ -85,7 +85,7 @@ tags: [Coding Interviews,Array]
 	            printNumber(number);
 	        }
 	    }
-	
+
 	    // 从右到左打印一行
 	    if (start < endX && start < endY)
 	    {
@@ -95,7 +95,7 @@ tags: [Coding Interviews,Array]
 	            printNumber(number);
 	        }
 	    }
-	
+
 	    // 从下到上打印一行
 	    if (start < endX && start < endY - 1)
 	    {
@@ -106,20 +106,20 @@ tags: [Coding Interviews,Array]
 	        }
 	    }
 	}
-	
+
 	void printNumber(int number)
 	{
 	    printf("%d\t", number);
 	}
-	
+
 	// ====================测试代码====================
 	void Test(int columns, int rows)
 	{
 	    printf("Test Begin: %d columns, %d rows.\n", columns, rows);
-	
+
 	    if (columns < 1 || rows < 1)
 	        return;
-	
+
 	    int** numbers = new int*[rows];
 	    for (int i = 0; i < rows; ++i)
 	    {
@@ -129,29 +129,29 @@ tags: [Coding Interviews,Array]
 	            numbers[i][j] = i * columns + j + 1;
 	        }
 	    }
-	
+
 	    PrintMatrixClockwisely(numbers, columns, rows);
 	    printf("\n");
-	
+
 	    for (int i = 0; i < rows; ++i)
 	        delete[](int*)numbers[i];
-	
+
 	    delete[] numbers;
 	}
-	
+
 	int main(int argc, char* argv[])
 	{
 	    /*
 	    1
 	    */
 	    Test(1, 1);
-	
+
 	    /*
 	    1    2
 	    3    4
 	    */
 	    Test(2, 2);
-	
+
 	    /*
 	    1    2    3    4
 	    5    6    7    8
@@ -159,7 +159,7 @@ tags: [Coding Interviews,Array]
 	    13   14   15   16
 	    */
 	    Test(4, 4);
-	
+
 	    /*
 	    1    2    3    4    5
 	    6    7    8    9    10
@@ -168,7 +168,7 @@ tags: [Coding Interviews,Array]
 	    21   22   23   24   25
 	    */
 	    Test(5, 5);
-	
+
 	    /*
 	    1
 	    2
@@ -177,7 +177,7 @@ tags: [Coding Interviews,Array]
 	    5
 	    */
 	    Test(1, 5);
-	
+
 	    /*
 	    1    2
 	    3    4
@@ -186,7 +186,7 @@ tags: [Coding Interviews,Array]
 	    9    10
 	    */
 	    Test(2, 5);
-	
+
 	    /*
 	    1    2    3
 	    4    5    6
@@ -195,7 +195,7 @@ tags: [Coding Interviews,Array]
 	    13   14   15
 	    */
 	    Test(3, 5);
-	
+
 	    /*
 	    1    2    3    4
 	    5    6    7    8
@@ -204,25 +204,25 @@ tags: [Coding Interviews,Array]
 	    17   18   19   20
 	    */
 	    Test(4, 5);
-	
+
 	    /*
 	    1    2    3    4    5
 	    */
 	    Test(5, 1);
-	
+
 	    /*
 	    1    2    3    4    5
 	    6    7    8    9    10
 	    */
 	    Test(5, 2);
-	
+
 	    /*
 	    1    2    3    4    5
 	    6    7    8    9    10
 	    11   12   13   14    15
 	    */
 	    Test(5, 3);
-	
+
 	    /*
 	    1    2    3    4    5
 	    6    7    8    9    10
@@ -230,8 +230,6 @@ tags: [Coding Interviews,Array]
 	    16   17   18   19   20
 	    */
 	    Test(5, 4);
-	
+
 	    return 0;
 	}
-	
-

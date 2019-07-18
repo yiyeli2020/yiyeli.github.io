@@ -6,7 +6,7 @@ tags: [Coding Interviews,Algorithm]
 
 
 ---
-# 剑指offer思路总结
+ 
 
 剑指offer已经刷过两遍，总结一下思路方便回忆
 
@@ -34,7 +34,7 @@ tags: [Coding Interviews,Algorithm]
 
 ## 14.调整数组顺序使奇数位于偶数前面
 
-### Brute Force 
+### Brute Force
 顺序扫描碰到偶数就将其放到末尾
 
 ### 初级解法
@@ -58,7 +58,7 @@ tags: [Coding Interviews,Algorithm]
 
 ## 16.反转链表
 需要定义三个指针，指向当前遍历的结点，前一个结点和后一个结点,先要找到反转链表后的头结点即原始链表的尾节点，需要满足的条件是后结点为空
-	
+
 	////Non-Recursive
 	ListNode* ReverseList(ListNode* pHead)
 	{
@@ -72,11 +72,11 @@ tags: [Coding Interviews,Algorithm]
 	            pReversedHead = pNode;
 	        }
 	        pNode->m_pNext = pPrev;//Revserse
-	
+
 	        pPrev = pNode;// forward
 	        pNode = pNext;
 	    }
-	
+
 	    return pReversedHead;
 	}
 	ListNode* ReverseList(ListNode* pHead)

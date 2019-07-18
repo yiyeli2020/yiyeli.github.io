@@ -6,7 +6,7 @@ tags: [Hexo,Github,Git]
 
 
 ---
-#### Hexo+github搭建个人博客问题总结
+ 
 
 总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法
 
@@ -16,7 +16,7 @@ tags: [Hexo,Github,Git]
 ## 问题1：本地同时配置多个github账号导致博客部署失败
 
 因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题
-	
+
 	remote: Permission to B/B.github.io.git denied to A.
 	fatal: unable to access 'https://github.com/B/B.github.io.git/': The requested URL returned error: 403
 	FATAL Something's wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
@@ -43,7 +43,7 @@ tags: [Hexo,Github,Git]
 
 ## 问题3：Hexo deploy 发布不成功
 始终停留在
-	
+
 	nothing to commit (working directory clean)
 Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git
 

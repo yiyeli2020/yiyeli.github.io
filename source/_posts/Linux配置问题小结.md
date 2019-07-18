@@ -5,7 +5,7 @@ categories: 2019年6月
 tags: [Linux]
 
 ---
-#  Linux配置问题小结
+ 
 
 记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor;解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题;解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。
 

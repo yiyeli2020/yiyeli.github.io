@@ -5,7 +5,7 @@ categories: 2018年8月
 tags: [Kickstart,Google,Algorithm,Array]
 
 ---
-# Kickstart-Round-E-2018-ProblemA.Yogurt
+ 
 
 
 酸奶可以作为开胃菜、主菜或甜点的营养成分，但它必须在过期前食用，而且可能很快过期!此外，不同的酸奶会在不同的日子过期。露西很喜欢酸奶，她刚买了N杯酸奶，但她担心自己可能无法在酸奶过期前全部喝完。从今天开始，第i杯酸奶会过期，在过期当天或之后的任何一天都不能喝。虽然露西很喜欢酸奶，但她每天最多只能喝K杯酸奶。从今天开始，她最多能喝多少杯酸奶?
@@ -38,10 +38,10 @@ Large dataset
 1 ≤ N ≤ 5000.
 Sample
 
-Input 
- 	
-Output 
-	 
+Input
+
+Output
+
 	4
 	2 1
 	1 1
@@ -51,7 +51,7 @@ Output
 	1 1
 	6 2
 	1 1 1 7 7 7
-	
+
 	Case #1: 1
 	Case #2: 3
 	Case #3: 2
@@ -67,7 +67,7 @@ In Sample Case #3, Lucy can consume up to two cups each day, so she can consume 
 
 模拟每天发生的过程，先将输入的保质期数组A排序，将最大的保质期天数定义为maxday，然后从今天到maxday进行循环，每天更新最多能喝的杯数和当前的保质期数组。
 这里在比赛过程中犯了两个错误，见代码注释
-	
+
 	#include <iostream>
 	#include<unordered_map>
 	#include<cstdio>
@@ -78,20 +78,20 @@ In Sample Case #3, Lucy can consume up to two cups each day, so she can consume 
 	#include<stack>
 	#include<set>
 	using namespace std;
-	
+
 	void solve() {// brute force TLE
 		int N = 0, K = 0;
 		cin >> N >> K;
-		vector<int> a; 
+		vector<int> a;
 		for (int i = 0; i < N; i++) {
 		int temp;
-		cin >> temp; 
+		cin >> temp;
 		a.push_back(temp);
 		}
 		sort(a.begin(), a.end());
-		  /*  cout << "a[N-1]=" << a[N - 1] << "  "; 
+		  /*  cout << "a[N-1]=" << a[N - 1] << "  ";
 		cout << "After sort:   "; output(a);*/
-		
+
 		int num = 0;
 		int maxday = a[N - 1];
 		for (int i = 0; i < maxday; i++) {//error i < a[N - 1] 因为a[N-1]会动态变化
@@ -107,24 +107,24 @@ In Sample Case #3, Lucy can consume up to two cups each day, so she can consume 
 		}
 	   // cout << "  num=" << num<<"  "; output(a);
 		for (int mm = 0; mm < N; mm++) { a[mm] -= 1; }
-	
+
 		}
 		cout << num << endl;
 	}
 	int main() {
 	    freopen("C:\\Users\\yiye\\Downloads\\A-small-attempt0.in", "r", stdin);
 	    //freopen("C:\\Users\\yiye\\Downloads\\out.txt", "w", stdout);
-	  
+
 	    int T;
 	    scanf("%d", &T);
 	    for (int i = 1; i <= T; i++) {
 	         printf("Case #%d: ", i);
 			 solve();
-	
+
 	    }
 	        //===========================
-	        //fclose(stdin);//关闭文件 
-	        //fclose(stdout);//关闭文件 
+	        //fclose(stdin);//关闭文件
+	        //fclose(stdout);//关闭文件
 	        return 0;
 	}
 
@@ -132,7 +132,7 @@ In Sample Case #3, Lucy can consume up to two cups each day, so she can consume 
 
 在每天的模拟过程中用lower_bound找到第一个非零的位置，然后将改天中连续K个杯子状态置为已喝，这样可以将时间复杂度从O(n*n)变为O(nlog(n))
 
-	
+
 	#include <iostream>
 	#include<unordered_map>
 	#include<cstdio>
@@ -140,8 +140,8 @@ In Sample Case #3, Lucy can consume up to two cups each day, so she can consume 
 	#include<vector>
 	#include<cmath>
 	#include<algorithm>
-	#include<stack> 
-	#include <functional> 
+	#include<stack>
+	#include <functional>
 	#include<set>
 	using namespace std;
 	void solve() {// brute force TLE
@@ -154,7 +154,7 @@ In Sample Case #3, Lucy can consume up to two cups each day, so she can consume 
 	        a.push_back(temp);
 	    }
 	    sort(a.begin(), a.end());
-	    
+
 	    int num = 0;
 	        int maxday = a[N - 1];
 	        for (int i = 0; i < maxday; i++) {//error i < a[N - 1] 因为a[N-1]会动态变化
@@ -167,7 +167,7 @@ In Sample Case #3, Lucy can consume up to two cups each day, so she can consume 
 	            }
 	            //cout << "  nonezeroindex="<<(nonezeroindex-a.begin())<<"  num=" << num<<"  "; output(a);
 	            for (int mm = nonezeroindex - a.begin(); mm < N; mm++) { a[mm] -= 1; }
-	            
+
 	        }
 	    cout << num << endl;
 	}
@@ -182,10 +182,10 @@ In Sample Case #3, Lucy can consume up to two cups each day, so she can consume 
 	        solve();
 	    }
 	        //===========================
-	        //fclose(stdin);//关闭文件 
-	        //fclose(stdout);//关闭文件 
+	        //fclose(stdin);//关闭文件
+	        //fclose(stdout);//关闭文件
 	        return 0;
-	    } 
+	    }
 
 ## 思路3：
 
@@ -217,7 +217,7 @@ In Sample Case #3, Lucy can consume up to two cups each day, so she can consume 
 		return 0;
 	}
 
-将其	改写成易于理解的形式	
+将其	改写成易于理解的形式
 
 	void solve() {
 	    int N, K;
