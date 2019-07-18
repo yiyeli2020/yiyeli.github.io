@@ -5,18 +5,18 @@
   
   <title>C++基础概念III | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C++基础概念III总结C++基础概念 面向对象的语言有三大特性：继承、封装、多态。虚函数作为多态的实现方式，重要性毋庸置疑。并且作为一个C++程序员，每一次面试都会被问及虚函数的相关问题。下面我们就来讨论讨论虚函数。  首先，什么是多态，什么又是虚函数呢？先来看看维基百科对多态的解释： “多态（英语：polymorphism），是指计算机程序运行时，相同的消息可能会送给多个不同的类别之对象，而系">
+  <meta name="description" content="总结C++基础概念 面向对象的语言有三大特性：继承、封装、多态。虚函数作为多态的实现方式，重要性毋庸置疑。并且作为一个C++程序员，每一次面试都会被问及虚函数的相关问题。下面我们就来讨论讨论虚函数。  首先，什么是多态，什么又是虚函数呢？先来看看维基百科对多态的解释： “多态（英语：polymorphism），是指计算机程序运行时，相同的消息可能会送给多个不同的类别之对象，而系统可依据对象所属类别">
 <meta name="keywords" content="C++,Virtual function">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++基础概念III">
 <meta property="og:url" content="http://yoursite.com/2018/08/21/C++基础概念III/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="C++基础概念III总结C++基础概念 面向对象的语言有三大特性：继承、封装、多态。虚函数作为多态的实现方式，重要性毋庸置疑。并且作为一个C++程序员，每一次面试都会被问及虚函数的相关问题。下面我们就来讨论讨论虚函数。  首先，什么是多态，什么又是虚函数呢？先来看看维基百科对多态的解释： “多态（英语：polymorphism），是指计算机程序运行时，相同的消息可能会送给多个不同的类别之对象，而系">
+<meta property="og:description" content="总结C++基础概念 面向对象的语言有三大特性：继承、封装、多态。虚函数作为多态的实现方式，重要性毋庸置疑。并且作为一个C++程序员，每一次面试都会被问及虚函数的相关问题。下面我们就来讨论讨论虚函数。  首先，什么是多态，什么又是虚函数呢？先来看看维基百科对多态的解释： “多态（英语：polymorphism），是指计算机程序运行时，相同的消息可能会送给多个不同的类别之对象，而系统可依据对象所属类别">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-17T03:53:33.989Z">
+<meta property="og:updated_time" content="2019-07-18T04:07:06.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++基础概念III">
-<meta name="twitter:description" content="C++基础概念III总结C++基础概念 面向对象的语言有三大特性：继承、封装、多态。虚函数作为多态的实现方式，重要性毋庸置疑。并且作为一个C++程序员，每一次面试都会被问及虚函数的相关问题。下面我们就来讨论讨论虚函数。  首先，什么是多态，什么又是虚函数呢？先来看看维基百科对多态的解释： “多态（英语：polymorphism），是指计算机程序运行时，相同的消息可能会送给多个不同的类别之对象，而系">
+<meta name="twitter:description" content="总结C++基础概念 面向对象的语言有三大特性：继承、封装、多态。虚函数作为多态的实现方式，重要性毋庸置疑。并且作为一个C++程序员，每一次面试都会被问及虚函数的相关问题。下面我们就来讨论讨论虚函数。  首先，什么是多态，什么又是虚函数呢？先来看看维基百科对多态的解释： “多态（英语：polymorphism），是指计算机程序运行时，相同的消息可能会送给多个不同的类别之对象，而系统可依据对象所属类别">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -240,7 +240,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="C-基础概念III"><a href="#C-基础概念III" class="headerlink" title="C++基础概念III"></a>C++基础概念III</h1><p>总结C++基础概念</p>
+        <p>总结C++基础概念</p>
 <p>面向对象的语言有三大特性：继承、封装、多态。虚函数作为多态的实现方式，重要性毋庸置疑。并且作为一个C++程序员，每一次面试都会被问及虚函数的相关问题。下面我们就来讨论讨论虚函数。</p>
 <p> 首先，什么是多态，什么又是虚函数呢？先来看看维基百科对多态的解释：</p>
 <p>“多态（英语：polymorphism），是指计算机程序运行时，相同的消息可能会送给多个不同的类别之对象，而系统可依据对象所属类别，引发对应类别的方法，而有不同的行为。简单来说，所谓多态意指相同的消息给予不同的对象会引发不同的动作称之。”其实更简单地来说，就是“在用父类指针调用函数时，实际调用的是指针指向的实际类型（子类）的成员函数”。多态性使得程序调用的函数是在运行时动态确定的，而不是在编译时静态确定的。而虚函数则是加了virtual修饰词的类的成员函数。</p>
@@ -288,34 +288,34 @@ int b： B成员
 <p>这里我们着重看一下这张虚函数表。在C++的标准规格说明书中说到，编译器必需要保证虚函数表的指针存在于对象实例中最前面的位置（这是为了保证正确取到虚函数的偏移量）。 这意味着我们通过对象实例的地址得到这张虚函数表，然后就可以遍历其中函数指针，并调用相应的函数。</p>
 <p>假设我们有这样的一个类：</p>
 <p>以下是引用片段：</p>
-<pre><code>class Base { 
-     public: 
-            virtual void f() { cout &lt;&lt; &quot;Base::f&quot; &lt;&lt; endl; } 
-            virtual void g() { cout &lt;&lt; &quot;Base::g&quot; &lt;&lt; endl; } 
-            virtual void h() { cout &lt;&lt; &quot;Base::h&quot; &lt;&lt; endl; } 
+<pre><code>class Base {
+     public:
+            virtual void f() { cout &lt;&lt; &quot;Base::f&quot; &lt;&lt; endl; }
+            virtual void g() { cout &lt;&lt; &quot;Base::g&quot; &lt;&lt; endl; }
+            virtual void h() { cout &lt;&lt; &quot;Base::h&quot; &lt;&lt; endl; }
 
-}; 
+};
 </code></pre><p>   按照上面的说法，我们可以通过Base的实例来得到虚函数表。 下面是实际例程：</p>
 <p>以下是引用片段：</p>
-<pre><code>typedef void(*Fun)(void); 
+<pre><code>typedef void(*Fun)(void);
 
-         Base b; 
+         Base b;
 
-         Fun pFun = NULL; 
+         Fun pFun = NULL;
 
-         cout &lt;&lt; &quot;虚函数表地址：&quot; &lt;&lt; (int*)(&amp;b) &lt;&lt; endl; 
-         cout &lt;&lt; &quot;虚函数表 — 第一个函数地址：&quot; &lt;&lt; (int*)*(int*)(&amp;b) &lt;&lt; endl; 
+         cout &lt;&lt; &quot;虚函数表地址：&quot; &lt;&lt; (int*)(&amp;b) &lt;&lt; endl;
+         cout &lt;&lt; &quot;虚函数表 — 第一个函数地址：&quot; &lt;&lt; (int*)*(int*)(&amp;b) &lt;&lt; endl;
 
          // Invoke the first virtual function   
-         pFun = (Fun)*((int*)*(int*)(&amp;b)); 
+         pFun = (Fun)*((int*)*(int*)(&amp;b));
          pFun();
 </code></pre><p>以下是引用片段：</p>
-<pre><code>虚函数表地址：0012FED4 
-虚函数表 — 第一个函数地址：0044F148 
+<pre><code>虚函数表地址：0012FED4
+虚函数表 — 第一个函数地址：0044F148
 Base::f
 </code></pre><p> 通过这个示例，我们可以看到，我们可以通过强行把&amp;b转成int <em>，取得虚函数表的地址，然后，再次取址就可以得到第一个虚函数的地址了，也就是Base::f()，这在上面的程序中得到了验证（把int</em> 强制转成了函数指针）。通过这个示例，我们就可以知道如果要调用Base::g()和Base::h()，其代码如下：</p>
-<pre><code>(Fun)*((int*)*(int*)(&amp;b)+0);  // Base::f() 
-(Fun)*((int*)*(int*)(&amp;b)+1);  // Base::g() 
+<pre><code>(Fun)*((int*)*(int*)(&amp;b)+0);  // Base::f()
+(Fun)*((int*)*(int*)(&amp;b)+1);  // Base::g()
 (Fun)*((int*)*(int*)(&amp;b)+2);  // Base::h()
 </code></pre><h2 id="3-动态绑定与静态绑定"><a href="#3-动态绑定与静态绑定" class="headerlink" title="3.动态绑定与静态绑定"></a>3.动态绑定与静态绑定</h2><p>静态绑定：编译时绑定，通过对象调用<br>动态绑定：运行时绑定，通过地址实现</p>
 <p>只有采用“指针-&gt;函数()”或“引用变量.函数()”的方式调用C++类中的虚函数才会执行动态绑定。对于C++中的非虚函数，因为其不具备动态绑定的特征，所以不管采用什么样的方式调用，都不会执行动态绑定。<br>即所谓动态绑定，就是基类的指针或引用有可能指向不同的派生类对象，对于非虚函数，执行时实际调用该函数的对象类型即为该指针或引用的静态类型（基类类型）；而对于虚函数，执行时实际调用该函数的对象类型为该指针或引用所指对象的实际类型</p>
@@ -347,7 +347,7 @@ class ClxDerived : public ClxBase
 {
 public:
     ClxDerived() {};
-    ~ClxDerived() { cout &lt;&lt; &quot;Output from the destructor of class ClxDerived!&quot; &lt;&lt; endl; }; 
+    ~ClxDerived() { cout &lt;&lt; &quot;Output from the destructor of class ClxDerived!&quot; &lt;&lt; endl; };
 
     void DoSomething() { cout &lt;&lt; &quot;Do something in class ClxDerived!&quot; &lt;&lt; endl; };
 };
@@ -507,38 +507,38 @@ B::h1 的地址
 </code></pre><p>   我们从表中可以看到下面几点，</p>
 <p> 1）覆盖的f()函数被放到了虚表中原来父类虚函数的位置。</p>
 <p>  2）没有被覆盖的函数依旧。</p>
-<pre><code>A *b = new B(); 
+<pre><code>A *b = new B();
 
 b-&gt;f();
 </code></pre><p>由b所指的内存中的虚函数表的f()的位置已经被B::f()函数地址所取代，于是在实际调用发生时，是B::f()被调用了。这就实现了多态。</p>
-<h3 id="多重继承（无虚函数覆盖）"><a href="#多重继承（无虚函数覆盖）" class="headerlink" title="多重继承（无虚函数覆盖）"></a>多重继承（无虚函数覆盖）</h3><pre><code>class Base1 { 
-public: 
-            virtual void f() { cout &lt;&lt; &quot;Base1::f&quot; &lt;&lt; endl; } 
-            virtual void g() { cout &lt;&lt; &quot;Base1::g&quot; &lt;&lt; endl; } 
-            virtual void h() { cout &lt;&lt; &quot;Base1::h&quot; &lt;&lt; endl; } 
+<h3 id="多重继承（无虚函数覆盖）"><a href="#多重继承（无虚函数覆盖）" class="headerlink" title="多重继承（无虚函数覆盖）"></a>多重继承（无虚函数覆盖）</h3><pre><code>class Base1 {
+public:
+            virtual void f() { cout &lt;&lt; &quot;Base1::f&quot; &lt;&lt; endl; }
+            virtual void g() { cout &lt;&lt; &quot;Base1::g&quot; &lt;&lt; endl; }
+            virtual void h() { cout &lt;&lt; &quot;Base1::h&quot; &lt;&lt; endl; }
 
-}; 
+};
 
-class Base2 { 
-public: 
-            virtual void f() { cout &lt;&lt; &quot;Base2::f&quot; &lt;&lt; endl; } 
-            virtual void g() { cout &lt;&lt; &quot;Base2::g&quot; &lt;&lt; endl; } 
-            virtual void h() { cout &lt;&lt; &quot;Base2::h&quot; &lt;&lt; endl; } 
-}; 
+class Base2 {
+public:
+            virtual void f() { cout &lt;&lt; &quot;Base2::f&quot; &lt;&lt; endl; }
+            virtual void g() { cout &lt;&lt; &quot;Base2::g&quot; &lt;&lt; endl; }
+            virtual void h() { cout &lt;&lt; &quot;Base2::h&quot; &lt;&lt; endl; }
+};
 
-class Base3 { 
-public: 
-            virtual void f() { cout &lt;&lt; &quot;Base3::f&quot; &lt;&lt; endl; } 
-            virtual void g() { cout &lt;&lt; &quot;Base3::g&quot; &lt;&lt; endl; } 
-            virtual void h() { cout &lt;&lt; &quot;Base3::h&quot; &lt;&lt; endl; } 
-}; 
+class Base3 {
+public:
+            virtual void f() { cout &lt;&lt; &quot;Base3::f&quot; &lt;&lt; endl; }
+            virtual void g() { cout &lt;&lt; &quot;Base3::g&quot; &lt;&lt; endl; }
+            virtual void h() { cout &lt;&lt; &quot;Base3::h&quot; &lt;&lt; endl; }
+};
 
 
-class Derive : public Base1, public Base2, public Base3 { 
-public: 
-            virtual void f1() { cout &lt;&lt; &quot;Derive::f&quot; &lt;&lt; endl; } 
-            virtual void g1() { cout &lt;&lt; &quot;Derive::g1&quot; &lt;&lt; endl; } 
-}; 
+class Derive : public Base1, public Base2, public Base3 {
+public:
+            virtual void f1() { cout &lt;&lt; &quot;Derive::f&quot; &lt;&lt; endl; }
+            virtual void g1() { cout &lt;&lt; &quot;Derive::g1&quot; &lt;&lt; endl; }
+};
 </code></pre><p>产生了三个父类的虚函数表</p>
 <pre><code>Base1::f 的地址
 Base1::g 的地址
@@ -548,7 +548,7 @@ Derive::g1 的地址
 </code></pre><p>和</p>
 <pre><code>Base2::f 的地址
 Base2::g 的地址
-Base2::h 的地址    
+Base2::h 的地址
 </code></pre><p>以及</p>
 <pre><code>Base2::f 的地址
 Base2::g 的地址
@@ -557,131 +557,131 @@ Base2::h 的地址
 <pre><code>1）  每个父类都有自己的虚表。
 
 2）  子类的成员函数被放到了第一个父类的表中。（所谓的第一个父类是按照声明顺序来判断的）
-</code></pre><h3 id="多重继承（有虚函数覆盖）"><a href="#多重继承（有虚函数覆盖）" class="headerlink" title="多重继承（有虚函数覆盖）"></a>多重继承（有虚函数覆盖）</h3><pre><code>class Base1 { 
-public: 
-            virtual void f() { cout &lt;&lt; &quot;Base1::f&quot; &lt;&lt; endl; } 
-            virtual void g() { cout &lt;&lt; &quot;Base1::g&quot; &lt;&lt; endl; } 
-            virtual void h() { cout &lt;&lt; &quot;Base1::h&quot; &lt;&lt; endl; } 
+</code></pre><h3 id="多重继承（有虚函数覆盖）"><a href="#多重继承（有虚函数覆盖）" class="headerlink" title="多重继承（有虚函数覆盖）"></a>多重继承（有虚函数覆盖）</h3><pre><code>class Base1 {
+public:
+            virtual void f() { cout &lt;&lt; &quot;Base1::f&quot; &lt;&lt; endl; }
+            virtual void g() { cout &lt;&lt; &quot;Base1::g&quot; &lt;&lt; endl; }
+            virtual void h() { cout &lt;&lt; &quot;Base1::h&quot; &lt;&lt; endl; }
 
-}; 
+};
 
-class Base2 { 
-public: 
-            virtual void f() { cout &lt;&lt; &quot;Base2::f&quot; &lt;&lt; endl; } 
-            virtual void g() { cout &lt;&lt; &quot;Base2::g&quot; &lt;&lt; endl; } 
-            virtual void h() { cout &lt;&lt; &quot;Base2::h&quot; &lt;&lt; endl; } 
-}; 
+class Base2 {
+public:
+            virtual void f() { cout &lt;&lt; &quot;Base2::f&quot; &lt;&lt; endl; }
+            virtual void g() { cout &lt;&lt; &quot;Base2::g&quot; &lt;&lt; endl; }
+            virtual void h() { cout &lt;&lt; &quot;Base2::h&quot; &lt;&lt; endl; }
+};
 
-class Base3 { 
-public: 
-            virtual void f() { cout &lt;&lt; &quot;Base3::f&quot; &lt;&lt; endl; } 
-            virtual void g() { cout &lt;&lt; &quot;Base3::g&quot; &lt;&lt; endl; } 
-            virtual void h() { cout &lt;&lt; &quot;Base3::h&quot; &lt;&lt; endl; } 
-}; 
+class Base3 {
+public:
+            virtual void f() { cout &lt;&lt; &quot;Base3::f&quot; &lt;&lt; endl; }
+            virtual void g() { cout &lt;&lt; &quot;Base3::g&quot; &lt;&lt; endl; }
+            virtual void h() { cout &lt;&lt; &quot;Base3::h&quot; &lt;&lt; endl; }
+};
 
 
-class Derive : public Base1, public Base2, public Base3 { 
-public: 
-            virtual void f() { cout &lt;&lt; &quot;Derive::f&quot; &lt;&lt; endl; } 
-            virtual void g1() { cout &lt;&lt; &quot;Derive::g1&quot; &lt;&lt; endl; } 
-}; 
+class Derive : public Base1, public Base2, public Base3 {
+public:
+            virtual void f() { cout &lt;&lt; &quot;Derive::f&quot; &lt;&lt; endl; }
+            virtual void g1() { cout &lt;&lt; &quot;Derive::g1&quot; &lt;&lt; endl; }
+};
 </code></pre><p>在子类中覆盖了父类的f()函数</p>
 <p>产生了三个父类的虚函数表</p>
 <pre><code>Derive::f 的地址
 Base1::g 的地址
-Base1::h 的地址    
+Base1::h 的地址
 Derive::g1 的地址
 </code></pre><p>和</p>
 <pre><code>Derive::f 的地址
 Base2::g 的地址
-Base2::h 的地址    
+Base2::h 的地址
 </code></pre><p>以及</p>
 <pre><code>Derive::f 的地址
 Base2::g 的地址
 Base2::h 的地址
 </code></pre><p>可见三个父类虚函数表中的f()的位置被替换成了子类的函数指针。这样，我们就可以任一静态类型的父类来指向子类，并调用子类的f()了。</p>
 <p>以下是引用片段：</p>
-<pre><code>Derive d; 
-Base1 *b1 = &amp;d; 
-Base2 *b2 = &amp;d; 
-Base3 *b3 = &amp;d; 
-b1-&gt;f(); //Derive::f() 
-b2-&gt;f(); //Derive::f() 
-b3-&gt;f(); //Derive::f() 
+<pre><code>Derive d;
+Base1 *b1 = &amp;d;
+Base2 *b2 = &amp;d;
+Base3 *b3 = &amp;d;
+b1-&gt;f(); //Derive::f()
+b2-&gt;f(); //Derive::f()
+b3-&gt;f(); //Derive::f()
 
-b1-&gt;g(); //Base1::g() 
-b2-&gt;g(); //Base2::g() 
+b1-&gt;g(); //Base1::g()
+b2-&gt;g(); //Base2::g()
 b3-&gt;g(); //Base3::g()            
 </code></pre><p>多重继承的输出部分例程</p>
-<pre><code>#include &lt;iostream&gt; 
+<pre><code>#include &lt;iostream&gt;
 using namespace std;   
-typedef void(*Fun)(void); 
+typedef void(*Fun)(void);
 
 int main()  
-{ 
-            Fun pFun = NULL; 
+{
+            Fun pFun = NULL;
 
-            Derive d; 
-            int** pVtab = (int**)&amp;d; 
+            Derive d;
+            int** pVtab = (int**)&amp;d;
 
-            //Base1&apos;s vtable 
-            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+0)+0); 
-            pFun = (Fun)pVtab[0][0]; 
-            pFun(); 
+            //Base1&apos;s vtable
+            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+0)+0);
+            pFun = (Fun)pVtab[0][0];
+            pFun();
 
-            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+0)+1); 
-            pFun = (Fun)pVtab[0][1]; 
-            pFun(); 
+            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+0)+1);
+            pFun = (Fun)pVtab[0][1];
+            pFun();
 
-            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+0)+2); 
-            pFun = (Fun)pVtab[0][2]; 
-            pFun(); 
+            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+0)+2);
+            pFun = (Fun)pVtab[0][2];
+            pFun();
 
-            //Derive&apos;s vtable 
-            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+0)+3); 
-            pFun = (Fun)pVtab[0][3]; 
-            pFun(); 
+            //Derive&apos;s vtable
+            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+0)+3);
+            pFun = (Fun)pVtab[0][3];
+            pFun();
 
-            //The tail of the vtable 
-            pFun = (Fun)pVtab[0][4]; 
-            cout&lt;&lt;pFun&lt;&lt;endl; 
+            //The tail of the vtable
+            pFun = (Fun)pVtab[0][4];
+            cout&lt;&lt;pFun&lt;&lt;endl;
 
 
-            //Base2&apos;s vtable 
-            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+1)+0); 
-            pFun = (Fun)pVtab[1][0]; 
-            pFun(); 
+            //Base2&apos;s vtable
+            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+1)+0);
+            pFun = (Fun)pVtab[1][0];
+            pFun();
 
-            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+1)+1); 
-            pFun = (Fun)pVtab[1][1]; 
-            pFun(); 
+            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+1)+1);
+            pFun = (Fun)pVtab[1][1];
+            pFun();
 
-            pFun = (Fun)pVtab[1][2]; 
+            pFun = (Fun)pVtab[1][2];
             pFun();  
 
-            //The tail of the vtable 
-            pFun = (Fun)pVtab[1][3]; 
-            cout&lt;&lt;pFun&lt;&lt;endl; 
+            //The tail of the vtable
+            pFun = (Fun)pVtab[1][3];
+            cout&lt;&lt;pFun&lt;&lt;endl;
 
 
 
-            //Base3&apos;s vtable 
-            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+1)+0); 
-            pFun = (Fun)pVtab[2][0]; 
-            pFun(); 
+            //Base3&apos;s vtable
+            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+1)+0);
+            pFun = (Fun)pVtab[2][0];
+            pFun();
 
-            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+1)+1); 
-            pFun = (Fun)pVtab[2][1]; 
-            pFun(); 
+            //pFun = (Fun)*((int*)*(int*)((int*)&amp;d+1)+1);
+            pFun = (Fun)pVtab[2][1];
+            pFun();
 
-            pFun = (Fun)pVtab[2][2]; 
+            pFun = (Fun)pVtab[2][2];
             pFun();  
 
-            //The tail of the vtable 
-            pFun = (Fun)pVtab[2][3]; 
-            cout&lt;&lt;pFun&lt;&lt;endl; 
+            //The tail of the vtable
+            pFun = (Fun)pVtab[2][3];
+            cout&lt;&lt;pFun&lt;&lt;endl;
 
-            return 0; 
+            return 0;
 }
 </code></pre><h2 id="7-如何在VS2015中查看虚函数表和类内存布局"><a href="#7-如何在VS2015中查看虚函数表和类内存布局" class="headerlink" title="7.如何在VS2015中查看虚函数表和类内存布局"></a>7.如何在VS2015中查看虚函数表和类内存布局</h2><p>在Developer Command Prompt For VS2015中使用cl命令的reportSingleClassLayoutXXX选项打印指定类的内存布局和虚函数表</p>
 <p>格式为</p>
@@ -746,7 +746,7 @@ int main()
         <p><span>本文标题:</span><a href="/2018/08/21/C++基础概念III/">C++基础概念III</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
         <p><span>发布时间:</span>2018年08月21日 - 09时58分</p>
-        <p><span>最后更新:</span>2019年07月17日 - 11时53分</p>
+        <p><span>最后更新:</span>2019年07月18日 - 12时07分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/08/21/C++基础概念III/" title="C++基础概念III">http://yoursite.com/2018/08/21/C++基础概念III/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/21/C++基础概念III/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -784,7 +784,7 @@ int main()
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-基础概念III"><span class="toc-number">1.</span> <span class="toc-text">C++基础概念III</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-虚函数与虚函数表的基本知识"><span class="toc-number">1.1.</span> <span class="toc-text">1.虚函数与虚函数表的基本知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-C-虚函数表解析"><span class="toc-number">1.2.</span> <span class="toc-text">2.C++虚函数表解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-动态绑定与静态绑定"><span class="toc-number">1.3.</span> <span class="toc-text">3.动态绑定与静态绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-构造函数和析构函数可以是虚函数吗？-C-中虚析构函数的作用"><span class="toc-number">1.4.</span> <span class="toc-text">4.构造函数和析构函数可以是虚函数吗？(C++中虚析构函数的作用)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-含有虚函数的类的大小"><span class="toc-number">1.5.</span> <span class="toc-text">5.含有虚函数的类的大小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-空类和单继承的sizeof"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 空类和单继承的sizeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2多继承的sizeof"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2多继承的sizeof</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-有覆盖和无覆盖时的虚函数表"><span class="toc-number">1.6.</span> <span class="toc-text">6.有覆盖和无覆盖时的虚函数表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般继承（无虚函数覆盖）"><span class="toc-number">1.6.1.</span> <span class="toc-text">一般继承（无虚函数覆盖）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一般继承（有虚函数覆盖）"><span class="toc-number">1.6.2.</span> <span class="toc-text">一般继承（有虚函数覆盖）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重继承（无虚函数覆盖）"><span class="toc-number">1.6.3.</span> <span class="toc-text">多重继承（无虚函数覆盖）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重继承（有虚函数覆盖）"><span class="toc-number">1.6.4.</span> <span class="toc-text">多重继承（有虚函数覆盖）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-如何在VS2015中查看虚函数表和类内存布局"><span class="toc-number">1.7.</span> <span class="toc-text">7.如何在VS2015中查看虚函数表和类内存布局</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-虚函数与虚函数表的基本知识"><span class="toc-number">1.</span> <span class="toc-text">1.虚函数与虚函数表的基本知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-C-虚函数表解析"><span class="toc-number">2.</span> <span class="toc-text">2.C++虚函数表解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-动态绑定与静态绑定"><span class="toc-number">3.</span> <span class="toc-text">3.动态绑定与静态绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-构造函数和析构函数可以是虚函数吗？-C-中虚析构函数的作用"><span class="toc-number">4.</span> <span class="toc-text">4.构造函数和析构函数可以是虚函数吗？(C++中虚析构函数的作用)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-含有虚函数的类的大小"><span class="toc-number">5.</span> <span class="toc-text">5.含有虚函数的类的大小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-空类和单继承的sizeof"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 空类和单继承的sizeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2多继承的sizeof"><span class="toc-number">5.2.</span> <span class="toc-text">5.2多继承的sizeof</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-有覆盖和无覆盖时的虚函数表"><span class="toc-number">6.</span> <span class="toc-text">6.有覆盖和无覆盖时的虚函数表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般继承（无虚函数覆盖）"><span class="toc-number">6.1.</span> <span class="toc-text">一般继承（无虚函数覆盖）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一般继承（有虚函数覆盖）"><span class="toc-number">6.2.</span> <span class="toc-text">一般继承（有虚函数覆盖）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重继承（无虚函数覆盖）"><span class="toc-number">6.3.</span> <span class="toc-text">多重继承（无虚函数覆盖）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重继承（有虚函数覆盖）"><span class="toc-number">6.4.</span> <span class="toc-text">多重继承（有虚函数覆盖）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-如何在VS2015中查看虚函数表和类内存布局"><span class="toc-number">7.</span> <span class="toc-text">7.如何在VS2015中查看虚函数表和类内存布局</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -861,7 +861,7 @@ int main()
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/NOIP普及组/">NOIP普及组</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/510. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/NOIP普及组/">NOIP普及组</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/510. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");

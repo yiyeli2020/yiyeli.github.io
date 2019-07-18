@@ -359,7 +359,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="Linux配置问题小结"><a href="#Linux配置问题小结" class="headerlink" title="Linux配置问题小结"></a>Linux配置问题小结</h1><p>记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor;解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题;解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。</p>
+              <p>记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor;解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题;解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。</p>
           
       
       
@@ -426,7 +426,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="操作系统基础概念I"><a href="#操作系统基础概念I" class="headerlink" title="操作系统基础概念I"></a>操作系统基础概念I</h1><p>总结操作系统基础概念</p>
+              <p>总结操作系统基础概念</p>
           
       
       
@@ -493,7 +493,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="Hexo博客多终端更新问题"><a href="#Hexo博客多终端更新问题" class="headerlink" title="Hexo博客多终端更新问题"></a>Hexo博客多终端更新问题</h1><p>记录Hexo博客多终端备份更新问题的解决方案</p>
+              <p>记录Hexo博客多终端备份更新问题的解决方案</p>
           
       
       
@@ -560,7 +560,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="TensorFlow入门-Mnist手写数字识别"><a href="#TensorFlow入门-Mnist手写数字识别" class="headerlink" title="TensorFlow入门-Mnist手写数字识别"></a>TensorFlow入门-Mnist手写数字识别</h1><p>记录一下Mnist手写数字识别的练习过程，网上已经有很多类似的教程比如(<a href="https://blog.csdn.net/simple_the_best/article/details/75267863，https://blog.csdn.net/cqrtxwd/article/details/79028264），" target="_blank" rel="noopener">https://blog.csdn.net/simple_the_best/article/details/75267863，https://blog.csdn.net/cqrtxwd/article/details/79028264），</a> 但会有些许问题，所以做修改后整理一下<br>当然最好的入门教程还是TensorFlow中文社区（<a href="http://www.tensorfly.cn" target="_blank" rel="noopener">www.tensorfly.cn</a>)</p>
+              <p>记录一下Mnist手写数字识别的练习过程，网上已经有很多类似的教程比如(<a href="https://blog.csdn.net/simple_the_best/article/details/75267863，https://blog.csdn.net/cqrtxwd/article/details/79028264），" target="_blank" rel="noopener">https://blog.csdn.net/simple_the_best/article/details/75267863，https://blog.csdn.net/cqrtxwd/article/details/79028264），</a> 但会有些许问题，所以做修改后整理一下<br>当然最好的入门教程还是TensorFlow中文社区（<a href="http://www.tensorfly.cn" target="_blank" rel="noopener">www.tensorfly.cn</a>)</p>
           
       
       
@@ -627,8 +627,49 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree-二叉搜索树的最近公共祖先"><a href="#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree-二叉搜索树的最近公共祖先" class="headerlink" title="235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先"></a>235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</h1>
-          
+        <a id="more"></a>
+<p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p>例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]</p>
+<pre><code>     _______6______
+    /              \
+ ___2__          ___8__
+/      \        /      \
+0      _4       7       9
+      /  \
+      3   5
+</code></pre><p>示例 1:</p>
+<pre><code>输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+输出: 6
+解释: 节点 2 和节点 8 的最近公共祖先是 6。
+</code></pre><p>示例 2:</p>
+<pre><code>输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
+输出: 2
+解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。
+说明:
+
+所有节点的值都是唯一的。
+p、q 为不同节点且均存在于给定的二叉搜索树中。
+</code></pre><h2 id="递归解法"><a href="#递归解法" class="headerlink" title="递归解法"></a>递归解法</h2><pre><code>/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root.val&gt;p.val &amp;&amp; root.val&gt;q.val){
+            return lowestCommonAncestor(root.left,p,q);
+        }
+        else if(root.val&lt;p.val &amp;&amp; root.val&lt;q.val){
+            return lowestCommonAncestor(root.right,p,q);
+        }else return root;
+    }
+}
+</code></pre>
       
       
     </div>
@@ -646,10 +687,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tree/">Tree</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a  href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -694,7 +731,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="Permutations全排列问题总结"><a href="#Permutations全排列问题总结" class="headerlink" title="Permutations全排列问题总结"></a>Permutations全排列问题总结</h1><p>总结几个常见的全排列问题<br>46.Permutations 全排列<br>47.PermutationsII 全排列II<br>31.Next Permutations 下一个排列<br>60.Permutation Sequence 第k个排列<br>266.Palindrome Permutation 回文排列<br>267.Palindrome PermutationII 回文排列II</p>
+              <p>总结几个常见的全排列问题<br>46.Permutations 全排列<br>47.PermutationsII 全排列II<br>31.Next Permutations 下一个排列<br>60.Permutation Sequence 第k个排列<br>266.Palindrome Permutation 回文排列<br>267.Palindrome PermutationII 回文排列II</p>
           
       
       
@@ -761,7 +798,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="84-Largest-Rectangle-in-Histogram柱状图中最大的矩形"><a href="#84-Largest-Rectangle-in-Histogram柱状图中最大的矩形" class="headerlink" title="84.Largest Rectangle in Histogram柱状图中最大的矩形"></a>84.Largest Rectangle in Histogram柱状图中最大的矩形</h1><p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。</p>
+              <p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。</p>
           
       
       
@@ -828,7 +865,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h1 id="52-N-QueensNII皇后II"><a href="#52-N-QueensNII皇后II" class="headerlink" title="52. N-QueensNII皇后II"></a>52. N-QueensNII皇后II</h1><p>n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
+              <p>n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
           
       
       
