@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树 | Yiye Li</title>
+  <title>SpringBoot学习笔记II | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。">
-<meta name="keywords" content="LeetCode,Binary Search Tree">
+  <meta name="description" content="总结整理在学习SpringBoot的过程中遇到的问题和解决方案。">
+<meta name="keywords" content="SpringBoot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="538. Convert BST to Greater Tree把二叉搜索树转换为累加树">
-<meta property="og:url" content="http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/index.html">
+<meta property="og:title" content="SpringBoot学习笔记II">
+<meta property="og:url" content="http://yoursite.com/2019/07/19/SpringBoot学习笔记II/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。">
+<meta property="og:description" content="总结整理在学习SpringBoot的过程中遇到的问题和解决方案。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T04:05:40.033Z">
+<meta property="og:updated_time" content="2019-07-19T06:54:47.132Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="538. Convert BST to Greater Tree把二叉搜索树转换为累加树">
-<meta name="twitter:description" content="给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。">
+<meta name="twitter:title" content="SpringBoot学习笔记II">
+<meta name="twitter:description" content="总结整理在学习SpringBoot的过程中遇到的问题和解决方案。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-538. Convert BST to Greater Tree把二叉搜索树转换为累加树" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-SpringBoot学习笔记II" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" class="article-date">
-      <time datetime="2018-08-24T05:36:12.000Z" itemprop="datePublished">2018-08-24</time>
+      <a href="/2019/07/19/SpringBoot学习笔记II/" class="article-date">
+      <time datetime="2019-07-19T03:23:12.000Z" itemprop="datePublished">2019-07-19</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      538. Convert BST to Greater Tree把二叉搜索树转换为累加树
+      SpringBoot学习笔记II
     </h1>
   
 
@@ -224,13 +224,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    <a class="article-category-link" href="/categories/2019年7月/">2019年7月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search-Tree/">Binary Search Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -240,29 +240,35 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p>
+        <p>总结整理在学习SpringBoot的过程中遇到的问题和解决方案。</p>
 <a id="more"></a>
-<p>例如：</p>
-<p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p>
-<p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p>
-<pre><code>class Solution {
-private:
-    int cur_sum = 0;
-public:
-    void travel(TreeNode* root){
-        if (!root) return;
-        if (root-&gt;right) travel(root-&gt;right);
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="新建SpringBoot项目启动时往往会报错"><a href="#新建SpringBoot项目启动时往往会报错" class="headerlink" title="新建SpringBoot项目启动时往往会报错"></a>新建SpringBoot项目启动时往往会报错</h2><h3 id="常见错误类型："><a href="#常见错误类型：" class="headerlink" title="常见错误类型："></a>常见错误类型：</h3><pre><code>***************************
+APPLICATION FAILED TO START
+***************************
 
-        root-&gt;val = (cur_sum += root-&gt;val);
-        if (root-&gt;left) travel(root-&gt;left);
+Description:
+
+Failed to configure a DataSource: &apos;url&apos; attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+</code></pre><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>配置Mybatis时出现的错误，原因是因为添加了数据库组件，所以autoconfig会去读取数据源但配置，而新建项目还没有配置数据源，所以会导致异常出现。</p>
+<p>方法1:需要先在target/pom.xml中去掉对数据库的依赖，即去掉下面这段。</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;2.1.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>方法2:也可以在启动类的@EnableAutoConfiguration或@SpringBootApplication中添加exclude = {DataSourceAutoConfiguration.class}，排除此类的autoconfig。启动以后就可以正常运行。修改如下：</p>
+<pre><code>@SpringBootApplication(exclude= DataSourceAutoConfiguration.class)
+public class DemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
     }
-    TreeNode* convertBST(TreeNode* root) {
-        travel(root);
-        return root;
-    }
-};
-</code></pre>
+}
+</code></pre><h3 id="常见错误类型：-1"><a href="#常见错误类型：-1" class="headerlink" title="常见错误类型："></a>常见错误类型：</h3><pre><code>Error starting ApplicationContext. To display the conditions report re-run your application with &apos;debug&apos; enabled.
+</code></pre><h3 id="解决办法：-1"><a href="#解决办法：-1" class="headerlink" title="解决办法："></a>解决办法：</h3><p>这是配置JPA时出现的错误，错误原因同上，同理可知解决方法。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1]<a href="https://stackoverflow.com/questions/40738818/illegalargumentexception-at-least-one-jpa-metamodel-must-be-present?newreg=1d1be5c9c5a04ec2878d9fc8237bbda5" target="_blank" rel="noopener">https://stackoverflow.com/questions/40738818/illegalargumentexception-at-least-one-jpa-metamodel-must-be-present?newreg=1d1be5c9c5a04ec2878d9fc8237bbda5</a><br>[2]]<a href="https://blog.csdn.net/zsg88/article/details/80780281" target="_blank" rel="noopener">https://blog.csdn.net/zsg88/article/details/80780281</a></p>
+
       
       
         <div class="page-reward">
@@ -317,13 +323,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/19/SpringBoot学习笔记II/">SpringBoot学习笔记II</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月24日 - 13时36分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 12时05分</p>
+        <p><span>发布时间:</span>2019年07月19日 - 11时23分</p>
+        <p><span>最后更新:</span>2019年07月19日 - 14时54分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树">http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/19/SpringBoot学习笔记II/" title="SpringBoot学习笔记II">http://yoursite.com/2019/07/19/SpringBoot学习笔记II/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/19/SpringBoot学习笔记II/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -336,18 +342,9 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/08/24/485. Max Consecutive Ones/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          485. Max Consecutive Ones最大连续1的个数
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/24/697. Degree of an Array数组的度/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">697. Degree of an Array数组的度</div>
+    <a href="/2019/07/17/SpringBoot学习笔记I/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringBoot学习笔记I</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -358,7 +355,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常见问题"><span class="toc-number">1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建SpringBoot项目启动时往往会报错"><span class="toc-number">1.1.</span> <span class="toc-text">新建SpringBoot项目启动时往往会报错</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见错误类型："><span class="toc-number">1.1.1.</span> <span class="toc-text">常见错误类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决办法："><span class="toc-number">1.1.2.</span> <span class="toc-text">解决办法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见错误类型：-1"><span class="toc-number">1.1.3.</span> <span class="toc-text">常见错误类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决办法：-1"><span class="toc-number">1.1.4.</span> <span class="toc-text">解决办法：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">2.</span> <span class="toc-text">参考文献</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -424,13 +421,11 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/24/485. Max Consecutive Ones/" title="上一篇: 485. Max Consecutive Ones最大连续1的个数">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/24/697. Degree of an Array数组的度/" title="下一篇: 697. Degree of an Array数组的度">
+            <a href="/2019/07/17/SpringBoot学习笔记I/" title="下一篇: SpringBoot学习笔记I">
                 <i class="fa fa-angle-right"></i>
             </a>
         

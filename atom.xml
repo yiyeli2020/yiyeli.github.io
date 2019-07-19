@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-18T08:57:08.075Z</updated>
+  <updated>2019-07-19T06:54:47.132Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot学习笔记II</title>
+    <link href="http://yoursite.com/2019/07/19/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0II/"/>
+    <id>http://yoursite.com/2019/07/19/SpringBoot学习笔记II/</id>
+    <published>2019-07-19T03:23:12.000Z</published>
+    <updated>2019-07-19T06:54:47.132Z</updated>
+    
+    <content type="html"><![CDATA[<p>总结整理在学习SpringBoot的过程中遇到的问题和解决方案。</p><a id="more"></a><h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="新建SpringBoot项目启动时往往会报错"><a href="#新建SpringBoot项目启动时往往会报错" class="headerlink" title="新建SpringBoot项目启动时往往会报错"></a>新建SpringBoot项目启动时往往会报错</h2><h3 id="常见错误类型："><a href="#常见错误类型：" class="headerlink" title="常见错误类型："></a>常见错误类型：</h3><pre><code>***************************APPLICATION FAILED TO START***************************Description:Failed to configure a DataSource: &apos;url&apos; attribute is not specified and no embedded datasource could be configured.Reason: Failed to determine a suitable driver class</code></pre><h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>配置Mybatis时出现的错误，原因是因为添加了数据库组件，所以autoconfig会去读取数据源但配置，而新建项目还没有配置数据源，所以会导致异常出现。</p><p>方法1:需要先在target/pom.xml中去掉对数据库的依赖，即去掉下面这段。</p><pre><code>&lt;dependency&gt;    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;    &lt;version&gt;2.1.0&lt;/version&gt;&lt;/dependency&gt;</code></pre><p>方法2:也可以在启动类的@EnableAutoConfiguration或@SpringBootApplication中添加exclude = {DataSourceAutoConfiguration.class}，排除此类的autoconfig。启动以后就可以正常运行。修改如下：</p><pre><code>@SpringBootApplication(exclude= DataSourceAutoConfiguration.class)public class DemoApplication {    public static void main(String[] args) {        SpringApplication.run(DemoApplication.class, args);    }}</code></pre><h3 id="常见错误类型：-1"><a href="#常见错误类型：-1" class="headerlink" title="常见错误类型："></a>常见错误类型：</h3><pre><code>Error starting ApplicationContext. To display the conditions report re-run your application with &apos;debug&apos; enabled.</code></pre><h3 id="解决办法：-1"><a href="#解决办法：-1" class="headerlink" title="解决办法："></a>解决办法：</h3><p>这是配置JPA时出现的错误，错误原因同上，同理可知解决方法。</p><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1]<a href="https://stackoverflow.com/questions/40738818/illegalargumentexception-at-least-one-jpa-metamodel-must-be-present?newreg=1d1be5c9c5a04ec2878d9fc8237bbda5" target="_blank" rel="noopener">https://stackoverflow.com/questions/40738818/illegalargumentexception-at-least-one-jpa-metamodel-must-be-present?newreg=1d1be5c9c5a04ec2878d9fc8237bbda5</a><br>[2]]<a href="https://blog.csdn.net/zsg88/article/details/80780281" target="_blank" rel="noopener">https://blog.csdn.net/zsg88/article/details/80780281</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;总结整理在学习SpringBoot的过程中遇到的问题和解决方案。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2019年7月" scheme="http://yoursite.com/categories/2019%E5%B9%B47%E6%9C%88/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://yoursite.com/tags/SpringBoot/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot学习笔记I</title>
@@ -344,9 +366,9 @@
     
       <category term="Tree" scheme="http://yoursite.com/tags/Tree/"/>
     
-      <category term="Depth-first Search" scheme="http://yoursite.com/tags/Depth-first-Search/"/>
-    
       <category term="Breadth-first Search" scheme="http://yoursite.com/tags/Breadth-first-Search/"/>
+    
+      <category term="Depth-first Search" scheme="http://yoursite.com/tags/Depth-first-Search/"/>
     
   </entry>
   
@@ -465,30 +487,6 @@
     
     
       <category term="C++" scheme="http://yoursite.com/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>792. Number of Matching Subsequences匹配子序列的单词数</title>
-    <link href="http://yoursite.com/2018/09/20/792.%20Number%20of%20Matching%20Subsequences%E5%8C%B9%E9%85%8D%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E5%8D%95%E8%AF%8D%E6%95%B0/"/>
-    <id>http://yoursite.com/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/</id>
-    <published>2018-09-20T07:08:38.000Z</published>
-    <updated>2019-07-18T04:06:09.699Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定字符串 S 和单词字典 words, 求 words[i] 中是 S 的子序列的单词个数。</p><a id="more"></a><pre><code>示例:输入:S = &quot;abcde&quot;words = [&quot;a&quot;, &quot;bb&quot;, &quot;acd&quot;, &quot;ace&quot;]输出: 3解释: 有三个是 S 的子序列的单词: &quot;a&quot;, &quot;acd&quot;, &quot;ace&quot;。</code></pre><p>注意:</p><p>所有在words和 S 里的单词都只由小写字母组成。<br>S 的长度在 [1, 50000]。<br>words 的长度在 [1, 5000]。<br>words[i]的长度在[1, 50]。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><pre><code>class Solution {public:/*解法二：二分查找 4.复杂度估计O(mlogn)，m为 words 的个数，n 表示 S 的长度。*/    int numMatchingSubseq(string S, vector&lt;string&gt;&amp; words) {        //1.考虑第一种情况主要是因为字符批对的效率不够高，我们需要一位位字符批对过去。所以我们可考虑用更高效的方法去批对。        vector&lt;vector&lt;int&gt;&gt; alpha(26);//2.先记录下 S 中各个字符出现的位置，并且按顺序记录下来。        for (int i = 0; i &lt; S.size(); i++) {            alpha[S[i] - &apos;a&apos;].push_back(i);        }        int res = 0;        for (const auto word : words) {            int x = -1;//3.初始化记录当前指向 S 位置的指针为-1            bool found = true;            for (char c : word) {//对每个 word 的字符 char 去 dicts 中查找是否存在该字符，如果没有则说明子串不存在，可以跳转下一个 word               //反之，我们可以用二分查找的方式去寻找 S 中所有字符 char 的位置 中，第一个大于当前指向 S 位置的指针的位置（这边用到了贪心的思想）。如果存在，则更新指向 S 位置的指针到该位置。否则说明子串不存在。                auto it = upper_bound(alpha[c - &apos;a&apos;].begin(), alpha[c - &apos;a&apos;].end(), x); //upper_bound是用二分查找在排序数组中找到第一个大于x的数字位置，lower_bound是用二分查找找到第一个大于或等于x的数字位置                if (it == alpha[c - &apos;a&apos;].end()) {                    found = false;                }                else { x = *it; }            }            if (found) res++;        }        return res;    }    // int numMatchingSubseq(string S, vector&lt;string&gt;&amp; words) {    //     //解法三：字典树    //     vector&lt;const char*&gt; waiting[128];    //     for (auto &amp;w : words)    //     waiting[w[0]].push_back(w.c_str()); //1.把 words 里中具有相同开头的单词 word 开头字符合并，记成一个字典树。    //     for (char c : S) {    //         auto advance = waiting[c];//2.遍历 S 中的每个字符 char，    //         waiting[c].clear(); //如果 char 存在当前字典树中，则把该节点删除，    //         for (auto it : advance)    //             waiting[*++it].push_back(it);//把原本该节点的元素根据剩下字符串的开头字符重新分配，构成新的字典树。如果剩下为空字符，表示该字符串能由 S 的子串构成，计数器加1。    //     }    //     return waiting[0].size();//3.当遍历完 S ，返回计数器的的结果即是最后答案。    //   //  4.复杂度估计O(nk)，n为 S 的长度，k 表示删除一个节点后，需要重新分配字符串的平均个数。最坏情况下 k=m ， m 为 words 的个数。不过常规情况下 k&lt;&lt;m    // }};</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;给定字符串 S 和单词字典 words, 求 words[i] 中是 S 的子序列的单词个数。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2018年9月" scheme="http://yoursite.com/categories/2018%E5%B9%B49%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
   </entry>
   
