@@ -9,7 +9,10 @@ tags: [SpringBoot]
 总结整理在学习SpringBoot的过程中遇到的问题和解决方案。
 
 <!-- more -->
+# JPA
+## 任务：完成一个JPA项目的增删改查
 
+## 遇到的问题：application.yml和application.properties的格式
 
 # 常见问题
 
