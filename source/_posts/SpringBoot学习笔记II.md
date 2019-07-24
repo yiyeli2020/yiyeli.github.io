@@ -9,6 +9,13 @@ tags: [SpringBoot]
 总结整理在学习SpringBoot的过程中遇到的问题和解决方案。
 
 <!-- more -->
+# 三省吾身：
+Spring 是什么？
+
+Spring和SpringBoot的区别？
+
+@Resource和@Autowired的区别？
+
 # JPA任务：
 在Merchant表中完成一个JPA项目的增删改查,并在test/java/com.example.std.java.demo/DemoApplicationTests中进行测试
 
@@ -21,6 +28,10 @@ tags: [SpringBoot]
 ## 建表注意事项：
 
 创建数据访问接口userRepository建在dao层中。
+
+社区版的Intellij IDEA可以直接在文件夹上右键New->Jpa Entities即可自动创建实体。
+
+对数据库对增删改查可以直接写在test文件夹下的DemoApplicationTest中，每次执行时只需要Run相应的test函数即可，不需全部Run一遍。
 
 ## 常见问题application.properties文件解析错误：
 
@@ -38,21 +49,114 @@ File->Preference->Maven中的Maven home directory; User settings file; Local rep
 
 IDEA中错误信息以堆栈形式输出，所以最下面的错误是第一个错误，优先看
 
+
 ## hibernate.dialect配置问题
 启动时报错：
 Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
 
 hibernate.dialect是为了更好的适配各种数据库，针对每种数据库都指定方言dialect，将各类数据库Oracle，Mysql等不同类型等语法
 转换成hibernate能理解等统一的格式。
-这个问题花了很长时间，从网上看到的大多数方法都没有作用，最后确定在application.yml中加入的配置
+### 解决方法1:
+这个问题花了很长时间，google到的方法都没有作用，最后确定原因是demo/config/JpaConfig文件中的factory.setJpaProperties(jpaProperties.getProperties());一行中Jpaproperties读到的属性为空，
+
+demo/config/JpaConfig文件如下
+
+    package com.example.std.java.demo.config;
+
+    import javax.annotation.Resource;
+    import javax.persistence.EntityManagerFactory;
+    import javax.sql.DataSource;
+
+    import com.example.std.java.demo.config.jpa.HibernateConfig;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.beans.factory.annotation.Qualifier;
+    import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+    import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
+    import org.springframework.boot.context.properties.ConfigurationProperties;
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.context.annotation.Primary;
+    import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+    import org.springframework.orm.jpa.DefaultJpaDialect;
+    import org.springframework.orm.jpa.JpaTransactionManager;
+    import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+    import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+    import org.springframework.transaction.PlatformTransactionManager;
+    import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+    import java.util.Map;
+    import java.util.Properties;
+
+    @Configuration
+    @EnableTransactionManagement
+    @EnableJpaRepositories(
+        entityManagerFactoryRef = "entityManagerFactory",
+        transactionManagerRef = "platformTransactionManager",
+        basePackages = {"com.example.std.java.demo.dao.jpa"}) //设置Repository所在位置
+    public class JpaConfig {
+
+        @Resource
+        private HibernateConfig jpaProperties;
+
+        @Resource(name = "testDataSource")
+        private DataSource dataSource;
+
+
+
+        @Primary
+        @Bean(name = "entityManagerFactory")
+        public EntityManagerFactory entityManagerFactory() {
+            HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+            LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+            factory.setJpaVendorAdapter(vendorAdapter);
+            factory.setPackagesToScan("com.example.std.java.demo.entity.jpa");
+            factory.setDataSource(dataSource);//数据源
+            factory.setJpaProperties(jpaProperties.getProperties());
+            factory.afterPropertiesSet();//在完成了其它所有相关的配置加载以及属性设置后,才初始化
+            return factory.getObject();
+        }
+
+        /**
+         * 配置事物管理器
+         * @return
+         */
+        @Bean(name = "platformTransactionManager")
+        @Primary
+        public PlatformTransactionManager platformTransactionManager() {
+            JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+            jpaTransactionManager.setEntityManagerFactory(this.entityManagerFactory());
+            return jpaTransactionManager;
+        }
+
+
+    }
+
+为了能传进属性，在demo/config/jpa/HibernateConfig文件中增加属性properties
+
+
+    package com.example.std.java.demo.config.jpa;
+
+
+    import lombok.Data;
+    import org.springframework.boot.context.properties.ConfigurationProperties;
+    import org.springframework.context.annotation.Configuration;
+
+    import java.util.Properties;
+
+    @Configuration
+    @ConfigurationProperties(prefix = "user.jpa")
+    @Data
+    public class HibernateConfig {
+
+        Properties properties;
+
+
+    }
+
+其中注解中的的@ConfigurationProperties(prefix = "user.jpa")指的是resources/local/application.yml中的数据源配置
+
 
     spring:
-      jpa:
-        properties:
-          hibernate:
-            hbm2ddlauto: update
-            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-        show-sql: true
       datasource:
         test:
           jdbcUrl: jdbc:mysql://10.143.248.78:3306/java_demo?autoReconnect=true&characterEncoding=UTF8&&parseTime=True
@@ -70,7 +174,16 @@ hibernate.dialect是为了更好的适配各种数据库，针对每种数据库
           testOnBorrow: true
           validationQuery: "select version()"
           driver-class-name: com.mysql.jdbc.Driver
-其中把jpa一项的配置放在最前面，原因是解析格式问题，放在后面无法正常解析。
+    user:
+      jpa:
+        properties:
+          hibernate:
+            hbm2ddlauto: update
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+### 解决方法2:
+也可以直接将properties固定的写在JpaConfig中
+
+
 
 ## 新建SpringBoot项目启动时往往会报错
 ###  常见错误类型：
@@ -117,7 +230,49 @@ hibernate.dialect是为了更好的适配各种数据库，针对每种数据库
 
 这是配置JPA时出现的错误，错误原因同上，同理可知解决方法。
 
+## 建表问题：
+在多数据源情况下，会出现所链接的数据库中没有需要查询的表，而该表在另一个数据库中，此时在demo/config/JpaConfig文件中找到
 
+    @Qualifier("testDataSource")
+    private DataSource dataSource;
+
+改为
+    @Resource(name = "testDataSource")
+    private DataSource dataSource;
+或者@Autowired注解来选择数据源，其中dataSource等来自于demo/config/DbAutoConfiguration
+
+    package com.example.std.java.demo.config;
+
+    import javax.sql.DataSource;
+    import org.springframework.boot.context.properties.ConfigurationProperties;
+    import org.springframework.boot.jdbc.DataSourceBuilder;
+    import org.springframework.context.annotation.AdviceMode;
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+    /**
+     * @Description: db数据库自动化配置
+     * @Author: 
+     * @Date: 2019-07-11 14:50
+     */
+    @Configuration
+    @EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
+    public class DbAutoConfiguration {
+
+        @Bean("testDataSource")
+        @ConfigurationProperties(prefix = "spring.datasource.test")
+        public DataSource dataSource() {
+            return DataSourceBuilder.create().build();
+        }
+
+        @Bean("dataSource")
+        @ConfigurationProperties(prefix = "spring.datasource.shangtongdai")
+        public DataSource dataSource2() {
+            return DataSourceBuilder.create().build();
+        }
+
+    }
 
 # 参考文献
 [1]https://stackoverflow.com/questions/40738818/illegalargumentexception-at-least-one-jpa-metamodel-must-be-present?newreg=1d1be5c9c5a04ec2878d9fc8237bbda5
