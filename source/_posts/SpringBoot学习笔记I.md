@@ -69,5 +69,5 @@ MyBatis 使用简单的 XML或注解用于配置和原始映射，将接口和
 对应数据库中的表，简单的理解为一个表对应一个实体，以交易订单表Order为例，若该表中含有20个字段，那么这个OrderEntity对象里面也要含有20个对应的属性。
 
 
-# 参考文献
+# 参考资料
 【1】详述 PO VO BO DTO DAO 和 POJO 的概念及区别https://blog.csdn.net/qq_35246620/article/details/77247427

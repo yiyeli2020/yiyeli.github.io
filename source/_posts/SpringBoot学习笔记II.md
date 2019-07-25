@@ -9,12 +9,6 @@ tags: [SpringBoot]
 总结整理在学习SpringBoot的过程中遇到的问题和解决方案。
 
 <!-- more -->
-# 三省吾身：
-Spring 是什么？
-
-Spring和SpringBoot的区别？
-
-@Resource和@Autowired的区别？
 
 # JPA任务：
 在Merchant表中完成一个JPA项目的增删改查,并在test/java/com.example.std.java.demo/DemoApplicationTests中进行测试
@@ -230,7 +224,7 @@ demo/config/JpaConfig文件如下
 
 这是配置JPA时出现的错误，错误原因同上，同理可知解决方法。
 
-## 建表问题：
+## 多数据源问题：
 在多数据源情况下，会出现所链接的数据库中没有需要查询的表，而该表在另一个数据库中，此时在demo/config/JpaConfig文件中找到
 
     @Qualifier("testDataSource")
@@ -253,7 +247,7 @@ demo/config/JpaConfig文件如下
 
     /**
      * @Description: db数据库自动化配置
-     * @Author: 
+     * @Author:
      * @Date: 2019-07-11 14:50
      */
     @Configuration
@@ -274,6 +268,6 @@ demo/config/JpaConfig文件如下
 
     }
 
-# 参考文献
+# 参考资料
 [1]https://stackoverflow.com/questions/40738818/illegalargumentexception-at-least-one-jpa-metamodel-must-be-present?newreg=1d1be5c9c5a04ec2878d9fc8237bbda5
 [2]]https://blog.csdn.net/zsg88/article/details/80780281
