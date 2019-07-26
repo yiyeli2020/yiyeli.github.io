@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>51. N-QueensN皇后 | Yiye Li</title>
+  <title>SpringBoot学习笔记IV | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。">
-<meta name="keywords" content="LeetCode,Backtracking">
+  <meta name="description" content="阐述Spring，Spring MVC，Spring Boot 三者的原理和区别。学习笔记II中涉及到对@Resource和@Autowired的区别做了解释。">
+<meta name="keywords" content="SpringBoot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="51. N-QueensN皇后">
-<meta property="og:url" content="http://yoursite.com/2018/10/05/51. N-QueensN皇后/index.html">
+<meta property="og:title" content="SpringBoot学习笔记IV">
+<meta property="og:url" content="http://yoursite.com/2019/07/26/SpringBoot学习笔记IV/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。">
+<meta property="og:description" content="阐述Spring，Spring MVC，Spring Boot 三者的原理和区别。学习笔记II中涉及到对@Resource和@Autowired的区别做了解释。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T06:32:04.263Z">
+<meta property="og:updated_time" content="2019-07-26T10:29:24.837Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="51. N-QueensN皇后">
-<meta name="twitter:description" content="n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。">
+<meta name="twitter:title" content="SpringBoot学习笔记IV">
+<meta name="twitter:description" content="阐述Spring，Spring MVC，Spring Boot 三者的原理和区别。学习笔记II中涉及到对@Resource和@Autowired的区别做了解释。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-51. N-QueensN皇后" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-SpringBoot学习笔记IV" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/05/51. N-QueensN皇后/" class="article-date">
-      <time datetime="2018-10-05T11:19:45.000Z" itemprop="datePublished">2018-10-05</time>
+      <a href="/2019/07/26/SpringBoot学习笔记IV/" class="article-date">
+      <time datetime="2019-07-26T10:30:12.000Z" itemprop="datePublished">2019-07-26</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      51. N-QueensN皇后
+      SpringBoot学习笔记IV
     </h1>
   
 
@@ -224,13 +224,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年10月/">2018年10月</a>
+    <a class="article-category-link" href="/categories/2019年7月/">2019年7月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Backtracking/">Backtracking</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -240,70 +240,112 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
+        <p>阐述Spring，Spring MVC，Spring Boot 三者的原理和区别。学习笔记II中涉及到对@Resource和@Autowired的区别做了解释。</p>
 <a id="more"></a>
-<p>给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。</p>
-<p>每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 ‘Q’ 和 ‘.’ 分别代表了皇后和空位。</p>
-<p>示例:</p>
-<pre><code>输入: 4
-输出: [
- [&quot;.Q..&quot;,  // 解法 1
-  &quot;...Q&quot;,
-  &quot;Q...&quot;,
-  &quot;..Q.&quot;],
+<pre><code>private static SqlSessionFactory sqlSessionFactory;
 
- [&quot;..Q.&quot;,  // 解法 2
-  &quot;Q...&quot;,
-  &quot;...Q&quot;,
-  &quot;.Q..&quot;]
-]
-解释: 4 皇后问题存在两个不同的解法。
-</code></pre><h2 id="思路1-递归"><a href="#思路1-递归" class="headerlink" title="思路1 递归"></a>思路1 递归</h2><p>尝试每个可能存在皇后的位置</p>
-<pre><code>class Solution {
-private:
-    vector&lt;vector&lt;string&gt;&gt; res;
-public:
-    vector&lt;vector&lt;string&gt;&gt; solveNQueens(int n) {
-       vector&lt;string&gt; cur(n,string(n,&apos;.&apos;));
-        helper(cur,0);
-        return res;
-    }
-    void helper(vector&lt;string&gt; &amp;cur,int row){
-        if(row==cur.size()){
-            res.push_back(cur);
-            return;
+    public static void main(String[] args) {
+        // Mybatis 配置文件
+        String resource = &quot;mybatis-config.xml&quot;;
+
+        // 得到配置文件流
+        InputStream inputStream = null;
+        try {
+            inputStream = Resources.getResourceAsStream(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        for(int col=0;col&lt;cur.size();col++)
-            if(isValid(cur,row,col)){
-                cur[row][col]=&apos;Q&apos;;
-                helper(cur,row+1);
-                cur[row][col]=&apos;.&apos;;
-            }
-    }
-    bool isValid(vector&lt;string&gt; &amp;cur,int row,int col){
-        for(int i=0;i&lt;row;i++)
-            if(cur[i][col] == &apos;Q&apos;) return false;
-        for(int i=row-1,j=col-1;i&gt;=0 &amp;&amp; j&gt;=0;i--,j--)
-            if(cur[i][j]==&apos;Q&apos;) return false;
-        for(int i=row-1,j=col+1;i&gt;=0 &amp;&amp; j&lt;cur.size();i--,j++)
-            if(cur[i][j]==&apos;Q&apos;) return false;
-        return true;
+        System.out.println(inputStream);
+        // 创建会话工厂，传入 MyBatis 的配置文件信息
+        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        System.out.println(sqlSessionFactory);
+//        for (int i = 0;i&lt;10;i++){
+//            insertUser();
+//        }
+
+//        insertUser();
+        // updateUser();
+        // deleteUser();
+        // selectUserById();
+        // selectAllUser();
+//        findAllUser();
+//        findUserByContactName();
+        deleteUserById();
+
     }
 
-};
-</code></pre><h2 id="思路2：DFS"><a href="#思路2：DFS" class="headerlink" title="思路2：DFS"></a>思路2：DFS</h2><p>queen用来记录皇后的横纵坐标位置，xy_dif用来记录横纵坐标之差，xy_sum用来记录横纵坐标之和，p + q == x + y 时在同一条对角线上， p - q == x - y时在同一条反对角线上</p>
-<pre><code>def solveNQueens(self, n):
-    def DFS(queens, xy_dif, xy_sum):
-        p = len(queens)
-        if p==n:
-            result.append(queens)
-            return None
-        for q in range(n):
-            if q not in queens and p-q not in xy_dif and p+q not in xy_sum:
-                DFS(queens+[q], xy_dif+[p-q], xy_sum+[p+q])  
-    result = [] #全局变量
-    DFS([],[],[])
-    return [ [&quot;.&quot;*i + &quot;Q&quot; + &quot;.&quot;*(n-i-1) for i in sol] for sol in result]
+    // 新增用戶
+
+    private static void insertUser() {
+        // 通过工厂得到 SqlSession
+        SqlSession session = sqlSessionFactory.openSession();
+
+        TblMerchantEntityMapper mapper = session.getMapper(TblMerchantEntityMapper.class);
+        TblMerchantEntity user = new TblMerchantEntity();
+            user.setContactName(&quot;Tom&quot;);
+            user.setMerchantNo(String.valueOf(Math.random()*Long.MAX_VALUE));
+            user.setMerchantName(&quot;肯德基&quot;);
+            user.setStatus(&quot;1&quot;);
+        try {
+            mapper.insert(user);
+
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        }
+
+        // 释放资源
+        session.close();
+    }
+//    private static void updateUser(){
+//        SqlSession session = sqlSessionFactory.openSession();
+//        TblMerchantEntityMapper mapper = session.getMapper(TblMerchantEntityMapper.class);
+//
+//        TblMerchantEntityExample tblMerchantEntityExample = new TblMerchantEntityExample();
+//        Criteria criteria = tblMerchantEntityExample.createCriteria();
+//
+//
+//    }
+    private static void deleteUserById(){
+        SqlSession session = sqlSessionFactory.openSession();
+        TblMerchantEntityMapper mapper = session.getMapper(TblMerchantEntityMapper.class);
+        int x = mapper.deleteByPrimaryKey((long)30);
+        System.out.println(&quot;这次删除了&quot;+x+&quot;行数据&quot;);
+        session.commit();
+        session.close();
+
+    }
+    private static void findAllUser(){
+        SqlSession session = sqlSessionFactory.openSession();
+        TblMerchantEntityMapper mapper = session.getMapper(TblMerchantEntityMapper.class);
+        TblMerchantEntity entity;
+        TblMerchantEntityExample tblMerchantEntityExample = new TblMerchantEntityExample();
+        Criteria criteria = tblMerchantEntityExample.createCriteria();
+        criteria.getCriteria();
+        List&lt;TblMerchantEntity&gt; list = mapper.selectByExample(tblMerchantEntityExample);
+        Iterator it = list.iterator();
+        while (it.hasNext()){
+            entity = (TblMerchantEntity)it.next();
+            System.out.println(entity.toString());
+        }
+        session.close();
+    }
+    private static void findUserByContactName(){
+        SqlSession session = sqlSessionFactory.openSession();
+        TblMerchantEntityMapper mapper = session.getMapper(TblMerchantEntityMapper.class);
+        TblMerchantEntity entity;
+        TblMerchantEntityExample tblMerchantEntityExample = new TblMerchantEntityExample();
+        Criteria criteria = tblMerchantEntityExample.createCriteria();
+//        criteria.andContactNameEqualTo(&quot;李四&quot;).andIdGreaterThan((long)5);
+        criteria.andIdBetween((long)2,(long)7);//分页查询
+        List&lt;TblMerchantEntity&gt; list = mapper.selectByExample(tblMerchantEntityExample);
+        Iterator it = list.iterator();
+        while (it.hasNext()){
+            entity = (TblMerchantEntity)it.next();
+            System.out.println(entity.toString());
+        }
+    }
 </code></pre>
       
       
@@ -359,13 +401,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年10月05日 - 19时19分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 14时32分</p>
+        <p><span>发布时间:</span>2019年07月26日 - 18时30分</p>
+        <p><span>最后更新:</span>2019年07月26日 - 18时29分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/10/05/51. N-QueensN皇后/" title="51. N-QueensN皇后">http://yoursite.com/2018/10/05/51. N-QueensN皇后/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/05/51. N-QueensN皇后/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/26/SpringBoot学习笔记IV/" title="SpringBoot学习笔记IV">http://yoursite.com/2019/07/26/SpringBoot学习笔记IV/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/26/SpringBoot学习笔记IV/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -378,18 +420,9 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/10/05/52. N-QueensIIN皇后II/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          52. N-QueensNII皇后II
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">102.Binary Tree Level Order Traversal二叉树的层次遍历</div>
+    <a href="/2019/07/25/SpringBoot学习笔记III/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringBoot学习笔记III</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -400,7 +433,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路1-递归"><span class="toc-number">1.</span> <span class="toc-text">思路1 递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路2：DFS"><span class="toc-number">2.</span> <span class="toc-text">思路2：DFS</span></a></li></ol>
+    
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -466,13 +499,11 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/10/05/52. N-QueensIIN皇后II/" title="上一篇: 52. N-QueensNII皇后II">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /" title="下一篇: 102.Binary Tree Level Order Traversal二叉树的层次遍历">
+            <a href="/2019/07/25/SpringBoot学习笔记III/" title="下一篇: SpringBoot学习笔记III">
                 <i class="fa fa-angle-right"></i>
             </a>
         
