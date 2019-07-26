@@ -15,7 +15,10 @@ tags: [SpringBoot]
 
 # Mybatis任务：
 在Merchant表中完成一个Mybatis项目的增删改查,并在test/java/com.example.std.java.demo/DemoApplicationTests中进行测试
-
+使用Mybatis注册商户，根据商编（MerchantNO）查询商户，修改商户状态，从外部能查询，Controller调service，再调cto
+注释
+每个dto属性是做什么的
+日志
 # 常见问题
 
 
@@ -177,7 +180,21 @@ demo/config/JpaConfig文件如下
 ### 解决方法2:
 也可以直接将properties固定的写在JpaConfig中
 
+    @Primary
+     @Bean(name = "entityManagerFactory")
+     public EntityManagerFactory entityManagerFactory() {
+         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+         factory.setJpaVendorAdapter(vendorAdapter);
+         factory.setPackagesToScan("com.example.std.java.demo.entity.jpa");
+         factory.setDataSource(dataSource);//数据源
+         Properties properties=new Properties();
+         properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5InnoDBDialect");
 
+         factory.setJpaProperties(properties);
+         factory.afterPropertiesSet();//在完成了其它所有相关的配置加载以及属性设置后,才初始化
+         return factory.getObject();
+     }
 
 ## 新建SpringBoot项目启动时往往会报错
 ###  常见错误类型：

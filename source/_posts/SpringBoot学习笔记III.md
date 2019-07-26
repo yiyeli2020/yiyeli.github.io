@@ -263,6 +263,30 @@ https://upload-images.jianshu.io/upload_images/4185175-a0a50bf022178e1d.png?imag
 
     @Resource的作用相当于@Autowired，只不过@Autowired按照byType自动注入。
 
+
+# Mac OS/Linux命令查询网络端口占用情况，查找/杀死进程
+## netstat命令
+
+    netstat -an | grep 3306
+
+3306替换成需要grep的端口号
+
+## lsof命令
+
+通过list open file命令可以查看到当前打开文件，在linux中所有事物都是以文件形式存在，包括网络连接及硬件设备。
+
+    lsof -i:80
+-i参数表示网络链接，:80指明端口号，该命令会同时列出PID，方便kill
+
+查看所有进程监听的端口
+
+    sudo lsof -i -P | grep -i "listen"
+## ps -A|grep [进程名]
+
+找PID： ps -A|grep [进程名]
+## kill [PID]
+
+杀进程：kill [PID]
 参考资料：
 
 【1】https://www.jianshu.com/p/42620a0a2c33
