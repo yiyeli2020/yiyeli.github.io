@@ -14,11 +14,9 @@ tags: [SpringBoot]
 在Merchant表中完成一个JPA项目的增删改查,并在test/java/com.example.std.java.demo/DemoApplicationTests中进行测试
 
 # Mybatis任务：
-在Merchant表中完成一个Mybatis项目的增删改查,并在test/java/com.example.std.java.demo/DemoApplicationTests中进行测试
-使用Mybatis注册商户，根据商编（MerchantNO）查询商户，修改商户状态，从外部能查询，Controller调service，再调dto
-注释
-每个dto属性是做什么的,DTO中只需要写要从外部传入的属性
-日志
+1.在Merchant表中完成一个Mybatis项目的增删改查,并在test/java/com.example.std.java.demo/DemoApplicationTests中进行测试
+2.使用Mybatis注册商户，根据商编（MerchantNO）查询商户，修改商户状态，从外部能查询，Controller调service，再调dto（写注释，包括每个dto属性是做什么的,DTO中只需要写要从外部传入的属性，写日志）
+
 # 常见问题
 
 
