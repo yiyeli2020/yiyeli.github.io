@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>在浏览器地址栏输入URL，按下回车后发生了什么 | Yiye Li</title>
+  <title>SpringBoot学习笔记VII | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这道题目没有所谓的完全的正确答案，这个题目可以让你在任意的一个点深入下去， 只要你对这个点是熟悉的。以下是一个大概流程：">
-<meta name="keywords" content="TCPIP,Web">
+  <meta name="description" content="Mybatis的分页查询，日志log的写法详解">
+<meta name="keywords" content="SpringBoot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在浏览器地址栏输入URL，按下回车后发生了什么">
-<meta property="og:url" content="http://yoursite.com/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/index.html">
+<meta property="og:title" content="SpringBoot学习笔记VII">
+<meta property="og:url" content="http://yoursite.com/2019/07/31/SpringBoot学习笔记VII/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="这道题目没有所谓的完全的正确答案，这个题目可以让你在任意的一个点深入下去， 只要你对这个点是熟悉的。以下是一个大概流程：">
+<meta property="og:description" content="Mybatis的分页查询，日志log的写法详解">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T04:08:25.827Z">
+<meta property="og:updated_time" content="2019-07-31T03:27:31.071Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在浏览器地址栏输入URL，按下回车后发生了什么">
-<meta name="twitter:description" content="这道题目没有所谓的完全的正确答案，这个题目可以让你在任意的一个点深入下去， 只要你对这个点是熟悉的。以下是一个大概流程：">
+<meta name="twitter:title" content="SpringBoot学习笔记VII">
+<meta name="twitter:description" content="Mybatis的分页查询，日志log的写法详解">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-在浏览器地址栏输入URL，按下回车后发生了什么" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-SpringBoot学习笔记VII" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/" class="article-date">
-      <time datetime="2018-08-23T01:06:12.000Z" itemprop="datePublished">2018-08-23</time>
+      <a href="/2019/07/31/SpringBoot学习笔记VII/" class="article-date">
+      <time datetime="2019-07-31T03:12:12.000Z" itemprop="datePublished">2019-07-31</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      在浏览器地址栏输入URL，按下回车后发生了什么
+      SpringBoot学习笔记VII
     </h1>
   
 
@@ -224,13 +224,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    <a class="article-category-link" href="/categories/2019年7月/">2019年7月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCPIP/">TCPIP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -240,48 +240,28 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>这道题目没有所谓的完全的正确答案，这个题目可以让你在任意的一个点深入下去， 只要你对这个点是熟悉的。以下是一个大概流程：</p>
+        <p>Mybatis的分页查询，日志log的写法详解</p>
 <a id="more"></a>
-<h2 id="解答1："><a href="#解答1：" class="headerlink" title="解答1："></a>解答1：</h2><h3 id="1-浏览器向DNS服务器查找输入URL对应的IP地址。"><a href="#1-浏览器向DNS服务器查找输入URL对应的IP地址。" class="headerlink" title="1.浏览器向DNS服务器查找输入URL对应的IP地址。"></a>1.浏览器向DNS服务器查找输入URL对应的IP地址。</h3><h3 id="2-DNS服务器返回网站的IP地址。"><a href="#2-DNS服务器返回网站的IP地址。" class="headerlink" title="2.DNS服务器返回网站的IP地址。"></a>2.DNS服务器返回网站的IP地址。</h3><h3 id="3-浏览器根据IP地址与目标web服务器在80端口上建立TCP连接"><a href="#3-浏览器根据IP地址与目标web服务器在80端口上建立TCP连接" class="headerlink" title="3.浏览器根据IP地址与目标web服务器在80端口上建立TCP连接"></a>3.浏览器根据IP地址与目标web服务器在80端口上建立TCP连接</h3><h3 id="4-浏览器获取请求页面的html代码。"><a href="#4-浏览器获取请求页面的html代码。" class="headerlink" title="4.浏览器获取请求页面的html代码。"></a>4.浏览器获取请求页面的html代码。</h3><h3 id="5-浏览器在显示窗口内渲染HTML。"><a href="#5-浏览器在显示窗口内渲染HTML。" class="headerlink" title="5.浏览器在显示窗口内渲染HTML。"></a>5.浏览器在显示窗口内渲染HTML。</h3><h3 id="6-窗口关闭时，浏览器终止与服务器的连接。"><a href="#6-窗口关闭时，浏览器终止与服务器的连接。" class="headerlink" title="6.窗口关闭时，浏览器终止与服务器的连接。"></a>6.窗口关闭时，浏览器终止与服务器的连接。</h3><p>这其中最有趣的是第1步和第2步(域名解析)。我们输入的网址(域名)是IP地址的一个别名， 在一个DNS内，一个域名对应一个IP地址。域名系统(DNS) 的工作就是将域名与它的IP地址对应起来。DNS是分布式的，同时也是具有层级关系的。</p>
-<h2 id="解答2："><a href="#解答2：" class="headerlink" title="解答2："></a>解答2：</h2><p>当我们用浏览器访问一个网页时，浏览器先尝试从Host文件中获取 <a href="http://www.baidu.com/对应的IP地址，如何不能取到就是用DNS协议来获取IP。在DNS协议中PC会向你的本地DNS服务器求助（一般是路由器），希望从本地DNS服务器那里得到百度的IP，如果得不到本地DNS服务器会向更高层次的DNS服务器求助.......,最终总能得到百度的IP。" target="_blank" rel="noopener">http://www.baidu.com/对应的IP地址，如何不能取到就是用DNS协议来获取IP。在DNS协议中PC会向你的本地DNS服务器求助（一般是路由器），希望从本地DNS服务器那里得到百度的IP，如果得不到本地DNS服务器会向更高层次的DNS服务器求助.......,最终总能得到百度的IP。</a></p>
-<p>得到百度的IP，下一步使用TCP协议，建立TCP连接。在TCP协议中建立TCP需要与百度服务器握手三次，你先告诉服务器你要给服务器发东西（SYN），服务器应答你并告诉你它也要给你发东西（SYN，ACK），然后你向应答服务器（SYN，ACK）做出应答，总共来回了三次，成为3次握手。不过，建立TCP连接有个前提，你必须能够成功地把消息发到服务器上。</p>
-<p>为了将消息从你的PC上传到服务器上，需要用到IP协议、ARP协议和OSPF协议。我们都知道，你的PC和百度服务器之间一般会有许多路由器之类的东西，IP协议指定了出发地和目的地；你的数据会经过一个又一个路由器，OSPF决定了会经过哪些路由器（用一种路由算法，找出最佳路径）从一个路由器怎么传给下一个路由器，这是ARP协议的工作，ARP负责求下一个节点的地址。IP协议使用的是IP地址，整个发送过程中只涉及出发地和目的地2个IP地址，而ARP协议使用的是MAC地址，整个发送过程中涉及到每一个节点的MAC地址。</p>
-<p>现在，我们能和服务器通信，还建立TCP连接，下一步就是用HTTP协议请求网页内容了。你发个http请求报文给服务器，如果服务器禁止你访问就给你回个“forbidden”，如果他暂时挂掉了就给你回个“内部服务错误”，如果它正常才给你回个“OK”，并将你要的数据传给你；如果你有其他需要的东西再去给他要。你收到了服务器的回复，是一坨html的文本，浏览器必须能够理解文本的内容，并快速的渲染到屏幕上。渲染出来后，就可以看到网页了。</p>
-<h2 id="解答3"><a href="#解答3" class="headerlink" title="解答3"></a>解答3</h2><h3 id="基本流程："><a href="#基本流程：" class="headerlink" title="基本流程："></a>基本流程：</h3><p>①查询ip地址</p>
-<p>②建立tcp连接，接入服务器</p>
-<p>③浏览器发起http请求</p>
-<p>④服务器后台操作并做出http响应</p>
-<p>⑤网页的解析与渲染</p>
-<h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><p>查询ip地址<br>①浏览器解析出url中的域名。</p>
-<p>②查询浏览器的DNS缓存。</p>
-<p>③浏览器中没有DNS缓存，则查找本地客户端hosts文件有无对应的ip地址。</p>
-<p>④hosts中无，则查找本地DNS服务器（运营商提供的DNS服务器）有无对应的DNS缓存。</p>
-<p>⑤若本地DNS没有DNS缓存，则向根服务器查询，进行递归查找。</p>
-<p>⑥递归查找从顶级域名开始（如.com）,一步步缩小范围，最终客户端取得ip地址。</p>
-<p>tcp连接与http连接<br>①http协议建立在tcp协议之上，http请求前，需先进行tcp连接，形成客户端到服务器的稳定的通道。俗称TCP的三次握手。</p>
-<p>②tcp连接完成后，http请求开始，请求有多种方式，常见的有get，post等。</p>
-<p>③http请求包含请求头，也可能包含请求体两部分，请求头中包含我们希望对请求文件的操作的信息，请求体中包含传递给后台的参数。</p>
-<p>④服务器收到http请求后，后台开始工作，如负载平衡，跨域等，这里就是后端的工作了。</p>
-<p>⑤文件处理完毕，生成响应数据包，响应也包含两部分，响应头和相应体，响应体就是我们所请求的文件。</p>
-<p>⑥经过网络传输，文件被下载到本地客户端，客户端开始加载。</p>
-<p>html渲染<br>①客户端浏览器加载了html文件后，由上到下解析html为DOM树（DOM Tree）。</p>
-<p>②遇到css文件，css中的url发起http请求。</p>
-<p>③这是第二次http请求，由于http1.1协议增加了Connection: keep-alive声明，故tcp连接不会关闭，可以复用。</p>
-<p>④http连接是无状态连接，客户端与服务器端需要重新发起请求–响应。</p>
-<p>在请求css的过程中，解析器继续解析html，然后到了script标签。</p>
-<p>⑤由于script可能会改变DOM结构，故解析器停止生成DOM树，解析器被js阻塞，等待js文件发起http请求，然后加载。这是第三次http请求。js执行完成后解析器继续解析。</p>
-<p>⑥由于css文件可能会影响js文件的执行结果，因此需等css文件加载完成后再执行。</p>
-<p>⑦浏览器收到css文件后，开始解析css文件为CSSOM树（CSS Rule Tree）。</p>
-<p>⑧CSSOM树生成后，DOM Tree与CSS Rule Tree结合生成渲染树（Render Tree）。</p>
-<p>⑨Render Tree会被css文件阻塞，渲染树生成后，先布局，绘制渲染树中节点的属性(位置，宽度，大小等)，然后渲染，页面就会呈现信息。</p>
-<p>⑩继续边解析边渲染，遇到了另一个js文件，js文件执行后改变了DOM树，渲染树从被改变的dom开始再次渲染。</p>
-<p>⑪继续向下渲染，碰到一个img标签，浏览器发起http请求，不会等待img加载完成，继续向下渲染，之后再重新渲染此部分。</p>
-<p>⑫DOM树遇到html结束标签，停止解析，进而渲染结束。</p>
-<h3 id="扩展思考"><a href="#扩展思考" class="headerlink" title="扩展思考"></a>扩展思考</h3><p>有那些网站优化的方法？<br>①减少DNS查询:将服务器域名的ip信息加入本地host文件。</p>
-<p>②减少http请求数量，对于图片使用雪碧图,对于html文件和css文件，js文件分别进行合并操作。</p>
-<p>③减少下载时间：压缩图片，使用压缩应用压缩文档中的空格，删除文件多余的语句和注释，创造自己的js精简库和精简框架,使用本地浏览器缓存。</p>
-<p>④提前渲染开始时间：将css链接放在html头部。</p>
-<p>⑤减轻解析器的阻塞：将js链接放在body尾部</p>
+<h1 id="SQL分页查询"><a href="#SQL分页查询" class="headerlink" title="SQL分页查询"></a>SQL分页查询</h1><p>使用SELECT查询时，如果结果集数据量很大，比如几万行数据，放在一个页面显示的话数据量太大，不如分页显示，每次显示100条。</p>
+<p>要实现分页功能，实际上就是从结果集中显示第1 ~ 100条记录作为第1页，显示第101~200条记录作为第2页，以此类推。</p>
+<p>因此，分页实际上就是从结果集中“截取”出第M~N条记录。这个查询可以通过LIMIT <m> OFFSET <n>子句实现。</n></m></p>
+<p>例如基本查询语句：</p>
+<pre><code>SELECT id,name,gender,score
+FROM students
+ORDER BY score DESC;
+</code></pre><p>现在将结果集分页，每页3条记录。要获取第一页的记录，可以使用 LIMIT 3 OFFSET 0:</p>
+<pre><code>SELECT id,name,gender,score
+FROM students
+ORDER BY score DESC
+LIMIT 3 OFFSET 0;
+</code></pre><p>上述查询LIMIT 3 OFFSET 0表示：<br>对结果集从0号记录开始，最多取3条（注意SQL记录集对索引从0开始）。<br>若要查询第2页，那么我们只需要跳过前3条记录，即对结果集从3号记录开始查询，把OFFSET设定为3:</p>
+<p>  SELECT id,name,gender,score<br>  FROM students<br>  ORDER BY score DESC<br>  LIMIT 3 OFFSET 3;</p>
+<p>类似的，查询第3页的时候，OFFSET应该设为6，查询第4页的时候，OFFSET应该设为9.如果查询的表第4页只有1条记录，则最终结果按照实际数量1显示，LIMIT 3表示的意思是“最多3条记录”。</p>
+<p>可见分页查询的关键在于，首先要确定每页需要显示的结果数量pageSize，然后根据当前页的索引pageIndex（从1开始），确定LIMIT和OFFSET应该设定的值：</p>
+<p>LIMIT总是设定为pageSize；<br>OFFSET计算公式为pageSize*（pageIndex-1）。</p>
+<h2 id="扩展思考"><a href="#扩展思考" class="headerlink" title="扩展思考"></a>扩展思考</h2><p>如果原本记录集只有10条记录，但我们将OFFSET设置为20，结果会怎样呢？<br>答案是OFFSET超过查询的最大数量并不会报错，而是会得到一个空的结果集</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>OFFSET是可选的，OFFSET缺省值为0.即LIMIT 3 相当于LIMIT 3 OFFSET 0<br>在MySQL中，LIMIT 3 OFFSET 0也可简写为LIMIT 3，0<br>使用LIMIT M OFFSET N进行分页查询时，N越大查询效率越低。</p>
+<h1 id="Mybatis分页查询"><a href="#Mybatis分页查询" class="headerlink" title="Mybatis分页查询"></a>Mybatis分页查询</h1><h1 id="日志Log写法详解"><a href="#日志Log写法详解" class="headerlink" title="日志Log写法详解"></a>日志Log写法详解</h1><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600</a></p>
 
       
       
@@ -337,13 +317,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></p>
+        <p><span>本文标题:</span><a href="/2019/07/31/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月23日 - 09时06分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 12时08分</p>
+        <p><span>发布时间:</span>2019年07月31日 - 11时12分</p>
+        <p><span>最后更新:</span>2019年07月31日 - 11时27分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/" title="在浏览器地址栏输入URL，按下回车后发生了什么">http://yoursite.com/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/31/SpringBoot学习笔记VII/" title="SpringBoot学习笔记VII">http://yoursite.com/2019/07/31/SpringBoot学习笔记VII/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/31/SpringBoot学习笔记VII/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -356,18 +336,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          650. 2 Keys Keyboard只有两个键的键盘
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/23/剑指Offer59.对称的二叉树/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</div>
+    <a href="/2019/07/31/SpringBoot学习笔记VI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringBoot学习笔记VI</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -378,7 +349,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#解答1："><span class="toc-number">1.</span> <span class="toc-text">解答1：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-浏览器向DNS服务器查找输入URL对应的IP地址。"><span class="toc-number">1.1.</span> <span class="toc-text">1.浏览器向DNS服务器查找输入URL对应的IP地址。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-DNS服务器返回网站的IP地址。"><span class="toc-number">1.2.</span> <span class="toc-text">2.DNS服务器返回网站的IP地址。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-浏览器根据IP地址与目标web服务器在80端口上建立TCP连接"><span class="toc-number">1.3.</span> <span class="toc-text">3.浏览器根据IP地址与目标web服务器在80端口上建立TCP连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-浏览器获取请求页面的html代码。"><span class="toc-number">1.4.</span> <span class="toc-text">4.浏览器获取请求页面的html代码。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-浏览器在显示窗口内渲染HTML。"><span class="toc-number">1.5.</span> <span class="toc-text">5.浏览器在显示窗口内渲染HTML。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-窗口关闭时，浏览器终止与服务器的连接。"><span class="toc-number">1.6.</span> <span class="toc-text">6.窗口关闭时，浏览器终止与服务器的连接。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解答2："><span class="toc-number">2.</span> <span class="toc-text">解答2：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解答3"><span class="toc-number">3.</span> <span class="toc-text">解答3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本流程："><span class="toc-number">3.1.</span> <span class="toc-text">基本流程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体步骤"><span class="toc-number">3.2.</span> <span class="toc-text">具体步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展思考"><span class="toc-number">3.3.</span> <span class="toc-text">扩展思考</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL分页查询"><span class="toc-number">1.</span> <span class="toc-text">SQL分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展思考"><span class="toc-number">1.1.</span> <span class="toc-text">扩展思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">1.2.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis分页查询"><span class="toc-number">2.</span> <span class="toc-text">Mybatis分页查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#日志Log写法详解"><span class="toc-number">3.</span> <span class="toc-text">日志Log写法详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">4.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -444,13 +415,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/" title="上一篇: 650. 2 Keys Keyboard只有两个键的键盘">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/23/剑指Offer59.对称的二叉树/" title="下一篇: 59.SymmetricalBinaryTree对称的二叉树(CodingInterview)">
+            <a href="/2019/07/31/SpringBoot学习笔记VI/" title="下一篇: SpringBoot学习笔记VI">
                 <i class="fa fa-angle-right"></i>
             </a>
         
