@@ -613,7 +613,7 @@ Postman中选择POST格式发送，http://localhost:8080/Merchant/MerchantQuery
 
     }
 
-则选择Body形式，然后在右侧的栏中选择JSON(application/json)
+则选择Body-》raw形式，然后在右侧的栏中选择JSON(application/json)
 以JSON格式填写POST中的Body：
 
     {
