@@ -619,3 +619,7 @@ Postman中选择POST格式发送，http://localhost:8080/Merchant/MerchantQuery
     {
         "ID": "47943"
     }
+
+# 浏览器测试
+
+除了用Postman进行测试外，也可以直接在浏览器中输入GET请求进行测试，在网址栏输入http://localhost:8080//Merchant/MerchantQuery发送即可
