@@ -5,18 +5,18 @@
   
   <title>SpringBoot学习笔记VIII | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CMS系统学习，对常用到的注解做详解">
+  <meta name="description" content="CMS系统学习，对常用到的注解做详解,总结Java8 Lambda表达式。">
 <meta name="keywords" content="SpringBoot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot学习笔记VIII">
 <meta property="og:url" content="http://yoursite.com/2019/08/01/SpringBoot学习笔记VIII/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="CMS系统学习，对常用到的注解做详解">
+<meta property="og:description" content="CMS系统学习，对常用到的注解做详解,总结Java8 Lambda表达式。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-02T02:52:36.758Z">
+<meta property="og:updated_time" content="2019-08-02T09:10:37.746Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot学习笔记VIII">
-<meta name="twitter:description" content="CMS系统学习，对常用到的注解做详解">
+<meta name="twitter:description" content="CMS系统学习，对常用到的注解做详解,总结Java8 Lambda表达式。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -240,7 +240,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>CMS系统学习，对常用到的注解做详解</p>
+        <p>CMS系统学习，对常用到的注解做详解,总结Java8 Lambda表达式。</p>
 <a id="more"></a>
 <h1 id="CMS系统简介"><a href="#CMS系统简介" class="headerlink" title="CMS系统简介"></a>CMS系统简介</h1><p>内容管理系统（英语：content management system，缩写为 CMS）是指在一个合作模式下，用于管理工作流程的一套制度。该系统可应用于手工操作中，也可以应用到计算机或网络里。作为一种中央储存器（central repository），内容管理系统可将相关内容集中储存并具有群组管理、版本控制等功能。版本控制是内容管理系统的一个主要优势。<br>内容管理系统在物品或文案或数据的存储、掌管、修订（盘存）、语用充实、文档发布等方面有着广泛的应用。现在流行的开源CMS系统有WordPress、Joomla!、Drupal、Xoops、CmsTop等。</p>
 <h1 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h1><p>saas-cms 的Respository中建立自己的分支，在controller/creditreview/TransportController中画出getAllProcessHistory函数的流程图，自己重新实现一个查询接口<br>数据库配置文件在resources.local/application.yml中<br>使用的数据库是：jdbc:mysql://10.143.248.78:3306/creditreview?</p>
@@ -350,7 +350,132 @@ public String processSubmit(@ModelAttribute Pet pet) {
 <p>若要绑定的对象时简单类型：  调用@RequestParam来处理的。 </p>
 <p>若要绑定的对象时复杂类型：  调用@ModelAttribute来处理的。</p>
 <p>这里的简单类型指java的原始类型(boolean, int 等)、原始类型对象（Boolean, Int等）、String、Date等ConversionService里可以直接String转换成目标对象的类型；</p>
-<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://blog.csdn.net/walkerJong/article/details/7946109" target="_blank" rel="noopener">https://blog.csdn.net/walkerJong/article/details/7946109</a></p>
+<h1 id="Java8-Lambda表达式"><a href="#Java8-Lambda表达式" class="headerlink" title="Java8 Lambda表达式"></a>Java8 Lambda表达式</h1><p>Lambda 表达式，也可称为闭包，它是推动 Java 8 发布的最重要新特性。<br>Lambda 允许把函数作为一个方法的参数（函数作为参数传递进方法中）。<br>使用 Lambda 表达式可以使代码变的更加简洁紧凑。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>lambda 表达式的语法格式如下：</p>
+<pre><code>(parameters) -&gt; expression
+或
+(parameters) -&gt;{ statements; }
+</code></pre><p>以下是lambda表达式的重要特征:</p>
+<p>可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。</p>
+<p>可选的参数圆括号：一个参数无需定义圆括号，但多个参数需要定义圆括号。</p>
+<p>可选的大括号：如果主体包含了一个语句，就不需要使用大括号。</p>
+<p>可选的返回关键字：如果主体只有一个表达式返回值则编译器会自动返回值，大括号需要指定明表达式返回了一个数值。</p>
+<h2 id="Lambda-表达式实例"><a href="#Lambda-表达式实例" class="headerlink" title="Lambda 表达式实例"></a>Lambda 表达式实例</h2><p>Lambda 表达式的简单例子:</p>
+<pre><code>// 1. 不需要参数,返回值为 5  
+() -&gt; 5  
+
+// 2. 接收一个参数(数字类型),返回其2倍的值  
+x -&gt; 2 * x  
+
+// 3. 接受2个参数(数字),并返回他们的差值  
+(x, y) -&gt; x – y  
+
+// 4. 接收2个int型整数,返回他们的和  
+(int x, int y) -&gt; x + y  
+
+// 5. 接受一个 string 对象,并在控制台打印,不返回任何值(看起来像是返回void)  
+(String s) -&gt; System.out.print(s)
+</code></pre><p>在 Java8Tester.java 文件输入以下代码：</p>
+<pre><code>public class Java8Tester {
+   public static void main(String args[]){
+      Java8Tester tester = new Java8Tester();
+
+      // 类型声明
+      MathOperation addition = (int a, int b) -&gt; a + b;
+
+      // 不用类型声明
+      MathOperation subtraction = (a, b) -&gt; a - b;
+
+      // 大括号中的返回语句
+      MathOperation multiplication = (int a, int b) -&gt; { return a * b; };
+
+      // 没有大括号及返回语句
+      MathOperation division = (int a, int b) -&gt; a / b;
+
+      System.out.println(&quot;10 + 5 = &quot; + tester.operate(10, 5, addition));
+      System.out.println(&quot;10 - 5 = &quot; + tester.operate(10, 5, subtraction));
+      System.out.println(&quot;10 x 5 = &quot; + tester.operate(10, 5, multiplication));
+      System.out.println(&quot;10 / 5 = &quot; + tester.operate(10, 5, division));
+
+      // 不用括号
+      GreetingService greetService1 = message -&gt;
+      System.out.println(&quot;Hello &quot; + message);
+
+      // 用括号
+      GreetingService greetService2 = (message) -&gt;
+      System.out.println(&quot;Hello &quot; + message);
+
+      greetService1.sayMessage(&quot;Runoob&quot;);
+      greetService2.sayMessage(&quot;Google&quot;);
+   }
+
+   interface MathOperation {
+      int operation(int a, int b);
+   }
+
+   interface GreetingService {
+      void sayMessage(String message);
+   }
+
+   private int operate(int a, int b, MathOperation mathOperation){
+      return mathOperation.operation(a, b);
+   }
+}
+</code></pre><p>执行以上脚本，输出结果为：</p>
+<pre><code>$ javac Java8Tester.java
+$ java Java8Tester
+10 + 5 = 15
+10 - 5 = 5
+10 x 5 = 50
+10 / 5 = 2
+Hello Runoob
+Hello Google
+</code></pre><p>使用 Lambda 表达式需要注意以下两点：</p>
+<p>Lambda 表达式主要用来定义行内执行的方法类型接口，例如，一个简单方法接口。在上面例子中，我们使用各种类型的Lambda表达式来定义MathOperation接口的方法。然后我们定义了sayMessage的执行。</p>
+<p>Lambda 表达式免去了使用匿名方法的麻烦，并且给予Java简单但是强大的函数化的编程能力。</p>
+<h2 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h2><p>lambda 表达式只能引用标记了 final 的外层局部变量，这就是说不能在 lambda 内部修改定义在域外的局部变量，否则会编译错误。<br>在 Java8Tester.java 文件输入以下代码：</p>
+<pre><code>public class Java8Tester {
+
+final static String salutation = &quot;Hello! &quot;;
+
+public static void main(String args[]){
+  GreetingService greetService1 = message -&gt;
+  System.out.println(salutation + message);
+  greetService1.sayMessage(&quot;Runoob&quot;);
+}
+
+interface GreetingService {
+  void sayMessage(String message);
+}
+}
+</code></pre><p>执行以上脚本，输出结果为：</p>
+<pre><code>$ javac Java8Tester.java
+$ java Java8Tester
+Hello! Runoob
+</code></pre><p>我们也可以直接在 lambda 表达式中访问外层的局部变量：</p>
+<pre><code>public class Java8Tester {
+    public static void main(String args[]) {
+        final int num = 1;
+        Converter&lt;Integer, String&gt; s = (param) -&gt; System.out.println(String.valueOf(param + num));
+        s.convert(2);  // 输出结果为 3
+    }
+
+    public interface Converter&lt;T1, T2&gt; {
+        void convert(int i);
+    }
+}
+</code></pre><p>lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）</p>
+<pre><code>int num = 1;  
+Converter&lt;Integer, String&gt; s = (param) -&gt; System.out.println(String.valueOf(param + num));
+s.convert(2);
+num = 5;  
+//报错信息：Local variable num defined in an enclosing scope must be final or effectively
+ final
+</code></pre><p>在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量。</p>
+<pre><code>String first = &quot;&quot;;  
+Comparator&lt;String&gt; comparator = (first, second) -&gt; Integer.compare(first.length(), second.length());  //编译会出错
+</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://blog.csdn.net/walkerJong/article/details/7946109" target="_blank" rel="noopener">https://blog.csdn.net/walkerJong/article/details/7946109</a></p>
+<p>【2】<a href="https://www.runoob.com/java/java8-lambda-expressions.html" target="_blank" rel="noopener">https://www.runoob.com/java/java8-lambda-expressions.html</a></p>
 
       
       
@@ -409,7 +534,7 @@ public String processSubmit(@ModelAttribute Pet pet) {
         <p><span>本文标题:</span><a href="/2019/08/01/SpringBoot学习笔记VIII/">SpringBoot学习笔记VIII</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
         <p><span>发布时间:</span>2019年08月01日 - 17时12分</p>
-        <p><span>最后更新:</span>2019年08月02日 - 10时52分</p>
+        <p><span>最后更新:</span>2019年08月02日 - 17时10分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/01/SpringBoot学习笔记VIII/" title="SpringBoot学习笔记VIII">http://yoursite.com/2019/08/01/SpringBoot学习笔记VIII/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/08/01/SpringBoot学习笔记VIII/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -438,7 +563,7 @@ public String processSubmit(@ModelAttribute Pet pet) {
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CMS系统简介"><span class="toc-number">1.</span> <span class="toc-text">CMS系统简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#任务描述"><span class="toc-number">2.</span> <span class="toc-text">任务描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注解"><span class="toc-number">3.</span> <span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PathVariable"><span class="toc-number">3.1.</span> <span class="toc-text">@PathVariable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RequestHeader、-CookieValue"><span class="toc-number">3.2.</span> <span class="toc-text">@RequestHeader、@CookieValue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RequestParam-RequestBody"><span class="toc-number">3.3.</span> <span class="toc-text">@RequestParam, @RequestBody</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RequestParam"><span class="toc-number">3.3.1.</span> <span class="toc-text">@RequestParam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RequestBody"><span class="toc-number">3.3.2.</span> <span class="toc-text">@RequestBody</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SessionAttributes-ModelAttribute"><span class="toc-number">3.4.</span> <span class="toc-text">@SessionAttributes, @ModelAttribute</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SessionAttributes"><span class="toc-number">3.4.1.</span> <span class="toc-text">@SessionAttributes:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ModelAttribute"><span class="toc-number">3.4.2.</span> <span class="toc-text">@ModelAttribute</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在不给定注解的情况下，参数是怎样绑定的？"><span class="toc-number">3.5.</span> <span class="toc-text">在不给定注解的情况下，参数是怎样绑定的？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">4.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CMS系统简介"><span class="toc-number">1.</span> <span class="toc-text">CMS系统简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#任务描述"><span class="toc-number">2.</span> <span class="toc-text">任务描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注解"><span class="toc-number">3.</span> <span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PathVariable"><span class="toc-number">3.1.</span> <span class="toc-text">@PathVariable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RequestHeader、-CookieValue"><span class="toc-number">3.2.</span> <span class="toc-text">@RequestHeader、@CookieValue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RequestParam-RequestBody"><span class="toc-number">3.3.</span> <span class="toc-text">@RequestParam, @RequestBody</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RequestParam"><span class="toc-number">3.3.1.</span> <span class="toc-text">@RequestParam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RequestBody"><span class="toc-number">3.3.2.</span> <span class="toc-text">@RequestBody</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SessionAttributes-ModelAttribute"><span class="toc-number">3.4.</span> <span class="toc-text">@SessionAttributes, @ModelAttribute</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SessionAttributes"><span class="toc-number">3.4.1.</span> <span class="toc-text">@SessionAttributes:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ModelAttribute"><span class="toc-number">3.4.2.</span> <span class="toc-text">@ModelAttribute</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在不给定注解的情况下，参数是怎样绑定的？"><span class="toc-number">3.5.</span> <span class="toc-text">在不给定注解的情况下，参数是怎样绑定的？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java8-Lambda表达式"><span class="toc-number">4.</span> <span class="toc-text">Java8 Lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法"><span class="toc-number">4.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambda-表达式实例"><span class="toc-number">4.2.</span> <span class="toc-text">Lambda 表达式实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量作用域"><span class="toc-number">4.3.</span> <span class="toc-text">变量作用域</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">5.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -513,7 +638,7 @@ public String processSubmit(@ModelAttribute Pet pet) {
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VIII/">SpringBoot学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/SpringBoot学习笔记VI/">SpringBoot学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/19/SpringBoot学习笔记II/">SpringBoot学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VIII/">SpringBoot学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/SpringBoot学习笔记VI/">SpringBoot学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/19/SpringBoot学习笔记II/">SpringBoot学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
