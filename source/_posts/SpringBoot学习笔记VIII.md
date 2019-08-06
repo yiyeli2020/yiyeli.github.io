@@ -6,7 +6,7 @@ tags: [SpringBoot]
 
 ---
 
-CMS系统学习，对常用到的注解做详解,总结Java8 Lambda表达式。
+CMS系统学习，对常用到的注解做详解,总结Java8 Lambda表达式，对涉及到到final关键字做了回顾
 
 <!-- more -->
 # CMS系统简介
@@ -29,6 +29,8 @@ saas-cms 的Respository中建立自己的分支，在controller/creditreview/Tra
 
 
 ## CMS排查问题记录
+
+入手学习CMS系统
 
 # 注解
 
@@ -375,6 +377,42 @@ lambda 表达式的局部变量可以不用声明为 final，但是必须不可�
 
     String first = "";  
     Comparator<String> comparator = (first, second) -> Integer.compare(first.length(), second.length());  //编译会出错
+
+# final关键字
+
+final是一个关键字，可以用于修饰类，成员变量，成员方法。
+
+## 特点：
+
+它修饰的类不能被继承。
+
+它修饰的成员变量是一个常量。
+
+它修饰的成员方法是不能被子类重写的。
+
+final修饰的常量定义一般都有书写规范,被final修饰的常量名称,所有字母都大写。
+
+final修饰成员变量,必须初始化,初始化有两种
+
+显示初始化；
+
+构造方法初始化。
+
+但是不能两个一起初始化
+
+## final和private的区别：
+
+final修饰的类可以访问；
+
+private不可以修饰外部类，但可以修饰内部类（其实把外部类私有化是没有意义的）。
+
+final修饰的方法不可以被子类重写；
+
+private修饰的方法表面上看是可以被子类重写的，其实不可以，子类是看不到父类的私有方法的。
+
+final修饰的变量只能在显示初始化或者构造函数初始化的时候赋值一次，以后不允许更改；
+
+private修饰的变量，也不允许直接被子类或一个包中的其它类访问或修改，但是他可以通过set和get方法对其改值和取值。
 
 # 参考资料：
 【1】https://blog.csdn.net/walkerJong/article/details/7946109
