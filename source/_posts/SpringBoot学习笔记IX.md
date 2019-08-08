@@ -135,7 +135,7 @@ cms有页面，会串联很多系统有交互，会处理很多中间的进件�
 chrome 右键检查可以看见请求，根据请求找代码
 
 进件流程 ：画流程图
-重点是create和full——flow两个
+重点是create和fullflow两个
 
 
 进件分为store检查是否有新进件，没有的话insert，待初审分配，
