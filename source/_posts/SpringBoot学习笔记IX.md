@@ -120,7 +120,31 @@ user_role
 tb_cron_ini
 cms_task
 
+# CMS系统分析
+## 进件流程
+入口create接口
+## 状态机流程
+很多外界模块都会调用 NewtransportOpmachineServiceimpl/operateTransport
+举例审核操作信审3.0系统 ，审核进件，批钱，批产品，校验身份，审核是否符合规定，可能也需要用户补充信息，例如电话核实信息，如果拒绝则调用信审系统，调用cms系统中cn.creditease.bdp.newcms.controller.creditreview.operate接口
 
+目的是变换当前状态到下一个状态，其次是通知操作,label标定，记录备注都会调用状态机，状态不会改变。
+
+## 展示流程
+cms有页面，会串联很多系统有交互，会处理很多中间的进件流程。
+比如applicatoin进件系统，当application将进件推给cms时，进件信息里很多存在transport_exts表中，CmsDetailController
+chrome 右键检查可以看见请求，根据请求找代码
+
+进件流程 ：画流程图
+重点是create和full——flow两个
+
+
+进件分为store检查是否有新进件，没有的话insert，待初审分配，
+第二是重新进件
+
+
+cn.creditease.bdp.newcms.service.creditreview.fullFlow
+1.rateBoth full预估和partial预估
+2.dataPrepareCheckAndCheckSuijieRule 随借 检查数据完整性是否能够推送到信审3.0，如果不够完整则创建redis任务，
 
 # MapReduce思想及Java中的实现
 
