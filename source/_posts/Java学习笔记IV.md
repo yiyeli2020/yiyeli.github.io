@@ -650,8 +650,7 @@ Intermediate 操作永远是惰性化的。
 集合有固定大小，Stream 则不必。limit(n) 和 findFirst() 这类的 short-circuiting 操作可以对无限的 Stream 进行运算并很快完成。
 
 # 参考资料
-【1】
-https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html
+【1】https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html
 
 【2】https://www.ibm.com/developerworks/cn/java/
 

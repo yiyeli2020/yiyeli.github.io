@@ -24,7 +24,8 @@ cn.creditease.bdp.newcms.controller.creditreview.TransportController中的public
 
      dataPrepareCheckAndCheckSuijieRule(transport);
 
-需求：CMS逾期天数计算方式优化
+需求：
+cn.creditease.bdp.newcms.cmswrapper.controller中的getAll对应http://std-cms-fe.laincloud.xyz/#/incoming进件查询中的查询按钮，现在需要在标记一栏的返回值中加入新的返回信息。
 
 # 系统介绍
 
