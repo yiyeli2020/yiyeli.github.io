@@ -1,200 +1,221 @@
 ---
 title: SpringBoot学习笔记VII
-date: 2019-7-31 11:12:12
-categories: 2019年7月
+date: 2019-8-1 17:12:12
+categories: 2019年8月
 tags: [SpringBoot]
 
 ---
 
-Mybatis的分页查询，日志log的写法详解
+CMS系统学习，对常用到的注解做详解
 
 <!-- more -->
+# CMS系统简介
+内容管理系统（英语：content management system，缩写为 CMS）是指在一个合作模式下，用于管理工作流程的一套制度。该系统可应用于手工操作中，也可以应用到计算机或网络里。作为一种中央储存器（central repository），内容管理系统可将相关内容集中储存并具有群组管理、版本控制等功能。版本控制是内容管理系统的一个主要优势。
+内容管理系统在物品或文案或数据的存储、掌管、修订（盘存）、语用充实、文档发布等方面有着广泛的应用。现在流行的开源CMS系统有WordPress、Joomla!、Drupal、Xoops、CmsTop等。
 
-# SQL分页查询
-使用SELECT查询时，如果结果集数据量很大，比如几万行数据，放在一个页面显示的话数据量太大，不如分页显示，每次显示100条。
+# 名词解释
 
-要实现分页功能，实际上就是从结果集中显示第1 ~ 100条记录作为第1页，显示第101~200条记录作为第2页，以此类推。
+进件 Transport 业务上增加贷款或商户的操作。
 
-因此，分页实际上就是从结果集中“截取”出第M~N条记录。这个查询可以通过LIMIT <M> OFFSET <N>子句实现。
+# 任务描述
+## 实现查询接口
+saas-cms 的Respository中建立自己的分支，在controller/creditreview/TransportController中画出getAllProcessHistory函数的流程图，自己重新实现一个查询接口
+数据库配置文件在resources.local/application.yml中
+使用的数据库是：jdbc:mysql://10.143.248.78:3306/creditreview?
 
-例如基本查询语句：
+其中该函数根据GET请求/{transportId}/{attr}中的attr参数（花括号内为参数值）查询相应的数据库transportLabel、transportExt、transportProcessHistory、transportDecision四个数据库
 
-    SELECT id,name,gender,score
-    FROM students
-    ORDER BY score DESC;
+## 画出putExts函数流程图（周一上午提交）
 
-现在将结果集分页，每页3条记录。要获取第一页的记录，可以使用 LIMIT 3 OFFSET 0:
 
-    SELECT id,name,gender,score
-    FROM students
-    ORDER BY score DESC
-    LIMIT 3 OFFSET 0;
+## CMS排查问题记录
 
-上述查询LIMIT 3 OFFSET 0表示：
-对结果集从0号记录开始，最多取3条（注意SQL记录集对索引从0开始）。
-若要查询第2页，那么我们只需要跳过前3条记录，即对结果集从3号记录开始查询，把OFFSET设定为3:
+入手学习CMS系统
 
-    SELECT id,name,gender,score
-    FROM students
-    ORDER BY score DESC
-    LIMIT 3 OFFSET 3;
+# 注解
 
-类似的，查询第3页的时候，OFFSET应该设为6，查询第4页的时候，OFFSET应该设为9.如果查询的表第4页只有1条记录，则最终结果按照实际数量1显示，LIMIT 3表示的意思是“最多3条记录”。
+handler method 参数绑定常用的注解,根据处理的Request的不同内容部分分为四类：（主要讲解常用类型）
 
-可见分页查询的关键在于，首先要确定每页需要显示的结果数量pageSize，然后根据当前页的索引pageIndex（从1开始），确定LIMIT和OFFSET应该设定的值：
+A、处理request uri 部分（这里指uri template中variable，不含queryString部分）的注解：@PathVariable;
 
-LIMIT总是设定为pageSize；
-OFFSET计算公式为pageSize*（pageIndex-1）。
+B、处理request header部分的注解：   @RequestHeader, @CookieValue;
 
-## 扩展思考
-如果原本记录集只有10条记录，但我们将OFFSET设置为20，结果会怎样呢？
-答案是OFFSET超过查询的最大数量并不会报错，而是会得到一个空的结果集
+C、处理request body部分的注解：@RequestParam,  @RequestBody;
 
-## 注意
-OFFSET是可选的，OFFSET缺省值为0.即LIMIT 3 相当于LIMIT 3 OFFSET 0
-在MySQL中，LIMIT 3 OFFSET 0也可简写为LIMIT 3，0
-使用LIMIT M OFFSET N进行分页查询时，N越大查询效率越低。
+D、处理attribute类型是注解： @SessionAttributes, @ModelAttribute;
 
-# SQL连接查询
-连接查询是将两个或两个以上的表按某些条件连接起来，从中选取需要的数据。可以分为内连接查询(通过where实现)和外连接查询（join）。
+## @PathVariable 
 
-## 内连接查询
-只有不同表中有相同意义的字段时才能进行连接，而且内连接查询只查询出指定字段取值相同的记录。
-![https://img-blog.csdn.net/20171209135846780?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGxnMTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast](assets/markdown-img-paste-20190801165654826.png)
+当使用@RequestMapping URI template 样式映射时， 即 someUrl/{paramId}, 这时的paramId可通过 @Pathvariable注解绑定它传过来的值到方法的参数上。
 
-    一般语法:
-    select a.* , b.*
-    from table_a as a, table_b as b
-    where a.id = b.id;
-## 外连接查询
-需要通过指定字段来进行连接。当该字段取值相等时，可以查询出该记录；而且当该字段不等时，也可以查询出来。包括左连接，右连接查询。
+示例代码：
 
-    一般语法：
-    select 属性名列表
-    from 表1
-    left | right join 表2
-    on 表1.属性名 = 表2.属性名;
 
-### 左外连接
-left join 是left outer join的简写，它的全称是左外连接，是外连接中的一种。
-左(外)连接，左表(a_table)的记录将会全部表示出来，而右表(b_table)只会显示符合搜索条件的记录。右表记录不足的地方均为NULL。
-![https://img-blog.csdn.net/20171209142610819?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGxnMTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast](assets/markdown-img-paste-2019080116575036.png)
+    @Controller
+    @RequestMapping("/owners/{ownerId}")
+    public class RelativePathUriTemplateController {
 
-### 右外连接
-右外连接与左外连接相对称，
-right join是right outer join的简写，它的全称是右外连接，是外连接中的一种。
-与左(外)连接相反，右(外)连接，左表(a_table)只会显示符合搜索条件的记录，而右表(b_table)的记录将会全部表示出来。左表记录不足的地方均为NULL。
-![https://img-blog.csdn.net/20171209144056668?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGxnMTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast](assets/markdown-img-paste-20190801175330121.png)
-### 外连接查询加条件语句
+      @RequestMapping("/pets/{petId}")
+      public void findPet(@PathVariable String ownerId, @PathVariable String petId, Model model) {    
+        // implementation omitted
+      }
+    }
+上面代码把URI template 中变量 ownerId的值和petId的值，绑定到方法的参数上。若方法参数名称和需要绑定的uri template中变量名称不一致，需要在@PathVariable("name")指定uri template中的名称。
 
-使用外连接查询时，可以加上各种条件进行筛选。
+##  @RequestHeader、@CookieValue
 
-    select table1.column1, table2.column1
-    from table1
-    join table2
-    on table1.column2 = table2.column3;
+***@RequestHeader注解，可以把Request请求header部分的值绑定到方法的参数上。***
 
-    select table1.column1, table2.column1
-    from table1,table2
-    where table1.column2 = table2.column3;
+示例代码：
 
-## 子查询
-子查询时将一个查询语句嵌套在另一个查询语句中，内层查询语句的查询结果，可以为外层查询语句提供查询条件。在特定情况下：一个查询语句的条件需要另一个查询语句来获取。
-子查询，又叫内部查询，相对于内部查询，包含内部查询的就称为外部查询。
+这是一个Request 的header部分：
 
-子查询可以包含普通select可以包括的任何子句，比如：distinct、 group by、order by、limit、join和union等；但是对应的外部查询必须是以下语句之一：select、insert、update、delete、set或 者do。
 
-注：一个查询语句只能有一个order by ，在子查询中只能位于外部查询后面.
+    Host                    localhost:8080
+    Accept                  text/html,application/xhtml+xml,application/xml;q=0.9
+    Accept-Language         fr,en-gb;q=0.7,en;q=0.3
+    Accept-Encoding         gzip,deflate
+    Accept-Charset          ISO-8859-1,utf-8;q=0.7,*;q=0.7
+    Keep-Alive              300
 
-### 分类
+下面的代码，把request header部分的 Accept-Encoding的值，绑定到参数encoding上了， Keep-Alive header的值绑定到参数keepAlive上。
 
-子查询分为如下几类：
-1）. 标量子查询：返回单一值的标量，最简单的形式。
-2）. 列子查询：返回的结果集是 N 行一列。
-3）. 行子查询：返回的结果集是一行 N 列。
-4）. 表子查询：返回的结果集是 N 行 N 列。
-可以使用的操作符：= > < >= <= <> ANY IN SOME ALL EXISTS
 
-释义：一个子查询会返回一个标量（就一个值）、一个行、一个列或一个表，这些子查询称之为标量、行、列和表子查询。
+    @RequestMapping("/displayHeaderInfo.do")
+    public void displayHeaderInfo(@RequestHeader("Accept-Encoding") String encoding,
+                                  @RequestHeader("Keep-Alive") long keepAlive)  {
 
-### 带有any关键字的子查询
+      //...
 
-any关键字表示满足其中任一条件，使用any关键字时，只要满足内层查询语句返回的结果中的任何一个，就可以通过该条件来执行外层查询语句。
+    }
 
-从computer表中查询哪些人分数高于任何一个奖学金的最低分。
 
-    select * from computer_stu
-    where score >= ANY
-                      (select score From  scholarship);
-### 带有all关键字的子查询
 
-表示需要满足所有的条件。只有满足内层查询语句返回的所有结果，才可以执行外层查询语句。
+***@CookieValue 可以把Request header中关于cookie的值绑定到方法的参数上。***
 
-### 带有exists关键字的子查询
+例如有如下Cookie值：
 
-exists关键字表示存在，内层查询语句不返回查询的记录，而是返回一个真假值，如果内层查询语句查询到满足条件的记录，就返回一个true，外层查询语句将进行查询。
+    JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84
+参数绑定的代码：
 
-    select * from employee
-    where exists (select d_name from department where d_id = 1003);
-    //如果department存在d_id为1003，则查询employee表。
-还可以分为相关子查询，独立子查询。以上子查询与外层查询没有关联，称为独立子查询，如果子查询有用到外层查询的字段，则称相关子查询，相关子查询容易产生性能问题。
+    @RequestMapping("/displayHeaderInfo.do")
+    public void displayHeaderInfo(@CookieValue("JSESSIONID") String cookie)  {
 
+      //...
 
+    }
+即把JSESSIONID的值绑定到参数cookie上。
 
-# Mybatis分页查询
+##  @RequestParam, @RequestBody
 
+### @RequestParam
 
+A） 常用来处理简单类型的绑定，通过Request.getParameter() 获取的String可直接转换为简单类型的情况（ String--> 简单类型的转换操作由ConversionService配置的转换器来完成）；因为使用request.getParameter()方式获取参数，所以可以处理get 方式中queryString的值，也可以处理post方式中 body data的值；
 
+B）用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST；
 
+C) 该注解有两个属性： value、required； value用来指定要传入值的id名称，required用来指示参数是否必须绑定；
 
+示例代码：
 
+    @Controller
+    @RequestMapping("/pets")
+    @SessionAttributes("pet")
+    public class EditPetForm {
 
+        // ...
 
+        @RequestMapping(method = RequestMethod.GET)
+        public String setupForm(@RequestParam("petId") int petId, ModelMap model) {
+            Pet pet = this.clinic.loadPet(petId);
+            model.addAttribute("pet", pet);
+            return "petForm";
+        }
 
+        // ...
 
 
+### @RequestBody
 
+该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；
 
+它是通过使用HandlerAdapter 配置的HttpMessageConverters来解析post data body，然后绑定到相应的bean上的。
 
+因为配置有FormHttpMessageConverter，所以也可以用来处理 application/x-www-form-urlencoded的内容，处理完的结果放在一个MultiValueMap<String, String>里，这种情况在某些特殊需求下使用，详情查看FormHttpMessageConverter api;
 
+示例代码：
 
+    @RequestMapping(value = "/something", method = RequestMethod.PUT)
+    public void handle(@RequestBody String body, Writer writer) throws IOException {
+      writer.write(body);
 
+## @SessionAttributes, @ModelAttribute
 
+### @SessionAttributes:
 
-# 日志Log写法详解
+该注解用来绑定HttpSession中的attribute对象的值，便于在方法中的参数里使用。
 
+该注解有value、types两个属性，可以通过名字和类型指定要使用的attribute 对象；
 
+示例代码：
 
+    @Controller
+    @RequestMapping("/editPet.do")
+    @SessionAttributes("pet")
+    public class EditPetForm {
+        // ...
+    }
 
 
+### @ModelAttribute
 
+该注解有两个用法，一个是用于方法上，一个是用于参数上；
 
+用于方法上时：  通常用来在处理@RequestMapping之前，为请求绑定需要从后台查询的model；
 
+用于参数上时： 用来通过名称对应，把相应名称的值绑定到注解的参数bean上；要绑定的值来源于：
 
+A） @SessionAttributes 启用的attribute 对象上；
 
+B） @ModelAttribute 用于方法上时指定的model对象；
 
+C） 上述两种情况都没有时，new一个需要绑定的bean对象，然后把request中按名称对应的方式把值绑定到bean中。
 
 
 
+用到方法上@ModelAttribute的示例代码：
 
+    // Add one attribute
+    // The return value of the method is added to the model under the name "account"
+    // You can customize the name via @ModelAttribute("myAccount")
 
+    @ModelAttribute
+    public Account addAccount(@RequestParam String number) {
+        return accountManager.findAccount(number);
+    }
 
+这种方式实际的效果就是在调用@RequestMapping的方法之前，为request对象的model里put（“account”， Account）；
 
 
+用在参数上的@ModelAttribute示例代码：
 
+    @RequestMapping(value="/owners/{ownerId}/pets/{petId}/edit", method = RequestMethod.POST)
+    public String processSubmit(@ModelAttribute Pet pet) {
 
+    }
+首先查询 @SessionAttributes有无绑定的Pet对象，若没有则查询@ModelAttribute方法层面上是否绑定了Pet对象，若没有则将URI template中的值按对应的名称绑定到Pet对象的各属性上。
 
+## 在不给定注解的情况下，参数是怎样绑定的？
 
+通过分析AnnotationMethodHandlerAdapter和RequestMappingHandlerAdapter的源代码发现，方法的参数在不给定参数的情况下：
 
+若要绑定的对象时简单类型：  调用@RequestParam来处理的。 
 
+若要绑定的对象时复杂类型：  调用@ModelAttribute来处理的。
 
-
-
+这里的简单类型指java的原始类型(boolean, int 等)、原始类型对象（Boolean, Int等）、String、Date等ConversionService里可以直接String转换成目标对象的类型；
 
 
 
 # 参考资料：
-
-【1】https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600
-【2】https://blog.csdn.net/plg17/article/details/78758593
-【3】https://cloud.tencent.com/developer/article/1333120
+【1】https://blog.csdn.net/walkerJong/article/details/7946109

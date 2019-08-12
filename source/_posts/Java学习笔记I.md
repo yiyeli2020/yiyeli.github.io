@@ -1,7 +1,7 @@
-title: SpringBoot学习笔记X
+title: Java学习笔记I
 date: 2019-8-6 15:12:12
 categories: 2019年8月
-tags: [Java,SpringBoot]
+tags: [Java]
 
 ---
 

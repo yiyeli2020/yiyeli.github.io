@@ -1,420 +1,153 @@
 ---
 title: SpringBoot学习笔记VIII
-date: 2019-8-1 17:12:12
+date: 2019-8-5 11:22:12
 categories: 2019年8月
-tags: [SpringBoot]
+tags: [SpringBoot，Java]
 
 ---
 
-CMS系统学习，对常用到的注解做详解,总结Java8 Lambda表达式，对涉及到到final关键字做了回顾
+CMS系统学习。
 
 <!-- more -->
-# CMS系统简介
-内容管理系统（英语：content management system，缩写为 CMS）是指在一个合作模式下，用于管理工作流程的一套制度。该系统可应用于手工操作中，也可以应用到计算机或网络里。作为一种中央储存器（central repository），内容管理系统可将相关内容集中储存并具有群组管理、版本控制等功能。版本控制是内容管理系统的一个主要优势。
-内容管理系统在物品或文案或数据的存储、掌管、修订（盘存）、语用充实、文档发布等方面有着广泛的应用。现在流行的开源CMS系统有WordPress、Joomla!、Drupal、Xoops、CmsTop等。
+# 任务
+先阅读cn.creditease.bdp.newcms.notice源码，定时相关，其中impl/CmsTaskNoticeHelperImpl/sendMsgByBatch函数是模块入口
 
-# 名词解释
+阅读
+cn.creditease.bdp.newcms.cmswrapper.controller.PaymentScheduleController的源码，涉及到customer表，里面是借贷用户的信息
 
-进件 Transport 业务上增加贷款或商户的操作。
+阅读
+cn.creditease.bdp.newcms.controller.creditreview.TransportController中的public Object create(@RequestBody(required = false) Transport transport)方法重点看FULL_FLOW，cn.creditease.bdp.newcms.service.creditreview.fullFlowfullFlow中的评级部分代码
 
-# 任务描述
-## 实现查询接口
-saas-cms 的Respository中建立自己的分支，在controller/creditreview/TransportController中画出getAllProcessHistory函数的流程图，自己重新实现一个查询接口
-数据库配置文件在resources.local/application.yml中
-使用的数据库是：jdbc:mysql://10.143.248.78:3306/creditreview?
+    CMSResponseCode cmsResponseCode = rateBoth(transport);
 
-其中该函数根据GET请求/{transportId}/{attr}中的attr参数（花括号内为参数值）查询相应的数据库transportLabel、transportExt、transportProcessHistory、transportDecision四个数据库
+和最后一段代码
 
-## 画出putExts函数流程图（周一上午提交）
+     dataPrepareCheckAndCheckSuijieRule(transport);
 
+需求：CMS逾期天数计算方式优化
 
-## CMS排查问题记录
+# 系统介绍
 
-入手学习CMS系统
+最早的site系统，scala语言，编译运行比较慢，一小时左右，包括了application，postloan等所有系统
 
-# 注解
+测试官网网址：http://shangtongdai.yxapp.xyz/newsite/?code=YANGKAI34#/loginReg/login
 
-handler method 参数绑定常用的注解,根据处理的Request的不同内容部分分为四类：（主要讲解常用类型）
+查询语句：
 
-A、处理request uri 部分（这里指uri template中variable，不含queryString部分）的注解：@PathVariable;
+    select * from shangtongdai.users
+        where id in (
+          select user_id from shangtongdai.applications
+              where id in (
+                    select application_id from shangtongdai.loans
+                          where loan_status_id=12 ))
 
-B、处理request header部分的注解：   @RequestHeader, @CookieValue;
+application系统：进件系统
 
-C、处理request body部分的注解：@RequestParam,  @RequestBody;
+巨星系统：数据中转
 
-D、处理attribute类型是注解： @SessionAttributes, @ModelAttribute;
+爬虫系统：爬取商户数据
 
-## @PathVariable 
+miner系统：评级系统
 
-当使用@RequestMapping URI template 样式映射时， 即 someUrl/{paramId}, 这时的paramId可通过 @Pathvariable注解绑定它传过来的值到方法的参数上。
+postloan系统（贷后系统）
 
-示例代码：
+User系统：管理用户
 
+User-refer系统：返还佣金
 
-    @Controller
-    @RequestMapping("/owners/{ownerId}")
-    public class RelativePathUriTemplateController {
+Report系统：做报表
 
-      @RequestMapping("/pets/{petId}")
-      public void findPet(@PathVariable String ownerId, @PathVariable String petId, Model model) {    
-        // implementation omitted
-      }
-    }
-上面代码把URI template 中变量 ownerId的值和petId的值，绑定到方法的参数上。若方法参数名称和需要绑定的uri template中变量名称不一致，需要在@PathVariable("name")指定uri template中的名称。
+Report-tool系统：基础查询
 
-##  @RequestHeader、@CookieValue
+综合信贷系统：管理合同签约
 
-***@RequestHeader注解，可以把Request请求header部分的值绑定到方法的参数上。***
+新核心系统：管理还款计划表
 
-示例代码：
+结算系统：管理还款逻辑
 
-这是一个Request 的header部分：
+添加店户会触发爬虫系统，爬取商户的数据，使用miner系统进行评级，巨星系统进行数据中转筛除。
 
+评级通过之后，进件将由CMS系统进行审核，审核通过后，所有审核逻辑都在CMS系统中。
 
-    Host                    localhost:8080
-    Accept                  text/html,application/xhtml+xml,application/xml;q=0.9
-    Accept-Language         fr,en-gb;q=0.7,en;q=0.3
-    Accept-Encoding         gzip,deflate
-    Accept-Charset          ISO-8859-1,utf-8;q=0.7,*;q=0.7
-    Keep-Alive              300
+审核通过后，由postloan系统（贷后系统）处理，包括了：
 
-下面的代码，把request header部分的 Accept-Encoding的值，绑定到参数encoding上了， Keep-Alive header的值绑定到参数keepAlive上。
+1.合同管理：签约，管理状态,综合信贷系统管理合同签约
 
+2.还款：还款计划表,新核心系统管理还款计划表
 
-    @RequestMapping("/displayHeaderInfo.do")
-    public void displayHeaderInfo(@RequestHeader("Accept-Encoding") String encoding,
-                                  @RequestHeader("Keep-Alive") long keepAlive)  {
+3.放款：结算系统管理还款逻辑
 
-      //...
 
-    }
+团队主要负责CMS，postloan和report，report-tool等系统。
 
+application进件系统，爬虫系统，巨星系统，miner评级系统由进件团队负责。
 
+CMS系统里有初审，复审，分发等36个状态。
 
-***@CookieValue 可以把Request header中关于cookie的值绑定到方法的参数上。***
+***shangtongdai数据库表信息：***
 
-例如有如下Cookie值：
+transport表：进件表，维护进件状态，
 
-    JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84
-参数绑定的代码：
+transportlabel拒绝或接受打下标签
 
-    @RequestMapping("/displayHeaderInfo.do")
-    public void displayHeaderInfo(@CookieValue("JSESSIONID") String cookie)  {
+transportext 进件附加信息，以json格式存储（最重要）
 
-      //...
+transport_decisions:重大决策信息放款或其它
 
-    }
-即把JSESSIONID的值绑定到参数cookie上。
+transport_assigned_history：客服分单给客户历史的信息
 
-##  @RequestParam, @RequestBody
 
-### @RequestParam
 
-A） 常用来处理简单类型的绑定，通过Request.getParameter() 获取的String可直接转换为简单类型的情况（ String--> 简单类型的转换操作由ConversionService配置的转换器来完成）；因为使用request.getParameter()方式获取参数，所以可以处理get 方式中queryString的值，也可以处理post方式中 body data的值；
+loan :合同
 
-B）用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST；
+repayment：业务订单，用户还款会生成业务订单
 
-C) 该注解有两个属性： value、required； value用来指定要传入值的id名称，required用来指示参数是否必须绑定；
+loanrepayment：合同和业务订单的关系，一笔合同会有多笔订单
 
-示例代码：
+repayment_type字段，还款类型
 
-    @Controller
-    @RequestMapping("/pets")
-    @SessionAttributes("pet")
-    public class EditPetForm {
+repayment_order字段：
 
-        // ...
+repaymenttags:业务订单信息
 
-        @RequestMapping(method = RequestMethod.GET)
-        public String setupForm(@RequestParam("petId") int petId, ModelMap model) {
-            Pet pet = this.clinic.loadPet(petId);
-            model.addAttribute("pet", pet);
-            return "petForm";
-        }
+权限信息的相关表
+privilege
+role
+role_privilege
+user_role
 
-        // ...
+任务相关的表
+tb_cron_ini
+cms_task
 
+# CMS系统分析
+## 进件流程
+入口create接口
+## 状态机流程
+很多外界模块都会调用 NewtransportOpmachineServiceimpl/operateTransport
+举例审核操作信审3.0系统 ，审核进件，批钱，批产品，校验身份，审核是否符合规定，可能也需要用户补充信息，例如电话核实信息，如果拒绝则调用信审系统，调用cms系统中cn.creditease.bdp.newcms.controller.creditreview.operate接口
 
-### @RequestBody
+目的是变换当前状态到下一个状态，其次是通知操作,label标定，记录备注都会调用状态机，状态不会改变。
 
-该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；
+## 展示流程
+cms有页面，会串联很多系统有交互，会处理很多中间的进件流程。
+比如applicatoin进件系统，当application将进件推给cms时，进件信息里很多存在transport_exts表中，CmsDetailController
+chrome 右键检查可以看见请求，根据请求找代码
 
-它是通过使用HandlerAdapter 配置的HttpMessageConverters来解析post data body，然后绑定到相应的bean上的。
+进件流程 ：画流程图
+重点是create和fullflow两个
 
-因为配置有FormHttpMessageConverter，所以也可以用来处理 application/x-www-form-urlencoded的内容，处理完的结果放在一个MultiValueMap<String, String>里，这种情况在某些特殊需求下使用，详情查看FormHttpMessageConverter api;
 
-示例代码：
+进件分为store检查是否有新进件，没有的话insert，待初审分配，
+第二是重新进件
 
-    @RequestMapping(value = "/something", method = RequestMethod.PUT)
-    public void handle(@RequestBody String body, Writer writer) throws IOException {
-      writer.write(body);
 
-## @SessionAttributes, @ModelAttribute
+cn.creditease.bdp.newcms.service.creditreview.fullFlow
+1.rateBoth full预估和partial预估
+2.dataPrepareCheckAndCheckSuijieRule 随借 检查数据完整性是否能够推送到信审3.0，如果不够完整则创建redis任务，
 
-### @SessionAttributes:
 
-该注解用来绑定HttpSession中的attribute对象的值，便于在方法中的参数里使用。
 
-该注解有value、types两个属性，可以通过名字和类型指定要使用的attribute 对象；
-
-示例代码：
-
-    @Controller
-    @RequestMapping("/editPet.do")
-    @SessionAttributes("pet")
-    public class EditPetForm {
-        // ...
-    }
-
-
-### @ModelAttribute
-
-该注解有两个用法，一个是用于方法上，一个是用于参数上；
-
-用于方法上时：  通常用来在处理@RequestMapping之前，为请求绑定需要从后台查询的model；
-
-用于参数上时： 用来通过名称对应，把相应名称的值绑定到注解的参数bean上；要绑定的值来源于：
-
-A） @SessionAttributes 启用的attribute 对象上；
-
-B） @ModelAttribute 用于方法上时指定的model对象；
-
-C） 上述两种情况都没有时，new一个需要绑定的bean对象，然后把request中按名称对应的方式把值绑定到bean中。
-
-
-
-用到方法上@ModelAttribute的示例代码：
-
-    // Add one attribute
-    // The return value of the method is added to the model under the name "account"
-    // You can customize the name via @ModelAttribute("myAccount")
-
-    @ModelAttribute
-    public Account addAccount(@RequestParam String number) {
-        return accountManager.findAccount(number);
-    }
-
-这种方式实际的效果就是在调用@RequestMapping的方法之前，为request对象的model里put（“account”， Account）；
-
-
-用在参数上的@ModelAttribute示例代码：
-
-    @RequestMapping(value="/owners/{ownerId}/pets/{petId}/edit", method = RequestMethod.POST)
-    public String processSubmit(@ModelAttribute Pet pet) {
-
-    }
-首先查询 @SessionAttributes有无绑定的Pet对象，若没有则查询@ModelAttribute方法层面上是否绑定了Pet对象，若没有则将URI template中的值按对应的名称绑定到Pet对象的各属性上。
-
-## 在不给定注解的情况下，参数是怎样绑定的？
-
-通过分析AnnotationMethodHandlerAdapter和RequestMappingHandlerAdapter的源代码发现，方法的参数在不给定参数的情况下：
-
-若要绑定的对象时简单类型：  调用@RequestParam来处理的。 
-
-若要绑定的对象时复杂类型：  调用@ModelAttribute来处理的。
-
-这里的简单类型指java的原始类型(boolean, int 等)、原始类型对象（Boolean, Int等）、String、Date等ConversionService里可以直接String转换成目标对象的类型；
-
-# Java8 Lambda表达式
-
-Lambda 表达式，也可称为闭包，它是推动 Java 8 发布的最重要新特性。
-Lambda 允许把函数作为一个方法的参数（函数作为参数传递进方法中）。
-使用 Lambda 表达式可以使代码变的更加简洁紧凑。
-## 语法
-lambda 表达式的语法格式如下：
-
-    (parameters) -> expression
-    或
-    (parameters) ->{ statements; }
-
-以下是lambda表达式的重要特征:
-
-可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。
-
-可选的参数圆括号：一个参数无需定义圆括号，但多个参数需要定义圆括号。
-
-可选的大括号：如果主体包含了一个语句，就不需要使用大括号。
-
-可选的返回关键字：如果主体只有一个表达式返回值则编译器会自动返回值，大括号需要指定明表达式返回了一个数值。
-
-## Lambda 表达式实例
-
-Lambda 表达式的简单例子:
-
-
-    // 1. 不需要参数,返回值为 5  
-    () -> 5  
-
-    // 2. 接收一个参数(数字类型),返回其2倍的值  
-    x -> 2 * x  
-
-    // 3. 接受2个参数(数字),并返回他们的差值  
-    (x, y) -> x – y  
-
-    // 4. 接收2个int型整数,返回他们的和  
-    (int x, int y) -> x + y  
-
-    // 5. 接受一个 string 对象,并在控制台打印,不返回任何值(看起来像是返回void)  
-    (String s) -> System.out.print(s)
-
-在 Java8Tester.java 文件输入以下代码：
-
-    public class Java8Tester {
-       public static void main(String args[]){
-          Java8Tester tester = new Java8Tester();
-
-          // 类型声明
-          MathOperation addition = (int a, int b) -> a + b;
-
-          // 不用类型声明
-          MathOperation subtraction = (a, b) -> a - b;
-
-          // 大括号中的返回语句
-          MathOperation multiplication = (int a, int b) -> { return a * b; };
-
-          // 没有大括号及返回语句
-          MathOperation division = (int a, int b) -> a / b;
-
-          System.out.println("10 + 5 = " + tester.operate(10, 5, addition));
-          System.out.println("10 - 5 = " + tester.operate(10, 5, subtraction));
-          System.out.println("10 x 5 = " + tester.operate(10, 5, multiplication));
-          System.out.println("10 / 5 = " + tester.operate(10, 5, division));
-
-          // 不用括号
-          GreetingService greetService1 = message ->
-          System.out.println("Hello " + message);
-
-          // 用括号
-          GreetingService greetService2 = (message) ->
-          System.out.println("Hello " + message);
-
-          greetService1.sayMessage("Runoob");
-          greetService2.sayMessage("Google");
-       }
-
-       interface MathOperation {
-          int operation(int a, int b);
-       }
-
-       interface GreetingService {
-          void sayMessage(String message);
-       }
-
-       private int operate(int a, int b, MathOperation mathOperation){
-          return mathOperation.operation(a, b);
-       }
-    }
-
-执行以上脚本，输出结果为：
-
-
-      $ javac Java8Tester.java
-      $ java Java8Tester
-      10 + 5 = 15
-      10 - 5 = 5
-      10 x 5 = 50
-      10 / 5 = 2
-      Hello Runoob
-      Hello Google
-
-使用 Lambda 表达式需要注意以下两点：
-
-Lambda 表达式主要用来定义行内执行的方法类型接口，例如，一个简单方法接口。在上面例子中，我们使用各种类型的Lambda表达式来定义MathOperation接口的方法。然后我们定义了sayMessage的执行。
-
-Lambda 表达式免去了使用匿名方法的麻烦，并且给予Java简单但是强大的函数化的编程能力。
-
-
-## 变量作用域
-lambda 表达式只能引用标记了 final 的外层局部变量，这就是说不能在 lambda 内部修改定义在域外的局部变量，否则会编译错误。
-在 Java8Tester.java 文件输入以下代码：
-
-
-    public class Java8Tester {
-
-    final static String salutation = "Hello! ";
-
-    public static void main(String args[]){
-      GreetingService greetService1 = message ->
-      System.out.println(salutation + message);
-      greetService1.sayMessage("Runoob");
-    }
-
-    interface GreetingService {
-      void sayMessage(String message);
-    }
-    }
-
-执行以上脚本，输出结果为：
-
-    $ javac Java8Tester.java
-    $ java Java8Tester
-    Hello! Runoob
-
-我们也可以直接在 lambda 表达式中访问外层的局部变量：
-
-    public class Java8Tester {
-        public static void main(String args[]) {
-            final int num = 1;
-            Converter<Integer, String> s = (param) -> System.out.println(String.valueOf(param + num));
-            s.convert(2);  // 输出结果为 3
-        }
-
-        public interface Converter<T1, T2> {
-            void convert(int i);
-        }
-    }
-
-lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）
-
-    int num = 1;  
-    Converter<Integer, String> s = (param) -> System.out.println(String.valueOf(param + num));
-    s.convert(2);
-    num = 5;  
-    //报错信息：Local variable num defined in an enclosing scope must be final or effectively
-     final
-
-在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量。
-
-    String first = "";  
-    Comparator<String> comparator = (first, second) -> Integer.compare(first.length(), second.length());  //编译会出错
-
-# final关键字
-
-final是一个关键字，可以用于修饰类，成员变量，成员方法。
-
-## 特点：
-
-它修饰的类不能被继承。
-
-它修饰的成员变量是一个常量。
-
-它修饰的成员方法是不能被子类重写的。
-
-final修饰的常量定义一般都有书写规范,被final修饰的常量名称,所有字母都大写。
-
-final修饰成员变量,必须初始化,初始化有两种
-
-显示初始化；
-
-构造方法初始化。
-
-但是不能两个一起初始化
-
-## final和private的区别：
-
-final修饰的类可以访问；
-
-private不可以修饰外部类，但可以修饰内部类（其实把外部类私有化是没有意义的）。
-
-final修饰的方法不可以被子类重写；
-
-private修饰的方法表面上看是可以被子类重写的，其实不可以，子类是看不到父类的私有方法的。
-
-final修饰的变量只能在显示初始化或者构造函数初始化的时候赋值一次，以后不允许更改；
-
-private修饰的变量，也不允许直接被子类或一个包中的其它类访问或修改，但是他可以通过set和get方法对其改值和取值。
-
-# 参考资料：
-【1】https://blog.csdn.net/walkerJong/article/details/7946109
-
-【2】https://www.runoob.com/java/java8-lambda-expressions.html
+# 参考资料
+【1】
+https://blog.csdn.net/weixin_34112900/article/details/93630203
