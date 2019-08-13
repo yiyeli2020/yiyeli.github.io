@@ -41,7 +41,7 @@ controllers.api.InternalApiController.submitDebt
 先写submitDebt接口，即siteHelper.submitDebtInfo部分把商通贷中的逻辑写在cms中，scala-》Java
 
 系统调用：Controller->Service->DAO->database
-所以逻辑写在Service中，数据库操作写在DAO，一个方法做一件事，增强可读性。
+所以逻辑写在Service中，数据库操作写在DAO，一个方法做一件事，增强可读性。he
 
 两个接口原先在shangtongdai中，用scala写成
 
