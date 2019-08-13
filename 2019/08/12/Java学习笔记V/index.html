@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>199.Binary Tree Right Side View二叉树的右视图 | Yiye Li</title>
+  <title>Java学习笔记V | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。">
-<meta name="keywords" content="LeetCode,Tree,Breadth-first Search,Depth-first Search">
+  <meta name="description" content="学习Guaa中的字符串处理函数Joiner类的用法。">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="199.Binary Tree Right Side View二叉树的右视图">
-<meta property="og:url" content="http://yoursite.com/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/index.html">
+<meta property="og:title" content="Java学习笔记V">
+<meta property="og:url" content="http://yoursite.com/2019/08/12/Java学习笔记V/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。">
+<meta property="og:description" content="学习Guaa中的字符串处理函数Joiner类的用法。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T04:04:54.455Z">
+<meta property="og:updated_time" content="2019-08-13T06:44:00.146Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="199.Binary Tree Right Side View二叉树的右视图">
-<meta name="twitter:description" content="给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。">
+<meta name="twitter:title" content="Java学习笔记V">
+<meta name="twitter:description" content="学习Guaa中的字符串处理函数Joiner类的用法。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-199.Binary Tree Right Side View二叉树的右视图" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java学习笔记V" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/" class="article-date">
-      <time datetime="2018-10-04T11:14:32.000Z" itemprop="datePublished">2018-10-04</time>
+      <a href="/2019/08/12/Java学习笔记V/" class="article-date">
+      <time datetime="2019-08-12T06:48:12.000Z" itemprop="datePublished">2019-08-12</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      199.Binary Tree Right Side View二叉树的右视图
+      Java学习笔记V
     </h1>
   
 
@@ -224,13 +224,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年10月/">2018年10月</a>
+    <a class="article-category-link" href="/categories/2019年8月/">2019年8月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Breadth-first-Search/">Breadth-first Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Depth-first-Search/">Depth-first Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tree/">Tree</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -240,48 +240,41 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。</p>
+        <p>学习Guaa中的字符串处理函数Joiner类的用法。</p>
 <a id="more"></a>
-<p>示例:</p>
-<pre><code>输入: [1,2,3,null,5,null,4]
-输出: [1, 3, 4]
-解释:
-
-   1            &lt;---
- /   \
-2     3         &lt;---
- \     \
-  5     4       &lt;---
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用队列层次遍历二叉树，存储每层最右边的结点</p>
-<pre><code>/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-class Solution {
-public:
-    vector&lt;int&gt; rightSideView(TreeNode* root) {
-        vector&lt;int&gt; res;
-        queue&lt;TreeNode*&gt; q;
-        if(root) q.push(root);
-        while(!q.empty()){
-            int len=q.size();
-            for(int i=0;i&lt;len;i++){
-                TreeNode *cur=q.front();
-                q.pop();
-                if(i==len-1)res.push_back(cur-&gt;val);
-                if(cur-&gt;left) q.push(cur-&gt;left);
-                if(cur-&gt;right) q.push(cur-&gt;right);
-            }
+<h1 id="Guava"><a href="#Guava" class="headerlink" title="Guava"></a>Guava</h1><p>Guava 是一个 Google 的基于java1.6的类库集合的扩展项目，Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、字符串处理 [string processing] 、I/O 等等。</p>
+<h1 id="连接器Joiner"><a href="#连接器Joiner" class="headerlink" title="连接器Joiner"></a>连接器Joiner</h1><p>用分隔符把字符串序列连接起来也可能会遇上不必要的麻烦。如果字符串序列中含有null，那连接操作会更难。Fluent风格的Joiner让连接字符串更简单。</p>
+<p>  Joiner joiner = Joiner.on(“; “).skipNulls();<br>  return joiner.join(“Harry”, null, “Ron”, “Hermione”);</p>
+<p>上述代码返回”Harry; Ron; Hermione”。另外，useForNull(String)方法可以给定某个字符串来替换null，而不像skipNulls()方法是直接忽略null。<br> Joiner也可以用来连接对象类型，在这种情况下，它会把对象的toString()值连接起来。</p>
+<pre><code>Joiner.on(&quot;,&quot;).join(Arrays.asList(1, 5, 7)); // returns &quot;1,5,7&quot;
+</code></pre><p>警告：joiner实例总是不可变的。用来定义joiner目标语义的配置方法总会返回一个新的joiner实例。<br>这使得joiner实例都是线程安全的，你可以将其定义为static final常量。</p>
+<h1 id="传统连接方法"><a href="#传统连接方法" class="headerlink" title="传统连接方法"></a>传统连接方法</h1><p>相比之下传统的以某个分隔符来进行拼接的代码如下：</p>
+<pre><code>public static String concatString(List&lt;String&gt; lists,String delimiter){
+    StringBuilder builder=new StringBuilder();
+    for(String s:lists){
+        if(s!=null){
+            builder.append(s).append(delimiter);
         }
-        return res;
     }
-};
-</code></pre>
+    builder.setLength(builder.length()-delimiter.length());
+    return builder.toString();
+}
+public  static  void  main(String[] args) {
+  List&lt;String&gt; list=new ArrayList();
+  list.add(&quot;Traditional&quot;);
+  list.add(&quot;delimiter&quot;);
+  list.add(&quot;codingstyle&quot;);
+  System.out.println(concatString(list,&quot;-&quot;));
+}
+</code></pre><h1 id="MapJoiner"><a href="#MapJoiner" class="headerlink" title="MapJoiner"></a>MapJoiner</h1><p>MapJoiner的用法和Joiner类似,不过MapJoiner主要针对map的字符串拼接例：</p>
+<pre><code>Map&lt;String,String&gt; maps=Maps.newHashMap();
+maps.put(&quot;MapJoiner&quot;,&quot;1&quot;);
+maps.put(&quot;String&quot;,&quot;delimiter&quot;);
+String ss=Joiner.on(&quot;$&quot;).withKeyValueSeparator(&quot;=&quot;).join(maps);
+System.out.println(ss);
+</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html</a></p>
+<p>【2】<a href="https://blog.csdn.net/u012415194/article/details/84880258" target="_blank" rel="noopener">https://blog.csdn.net/u012415194/article/details/84880258</a></p>
+
       
       
         <div class="page-reward">
@@ -336,13 +329,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></p>
+        <p><span>本文标题:</span><a href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年10月04日 - 19时14分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 12时04分</p>
+        <p><span>发布时间:</span>2019年08月12日 - 14时48分</p>
+        <p><span>最后更新:</span>2019年08月13日 - 14时44分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/" title="199.Binary Tree Right Side View二叉树的右视图">http://yoursite.com/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/12/Java学习笔记V/" title="Java学习笔记V">http://yoursite.com/2019/08/12/Java学习笔记V/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/08/12/Java学习笔记V/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -355,18 +348,9 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">545.Boundary of Binary Tree 二叉树的边界</div>
+    <a href="/2019/08/12/Java学习笔记IV/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java学习笔记IV</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -377,7 +361,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Guava"><span class="toc-number">1.</span> <span class="toc-text">Guava</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#连接器Joiner"><span class="toc-number">2.</span> <span class="toc-text">连接器Joiner</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统连接方法"><span class="toc-number">3.</span> <span class="toc-text">传统连接方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MapJoiner"><span class="toc-number">4.</span> <span class="toc-text">MapJoiner</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">5.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -443,13 +427,11 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/" title="上一篇: 117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/" title="下一篇: 545.Boundary of Binary Tree 二叉树的边界">
+            <a href="/2019/08/12/Java学习笔记IV/" title="下一篇: Java学习笔记IV">
                 <i class="fa fa-angle-right"></i>
             </a>
         
