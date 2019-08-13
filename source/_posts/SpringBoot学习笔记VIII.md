@@ -27,6 +27,27 @@ cn.creditease.bdp.newcms.controller.creditreview.TransportController中的public
 需求：
 cn.creditease.bdp.newcms.cmswrapper.controller中的getAll对应http://std-cms-fe.laincloud.xyz/#/incoming进件查询中的查询按钮，现在需要在标记一栏的返回值中加入新的返回信息。
 
+参见http://wiki.yxapp.in/pages/viewpage.action?pageId=68764493
+
+/api/2.0/application/isDataloan/{transportId} 根据进件号查询是否为数据贷进件
+在shangtongdai中site.conf.routes
+controllers.api2.InternalApiController.isDataloan
+
+
+/internal/api/v1/submitDebt 提交负债信息
+在shangtongdai中site.conf.api2.routes
+controllers.api.InternalApiController.submitDebt
+
+先写submitDebt接口，即siteHelper.submitDebtInfo部分把商通贷中的逻辑写在cms中，scala-》Java
+
+系统调用：Controller->Service->DAO->database
+所以逻辑写在Service中，数据库操作写在DAO，一个方法做一件事，增强可读性。
+
+两个接口原先在shangtongdai中，用scala写成
+
+现在需要迁移到cms中重构为Java
+
+
 # 系统介绍
 
 最早的site系统，scala语言，编译运行比较慢，一小时左右，包括了application，postloan等所有系统
