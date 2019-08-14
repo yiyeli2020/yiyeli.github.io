@@ -12,10 +12,10 @@ CMS系统学习。
 # 任务
 先阅读cn.creditease.bdp.newcms.notice源码，定时相关，其中impl/CmsTaskNoticeHelperImpl/sendMsgByBatch函数是模块入口
 
-阅读
+## 阅读
 cn.creditease.bdp.newcms.cmswrapper.controller.PaymentScheduleController的源码，涉及到customer表，里面是借贷用户的信息
 
-阅读
+## 阅读
 cn.creditease.bdp.newcms.controller.creditreview.TransportController中的public Object create(@RequestBody(required = false) Transport transport)方法重点看FULL_FLOW，cn.creditease.bdp.newcms.service.creditreview.fullFlowfullFlow中的评级部分代码
 
     CMSResponseCode cmsResponseCode = rateBoth(transport);
@@ -24,8 +24,12 @@ cn.creditease.bdp.newcms.controller.creditreview.TransportController中的public
 
      dataPrepareCheckAndCheckSuijieRule(transport);
 
-需求：
-cn.creditease.bdp.newcms.cmswrapper.controller中的getAll对应http://std-cms-fe.laincloud.xyz/#/incoming进件查询中的查询按钮，现在需要在标记一栏的返回值中加入新的返回信息。
+## 需求：
+
+cn.creditease.bdp.newcms.cmswrapper.controller.TransportQueryController中的getAll对应http://std-cms-fe.laincloud.xyz/#/incoming进件查询中的查询按钮，现在需要在标记一栏的返回值中加入新的返回信息。
+
+cn.creditease.bdp.newcms.cmswrapper.service.cms.TransportQueryServiceTest中写测试样例
+
 
 参见http://wiki.yxapp.in/pages/viewpage.action?pageId=68764493
 
