@@ -37,7 +37,6 @@ cn.creditease.bdp.newcms.cmswrapper.service.cms.TransportQueryServiceTest中写�
 在shangtongdai中site.conf.routes
 controllers.api2.InternalApiController.isDataloan
 
-
 /internal/api/v1/submitDebt 提交负债信息
 在shangtongdai中site.conf.api2.routes
 controllers.api.InternalApiController.submitDebt

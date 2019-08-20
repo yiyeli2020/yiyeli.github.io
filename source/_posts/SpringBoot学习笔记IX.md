@@ -27,3 +27,10 @@ tbl_sql_warning 是SQL语句对应的表，
 
 java:程序包XXXX不存在
 可以先删去导入的该包然后用快捷键Alt+Enter选择add to library搜索导入该包
+
+## 驼峰命名法
+方法名开头字母要小写
+不能全写到一个UserService里，要有相应的区分
+ServiceImpl参数不能直接传实体，不利于可读性和可维护性，用哪些传哪些，里面只写数据库相关操作，涉及EntityMapper的，逻辑内容写到biz文件夹中
+mybatis-config不用加到resources.local里面，在resources里面就行
+config文件夹内还要有相应的数据库自动化配置和Mybatis配置文件
