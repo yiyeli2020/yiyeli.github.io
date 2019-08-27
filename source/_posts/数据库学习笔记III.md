@@ -17,21 +17,21 @@ tags: [Mysql]
 其中的条件，SQL有四种匹配模式：
 
 ## %
-表示任意0个或多个自负，可匹配任意类型和长度的自负，有些情况下若是中文，请使用两个百分号（%%）表示。
+表示任意0个或多个字符，可匹配任意类型和长度的字符，有些情况下若是中文，请使用两个百分号（%%）表示。
 
 例如
 
-  SELECT * FROM user WHERE name LIKE '%一%'
+    SELECT * FROM user WHERE name LIKE '%一%'
 
 将会把name为“一野”，”李一野”，“一休和尚”等等有”一”的记录都找出来。
 
 另外如果需要找出name中既有“一”又有"野"的记录，请使用and条件
 
-  SELECT *   FROM user  WHERE name  LIKE '%一%'  AND  name LIKE '%野%'
+    SELECT *   FROM user  WHERE name  LIKE '%一%'  AND  name LIKE '%野%'
 
 而如果使用
 
-  SELECT *  FROM user  WHERE name  LIKE '%一%野%'
+    SELECT *  FROM user  WHERE name  LIKE '%一%野%'
 
 虽然能够搜索出“李一野”，但不能搜索出符合条件的”野一李”。
 
@@ -40,13 +40,13 @@ tags: [Mysql]
 
 比如
 
-  SELECT *  FROM user  WHERE name  LIKE '_三_'
+    SELECT *  FROM user  WHERE name  LIKE '_三_'
 
 只能找出“唐三藏”这样name为三个字且中间一个字是”三”的；
 
 例如
 
-  SELECT *  FROM user  WHERE name  LIKE '三__'
+    SELECT *  FROM user  WHERE name  LIKE '三__'
 
 只能找出“三国杀”这样name为三个字且第一字为”三”的；
 
@@ -55,13 +55,13 @@ tags: [Mysql]
 
 比如
 
-  SELECT *  FROM user  WHERE name  LIKE '[张王李]三'
+    SELECT *  FROM user  WHERE name  LIKE '[张王李]三'
 
 搜索出的是“张三”，“王三”，”李三”，而不是“张王李三”；
 
 如果[]内有一系列字符（01234，abcd之类)，则可以简写为“0-4”、“a-d”
 
-  SELECT *  FROM user  WHERE name  LIKE '大[a-d]'
+    SELECT *  FROM user  WHERE name  LIKE '大[a-d]'
 
 将搜索出“大a”、......、“大d”；
 
@@ -70,11 +70,11 @@ tags: [Mysql]
 
 比如
 
-  SELECT *  FROM user  WHERE name  LIKE '[^张王李]三'
+    SELECT *  FROM user  WHERE name  LIKE '[^张王李]三'
 
 将找出不姓“张”，“王”，”李”的“赵三”，”孙三”等。
 
-  SELECT *  FROM user  WHERE name  LIKE '大[^a-d]'
+    SELECT *  FROM user  WHERE name  LIKE '大[^a-d]'
 
 将排除“大a”到“大d”，搜索“大e”、”大f”、......
 
@@ -86,7 +86,7 @@ tags: [Mysql]
 
 看上去我们可以使用AND连接进行多条件模糊查询
 
-  SELECT * FROM user WHERE name LIKE '%三%' AND phone LIKE ‘%1234%’
+    SELECT * FROM user WHERE name LIKE '%三%' AND phone LIKE ‘%1234%’
 
 但在实际使用时会发现如果数据库的查询字段不是都有值的情况下无法搜索到，
 
@@ -99,7 +99,11 @@ tags: [Mysql]
 
 ## 注意问题
 
-sql语句sql=“select * from user where name like ...”必须在一行内输入完，而不能用回车符分段，因为vbs多行被认为是多个语句，这是许多初写者常犯的错误。如果你想分多段写，可以用上面的方法在现有变量基础上逐步增加查询语句的各个组成部分并把它存在同一变量内实现。在封闭引号之前或者在打开引号之后你需要增加空格，这样才能保证字符串连接起来的时候没有把几个词凑到了一块。
+sql语句
+
+    sql=“select * from user where name like ...”
+
+必须在一行内输入完，而不能用回车符分段，因为vbs多行被认为是多个语句，这是许多初写者常犯的错误。如果你想分多段写，可以用上面的方法在现有变量基础上逐步增加查询语句的各个组成部分并把它存在同一变量内实现。在封闭引号之前或者在打开引号之后你需要增加空格，这样才能保证字符串连接起来的时候没有把几个词凑到了一块。
 
 最后注意以上查询的LIKE后要加单引号。
 
