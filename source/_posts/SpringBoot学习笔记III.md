@@ -282,9 +282,34 @@ https://upload-images.jianshu.io/upload_images/4185175-a0a50bf022178e1d.png?imag
 查看所有进程监听的端口
 
     sudo lsof -i -P | grep -i "listen"
-## ps -A|grep [进程名]
+## lsof命令参数
 
-找PID： ps -A|grep [进程名]
+-a 列出打开文件存在的进程
+
+-c<进程名> 列出指定进程所打开的文件
+
+-g  列出GID号进程详情
+
+-d<文件号> 列出占用该文件号的进程
+
++d<目录>  列出目录下被打开的文件
+
++D<目录>  递归列出目录下被打开的文件
+
+-n<目录>  列出使用NFS的文件
+
+-i<条件>  列出符合条件的进程。（4、6、协议、:端口、 @ip ）
+
+-p<进程号> 列出指定进程号所打开的文件
+
+-u  列出UID号进程详情
+
+-h 显示帮助信息
+
+-v 显示版本信息
+## ps -A | grep [进程名]
+
+找PID： ps -A | grep [进程名]
 ## kill [PID]
 
 杀进程：kill [PID]

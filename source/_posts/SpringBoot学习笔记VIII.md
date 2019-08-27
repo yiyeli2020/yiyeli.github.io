@@ -50,6 +50,9 @@ controllers.api.InternalApiController.submitDebt
 
 现在需要迁移到cms中重构为Java
 
+运行项目
+sbt "project site" run
+
 
 # 系统介绍
 
