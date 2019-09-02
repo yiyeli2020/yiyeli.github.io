@@ -1,5 +1,5 @@
 ---
-title: SpringBoot学习笔记VIII
+title: SpringBoot学习笔记IX
 date: 2019-8-5 11:22:12
 categories: 2019年8月
 tags: [SpringBoot，Java]
@@ -16,7 +16,7 @@ controller接口，dao数据库自动生成，
 
 kael_query表中的tbl_jobs是定时任务相关的表,其中tag是标签名字，暂时是唯一索引，入参，不能改动，sql_note是sql语句内容，operator_no是操作者编号，cron是定时表达式，receiver是收件人，memo是备注内容，task_status是定时任务状态，datasoure_name要执行任务sql的数据源，out_type是输出类型（正文和附件）
 
-增加定时任务的分页查询，包括附加条件的分页查询，比如模糊匹配名字，接收者的分页查询，固定时间范围内的分页查询
+增加定时任务的分页查询，包括附加条件的分页查询，比如模糊匹配名字，接收者的分页查询，固定时间范围内的分页查询,把分页查询都写到一个接口里，根据传进来的参数进行不同的查询。
 
 增删改查完本地库，去Quartz 完成增删改查定时任务。用@Autowired注解注入
 
