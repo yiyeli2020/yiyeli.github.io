@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-27T07:24:35.636Z</updated>
+  <updated>2019-09-02T10:59:35.874Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot学习笔记X</title>
+    <link href="http://yoursite.com/2019/08/28/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0X/"/>
+    <id>http://yoursite.com/2019/08/28/SpringBoot学习笔记X/</id>
+    <published>2019-08-28T09:18:12.000Z</published>
+    <updated>2019-09-02T10:59:35.874Z</updated>
+    
+    <content type="html"><![CDATA[<p>SpringBoot系统学习。</p><a id="more"></a><h1 id="配置文件application-yml解读"><a href="#配置文件application-yml解读" class="headerlink" title="配置文件application.yml解读"></a>配置文件application.yml解读</h1><p>有必要解读一下SpringBoot项目中关于application.yml配置的一些问题：</p><p>首先看kael-starter中的pom.xml</p><pre><code>&lt;profiles&gt;    &lt;profile&gt;        &lt;id&gt;prod&lt;/id&gt;        &lt;properties&gt;            &lt;env&gt;prod&lt;/env&gt;        &lt;/properties&gt;    &lt;/profile&gt;    &lt;profile&gt;        &lt;id&gt;local&lt;/id&gt;        &lt;activation&gt;            &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;        &lt;/activation&gt;        &lt;properties&gt;            &lt;env&gt;local&lt;/env&gt;        &lt;/properties&gt;    &lt;/profile&gt;    &lt;profile&gt;        &lt;id&gt;staging&lt;/id&gt;        &lt;properties&gt;            &lt;env&gt;staging&lt;/env&gt;        &lt;/properties&gt;    &lt;/profile&gt;&lt;/profiles&gt;</code></pre><p>三个环境分别是生产环境，本地环境和测试环境，其中</p><pre><code>&lt;activation&gt;    &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;&lt;/activation&gt;  </code></pre><p>代表使用的是本地环境。</p><p>在这个pom.xml中还有：</p><pre><code>&lt;resources&gt;     &lt;resource&gt;         &lt;directory&gt;src/main/resources&lt;/directory&gt;         &lt;includes&gt;             &lt;include&gt;**/*.*&lt;/include&gt; &lt;!-- 此配置不可缺，否则mybatis的Mapper.xml将会丢失 --&gt;         &lt;/includes&gt;         &lt;filtering&gt;false&lt;/filtering&gt;     &lt;/resource&gt;     &lt;resource&gt;         &lt;directory&gt;src/main/resources.${env}&lt;/directory&gt;     &lt;/resource&gt; &lt;/resources&gt;</code></pre><p>在进行加载时首先加载resources文件夹中的application.yml<br>其中的内容是：</p><pre><code>spring:  profiles.active: env</code></pre><p>而在resources.local文件夹中的application-env.yml中</p><pre><code>application.mode: localspring:  zipkin:    base-url: http://std-zipkin.laincloud.xyz/  datasource:    url: jdbc:mysql://10.143.248.78:3306/kael_query?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false    driver-class-name: com.mysql.jdbc.Driver    username: root    password: 123456kael:  datasource:    druidDataSourceList:      #  前期通过yml配置，后期有需要可以迁移出去配置      - name: kael_query        type: com.alibaba.druid.pool.DruidDataSource        driver-class-name: com.mysql.jdbc.Driver        url: jdbc:mysql://10.143.248.78:3306/kael_query?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false        username: root        password: mojiti        #      filters: stat,wall,log4j,config        max-active: 20        initial-size: 10        max-wait: 1000        min-idle: 1        max-idle: 10        time-between-eviction-runs-millis: 60000        min-evictable-idle-time-millis: 300000        validation-query: select &apos;x&apos;        test-while-idle: true        test-on-borrow: false        test-on-return: false        pool-prepared-statements: true        max-open-prepared-statements: 50        max-pool-prepared-statement-per-connection-size: 20      - name: shangtongdai        type: com.alibaba.druid.pool.DruidDataSource        driver-class-name: com.mysql.jdbc.Driver        url: jdbc:mysql://10.143.248.78:3306/shangtongdai?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false        username: root        password: mojiti          #      filters: stat,wall,log4j,config        max-active: 20        initial-size: 10        max-wait: 1000        min-idle: 1        max-idle: 10        time-between-eviction-runs-millis: 60000        min-evictable-idle-time-millis: 300000        validation-query: select &apos;x&apos;        test-while-idle: true        test-on-borrow: false        test-on-return: false        pool-prepared-statements: true        max-open-prepared-statements: 50        max-pool-prepared-statement-per-connection-size: 20      #  前期通过yml配置，后期有需要可以迁移出去配置# Actuator 配置management.endpoints.web:  exposure.include: &quot;*&quot;  exposure.exclude: env,beanseureka:  client:    register-with-eureka: true    fetch-registry: true    serviceUrl:      defaultZone: http://std-eureka.laincloud.xyz/eureka/swagger:  enable: true</code></pre><p>其中指明了application.mode: local所以在加载的时候也要加载它，而</p><pre><code>spring:  profiles.active: env</code></pre><p>则说明在加载时读取的application-env.yml文件名中可以加上-env</p><h1 id="多条件模糊分页查询遇到的问题"><a href="#多条件模糊分页查询遇到的问题" class="headerlink" title="多条件模糊分页查询遇到的问题"></a>多条件模糊分页查询遇到的问题</h1><p>当一些查询条件为NULL或空字符串“”</p><pre><code>/**  * 分页查询  * 分页参数pageNo(页码） ，pageSize(每页查询数目）  */ @Override public PageInfo&lt;TblJobsEntity&gt; queryTblJobByPage(int pageNo, int pageSize, TblJobsEntity tblJobsEntity,     Date createTimeBegin, Date createTimeEnd, Date updateTimeBegin, Date updateTimeEnd) {     //查询     String tag = tblJobsEntity.getTag();     String receiver = tblJobsEntity.getReceiver();     PageHelper.startPage(pageNo, pageSize);     TblJobsEntityExample tblJobsEntityExample = new TblJobsEntityExample();     TblJobsEntityExample.Criteria criteria = tblJobsEntityExample.createCriteria();     //使用StringUtil.isEmpty()而不是==来判断，因为==判断的是地址     if (!StringUtils.isEmpty(tag)) {         //模糊匹配的通配符         tag = &quot;%&quot; + tag + &quot;%&quot;;         criteria.andTagLike(tag);     }     //如果存在该属性为NULL或空字符串&quot;&quot;的时候，需要进行判断，之前出现的错误是只判断该属性是否为NULL而未判断是否为&quot;&quot;空字符串     if (!StringUtils.isEmpty(receiver)) {         receiver = &quot;%&quot; + receiver + &quot;%&quot;;         criteria.andReceiverLike(receiver);     }     if (createTimeBegin != null &amp;&amp; createTimeEnd != null) {         criteria.andCreateTimeBetween(createTimeBegin, createTimeEnd);     }     if (updateTimeBegin != null &amp;&amp; updateTimeEnd != null) {         criteria.andUpdateTimeBetween(updateTimeBegin, updateTimeEnd);     }     List&lt;TblJobsEntity&gt; tblJobsEntityList = tblJobsEntityMapper.selectByExample(tblJobsEntityExample);     //用PageInfo对结果进行包装     PageInfo&lt;TblJobsEntity&gt; pageInfo = new PageInfo&lt;TblJobsEntity&gt;(tblJobsEntityList);     return pageInfo; }</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;SpringBoot系统学习。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2019年8月" scheme="http://yoursite.com/categories/2019%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="SpringBoot，Java" scheme="http://yoursite.com/tags/SpringBoot%EF%BC%8CJava/"/>
+    
+  </entry>
   
   <entry>
     <title>数据库学习笔记III</title>
@@ -39,28 +61,6 @@
   </entry>
   
   <entry>
-    <title>Java学习笔记V</title>
-    <link href="http://yoursite.com/2019/08/12/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0V/"/>
-    <id>http://yoursite.com/2019/08/12/Java学习笔记V/</id>
-    <published>2019-08-12T06:48:12.000Z</published>
-    <updated>2019-08-13T06:44:00.146Z</updated>
-    
-    <content type="html"><![CDATA[<p>学习Guaa中的字符串处理函数Joiner类的用法。</p><a id="more"></a><h1 id="Guava"><a href="#Guava" class="headerlink" title="Guava"></a>Guava</h1><p>Guava 是一个 Google 的基于java1.6的类库集合的扩展项目，Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、字符串处理 [string processing] 、I/O 等等。</p><h1 id="连接器Joiner"><a href="#连接器Joiner" class="headerlink" title="连接器Joiner"></a>连接器Joiner</h1><p>用分隔符把字符串序列连接起来也可能会遇上不必要的麻烦。如果字符串序列中含有null，那连接操作会更难。Fluent风格的Joiner让连接字符串更简单。</p><p>  Joiner joiner = Joiner.on(“; “).skipNulls();<br>  return joiner.join(“Harry”, null, “Ron”, “Hermione”);</p><p>上述代码返回”Harry; Ron; Hermione”。另外，useForNull(String)方法可以给定某个字符串来替换null，而不像skipNulls()方法是直接忽略null。<br> Joiner也可以用来连接对象类型，在这种情况下，它会把对象的toString()值连接起来。</p><pre><code>Joiner.on(&quot;,&quot;).join(Arrays.asList(1, 5, 7)); // returns &quot;1,5,7&quot;</code></pre><p>警告：joiner实例总是不可变的。用来定义joiner目标语义的配置方法总会返回一个新的joiner实例。<br>这使得joiner实例都是线程安全的，你可以将其定义为static final常量。</p><h1 id="传统连接方法"><a href="#传统连接方法" class="headerlink" title="传统连接方法"></a>传统连接方法</h1><p>相比之下传统的以某个分隔符来进行拼接的代码如下：</p><pre><code>public static String concatString(List&lt;String&gt; lists,String delimiter){    StringBuilder builder=new StringBuilder();    for(String s:lists){        if(s!=null){            builder.append(s).append(delimiter);        }    }    builder.setLength(builder.length()-delimiter.length());    return builder.toString();}public  static  void  main(String[] args) {  List&lt;String&gt; list=new ArrayList();  list.add(&quot;Traditional&quot;);  list.add(&quot;delimiter&quot;);  list.add(&quot;codingstyle&quot;);  System.out.println(concatString(list,&quot;-&quot;));}</code></pre><h1 id="MapJoiner"><a href="#MapJoiner" class="headerlink" title="MapJoiner"></a>MapJoiner</h1><p>MapJoiner的用法和Joiner类似,不过MapJoiner主要针对map的字符串拼接例：</p><pre><code>Map&lt;String,String&gt; maps=Maps.newHashMap();maps.put(&quot;MapJoiner&quot;,&quot;1&quot;);maps.put(&quot;String&quot;,&quot;delimiter&quot;);String ss=Joiner.on(&quot;$&quot;).withKeyValueSeparator(&quot;=&quot;).join(maps);System.out.println(ss);</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html</a></p><p>【2】<a href="https://blog.csdn.net/u012415194/article/details/84880258" target="_blank" rel="noopener">https://blog.csdn.net/u012415194/article/details/84880258</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;学习Guaa中的字符串处理函数Joiner类的用法。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2019年8月" scheme="http://yoursite.com/categories/2019%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Java学习笔记IV</title>
     <link href="http://yoursite.com/2019/08/12/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0IV/"/>
     <id>http://yoursite.com/2019/08/12/Java学习笔记IV/</id>
@@ -72,6 +72,28 @@
     <summary type="html">
     
       &lt;p&gt;MapReduce思想学习,对Java8中对新特性stream，map和reduce进行学习，Stream API部分主要来自于IBM Developer官网，原文写的非常详尽清晰。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2019年8月" scheme="http://yoursite.com/categories/2019%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java学习笔记V</title>
+    <link href="http://yoursite.com/2019/08/12/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0V/"/>
+    <id>http://yoursite.com/2019/08/12/Java学习笔记V/</id>
+    <published>2019-08-12T06:48:12.000Z</published>
+    <updated>2019-08-13T06:44:00.146Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习Guaa中的字符串处理函数Joiner类的用法。</p><a id="more"></a><h1 id="Guava"><a href="#Guava" class="headerlink" title="Guava"></a>Guava</h1><p>Guava 是一个 Google 的基于java1.6的类库集合的扩展项目，Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、字符串处理 [string processing] 、I/O 等等。</p><h1 id="连接器Joiner"><a href="#连接器Joiner" class="headerlink" title="连接器Joiner"></a>连接器Joiner</h1><p>用分隔符把字符串序列连接起来也可能会遇上不必要的麻烦。如果字符串序列中含有null，那连接操作会更难。Fluent风格的Joiner让连接字符串更简单。</p><p>  Joiner joiner = Joiner.on(“; “).skipNulls();<br>  return joiner.join(“Harry”, null, “Ron”, “Hermione”);</p><p>上述代码返回”Harry; Ron; Hermione”。另外，useForNull(String)方法可以给定某个字符串来替换null，而不像skipNulls()方法是直接忽略null。<br> Joiner也可以用来连接对象类型，在这种情况下，它会把对象的toString()值连接起来。</p><pre><code>Joiner.on(&quot;,&quot;).join(Arrays.asList(1, 5, 7)); // returns &quot;1,5,7&quot;</code></pre><p>警告：joiner实例总是不可变的。用来定义joiner目标语义的配置方法总会返回一个新的joiner实例。<br>这使得joiner实例都是线程安全的，你可以将其定义为static final常量。</p><h1 id="传统连接方法"><a href="#传统连接方法" class="headerlink" title="传统连接方法"></a>传统连接方法</h1><p>相比之下传统的以某个分隔符来进行拼接的代码如下：</p><pre><code>public static String concatString(List&lt;String&gt; lists,String delimiter){    StringBuilder builder=new StringBuilder();    for(String s:lists){        if(s!=null){            builder.append(s).append(delimiter);        }    }    builder.setLength(builder.length()-delimiter.length());    return builder.toString();}public  static  void  main(String[] args) {  List&lt;String&gt; list=new ArrayList();  list.add(&quot;Traditional&quot;);  list.add(&quot;delimiter&quot;);  list.add(&quot;codingstyle&quot;);  System.out.println(concatString(list,&quot;-&quot;));}</code></pre><h1 id="MapJoiner"><a href="#MapJoiner" class="headerlink" title="MapJoiner"></a>MapJoiner</h1><p>MapJoiner的用法和Joiner类似,不过MapJoiner主要针对map的字符串拼接例：</p><pre><code>Map&lt;String,String&gt; maps=Maps.newHashMap();maps.put(&quot;MapJoiner&quot;,&quot;1&quot;);maps.put(&quot;String&quot;,&quot;delimiter&quot;);String ss=Joiner.on(&quot;$&quot;).withKeyValueSeparator(&quot;=&quot;).join(maps);System.out.println(ss);</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html</a></p><p>【2】<a href="https://blog.csdn.net/u012415194/article/details/84880258" target="_blank" rel="noopener">https://blog.csdn.net/u012415194/article/details/84880258</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习Guaa中的字符串处理函数Joiner类的用法。&lt;/p&gt;
     
     </summary>
     
@@ -173,13 +195,13 @@
   </entry>
   
   <entry>
-    <title>SpringBoot学习笔记VIII</title>
+    <title>SpringBoot学习笔记IX</title>
     <link href="http://yoursite.com/2019/08/05/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0IX/"/>
     <id>http://yoursite.com/2019/08/05/SpringBoot学习笔记IX/</id>
     <published>2019-08-05T03:22:12.000Z</published>
-    <updated>2019-08-26T07:41:02.255Z</updated>
+    <updated>2019-08-28T09:17:37.143Z</updated>
     
-    <content type="html"><![CDATA[<p>CMS系统学习。</p><a id="more"></a><h1 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h1><p>cn.kael.query.inner中逻辑写在biz中，config/InnerDbConfig是内部数据库配置，<br>controller接口，dao数据库自动生成，</p><p>kael_query表中的tbl_jobs是定时任务相关的表,其中tag是标签名字，暂时是唯一索引，入参，不能改动，sql_note是sql语句内容，operator_no是操作者编号，cron是定时表达式，receiver是收件人，memo是备注内容，task_status是定时任务状态，datasoure_name要执行任务sql的数据源，out_type是输出类型（正文和附件）</p><p>增加定时任务的分页查询，包括附加条件的分页查询，比如模糊匹配名字，接收者的分页查询，固定时间范围内的分页查询</p><p>增删改查完本地库，去Quartz 完成增删改查定时任务。用@Autowired注解注入</p><p>cn.creditease.std.query.kael.core.task.TaskManager</p><p>kaelContext.setEmailMode(tblJobsEntity.getOutType());</p><p>根据枚举的邮件输出类型设置emailMode为0或1</p><p>tbl_notes是笔记相关的表，tag是笔记名字，暂时不能改动，后面可以置为能改动的列，根据id来查，两张表都是tag和operator_no不能改动，其它可以改动</p><p>tbl_sql_warning 是SQL语句对应的表，</p><p>完成两张表到增删改查功能，在DatasourceInfoController中查询并返回可用的数据源列表。</p><p>中秋节前，9.12：<br>CMS业务分享PPT：<br>常用页面操作分享，<br>核心流程分享：进件流程，状态机修改流程，有哪些限制，<br>CMS常用表例如transport，history分享</p><h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><p>出现找不到主类的错误首先将porm文件右键选择Add to the maven project添加到右侧到maven库中，然后再将工程文件右键Mark Directory as-&gt;Sources Root</p><p>java:程序包XXXX不存在</p><p>可以先删去导入的该包然后用快捷键Alt+Enter选择add to library搜索导入该包</p><p>不能全写到一个UserService里，要有相应的区分</p><p>ServiceImpl参数不能直接传实体，不利于可读性和可维护性，用哪些传哪些，里面只写数据库相关操作，涉及EntityMapper的，逻辑内容写到biz文件夹中,Service里返回Entity而不是DTO，biz中返回DTO</p><p>mybatis-config不用加到resources.local里面，在resources里面就行</p><p>config文件夹内还要有相应的数据库自动化配置和Mybatis配置文件</p><p>如果出现循环依赖的问题，例如query.inner和query.core相互依赖，则在两个子项目的porm.xml中去掉彼此的依赖项目</p><p>Maven执行clean和install在生命周期Lifecycle中选择相应的命令执行即可</p><p>pom.xml中的自动生成mapper.xml的依赖后期要注释掉，否则每次install maven都会覆盖掉原先的。</p><pre><code>CharacterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=falsecom.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server. Attempted reconnect 3 times. Giving up.    at sun.reflect.GeneratedConstructorAccessor64.newInstance(Unknown Source)    at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)    at java.lang.reflect.Constructor.newInstance(Constructor.java:423)</code></pre><h2 id="驼峰命名法"><a href="#驼峰命名法" class="headerlink" title="驼峰命名法"></a>驼峰命名法</h2><p>方法名开头字母要小写</p><h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>之前处理异常的方法</p>]]></content>
+    <content type="html"><![CDATA[<p>CMS系统学习。</p><a id="more"></a><h1 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h1><p>cn.kael.query.inner中逻辑写在biz中，config/InnerDbConfig是内部数据库配置，<br>controller接口，dao数据库自动生成，</p><p>kael_query表中的tbl_jobs是定时任务相关的表,其中tag是标签名字，暂时是唯一索引，入参，不能改动，sql_note是sql语句内容，operator_no是操作者编号，cron是定时表达式，receiver是收件人，memo是备注内容，task_status是定时任务状态，datasoure_name要执行任务sql的数据源，out_type是输出类型（正文和附件）</p><p>增加定时任务的分页查询，包括附加条件的分页查询，比如模糊匹配名字，接收者的分页查询，固定时间范围内的分页查询,把分页查询都写到一个接口里，根据传进来的参数进行不同的查询。</p><p>增删改查完本地库，去Quartz 完成增删改查定时任务。用@Autowired注解注入</p><p>cn.creditease.std.query.kael.core.task.TaskManager</p><p>kaelContext.setEmailMode(tblJobsEntity.getOutType());</p><p>根据枚举的邮件输出类型设置emailMode为0或1</p><p>tbl_notes是笔记相关的表，tag是笔记名字，暂时不能改动，后面可以置为能改动的列，根据id来查，两张表都是tag和operator_no不能改动，其它可以改动</p><p>tbl_sql_warning 是SQL语句对应的表，</p><p>完成两张表到增删改查功能，在DatasourceInfoController中查询并返回可用的数据源列表。</p><p>中秋节前，9.12：<br>CMS业务分享PPT：<br>常用页面操作分享，<br>核心流程分享：进件流程，状态机修改流程，有哪些限制，<br>CMS常用表例如transport，history分享</p><h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><p>出现找不到主类的错误首先将porm文件右键选择Add to the maven project添加到右侧到maven库中，然后再将工程文件右键Mark Directory as-&gt;Sources Root</p><p>java:程序包XXXX不存在</p><p>可以先删去导入的该包然后用快捷键Alt+Enter选择add to library搜索导入该包</p><p>不能全写到一个UserService里，要有相应的区分</p><p>ServiceImpl参数不能直接传实体，不利于可读性和可维护性，用哪些传哪些，里面只写数据库相关操作，涉及EntityMapper的，逻辑内容写到biz文件夹中,Service里返回Entity而不是DTO，biz中返回DTO</p><p>mybatis-config不用加到resources.local里面，在resources里面就行</p><p>config文件夹内还要有相应的数据库自动化配置和Mybatis配置文件</p><p>如果出现循环依赖的问题，例如query.inner和query.core相互依赖，则在两个子项目的porm.xml中去掉彼此的依赖项目</p><p>Maven执行clean和install在生命周期Lifecycle中选择相应的命令执行即可</p><p>pom.xml中的自动生成mapper.xml的依赖后期要注释掉，否则每次install maven都会覆盖掉原先的。</p><pre><code>CharacterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=falsecom.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server. Attempted reconnect 3 times. Giving up.    at sun.reflect.GeneratedConstructorAccessor64.newInstance(Unknown Source)    at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)    at java.lang.reflect.Constructor.newInstance(Constructor.java:423)</code></pre><h2 id="驼峰命名法"><a href="#驼峰命名法" class="headerlink" title="驼峰命名法"></a>驼峰命名法</h2><p>方法名开头字母要小写</p><h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>之前处理异常的方法</p>]]></content>
     
     <summary type="html">
     
@@ -433,28 +455,6 @@
     
     
       <category term="Operating System" scheme="http://yoursite.com/tags/Operating-System/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo博客多终端更新问题</title>
-    <link href="http://yoursite.com/2019/05/28/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E7%BB%88%E7%AB%AF%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2019/05/28/Hexo博客多终端更新问题/</id>
-    <published>2019-05-28T11:19:45.000Z</published>
-    <updated>2019-07-18T04:07:43.663Z</updated>
-    
-    <content type="html"><![CDATA[<p>记录Hexo博客多终端备份更新问题的解决方案</p><a id="more"></a><h2 id="问题介绍"><a href="#问题介绍" class="headerlink" title="问题介绍"></a>问题介绍</h2><p>很多人会把Hexo生成出来的静态网站放到GitHub Pages来进行托管。一般发布Hexo博客的流程是，首先在本地搭建Hexo的环境，编写新文章，然后利用hexo deploy来发布到Git。那么对于本地的Hexo的原始文件怎么管理呢？如果换电脑了怎么办？如果没有对原始文件进行备份，突然有一天你的本地环境挂了导致源文件丢失，那就很悲催了。可以用Dropbox或者其他方案来对源文件进行备份，但是每次更新完博客，需要备份好源文件，然后执行hexo deploy进行发布，非常麻烦。这就是写博客常遇到的多终端备份和更新问题。</p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>目前找到的解决方法有两种：</p><h3 id="1-持续集成"><a href="#1-持续集成" class="headerlink" title="1.持续集成"></a>1.持续集成</h3><p>用两个GitHub Repo，一个Repo放Hexo的源文件（这里称之为Source Repo），另一个Repo放Hexo生成出来的静态网站（这里称之为Content Repo），然后使用AppVeyor做持续集成。每当需要更新博客，只需要更新Source Repo，AppVeyor会自动生成静态网站并push到Content Repo，一气呵成，版本控制完全由GitHub完成，也不需要手动deploy。参见（<a href="https://formulahendry.github.io/2016/12/04/hexo-ci/）。" target="_blank" rel="noopener">https://formulahendry.github.io/2016/12/04/hexo-ci/）。</a><br>但是这种方法比较麻烦，AppVeyor的注册和使用都很不顺畅。所以我推荐下面的方法。</p><h3 id="2-git分支进行多终端工作"><a href="#2-git分支进行多终端工作" class="headerlink" title="2.git分支进行多终端工作"></a>2.git分支进行多终端工作</h3><p>这种方法是利用git的分支进行多终端工作，可以参见（<a href="http://fangzh.top）" target="_blank" rel="noopener">http://fangzh.top）</a><br>每次打开不一样的电脑，只需要进行简单的配置和在github上把文件同步下来，可以无缝操作。而且这种方法对新手比较友好。</p><h3 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h3><p>由于hexo d上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。也就是上传的是在本地目录里自动生成的.deploy_git里面。其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github<br>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p><h3 id="上传分支"><a href="#上传分支" class="headerlink" title="上传分支"></a>上传分支</h3><p>首先，先在github上新建一个hexo分支，然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）。<br>然后在本地的任意目录下，打开git bash，</p><pre><code>git clone git@github.com:liyiye012/liyiye012.github.io.git</code></pre><p>将其克隆到本地，因为默认分支已经设成了hexo，所以clone时只clone了hexo。接下来在克隆到本地的liyiye012.github.io中，把除了.git 文件夹外的所有文件都删掉 把之前我们写的博客源文件全部复制过来，除了.deploy_git。<br>这里应该说一句，复制过来的源文件应该有一个.gitignore，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：.DS_Store</p><pre><code>Thumbs.dbdb.json*.lognode_modules/public/.deploy*/</code></pre><p>注意，如果之前克隆过theme中的主题文件，那么应该把主题文件中的.git文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。而后</p><pre><code>git add .git commit –m &quot;add branch&quot;git push</code></pre><p>这样就上传完了，可以去github上看一看hexo分支有没有上传上去，其中node_modules、public、db.json已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。</p><p>这样就上传完了。</p><h3 id="更换电脑操作"><a href="#更换电脑操作" class="headerlink" title="更换电脑操作"></a>更换电脑操作</h3><p>跟之前的环境搭建一样，安装git</p><pre><code>sudo apt-get install git</code></pre><p>设置git全局邮箱和用户名</p><pre><code>git config --global user.name &quot;yourgithubname&quot;git config --global user.email &quot;yourgithubemail&quot;</code></pre><p>设置ssh key</p><pre><code>ssh-keygen -t rsa -C &quot;youremail&quot;#生成后填到github和coding上（有coding平台的话）#验证是否成功ssh -T git@github.comssh -T git@git.coding.net #(有coding平台的话)</code></pre><p>安装nodejs</p><pre><code>sudo apt-get install nodejssudo apt-get install npm</code></pre><p>安装hexo  </p><pre><code>sudo npm install hexo-cli -g</code></pre><p>但是已经不需要初始化了，直接在任意文件夹下，git clone git@………………<br>然后进入克隆到的文件夹：cd xxx.github.io</p><pre><code>npm installnpm install hexo-deployer-git --save</code></pre><p>生成，部署：</p><pre><code>hexo ghexo d</code></pre><p>然后就可以愉快的开始写新博客了</p><pre><code>hexo new newpage</code></pre><p>Tips:不要忘了，每次写完最好都把源文件上传一下</p><pre><code>git add .git commit –m &quot;xxxx&quot;git push</code></pre><p>如果是在已经编辑过的电脑上，已经有clone文件夹了，那么，每次只要和远端同步一下就行了</p><pre><code>git pull</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;记录Hexo博客多终端备份更新问题的解决方案&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2019年5月" scheme="http://yoursite.com/categories/2019%E5%B9%B45%E6%9C%88/"/>
-    
-    
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
     
   </entry>
   
