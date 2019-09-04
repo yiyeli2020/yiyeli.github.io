@@ -9,6 +9,14 @@ tags: [SpringBoot，Java]
 SpringBoot系统学习。
 
 <!-- more -->
+# 使用lain在测试环境部署
+测试环境网址
+http://console.laincloud.xyz/
+登陆后选择kael-query-test
+先点击详情-》构建，然后在镜像选项中点击部署，进行项目的部署，
+部署后选择SHELL，在/lain/logs/kael.log中查看日志
+
+    tail -f
 
 # 配置文件application.yml解读
 有必要解读一下SpringBoot项目中关于application.yml配置的一些问题：
@@ -48,6 +56,22 @@ SpringBoot系统学习。
       </activation>  
 
 代表使用的是本地环境。
+
+在这个pom.xml中还有：
+
+      <resources>
+           <resource>
+               <directory>src/main/resources</directory>
+               <includes>
+                   <include>**/*.*</include> <!-- 此配置不可缺，否则mybatis的Mapper.xml将会丢失 -->
+               </includes>
+               <filtering>false</filtering>
+           </resource>
+           <resource>
+               <directory>src/main/resources.${env}</directory>
+           </resource>
+       </resources>
+
 
 在进行加载时首先加载resources文件夹中的application.yml
 其中的内容是：
@@ -179,7 +203,83 @@ SpringBoot系统学习。
          return pageInfo;
      }
 
+# 通过日志调试定时任务执行情况
+在resources.local中添加logback.xml文件，改动 <logger name="cn.kael.query.inner.dao" level="DEBUG" />中的level
+
+      <?xml version="1.0" encoding="UTF-8"?>
+      <configuration>
+
+          <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+              <encoder>
+                  <pattern>%d{yyyy.MM.dd HH:mm:ss.SSS}|%X{TRACE_ID}|%thread|%p|%c:%line|%m%n</pattern>
+              </encoder>
+          </appender>
+
+          <root level="INFO">
+              <appender-ref ref="CONSOLE"/>
+          </root>
+
+          <!--<logger name="org.springframework.amqp" level="info" additivity="false">-->
+          <!--<appender-ref ref="CONSOLE"/>-->
+          <!--</logger>-->
+
+          <!--<logger name="org.mybatis" level="DEBUG" additivity="false">-->
+          <!--<appender-ref ref="CONSOLE"/>-->
+          <!--</logger>-->
+          <!--<logger name="org.apache.zookeeper" level="ERROR" additivity="false">-->
+          <!--<appender-ref ref="CONSOLE"/>-->
+          <!--</logger>-->
+          <!--<logger name="java.sql.Connection" level="DEBUG" additivity="false">-->
+          <!--<appender-ref ref="CONSOLE"/>-->
+          <!--</logger>-->
+          <!--<logger name="java.sql.Statement" level="DEBUG" additivity="false">-->
+          <!--<appender-ref ref="CONSOLE"/>-->
+          <!--</logger>-->
+          <!--<logger name="java.sql.PreparedStatement" level="DEBUG" additivity="false">-->
+          <!--<appender-ref ref="CONSOLE"/>-->
+          <!--</logger>-->
+          <logger name="org.springframework.data.redis" level="INFO" additivity="false">
+              <appender-ref ref="CONSOLE"/>
+          </logger>
+          <logger name="redis.clients" level="INFO" additivity="false">
+              <appender-ref ref="CONSOLE"/>
+          </logger>
+
+          <logger name="cn.kael.query.inner.dao" level="DEBUG" />
+
+      </configuration>
+
+# Mybatis中自动生成主键
+
+## 遇到的问题
+在使用例如
+
+    tblJobsEntityMapper.insertSelective(tblJobsEntity);
+
+进行数据插入时，由于数据库的ID为自动插入：
+
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+
+所以RequestDTO里往往没有传入id，这时会导致后面的在Quartz中添加定时任务时获取到的id为null
+
+    //在Quartz中添加定时任务
+    taskManager.addJob(tblJobsEntity.getId(), tblJobsEntity.getCron(), tblJobsEntity.getMemo());
+
+## 解决的方法
+可以在数据库中查询再获取id，但为了减小数据库查询的压力，所以要使用Mybatis的自带配置来进行自动插入id，
+
+在TblJobsEntityMapper.xml中添加配置，在INSERT语句中，我们为可以自动生成（auto-generated）主键的列 id 插入值。
+
+我们可以使用useGeneratedKeys和keyProperty属性让数据库生成auto_increment列的值，并将生成的值设置到其中一个输入对象属性内，如下所示：     
+
+
+    </insert>
+      <insert id="insertSelective" parameterType="cn.kael.query.inner.entity.TblJobsEntity" useGeneratedKeys="true" keyProperty="id">
+      ......
+    </insert>
+
+ 这里id列值将会被数据库自动生成(如mysql)，并且生成的值会被设置到tblJobsEntity对象的id属性上
 
 
 # 参考资料：
-【1】
+【1】https://blog.csdn.net/suwu150/article/details/52895855
