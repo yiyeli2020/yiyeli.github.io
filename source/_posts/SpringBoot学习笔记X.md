@@ -9,10 +9,76 @@ tags: [SpringBoot，Java]
 SpringBoot系统学习。
 
 <!-- more -->
+# mysql-scheduler
+四个项目：
+mysql-scheduler
+user-referral
+std-report
+std-query
+
+
+如果字段有问题例如http://std-report.yxapp.in/bdStat页面中某客户的“能否进件”字段出现错误，
+
+先在Chrome中F12（检查）-》Network->Doc查看，执行页面中的查询选项可以看到Console中出现相应的请求，然后在请求中的data中找到相应字段对应的字段名字，shouldSuijie:"是"
+
+去mysql-scheduler全局搜字段shouldSuijie，根据std-report计算的逻辑找到相应字段，如果查不到相应定时就去user-referral里面去查
+
+mysql-scheduler:
+按sql和程序来更新字段，配置文件yxapp.in.conf
+routes的找到对应字段的请求
+
+shangtongdai_rpt.application_infos是mysql-scheduler里面跑出来的进件信息
+
+项目主要使用shangtongdai_rpt数据库中的表
+
+常用网址：
+测试环境网址（暂时无权限）：
+
+http://std-report-old.laincloud.xyz/partner
+
+线上环境（scala）：
+
+http://std-report.yxapp.in/index
+
+parnter界面：
+
+http://std-report.yxapp.in/partner
+
+运营界面：
+
+http://std-report.yxapp.in/stdTask
+
+bd界面：
+
+http://std-report.yxapp.in/bdStat
+
+新的report测试网址（java），对应项目std-query：
+
+http://std-report-fe.laincloud.xyz/#/
+常见问题：数据不全
+
+上午10：10前不要重启lain中的std-report-tool-pro
+里面有重发接口
+
+final_area,final_bd 今天更新昨天进件，本周更新上周进件，刷新code
+
+定时卡住去查：
+
+    SELECT *
+    FROM shangtongdai_rpt.rpt_fetch_times ;
+里面有定时最后更新时间
+如果查不到相应定时就去user-referral里面去查
+
+# 调试定时任务管理器TaskManager时要注意定时表达式满足条件时才会执行
+
 # 使用lain在测试环境部署
-测试环境网址
+登陆：
+http://kael-query-test.laincloud.xyz/auth/login/do?loginName=kai.yang&password=123123
+测试环境网址：
 http://console.laincloud.xyz/
 登陆后选择kael-query-test
+
+
 先点击详情-》构建，然后在镜像选项中点击部署，进行项目的部署，
 部署后选择SHELL，在/lain/logs/kael.log中查看日志
 

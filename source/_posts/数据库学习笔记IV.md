@@ -1,4 +1,4 @@
-title: 数据库学习笔记III
+title: 数据库学习笔记IV
 date: 2019-9-4 10:00:12
 categories: 2019年9月
 tags: [Mysql]
@@ -68,7 +68,7 @@ auth_users_roles_rela代表的是不同用户所具有的角色，
     ON auth_users.id=auth_user_roles_rela.user_id
     WHERE auth_users.account='kai.yang'
 
-再根据角色id到auth_role_resources_rela中找到该角色所拥有的资源resource_id
+根据角色id到auth_role_resources_rela中找到该角色所拥有的资源resource_id
     SELECT resource_id
     FROM auth_role_resources_rela
     WHERE role_id=(
@@ -79,22 +79,19 @@ auth_users_roles_rela代表的是不同用户所具有的角色，
       WHERE auth_users.account='kai.yang'
       )
 
-根据资源id连接查询auth_resources中的资源名称
+根据角色id连接查询auth_resources中的资源名称
 
-    SELECT resource_name
+    SELECT auth_resources.id,resource_name,resource_type,resource_url
     FROM auth_resources
     INNER JOIN auth_role_resources_rela
-    ON auth_resources.id=auth_role_resources_rela(
-      SELECT resource_id
-      FROM auth_role_resources_rela
-      WHERE role_id=(
-        SELECT role_id
-        FROM auth_users
-        INNER JOIN auth_user_roles_rela
-        ON auth_users.id=auth_user_roles_rela.user_id
-        WHERE auth_users.account='kai.yang'
-        )
-      )  auth_role_resources_rela
+    ON auth_resources.id=auth_role_resources_rela.resource_id
+    WHERE auth_role_resources_rela.role_id=(
+      SELECT role_id
+      FROM auth_users
+      INNER JOIN auth_user_roles_rela
+      ON auth_users.id=auth_user_roles_rela.user_id
+      WHERE auth_users.account='kai.yang'
+      )
 
 ## 注意INNER JOIN查询的写法
 
