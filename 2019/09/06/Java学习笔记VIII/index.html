@@ -3,22 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>SpringBoot学习笔记I | Yiye Li</title>
+  <title>Java学习笔记VIII | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="总结整理在学习SpringBoot的过程中遇到的问题和解决方案（我又双叒要开始更新博客了）。">
-<meta name="keywords" content="SpringBoot">
+  <meta name="description" content="使用Quzrtz 及Cron定时表达式语法解析">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot学习笔记I">
-<meta property="og:url" content="http://yoursite.com/2019/07/17/SpringBoot学习笔记I/index.html">
+<meta property="og:title" content="Java学习笔记VIII">
+<meta property="og:url" content="http://yoursite.com/2019/09/06/Java学习笔记VIII/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="总结整理在学习SpringBoot的过程中遇到的问题和解决方案（我又双叒要开始更新博客了）。">
+<meta property="og:description" content="使用Quzrtz 及Cron定时表达式语法解析">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/SpringBoot学习笔记I/assets/markdown-img-paste-20190718153319935.png">
-<meta property="og:updated_time" content="2019-07-25T01:49:45.216Z">
+<meta property="og:updated_time" content="2019-09-09T02:23:05.535Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringBoot学习笔记I">
-<meta name="twitter:description" content="总结整理在学习SpringBoot的过程中遇到的问题和解决方案（我又双叒要开始更新博客了）。">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/17/SpringBoot学习笔记I/assets/markdown-img-paste-20190718153319935.png">
+<meta name="twitter:title" content="Java学习笔记VIII">
+<meta name="twitter:description" content="使用Quzrtz 及Cron定时表达式语法解析">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -200,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-SpringBoot学习笔记I" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java学习笔记VIII" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/07/17/SpringBoot学习笔记I/" class="article-date">
-      <time datetime="2019-07-17T07:30:12.000Z" itemprop="datePublished">2019-07-17</time>
+      <a href="/2019/09/06/Java学习笔记VIII/" class="article-date">
+      <time datetime="2019-09-06T10:43:12.000Z" itemprop="datePublished">2019-09-06</time>
 </a>
     </div>
   
@@ -217,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      SpringBoot学习笔记I
+      Java学习笔记VIII
     </h1>
   
 
@@ -226,13 +224,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2019年7月/">2019年7月</a>
+    <a class="article-category-link" href="/categories/2019年9月/">2019年9月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -242,22 +240,65 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>总结整理在学习SpringBoot的过程中遇到的问题和解决方案（我又双叒要开始更新博客了）。</p>
+        <p>使用Quzrtz 及Cron定时表达式语法解析</p>
 <a id="more"></a>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>忙忙碌碌的暑假结束了，虽然可以算得上十分充实，不过在学习新知识提高自己这一方面却做的并不尽如人意，之前制定的学习计划大都被其它各种计划所取代，<br>从屈指可数的博客更新就能看出来。<br>随着步入职场，自我学习变得更加重要，之前这段时间的状态不能再继续下去。写了这么多中心思想就一条：“我又双叒要开始更新博客了”。</p>
-<h2 id="SSM框架"><a href="#SSM框架" class="headerlink" title="SSM框架"></a>SSM框架</h2><p>Java中常用的有三大框架SSM（Spring，SpringMVC和Mybatis），其中Spring是一个轻量级的控制反转（IoC）和面向切面（AOP）的容器框架，<br>是为了解决企业应用开发的复杂性而创建的。而SpringMVC属于SpringFrameWork的后续产品，已经融合在Spring Web Flow里面。<br>SpringMVC分离了控制器、模型对象、分派器以及处理程序对象的角色，这种分离让它们更容易进行定制。<br>MyBatis本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。<br>MyBatis是一个基于Java的持久层框架。iBATIS提供的持久层框架包括SQL Maps和Data Access Objects（DAO）MyBatis<br>消除了几乎所有的JDBC代码和参数的手工设置以及结果集的检索。<br>MyBatis 使用简单的 XML或注解用于配置和原始映射，将接口和 Java 的POJOs（Plain Old Java Objects，普通的 Java对象）映射成数据库中的记录。</p>
-<h2 id="SpringBoot简介"><a href="#SpringBoot简介" class="headerlink" title="SpringBoot简介"></a>SpringBoot简介</h2><p>而我们之后要学习的SpringBoot则可以快速构建容易配置的 Spring 应用程序，使用SpringBoot可以减少配置的工作量。SpringBoot网站对它的简洁介绍如下：</p>
-<p>“ Spring Boot 使您能轻松地创建独立的、生产级的、基于 Spring 且能直接运行的应用程序。我们对 Spring 平台和第三方库有自己的看法，<br>所以您从一开始只会遇到极少的麻烦。”</p>
-<p>刚开始学习SpringBoot时可以从HelloWorld开始，此处网上例程很多，不再赘述。</p>
-<h1 id="概念剖析"><a href="#概念剖析" class="headerlink" title="概念剖析"></a>概念剖析</h1><p>首先学习几个Java开发中会遇到的概念。<br><img src="assets/markdown-img-paste-20190718153319935.png" alt="https://img-blog.csdn.net/20170816144718827"></p>
-<h2 id="1-DAO-data-access-object-数据访问对象"><a href="#1-DAO-data-access-object-数据访问对象" class="headerlink" title="1.DAO[data access object]数据访问对象"></a>1.DAO[data access object]数据访问对象</h2><p>一个面向对象的数据库接口，负责持久层的操作，为业务层提供接口，主要用来封装对数据库的访问，常见操作无外乎 CURD。我们也可以认为一个 DAO 对应一个 POJO 的对象，它位于业务逻辑与数据库资源中间，可以结合 PO 对数据库进行相关的操作。<br>此处注意对数据访问不仅仅指的是对数据库的访问。 假如A系统调用B系统的服务获取数据，这时候A系统对B系统访问数据对象的封装也可以称为DAO。</p>
-<h2 id="2-DTO-data-transfer-object-数据传输对象"><a href="#2-DTO-data-transfer-object-数据传输对象" class="headerlink" title="2.DTO[data transfer object]数据传输对象"></a>2.DTO[data transfer object]数据传输对象</h2><p>主要用于远程调用等需要大量传输对象的地方，比如我们有一个交易订单表，含有20个字段，那么其对应的PO就有20个属性，但我们的页面上只需要显示5个字段，因此没有必要把整个 PO 对象传递给客户端，这时我们只需把仅有 5 个属性的 DTO 把结果传递给客户端即可，而且如果用这个对象来对应界面的显示对象，那此时它的身份就转为VO。使用DTO的好处有两个，一是能避免传递过多的无用数据，提高数据的传输速度；二是能隐藏后端的表结构。常见的用法是：将请求的数据或属性组装成一个RequestDTO，再将响应的数据或属性组装成一个 ResponseDTO.</p>
-<h2 id="3-PO-persistant-object-持久层对象"><a href="#3-PO-persistant-object-持久层对象" class="headerlink" title="3.PO[persistant object]持久层对象"></a>3.PO[persistant object]持久层对象</h2><p>由一组属性和属性的get和set方法组成，最简单的 PO 就是对应数据库中某个表中的一条记录（也就是说，我们可以将数据库表中的一条记录理解为一个持久层对象），多个记录可以用 PO 的集合，PO 中应该不包含任何对数据库的操作。PO 的属性是跟数据库表的字段一一对应的，此外 PO 对象需要实现序列化接口。因对象-关系映射（Object-Relational Mapping，简称ORM）框架的广泛使用而被引入到JavaEE项目设计中。</p>
-<h2 id="4-BO-bussiness-object-业务对象"><a href="#4-BO-bussiness-object-业务对象" class="headerlink" title="4.BO[bussiness object]业务对象"></a>4.BO[bussiness object]业务对象</h2><p>简单的真实世界的软件抽象，通常位于中间层。BO 的主要作用是把业务逻辑封装为一个对象，这个对象可以包括一个或多个其它的对象。举一个求职简历的例子，每份简历都包括教育经历、项目经历等，我们可以让教育经历和项目经历分别对应一个 PO，这样在我们建立对应求职简历的 BO 对象处理简历的时候，让每个 BO 都包含这些 PO 即可。</p>
-<h2 id="5-VO-value-object-值对象"><a href="#5-VO-value-object-值对象" class="headerlink" title="5.VO[value object]值对象"></a>5.VO[value object]值对象</h2><p>通常用于业务层之间的数据传递，和 PO 一样也是仅仅包含数据而已，但 VO 应该是抽象出的业务对象，可以和表对应，也可以不对应，这根据业务的需要。 如果锅碗瓢盆分别为对应的业务对象的话，那么整个碗柜就是一个值对象。此外，VO 也可以称为页面对象，如果称为页面对象的话，那么它所代表的将是整个页面展示层的对象，也可以由需要的业务对象进行组装而来。</p>
-<h2 id="6-POJO-plain-ordiary-java-object-简单java对象"><a href="#6-POJO-plain-ordiary-java-object-简单java对象" class="headerlink" title="6.POJO[plain ordiary java object] 简单java对象"></a>6.POJO[plain ordiary java object] 简单java对象</h2><p>实际就是普通的 JavaBeans，是为了避免和 EJB（Enterprise JavaBean）混淆所创造的简称。POJO 实质上可以理解为简单的实体类，其中有一些属性及其getter和setter方法的类，没有业务逻辑，也不允许有业务方法，也不能携带有connection之类的方法。POJO 是 JavaEE 世界里面最灵活的对象，在简单系统中，如果从数据库到页面展示都是 POJO 的话，它可以是 DTO；如果从数据库中到业务处理中都是 POJO 的话，它可以是 BO；如果从数据库到整个页面的展示的话，它也可以是 VO.</p>
-<h2 id="7-Entity-实体"><a href="#7-Entity-实体" class="headerlink" title="7.Entity 实体"></a>7.Entity 实体</h2><p>对应数据库中的表，简单的理解为一个表对应一个实体，以交易订单表Order为例，若该表中含有20个字段，那么这个OrderEntity对象里面也要含有20个对应的属性。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】详述 PO VO BO DTO DAO 和 POJO 的概念及区别<a href="https://blog.csdn.net/qq_35246620/article/details/77247427" target="_blank" rel="noopener">https://blog.csdn.net/qq_35246620/article/details/77247427</a></p>
+<h1 id="Cron表达式范例："><a href="#Cron表达式范例：" class="headerlink" title="Cron表达式范例："></a>Cron表达式范例：</h1><pre><code>*/5 * * * * ?  每隔5秒执行一次
+0 */1 * * * ?  每隔1分钟执行一次
+0 0 23 * * ?  每天23点执行一次
+0 0 1 * * ?  每天凌晨1点执行一次：
+0 0 1 1 * ?  每月1号凌晨1点执行一次
+0 0 23 L * ?  每月最后一天23点执行一次
+0 0 1 ? * L  每周星期天凌晨1点实行一次
+0 26,29,33 * * * ?  在26分、29分、33分执行一次
+0 0 0,13,18,21 * * ? 每天的0点、13点、18点、21点都执行一次
+</code></pre><h1 id="Cron-表达式"><a href="#Cron-表达式" class="headerlink" title="Cron 表达式"></a>Cron 表达式</h1><p>Cron表达式由7个部分组成，各部分用空格隔开，例如0 0 12 ? * WED（每星期三下午12:00 执行）</p>
+<p>Cron表达式的7个部分从左到右代表的含义如下</p>
+<pre><code>Seconds Minutes Hours Day-of-Month Month Day-of-Week Year
+</code></pre><p>其中Year是可选的</p>
+<h1 id="Cron表达式可选的值"><a href="#Cron表达式可选的值" class="headerlink" title="Cron表达式可选的值"></a>Cron表达式可选的值</h1><pre><code>Seconds
+秒：数字0－59
+Minutes
+分：数字0－59
+Hours
+时 ：数字0-23
+Day-of-Month
+月中的几号 ：可以用数字1-31 中的任一一个值，但要注意一些特别的月份
+Month
+一年中的几月：可以用0-11 或用字符串 “JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV and DEC” 表示
+Day-of-Week
+每周：数字1-7（1 ＝ 星期日），或用字符口串“SUN, MON, TUE, WED, THU, FRI and SAT”
+
+字段名                 允许的值                        允许的特殊字符  
+秒                    0-59                            , - * /  
+分                    0-59                            , - * /  
+小时                  0-23                            , - * /  
+日                    1-31                            , - * ? / L W C  
+月                    1-12 or JAN-DEC                 , - * /  
+周几                  1-7 or SUN-SAT                   , - * ? / L C #  
+年 (可选字段)          empty, 1970-2099                 , - * /
+</code></pre><h1 id="Cron中的符号"><a href="#Cron中的符号" class="headerlink" title="Cron中的符号"></a>Cron中的符号</h1><pre><code>* ：代表整个时间段.
+/ ：表示每多长时间执行一次
+0/15表示每隔15分钟执行一次,“0”表示为从“0”分开始；
+3/20表示每隔20分钟执行一次，“3”表示从第3分钟开始执行
+? ：表示每月的某一天，或第几周的某一天
+L ：
+“6L”表示“每月的最后一个星期五”
+W：表示为最近工作日
+如“15W”放在每月（day-of-month）字段上表示为“到本月15日最近的工作日”
+#：是用来指定“的”每月第n个工作日
+&quot;6#3&quot;或者&quot;FRI#3&quot;:在每周（day-of-week）中表示“每月第三个星期五”
+
+问号(?)就是用来对日期和星期字段做互斥的，问号(?)的作用是指明该字段‘没有特定的值’，
+星号(*)和其它值，比如数字，都是给该字段指明特定的值，而星号(*)代表所有，在天时表示每一天。
+
+“?”字符：表示不确定的值
+“,”字符：指定数个值
+“-”字符：指定一个值的范围
+“/”字符：指定一个值的增加幅度。n/m表示从n开始，每次增加m
+“L”字符：用在日表示一个月中的最后一天，用在周表示该月最后一个星期X
+“W”字符：指定离给定日期最近的工作日(周一到周五)
+“#”字符：表示该月第几个周X。6#3表示该月第3个周五
+</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<br><a href="https://www.jianshu.com/p/f03b1497122a" target="_blank" rel="noopener">https://www.jianshu.com/p/f03b1497122a</a></p>
 
       
       
@@ -313,13 +354,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></p>
+        <p><span>本文标题:</span><a href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2019年07月17日 - 15时30分</p>
-        <p><span>最后更新:</span>2019年07月25日 - 09时49分</p>
+        <p><span>发布时间:</span>2019年09月06日 - 18时43分</p>
+        <p><span>最后更新:</span>2019年09月09日 - 10时23分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/17/SpringBoot学习笔记I/" title="SpringBoot学习笔记I">http://yoursite.com/2019/07/17/SpringBoot学习笔记I/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/17/SpringBoot学习笔记I/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/06/Java学习笔记VIII/" title="Java学习笔记VIII">http://yoursite.com/2019/09/06/Java学习笔记VIII/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/06/Java学习笔记VIII/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -332,18 +373,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2019/07/19/SpringBoot学习笔记II/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          SpringBoot学习笔记II
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/03/Linux配置问题小结/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Linux配置问题小结</div>
+    <a href="/2019/09/06/Java学习笔记VII/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java学习笔记VII</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -354,7 +386,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SSM框架"><span class="toc-number">1.1.</span> <span class="toc-text">SSM框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot简介"><span class="toc-number">1.2.</span> <span class="toc-text">SpringBoot简介</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#概念剖析"><span class="toc-number">2.</span> <span class="toc-text">概念剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-DAO-data-access-object-数据访问对象"><span class="toc-number">2.1.</span> <span class="toc-text">1.DAO[data access object]数据访问对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-DTO-data-transfer-object-数据传输对象"><span class="toc-number">2.2.</span> <span class="toc-text">2.DTO[data transfer object]数据传输对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PO-persistant-object-持久层对象"><span class="toc-number">2.3.</span> <span class="toc-text">3.PO[persistant object]持久层对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-BO-bussiness-object-业务对象"><span class="toc-number">2.4.</span> <span class="toc-text">4.BO[bussiness object]业务对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-VO-value-object-值对象"><span class="toc-number">2.5.</span> <span class="toc-text">5.VO[value object]值对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-POJO-plain-ordiary-java-object-简单java对象"><span class="toc-number">2.6.</span> <span class="toc-text">6.POJO[plain ordiary java object] 简单java对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Entity-实体"><span class="toc-number">2.7.</span> <span class="toc-text">7.Entity 实体</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cron表达式范例："><span class="toc-number">1.</span> <span class="toc-text">Cron表达式范例：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cron-表达式"><span class="toc-number">2.</span> <span class="toc-text">Cron 表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cron表达式可选的值"><span class="toc-number">3.</span> <span class="toc-text">Cron表达式可选的值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cron中的符号"><span class="toc-number">4.</span> <span class="toc-text">Cron中的符号</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -420,13 +452,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/19/SpringBoot学习笔记II/" title="上一篇: SpringBoot学习笔记II">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/06/03/Linux配置问题小结/" title="下一篇: Linux配置问题小结">
+            <a href="/2019/09/06/Java学习笔记VII/" title="下一篇: Java学习笔记VII">
                 <i class="fa fa-angle-right"></i>
             </a>
         
