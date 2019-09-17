@@ -12,6 +12,7 @@ Shell脚本编程，懒虫的最爱。
 
 世界的进步是由一群聪明的懒人推动的，可惜自己不但不聪明，还很懒。每次写完博客总打着熟悉git操作的旗号手动部署，终于洗心革面决定写个脚本来自动部署。
 
+    #!/bin/bash
     cd /Users/liyiye/yiye-project/liyiye012.github.io
     git add .
     git commit -m "github.io 自动部署"
