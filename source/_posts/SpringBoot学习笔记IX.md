@@ -39,9 +39,11 @@ CMS业务分享PPT：
 CMS常用表例如transport，history分享
 
 # 常见问题
-出现找不到主类的错误首先将porm文件右键选择Add to the maven project添加到右侧到maven库中，然后再将工程文件右键Mark Directory as->Sources Root
+## 出现找不到主类的错误
 
-java:程序包XXXX不存在
+首先将porm文件右键选择Add to the maven project添加到右侧到maven库中，然后再将工程文件右键Mark Directory as->Sources Root
+
+## java:程序包XXXX不存在
 
 可以先删去导入的该包然后用快捷键Alt+Enter选择add to library搜索导入该包
 
@@ -58,6 +60,7 @@ config文件夹内还要有相应的数据库自动化配置和Mybatis配置文�
 
 Maven执行clean和install在生命周期Lifecycle中选择相应的命令执行即可
 
+## Mybatis自动生成实体
 pom.xml中的自动生成mapper.xml的依赖后期要注释掉，否则每次install maven都会覆盖掉原先的。
 
     CharacterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false
@@ -65,6 +68,28 @@ pom.xml中的自动生成mapper.xml的依赖后期要注释掉，否则每次ins
     	at sun.reflect.GeneratedConstructorAccessor64.newInstance(Unknown Source)
     	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
     	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+
+## Mybatis自动生成实体时generator无法将数据表中TEXT字段和TIMESTAMP映射问题
+在mybatis generator对在数据库中表进行映射时发现它无法将表中的TEXT类型和TIMESTAMP的字段映射到实体文件中，
+
+我们需要在配置文件generatorConfig.xml中的 <table></table> 标签中做一定的修改。
+
+比如表rpt_sql_query_task，它的商品描述sql_query是TEXT类型， 那么我们可以在<table> 标签中添加<columnOverride column="sql_query" jdbcType="VARCHAR"></columnOverride> 即可。
+
+同样也可以修改TIMESTAMP格式的字段。
+
+完整代码如下：
+
+
+    <table tableName="rpt_sql_query_task" domainObjectName="RptSqlQueryTaskEntity"
+            enableCountByExample="false" enableUpdateByExample="true" enableDeleteByExample="false"
+            enableSelectByExample="true" selectByExampleQueryId="true" enableInsert="true">
+         <columnOverride column="sql_query" jdbcType="VARCHAR"></columnOverride>
+         <columnOverride column="mail_to" jdbcType="VARCHAR"></columnOverride>
+         <columnOverride column="ext_info" jdbcType="VARCHAR"></columnOverride>
+         <columnOverride column="created" jdbcType="TIMESTAMP"></columnOverride>
+         <columnOverride column="updated" jdbcType="TIMESTAMP"></columnOverride>
+     </table>
 
 
 ## 驼峰命名法
