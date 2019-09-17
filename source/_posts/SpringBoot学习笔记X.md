@@ -26,7 +26,9 @@ cn.creditease.bdp.std.authorization.client.token
 ## 同步定时
 
 http://std-report-tool.yxapp.in/tool
-查询列表将定时同步到kael-query的tbl_jobs表中
+查询列表将定时同步到kael-query的tbl_jobs表中,先将所有定时任务status都置为disable状态，然后第二次时将需要同步都都打开
+
+
 # mysql-scheduler
 四个项目：
 mysql-scheduler 计算进件信息的逻辑代码
