@@ -16,7 +16,7 @@ CMS系统学习。
 cn.creditease.bdp.newcms.cmswrapper.controller.PaymentScheduleController的源码，涉及到customer表，里面是借贷用户的信息
 
 ## 阅读
-cn.creditease.bdp.newcms.controller.creditreview.TransportController中的public Object create(@RequestBody(required = false) Transport transport)方法重点看FULL_FLOW，cn.creditease.bdp.newcms.service.creditreview.fullFlowfullFlow中的评级部分代码
+cn.creditease.bdp.newcms.controller.creditreview.TransportController中的public Object create(@RequestBody(required = false) Transport transport)方法重点看FULL_FLOW，cn.creditease.bdp.newcms.service.creditreview.CreditFlowService.fullFlow中的评级部分代码
 
     CMSResponseCode cmsResponseCode = rateBoth(transport);
 
@@ -148,9 +148,14 @@ user_role
 tb_cron_ini
 cms_task
 
-# CMS系统分析
+# CMS系统核心流程分析
+
+核心流程有进件流程和状态机流程
+
+
 ## 进件流程
-入口create接口
+入口
+cn.creditease.bdp.newcms.controller.creditreview.TransportController.create接口
 ## 状态机流程
 很多外界模块都会调用 NewtransportOpmachineServiceimpl/operateTransport
 举例审核操作信审3.0系统 ，审核进件，批钱，批产品，校验身份，审核是否符合规定，可能也需要用户补充信息，例如电话核实信息，如果拒绝则调用信审系统，调用cms系统中cn.creditease.bdp.newcms.controller.creditreview.operate接口
@@ -163,10 +168,9 @@ cms有页面，会串联很多系统有交互，会处理很多中间的进件�
 chrome 右键检查可以看见请求，根据请求找代码
 
 进件流程 ：画流程图
-重点是create和fullflow两个
+重点是transportService.create和fullflow两个
 
-
-进件分为store检查是否有新进件，没有的话insert，待初审分配，
+进件分为cn.creditease.bdp.newcms.dao.store检查是否有新进件，没有的话insert，待初审分配，
 第二是重新进件
 
 
@@ -174,8 +178,74 @@ cn.creditease.bdp.newcms.service.creditreview.fullFlow
 1.rateBoth full预估和partial预估
 2.dataPrepareCheckAndCheckSuijieRule 随借 检查数据完整性是否能够推送到信审3.0，如果不够完整则创建redis任务，
 
+#credit_audit
+生产环境数据库，修改需要在yearning上提交工单，平时只能增加，不能修改或删除
+
+# creditreview
+测试环境数据库
+transport_assignee_history  分单处理历史,记录此进件该被谁处理了
+transport_decisions 对一些进件状态需要重大改变的操作,都会存储此决策信息,此数据变更必会通知site、电销等系统,进行系统同步,当下一个操作状态为如下状态时,会生成decision
+transport_labels 存储一些标签数据，不改变进件的状态，但可能以后会用到，所以打一个标签
+transport_history 进件审核的历史信息
+tb_cron_ini 定时任务配置
+cms_task 定时任务记录表
+customers 用户信息
+transports 进件表，存储进件的基本信息状态
+transport_states 进件状态
+transport_exts 对一些外部系统操作,及外部系统调用返回结果的存储，以json格式存储
+待审核-》初审-》复核
+
+
+# 页面显示
+
+在application.yml中
+
+    cms-servlet-path: /cms/*
+    cms-package-path: cn.creditease.bdp.newcms.cmswrapper.controller
+
+会在UserRequestRecordInterceptor中对相应请求做记录，然后自动的将有/cms/*的 HTTP请求转入相应的controller包中去
+通过页面查询时检查-》Network-》All-》Headers可查询到相应的url，再通过url查询到相应接口
+
+## 进件查询
+身份证照片：cn.creditease.bdp.newcms.cmswrapper.controller.IDAddrContactController
+常用联系人、地址、提款银行卡查询： cn.creditease.bdp.newcms.cmswrapper.controller.IDAddrContactController
+姨搜查重，ID5查询：cn.creditease.bdp.newcms.cmswrapper.controller.cms4.CmsDetailController
+外贸信息，内贸信息，数据贷信息，数据贷汇总信息，cms上传银行流水，评级信息,进件历史,信审平台查重，外部平台信息，企业材料：cn.creditease.bdp.newcms.cmswrapper.controller.cms4.CmsDetailController
+对公银行流水：cn.creditease.bdp.newcms.cmswrapper.controller.BankFlowController
+人行征信报告：cn.creditease.bdp.newcms.cmswrapper.controller.BankCreditReportController
+个人银行流水：cn.creditease.bdp.newcms.cmswrapper.controller.BankFlowController
+           cn.creditease.bdp.newcms.cmswrapper.controller.cms4.CmsDetailController
+信审记录：cn.creditease.bdp.newcms.cmswrapper.controller.AuditRecordController
+实地征信报告：cn.creditease.bdp.newcms.cmswrapper.controller.app.FieldQualifyAppOperatorController
+还款计划表：cn.creditease.bdp.newcms.controller.creditreview.TransportController
+姨搜归户：cn.creditease.bdp.newcms.cmswrapper.controller.YisouRegisterController
+
+## 客服：
+cn.creditease.bdp.newcms.cmswrapper.controller.task.CustomerServiceTaskController
+## 初审
+## 终审
+## 复核
+## 实地征信：
+cn.creditease.bdp.newcms.cmswrapper.controller.cms3.FieldNewController
+## 反欺诈
+## 权限管理:
+用户管理：cn.creditease.bdp.newcms.cmswrapper.controller.PrivilegeController
+客服分单池：cn.creditease.bdp.newcms.cmswrapper.controller.assigneepool.CustomerServiceAssigneePoolController
+
+# 和其他系统消息同步
+cn.creditease.bdp.newcms.service.creditreview.external  信息同步接口
+例如推送信审3 Credit3Helper-》Credit3Service等
+同步接口=》Credit3Controller
+进件接口=》大批量数据
+手动进件接口
+同步接口-》同步时同步状态
+手动同步接口
+
+
 
 
 # 参考资料
 【1】
 https://blog.csdn.net/weixin_34112900/article/details/93630203
+【2】
+http://wiki.yxapp.in/pages/viewpage.action?pageId=65372471

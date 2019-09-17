@@ -9,19 +9,48 @@ tags: [SpringBoot，Java]
 SpringBoot系统学习。
 
 <!-- more -->
+邮件网页版申请会议室，新建-》会议请求
+
+# 写tc文件
+http://jira.yxapp.in/projects/STD/summary
+上面的代号：STD-4545 report-tool项目重构
+用户使用的查询网址：
+http://std-report-fe.laincloud.xyz/#/reportool/notes
+要有用户名，有地址，把定时模块和笔记模块写上去，将该网址中的操作进行截图然后介绍如何使用
+
+## 遇到的问题
+http://std-report-fe.laincloud.xyz/#/reportool/notes
+登陆时失败，去lain中的日志中去找登陆失败的原因
+cn.creditease.bdp.std.authorization.client.token
+
+## 同步定时
+
+http://std-report-tool.yxapp.in/tool
+查询列表将定时同步到kael-query的tbl_jobs表中
 # mysql-scheduler
 四个项目：
-mysql-scheduler
-user-referral
-std-report
+mysql-scheduler 计算进件信息的逻辑代码
+user-referral 计算进件信息的逻辑代码
+std-report 查询进件
 std-query
 
 
 如果字段有问题例如http://std-report.yxapp.in/bdStat页面中某客户的“能否进件”字段出现错误，
 
-先在Chrome中F12（检查）-》Network->Doc查看，执行页面中的查询选项可以看到Console中出现相应的请求，然后在请求中的data中找到相应字段对应的字段名字，shouldSuijie:"是"
+先在Chrome中F12（检查）-》Network->Doc或All查看，执行页面中的查询选项可以看到Console中出现相应的请求，然后在请求中的data中找到相应字段对应的字段名字，shouldSuijie:"是"。
+再在All->transports->Headers中找到Request URL: http://std-report.yxapp.in/internal/bd/transports
+在std-report中的conf/routes中找到与URL对应的接口，如果查不到相应定时就去user-referral里面去查
 
-去mysql-scheduler全局搜字段shouldSuijie，根据std-report计算的逻辑找到相应字段，如果查不到相应定时就去user-referral里面去查
+    POST        /internal/bd/transports                    controllers.TransportController.allTransports
+
+如果需要寻找更新逻辑则
+去mysql-scheduler或者std-report全局搜字段shouldSuijie或suijie或should_suijie，因为在不同系统中同一个字段可能有不同字段名字，如果查不到相应定时就去user-referral里面去查,
+
+例如查找更新信息则查到updateSuijieInfoById，再找到使用其的updateByLoans等三个接口，再找到使用其的方法，最后查到updateSuijieInfo接口
+
+    GET         /updateSuijieInfo                       controllers.HomeController.updateSuijieInfo
+
+再发送带有对应参数的GET请求来更新用户信息，逻辑修改到相应的底层代码去改。
 
 mysql-scheduler:
 按sql和程序来更新字段，配置文件yxapp.in.conf
@@ -30,6 +59,69 @@ routes的找到对应字段的请求
 shangtongdai_rpt.application_infos是mysql-scheduler里面跑出来的进件信息
 
 项目主要使用shangtongdai_rpt数据库中的表
+
+在http://std-report-tool.yxapp.in/tool查询工具中查询对应用户的身份证号或者信息
+
+    select * from shangtongdai.user_authentications where user_name='李侠'
+
+    select * from shangtongdai.users where id=540721
+
+举个例子：姓名为田伟的用户需要查询
+
+    select *
+    from shangtongdai.user_authentications
+    where user_name='田伟'
+查询结果：
+
+    id	user_id	user_name	identification	card_number	source_type	addition_loan	is_deleted	deleted_at	created	updated
+    4546	526765	田伟	610422197407190017	6228450226018907664	WEB	0	0	null	2018-10-26 12:04:20.0	2018-10-26 12:04:20.0
+    8506	146069	田伟	51013219830125661X	6222024402055205128	WEB	1	0	null	2018-12-15 20:07:20.0	2019-08-30 00:23:45.0
+    12195	475021	田伟	522730198601080314	6214835102106232	WEB	1	0	null	2019-01-21 13:03:45.0	2019-08-30 00:33:22.0
+
+多个重名，根据user_id 查询到编号475021的用户是我们要找的田伟
+
+    select *
+    from shangtongdai.users
+    where id=475021
+
+    id	email	email_confirmed	name	mobile	mobile_account	has_set_pwd	code	tracking	hashed_password	salt	signup_ip	created	updated
+    475021	null	1	null	150****1468	150****1468	1	QDCYL674	null	9e286c2c3f2954070f0fd12067f7e7d4b351abc5	1928a1d1be554c8a9fb00faff215c881	null	2018-01-26 11:49:21.0	2018-08-15 10:44:42.0
+
+查询该用户的进件信息
+    select id,transport_id,user_id,identification,should_suijie
+    from shangtongdai_rpt.application_infos
+    where identification =522730198601080314 and user_id=475021
+
+查询结果
+
+    id	transport_id	user_id	identification	should_suijie
+    309722805	250658	475021	522730198601080314	0
+    344227885	272763	475021	522730198601080314	0
+    358453685	282782	475021	522730198601080314	0
+    377322417	289761	475021	522730198601080314	0
+
+
+查询记录中should_suijie为NULL的条数
+
+    select count(id)
+        from shangtongdai_rpt.application_infos
+        where should_suijie IS NULL
+
+查询对应的记录中有身份证信息的条数：
+
+    select count(id)
+        from shangtongdai_rpt.application_infos
+        where should_suijie IS NULL and identification IS NOT NULL
+
+进件数据库生产环境在credit_audit,测试环境在creditreview
+
+根据进件id在credit_audit.transports中查询should_suijie为NULL，身份证信息不为空的相应记录的更多信息
+
+    select count(*)
+    from shangtongdai_rpt.application_infos
+    INNER JOIN credit_audit.transports
+    ON shangtongdai_rpt.application_infos.transport_id=credit_audit.transports.id
+    where should_suijie IS NULL and identification IS NOT NULL
 
 常用网址：
 测试环境网址（暂时无权限）：

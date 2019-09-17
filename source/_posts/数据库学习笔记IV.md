@@ -41,6 +41,33 @@ auth_role_resources_rela是不同角色所具有的资源信息，
     INSERT INTO auth_role_resources_rela
     (role_id,resource_id,status,created,updated)
     VALUES
+    (3,1,'ACTIVE',NOW(),NOW()),
+    (3,2,'ACTIVE',NOW(),NOW()),
+    (3,3,'ACTIVE',NOW(),NOW()),
+    (3,4,'ACTIVE',NOW(),NOW()),
+    (3,6,'ACTIVE',NOW(),NOW()),
+    (3,9,'ACTIVE',NOW(),NOW()),
+    (3,10,'ACTIVE',NOW(),NOW()),
+    (3,11,'ACTIVE',NOW(),NOW()),
+    (3,12,'ACTIVE',NOW(),NOW()),
+    (3,23,'ACTIVE',NOW(),NOW()),
+    (3,24,'ACTIVE',NOW(),NOW()),
+    (3,25,'ACTIVE',NOW(),NOW()),
+    (3,26,'ACTIVE',NOW(),NOW()),
+    (3,27,'ACTIVE',NOW(),NOW()),
+    (3,28,'ACTIVE',NOW(),NOW()),
+    (3,29,'ACTIVE',NOW(),NOW()),
+    (3,30,'ACTIVE',NOW(),NOW()),
+    (3,31,'ACTIVE',NOW(),NOW()),
+    (3,32,'ACTIVE',NOW(),NOW()),
+    (3,33,'ACTIVE',NOW(),NOW()),
+    (3,34,'ACTIVE',NOW(),NOW()),
+    (3,37,'ACTIVE',NOW(),NOW()),
+    (3,38,'ACTIVE',NOW(),NOW()),
+    (3,39,'ACTIVE',NOW(),NOW()),
+    (3,40,'ACTIVE',NOW(),NOW()),
+    (3,41,'ACTIVE',NOW(),NOW()),
+    (3,42,'ACTIVE',NOW(),NOW()),
     (3,43,'ACTIVE',NOW(),NOW()),
     (3,44,'ACTIVE',NOW(),NOW()),
     (3,45,'ACTIVE',NOW(),NOW()),
@@ -51,7 +78,8 @@ auth_role_resources_rela是不同角色所具有的资源信息，
     (3,50,'ACTIVE',NOW(),NOW()),
     (3,51,'ACTIVE',NOW(),NOW()),
     (3,52,'ACTIVE',NOW(),NOW()),
-    (3,53,'ACTIVE',NOW(),NOW());
+    (3,53,'ACTIVE',NOW(),NOW()),
+    (3,54,'ACTIVE',NOW(),NOW());
 
 
 
