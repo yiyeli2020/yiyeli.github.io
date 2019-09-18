@@ -36,12 +36,113 @@ TODO：
 可供参考：
 cn.kael.query.core.executer.SqlExecuterWrapper.execute
 cn.kael.query.core.executer.impl.execute
+仿照：
+
+    @Override
+     public ResultSet execute(long maxWaitMills) {
+         try {
+             //1.获取链接
+             //TODO:2019.9.17 自己写一个JDBC来建立连接，从resultSet中获取结果然后找到要查询的内容
+             connection = ((DataSourcePoolWrapper) dataSrource).getConnection(isSlowSql, maxWaitMills);
+             statement = connection
+                 .prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
+             //2.执行实现方法
+             resultSet = doExuecte(statement);
+
+             return resultSet;
+
+
+         } catch (Exception e) {
+             //4.异常控制
+             logger.error("执行sql异常", e);
+             throw new KaelException(e.getMessage());
+         }
+
+     }
+
+查询 kael_query.tbl_jobs中的相应内容：
+
+      SELECT * from kael_query.tbl_jobs
+      where tag='33'
+
+
+删除 kael_query.tbl_jobs中的相应内容：
+
+    DELETE FROM kael_query.tbl_jobs
+    WHERE tag='3'
+
+在kael_query.tbl_jobs加入一个字段用于记录迁移前的数据id,位置在tag之后
+
+    ALTER TABLE kael_query.tbl_jobs ADD old_id int(11) AFTER tag
+
+从shangtongdai_rpt.rpt_sql_query_task中复制相应的列到kael_query.tbl_jobs中：
+
+    INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
+    SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,status,query_type,ext_info
+    from shangtongdai_rpt.rpt_sql_query_task
+    where shangtongdai_rpt.rpt_sql_query_task.id=3
+
+试验：
+复制时先将所有定时任务status都置为disable状态且不复制status为“deleted”状态的数据（先复制id=33的数据）：
+
+    INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
+    SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,'disable',query_type,ext_info
+    from shangtongdai_rpt.rpt_sql_query_task
+    where shangtongdai_rpt.rpt_sql_query_task.id=33 and shangtongdai_rpt.rpt_sql_query_task.status!='deleted'
+
+现在开始复制所有数据：
+
+    INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
+    SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,'disable',query_type,ext_info
+    from shangtongdai_rpt.rpt_sql_query_task
+    where shangtongdai_rpt.rpt_sql_query_task.status!='deleted'
+
+发现出现问题，要复制的shangtongdai_rpt.rpt_sql_query_task表中sql_query,receiver,out_type过长，所以要去kael_query.tbl_jobs中修改字段类型
+
+    ALTER TABLE kael_query.tbl_jobs
+    MODIFY sql_note text NOT NULL
+
+    ALTER TABLE kael_query.tbl_jobs
+    MODIFY receiver text
+
+    ALTER TABLE kael_query.tbl_jobs
+    MODIFY out_type text
+
+
+第二次时将需要status状态同步的数据都打开，置为enable数据
+
+    UPDATE kael_query.tbl_jobs
+    INNER JOIN shangtongdai_rpt.rpt_sql_query_task
+    ON kael_query.tbl_jobs.old_id=shangtongdai_rpt.rpt_sql_query_task.id
+    SET kael_query.tbl_jobs.task_status=shangtongdai_rpt.rpt_sql_query_task.status
+
+重置所有记录的status为disable
+    UPDATE kael_query.tbl_jobs
+    SET kael_query.tbl_jobs.task_status='disable'
+
+out_type中到csv和xls复制时都转为attachment
+    UPDATE kael_query.tbl_jobs
+    SET out_type='attachment'
+    WHERE out_type='{"emailType":"csv"}' OR out_type='{"emailType":"xls"}'
+
+    UPDATE kael_query.tbl_jobs
+    SET out_type='content'
+    WHERE out_type='{"emailType":"content"}'
+
+
+query_type 对应的mysql属性需要到线上到std-report-tool查询应该转成什么数据源
+
 
 # mysql-scheduler
 四个项目：
+
 mysql-scheduler 计算进件信息的逻辑代码
+
 user-referral 计算进件信息的逻辑代码
+
 std-report 查询进件
+
 std-query
 
 
