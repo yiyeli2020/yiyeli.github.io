@@ -31,6 +31,11 @@ http://std-report-tool.yxapp.in/tool
 查询列表将定时同步到kael-query的tbl_jobs表中,先将所有定时任务status都置为disable状态，然后第二次时将需要同步都都打开
 
     SELECT * from shangtongdai_rpt.rpt_sql_query_task
+TODO：
+自己写一个JDBC来建立连接，从resultSet中获取结果然后找到要查询的内容
+可供参考：
+cn.kael.query.core.executer.SqlExecuterWrapper.execute
+cn.kael.query.core.executer.impl.execute
 
 # mysql-scheduler
 四个项目：
@@ -443,6 +448,9 @@ http://console.laincloud.xyz/
 
  这里id列值将会被数据库自动生成(如mysql)，并且生成的值会被设置到tblJobsEntity对象的id属性上
 
+## Mybatis 查询自动生成的多个数据库中的表
+配置文件是config/MybatisConfig
+扫描的类是sqlSessionFactory，对应的实现是config/DbAutoConfiguration中的SqlSessionFactoryBean，其数据源配置来自dataSourceProperties
 
 # 参考资料：
 【1】https://blog.csdn.net/suwu150/article/details/52895855
