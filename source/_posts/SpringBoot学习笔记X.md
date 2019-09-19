@@ -145,6 +145,10 @@ out_type中到csv和xls复制时都转为attachment
 
 
 query_type 对应的mysql属性需要到线上到std-report-tool查询应该转成什么数据源,xyz后缀的是测试，in后缀的是生产
+
+执行sbt run命令
+在localhost:9000 中进入
+
 首先插入一条测试的数据对数据源进行测试：
 
     INSERT INTO kael_query.tbl_jobs
@@ -155,6 +159,9 @@ query_type 对应的mysql属性需要到线上到std-report-tool查询应该转�
 
     UPDATE kael_query.tbl_jobs
     SET datasource_name='shangtongdai'
+    WHERE datasource_name='mysql'
+
+在测试环境中只需要选择shangtongdai进行测试，把mysql改成shangtongdai，hive在测试环境也没法测，数据源配好上线测试，dianxiao在线上测试
 
 # mysql-scheduler
 四个项目：
