@@ -132,7 +132,16 @@ out_type中到csv和xls复制时都转为attachment
 
 
 query_type 对应的mysql属性需要到线上到std-report-tool查询应该转成什么数据源
+首先插入一条测试的数据对数据源进行测试：
 
+    INSERT INTO kael_query.tbl_jobs
+    (tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,out_type,datasource_name)
+    VALUES
+    ('CronTest',888,"",'yiyeli','*/10 * * * * ?','yiyeli@creditease.cn','测试数据源','enable','attachment','shangtongdai')
+在sql_note中复制入不同的sql来测试
+
+    UPDATE kael_query.tbl_jobs
+    SET datasource_name='shangtongdai'
 
 # mysql-scheduler
 四个项目：
