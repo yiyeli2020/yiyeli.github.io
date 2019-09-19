@@ -91,10 +91,13 @@ cn.kael.query.core.executer.impl.execute
     from shangtongdai_rpt.rpt_sql_query_task
     where shangtongdai_rpt.rpt_sql_query_task.id=33 and shangtongdai_rpt.rpt_sql_query_task.status!='deleted'
 
+task_status为了和kael_query.tbl_jobs保持一致，复制时改为off状态
+
+
 现在开始复制所有数据：
 
     INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
-    SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,'disable',query_type,ext_info
+    SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,'off',query_type,ext_info
     from shangtongdai_rpt.rpt_sql_query_task
     where shangtongdai_rpt.rpt_sql_query_task.status!='deleted'
 
@@ -117,9 +120,19 @@ cn.kael.query.core.executer.impl.execute
     ON kael_query.tbl_jobs.old_id=shangtongdai_rpt.rpt_sql_query_task.id
     SET kael_query.tbl_jobs.task_status=shangtongdai_rpt.rpt_sql_query_task.status
 
-重置所有记录的status为disable
+task_status为了和kael_query.tbl_jobs保持一致，同步时改为on状态
+
     UPDATE kael_query.tbl_jobs
-    SET kael_query.tbl_jobs.task_status='disable'
+    SET task_status='on'
+    WHERE task_status='enable'
+
+    UPDATE kael_query.tbl_jobs
+    SET task_status='off'
+    WHERE task_status='disable'
+
+重置所有记录的status为off
+    UPDATE kael_query.tbl_jobs
+    SET kael_query.tbl_jobs.task_status='off'
 
 out_type中到csv和xls复制时都转为attachment
     UPDATE kael_query.tbl_jobs
@@ -131,7 +144,7 @@ out_type中到csv和xls复制时都转为attachment
     WHERE out_type='{"emailType":"content"}'
 
 
-query_type 对应的mysql属性需要到线上到std-report-tool查询应该转成什么数据源
+query_type 对应的mysql属性需要到线上到std-report-tool查询应该转成什么数据源,xyz后缀的是测试，in后缀的是生产
 首先插入一条测试的数据对数据源进行测试：
 
     INSERT INTO kael_query.tbl_jobs
