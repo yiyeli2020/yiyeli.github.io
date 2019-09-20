@@ -18,6 +18,23 @@ auth_role_resources_rela是不同角色所具有的资源信息，
 现在要使用SQL语句添加新的资源，将用户yang.kai
 
 
+# 页面权限配置
+resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，现将http://std-report-fe.laincloud.xyz/#/reportool中的不同级别菜单的http请求url添加到reporting数据库的资源中
+
+    INSERT INTO reporting.auth_resources
+    (resource_name, external_id,resource_type,application_name,resource_url,status,parent_id,level,sort)
+    VALUES
+    ('首页',-1,'MENU','reporting','/','ACTIVE',0,0,0),
+    ('报表',-1,'MENU','reporting','/report/home','ACTIVE',0,0,0),
+    ('night watcher',-1,'MENU','reporting','/night/home','ACTIVE',0,0,0),
+    ('report tool',-1,'MENU','reporting','/reportool','ACTIVE',0,0,0),
+    ('短信模板',-1,'MENU','reporting','/night/template/sms','ACTIVE',0,1,0),
+    ('邮件模板',-1,'MENU','reporting','/night/template/mail','ACTIVE',0,1,0),
+    ('新增模板',-1,'MENU','reporting','/night/template/mail','ACTIVE',0,1,0),
+    ('定时任务列表',-1,'MENU','reporting','/reportool/jobs','ACTIVE',0,1,0),
+    ('我的笔记',-1,'MENU','reporting','/reportool/notes','ACTIVE',0,1,0);
+
+
 # INSERT语句
 
 基本语法是：
