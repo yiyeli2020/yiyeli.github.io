@@ -623,3 +623,33 @@ Postman中选择POST格式发送，http://localhost:8080/Merchant/MerchantQuery
 # 浏览器测试
 
 除了用Postman进行测试外，也可以直接在浏览器中输入GET请求进行测试，在网址栏输入http://localhost:8080//Merchant/MerchantQuery发送即可
+
+# 使用curl命令测试
+
+curl 是常用的命令行工具，用来请求 Web 服务器。它的名字就是客户端（client）的 URL 工具的意思。
+
+它的功能非常强大，命令行参数多达几十种。如果熟练的话，完全可以取代 Postman 这一类的图形界面工具。
+
+不带有任何参数时，curl 就是发出 GET 请求。
+
+    $ curl https://www.google.com
+
+## -d
+-d参数用于发送 POST 请求的数据体。
+
+    $ curl -d'login=emma＆password=123'-X POST https://google.com/login
+    # 或者
+    $ curl -d 'login=emma' -d 'password=123' -X POST  https://google.com/login
+
+使用-d参数以后，HTTP 请求会自动加上标头Content-Type : application/x-www-form-urlencoded。并且会自动将请求转为 POST 方法，因此可以省略-X POST。
+
+-d参数可以读取本地文本文件的数据，向服务器发送。
+
+    $ curl -d '@data.txt' https://google.com/login
+
+上面命令读取data.txt文件的内容，作为数据体向服务器发送。
+
+
+# 参考资料：
+
+【1】 http://www.ruanyifeng.com/blog/2019/09/curl-reference.html

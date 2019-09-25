@@ -10,16 +10,20 @@ SpringBoot系统学习。
 
 <!-- more -->
 邮件网页版申请会议室，新建-》会议请求
-周报：
-提测kael-query项目（STD-4545）
-同步定时任务到kael-query的tbl_jobs表中（同时修改tbl_notes和tbl_sql_warning 中的sql_note类型为TEXT）
-解决测试问题：
-STD-5114（重置更新时间）
-STD-5120 （建定时任务报错，但是创建成功）
-STD-5119 （数据源mysql更改，添加新到数据源）
 
 CMS分享：
 疑难点：sync2ExternalCredit
+
+
+手动触发定时功能添加
+定时补偿（例如本次没有按时发邮件，检查发现时要重发一次）
+重构shangtongdai-task：
+#以下几个个是report-tool 定时调用执行 report-tool 相关开发看一下
+*/5 8-20 * * * curl -d "" "localhost:8003/sms/common/CommonSQL?sqlId=1280&smsTemplateId=100010&debug=false" > /dev/null
+*/5 8-20 * * * curl -d "" "localhost:8003/sms/common/CommonSQL?sqlId=1292&smsTemplateId=100011&debug=false" > /dev/null
+45 8 1 * * curl -d "" "localhost:8003/huifang/common/CommonSQL?sqlId=1335&debug=false" > /dev/null #预催收T-3 回访功能
+数据库shangtongdai-rpt.rpt_sql_query_task
+
 
 # 写tc文件
 http://jira.yxapp.in/projects/STD/summary
