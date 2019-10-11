@@ -6,7 +6,7 @@ tags: [Scala]
 
 ---
 
-Scala学习：=>语法糖
+Scala学习：=>语法糖,模式匹配
 
 <!-- more -->
 
@@ -45,6 +45,60 @@ Scala中的=>符号可以看做是创建函数实例的语法糖。例如：A =>
 
       }
     }
+
+# 模式匹配
+
+    object scala {
+        def main(args: Array[String]):Unit={
+            println(matchTest(3))
+        }
+        def matchTest(x:Int):String =x match{
+          case 1=>"one"
+          case 2=>"two"
+          case _=>"many"
+        }
+    }
+match 对应 Java 里的 switch，但是写在选择器表达式之后。即： 选择器 match {备选项}。
+
+match 表达式通过以代码编写的先后次序尝试每个模式来完成计算，只要发现有一个匹配的case，剩下的case不会继续匹配。
+
+接下来我们来看一个不同数据类型的模式匹配：
+
+    object scala {
+        def main(args: Array[String]):Unit={
+          println(matchTest("two"))
+          println(matchTest("test"))
+          println(matchTest(1))
+          println(matchTest(6))
+        }
+        def matchTest(x:Any) : Any=x match {
+          case 1=>"one"
+          case "two"=>2
+          case y:Int=>"scala.Int"
+          case _=>"many"
+        }
+    }
+输出结果为：
+
+    2
+    many
+    one
+    scala.Int
+实例中第一个 case 对应整型数值 1，第二个 case 对应字符串值 two，第三个 case 对应类型模式，用于判断传入的值是否为整型，相比使用isInstanceOf来判断类型，使用模式匹配更好。第四个 case 表示默认的全匹配备选项，即没有找到其他匹配时的匹配项，类似 switch 中的 default。
+
+## 使用样例类
+使用了case关键字的类定义就是就是样例类(case classes)，样例类是种特殊的类，经过优化以用于模式匹配。
+
+以下是样例类的简单实例:
+
+
+
+
+
+
+
+
+
 
 # 参考资料：
 【1】 https://www.orchome.com/401
