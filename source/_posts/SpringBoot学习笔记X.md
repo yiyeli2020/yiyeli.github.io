@@ -97,7 +97,16 @@ cn.kael.query.core.executer.impl.execute
     from shangtongdai_rpt.rpt_sql_query_task
     where shangtongdai_rpt.rpt_sql_query_task.id=3
 
-试验：
+### 定时为空，状态打开的记录
+
+    SELECT count(*) FROM shangtongdai_rpt.rpt_sql_query_task
+     where status="enable"  and cron_desc is NULL
+
+有定时为空，状态打开的记录，目前这些初始化时会被添加到Quartz里但不会被执行
+
+所以在初始化时不迁移这种记录
+
+### 试验：
 复制时先将所有定时任务status都置为disable状态且不复制status为“deleted”状态的数据（先复制id=33的数据）：
 
     INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
@@ -108,12 +117,18 @@ cn.kael.query.core.executer.impl.execute
 task_status为了和kael_query.tbl_jobs保持一致，复制时改为off状态
 
 
-现在开始复制所有数据：
+### 现在开始复制所有数据(定时表达式为空的不负责)：
 
     INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
     SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,'off',query_type,ext_info
     from shangtongdai_rpt.rpt_sql_query_task
-    where shangtongdai_rpt.rpt_sql_query_task.status!='deleted'
+    where shangtongdai_rpt.rpt_sql_query_task.status!='deleted' and shangtongdai_rpt.rpt_sql_query_task.cron_desc is not NULL
+
+再复制状态关闭且表达式为空的。
+    INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
+    SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,'off',query_type,ext_info
+    from shangtongdai_rpt.rpt_sql_query_task
+    where shangtongdai_rpt.rpt_sql_query_task.status='disable' and shangtongdai_rpt.rpt_sql_query_task.cron_desc is NULL
 
 发现出现问题，要复制的shangtongdai_rpt.rpt_sql_query_task表中sql_query,receiver,out_type过长，所以要去kael_query.tbl_jobs中修改字段类型
 
@@ -156,6 +171,7 @@ out_type中到csv和xls复制时都转为attachment
     UPDATE kael_query.tbl_jobs
     SET out_type='content'
     WHERE out_type='{"emailType":"content"}'
+
 
 
 query_type 对应的mysql属性需要到线上到std-report-tool查询应该转成什么数据源,xyz后缀的是测试，in后缀的是生产
