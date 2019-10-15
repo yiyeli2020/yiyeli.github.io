@@ -98,6 +98,25 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     (3,53,'ACTIVE',NOW(),NOW()),
     (3,54,'ACTIVE',NOW(),NOW());
 
+例如在线上生产环境中添加角色权限
+    INSERT INTO reporting.auth_user_roles_rela
+    (user_id,role_id,create_user,status,created,updated)
+    VALUES
+    (14,1,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,5,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,6,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,7,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,8,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,9,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,10,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,11,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,12,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,13,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,14,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,16,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,17,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (14,18,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW())
+
 
 
 # 连接查询

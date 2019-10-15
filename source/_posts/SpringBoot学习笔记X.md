@@ -107,26 +107,34 @@ cn.kael.query.core.executer.impl.execute
 所以在初始化时不迁移这种记录
 
 ### 试验：
-复制时先将所有定时任务status都置为disable状态且不复制status为“deleted”状态的数据（先复制id=33的数据）：
+复制时先将所有定时任务status都置为disable状态且不复制status为“deleted”状态的数据（先复制id=33的数据）,新的tag为原来的description+id：
+此处需要拼接字段，所以使用CONCAT关键字
 
     INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
-    SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,'disable',query_type,ext_info
+    SELECT CONCAT(description,id),id,sql_query,created_user,cron_desc,mail_to,description,'disable',query_type,ext_info
     from shangtongdai_rpt.rpt_sql_query_task
-    where shangtongdai_rpt.rpt_sql_query_task.id=33 and shangtongdai_rpt.rpt_sql_query_task.status!='deleted'
+    where shangtongdai_rpt.rpt_sql_query_task.id=33 and shangtongdai_rpt.rpt_sql_query_task.status!='deleted' and shangtongdai_rpt.rpt_sql_query_task.cron_desc is not NULL
 
 task_status为了和kael_query.tbl_jobs保持一致，复制时改为off状态
 
+再试验性的复制id=21的数据
+
+    INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
+    SELECT CONCAT(description,id),id,sql_query,created_user,cron_desc,mail_to,description,'disable',query_type,ext_info
+    from shangtongdai_rpt.rpt_sql_query_task
+    where shangtongdai_rpt.rpt_sql_query_task.id=21 and shangtongdai_rpt.rpt_sql_query_task.status!='deleted' and shangtongdai_rpt.rpt_sql_query_task.cron_desc is not NULL
 
 ### 现在开始复制所有数据(定时表达式为空的不负责)：
 
     INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
-    SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,'off',query_type,ext_info
+    SELECT CONCAT(description,id),id,sql_query,created_user,cron_desc,mail_to,description,'off',query_type,ext_info
     from shangtongdai_rpt.rpt_sql_query_task
     where shangtongdai_rpt.rpt_sql_query_task.status!='deleted' and shangtongdai_rpt.rpt_sql_query_task.cron_desc is not NULL
 
 再复制状态关闭且表达式为空的。
+
     INSERT INTO kael_query.tbl_jobs(tag,old_id,sql_note,operator_no,cron,receiver,memo,task_status,datasource_name,out_type)
-    SELECT id,id,sql_query,created_user,cron_desc,mail_to,description,'off',query_type,ext_info
+    SELECT CONCAT(description,id),id,sql_query,created_user,cron_desc,mail_to,description,'off',query_type,ext_info
     from shangtongdai_rpt.rpt_sql_query_task
     where shangtongdai_rpt.rpt_sql_query_task.status='disable' and shangtongdai_rpt.rpt_sql_query_task.cron_desc is NULL
 
@@ -173,6 +181,12 @@ out_type中到csv和xls复制时都转为attachment
     WHERE out_type='{"emailType":"content"}'
 
 
+在测试环境中只需要选择shangtongdai进行测试，把mysql改成shangtongdai，hive在测试环境也没法测，数据源配好上线测试，dianxiao在线上测试
+
+    UPDATE kael_query.tbl_jobs
+    SET datasource_name='shangtongdai'
+    WHERE datasource_name='mysql' OR datasource_name='sqlQuery'
+
 
 query_type 对应的mysql属性需要到线上到std-report-tool查询应该转成什么数据源,xyz后缀的是测试，in后缀的是生产
 
@@ -190,8 +204,6 @@ query_type 对应的mysql属性需要到线上到std-report-tool查询应该转�
     UPDATE kael_query.tbl_jobs
     SET datasource_name='shangtongdai'
     WHERE datasource_name='mysql'
-
-在测试环境中只需要选择shangtongdai进行测试，把mysql改成shangtongdai，hive在测试环境也没法测，数据源配好上线测试，dianxiao在线上测试
 
 # mysql-scheduler
 四个项目：
