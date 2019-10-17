@@ -35,10 +35,17 @@ id=1612 ，1613，1614，1618 数据源有问题
 
  2.对慢sql定时的队列延迟处理：系统现在有慢sql限制,默认最多同时单台服务器最多执行15个,对于配置的定时sql进行延迟队列处理
 
+ 解决方案：
+    使用DataSourcePoolWrapper数据链接池包装类，使用ScheduledExecutorService实现延迟任务队列。
+    遇到慢sql时先判断当前线程池中的慢sql数量，如果有可用慢sql资源时则加入线程池，然后进行慢sql数量的更新和操作。
+    如果当前的慢sql池剩余资源不足，然后将慢sql加入延迟任务队列，延迟指定时间，再次执行该sql时如果仍无可用慢sql资源时，则再次加入延迟队列，指定延迟时间，如果有可用慢sql资源时则加入线程池，然后进行慢sql数量的更新和操作。
+
+
 3.支持oracle库数据源,数据源添加执行类型字段,判断能否语法优化部分sql，针对oracle和mysql，DB2做优化：支持dianxiao的oracle数据库配置
 
 解决方案：
-    使用DataSourceProperties和application-env.yml中的driverClassName作为区分字段，来对数据源类型进行判断。
+
+使用DataSourceProperties和application-env.yml中的driverClassName作为区分字段，来对数据源类型进行判断。
 
 4.添加慢sql黑白名单记录：对于慢sql的执行进行黑名单记录,记录执行人.执行耗时,执行sql(同一个sql记录一次),执行次数
 
