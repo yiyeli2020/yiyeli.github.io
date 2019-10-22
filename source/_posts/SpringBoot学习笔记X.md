@@ -17,11 +17,8 @@ CMS分享：
 
 手动触发定时功能添加
 定时补偿（例如本次没有按时发邮件，检查发现时要重发一次）
-重构shangtongdai-task：
-#以下几个个是report-tool 定时调用执行 report-tool 相关开发看一下
-*/5 8-20 * * * curl -d "" "localhost:8003/sms/common/CommonSQL?sqlId=1280&smsTemplateId=100010&debug=false" > /dev/null
-*/5 8-20 * * * curl -d "" "localhost:8003/sms/common/CommonSQL?sqlId=1292&smsTemplateId=100011&debug=false" > /dev/null
-45 8 1 * * curl -d "" "localhost:8003/huifang/common/CommonSQL?sqlId=1335&debug=false" > /dev/null #预催收T-3 回访功能
+
+回访功能
 数据库shangtongdai-rpt.rpt_sql_query_task
 
 

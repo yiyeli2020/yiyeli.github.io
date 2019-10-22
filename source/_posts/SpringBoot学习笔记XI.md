@@ -63,3 +63,34 @@ ToolQueryController中增加接口selectSchema根据选择的数据库和表拼�
 
 前端：
 在Report Tool中增加查询表结构的按钮，选择了查询的库之后点击查询表结构按钮调用selectSchema接口
+# 10.21
+report测试环境变更，在lain3上部署新的环境，注意在更新中修改URL和端口
+排查时可以在容器Prods的日志中的>_ 命令行中输入查询命令来搜索
+
+cms技术分享修改
+
+# 10.22
+
+定时任务迁移
+重构shangtongdai-task：
+#以下几个个是report-tool 定时调用执行 report-tool 相关开发看一下
+*/5 8-20 * * * curl -d "" "localhost:8003/sms/common/CommonSQL?sqlId=1280&smsTemplateId=100010&debug=false" > /dev/null
+*/5 8-20 * * * curl -d "" "localhost:8003/sms/common/CommonSQL?sqlId=1292&smsTemplateId=100011&debug=false" > /dev/null
+45 8 1 * * curl -d "" "localhost:8003/huifang/common/CommonSQL?sqlId=1335&debug=false" > /dev/null #预催收T-
+
+## 执行步骤：
+
+将shangtongdai的sbt仓库文件内容复制到~/.sbt/repositories 中
+
+    cd shangtongdai/
+    cat sbtrepositories -> ~/.sbt/repositories
+
+再执行
+
+    sbt "project task-scheduler" run
+其中要执行的项目文件是 task-scheduler
+遇到问题：
+
+    sbt.ResolveException: unresolved dependency: net.koofr#play2-sprites;1.1.3-SNAPSHOT: not found
+
+在项目中搜索play2-sprites然后注释掉，因为该插件版本库现在已不支持。
