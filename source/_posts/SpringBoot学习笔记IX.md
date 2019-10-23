@@ -91,7 +91,30 @@ pom.xml中的自动生成mapper.xml的依赖后期要注释掉，否则每次ins
          <columnOverride column="updated" jdbcType="TIMESTAMP"></columnOverride>
      </table>
 
+## 使用mybatis-generator生成新的DTO和mapper.xml时
 
+遇到
+
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD FAILURE
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Total time: 6.189 s
+    [INFO] Finished at: 2019-10-23T17:04:33+08:00
+    [INFO] Final Memory: 39M/308M
+    [INFO] ------------------------------------------------------------------------
+    [ERROR] Failed to execute goal org.mybatis.generator:mybatis-generator-maven-plugin:1.3.5:generate (Generate MyBatis Artifacts) on project kael-inner: Execution Generate MyBatis Artifacts of goal org.mybatis.generator:mybatis-generator-maven-plugin:1.3.5:generate failed: Cannot resolve classpath entry: /Users/liyiye/yiye-project/CreditEase/kael-query/kael-inner/src/main/resources.local -> [Help 1]
+    [ERROR]
+    [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+    [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+    [ERROR]
+    [ERROR] For more information about the errors and possible solutions, please read the following articles:
+    [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginExecutionException
+
+    Process finished with exit code 1
+
+项目文件中只有/Users/liyiye/yiye-project/CreditEase/kael-query/kael-inner/src/main/resources，多了一个.local
+
+改来改去没有太好的方法，所以直接建了个resources.local文件夹然后把相应文件复制过去，就install成功了
 ## 驼峰命名法
 方法名开头字母要小写
 

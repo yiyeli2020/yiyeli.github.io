@@ -83,14 +83,84 @@ cms技术分享修改
 将shangtongdai的sbt仓库文件内容复制到~/.sbt/repositories 中
 
     cd shangtongdai/
-    cat sbtrepositories -> ~/.sbt/repositories
+    cat sbtrepositories > ~/.sbt/repositories
 
-再执行
+再使用sbt-idea配置IDE
+
+    sbt "gen-idea no-classifiers" # no-classifiers表示不下载源代码，若删除会比较慢
+
+然后执行
 
     sbt "project task-scheduler" run
+
 其中要执行的项目文件是 task-scheduler
 遇到问题：
 
     sbt.ResolveException: unresolved dependency: net.koofr#play2-sprites;1.1.3-SNAPSHOT: not found
 
 在项目中搜索play2-sprites然后注释掉，因为该插件版本库现在已不支持。
+
+# 10.23
+1.cms技术分享文档整理：
+full_flow 和状态机展开详细说一下，总结一下
+
+信审3.0 接口找测试要账号在本地测一下，在cms页面的初审终审复核按钮中找到哪个和这些接口对应
+
+2.定时任务重构
+3.STD-5213
+1.1添加共用笔记模块：
+	1. 说明:
+	笔记添加共用笔记模块,数据库要加笔记类型,共有笔记可单独列表展示,所有人可见
+	2. 后端改动：
+
+  1. tbl_notes表增加新字段note_type，有public和private两种。
+  2. 在NotesController笔记的增删改查接口都要增加相应的属性。
+  3. 原有的queryNoteByTag和queryNotes接口都只能查询到当前操作人和public属性的笔记。
+
+1.3 支持oracle库数据源
+  问题:
+  数据源添加执行类型字段,判断能否语法优化部分sql，针对oracle和mysql，DB2做优化：支持dianxiao的oracle数据库配置---
+
+
+  解决方案：
+
+  	1. 使用DataSourceProperties和application-env.yml添加driverType作为区分字段，来对数据源类型进行判断, mysql or oracle。
+  	2. 对于sql优化部分,判断如果为oracle暂不做优化处理
+  	3. oracle 能够正常查询数据
+
+
+
+
+1.4.  添加表结构展示功能
+  目标:
+  查询表时,经常忘了表名,和哪些表存在,添加此功能便于使用
+
+
+  解决方案
+  后端：
+  示例 ,添加restful 接口 --/tool/tables/{datasourceName}
+  ToolQueryController中增加接口上述根据选择的数据库和表拼接sql语句sql: select * from information_schema.tables where TABLE_SCHEMA='shangtongdai'，然后执行sql
+
+  采集字段有:TABLE_SCHEMA (库名),TABLE_NAME(表名),TABLE_ROWS(数据量),TABLE_COMMENT(表说明)
+1.6 定时配置,添加‘无数据是否发送’单选框
+
+  前段,添加页面展示
+
+
+
+
+
+
+  后端对此参数进行处理,对于配置为否对定时,当查询数据为0是,不进行邮件发送
+
+
+  1.7 反馈邮件类型--》改为 发送类型
+  选项变为,1、邮件正文,2、邮件附件、3、短信
+
+
+1.7 定时查询添加 id, 收件人 ,创建者三个查询条件
+  1.后段需要接口改动
+
+  2.前端需要添加查询条件
+# 参考资料：
+【1】 http://std-docs.laincloud.in/%E5%BC%80%E5%8F%91%E9%83%A8%E7%BD%B2/develop-guidelines/
