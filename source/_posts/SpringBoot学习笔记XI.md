@@ -77,13 +77,19 @@ cms技术分享修改
 */5 8-20 * * * curl -d "" "localhost:8003/sms/common/CommonSQL?sqlId=1280&smsTemplateId=100010&debug=false" > /dev/null
 */5 8-20 * * * curl -d "" "localhost:8003/sms/common/CommonSQL?sqlId=1292&smsTemplateId=100011&debug=false" > /dev/null
 45 8 1 * * curl -d "" "localhost:8003/huifang/common/CommonSQL?sqlId=1335&debug=false" > /dev/null #预催收T-
-
+把里面绑定的端口都改为9000
+*/5 8-20 * * * curl -d "" "localhost:9000/sms/common/CommonSQL?sqlId=1280&smsTemplateId=100010&debug=false" > /dev/null
 ## 执行步骤：
 
 将shangtongdai的sbt仓库文件内容复制到~/.sbt/repositories 中
 
     cd shangtongdai/
     cat sbtrepositories > ~/.sbt/repositories
+
+找到readme.md，按照其中的步骤执行
+如果在本地使用apollo，需要在根目录 /opt/settings下面新建server.properties
+ 内容为env=DEV
+ 则可以读取测试环境apollo配置
 
 再使用sbt-idea配置IDE
 
@@ -94,11 +100,23 @@ cms技术分享修改
     sbt "project task-scheduler" run
 
 其中要执行的项目文件是 task-scheduler
+
 遇到问题：
 
     sbt.ResolveException: unresolved dependency: net.koofr#play2-sprites;1.1.3-SNAPSHOT: not found
 
 在项目中搜索play2-sprites然后注释掉，因为该插件版本库现在已不支持。
+要更新为：
+
+    addSbtPlugin("net.koofr" % "play2-sprites" % "1.1.4-SNAPSHOT")
+在该文件中找到此行
+
+    resolvers += "internal maven snapshots" at "http://artifactory.yxapp.xyz/artifactory/mvn-snapshot/"
+然后更新为
+
+    resolvers += "internal maven snapshots" at "http://mirrors.bdp.idc/libs-snapshot-local/"
+
+
 
 # 10.23
 1.cms技术分享文档整理：
@@ -162,5 +180,7 @@ full_flow 和状态机展开详细说一下，总结一下
   1.后段需要接口改动
 
   2.前端需要添加查询条件
+
+
 # 参考资料：
 【1】 http://std-docs.laincloud.in/%E5%BC%80%E5%8F%91%E9%83%A8%E7%BD%B2/develop-guidelines/

@@ -34,6 +34,12 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     ('定时任务列表',-1,'MENU','reporting','/reportool/jobs','ACTIVE',0,1,0),
     ('我的笔记',-1,'MENU','reporting','/reportool/notes','ACTIVE',0,1,0);
 
+再次添加一些界面：
+
+    INSERT INTO reporting.auth_resources
+    (resource_name, external_id,resource_type,application_name,resource_url,status,parent_id,level,sort)
+    VALUES
+    ('表结构查询',-1,'FUNCTION','reporting','/tool/tables','ACTIVE',0,1,0)
 
 # INSERT语句
 
@@ -97,6 +103,13 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     (3,52,'ACTIVE',NOW(),NOW()),
     (3,53,'ACTIVE',NOW(),NOW()),
     (3,54,'ACTIVE',NOW(),NOW());
+
+再添加一些权限
+
+    INSERT INTO auth_role_resources_rela
+    (role_id,resource_id,status,created,updated)
+    VALUES
+    (3,224,'ACTIVE',NOW(),NOW())
 
 例如在线上生产环境中添加角色权限
     INSERT INTO reporting.auth_user_roles_rela
