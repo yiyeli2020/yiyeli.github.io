@@ -182,5 +182,7 @@ full_flow 和状态机展开详细说一下，总结一下
   2.前端需要添加查询条件
 
 
+XXL-JOB缓存工具：自动降级，引入包，
+
 # 参考资料：
 【1】 http://std-docs.laincloud.in/%E5%BC%80%E5%8F%91%E9%83%A8%E7%BD%B2/develop-guidelines/
