@@ -130,7 +130,42 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     (14,17,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
     (14,18,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW())
 
+例如添加某个用户具有的角色信息：
 
+
+    INSERT INTO reporting.auth_user_roles_rela
+    (user_id,role_id,create_user,status,created,updated)
+    VALUES
+    (22,4,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,5,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,6,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,7,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,8,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,10,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,11,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,12,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,17,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,18,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,19,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,21,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,22,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,23,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,24,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,25,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,26,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,27,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,33,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,34,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,35,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,36,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,39,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,40,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,41,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,42,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,43,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,44,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,45,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,46,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW())
 
 # 连接查询
 auth_users表，代表的是用户信息，auth_roles代表的是不同的角色信息，
