@@ -41,6 +41,16 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     VALUES
     ('表结构查询',-1,'FUNCTION','reporting','/tool/tables','ACTIVE',0,1,0)
 
+
+    INSERT INTO reporting.auth_resources
+    (resource_name, external_id,resource_type,application_name,resource_url,status,parent_id,level,sort)
+    VALUES
+    ('根据当前用户获取所有报表展示树信息',-1,'FUNCTION','reporting','/auth/role/getLayout','ACTIVE',0,1,0),
+    ('根据当前用户获取所有功能展示树信息',-1,'FUNCTION','reporting','/auth/role/getFunctionLayout','ACTIVE',0,1,0),
+    ('分页查询角色信息',-1,'FUNCTION','reporting','/auth/role/queryRolesInfo','ACTIVE',0,1,0),
+    ('分页查询所有操作员信息',-1,'FUNCTION','reporting','/auth/user/queryInfo','ACTIVE',0,1,0),
+    ('更新操作员状态（冻结/解冻）',-1,'FUNCTION','reporting','/auth/user/updateStatus','ACTIVE',0,1,0)
+
 # INSERT语句
 
 基本语法是：
@@ -109,7 +119,11 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     INSERT INTO auth_role_resources_rela
     (role_id,resource_id,status,created,updated)
     VALUES
-    (3,224,'ACTIVE',NOW(),NOW())
+    (3,246,'ACTIVE',NOW(),NOW()),
+    (3,247,'ACTIVE',NOW(),NOW()),
+    (3,248,'ACTIVE',NOW(),NOW()),
+    (3,249,'ACTIVE',NOW(),NOW()),
+    (3,250,'ACTIVE',NOW(),NOW())
 
 例如在线上生产环境中添加角色权限
     INSERT INTO reporting.auth_user_roles_rela
@@ -165,7 +179,50 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     (22,43,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
     (22,44,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
     (22,45,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,46,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW())
+    (22,46,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,47,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,48,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,49,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
+    (22,50,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW())
+
+    INSERT INTO reporting.auth_user_roles_rela
+    (user_id,role_id,create_user,status,created,updated)
+    VALUES
+    (41,3,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,4,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,5,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,6,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,7,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,8,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,10,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,11,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,12,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,17,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,18,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,19,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,21,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,22,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,23,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,24,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,25,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,26,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,27,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,33,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,34,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,35,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,36,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,39,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,40,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,41,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,42,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,43,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,44,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,45,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,46,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,47,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,48,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,49,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
+    (41,50,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW())
 
 # 连接查询
 auth_users表，代表的是用户信息，auth_roles代表的是不同的角色信息，
