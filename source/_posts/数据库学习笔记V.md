@@ -138,5 +138,33 @@ FIRST 和 AFTER 关键字可用于 ADD 与 MODIFY 子句，所以如果你想重
 
     mysql> ALTER TABLE tablename RENAME TO alter_tbl;
 
+# 修改unique-key
+
+mysql可以使用unique key来确保数据的准确性，unique key可以是一个字段，也可以是多个字段，对应已经存在的unique key如何修改呢？分两步来完成，先drop掉，然后在创建。需要注意的是drop时关键字是“index”，而创建时关键词是“unique key”，命令如下：
+
+alter table table_name drop index `uk_name`;
+
+alter table table_name add unique key `new_uk_name` (`col1`,`col2`);
+注意：如果表中已经存在数据，可能会创建失败，原因是col1, col2无法满足unique。
+
+例如auth_roles表中原有的
+    UNIQUE KEY `role_unin_name` (`application_name`,`department`,`role_name`)
+
+现在先drop掉
+
+    ALTER TABLE auth_roles DROP index `role_unin_name`
+
+然后再创建
+
+  ALTER TABLE auth_roles ADD UNIQUE KEY `role_unin_name` (`application_name`,`department`,`role_name`,
+  `role_type`)
+其它用过的：
+
+  ALTER TABLE
+      `reporting`.`auth_users` CHANGE `application_name` department_name VARCHAR(64)
+
+# 修改表的某列为同一值
+
+    update 表名 set 列名=想改的值
 # 参考资料
 【1】https://www.runoob.com/mysql/mysql-alter.html

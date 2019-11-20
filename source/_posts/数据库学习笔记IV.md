@@ -224,6 +224,53 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     (41,49,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
     (41,50,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW())
 
+
+    INSERT INTO reporting.auth_user_roles_rela
+    (user_id,role_id,create_user,status,created,updated)
+    VALUES
+    (41,21,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,23,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,24,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,25,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,33,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,34,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,35,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,36,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,39,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,40,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,41,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,42,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,43,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,44,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,45,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,46,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,47,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,48,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,49,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,50,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,51,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,52,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,53,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,54,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,55,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,56,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,57,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,58,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,59,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,60,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,61,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,65,'zhenxinlin2','ACTIVE',NOW(),NOW()),
+    (41,66,'zhenxinlin2','ACTIVE',NOW(),NOW())
+在角色表中添加新的角色
+
+    INSERT INTO reporting.auth_roles
+    (application_name,department,role_name,layout_id,role_type,role_level,resource_level,description,status,created,updated)
+    VALUES
+
+    ('platform','商通贷','platform-FUNCTION','47','FUNCTION',1,'HIGHT', '角色树根节点','ACTIVE',NOW(),NOW()),
+    ('reporting','商通贷','reporting-FUNCTION','47','FUNCTION',1,'HIGHT', '角色树根节点','ACTIVE',NOW(),NOW())
+
+
 # 连接查询
 auth_users表，代表的是用户信息，auth_roles代表的是不同的角色信息，
 

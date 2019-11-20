@@ -224,6 +224,13 @@ auth_roles分页查询，根据页面显示相应的信息
 2.修改笔记遇到名字重复的bug
 3.共有笔记返回DTO里加入属性字段modify：是否能修改，共有笔记不能修改，只能查看
 
+11.14
+auth_users表unique-key只用account一列
+auth_roles表 unique-key加入role—type一列
+软删除auth_roles表中的application_name，并在涉及到的接口进行修改
+查询所有用户中的应用访问权限现在只显示 所有level=1角色的role—name
+修改角色信息中所属应用返回所有level=1 的role-name
+修改上级角色返回所有level大于1的role-name
 
 技术研究：
 XXL-JOB缓存工具：自动降级，引入包，
