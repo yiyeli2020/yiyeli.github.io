@@ -235,5 +235,69 @@ auth_roles表 unique-key加入role—type一列
 技术研究：
 XXL-JOB缓存工具：自动降级，引入包，
 
+11.21
+查询结果如果查询结果不存在，不能抛异常，要返回为空
+不重复查询
+超级管理员权限可以添加，但在显示树时不能显示
+以Set集合的形式  Set<AuthRolesEntity> authRolesEntities=new HashSet<>();
+不能实现去除重复的功能，因为每个实体都是不同的，要根据其中的id等去除
+当添加某个子角色时要显示其父角色，但是要加参数表示其不可修改，否则显示其父角色后若可修改则默认添加了所有其下的子角色。
+
+
+11.25
+report功能导入模块研究,
+resource_name;resource_type;application_name;resource_url;resource_level;role_name
+
+输入参数为文本形式的字符串
+
+    查看报表功能;FUNCTION;reporting;/output/**;HIGHT;管理员,业务员;
+
+    编辑报表;MENU;reporting;/output/**;HIGHT;管理员,业务员;
+
+    查看报表功能;FUNCTION;reporting;/output/**;HIGHT;管理员,业务员;
+
+    编辑报表;MENU;reporting;/output/**;HIGHT;管理员,业务员;
+
+resource_type目前只考虑FUNCTION和MENU，先校验reporting.auth_roles中是否存在
+
+application_name为reporting且role_type为FUNCTION且role_level==1的记录，如果不存在则添加相应记录，如果存在
+则继续校验每行的roleName是否具有相应的资源，如果已经有则返回该行不能插入的提醒，如果不存在则在相应的rela表中插入该角色和该资源的关联记录，在资源表中插入该条资源。
+
+11.26
+分页查询用户信息 ：增加用户状态，去除所属应用，修正应用访问权限查询
+分页查询角色信息： 父角色查询问题修正，分页修正
+上级角色：传入所属应用和角色类型，返回与之相关的上级应用，不是全部返回，和前端沟通换一下几项的顺序
+
+
+报表/功能树查询时不根据当前角色查询子角色了，都改为根据rela表中的角色查询显示，但是要返回父角色
+ roleService.addUserAndRoleRela(user.getId(), user.getAccount(),
+  roleService.deleteUserAndRoleRela(user.getId(), roleRelaRequestDTO.getApplicationName(),
+增加删除也都在相应位置做修改
+
+11.27
+去掉MENU枚举和类型
+用于Integer的注解
+@NotNull
+用于String的注解
+@NotEmpty
+用于枚举类型的注解
+@EnumValid(enumClass = RoleTypeEnum.class)
+
+11.28
+修正表结构查询问题
+
+11.29
+std-query中getAllAuthRolesNoDuplicate()中的逻辑移至roleService.getRoles(userid)中
+        AuthRolesEntity admin=null;
+        //如果是超级管理员则查询所有角色实体，即包括不存在于rela表中但属于当前角色的子角色
+        if (!CollectionUtils.isEmpty(rolesEntities)) {
+            for(AuthRolesEntity authRolesEntity:rolesEntities){
+                if(authRolesEntity.getRoleType().equals(RoleTypeEnum.ADMIN.getCode())){
+                    //查询当前用户具有的角色的所有子角色id
+                    admin=authRolesEntity;
+                    break;
+                }
+            }
+        }
 # 参考资料：
 【1】 http://std-docs.laincloud.in/%E5%BC%80%E5%8F%91%E9%83%A8%E7%BD%B2/develop-guidelines/
