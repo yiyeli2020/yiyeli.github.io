@@ -63,6 +63,9 @@ MySQL 中使用 ADD 子句来向数据表中添加列，如下实例在表 table
     ALTER TABLE tablename ADD i INT AFTER c;
 FIRST 和 AFTER 关键字可用于 ADD 与 MODIFY 子句，所以如果你想重置数据表字段的位置就需要先使用 DROP 删除字段然后使用 ADD 来添加字段并设置位置。
 
+类似使用到的语句：
+
+    ALTER TABLE tbl_jobs ADD data_send varchar(32)
 # 修改字段类型及名称
 如果需要修改字段类型及名称, 你可以在ALTER命令中使用 MODIFY 或 CHANGE 子句 。
 
