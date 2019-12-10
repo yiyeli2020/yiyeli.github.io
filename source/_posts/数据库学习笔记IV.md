@@ -75,44 +75,7 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     (role_id,resource_id,status,created,updated)
     VALUES
     (3,1,'ACTIVE',NOW(),NOW()),
-    (3,2,'ACTIVE',NOW(),NOW()),
-    (3,3,'ACTIVE',NOW(),NOW()),
-    (3,4,'ACTIVE',NOW(),NOW()),
-    (3,6,'ACTIVE',NOW(),NOW()),
-    (3,9,'ACTIVE',NOW(),NOW()),
-    (3,10,'ACTIVE',NOW(),NOW()),
-    (3,11,'ACTIVE',NOW(),NOW()),
-    (3,12,'ACTIVE',NOW(),NOW()),
-    (3,23,'ACTIVE',NOW(),NOW()),
-    (3,24,'ACTIVE',NOW(),NOW()),
-    (3,25,'ACTIVE',NOW(),NOW()),
-    (3,26,'ACTIVE',NOW(),NOW()),
-    (3,27,'ACTIVE',NOW(),NOW()),
-    (3,28,'ACTIVE',NOW(),NOW()),
-    (3,29,'ACTIVE',NOW(),NOW()),
-    (3,30,'ACTIVE',NOW(),NOW()),
-    (3,31,'ACTIVE',NOW(),NOW()),
-    (3,32,'ACTIVE',NOW(),NOW()),
-    (3,33,'ACTIVE',NOW(),NOW()),
-    (3,34,'ACTIVE',NOW(),NOW()),
-    (3,37,'ACTIVE',NOW(),NOW()),
-    (3,38,'ACTIVE',NOW(),NOW()),
-    (3,39,'ACTIVE',NOW(),NOW()),
-    (3,40,'ACTIVE',NOW(),NOW()),
-    (3,41,'ACTIVE',NOW(),NOW()),
-    (3,42,'ACTIVE',NOW(),NOW()),
-    (3,43,'ACTIVE',NOW(),NOW()),
-    (3,44,'ACTIVE',NOW(),NOW()),
-    (3,45,'ACTIVE',NOW(),NOW()),
-    (3,46,'ACTIVE',NOW(),NOW()),
-    (3,47,'ACTIVE',NOW(),NOW()),
-    (3,48,'ACTIVE',NOW(),NOW()),
-    (3,49,'ACTIVE',NOW(),NOW()),
-    (3,50,'ACTIVE',NOW(),NOW()),
-    (3,51,'ACTIVE',NOW(),NOW()),
-    (3,52,'ACTIVE',NOW(),NOW()),
-    (3,53,'ACTIVE',NOW(),NOW()),
-    (3,54,'ACTIVE',NOW(),NOW());
+    (3,2,'ACTIVE',NOW(),NOW())
 
 再添加一些权限
 
@@ -129,20 +92,8 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     INSERT INTO reporting.auth_user_roles_rela
     (user_id,role_id,create_user,status,created,updated)
     VALUES
-    (14,1,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,5,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,6,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,7,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,8,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,9,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,10,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,11,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,12,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,13,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,14,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,16,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,17,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (14,18,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW())
+    (14,1,'yiyeli@***.cn','ACTIVE',NOW(),NOW()),
+    (14,5,'yiyeli@***.cn','ACTIVE',NOW(),NOW())
 
 例如添加某个用户具有的角色信息：
 
@@ -150,117 +101,21 @@ resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，
     INSERT INTO reporting.auth_user_roles_rela
     (user_id,role_id,create_user,status,created,updated)
     VALUES
-    (22,4,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,5,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,6,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,7,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,8,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,10,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,11,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,12,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,17,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,18,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,19,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,21,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,22,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,23,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,24,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,25,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,26,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,27,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,33,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,34,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,35,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,36,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,39,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,40,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,41,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,42,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,43,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,44,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,45,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,46,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,47,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,48,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,49,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW()),
-    (22,50,'yiyeli@creditease.cn','ACTIVE',NOW(),NOW())
+    (22,4,'yiyeli@***.cn','ACTIVE',NOW(),NOW()),
+    (22,5,'yiyeli@***.cn','ACTIVE',NOW(),NOW())
 
     INSERT INTO reporting.auth_user_roles_rela
     (user_id,role_id,create_user,status,created,updated)
     VALUES
-    (41,3,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,4,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,5,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,6,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,7,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,8,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,10,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,11,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,12,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,17,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,18,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,19,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,21,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,22,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,23,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,24,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,25,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,26,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,27,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,33,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,34,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,35,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,36,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,39,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,40,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,41,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,42,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,43,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,44,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,45,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,46,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,47,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,48,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,49,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW()),
-    (41,50,'kaiyang38@creditease.cn','ACTIVE',NOW(),NOW())
+    (41,3,'kaiyang38@***.cn','ACTIVE',NOW(),NOW()),
+    (41,4,'kaiyang38@***.cn','ACTIVE',NOW(),NOW())
 
 
     INSERT INTO reporting.auth_user_roles_rela
     (user_id,role_id,create_user,status,created,updated)
     VALUES
     (41,21,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,23,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,24,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,25,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,33,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,34,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,35,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,36,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,39,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,40,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,41,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,42,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,43,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,44,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,45,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,46,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,47,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,48,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,49,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,50,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,51,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,52,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,53,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,54,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,55,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,56,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,57,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,58,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,59,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,60,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,61,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,65,'zhenxinlin2','ACTIVE',NOW(),NOW()),
-    (41,66,'zhenxinlin2','ACTIVE',NOW(),NOW())
+    (41,23,'zhenxinlin2','ACTIVE',NOW(),NOW())
 在角色表中添加新的角色
 
     INSERT INTO reporting.auth_roles
