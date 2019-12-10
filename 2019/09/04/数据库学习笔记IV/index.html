@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Yiye Li">
 <meta property="og:description" content="SQL插入，多表查询">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-11-19T07:44:46.943Z">
+<meta property="og:updated_time" content="2019-12-10T09:05:55.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库学习笔记IV">
 <meta name="twitter:description" content="SQL插入，多表查询">
@@ -280,7 +280,7 @@ VALUES
 VALUES (值1, 值2, ...),
 (值3, 值4, ...),
 (值5, 值6, ...);
-</code></pre><p>例如在auth_role_resources_rela中添加不同角色所拥有的资源信息：<br>    INSERT INTO auth_role_resources_rela<br>    (role_id,resource_id,status,created,updated)<br>    VALUES<br>    (3,1,’ACTIVE’,NOW(),NOW()),<br>    (3,2,’ACTIVE’,NOW(),NOW()),<br>    (3,3,’ACTIVE’,NOW(),NOW()),<br>    (3,4,’ACTIVE’,NOW(),NOW()),<br>    (3,6,’ACTIVE’,NOW(),NOW()),<br>    (3,9,’ACTIVE’,NOW(),NOW()),<br>    (3,10,’ACTIVE’,NOW(),NOW()),<br>    (3,11,’ACTIVE’,NOW(),NOW()),<br>    (3,12,’ACTIVE’,NOW(),NOW()),<br>    (3,23,’ACTIVE’,NOW(),NOW()),<br>    (3,24,’ACTIVE’,NOW(),NOW()),<br>    (3,25,’ACTIVE’,NOW(),NOW()),<br>    (3,26,’ACTIVE’,NOW(),NOW()),<br>    (3,27,’ACTIVE’,NOW(),NOW()),<br>    (3,28,’ACTIVE’,NOW(),NOW()),<br>    (3,29,’ACTIVE’,NOW(),NOW()),<br>    (3,30,’ACTIVE’,NOW(),NOW()),<br>    (3,31,’ACTIVE’,NOW(),NOW()),<br>    (3,32,’ACTIVE’,NOW(),NOW()),<br>    (3,33,’ACTIVE’,NOW(),NOW()),<br>    (3,34,’ACTIVE’,NOW(),NOW()),<br>    (3,37,’ACTIVE’,NOW(),NOW()),<br>    (3,38,’ACTIVE’,NOW(),NOW()),<br>    (3,39,’ACTIVE’,NOW(),NOW()),<br>    (3,40,’ACTIVE’,NOW(),NOW()),<br>    (3,41,’ACTIVE’,NOW(),NOW()),<br>    (3,42,’ACTIVE’,NOW(),NOW()),<br>    (3,43,’ACTIVE’,NOW(),NOW()),<br>    (3,44,’ACTIVE’,NOW(),NOW()),<br>    (3,45,’ACTIVE’,NOW(),NOW()),<br>    (3,46,’ACTIVE’,NOW(),NOW()),<br>    (3,47,’ACTIVE’,NOW(),NOW()),<br>    (3,48,’ACTIVE’,NOW(),NOW()),<br>    (3,49,’ACTIVE’,NOW(),NOW()),<br>    (3,50,’ACTIVE’,NOW(),NOW()),<br>    (3,51,’ACTIVE’,NOW(),NOW()),<br>    (3,52,’ACTIVE’,NOW(),NOW()),<br>    (3,53,’ACTIVE’,NOW(),NOW()),<br>    (3,54,’ACTIVE’,NOW(),NOW());</p>
+</code></pre><p>例如在auth_role_resources_rela中添加不同角色所拥有的资源信息：<br>    INSERT INTO auth_role_resources_rela<br>    (role_id,resource_id,status,created,updated)<br>    VALUES<br>    (3,1,’ACTIVE’,NOW(),NOW()),<br>    (3,2,’ACTIVE’,NOW(),NOW())</p>
 <p>再添加一些权限</p>
 <pre><code>INSERT INTO auth_role_resources_rela
 (role_id,resource_id,status,created,updated)
@@ -290,122 +290,26 @@ VALUES
 (3,248,&apos;ACTIVE&apos;,NOW(),NOW()),
 (3,249,&apos;ACTIVE&apos;,NOW(),NOW()),
 (3,250,&apos;ACTIVE&apos;,NOW(),NOW())
-</code></pre><p>例如在线上生产环境中添加角色权限<br>    INSERT INTO reporting.auth_user_roles_rela<br>    (user_id,role_id,create_user,status,created,updated)<br>    VALUES<br>    (14,1,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,5,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,6,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,7,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,8,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,9,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,10,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,11,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,12,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,13,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,14,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,16,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,17,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW()),<br>    (14,18,<a href="mailto:&#39;yiyeli@creditease.cn" target="_blank" rel="noopener">&#39;yiyeli@creditease.cn</a>‘,’ACTIVE’,NOW(),NOW())</p>
+</code></pre><p>例如在线上生产环境中添加角色权限<br>    INSERT INTO reporting.auth_user_roles_rela<br>    (user_id,role_id,create_user,status,created,updated)<br>    VALUES<br>    (14,1,‘yiyeli@<strong><em>.cn’,’ACTIVE’,NOW(),NOW()),<br>    (14,5,‘yiyeli@</em></strong>.cn’,’ACTIVE’,NOW(),NOW())</p>
 <p>例如添加某个用户具有的角色信息：</p>
 <pre><code>INSERT INTO reporting.auth_user_roles_rela
 (user_id,role_id,create_user,status,created,updated)
 VALUES
-(22,4,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,5,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,6,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,7,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,8,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,10,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,11,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,12,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,17,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,18,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,19,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,21,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,22,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,23,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,24,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,25,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,26,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,27,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,33,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,34,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,35,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,36,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,39,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,40,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,41,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,42,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,43,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,44,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,45,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,46,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,47,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,48,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,49,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(22,50,&apos;yiyeli@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW())
+(22,4,&apos;yiyeli@***.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
+(22,5,&apos;yiyeli@***.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW())
 
 INSERT INTO reporting.auth_user_roles_rela
 (user_id,role_id,create_user,status,created,updated)
 VALUES
-(41,3,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,4,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,5,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,6,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,7,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,8,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,10,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,11,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,12,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,17,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,18,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,19,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,21,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,22,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,23,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,24,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,25,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,26,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,27,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,33,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,34,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,35,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,36,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,39,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,40,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,41,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,42,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,43,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,44,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,45,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,46,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,47,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,48,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,49,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,50,&apos;kaiyang38@creditease.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW())
+(41,3,&apos;kaiyang38@***.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
+(41,4,&apos;kaiyang38@***.cn&apos;,&apos;ACTIVE&apos;,NOW(),NOW())
 
 
 INSERT INTO reporting.auth_user_roles_rela
 (user_id,role_id,create_user,status,created,updated)
 VALUES
 (41,21,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,23,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,24,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,25,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,33,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,34,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,35,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,36,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,39,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,40,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,41,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,42,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,43,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,44,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,45,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,46,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,47,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,48,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,49,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,50,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,51,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,52,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,53,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,54,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,55,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,56,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,57,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,58,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,59,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,60,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,61,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,65,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,66,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW())
+(41,23,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW())
 </code></pre><p>在角色表中添加新的角色</p>
 <pre><code>INSERT INTO reporting.auth_roles
 (application_name,department,role_name,layout_id,role_type,role_level,resource_level,description,status,created,updated)
@@ -508,7 +412,7 @@ WHERE auth_role_resources_rela.role_id=(
         <p><span>本文标题:</span><a href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
         <p><span>发布时间:</span>2019年09月04日 - 10时00分</p>
-        <p><span>最后更新:</span>2019年11月19日 - 15时44分</p>
+        <p><span>最后更新:</span>2019年12月10日 - 17时05分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/09/04/数据库学习笔记IV/" title="数据库学习笔记IV">http://yoursite.com/2019/09/04/数据库学习笔记IV/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/04/数据库学习笔记IV/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
