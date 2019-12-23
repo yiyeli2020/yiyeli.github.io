@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-19T10:25:15.159Z</updated>
+  <updated>2019-12-23T08:22:59.724Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java学习笔记XI</title>
+    <link href="http://yoursite.com/2019/12/23/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0XI/"/>
+    <id>http://yoursite.com/2019/12/23/Java学习笔记XI/</id>
+    <published>2019-12-23T07:41:12.000Z</published>
+    <updated>2019-12-23T08:22:59.724Z</updated>
+    
+    <content type="html"><![CDATA[<p>Java中静态方法和实例方法的异同</p><a id="more"></a><h1 id="类方法（静态方法）："><a href="#类方法（静态方法）：" class="headerlink" title="类方法（静态方法）："></a>类方法（静态方法）：</h1><p>用static修饰的方法，也称为静态方法，类方法属类本身的方法，不属于类的某一个实例（对象）。类方法中不可直接使用实例变量。其调用方式有三种：可直接调用、类名.方法名、对象名.方法名。</p><p>类方法体有如下限制：</p><p>1.类方法中不能引用对象变量；</p><p>2.类方法中不能调用类的对象方法；</p><p>3.在类方法中不能调使用super，this关键字；</p><p>4.类方法不能被覆盖。</p><h1 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h1><p>指的是不用static关键字修饰的方法。每个实例对象都有自身的实例方法，互相独立，不共享一个。其调用方式只能是对象名.方法名。</p><p>用修饰符static声明的方法为静态方法，不用修饰符static声明的方法为实例方法。</p><p>不管类生成或未生成对象，类的静态方法都可以被使用，使用格式为：类名.静态方法名。静态方法只能使用该静态方法所在类的静态数据成员和静态方法。这是因为使用静态方法时，该静态方法所在类可能还没有对象，即使有对象，由于用类名.静态方法名方式调用静态方法，静态方法没有this指针来存放对象的地址，无法判定应访问哪个对象的数据成员。在类创建对象后，实例方法才能被使用，使用格式为：对象名.实例方法名。实例方法可以使用该方法所在类的所有静态成员和实例成员。 </p><p>1.实例方法中可以引用对象变量，也可以引用类变量；</p><p>2.实例方法中可以调用类方法；</p><p>3.对象方法中可以使用super，this关键字。</p><h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>当类的字节码文件被加载到内存时，类的实例方法不会被分配入口地址，当该类创建对象后，类中的实例方法才分配入口地址，从而实例方法可以被类创建的任何对象调用执行。需要注意的是，当我们创建第一个对象时，类中的实例方法就分配了入口地址，当再创建对象时，不再分配入口地址，也就是说，方法的入口地址被所有的对象共享，当所有的对象都不存在时，方法的入口地址才被取消。</p><p>对于类中的类方法，在该类被加载到内存时，就分配了相应的入口地址。从而类方法不仅可以被类创建的任何对象调用执行，也可以直接通过类名调用。类方法的入口地址直到程序退出时才被取消。</p><p>类方法在类的字节码加载到内存时就分配了入口地址。因此，Java语言允许通过类名直接调用类方法，而实例方法不能通过类名调用。在Java语言中，类中的类方法不可以操作实例变量，也不可以调用实例方法，这是因为在类创建对象之前，实例成员变量还没有分配内存，而且实例方法也没有入口地址。</p><h1 id="何时用静态方法，何时用实例方法？"><a href="#何时用静态方法，何时用实例方法？" class="headerlink" title="何时用静态方法，何时用实例方法？"></a>何时用静态方法，何时用实例方法？</h1><p>先说实例方法，当给一个类写一个方法，如果该方法需要访问某个实例的成员变量时，那么就将该方法定义成实例方法。一类的实例通常有一些成员变量，其中含有该实例的状态信息。而该方法需要改变这些状态。那么该方法需要声明成实例方法。</p><p>静态方法正好相反，它不需要访问某个实例的成员变量，它不需要去改变某个实例的状态。我们把该方法定义成静态方法。</p><h1 id="关于静态方法和实例方法的一些误区。"><a href="#关于静态方法和实例方法的一些误区。" class="headerlink" title="关于静态方法和实例方法的一些误区。"></a>关于静态方法和实例方法的一些误区。</h1><p>误区一、静态方法常驻内存，实例方法不是，所以静态方法效率高但占内存。</p><p>事实上，方法都是一样的，在加载时机和占用内存上，静态方法和实例方法是一样的，在类型第一次被使用时加载。调用的速度基本上没有差别。 </p><p>误区二、静态方法在堆上分配内存，实例方法在堆栈上。 </p><p>事实上所有的方法都不可能在堆或者堆栈上分配内存，方法作为代码是被加载到特殊的代码内存区域，这个内存区域是不可写的。 </p><p>误区三、实例方法需要先创建实例才可以调用，比较麻烦，静态方法不用，比较简单。 </p><pre><code>事实上如果一个方法与他所在类型的实例无关，那么它就应该是静态的，决不会有人把它写成实例方法。所以所有的实例方法都与实例有关，既然与实例有关，那么创建实例就是必然的步骤，没有麻烦简单一说。实际上上你可以把所有的实例方法都写成静态的，将实例作为参数传入即可。 </code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="https://blog.csdn.net/klyz1314/article/details/16845679" target="_blank" rel="noopener">https://blog.csdn.net/klyz1314/article/details/16845679</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Java中静态方法和实例方法的异同&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2019年12月" scheme="http://yoursite.com/categories/2019%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala学习笔记III</title>
+    <link href="http://yoursite.com/2019/12/23/Scala%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0III/"/>
+    <id>http://yoursite.com/2019/12/23/Scala学习笔记III/</id>
+    <published>2019-12-23T07:08:12.000Z</published>
+    <updated>2019-12-23T08:23:13.252Z</updated>
+    
+    <content type="html"><![CDATA[<p>Scala学习：伴生对象中的apply方法</p><a id="more"></a><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Scala学习：伴生对象中的apply方法&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2019年12月" scheme="http://yoursite.com/categories/2019%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Scala" scheme="http://yoursite.com/tags/Scala/"/>
+    
+  </entry>
   
   <entry>
     <title>Java学习笔记X</title>
@@ -409,52 +453,6 @@
     
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java学习笔记III</title>
-    <link href="http://yoursite.com/2019/08/12/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0III/"/>
-    <id>http://yoursite.com/2019/08/12/Java学习笔记III/</id>
-    <published>2019-08-12T06:45:12.000Z</published>
-    <updated>2019-08-13T06:13:13.593Z</updated>
-    
-    <content type="html"><![CDATA[<p>总结Java8 Lambda表达式，对涉及到到final关键字做了回顾</p><a id="more"></a><h1 id="Java8-Lambda表达式"><a href="#Java8-Lambda表达式" class="headerlink" title="Java8 Lambda表达式"></a>Java8 Lambda表达式</h1><p>Lambda 表达式，也可称为闭包，它是推动 Java 8 发布的最重要新特性。<br>Lambda 允许把函数作为一个方法的参数（函数作为参数传递进方法中）。<br>使用 Lambda 表达式可以使代码变的更加简洁紧凑。</p><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>lambda 表达式的语法格式如下：</p><pre><code>(parameters) -&gt; expression或(parameters) -&gt;{ statements; }</code></pre><p>以下是lambda表达式的重要特征:</p><p>可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。</p><p>可选的参数圆括号：一个参数无需定义圆括号，但多个参数需要定义圆括号。</p><p>可选的大括号：如果主体包含了一个语句，就不需要使用大括号。</p><p>可选的返回关键字：如果主体只有一个表达式返回值则编译器会自动返回值，大括号需要指定明表达式返回了一个数值。</p><h2 id="Lambda-表达式实例"><a href="#Lambda-表达式实例" class="headerlink" title="Lambda 表达式实例"></a>Lambda 表达式实例</h2><p>Lambda 表达式的简单例子:</p><pre><code>// 1. 不需要参数,返回值为 5  () -&gt; 5  // 2. 接收一个参数(数字类型),返回其2倍的值  x -&gt; 2 * x  // 3. 接受2个参数(数字),并返回他们的差值  (x, y) -&gt; x – y  // 4. 接收2个int型整数,返回他们的和  (int x, int y) -&gt; x + y  // 5. 接受一个 string 对象,并在控制台打印,不返回任何值(看起来像是返回void)  (String s) -&gt; System.out.print(s)</code></pre><p>在 Java8Tester.java 文件输入以下代码：</p><pre><code>public class Java8Tester {   public static void main(String args[]){      Java8Tester tester = new Java8Tester();      // 类型声明      MathOperation addition = (int a, int b) -&gt; a + b;      // 不用类型声明      MathOperation subtraction = (a, b) -&gt; a - b;      // 大括号中的返回语句      MathOperation multiplication = (int a, int b) -&gt; { return a * b; };      // 没有大括号及返回语句      MathOperation division = (int a, int b) -&gt; a / b;      System.out.println(&quot;10 + 5 = &quot; + tester.operate(10, 5, addition));      System.out.println(&quot;10 - 5 = &quot; + tester.operate(10, 5, subtraction));      System.out.println(&quot;10 x 5 = &quot; + tester.operate(10, 5, multiplication));      System.out.println(&quot;10 / 5 = &quot; + tester.operate(10, 5, division));      // 不用括号      GreetingService greetService1 = message -&gt;      System.out.println(&quot;Hello &quot; + message);      // 用括号      GreetingService greetService2 = (message) -&gt;      System.out.println(&quot;Hello &quot; + message);      greetService1.sayMessage(&quot;Runoob&quot;);      greetService2.sayMessage(&quot;Google&quot;);   }   interface MathOperation {      int operation(int a, int b);   }   interface GreetingService {      void sayMessage(String message);   }   private int operate(int a, int b, MathOperation mathOperation){      return mathOperation.operation(a, b);   }}</code></pre><p>执行以上脚本，输出结果为：</p><pre><code>$ javac Java8Tester.java$ java Java8Tester10 + 5 = 1510 - 5 = 510 x 5 = 5010 / 5 = 2Hello RunoobHello Google</code></pre><p>使用 Lambda 表达式需要注意以下两点：</p><p>Lambda 表达式主要用来定义行内执行的方法类型接口，例如，一个简单方法接口。在上面例子中，我们使用各种类型的Lambda表达式来定义MathOperation接口的方法。然后我们定义了sayMessage的执行。</p><p>Lambda 表达式免去了使用匿名方法的麻烦，并且给予Java简单但是强大的函数化的编程能力。</p><h2 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h2><p>lambda 表达式只能引用标记了 final 的外层局部变量，这就是说不能在 lambda 内部修改定义在域外的局部变量，否则会编译错误。<br>在 Java8Tester.java 文件输入以下代码：</p><pre><code>public class Java8Tester {final static String salutation = &quot;Hello! &quot;;public static void main(String args[]){  GreetingService greetService1 = message -&gt;  System.out.println(salutation + message);  greetService1.sayMessage(&quot;Runoob&quot;);}interface GreetingService {  void sayMessage(String message);}}</code></pre><p>执行以上脚本，输出结果为：</p><pre><code>$ javac Java8Tester.java$ java Java8TesterHello! Runoob</code></pre><p>我们也可以直接在 lambda 表达式中访问外层的局部变量：</p><pre><code>public class Java8Tester {    public static void main(String args[]) {        final int num = 1;        Converter&lt;Integer, String&gt; s = (param) -&gt; System.out.println(String.valueOf(param + num));        s.convert(2);  // 输出结果为 3    }    public interface Converter&lt;T1, T2&gt; {        void convert(int i);    }}</code></pre><p>lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）</p><pre><code>int num = 1;  Converter&lt;Integer, String&gt; s = (param) -&gt; System.out.println(String.valueOf(param + num));s.convert(2);num = 5;  //报错信息：Local variable num defined in an enclosing scope must be final or effectively final</code></pre><p>在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量。</p><pre><code>String first = &quot;&quot;;  Comparator&lt;String&gt; comparator = (first, second) -&gt; Integer.compare(first.length(), second.length());  //编译会出错</code></pre><h1 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h1><p>final是一个关键字，可以用于修饰类，成员变量，成员方法。</p><h2 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h2><p>它修饰的类不能被继承。</p><p>它修饰的成员变量是一个常量。</p><p>它修饰的成员方法是不能被子类重写的。</p><p>final修饰的常量定义一般都有书写规范,被final修饰的常量名称,所有字母都大写。</p><p>final修饰成员变量,必须初始化,初始化有两种</p><p>显示初始化；</p><p>构造方法初始化。</p><p>但是不能两个一起初始化</p><h2 id="final和private的区别："><a href="#final和private的区别：" class="headerlink" title="final和private的区别："></a>final和private的区别：</h2><p>final修饰的类可以访问；</p><p>private不可以修饰外部类，但可以修饰内部类（其实把外部类私有化是没有意义的）。</p><p>final修饰的方法不可以被子类重写；</p><p>private修饰的方法表面上看是可以被子类重写的，其实不可以，子类是看不到父类的私有方法的。</p><p>final修饰的变量只能在显示初始化或者构造函数初始化的时候赋值一次，以后不允许更改；</p><p>private修饰的变量，也不允许直接被子类或一个包中的其它类访问或修改，但是他可以通过set和get方法对其改值和取值。</p><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://www.runoob.com/java/java8-lambda-expressions.html" target="_blank" rel="noopener">https://www.runoob.com/java/java8-lambda-expressions.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;总结Java8 Lambda表达式，对涉及到到final关键字做了回顾&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2019年8月" scheme="http://yoursite.com/categories/2019%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据库学习笔记II</title>
-    <link href="http://yoursite.com/2019/08/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0II/"/>
-    <id>http://yoursite.com/2019/08/09/数据库学习笔记II/</id>
-    <published>2019-08-09T07:12:12.000Z</published>
-    <updated>2019-08-13T07:20:00.734Z</updated>
-    
-    <content type="html"><![CDATA[<p>重新温习Mysqlkey 、primary key 、unique key 与index的区别</p><a id="more"></a><h1 id="key与primary-key区别"><a href="#key与primary-key区别" class="headerlink" title="key与primary key区别"></a>key与primary key区别</h1><pre><code>CREATE TABLE wh_logrecord (  logrecord_id int(11) NOT NULL auto_increment,  user_name varchar(100) default NULL,  operation_time datetime default NULL,  logrecord_operation varchar(100) default NULL,  PRIMARY KEY (logrecord_id),  KEY wh_logrecord_user_name (user_name)  )</code></pre><h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>  KEY wh_logrecord_user_name (user_name)</p><p>  本表的user_name字段与wh_logrecord_user_name表user_name字段建立外键</p><p>  括号外是建立外键的对应表，括号内是对应字段</p><p>  类似还有 KEY user(userid)</p><p>  当然，key未必都是外键</p><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>  Key是索引约束，对表中字段进行约束索引的，都是通过primary foreign unique等创建的。<br>  常见有foreign key，外键关联用的。</p><p>  KEY forum (status,type,displayorder)  # 是多列索引（键）</p><p>  KEY tid (tid)                         # 是单列索引（键）。</p><p>  如建表时： KEY forum (status,type,displayorder)</p><p>  select * from table group by status,type,displayorder 是否就自动用上了此索引，</p><p>  而当 select * from table group by status 此索引有用吗？</p><p>  key的用途：主要是用来加快查询速度的。</p><h1 id="KEY与INDEX区别"><a href="#KEY与INDEX区别" class="headerlink" title="KEY与INDEX区别"></a>KEY与INDEX区别</h1><p>KEY通常是INDEX同义词。</p><p>如果关键字属性PRIMARY KEY在列定义中已给定，则PRIMARY KEY也可以只指定为KEY。这么做的目的是与其它数据库系统兼容。</p><p>PRIMARY KEY是一个唯一KEY，此时，所有的关键字列必须定义为NOT NULL。</p><p>如果这些列没有被明确地定义为NOT NULL，MySQL应隐含地定义这些列。</p><p>一个表只有一个PRIMARY KEY。</p><h2 id="MySQL-中Index-与Key-的区别"><a href="#MySQL-中Index-与Key-的区别" class="headerlink" title="MySQL 中Index 与Key 的区别"></a>MySQL 中Index 与Key 的区别</h2><p>Key即键值，是关系模型理论中的一部份，比如有主键（Primary Key)，外键（Foreign Key）等，用于数据完整性检否与唯一性约束等。</p><p>而Index则处于实现层面，比如可以对表个的任意列建立索引，那么当建立索引的列处于SQL语句中的Where条件中时，就可以得到快速的数据定位，从而快速检索。</p><p>至于Unique Index，则只是属于Index中的一种而已，建立了Unique Index表示此列数据不可重复，猜想MySQL对Unique Index类型的索引可以做进一步特殊优化吧。</p><p>于是乎，在设计表的时候，Key只是要处于模型层面的，而当需要进行查询优化，则对相关列建立索引即可。</p><p>另外，在MySQL中，对于一个Primary Key的列，MySQL已经自动对其建立了Unique Index，无需重复再在上面建立索引了。</p><p>搜索到的一段解释：</p><p>Note that “primary” is called PRIMARY KEY not INDEX.</p><p>KEY is something on the logical level, describes your table and database design (i.e. enforces referential integrity …)</p><p>INDEX is something on the physical level, helps improve access time for table operations.</p><p>Behind every PK there is (usually) unique index created (automatically).</p><h1 id="mysql中UNIQUE-KEY和PRIMARY-KEY有什么区别"><a href="#mysql中UNIQUE-KEY和PRIMARY-KEY有什么区别" class="headerlink" title="mysql中UNIQUE KEY和PRIMARY KEY有什么区别"></a>mysql中UNIQUE KEY和PRIMARY KEY有什么区别</h1><p>1，Primary key的1个或多个列必须为NOT NULL，如果列为NULL，在增加PRIMARY KEY时，列自动更改为NOT NULL。而UNIQUE KEY 对列没有此要求</p><p>2，一个表只能有一个PRIMARY KEY，但可以有多个UNIQUE KEY</p><p>3，主键和唯一键约束是通过参考索引实施的，如果插入的值均为NULL，则根据索引的原理，全NULL值不被记录在索引上，所以插入全NULL值时，可以有重复的，而其他的则不能插入重复值。</p><pre><code>alter table t add constraint uk_t_1 unique (a,b);insert into t (a ,b ) values (null,1);    # 不能重复insert into t (a ,b ) values (null,null); # 可以重复</code></pre><h1 id="使用UNIQUE-KEY"><a href="#使用UNIQUE-KEY" class="headerlink" title="使用UNIQUE KEY"></a>使用UNIQUE KEY</h1><pre><code>CREATE TABLE `secure_vulnerability_warning` (  `id` int(10) NOT NULL auto_increment,  `date` date NOT NULL,  `type` varchar(100) NOT NULL,  `sub_type` varchar(100) NOT NULL,  `domain_name` varchar(128) NOT NULL,  `url` text NOT NULL,  `parameters` text NOT NULL,  `hash` varchar(100) NOT NULL,  `deal` int(1) NOT NULL,  `deal_date` date default NULL,  `remark` text,  `last_push_time` datetime default NULL,  `push_times` int(11) default &apos;1&apos;,  `first_set_ok_time` datetime default NULL,  `last_set_ok_time` datetime default NULL,  PRIMARY KEY  (`id`),  UNIQUE KEY `date` (`date`,`hash`)  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8</code></pre><p>UNIQUE KEY的用途：主要是用来防止数据插入的时候重复的。</p><p>1，创建表时</p><pre><code>CREATE TABLE Persons(  Id_P int NOT NULL,  LastName varchar(255) NOT NULL,  FirstName varchar(255),  Address varchar(255),  City varchar(255),  UNIQUE (Id_P))</code></pre><p>如果需要命名 UNIQUE 约束，以及为多个列定义 UNIQUE 约束，请使用下面的 SQL 语法：</p><pre><code>CREATE TABLE Persons(  Id_P int NOT NULL,  LastName varchar(255) NOT NULL,  FirstName varchar(255),  Address varchar(255),  City varchar(255),  CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName))</code></pre><p>2，当表已被创建时，如需在 “Id_P” 列创建 UNIQUE 约束，请使用下列 SQL：</p><p>ALTER TABLE PersonsADD UNIQUE (Id_P)<br>如需命名 UNIQUE 约束，并定义多个列的 UNIQUE 约束，请使用下面的 SQL 语法：</p><p>ALTER TABLE PersonsADD CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)</p><p>3，撤销 UNIQUE 约束如需撤销 UNIQUE 约束，请使用下面的 SQL：</p><p>MySQL:ALTER TABLE PersonsDROP INDEX uc_PersonID</p><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://www.jianshu.com/p/336170f4d649" target="_blank" rel="noopener">https://www.jianshu.com/p/336170f4d649</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;重新温习Mysqlkey 、primary key 、unique key 与index的区别&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2019年8月" scheme="http://yoursite.com/categories/2019%E5%B9%B48%E6%9C%88/"/>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
-      <category term="Mysql" scheme="http://yoursite.com/tags/Mysql/"/>
     
   </entry>
   
