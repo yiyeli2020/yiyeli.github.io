@@ -131,13 +131,13 @@
     <link href="http://yoursite.com/2019/11/05/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VI/"/>
     <id>http://yoursite.com/2019/11/05/数据库学习笔记VI/</id>
     <published>2019-11-05T03:54:12.000Z</published>
-    <updated>2019-11-05T03:58:40.518Z</updated>
+    <updated>2019-12-26T11:00:23.385Z</updated>
     
-    <content type="html"><![CDATA[<p>MySQL优化</p><a id="more"></a><p>#参考资料<br>【1】 <a href="https://tech.meituan.com/2014/06/30/mysql-index.html" target="_blank" rel="noopener">https://tech.meituan.com/2014/06/30/mysql-index.html</a></p>]]></content>
+    <content type="html"><![CDATA[<p>MySQL优化及常用函数</p><a id="more"></a><h1 id="SQL-CONCAT-函数"><a href="#SQL-CONCAT-函数" class="headerlink" title="SQL CONCAT 函数"></a>SQL CONCAT 函数</h1><p>CONCAT 函数用于将两个字符串连接为一个字符串，试一下下面这个例子：</p><pre><code>SQL&gt; SELECT CONCAT(&apos;FIRST &apos;, &apos;SECOND&apos;);+----------------------------+| CONCAT(&apos;FIRST &apos;, &apos;SECOND&apos;) |+----------------------------+| FIRST SECOND               |+----------------------------+1 row in set (0.00 sec)</code></pre><h1 id="case-when-then-else-end用法"><a href="#case-when-then-else-end用法" class="headerlink" title="case when then else end用法"></a>case when then else end用法</h1><pre><code>-简单case函数case sex  when &apos;1&apos; then &apos;男&apos;  when &apos;2&apos; then &apos;女’  else &apos;其他&apos; end--case搜索函数case when sex = &apos;1&apos; then &apos;男&apos;     when sex = &apos;2&apos; then &apos;女&apos;     else &apos;其他&apos; end  </code></pre><p>需要注重的问题，case函数只返回第一个符合条件的值，剩下的case部分将会被自动忽略。</p><h1 id="GROUP-BY-语句"><a href="#GROUP-BY-语句" class="headerlink" title="GROUP BY 语句"></a>GROUP BY 语句</h1><p>GROUP BY 语句用于结合合计函数，根据一个或多个列对结果集进行分组。</p><p>实例<br>我们拥有下面这个 “Orders” 表：</p><pre><code>O_Id    OrderDate    OrderPrice    Customer1    2008/12/29    1000    Bush2    2008/11/23    1600    Carter3    2008/10/05    700    Bush4    2008/09/28    300    Bush5    2008/08/06    2000    Adams6    2008/07/21    100    Carter</code></pre><p>现在，我们希望查找每个客户的总金额（总订单）。</p><p>我们想要使用 GROUP BY 语句对客户进行组合。</p><p>我们使用下列 SQL 语句：</p><pre><code>SELECT Customer,SUM(OrderPrice) FROM OrdersGROUP BY Customer</code></pre><p>结果集类似这样：</p><pre><code>Customer    SUM(OrderPrice)Bush    2000Carter    1700Adams    2000</code></pre><p>#参考资料<br>【1】 <a href="https://tech.meituan.com/2014/06/30/mysql-index.html" target="_blank" rel="noopener">https://tech.meituan.com/2014/06/30/mysql-index.html</a></p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;MySQL优化&lt;/p&gt;
+      &lt;p&gt;MySQL优化及常用函数&lt;/p&gt;
     
     </summary>
     
