@@ -6,9 +6,43 @@ tags: [Database，SQL]
 
 ---
 
-SQL分页查询
+SQL基本查询和分页查询
 
 <!-- more -->
+# SQL查询
+AS 一般是重命名列名或者表名。
+
+***例如有表table，列 column_1,column_2***
+
+你可以写成
+
+    select  column_1  as  列1,
+            column_2  as  列2   
+            from  table  as  表
+
+上面的语句就可以解释为，选择 column_1  作为  列1,column_2 作为   列2  从 table  当成 表
+
+***SELECT * FROM Employee AS emp***
+
+这句意思是查找所有Employee 表里面的数据，并把Employee表格命名为 emp。
+当你命名一个表之后，你可以在下面用 emp 代替 Employee.
+例如 SELECT * FROM emp.
+
+***把查询对像起个别名的作用***
+
+    select ID as 用户ID，Name as 用户名 from Table_user
+
+查出结果就以中文显示
+
+    select mytableA.* ,mytableB.*
+    from
+    tb_user as mytableA
+    join
+    Tb_UserGroup as mytableB
+    on mytableA.ID=mytableB.ID。
+
+这样就可以把查询结果起别名
+
 
 # SQL分页查询
 使用SELECT查询时，如果结果集数据量很大，比如几万行数据，放在一个页面显示的话数据量太大，不如分页显示，每次显示100条。
