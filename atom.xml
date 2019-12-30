@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-25T08:52:45.588Z</updated>
+  <updated>2019-12-27T06:29:21.578Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Scala学习笔记V</title>
+    <link href="http://yoursite.com/2019/12/27/Scala%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0V/"/>
+    <id>http://yoursite.com/2019/12/27/Scala学习笔记V/</id>
+    <published>2019-12-27T06:08:12.000Z</published>
+    <updated>2019-12-27T06:29:21.578Z</updated>
+    
+    <content type="html"><![CDATA[<p>scala中下划线_的用途</p><a id="more"></a><h1 id="初始化。"><a href="#初始化。" class="headerlink" title="初始化。"></a>初始化。</h1><pre><code>object Sample { var name:String=_ def main (args: Array[String]){ name=&quot;hello world&quot;  println(name) }</code></pre><p>在这里，name也可以声明为null，例：var name:String=null。这里的下划线和null的作用是一样的。</p><h1 id="引入时"><a href="#引入时" class="headerlink" title="引入时"></a>引入时</h1><pre><code>import math._object Sample {   def main (args: Array[String]){    println(BigInt(123))   }}</code></pre><p>这里的math._就相当于Java中的math.*; 即“引用包中的所有内容”。</p><h1 id="集合中使用。（最典型，最常用）"><a href="#集合中使用。（最典型，最常用）" class="headerlink" title="集合中使用。（最典型，最常用）"></a>集合中使用。（最典型，最常用）</h1><pre><code> object Sample {   def main (args: Array[String]){    val newArry= (1 to 10).map(_*2)   println(newArry)   }}</code></pre><p>这里的下划线代表了集合中的“某（this）”一个元素。这个用法很常见，在foreach等语句中也可以使用。</p><h1 id="模式匹配。"><a href="#模式匹配。" class="headerlink" title="模式匹配。"></a>模式匹配。</h1><pre><code> object Sample {   def main (args: Array[String]){     val value=&quot;a&quot;  val result=  value match{       case &quot;a&quot; =&gt; 1       case &quot;b&quot; =&gt; 2       case _ =&gt;&quot;result&quot;     }     println(result)   }}</code></pre><p>在这里的下划线相当于“others”的意思，就像Java  switch语句中的“default”。</p><p>还有一种写法，是被Some“包”起来的，说明Some里面是有值的，而不是None。<br>    object Sample {<br>      def main (args: Array[String]){<br>        val value=Some(“a”)<br>        val result=  value match{<br>          case Some(_) =&gt; 1<br>          case _ =&gt;”result”<br>        }<br>        println(result)<br>      }</p><p>还有一种表示队列</p><pre><code>object Sample {  def main (args: Array[String]){    val value=1 to 5    val result=  value match{      case Seq(_,_*) =&gt; 1      case _ =&gt;&quot;result&quot;    }    println(result)  }}</code></pre><h1 id="函数中使用。"><a href="#函数中使用。" class="headerlink" title="函数中使用。"></a>函数中使用。</h1><pre><code>object Sample {   def main (args: Array[String]){    val set=setFunction(3.0,_:Double)     println(set(7.1))   }  def setFunction(parm1:Double,parm2:Double): Double = parm1+parm2}</code></pre><p>这是Scala特有的“偏函数”用法。</p><h1 id="元组Tuple。（如果这也算是的话）"><a href="#元组Tuple。（如果这也算是的话）" class="headerlink" title="元组Tuple。（如果这也算是的话）"></a>元组Tuple。（如果这也算是的话）</h1><pre><code>object Sample {   def main (args: Array[String])={     val value=(1,2)     print(value._1)   }}</code></pre><h1 id="传参。"><a href="#传参。" class="headerlink" title="传参。"></a>传参。</h1><pre><code>object Sample {   def main (args: Array[String])={    val result=sum(1 to 5:_*)     println(result)   }  def sum(parms:Int*)={    var result=0    for(parm &lt;- parms)result+=parm    result  }}</code></pre><p>当函数接收的参数不定长的时候，假如你想输入一个队列，可以在一个队列后加入“:_*”，因此，这里的“1 to 5”也可以改写为：“Seq(1,2,3,4,5)”。这算是一个小的用法吧</p><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://blog.csdn.net/i6448038/article/details/50017427" target="_blank" rel="noopener">https://blog.csdn.net/i6448038/article/details/50017427</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;scala中下划线_的用途&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2019年12月" scheme="http://yoursite.com/categories/2019%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Scala" scheme="http://yoursite.com/tags/Scala/"/>
+    
+  </entry>
   
   <entry>
     <title>Java学习笔记XII</title>
@@ -428,28 +450,6 @@
     </summary>
     
       <category term="2019年9月" scheme="http://yoursite.com/categories/2019%E5%B9%B49%E6%9C%88/"/>
-    
-    
-      <category term="Mysql" scheme="http://yoursite.com/tags/Mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据库学习笔记III</title>
-    <link href="http://yoursite.com/2019/08/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0III/"/>
-    <id>http://yoursite.com/2019/08/27/数据库学习笔记III/</id>
-    <published>2019-08-27T03:52:12.000Z</published>
-    <updated>2019-08-27T07:24:35.636Z</updated>
-    
-    <content type="html"><![CDATA[<p>重新温习SQL语句中的模糊匹配</p><a id="more"></a><h1 id="模糊匹配"><a href="#模糊匹配" class="headerlink" title="模糊匹配"></a>模糊匹配</h1><p>在进行数据库查询的时候，有完整查询和模糊查询之分。<br>一般模糊查询语句如下：</p><p>  SELECT 字段 FROM 表 WHERE 某字段 Like 条件<br>其中的条件，SQL有四种匹配模式：</p><h2 id=""><a href="#" class="headerlink" title="%"></a>%</h2><p>表示任意0个或多个字符，可匹配任意类型和长度的字符，有些情况下若是中文，请使用两个百分号（%%）表示。</p><p>例如</p><pre><code>SELECT * FROM user WHERE name LIKE &apos;%一%&apos;</code></pre><p>将会把name为“一野”，”李一野”，“一休和尚”等等有”一”的记录都找出来。</p><p>另外如果需要找出name中既有“一”又有”野”的记录，请使用and条件</p><pre><code>SELECT *   FROM user  WHERE name  LIKE &apos;%一%&apos;  AND  name LIKE &apos;%野%&apos;</code></pre><p>而如果使用</p><pre><code>SELECT *  FROM user  WHERE name  LIKE &apos;%一%野%&apos;</code></pre><p>虽然能够搜索出“李一野”，但不能搜索出符合条件的”野一李”。</p><h2 id="-1"><a href="#-1" class="headerlink" title="_"></a>_</h2><p>表示任意单个字符，匹配单个任意字符，它常用来限制表达式的字符长度语句：</p><p>比如</p><pre><code>SELECT *  FROM user  WHERE name  LIKE &apos;_三_&apos;</code></pre><p>只能找出“唐三藏”这样name为三个字且中间一个字是”三”的；</p><p>例如</p><pre><code>SELECT *  FROM user  WHERE name  LIKE &apos;三__&apos;</code></pre><p>只能找出“三国杀”这样name为三个字且第一字为”三”的；</p><h2 id="-2"><a href="#-2" class="headerlink" title="[]"></a>[]</h2><p>表示括号内所列字符中的一个（类似正则表达式）。制定一个字符、字符串或范围，要求所匹配对象为它们中的人一个。</p><p>比如</p><pre><code>SELECT *  FROM user  WHERE name  LIKE &apos;[张王李]三&apos;</code></pre><p>搜索出的是“张三”，“王三”，”李三”，而不是“张王李三”；</p><p>如果[]内有一系列字符（01234，abcd之类)，则可以简写为“0-4”、“a-d”</p><pre><code>SELECT *  FROM user  WHERE name  LIKE &apos;大[a-d]&apos;</code></pre><p>将搜索出“大a”、……、“大d”；</p><h2 id="-3"><a href="#-3" class="headerlink" title="[^]"></a>[^]</h2><p>表示不在括号所列之内的单个字符。其取值和[]相同，但它要求所匹配对象为指定字符以外的任一个字符。</p><p>比如</p><pre><code>SELECT *  FROM user  WHERE name  LIKE &apos;[^张王李]三&apos;</code></pre><p>将找出不姓“张”，“王”，”李”的“赵三”，”孙三”等。</p><pre><code>SELECT *  FROM user  WHERE name  LIKE &apos;大[^a-d]&apos;</code></pre><p>将排除“大a”到“大d”，搜索“大e”、”大f”、……</p><h2 id="查询内容包含通配符时"><a href="#查询内容包含通配符时" class="headerlink" title="查询内容包含通配符时"></a>查询内容包含通配符时</h2><p>由于通配符会使得我们查询特殊字符“%”、”_”、“[”的语句无法正常实现，而把特殊字符用“[]”括起来便可以正常查询。</p><h2 id="多条件模糊查询"><a href="#多条件模糊查询" class="headerlink" title="多条件模糊查询"></a>多条件模糊查询</h2><p>看上去我们可以使用AND连接进行多条件模糊查询</p><pre><code>SELECT * FROM user WHERE name LIKE &apos;%三%&apos; AND phone LIKE ‘%1234%’</code></pre><p>但在实际使用时会发现如果数据库的查询字段不是都有值的情况下无法搜索到，</p><p>例如某记录name为“三国杀” ，phone没有值也不是null，因为电话没有值素以经过and运算后结果为false，没有输出。显然数据库中的对应字段必须有值，否则会漏掉正确的输出结果。</p><p>正确的输入应该为name为“三国杀”，phone为null，这样经过and运算后结果为true，可以输出正确结果</p><p>如何解决数据库中查询字段没有值时的多条件模糊匹配在网上搜了一些解决方法但暂未找到比较易懂但方法，留待后面解决</p><h2 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h2><p>sql语句</p><pre><code>sql=“select * from user where name like ...”</code></pre><p>必须在一行内输入完，而不能用回车符分段，因为vbs多行被认为是多个语句，这是许多初写者常犯的错误。如果你想分多段写，可以用上面的方法在现有变量基础上逐步增加查询语句的各个组成部分并把它存在同一变量内实现。在封闭引号之前或者在打开引号之后你需要增加空格，这样才能保证字符串连接起来的时候没有把几个词凑到了一块。</p><p>最后注意以上查询的LIKE后要加单引号。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="https://www.cnblogs.com/GT_Andy/archive/2009/12/25/1921914.html" target="_blank" rel="noopener">https://www.cnblogs.com/GT_Andy/archive/2009/12/25/1921914.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;重新温习SQL语句中的模糊匹配&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2019年8月" scheme="http://yoursite.com/categories/2019%E5%B9%B48%E6%9C%88/"/>
     
     
       <category term="Mysql" scheme="http://yoursite.com/tags/Mysql/"/>
