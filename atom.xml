@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-31T06:38:12.077Z</updated>
+  <updated>2019-12-31T07:09:00.775Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,17 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Effctive-Java阅读笔记III</title>
+    <link href="http://yoursite.com/2019/12/31/Effctive-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0III/"/>
+    <id>http://yoursite.com/2019/12/31/Effctive-Java阅读笔记III/</id>
+    <published>2019-12-31T07:06:12.000Z</published>
+    <updated>2019-12-31T07:09:00.775Z</updated>
+    
+    <content type="html"><![CDATA[<p>第二章阅读：创建和销毁对象<br>05.依赖注入优于硬连接资源（hardwiring resources）</p><a id="more"></a><p>　许多类依赖于一个或多个底层资源。例如，拼写检查器依赖于字典。将此类类实现为静态工具类并不少见 （详见第 4 条）:</p><pre><code>// Inappropriate use of static utility - inflexible &amp; untestable!public class SpellChecker {    private static final Lexicon dictionary = ...;    private SpellChecker() {} // Noninstantiable    public static boolean isValid(String word) { ... }    public static List&lt;String&gt; suggestions(String typo) { ... }}</code></pre><p>同样地，将它们实现为单例的做法也并不少见（详见第 3 条）：</p><pre><code>// Inappropriate use of singleton - inflexible &amp; untestable!public class SpellChecker {    private final Lexicon dictionary = ...;    private SpellChecker(...) {}    public static INSTANCE = new SpellChecker(...);    public boolean isValid(String word) { ... }    public List&lt;String&gt; suggestions(String typo) { ... }}</code></pre><p>#参考资料</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;第二章阅读：创建和销毁对象&lt;br&gt;05.依赖注入优于硬连接资源（hardwiring resources）&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2019年12月" scheme="http://yoursite.com/categories/2019%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Design Pattern，Java" scheme="http://yoursite.com/tags/Design-Pattern%EF%BC%8CJava/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Effctive-Java阅读笔记II</title>
     <link href="http://yoursite.com/2019/12/31/Effctive-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0II/"/>
     <id>http://yoursite.com/2019/12/31/Effctive-Java阅读笔记II/</id>
     <published>2019-12-31T03:30:12.000Z</published>
-    <updated>2019-12-31T06:38:12.077Z</updated>
+    <updated>2019-12-31T07:07:10.561Z</updated>
     
-    <content type="html"><![CDATA[<p>第二章阅读：创建和销毁对象<br>03.使用私有构造方法或枚类实现 Singleton 属性（这部分理解有困难，需要再次阅读）</p><a id="more"></a><h1 id="使用私有构造方法或枚类实现-Singleton-属性"><a href="#使用私有构造方法或枚类实现-Singleton-属性" class="headerlink" title="使用私有构造方法或枚类实现 Singleton 属性"></a>使用私有构造方法或枚类实现 Singleton 属性</h1><p>单例是一个仅实例化一次的类，详细描述参见笔记：《设计模式面试高频题》。单例对象通常表示无状态对象，如函数 (条目 24) 或一个本质上唯一的系统组件。让一个类成为单例会使测试它的客户变得困难，因为除非实现一个作为它类型的接口，否则不可能用一个模拟实现替代单例。</p><p>　有两种常见的方法来实现单例。两者都基于保持构造方法私有和导出公共静态成员以提供对唯一实例的访问。在第一种方法中，成员是 final 修饰的属性：</p><pre><code>// Singleton with public final fieldpublic class Elvis {    public static final Elvis INSTANCE = new Elvis();    private Elvis() { ... }    public void leaveTheBuilding() { ... }}</code></pre><p>私有构造方法只调用一次，来初始化公共静态 final Elvis.INSTANCE 属性。缺少一个公共的或受保护的构造方法，保证了全局的唯一性：一旦 Elvis 类被初始化，一个 Elvis 的实例就会存在——不多也不少。客户端所做的任何事情都不能改变这一点，但需要注意的是：特权客户端可以使用 AccessibleObject.setAccessible 方法，以反射方式调用私有构造方法（详见第 65 条）。如果需要防御此攻击，请修改构造函数，使其在请求创建第二个实例时抛出异常。<br>　在第二个实现单例的方法中，公共成员是一个静态的工厂方法：</p><pre><code>// Singleton with static factorypublic class Elvis {    private static final Elvis INSTANCE = new Elvis();    private Elvis() { ... }    public static Elvis getInstance() { return INSTANCE; }    public void leaveTheBuilding() { ... }}</code></pre><p>所有对 Elvis.getInstance 的调用都返回相同的对象引用，并且不会创建其他的 Elvis 实例（与前面提到的警告相同）。</p><p>　　公共属性方法的主要优点是 API 明确表示该类是一个单例：公共静态属性是 final 的，所以它总是包含相同的对象引用。 第二个好处是它更简单。</p><p>　　静态工厂方法的优势之一在于，它提供了灵活性：在不改变其 API 的前提下，我们可以改变该类是否应该为单例的想法。工厂方法返回该类的唯一实例，但是，它很容易被修改，比如，改为每个调用该方法的线程返回一个唯一的实例。 第二个好处是，如果你的应用程序需要它，可以编写一个泛型单例工厂（generic singleton factory ）（详见第30 条）。 使用静态工厂的最后一个优点是，可以通过方法引用（method reference）作为提供者，例如 Elvis::instance 等同于 Supplier<elvis>。 除非满足以上任意一种优势，否则还是优先考虑公有域（public-field）的方法。</elvis></p><p>　　为了将上述方法中实现的单例类变成是可序列化的 （第 12 章），仅仅将 implements Serializable 添加到声明中是不够的。为了保证单例模式不被破坏，必须声明所有的实例字段为 transient，并提供一个 readResolve 方法（详见第 89 条）。否则，每当序列化的实例被反序列化时，就会创建一个新的实例，在我们的例子中，导致出现新的 Elvis 实例。为了防止这种情况发生，将如下的 readResolve 方法添加到 Elvis 类：</p><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】</p>]]></content>
+    <content type="html"><![CDATA[<p>第二章阅读：创建和销毁对象<br>03.使用私有构造方法或枚类实现 Singleton 属性<br>04.使用私有构造器执行非实例化<br>（这两部分理解有困难，需要再查阅相关资料）<br><a id="more"></a></p><h1 id="使用私有构造方法或枚类实现-Singleton-属性"><a href="#使用私有构造方法或枚类实现-Singleton-属性" class="headerlink" title="使用私有构造方法或枚类实现 Singleton 属性"></a>使用私有构造方法或枚类实现 Singleton 属性</h1><p>单例是一个仅实例化一次的类，详细描述参见笔记：《设计模式面试高频题》。单例对象通常表示无状态对象，如函数 (条目 24) 或一个本质上唯一的系统组件。让一个类成为单例会使测试它的客户变得困难，因为除非实现一个作为它类型的接口，否则不可能用一个模拟实现替代单例。</p><p>　有两种常见的方法来实现单例。两者都基于保持构造方法私有和导出公共静态成员以提供对唯一实例的访问。在第一种方法中，成员是 final 修饰的属性：</p><pre><code>// Singleton with public final fieldpublic class Elvis {    public static final Elvis INSTANCE = new Elvis();    private Elvis() { ... }    public void leaveTheBuilding() { ... }}</code></pre><p>私有构造方法只调用一次，来初始化公共静态 final Elvis.INSTANCE 属性。缺少一个公共的或受保护的构造方法，保证了全局的唯一性：一旦 Elvis 类被初始化，一个 Elvis 的实例就会存在——不多也不少。客户端所做的任何事情都不能改变这一点，但需要注意的是：特权客户端可以使用 AccessibleObject.setAccessible 方法，以反射方式调用私有构造方法（详见第 65 条）。如果需要防御此攻击，请修改构造函数，使其在请求创建第二个实例时抛出异常。<br>　在第二个实现单例的方法中，公共成员是一个静态的工厂方法：</p><pre><code>// Singleton with static factorypublic class Elvis {    private static final Elvis INSTANCE = new Elvis();    private Elvis() { ... }    public static Elvis getInstance() { return INSTANCE; }    public void leaveTheBuilding() { ... }}</code></pre><p>所有对 Elvis.getInstance 的调用都返回相同的对象引用，并且不会创建其他的 Elvis 实例（与前面提到的警告相同）。</p><p>　　公共属性方法的主要优点是 API 明确表示该类是一个单例：公共静态属性是 final 的，所以它总是包含相同的对象引用。 第二个好处是它更简单。</p><p>　　静态工厂方法的优势之一在于，它提供了灵活性：在不改变其 API 的前提下，我们可以改变该类是否应该为单例的想法。工厂方法返回该类的唯一实例，但是，它很容易被修改，比如，改为每个调用该方法的线程返回一个唯一的实例。 第二个好处是，如果你的应用程序需要它，可以编写一个泛型单例工厂（generic singleton factory ）（详见第30 条）。 使用静态工厂的最后一个优点是，可以通过方法引用（method reference）作为提供者，例如 Elvis::instance 等同于 Supplier<elvis>。 除非满足以上任意一种优势，否则还是优先考虑公有域（public-field）的方法。</elvis></p><p>　　为了将上述方法中实现的单例类变成是可序列化的 （第 12 章），仅仅将 implements Serializable 添加到声明中是不够的。为了保证单例模式不被破坏，必须声明所有的实例字段为 transient，并提供一个 readResolve 方法（详见第 89 条）。否则，每当序列化的实例被反序列化时，就会创建一个新的实例，在我们的例子中，导致出现新的 Elvis 实例。为了防止这种情况发生，将如下的 readResolve 方法添加到 Elvis 类：</p><pre><code>// readResolve method to preserve singleton propertyprivate Object readResolve() {     // Return the one true Elvis and let the garbage collector     // take care of the Elvis impersonator.    return INSTANCE;}</code></pre><p>实现一个单例的第三种方法是声明单一元素的枚举类：</p><pre><code>// Enum singleton - the preferred approachpublic enum Elvis {    INSTANCE;    public void leaveTheBuilding() { ... }}</code></pre><p>　这种方式类似于公共属性方法，但更简洁，无偿地提供了序列化机制，并提供了防止多个实例化的坚固保证，即使是在复杂的序列化或反射攻击的情况下。这种方法可能感觉有点不自然，但是 单一元素枚举类通常是实现单例的最佳方式。注意，如果单例必须继承 Enum 以外的父类 (尽管可以声明一个 Enum 来实现接口)，那么就不能使用这种方法。</p><h1 id="使用私有构造器执行非实例化"><a href="#使用私有构造器执行非实例化" class="headerlink" title="使用私有构造器执行非实例化"></a>使用私有构造器执行非实例化</h1><p>试图通过创建抽象类来强制执行非实例化是行不通的。 该类可以被子类化，并且子类可以被实例化。此外，它误导用户认为该类是为继承而设计的（详见第 19 条）。不过，有一个简单的方法来确保非实例化。只有当类不包含显式构造器时，才会生成一个默认构造器，因此可以通过包含一个私有构造器来实现类的非实例化：</p><pre><code>// Noninstantiable utility classpublic class UtilityClass {    // Suppress default constructor for noninstantiability    private UtilityClass() {        throw new AssertionError();    }    ... // Remainder omitted}</code></pre><p>因为显式构造器是私有的，所以不可以在类的外部访问它。AssertionError 异常不是严格要求的，但是它可以避免不小心在类的内部调用构造器。它保证类在任何情况下都不会被实例化。这个习惯用法有点违反直觉，好像构造器就是设计成不能调用的一样。因此，如前面所示，添加注释是种明智的做法。</p><p>　　这种习惯有一个副作用，就是使得一个类不能子类化。所有的构造器都必须显式或隐式地调用父类构造器，而在这群情况下子类则没有可访问的父类构造器来调用。</p><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;第二章阅读：创建和销毁对象&lt;br&gt;03.使用私有构造方法或枚类实现 Singleton 属性（这部分理解有困难，需要再次阅读）&lt;/p&gt;
+      &lt;p&gt;第二章阅读：创建和销毁对象&lt;br&gt;03.使用私有构造方法或枚类实现 Singleton 属性&lt;br&gt;04.使用私有构造器执行非实例化&lt;br&gt;（这两部分理解有困难，需要再查阅相关资料）&lt;br&gt;
     
     </summary>
     
@@ -431,28 +453,6 @@
     
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git学习笔记II</title>
-    <link href="http://yoursite.com/2019/09/05/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0II/"/>
-    <id>http://yoursite.com/2019/09/05/Git学习笔记II/</id>
-    <published>2019-09-05T06:51:12.000Z</published>
-    <updated>2019-09-05T07:01:26.944Z</updated>
-    
-    <content type="html"><![CDATA[<p>Git版本回滚</p><a id="more"></a><p>在当前branch上多次commit代码并且push后，发现不符合要求，需要回滚到特定的版本。步骤如下：</p><p>1、查找commitId</p><p>首先用命令行打开git项目路径，输入git log命令查看commit记录，如下：</p><pre><code>$ git log</code></pre><p>找到commitId是9a0d02d1578ea064479296ad7efa70c5cb1a3717记录，这是执行上面命令后打印出来的信息：</p><pre><code>commit 9a0d02d1578ea064479296ad7efa70c5cb1a3717</code></pre><p>2、找到需要回滚的commit，输入git reset –hard {commitId}，将本地文件回滚：</p><pre><code>$ git reset --hard c503cffa099332911d4fce2fc1399cb4bc3ba9d6HEAD is now at c503cffa0 add a constellation test case</code></pre><p>3、此时本地文件已经回滚到刚刚commit 9a0d02d1578ea064479296ad7efa70c5cb1a3717之后的状态，但是服务器仍然没有改变，需要继续远程回滚：</p><pre><code>$ git push -f</code></pre><p>执行，最终提示一系列内容，远程回滚成功</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】 <a href="https://blog.csdn.net/weixin_38569499/article/details/83017699" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38569499/article/details/83017699</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Git版本回滚&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2019年9月" scheme="http://yoursite.com/categories/2019%E5%B9%B49%E6%9C%88/"/>
-    
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   
