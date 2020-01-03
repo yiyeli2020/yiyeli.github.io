@@ -12,7 +12,7 @@ Java开发中的易错点
 # 避免非空判断仅判断是否为empty
 反例：
 
-    public  static   void  main(String[] args){
+    public  static  void  main(String[] args){
         Map data=new HashMap();
         data=null;
         if(data.isEmpty()){
