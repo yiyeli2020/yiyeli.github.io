@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>792. Number of Matching Subsequences匹配子序列的单词数 | Yiye Li</title>
+  <title>十六个Java开发中的易错点 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给定字符串 S 和单词字典 words, 求 words[i] 中是 S 的子序列的单词个数。">
-<meta name="keywords" content="LeetCode,Array">
+  <meta name="description" content="十六个Java开发中的易错点">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="792. Number of Matching Subsequences匹配子序列的单词数">
-<meta property="og:url" content="http://yoursite.com/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/index.html">
+<meta property="og:title" content="十六个Java开发中的易错点">
+<meta property="og:url" content="http://yoursite.com/2020/01/03/十六个Java开发中的易错点/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="给定字符串 S 和单词字典 words, 求 words[i] 中是 S 的子序列的单词个数。">
+<meta property="og:description" content="十六个Java开发中的易错点">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T04:06:09.699Z">
+<meta property="og:updated_time" content="2020-01-03T08:37:07.601Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="792. Number of Matching Subsequences匹配子序列的单词数">
-<meta name="twitter:description" content="给定字符串 S 和单词字典 words, 求 words[i] 中是 S 的子序列的单词个数。">
+<meta name="twitter:title" content="十六个Java开发中的易错点">
+<meta name="twitter:description" content="十六个Java开发中的易错点">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-792. Number of Matching Subsequences匹配子序列的单词数" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-十六个Java开发中的易错点" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/" class="article-date">
-      <time datetime="2018-09-20T07:08:38.000Z" itemprop="datePublished">2018-09-20</time>
+      <a href="/2020/01/03/十六个Java开发中的易错点/" class="article-date">
+      <time datetime="2020-01-03T08:11:12.000Z" itemprop="datePublished">2020-01-03</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      792. Number of Matching Subsequences匹配子序列的单词数
+      十六个Java开发中的易错点
     </h1>
   
 
@@ -224,13 +224,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年9月/">2018年9月</a>
+    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -240,62 +240,39 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>给定字符串 S 和单词字典 words, 求 words[i] 中是 S 的子序列的单词个数。</p>
+        <p>十六个Java开发中的易错点</p>
 <a id="more"></a>
-<pre><code>示例:
-输入:
-S = &quot;abcde&quot;
-words = [&quot;a&quot;, &quot;bb&quot;, &quot;acd&quot;, &quot;ace&quot;]
-输出: 3
-解释: 有三个是 S 的子序列的单词: &quot;a&quot;, &quot;acd&quot;, &quot;ace&quot;。
-</code></pre><p>注意:</p>
-<p>所有在words和 S 里的单词都只由小写字母组成。<br>S 的长度在 [1, 50000]。<br>words 的长度在 [1, 5000]。<br>words[i]的长度在[1, 50]。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><pre><code>class Solution {
-public:
-/*解法二：二分查找
- 4.复杂度估计O(mlogn)，m为 words 的个数，n 表示 S 的长度。
-*/
-    int numMatchingSubseq(string S, vector&lt;string&gt;&amp; words) {
-        //1.考虑第一种情况主要是因为字符批对的效率不够高，我们需要一位位字符批对过去。所以我们可考虑用更高效的方法去批对。
-        vector&lt;vector&lt;int&gt;&gt; alpha(26);//2.先记录下 S 中各个字符出现的位置，并且按顺序记录下来。
-        for (int i = 0; i &lt; S.size(); i++) {
-            alpha[S[i] - &apos;a&apos;].push_back(i);
-        }
-        int res = 0;
-        for (const auto word : words) {
-            int x = -1;//3.初始化记录当前指向 S 位置的指针为-1
-            bool found = true;
-            for (char c : word) {//对每个 word 的字符 char 去 dicts 中查找是否存在该字符，如果没有则说明子串不存在，可以跳转下一个 word
-               //反之，我们可以用二分查找的方式去寻找 S 中所有字符 char 的位置 中，第一个大于当前指向 S 位置的指针的位置（这边用到了贪心的思想）。如果存在，则更新指向 S 位置的指针到该位置。否则说明子串不存在。
-                auto it = upper_bound(alpha[c - &apos;a&apos;].begin(), alpha[c - &apos;a&apos;].end(), x); //upper_bound是用二分查找在排序数组中找到第一个大于x的数字位置，lower_bound是用二分查找找到第一个大于或等于x的数字位置
-                if (it == alpha[c - &apos;a&apos;].end()) {
-                    found = false;
-                }
-                else { x = *it; }
-            }
-            if (found) res++;
-        }
-
-        return res;
-
+<h1 id="避免非空判断仅判断是否为empty"><a href="#避免非空判断仅判断是否为empty" class="headerlink" title="避免非空判断仅判断是否为empty"></a>避免非空判断仅判断是否为empty</h1><p>反例：</p>
+<pre><code>public  static   void  main(String[] args){
+    Map data=new HashMap();
+    data=null;
+    if(data.isEmpty()){
+        return;
     }
+}
+</code></pre><p>只判断data是否为isEmpty，但当数据为null时会报空指针异常</p>
+<pre><code>Exception in thread &quot;main&quot; java.lang.NullPointerException
+    at Application.main(Application.java:454)
+</code></pre><h1 id="log抛出要有详情和具体说明"><a href="#log抛出要有详情和具体说明" class="headerlink" title="log抛出要有详情和具体说明"></a>log抛出要有详情和具体说明</h1><p>反例：</p>
+<pre><code>try {
+  param = JSONObject.parseObject(methodParam,method.getParameterTypes()[0]);
+} catch (Exception e){
+  throw new ParamException(e.getMessage());
+}
+</code></pre><p>信息需要详细具体，参见<br>正例：</p>
+<pre><code>try {
+  ...
+} catch (IOException e){
+  logger.error(&quot;....Failed&quot;,e);
+  return null;
+}
+</code></pre><h1 id="配置文件尽量在配置文件定义，代码中不要配置"><a href="#配置文件尽量在配置文件定义，代码中不要配置" class="headerlink" title="配置文件尽量在配置文件定义，代码中不要配置"></a>配置文件尽量在配置文件定义，代码中不要配置</h1><p>反例：</p>
+<p>  String ip=”127.0.0.1”;<br>  Socket socket=new Socket(ip,6667);</p>
+<p>正例：</p>
+<p>  String ip= System.getProperty(“myapplication.ip”);<br>  Socket socket=new Socket(ip,6667);</p>
+<h1 id="精度转换"><a href="#精度转换" class="headerlink" title="精度转换"></a>精度转换</h1><p>BigDecimal转double，需先转换为string再 BigDecimal（String s），再使用BigDecimal.valueOf()方法，避免精度丢失</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="https://www.hollischuang.com/archives/1360" target="_blank" rel="noopener">https://www.hollischuang.com/archives/1360</a></p>
 
-    // int numMatchingSubseq(string S, vector&lt;string&gt;&amp; words) {
-    //     //解法三：字典树
-    //     vector&lt;const char*&gt; waiting[128];
-    //     for (auto &amp;w : words)
-    //     waiting[w[0]].push_back(w.c_str()); //1.把 words 里中具有相同开头的单词 word 开头字符合并，记成一个字典树。
-    //     for (char c : S) {
-    //         auto advance = waiting[c];//2.遍历 S 中的每个字符 char，
-    //         waiting[c].clear(); //如果 char 存在当前字典树中，则把该节点删除，
-    //         for (auto it : advance)
-    //             waiting[*++it].push_back(it);//把原本该节点的元素根据剩下字符串的开头字符重新分配，构成新的字典树。如果剩下为空字符，表示该字符串能由 S 的子串构成，计数器加1。
-    //     }
-    //     return waiting[0].size();//3.当遍历完 S ，返回计数器的的结果即是最后答案。
-    //   //  4.复杂度估计O(nk)，n为 S 的长度，k 表示删除一个节点后，需要重新分配字符串的平均个数。最坏情况下 k=m ， m 为 words 的个数。不过常规情况下 k&lt;&lt;m
-    // }
-};
-</code></pre>
       
       
         <div class="page-reward">
@@ -350,13 +327,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></p>
+        <p><span>本文标题:</span><a href="/2020/01/03/十六个Java开发中的易错点/">十六个Java开发中的易错点</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年09月20日 - 15时08分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 12时06分</p>
+        <p><span>发布时间:</span>2020年01月03日 - 16时11分</p>
+        <p><span>最后更新:</span>2020年01月03日 - 16时37分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/" title="792. Number of Matching Subsequences匹配子序列的单词数">http://yoursite.com/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/03/十六个Java开发中的易错点/" title="十六个Java开发中的易错点">http://yoursite.com/2020/01/03/十六个Java开发中的易错点/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/03/十六个Java开发中的易错点/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -369,18 +346,18 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/09/21/C++面试高频题/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/01/03/Java编程思想-第二十三章阅读笔记/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          C++面试高频题
+          Java编程思想-第二十三章阅读笔记
         
       </div>
     </a>
   
   
-    <a href="/2018/09/20/392. Is Subsequence判断子序列/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">392. Is Subsequence判断子序列</div>
+    <a href="/2020/01/03/设计模式学习笔记IV/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式学习笔记IV</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -391,7 +368,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#避免非空判断仅判断是否为empty"><span class="toc-number">1.</span> <span class="toc-text">避免非空判断仅判断是否为empty</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#log抛出要有详情和具体说明"><span class="toc-number">2.</span> <span class="toc-text">log抛出要有详情和具体说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置文件尽量在配置文件定义，代码中不要配置"><span class="toc-number">3.</span> <span class="toc-text">配置文件尽量在配置文件定义，代码中不要配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#精度转换"><span class="toc-number">4.</span> <span class="toc-text">精度转换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -457,13 +434,13 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/21/C++面试高频题/" title="上一篇: C++面试高频题">
+            <a href="/2020/01/03/Java编程思想-第二十三章阅读笔记/" title="上一篇: Java编程思想-第二十三章阅读笔记">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/09/20/392. Is Subsequence判断子序列/" title="下一篇: 392. Is Subsequence判断子序列">
+            <a href="/2020/01/03/设计模式学习笔记IV/" title="下一篇: 设计模式学习笔记IV">
                 <i class="fa fa-angle-right"></i>
             </a>
         
