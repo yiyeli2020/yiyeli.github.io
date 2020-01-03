@@ -1,7 +1,7 @@
 title: Effctive-Java阅读笔记II
 date: 2019-12-31 11:30:12
 categories: 2019年12月
-tags: [Design Pattern，Java]
+tags: [Java]
 
 ---
 
