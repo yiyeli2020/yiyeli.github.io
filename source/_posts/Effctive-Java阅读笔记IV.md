@@ -107,4 +107,4 @@ Finalizer 机制是不可预知的，往往是危险的，而且通常是不必�
 　　Cleaner 机制使用起来有点棘手。下面是演示该功能的一个简单的 Room 类。假设 Room 对象必须在被回收前清理干净。Room 类实现 AutoCloseable 接口；它的自动清理安全网使用的是一个 Cleaner 机制，这仅仅是一个实现细节。与 Finalizer 机制不同，Cleaner 机制不污染一个类的公共 API：
 
 # 参考资料：
-【1】
+【1】https://sjsdfg.github.io/effective-java-3rd-chinese/#/notes/08.%20%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8Finalizer%E5%92%8CCleaner%E6%9C%BA%E5%88%B6
