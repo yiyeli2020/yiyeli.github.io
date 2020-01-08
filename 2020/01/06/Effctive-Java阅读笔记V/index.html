@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>59. Spiral Matrix II螺旋矩阵 II | Yiye Li</title>
+  <title>Effctive-Java阅读笔记V | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。">
-<meta name="keywords" content="LeetCode,Array">
+  <meta name="description" content="第三章阅读：创建和销毁对象09.使用 try-with-resources 语句替代 try-finally 语句10.重写 equals 方法时遵守通用约定">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="59. Spiral Matrix II螺旋矩阵 II">
-<meta property="og:url" content="http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/index.html">
+<meta property="og:title" content="Effctive-Java阅读笔记V">
+<meta property="og:url" content="http://yoursite.com/2020/01/06/Effctive-Java阅读笔记V/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。">
+<meta property="og:description" content="第三章阅读：创建和销毁对象09.使用 try-with-resources 语句替代 try-finally 语句10.重写 equals 方法时遵守通用约定">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T04:03:09.626Z">
+<meta property="og:updated_time" content="2020-01-06T02:21:59.387Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="59. Spiral Matrix II螺旋矩阵 II">
-<meta name="twitter:description" content="给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。">
+<meta name="twitter:title" content="Effctive-Java阅读笔记V">
+<meta name="twitter:description" content="第三章阅读：创建和销毁对象09.使用 try-with-resources 语句替代 try-finally 语句10.重写 equals 方法时遵守通用约定">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-59. Spiral Matrix II螺旋矩阵 II" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Effctive-Java阅读笔记V" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/" class="article-date">
-      <time datetime="2018-08-24T01:30:12.000Z" itemprop="datePublished">2018-08-24</time>
+      <a href="/2020/01/06/Effctive-Java阅读笔记V/" class="article-date">
+      <time datetime="2020-01-06T01:46:12.000Z" itemprop="datePublished">2020-01-06</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      59. Spiral Matrix II螺旋矩阵 II
+      Effctive-Java阅读笔记V
     </h1>
   
 
@@ -224,13 +224,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -240,51 +240,70 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p>
+        <p>第三章阅读：创建和销毁对象<br>09.使用 try-with-resources 语句替代 try-finally 语句<br>10.重写 equals 方法时遵守通用约定</p>
 <a id="more"></a>
-<p>示例:</p>
-<p>输入: 3<br>输出:</p>
-<pre><code>[
- [ 1, 2, 3 ],
- [ 8, 9, 4 ],
- [ 7, 6, 5 ]
-]
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题可以参见剑指Offer20.PrintMatrix顺时针打印矩阵(CodingInterview)和54. Spiral Matrix螺旋矩阵</p>
-<p>所不同的是可以先生成一个n*n规模的矩阵然后螺旋将数字填入，时间复杂度是O(n^2)。</p>
-<pre><code>class Solution {
-public:
-    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {
-        vector&lt;vector&lt;int&gt;&gt; res(n,vector&lt;int&gt;(n,0));
-        int start=0;
-        int num=1;
-        while(start*2&lt;n){
-            generate(res,start,num,n);
-            start++;
-        }
-        return res;
+<h1 id="使用-try-with-resources-语句替代-try-finally-语句"><a href="#使用-try-with-resources-语句替代-try-finally-语句" class="headerlink" title="使用 try-with-resources 语句替代 try-finally 语句"></a>使用 try-with-resources 语句替代 try-finally 语句</h1><p>从以往来看，try-finally 语句是保证资源正确关闭的最佳方式，即使是在程序抛出异常或返回的情况下：</p>
+<pre><code>// try-finally - No longer the best way to close resources!
+static String firstLineOfFile(String path) throws IOException {
+    BufferedReader br = new BufferedReader(new FileReader(path));
+    try {
+        return br.readLine();
+    } finally {
+        br.close();
     }
-    void generate(vector&lt;vector&lt;int&gt;&gt; &amp;res,int start,int &amp;num,int n){
-        int endy=n-start-1;
-        int endx=n-start-1;
-        for(int j=start;j&lt;=endy;j++){
-            res[start][j]=num;
-            num++;
+}
+</code></pre><p>这可能看起来并不坏，但是当添加第二个资源时，情况会变得更糟：</p>
+<pre><code>// try-finally is ugly when used with more than one resource!
+static void copy(String src, String dst) throws IOException {
+    InputStream in = new FileInputStream(src);
+    try {
+        OutputStream out = new FileOutputStream(dst);
+        try {
+            byte[] buf = new byte[BUFFER_SIZE];
+            int n;
+            while ((n = in.read(buf)) &gt;= 0)
+                out.write(buf, 0, n);
+        } finally {
+            out.close();
         }
-        for(int i=start+1;i&lt;=endx;i++){
-            res[i][endy]=num;
-            num++;
-        }
-        for(int j=endy-1;j&gt;=start;j--){
-            res[endx][j]=num;
-            num++;
-        }
-        for(int i=endx-1;i&gt;start;i--){
-            res[i][start]=num;
-            num++;
-        }
+    } finally {
+        in.close();
     }
-};
-</code></pre>
+}
+</code></pre><p>即使是用 try-finally 语句关闭资源的正确代码，如前面两个代码示例所示，也有一个微妙的缺陷。 try-with-resources 块和 finally 块中的代码都可以抛出异常。 例如，在前面的 firstLineOfFile 方法中，由于底层物理设备发生故障，对 readLine 方法的调用可能会引发异常，并且由于相同的原因，调用 close 方法可能会失败。 在这种情况下，第二个异常完全冲掉了第一个异常。 在异常堆栈跟踪中没有第一个异常的记录，这可能使实际系统中的调试非常复杂——通常这是你想要诊断问题的第一个异常。 虽然可以编写代码来抑制第二个异常，但是实际上没有人这样做，因为它太冗长了。</p>
+<p>　　当 Java 7 引入了 try-with-resources 语句时，所有这些问题一下子都得到了解决。要使用这个构造，资源必须实现 AutoCloseable 接口，该接口由一个返回为 void 的 close 组成。Java 类库和第三方类库中的许多类和接口现在都实现或继承了 AutoCloseable 接口。如果你编写的类表示必须关闭的资源，那么这个类也应该实现 AutoCloseable 接口。</p>
+<p>　　以下是我们的第一个使用 try-with-resources 的示例：</p>
+<pre><code>// try-with-resources - the the best way to close resources!
+static String firstLineOfFile(String path) throws IOException {
+    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+       return br.readLine();
+    }
+}
+</code></pre><p>　以下是我们的第二个使用 try-with-resources 的示例：</p>
+<pre><code>// try-with-resources on multiple resources - short and sweet
+static void copy(String src, String dst) throws IOException {
+    try (InputStream   in = new FileInputStream(src);
+         OutputStream out = new FileOutputStream(dst)) {
+        byte[] buf = new byte[BUFFER_SIZE];
+        int n;
+        while ((n = in.read(buf)) &gt;= 0)
+            out.write(buf, 0, n);
+    }
+}
+</code></pre><p>不仅 try-with-resources 版本比原始版本更精简，更好的可读性，而且它们提供了更好的诊断。 考虑 firstLineOfFile 方法。 如果调用 readLine 和（不可见）close 方法都抛出异常，则后一个异常将被抑制（suppressed），而不是前者。 事实上，为了保留你真正想看到的异常，可能会抑制多个异常。 这些抑制的异常没有被抛弃， 而是打印在堆栈跟踪中，并标注为被抑制了。 你也可以使用 getSuppressed 方法以编程方式访问它们，该方法在 Java 7 中已添加到的 Throwable 中。</p>
+<p>　　可以在 try-with-resources 语句中添加 catch 子句，就像在常规的 try-finally 语句中一样。这允许你处理异常，而不会在另一层嵌套中污染代码。作为一个稍微有些做作的例子，这里有一个版本的 firstLineOfFile 方法，它不会抛出异常，但是如果它不能打开或读取文件，则返回默认值：</p>
+<pre><code>// try-with-resources with a catch clause
+static String firstLineOfFile(String path, String defaultVal) {
+    try (BufferedReader br = new BufferedReader(
+           new FileReader(path))) {
+        return br.readLine();
+    } catch (IOException e) {
+        return defaultVal;
+    }
+}
+</code></pre><p>结论很明确：在处理必须关闭的资源时，使用 try-with-resources 语句替代 try-finally 语句。 生成的代码更简洁，更清晰，并且生成的异常更有用。 try-with-resources 语句在编写必须关闭资源的代码时会更容易，也不会出错，而使用 try-finally 语句实际上是不可能的。</p>
+<h1 id="重写-equals-方法时遵守通用约定"><a href="#重写-equals-方法时遵守通用约定" class="headerlink" title="重写 equals 方法时遵守通用约定"></a>重写 equals 方法时遵守通用约定</h1><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】</p>
+
       
       
         <div class="page-reward">
@@ -339,13 +358,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></p>
+        <p><span>本文标题:</span><a href="/2020/01/06/Effctive-Java阅读笔记V/">Effctive-Java阅读笔记V</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月24日 - 09时30分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 12时03分</p>
+        <p><span>发布时间:</span>2020年01月06日 - 09时46分</p>
+        <p><span>最后更新:</span>2020年01月06日 - 10时21分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/" title="59. Spiral Matrix II螺旋矩阵 II">http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/06/Effctive-Java阅读笔记V/" title="Effctive-Java阅读笔记V">http://yoursite.com/2020/01/06/Effctive-Java阅读笔记V/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/06/Effctive-Java阅读笔记V/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -358,18 +377,9 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/08/24/剑指Offer20.顺时针打印矩阵/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          20.PrintMatrix顺时针打印矩阵(CodingInterview)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">650. 2 Keys Keyboard只有两个键的键盘</div>
+    <a href="/2020/01/03/Hexo标签与md文件冲突问题解决/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo标签与md文件冲突问题解决</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -380,7 +390,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用-try-with-resources-语句替代-try-finally-语句"><span class="toc-number">1.</span> <span class="toc-text">使用 try-with-resources 语句替代 try-finally 语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重写-equals-方法时遵守通用约定"><span class="toc-number">2.</span> <span class="toc-text">重写 equals 方法时遵守通用约定</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">3.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -446,13 +456,11 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/24/剑指Offer20.顺时针打印矩阵/" title="上一篇: 20.PrintMatrix顺时针打印矩阵(CodingInterview)">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/" title="下一篇: 650. 2 Keys Keyboard只有两个键的键盘">
+            <a href="/2020/01/03/Hexo标签与md文件冲突问题解决/" title="下一篇: Hexo标签与md文件冲突问题解决">
                 <i class="fa fa-angle-right"></i>
             </a>
         
