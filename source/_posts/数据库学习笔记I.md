@@ -173,7 +173,37 @@ exists关键字表示存在，内层查询语句不返回查询的记录，而�
     //如果department存在d_id为1003，则查询employee表。
 还可以分为相关子查询，独立子查询。以上子查询与外层查询没有关联，称为独立子查询，如果子查询有用到外层查询的字段，则称相关子查询，相关子查询容易产生性能问题。
 
+## TOP关键字
+TOP关键字在SQL语言中用来限制返回结果集中的记录条数
+（1）返回确定数目的记录个数
 
+语法格式：
+
+    SELECT TOP n <列名表> FROM <表名> [查询条件]
+
+其中，n为要返回结果集中的记录条数
+
+（2）返回结果集中指定百分比的记录数
+
+语法格式：
+
+    SELECT TOP n PERCENT <列名表> FROM <表名> [查询条件]
+
+其中，n为所返回的记录数所占结果集中记录数目的百分比数
+
+使用例子：
+查询某个条件多条数据中创建时间最新的一条
+
+      select top 1 * from tablename
+      where id=123456
+      order by 时间 desc      
+
+但是需要注意的是在MySQL中没有此语法，MySQL中使用limit来实现相关功能。
+同样的例子，MySQL中可以写为：
+
+      select * from tablename
+      where id=123456
+       order by 时间 desc limit 1
 # 参考资料：
 
 【1】https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600
