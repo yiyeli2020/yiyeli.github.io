@@ -128,22 +128,126 @@ tags: [Java]
     public final class CaseInsensitiveString {
         private final String s;
 
-        public CaseInsensitiveString(String s) {
+        public CaseInsensitiveString(String s){
             this.s = Objects.requireNonNull(s);
         }
 
         // Broken - violates symmetry!
         @Override
-        public boolean equals(Object o) {
-            if (o instanceof CaseInsensitiveString)
+        public boolean equals(Object o){
+            if(o instanceof CaseInsensitiveString){
                 return s.equalsIgnoreCase(
-                        ((CaseInsensitiveString) o).s);
-            if (o instanceof String)  // One-way interoperability!
-                return s.equalsIgnoreCase((String) o);
+                        ((CaseInsensitiveString)o).s);
+            }
+            if(o instanceof String){// One-way interoperability!
+                return s.equalsIgnoreCase((String)o);
+            }
             return false;
         }
-        ...// Remainder omitted
     }
+
+
+上面CaseInsensitiveString（大小写不敏感）类中的 equals 试图与正常的字符串进行操作，假设我们有一个不区分大小写的字符串和一个正常的字符串：
+
+    CaseInsensitiveString cis = new CaseInsensitiveString("Polish");
+    String s = "polish";
+
+    System.out.println(cis.equals(s)); // true
+    System.out.println(s.equals(cis)); // false
+
+正如所料，cis.equals(s) 返回 true。 问题是，尽管 CaseInsensitiveString 类中的 equals 方法知道正常字符串，但 String 类中的 equals 方法却忽略了不区分大小写的字符串。 因此，s.equals(cis) 返回 false，明显违反对称性。 假设把一个不区分大小写的字符串放入一个集合中：
+
+    List<CaseInsensitiveString> list = new ArrayList<>();
+    list.add(cis);
+
+list.contains(s) 返回了什么？谁知道呢？在当前的 OpenJDK 实现中，它会返回 false，但这只是一个实现构件。在另一个实现中，它可以很容易地返回 true 或抛出运行时异常。一旦违反了 equals 约定，就不知道其他对象在面对你的对象时会如何表现了。
+
+　　要消除这个问题，只需删除 equals 方法中与 String 类相互操作的恶意尝试。这样做之后，可以将该方法重构为单个返回语句:
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof CaseInsensitiveString &&
+                ((CaseInsensitiveString) o).s.equalsIgnoreCase(s);
+    }
+
+传递性（Transitivity）—— equals 约定的第三个要求是，如果第一个对象等于第二个对象，第二个对象等于第三个对象，那么第一个对象必须等于第三个对象。同样，也不难想象，无意中违反了这一要求。考虑子类的情况， 将新值组件（value component）添加到其父类中。换句话说，子类添加了一个信息，它影响了 equals 方法比较。让我们从一个简单不可变的二维整数类型 Point 类开始：
+
+    public class Point {
+        private final int x;
+        private final int y;
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Point))
+                return false;
+            Point p = (Point) o;
+            return p.x == x && p.y == y;
+        }
+
+        ...  // Remainder omitted
+    }
+
+假设想继承这个类，将表示颜色的 Color 类添加到 Point 类中：
+
+    public class ColorPoint extends Point {
+        private final Color color;
+
+        public ColorPoint(int x, int y, Color color) {
+            super(x, y);
+            this.color = color;
+        }
+
+        ...  // Remainder omitted
+    }
+equals 方法应该是什么样子？如果完全忽略，则实现是从 Point 类上继承的，颜色信息在 equals 方法比较中被忽略。虽然这并不违反 equals 约定，但这显然是不可接受的。假设你写了一个 equals 方法，它只在它的参数是另一个具有相同位置和颜色的 ColorPoint 实例时返回 true：
+
+    // Broken - violates symmetry!
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ColorPoint))
+            return false;
+        return super.equals(o) && ((ColorPoint) o).color == color;
+    }
+
+当你比较 Point 对象和 ColorPoint 对象时，可以会得到不同的结果，反之亦然。前者的比较忽略了颜色属性，而后者的比较会一直返回 false，因为参数的类型是错误的。为了让问题更加具体，我们创建一个 Point 对象和 ColorPoint 对象：
+
+    Point p = new Point(1, 2);
+    ColorPoint cp = new ColorPoint(1, 2, Color.RED);
+
+　　p.equals(cp) 返回 true，但是 cp.equals(p) 返回 false。你可能想使用 ColorPoint.equals 通过混合比较的方式来解决这个问题。
+
+    @Override
+    public boolean equals(Object o) {
+    if (!(o instanceof Point))
+        return false;
+
+    // If o is a normal Point, do a color-blind comparison
+    if (!(o instanceof ColorPoint))
+        return o.equals(this);
+
+    // o is a ColorPoint; do a full comparison
+    return super.equals(o) && ((ColorPoint) o).color == color;
+    }
+
+这种方法确实提供了对称性，但是丧失了传递性：
+
+    ColorPoint p1 = new ColorPoint(1, 2, Color.RED);
+    Point p2 = new Point(1, 2);
+    ColorPoint p3 = new ColorPoint(1, 2, Color.BLUE);
+
+现在，p1.equals(p2) 和 p2.equals(p3) 返回了 true，但是 p1.equals(p3) 却返回了 false，很明显违背了传递性的要求。前两个比较都是不考虑颜色信息的，而第三个比较时却包含颜色信息。
+
+　　此外，这种方法可能导致无限递归：假设有两个 Point 的子类，比如 ColorPoint 和 SmellPoint，每个都有这种 equals 方法。 然后调用 myColorPoint.equals(mySmellPoint) 将抛出一个 StackOverflowError 异常。
+
+　　那么解决方案是什么？ 事实证明，这是面向对象语言中关于等价关系的一个基本问题。 除非您愿意放弃面向对象抽象的好处，否则无法继承可实例化的类，并在保留 equals 约定的同时添加一个值组件。
+
+　　你可能听说过，可以继承一个可实例化的类并添加一个值组件，同时通过在 equals 方法中使用一个 getClass 测试代替 instanceof 测试来保留 equals 约定：
+
 
 # 参考资料：
 【1】http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/10.%20%E9%87%8D%E5%86%99equals%E6%96%B9%E6%B3%95%E6%97%B6%E9%81%B5%E5%AE%88%E9%80%9A%E7%94%A8%E7%BA%A6%E5%AE%9A
