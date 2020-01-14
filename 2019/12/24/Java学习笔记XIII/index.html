@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Java学习笔记III | Yiye Li</title>
+  <title>Java学习笔记XIII | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="总结Java8 Lambda表达式，对涉及到到final关键字做了回顾">
+  <meta name="description" content="Java中Calendar，LocalDateTime的用法和区别">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记III">
-<meta property="og:url" content="http://yoursite.com/2019/08/12/Java学习笔记III/index.html">
+<meta property="og:title" content="Java学习笔记XIII">
+<meta property="og:url" content="http://yoursite.com/2019/12/24/Java学习笔记XIII/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="总结Java8 Lambda表达式，对涉及到到final关键字做了回顾">
+<meta property="og:description" content="Java中Calendar，LocalDateTime的用法和区别">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-13T06:13:13.593Z">
+<meta property="og:updated_time" content="2020-01-13T10:51:29.576Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习笔记III">
-<meta name="twitter:description" content="总结Java8 Lambda表达式，对涉及到到final关键字做了回顾">
+<meta name="twitter:title" content="Java学习笔记XIII">
+<meta name="twitter:description" content="Java中Calendar，LocalDateTime的用法和区别">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Java学习笔记III" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java学习笔记XIII" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/08/12/Java学习笔记III/" class="article-date">
-      <time datetime="2019-08-12T06:45:12.000Z" itemprop="datePublished">2019-08-12</time>
+      <a href="/2019/12/24/Java学习笔记XIII/" class="article-date">
+      <time datetime="2019-12-24T03:21:12.000Z" itemprop="datePublished">2019-12-24</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java学习笔记III
+      Java学习笔记XIII
     </h1>
   
 
@@ -224,7 +224,7 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2019年8月/">2019年8月</a>
+    <a class="article-category-link" href="/categories/2019年12月/">2019年12月</a>
     </div>
 
 
@@ -240,148 +240,36 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>总结Java8 Lambda表达式，对涉及到到final关键字做了回顾</p>
+        <p>Java中Calendar，LocalDateTime的用法和区别</p>
 <a id="more"></a>
-<h1 id="Java8-Lambda表达式"><a href="#Java8-Lambda表达式" class="headerlink" title="Java8 Lambda表达式"></a>Java8 Lambda表达式</h1><p>Lambda 表达式，也可称为闭包，它是推动 Java 8 发布的最重要新特性。<br>Lambda 允许把函数作为一个方法的参数（函数作为参数传递进方法中）。<br>使用 Lambda 表达式可以使代码变的更加简洁紧凑。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>lambda 表达式的语法格式如下：</p>
-<pre><code>(parameters) -&gt; expression
-或
-(parameters) -&gt;{ statements; }
-</code></pre><p>以下是lambda表达式的重要特征:</p>
-<p>可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。</p>
-<p>可选的参数圆括号：一个参数无需定义圆括号，但多个参数需要定义圆括号。</p>
-<p>可选的大括号：如果主体包含了一个语句，就不需要使用大括号。</p>
-<p>可选的返回关键字：如果主体只有一个表达式返回值则编译器会自动返回值，大括号需要指定明表达式返回了一个数值。</p>
-<h2 id="Lambda-表达式实例"><a href="#Lambda-表达式实例" class="headerlink" title="Lambda 表达式实例"></a>Lambda 表达式实例</h2><p>Lambda 表达式的简单例子:</p>
-<pre><code>// 1. 不需要参数,返回值为 5  
-() -&gt; 5  
-
-// 2. 接收一个参数(数字类型),返回其2倍的值  
-x -&gt; 2 * x  
-
-// 3. 接受2个参数(数字),并返回他们的差值  
-(x, y) -&gt; x – y  
-
-// 4. 接收2个int型整数,返回他们的和  
-(int x, int y) -&gt; x + y  
-
-// 5. 接受一个 string 对象,并在控制台打印,不返回任何值(看起来像是返回void)  
-(String s) -&gt; System.out.print(s)
-</code></pre><p>在 Java8Tester.java 文件输入以下代码：</p>
-<pre><code>public class Java8Tester {
-   public static void main(String args[]){
-      Java8Tester tester = new Java8Tester();
-
-      // 类型声明
-      MathOperation addition = (int a, int b) -&gt; a + b;
-
-      // 不用类型声明
-      MathOperation subtraction = (a, b) -&gt; a - b;
-
-      // 大括号中的返回语句
-      MathOperation multiplication = (int a, int b) -&gt; { return a * b; };
-
-      // 没有大括号及返回语句
-      MathOperation division = (int a, int b) -&gt; a / b;
-
-      System.out.println(&quot;10 + 5 = &quot; + tester.operate(10, 5, addition));
-      System.out.println(&quot;10 - 5 = &quot; + tester.operate(10, 5, subtraction));
-      System.out.println(&quot;10 x 5 = &quot; + tester.operate(10, 5, multiplication));
-      System.out.println(&quot;10 / 5 = &quot; + tester.operate(10, 5, division));
-
-      // 不用括号
-      GreetingService greetService1 = message -&gt;
-      System.out.println(&quot;Hello &quot; + message);
-
-      // 用括号
-      GreetingService greetService2 = (message) -&gt;
-      System.out.println(&quot;Hello &quot; + message);
-
-      greetService1.sayMessage(&quot;Runoob&quot;);
-      greetService2.sayMessage(&quot;Google&quot;);
-   }
-
-   interface MathOperation {
-      int operation(int a, int b);
-   }
-
-   interface GreetingService {
-      void sayMessage(String message);
-   }
-
-   private int operate(int a, int b, MathOperation mathOperation){
-      return mathOperation.operation(a, b);
-   }
-}
-</code></pre><p>执行以上脚本，输出结果为：</p>
-<pre><code>$ javac Java8Tester.java
-$ java Java8Tester
-10 + 5 = 15
-10 - 5 = 5
-10 x 5 = 50
-10 / 5 = 2
-Hello Runoob
-Hello Google
-</code></pre><p>使用 Lambda 表达式需要注意以下两点：</p>
-<p>Lambda 表达式主要用来定义行内执行的方法类型接口，例如，一个简单方法接口。在上面例子中，我们使用各种类型的Lambda表达式来定义MathOperation接口的方法。然后我们定义了sayMessage的执行。</p>
-<p>Lambda 表达式免去了使用匿名方法的麻烦，并且给予Java简单但是强大的函数化的编程能力。</p>
-<h2 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h2><p>lambda 表达式只能引用标记了 final 的外层局部变量，这就是说不能在 lambda 内部修改定义在域外的局部变量，否则会编译错误。<br>在 Java8Tester.java 文件输入以下代码：</p>
-<pre><code>public class Java8Tester {
-
-final static String salutation = &quot;Hello! &quot;;
-
-public static void main(String args[]){
-  GreetingService greetService1 = message -&gt;
-  System.out.println(salutation + message);
-  greetService1.sayMessage(&quot;Runoob&quot;);
-}
-
-interface GreetingService {
-  void sayMessage(String message);
-}
-}
-</code></pre><p>执行以上脚本，输出结果为：</p>
-<pre><code>$ javac Java8Tester.java
-$ java Java8Tester
-Hello! Runoob
-</code></pre><p>我们也可以直接在 lambda 表达式中访问外层的局部变量：</p>
-<pre><code>public class Java8Tester {
-    public static void main(String args[]) {
-        final int num = 1;
-        Converter&lt;Integer, String&gt; s = (param) -&gt; System.out.println(String.valueOf(param + num));
-        s.convert(2);  // 输出结果为 3
-    }
-
-    public interface Converter&lt;T1, T2&gt; {
-        void convert(int i);
+<p>例如使用LocalDateTime：</p>
+<pre><code>private static void localDateTimeTest() throws ModuleBusinessException{
+    LocalDateTime currentTime=LocalDateTime.now();
+    LocalDateTime suspendLoanTime=LocalDateTime.of(2020,1,23,10,0,0);
+    LocalDateTime recoverLoanTime=LocalDateTime.of(2020,1,31,9,59,59);
+    System.out.println(currentTime);
+    System.out.println(suspendLoanTime);
+    System.out.println(recoverLoanTime);
+    if(currentTime.isAfter(suspendLoanTime) &amp;&amp; currentTime.isBefore(recoverLoanTime)){
+        throw new ModuleBusinessException(&quot;尊敬的用户您好，1月23日10:00-1月31日9:59暂停XX，1月31日10:00恢复XX，届时会短信通知到您，需要您再次来到APP继续XX&quot;);
     }
 }
-</code></pre><p>lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）</p>
-<pre><code>int num = 1;  
-Converter&lt;Integer, String&gt; s = (param) -&gt; System.out.println(String.valueOf(param + num));
-s.convert(2);
-num = 5;  
-//报错信息：Local variable num defined in an enclosing scope must be final or effectively
- final
-</code></pre><p>在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量。</p>
-<pre><code>String first = &quot;&quot;;  
-Comparator&lt;String&gt; comparator = (first, second) -&gt; Integer.compare(first.length(), second.length());  //编译会出错
-</code></pre><h1 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h1><p>final是一个关键字，可以用于修饰类，成员变量，成员方法。</p>
-<h2 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h2><p>它修饰的类不能被继承。</p>
-<p>它修饰的成员变量是一个常量。</p>
-<p>它修饰的成员方法是不能被子类重写的。</p>
-<p>final修饰的常量定义一般都有书写规范,被final修饰的常量名称,所有字母都大写。</p>
-<p>final修饰成员变量,必须初始化,初始化有两种</p>
-<p>显示初始化；</p>
-<p>构造方法初始化。</p>
-<p>但是不能两个一起初始化</p>
-<h2 id="final和private的区别："><a href="#final和private的区别：" class="headerlink" title="final和private的区别："></a>final和private的区别：</h2><p>final修饰的类可以访问；</p>
-<p>private不可以修饰外部类，但可以修饰内部类（其实把外部类私有化是没有意义的）。</p>
-<p>final修饰的方法不可以被子类重写；</p>
-<p>private修饰的方法表面上看是可以被子类重写的，其实不可以，子类是看不到父类的私有方法的。</p>
-<p>final修饰的变量只能在显示初始化或者构造函数初始化的时候赋值一次，以后不允许更改；</p>
-<p>private修饰的变量，也不允许直接被子类或一个包中的其它类访问或修改，但是他可以通过set和get方法对其改值和取值。</p>
-<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://www.runoob.com/java/java8-lambda-expressions.html" target="_blank" rel="noopener">https://www.runoob.com/java/java8-lambda-expressions.html</a></p>
+</code></pre><p>而使用Calendar时有个容易被坑的地方，calendar.set()中月份字段从0开始：</p>
+<pre><code>private static void dateTimeTest() throws ModuleBusinessException {
+    Calendar calendar=Calendar.getInstance();
+    Date currentTime=calendar.getTime();
+    calendar.set(2020,0,23,10,0,0);//（月份字段从0开始）
+    Date suspendLoanTime=calendar.getTime();
+    calendar.set(2020,0,31,9,59,59);//（月份字段从0开始）
+    Date recoverLoanTime=calendar.getTime();
+    System.out.println(currentTime);
+    System.out.println(suspendLoanTime);
+    System.out.println(recoverLoanTime);
+    if(!currentTime.after(suspendLoanTime) || !currentTime.before(recoverLoanTime)){
+        throw new ModuleBusinessException(&quot;尊敬的用户您好，1月23日10:00-1月31日9:59暂停XX，1月31日10:00恢复XX，届时会短信通知到您，需要您再次来到APP继续XX&quot;);
+    }
+}
+</code></pre><h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p>【1】</p>
 
       
       
@@ -437,13 +325,13 @@ Comparator&lt;String&gt; comparator = (first, second) -&gt; Integer.compare(firs
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></p>
+        <p><span>本文标题:</span><a href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2019年08月12日 - 14时45分</p>
-        <p><span>最后更新:</span>2019年08月13日 - 14时13分</p>
+        <p><span>发布时间:</span>2019年12月24日 - 11时21分</p>
+        <p><span>最后更新:</span>2020年01月13日 - 18时51分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/08/12/Java学习笔记III/" title="Java学习笔记III">http://yoursite.com/2019/08/12/Java学习笔记III/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/08/12/Java学习笔记III/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/12/24/Java学习笔记XIII/" title="Java学习笔记XIII">http://yoursite.com/2019/12/24/Java学习笔记XIII/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/12/24/Java学习笔记XIII/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -456,18 +344,18 @@ Comparator&lt;String&gt; comparator = (first, second) -&gt; Integer.compare(firs
 
 <nav id="article-nav">
   
-    <a href="/2019/08/12/Java学习笔记V/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/12/27/Scala学习笔记V/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Java学习笔记V
+          Scala学习笔记V
         
       </div>
     </a>
   
   
-    <a href="/2019/08/09/数据库学习笔记II/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据库学习笔记II</div>
+    <a href="/2019/12/24/Java学习笔记XII/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java学习笔记XII</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -478,7 +366,7 @@ Comparator&lt;String&gt; comparator = (first, second) -&gt; Integer.compare(firs
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java8-Lambda表达式"><span class="toc-number">1.</span> <span class="toc-text">Java8 Lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法"><span class="toc-number">1.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambda-表达式实例"><span class="toc-number">1.2.</span> <span class="toc-text">Lambda 表达式实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量作用域"><span class="toc-number">1.3.</span> <span class="toc-text">变量作用域</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#final关键字"><span class="toc-number">2.</span> <span class="toc-text">final关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特点："><span class="toc-number">2.1.</span> <span class="toc-text">特点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#final和private的区别："><span class="toc-number">2.2.</span> <span class="toc-text">final和private的区别：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">3.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献："><span class="toc-number">1.</span> <span class="toc-text">参考文献：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -544,13 +432,13 @@ Comparator&lt;String&gt; comparator = (first, second) -&gt; Integer.compare(firs
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/08/12/Java学习笔记V/" title="上一篇: Java学习笔记V">
+            <a href="/2019/12/27/Scala学习笔记V/" title="上一篇: Scala学习笔记V">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/08/09/数据库学习笔记II/" title="下一篇: 数据库学习笔记II">
+            <a href="/2019/12/24/Java学习笔记XII/" title="下一篇: Java学习笔记XII">
                 <i class="fa fa-angle-right"></i>
             </a>
         
