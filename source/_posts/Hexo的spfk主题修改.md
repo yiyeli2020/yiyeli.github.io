@@ -213,12 +213,46 @@ c. npm 模块名
 # 访问量统计
 
 使用不蒜子提供的服务，因为其域名更改，所以把原有的：
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 域名改一下即可：
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+# 安装脚本（必选）
+要使用不蒜子必须在页面中引入busuanzi.js，目前最新版如下。
 
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+不蒜子可以给任何类型的个人站点使用，如果是用的hexo，打开themes/主题/layout/_partial/footer.ejs添加上述脚本即可，当然你也可以添加到 header 中。
+
+# 安装标签（可选）
+只需要复制相应的html标签到网站要显示访问量的位置即可。可以随意更改不蒜子标签为自己喜欢的显示效果，内容参考第三部分扩展开发。根据要显示内容的不同，这分几种情况。
+
+## 显示站点总访问量
+要显示站点总访问量，复制以下代码添加到你需要显示的位置。有两种算法可选：
+
+算法a：pv的方式，单个用户连续点击n篇文章，记录n次访问量。
+
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+算法b：uv的方式，单个用户连续点击n篇文章，只记录1次访客数。
+
+    <span id="busuanzi_container_site_uv">
+      本站访客数<span id="busuanzi_value_site_uv"></span>人次
+    </span>
+如果你是用的hexo，打开themes/主题/layout/_partial/footer.ejs添加即可。
+
+# 显示单页面访问量
+要显示每篇文章的访问量，复制以下代码添加到需要显示的位置。
+
+算法：pv的方式，单个用户点击1篇文章，本篇文章记录1次阅读量。
+
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+代码中文字是可以修改的，只要保留id正确即可。
 
 # 参考资料
 【1】https://cniter.github.io/posts/b1e9411b.html
@@ -226,3 +260,4 @@ c. npm 模块名
 【3】https://zhuanlan.zhihu.com/p/69213954
 【4】https://www.itrhx.com/2018/08/27/A04-Hexo-blog-topic-personalization/
 【5】https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md
+【6】http://ibruce.info/2015/04/04/busuanzi/
