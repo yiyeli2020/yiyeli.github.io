@@ -79,6 +79,25 @@ c. npm 模块名
 
 然后将包名输入位于_config.yml 的 model.use 中.
 
+但在安装过程中遇到问题：
+
+    make: *** [Release/obj.target/fse/fsevents.o] Error 1
+    gyp ERR! build error
+    gyp ERR! stack Error: `make` failed with exit code: 2
+    gyp ERR! stack     at ChildProcess.onExit (/usr/local/lib/node_modules/npm/node_modules/node-gyp/lib/build.js:262:23)
+    gyp ERR! stack     at ChildProcess.emit (events.js:203:13)
+    gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:272:12)
+    gyp ERR! System Darwin 18.7.0
+    gyp ERR! command "/usr/local/Cellar/node/12.6.0/bin/node" "/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js" "build" "--fallback-to-build" "--module=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64/fse.node" "--module_name=fse" "--module_path=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64" "--napi_version=4" "--node_abi_napi=napi"
+    gyp ERR! cwd /Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents
+    gyp ERR! node -v v12.6.0
+    gyp ERR! node-gyp -v v3.8.0
+    gyp ERR! not ok
+    node-pre-gyp ERR! build error
+    node-pre-gyp ERR! stack Error: Failed to execute '/usr/local/Cellar/node/12.6.0/bin/node /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js build --fallback-to-build --module=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64/fse.node --module_name=fse --module_path=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64 --napi_version=4 --node_abi_napi=napi' (1)
+
+类似问题在https://github.com/nodejs/node-gyp/issues/1547中找到：
+
 
 # 参考资料
 【1】https://cniter.github.io/posts/b1e9411b.html
