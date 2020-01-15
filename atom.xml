@@ -391,28 +391,6 @@
   </entry>
   
   <entry>
-    <title>Java学习笔记XIII</title>
-    <link href="http://yoursite.com/2019/12/24/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0XIII/"/>
-    <id>http://yoursite.com/2019/12/24/Java学习笔记XIII/</id>
-    <published>2019-12-24T03:21:12.000Z</published>
-    <updated>2020-01-13T10:51:29.576Z</updated>
-    
-    <content type="html"><![CDATA[<p>Java中Calendar，LocalDateTime的用法和区别</p><a id="more"></a><p>例如使用LocalDateTime：</p><pre><code>private static void localDateTimeTest() throws ModuleBusinessException{    LocalDateTime currentTime=LocalDateTime.now();    LocalDateTime suspendLoanTime=LocalDateTime.of(2020,1,23,10,0,0);    LocalDateTime recoverLoanTime=LocalDateTime.of(2020,1,31,9,59,59);    System.out.println(currentTime);    System.out.println(suspendLoanTime);    System.out.println(recoverLoanTime);    if(currentTime.isAfter(suspendLoanTime) &amp;&amp; currentTime.isBefore(recoverLoanTime)){        throw new ModuleBusinessException(&quot;尊敬的用户您好，1月23日10:00-1月31日9:59暂停XX，1月31日10:00恢复XX，届时会短信通知到您，需要您再次来到APP继续XX&quot;);    }}</code></pre><p>而使用Calendar时有个容易被坑的地方，calendar.set()中月份字段从0开始：</p><pre><code>private static void dateTimeTest() throws ModuleBusinessException {    Calendar calendar=Calendar.getInstance();    Date currentTime=calendar.getTime();    calendar.set(2020,0,23,10,0,0);//（月份字段从0开始）    Date suspendLoanTime=calendar.getTime();    calendar.set(2020,0,31,9,59,59);//（月份字段从0开始）    Date recoverLoanTime=calendar.getTime();    System.out.println(currentTime);    System.out.println(suspendLoanTime);    System.out.println(recoverLoanTime);    if(!currentTime.after(suspendLoanTime) || !currentTime.before(recoverLoanTime)){        throw new ModuleBusinessException(&quot;尊敬的用户您好，1月23日10:00-1月31日9:59暂停XX，1月31日10:00恢复XX，届时会短信通知到您，需要您再次来到APP继续XX&quot;);    }}</code></pre><h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p>【1】</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Java中Calendar，LocalDateTime的用法和区别&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2019年12月" scheme="http://yoursite.com/categories/2019%E5%B9%B412%E6%9C%88/"/>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Java学习笔记XII</title>
     <link href="http://yoursite.com/2019/12/24/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0XII/"/>
     <id>http://yoursite.com/2019/12/24/Java学习笔记XII/</id>
@@ -424,6 +402,28 @@
     <summary type="html">
     
       &lt;p&gt;使用Java批量转换文件夹中的文件编码格式，删除文件中的代码&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2019年12月" scheme="http://yoursite.com/categories/2019%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java学习笔记XIII</title>
+    <link href="http://yoursite.com/2019/12/24/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0XIII/"/>
+    <id>http://yoursite.com/2019/12/24/Java学习笔记XIII/</id>
+    <published>2019-12-24T03:21:12.000Z</published>
+    <updated>2020-01-13T10:51:29.576Z</updated>
+    
+    <content type="html"><![CDATA[<p>Java中Calendar，LocalDateTime的用法和区别</p><a id="more"></a><p>例如使用LocalDateTime：</p><pre><code>private static void localDateTimeTest() throws ModuleBusinessException{    LocalDateTime currentTime=LocalDateTime.now();    LocalDateTime suspendLoanTime=LocalDateTime.of(2020,1,23,10,0,0);    LocalDateTime recoverLoanTime=LocalDateTime.of(2020,1,31,9,59,59);    System.out.println(currentTime);    System.out.println(suspendLoanTime);    System.out.println(recoverLoanTime);    if(currentTime.isAfter(suspendLoanTime) &amp;&amp; currentTime.isBefore(recoverLoanTime)){        throw new ModuleBusinessException(&quot;尊敬的用户您好，1月23日10:00-1月31日9:59暂停XX，1月31日10:00恢复XX，届时会短信通知到您，需要您再次来到APP继续XX&quot;);    }}</code></pre><p>而使用Calendar时有个容易被坑的地方，calendar.set()中月份字段从0开始：</p><pre><code>private static void dateTimeTest() throws ModuleBusinessException {    Calendar calendar=Calendar.getInstance();    Date currentTime=calendar.getTime();    calendar.set(2020,0,23,10,0,0);//（月份字段从0开始）    Date suspendLoanTime=calendar.getTime();    calendar.set(2020,0,31,9,59,59);//（月份字段从0开始）    Date recoverLoanTime=calendar.getTime();    System.out.println(currentTime);    System.out.println(suspendLoanTime);    System.out.println(recoverLoanTime);    if(!currentTime.after(suspendLoanTime) || !currentTime.before(recoverLoanTime)){        throw new ModuleBusinessException(&quot;尊敬的用户您好，1月23日10:00-1月31日9:59暂停XX，1月31日10:00恢复XX，届时会短信通知到您，需要您再次来到APP继续XX&quot;);    }}</code></pre><h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p>【1】</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Java中Calendar，LocalDateTime的用法和区别&lt;/p&gt;
     
     </summary>
     
