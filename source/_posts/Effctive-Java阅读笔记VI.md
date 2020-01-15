@@ -1,4 +1,4 @@
-title: Effctive-Java阅读笔记V
+title: Effctive-Java阅读笔记VI
 date: 2020-1-14 14:56:12
 categories: 2020年1月
 tags: [Java]
@@ -7,9 +7,11 @@ tags: [Java]
 
 第三章阅读：Methods Common to All Objects
 11.重写 equals 方法时同时也要重写 hashcode 方法
-12.
+12.始终重写 toString 方法
 
 <!-- more -->
+
+# 重写 equals 方法时同时也要重写 hashcode 方法
 
 在每个类中，在重写 equals 方法的时侯，一定要重写 hashcode 方法。 如果不这样做，你的类违反了 hashCode 的通用约定，这会阻止它在 HashMap 和 HashSet 这样的集合中正常工作。根据 Object 规范，以下时具体约定。
 
@@ -78,10 +80,89 @@ b. 将步骤 2.a 中属性 c 计算出的哈希码合并为如下结果：result
 
 如果一个类是不可变的，并且计算哈希码的代价很大，那么可以考虑在对象中缓存哈希码，而不是在每次请求时重新计算哈希码。 如果你认为这种类型的大多数对象将被用作哈希键，那么应该在创建实例时计算哈希码。 否则，可以选择在首次调用 hashCode 时延迟初始化（lazily initialize）哈希码。 需要注意确保类在存在延迟初始化属性的情况下保持线程安全（项目 83）。 PhoneNumber 类不适合这种情况，但只是为了展示它是如何完成的。 请注意，属性 hashCode 的初始值（在本例中为 0）不应该是通常创建的实例的哈希码：
 
+    // hashCode method with lazily initialized cached hash code
+    private int hashCode; // Automatically initialized to 0
 
+    @Override
+    public int hashCode() {
+        int result = hashCode;
+        if (result == 0) {
+            result = Short.hashCode(areaCode);
+            result = 31 * result + Short.hashCode(prefix);
+            result = 31 * result + Short.hashCode(lineNum);
+            hashCode = result;
+        }
+        return result;
+    }
 
+不要试图从哈希码计算中排除重要的属性来提高性能。 由此产生的哈希函数可能运行得更快，但其质量较差可能会降低哈希表的性能，使其无法使用。 具体来说，哈希函数可能会遇到大量不同的实例，这些实例主要在你忽略的区域中有所不同。 如果发生这种情况，哈希函数将把所有这些实例映射到少许哈希码上，而应该以线性时间运行的程序将会运行平方级的时间。
 
+　　这不仅仅是一个理论问题。 在 Java 2 之前，String 类哈希函数在整个字符串中最多使用 16 个字符，从第一个字符开始，在整个字符串中均匀地选取。 对于大量的带有层次名称的集合（如 URL），此功能正好显示了前面描述的病态行为。
 
+　　不要为 hashCode 返回的值提供详细的规范，因此客户端不能合理地依赖它； 你可以改变它的灵活性。 Java 类库中的许多类（例如 String 和 Integer）都将 hashCode 方法返回的确切值指定为实例值的函数。 这不是一个好主意，而是一个我们不得不忍受的错误：它妨碍了在未来版本中改进哈希函数的能力。 如果未指定细节并在散列函数中发现缺陷，或者发现了更好的哈希函数，则可以在后续版本中对其进行更改。
+
+　　总之，每次重写 equals 方法时都必须重写 hashCode 方法，否则程序将无法正常运行。你的 hashCode 方法必须遵从 Object 类指定的常规约定，并且必须执行合理的工作，将不相等的哈希码分配给不相等的实例。如果使用第 51 页的配方，这很容易实现。如条目 10 所述，AutoValue 框架为手动编写 equals 和 hashCode 方法提供了一个很好的选择，IDE 也提供了一些这样的功能。
+
+# 始终重写 toString 方法
+虽然 Object 类提供了 toString 方法的实现，但它返回的字符串通常不是你的类的用户想要看到的。 它由类名后跟一个「at」符号（@）和哈希码的无符号十六进制表示组成，例如 PhoneNumber@163b91。 toString 的通用约定要求，返回的字符串应该是「一个简洁但内容丰富的表示，对人们来说是很容易阅读的」。虽然可以认为 PhoneNumber@163b91 简洁易读，但相比于 707-867-5309，但并不是很丰富 。 toString 通用约定「建议所有的子类重写这个方法」。好的建议，的确如此！
+
+　　虽然它并不像遵守 equals 和 hashCode 约定那样重要 (条目 10 和 11)，但是提供一个良好的 toString 实现使你的类更易于使用，并对使用此类的系统更易于调试。当对象被传递到 println、printf、字符串连接操作符或断言，或者由调试器打印时，toString 方法会自动被调用。即使你从不调用对象上的 toString，其他人也可以。例如，对对象有引用的组件可能包含在日志错误消息中对象的字符串表示。如果未能重写 toString，则消息可能是无用的。
+
+　　如果为 PhoneNumber 提供了一个很好的 toString 方法，那么生成一个有用的诊断消息就像下面这样简单：
+
+    System.out.println("Failed to connect to " + phoneNumber);
+
+程序员将以这种方式生成诊断消息，不管你是否重写 toString，但是除非你这样做，否则这些消息将不会有用。 提供一个很好的 toString 方法的好处不仅包括类的实例，同样有益于包含实例引用的对象，特别是集合。 打印 map 对象时你会看到哪一个，{Jenny=PhoneNumber@163b91} 还是 {Jenny=707-867-5309}?
+
+　　实际上，toString 方法应该返回对象中包含的所有需要关注的信息，如电话号码示例中所示。 如果对象很大或者包含不利于字符串表示的状态，这是不切实际的。 在这种情况下，toString 应该返回一个摘要，如 Manhattan residential phone directory (1487536 listings) 或线程[main，5，main]。 理想情况下，字符串应该是不言自明的（线程示例并没有遵守这点）。 如果未能将所有对象的值得关注的信息包含在字符串表示中，则会导致一个特别烦人的处罚：测试失败报告如下所示：
+
+    Assertion failure: expected {abc, 123}, but was {abc, 123}.
+
+实现 toString 方法时，必须做出的一个重要决定是：在文档中指定返回值的格式。 建议你对值类进行此操作，例如电话号码或矩阵类。 指定格式的好处是它可以作为标准的，明确的，可读的对象表示。 这种表示形式可以用于输入、输出以及持久化可读性的数据对象，如 CSV 文件。 如果指定了格式，通常提供一个匹配的静态工厂或构造方法，是个好主意，所以程序员可以轻松地在对象和字符串表示之间来回转换。 Java 平台类库中的许多值类都采用了这种方法，包括 BigInteger，BigDecimal 和大部分基本类型包装类。
+
+　　指定 toString 返回值的格式的缺点是，假设你的类被广泛使用，一旦指定了格式，就会终身使用。程序员将编写代码来解析表达式，生成它，并将其嵌入到持久数据中。如果在将来的版本中更改了格式的表示，那么会破坏他们的代码和数据，并且还会抱怨。但通过选择不指定格式，就可以保留在后续版本中添加信息或改进格式的灵活性。
+
+　　无论是否决定指定格式，你都应该清楚地在文档中表明你的意图。如果指定了格式，则应该这样做。例如，这里有一个 toString 方法，该方法在条目 11 中使用 PhoneNumber 类：
+
+    /**
+     * Returns the string representation of this phone number.
+     * The string consists of twelve characters whose format is
+     * "XXX-YYY-ZZZZ", where XXX is the area code, YYY is the
+     * prefix, and ZZZZ is the line number. Each of the capital
+     * letters represents a single decimal digit.
+     *
+     * If any of the three parts of this phone number is too small
+     * to fill up its field, the field is padded with leading zeros.
+     * For example, if the value of the line number is 123, the last
+     * four characters of the string representation will be "0123".
+     */
+    @Override
+    public String toString() {
+        return String.format("%03d-%03d-%04d",
+                areaCode, prefix, lineNum);
+    }
+
+如果你决定不指定格式，那么文档注释应该是这样的：
+
+    /**
+     * Returns a brief description of this potion. The exact details
+     * of the representation are unspecified and subject to change,
+     * but the following may be regarded as typical:
+     *
+     * "[Potion #9: type=love, smell=turpentine, look=india ink]"
+     */
+    @Override
+    public String toString() { ... }
+
+在阅读了这条注释之后，那些生成依赖于格式细节的代码或持久化数据的程序员，在这种格式发生改变的时候，只能怪他们自己。
+
+　　无论是否指定格式，都可以通过编程方式访问 toString 返回的值中包含的信息。 例如，PhoneNumber 类应该包含 areaCode, prefix, lineNum 这三个属性。 如果不这样做，就会强迫程序员需要这些信息来解析字符串。 除了降低性能和程序员做不必要的工作之外，这个过程很容易出错，如果改变格式就会中断，并导致脆弱的系统。 由于未能提供访问器，即使已指定格式可能会更改，也可以将字符串格式转换为事实上的 API。
+
+　　在静态工具类（详见第 4 条）中编写 toString 方法是没有意义的。 你也不应该在大多数枚举类型（条目 34）中写一个 toString 方法，因为 Java 为你提供了一个非常好的方法。 但是，你应该在任何抽象类中定义 toString 方法，该类的子类共享一个公共字符串表示形式。 例如，大多数集合实现上的 toString 方法都是从抽象集合类继承的。
+
+　　Google 的开放源代码 AutoValue 工具在条目 10 中讨论过，它为你生成一个 toString 方法，就像大多数 IDE 工具一样。 这些方法非常适合告诉你每个属性的内容，但并不是专门针对类的含义。 因此，例如，为我们的 PhoneNumber 类使用自动生成的 toString 方法是不合适的（因为电话号码具有标准的字符串表示形式），但是对于我们的 Potion 类来说，这是完全可以接受的。 也就是说，自动生成的 toString 方法比从 Object 继承的方法要好得多，它不会告诉你对象的值。
+
+　　回顾一下，除非父类已经这样做了，否则在每个实例化的类中重写 Object 的 toString 实现。 它使得类更加舒适地使用和协助调试。 toString 方法应该以一种美观的格式返回对象的简明有用的描述。
 
 # 参考资料：
 【1】http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/11.%20%E9%87%8D%E5%86%99equals%E6%96%B9%E6%B3%95%E6%97%B6%E5%90%8C%E6%97%B6%E4%B9%9F%E8%A6%81%E9%87%8D%E5%86%99hashcode%E6%96%B9%E6%B3%95
