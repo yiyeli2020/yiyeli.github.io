@@ -184,7 +184,7 @@ baidu_analytics:
 # 不蒜子网站计数设置
 # http://ibruce.info/2015/04/04/busuanzi/
 visit_counter:
-  on: true
+  on: false
   site_visit: 到访数
   page_visit: 本页阅读量
 
