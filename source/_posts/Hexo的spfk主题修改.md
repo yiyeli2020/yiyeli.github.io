@@ -99,7 +99,9 @@ c. npm 模块名
 类似问题在https://github.com/nodejs/node-gyp/issues/1547中找到：
 
 执行命令：
-    sudo npm install live2d-widget-model-gf -g --unsafe-perm
+    sudo npm i --unsafe-perm
+
+    sudo npm audit fix --force
 
 
 # 参考资料
