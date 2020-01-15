@@ -12,7 +12,7 @@ tags: [Java]
 
 # 谨慎地重写 clone 方法
 
-TODO：第一段没有读懂，留待看过20/65条后再回头来读。
+TODO：前面这几段没有读懂，留待看过20/65条后再回头来读。
 
 Cloneable 接口的目的是作为一个 mixin 接口 （详见第 20 条），公布这样的类允许克隆。不幸的是，它没有达到这个目的。它的主要缺点是缺少 clone 方法，而 Object 的 clone 方法是受保护的。你不能，不借助反射 （详见第 65 条），仅仅因为它实现了 Cloneable 接口，就调用对象上的 clone 方法。即使是反射调用也可能失败，因为不能保证对象具有可访问的 clone 方法。尽管存在许多缺陷，该机制在合理的范围内使用，所以理解它是值得的。这个条目告诉你如何实现一个行为良好的 clone 方法，在适当的时候讨论这个方法，并提出替代方案。
 
@@ -32,7 +32,55 @@ Cloneable 接口的目的是作为一个 mixin 接口 （详见第 20 条），�
 
 　　假设你希望在一个类中实现 Cloneable 接口，它的父类提供了一个行为良好的 clone 方法。首先调用 super.clone。 得到的对象将是原始的完全功能的复制品。 在你的类中声明的任何属性将具有与原始属性相同的值。 如果每个属性包含原始值或对不可变对象的引用，则返回的对象可能正是你所需要的，在这种情况下，不需要进一步的处理。 例如，对于条目 11 中的 PhoneNumber 类，情况就是这样，但是请注意，不可变类永远不应该提供 clone 方法，因为这只会浪费复制。 有了这个警告，以下是 PhoneNumber 类的 clone 方法：
 
+    // Clone method for class with no references to mutable state
+    @Override public PhoneNumber clone() {
+        try {
+            return (PhoneNumber) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();  // Can't happen
+        }
+    }
 
+为了使这个方法起作用，PhoneNumber 的类声明必须被修改，以表明它实现了 Cloneable 接口。 虽然 Object 类的 clone 方法返回 Object 类，但是这个 clone 方法返回 PhoneNumber 类。 这样做是合法和可取的，***因为 Java 支持协变返回类型。 换句话说，重写方法的返回类型可以是重写方法的返回类型的子类。*** 这消除了在客户端转换的需要。 在返回之前，我们必须将 Object 的 super.clone 的结果强制转换为 PhoneNumber，但保证强制转换成功。
+
+　　super.clone 的调用包含在一个 try-catch 块中。 这是因为 Object 声明了它的 clone 方法来抛出 CloneNotSupportedException 异常，这是一个检查时异常。 由于 PhoneNumber 实现了 Cloneable 接口，所以我们知道调用 super.clone 会成功。 这里引用的需要表明 CloneNotSupportedException 应该是未被检查的（详见第 71条）。
+
+　　如果对象包含引用可变对象的属性，则前面显示的简单 clone 实现可能是灾难性的。 例如，考虑条目 7 中的 Stack 类：
+
+    public class Stack {
+
+        private Object[] elements;
+        private int size = 0;
+        private static final int DEFAULT_INITIAL_CAPACITY = 16;
+
+        public Stack() {
+            this.elements = new Object[DEFAULT_INITIAL_CAPACITY];
+        }
+
+        public void push(Object e) {
+            ensureCapacity();
+            elements[size++] = e;
+        }
+
+        public Object pop() {
+            if (size == 0)
+                throw new EmptyStackException();
+            Object result = elements[--size];
+
+            elements[size] = null; // Eliminate obsolete reference
+            return result;
+        }
+
+        // Ensure space for at least one more element.
+        private void ensureCapacity() {
+            if (elements.length == size)
+                elements = Arrays.copyOf(elements, 2 * size + 1);
+        }
+    }
+
+假设你想让这个类可以克隆。 如果 clone 方法仅返回 super.clone() 调用的对象，那么生成的 Stack 实例在其 size 属性中具有正确的值，但 elements 属性引用与原始 Stack 实例相同的数组。 修改原始实例将破坏克隆中的不变量，反之亦然。 你会很快发现你的程序产生了无意义的结果，或者抛出 NullPointerException 异常。
+
+　　这种情况永远不会发生，因为调用 Stack 类中的唯一构造方法。 实际上，clone 方法作为另一种构造方法; 必须确保它不会损坏原始对象，并且可以在克隆上正确建立不变量。 为了使 Stack 上的 clone 方法正常工作，它必须复制 stack 对象的内部。 最简单的方法是对元素数组递归调用 clone 方法：
 
 # 参考资料：
 【1】http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/13.%20%E8%B0%A8%E6%85%8E%E5%9C%B0%E9%87%8D%E5%86%99%20clone%20%E6%96%B9%E6%B3%95
