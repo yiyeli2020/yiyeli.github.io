@@ -262,8 +262,7 @@
 <p>Shape.java</p>
 <pre><code>public interface Shape {
    void draw();
-}
-</code></pre><h2 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤 2"></a>步骤 2</h2><p>创建实现接口的实体类。</p>
+}</code></pre><h2 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤 2"></a>步骤 2</h2><p>创建实现接口的实体类。</p>
 <p>Rectangle.java</p>
 <pre><code>public class Rectangle implements Shape {
 
@@ -271,16 +270,14 @@
    public void draw() {
       System.out.println(&quot;Shape: Rectangle&quot;);
    }
-}
-</code></pre><p>Circle.java</p>
+}</code></pre><p>Circle.java</p>
 <pre><code>public class Circle implements Shape {
 
    @Override
    public void draw() {
       System.out.println(&quot;Shape: Circle&quot;);
    }
-}
-</code></pre><h2 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤 3"></a>步骤 3</h2><p>创建实现了 Shape 接口的抽象装饰类。</p>
+}</code></pre><h2 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤 3"></a>步骤 3</h2><p>创建实现了 Shape 接口的抽象装饰类。</p>
 <p>ShapeDecorator.java</p>
 <pre><code>public abstract class ShapeDecorator implements Shape {
    protected Shape decoratedShape;
@@ -292,8 +289,7 @@
    public void draw(){
       decoratedShape.draw();
    }  
-}
-</code></pre><h2 id="步骤-4"><a href="#步骤-4" class="headerlink" title="步骤 4"></a>步骤 4</h2><p>创建扩展了 ShapeDecorator 类的实体装饰类。</p>
+}</code></pre><h2 id="步骤-4"><a href="#步骤-4" class="headerlink" title="步骤 4"></a>步骤 4</h2><p>创建扩展了 ShapeDecorator 类的实体装饰类。</p>
 <p>RedShapeDecorator.java</p>
 <pre><code>public class RedShapeDecorator extends ShapeDecorator {
 
@@ -310,8 +306,7 @@
    private void setRedBorder(Shape decoratedShape){
       System.out.println(&quot;Border Color: Red&quot;);
    }
-}
-</code></pre><h2 id="步骤-5"><a href="#步骤-5" class="headerlink" title="步骤 5"></a>步骤 5</h2><p>使用 RedShapeDecorator 来装饰 Shape 对象。</p>
+}</code></pre><h2 id="步骤-5"><a href="#步骤-5" class="headerlink" title="步骤 5"></a>步骤 5</h2><p>使用 RedShapeDecorator 来装饰 Shape 对象。</p>
 <p>DecoratorPatternDemo.java</p>
 <pre><code>public class DecoratorPatternDemo {
    public static void main(String[] args) {
@@ -330,8 +325,7 @@
       System.out.println(&quot;\nRectangle of red border&quot;);
       redRectangle.draw();
    }
-}
-</code></pre><h2 id="步骤-6"><a href="#步骤-6" class="headerlink" title="步骤 6"></a>步骤 6</h2><p>执行程序，输出结果：</p>
+}</code></pre><h2 id="步骤-6"><a href="#步骤-6" class="headerlink" title="步骤 6"></a>步骤 6</h2><p>执行程序，输出结果：</p>
 <pre><code>Circle with normal border
 Shape: Circle
 
@@ -341,8 +335,7 @@ Border Color: Red
 
 Rectangle of red border
 Shape: Rectangle
-Border Color: Red
-</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】 <a href="https://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/decorator-pattern.html</a></p>
+Border Color: Red</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】 <a href="https://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/decorator-pattern.html</a></p>
 
       
       

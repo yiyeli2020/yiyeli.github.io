@@ -281,10 +281,8 @@ public class NutritionFacts {
         this.sodium       = sodium;
         this.carbohydrate = carbohydrate;
     }
-}
-</code></pre><p>当想要创建一个实例时，可以使用包含所有要设置的参数的最短参数列表的构造方法：</p>
-<pre><code>NutritionFacts cocaCola = new NutritionFacts(240, 8, 100, 0, 35, 27);
-</code></pre><p>通常情况下，这个构造方法的调用需要许多你不想设置的参数，但是你不得不为它们传递一个值。 在这种情况下，我们为 fat 属性传递了 0 值。「只有」六个参数可能看起来并不那么糟糕，但随着参数数量的增加，它很快就会失控。</p>
+}</code></pre><p>当想要创建一个实例时，可以使用包含所有要设置的参数的最短参数列表的构造方法：</p>
+<pre><code>NutritionFacts cocaCola = new NutritionFacts(240, 8, 100, 0, 35, 27);</code></pre><p>通常情况下，这个构造方法的调用需要许多你不想设置的参数，但是你不得不为它们传递一个值。 在这种情况下，我们为 fat 属性传递了 0 值。「只有」六个参数可能看起来并不那么糟糕，但随着参数数量的增加，它很快就会失控。</p>
 <p>　　简而言之，可伸缩构造方法模式是有效的，但是当有很多参数时，很难编写客户端代码，而且很难读懂它。</p>
 <p>当在构造方法中遇到许多可选参数时，另一种选择是 JavaBeans 模式，在这种模式中，调用一个无参的构造方法来创建对象，然后调用 setter 方法来设置每个必需的参数和可选参数：</p>
 <pre><code>// JavaBeans Pattern - allows inconsistency, mandates mutability
@@ -306,15 +304,13 @@ public void setCalories(int val)    { calories = val; }
 public void setFat(int val)         { fat = val; }
 public void setSodium(int val)      { sodium = val; }
 public void setCarbohydrate(int val) { carbohydrate = val; }
-}
-</code></pre><p>这种模式没有伸缩构造方法模式的缺点。有点冗长，但创建实例很容易，并且易于阅读所生成的代码:</p>
+}</code></pre><p>这种模式没有伸缩构造方法模式的缺点。有点冗长，但创建实例很容易，并且易于阅读所生成的代码:</p>
 <pre><code>NutritionFacts cocaCola = new NutritionFacts();
 cocaCola.setServingSize(240);
 cocaCola.setServings(8);
 cocaCola.setCalories(100);
 cocaCola.setSodium(35);
-cocaCola.setCarbohydrate(27);
-</code></pre><p>JavaBeans 模式本身有严重的缺陷。由于构造方法被分割成了多次调用，所以在构造过程中 JavaBean 可能处于不一致的状态。该类没有通过检查构造参数参数的有效性来强制一致性的选项。在不一致的状态下尝试使用对象可能会导致一些错误，这些错误与平常代码的BUG很是不同，因此很难调试。一个相关的缺点是，JavaBeans 模式排除了让类不可变的可能性（详见第 17 条），并且需要程序员增加工作以确保线程安全。</p>
+cocaCola.setCarbohydrate(27);</code></pre><p>JavaBeans 模式本身有严重的缺陷。由于构造方法被分割成了多次调用，所以在构造过程中 JavaBean 可能处于不一致的状态。该类没有通过检查构造参数参数的有效性来强制一致性的选项。在不一致的状态下尝试使用对象可能会导致一些错误，这些错误与平常代码的BUG很是不同，因此很难调试。一个相关的缺点是，JavaBeans 模式排除了让类不可变的可能性（详见第 17 条），并且需要程序员增加工作以确保线程安全。</p>
 <p>　　通过在对象构建完成时手动「冻结」对象，并且不允许它在解冻之前使用，可以减少这些缺点，但是这种变体在实践中很难使用并且很少使用。 而且，在运行时会导致错误，因为编译器无法确保程序员会在使用对象之前调用 freeze 方法。</p>
 <p>　　幸运的是，还有第三种选择，它结合了可伸缩构造方法模式的安全性和 JavaBean 模式的可读性。 它是 Builder 模式（建造者模式）的一种形式。客户端不直接构造所需的对象，而是调用一个包含所有必需参数的构造方法 (或静态工厂)得到获得一个 builder 对象。以下是它在实践中的示例：</p>
 <pre><code>// Builder Pattern
@@ -375,11 +371,9 @@ public class NutritionFacts {
         sodium       = builder.sodium;
         carbohydrate = builder.carbohydrate;
     }
-}
-</code></pre><p>然后，客户端调用 builder 对象的与 setter 相似方法来设置你想设置的可选参数。最后，客户端调用builder对象的一个无参的 build 方法来生成对象，该对象通常是不可变的。Builder 通常是它所构建的类的一个静态成员类（详见第 24 条）。<br>　　NutritionFacts 类是不可变的，所有的参数默认值都在一个地方。builder 的 setter 方法返回 builder 本身，这样就可以进行链式调用，从而生成一个流畅的 API。下面是客户端代码的示例：</p>
+}</code></pre><p>然后，客户端调用 builder 对象的与 setter 相似方法来设置你想设置的可选参数。最后，客户端调用builder对象的一个无参的 build 方法来生成对象，该对象通常是不可变的。Builder 通常是它所构建的类的一个静态成员类（详见第 24 条）。<br>　　NutritionFacts 类是不可变的，所有的参数默认值都在一个地方。builder 的 setter 方法返回 builder 本身，这样就可以进行链式调用，从而生成一个流畅的 API。下面是客户端代码的示例：</p>
 <pre><code>NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8)
-.calories(100).sodium(35).carbohydrate(27).build();
-</code></pre><p>为了简洁起见，省略了有效性检查。 要尽快检测无效参数，检查 builder 的构造方法和方法中的参数有效性。 在 build 方法调用的构造方法中检查包含多个参数的不变性。为了确保这些不变性不受攻击，在从 builder 复制参数后对对象属性进行检查（详见第 50 条）。 如果检查失败，则抛出 IllegalArgumentException 异常（详见第 72 条），其详细消息指示哪些参数无效（详见第 75 条）。</p>
+.calories(100).sodium(35).carbohydrate(27).build();</code></pre><p>为了简洁起见，省略了有效性检查。 要尽快检测无效参数，检查 builder 的构造方法和方法中的参数有效性。 在 build 方法调用的构造方法中检查包含多个参数的不变性。为了确保这些不变性不受攻击，在从 builder 复制参数后对对象属性进行检查（详见第 50 条）。 如果检查失败，则抛出 IllegalArgumentException 异常（详见第 72 条），其详细消息指示哪些参数无效（详见第 75 条）。</p>
 <p>Builder 模式非常适合类层次结构。 使用平行层次的 builder，每个builder嵌套在相应的类中。 抽象类有抽象的 builder；具体的类有具体的 builder。 例如，考虑代表各种比萨饼的根层次结构的抽象类：</p>
 <pre><code>// Builder pattern for class hierarchies
 import java.util.EnumSet;
@@ -408,8 +402,7 @@ public abstract class Pizza {
     Pizza(Builder&lt;?&gt; builder) {
         toppings = builder.toppings.clone(); // See Item 50
     }
-}
-</code></pre><p>请注意，Pizza.Builder 是一个带有递归类型参数（ recursive type parameter）（详见第 30 条）的泛型类型。 这与抽象的 self 方法一起，允许方法链在子类中正常工作，而不需要强制转换。 Java 缺乏自我类型的这种变通解决方法被称为模拟自我类型（simulated self-type）。</p>
+}</code></pre><p>请注意，Pizza.Builder 是一个带有递归类型参数（ recursive type parameter）（详见第 30 条）的泛型类型。 这与抽象的 self 方法一起，允许方法链在子类中正常工作，而不需要强制转换。 Java 缺乏自我类型的这种变通解决方法被称为模拟自我类型（simulated self-type）。</p>
 <p>　　这里有两个具体的 Pizza 的子类，其中一个代表标准的纽约风格的披萨，另一个是半圆形烤乳酪馅饼。前者有一个所需的尺寸参数，而后者则允许指定酱汁是否应该在里面或在外面：</p>
 <pre><code>import java.util.Objects;
 
@@ -463,14 +456,12 @@ public class Calzone extends Pizza {
         super(builder);
         sauceInside = builder.sauceInside;
     }
-}
-</code></pre><p>请注意，每个子类 builder 中的 build 方法被声明为返回正确的子类：NyPizza.Builder 的 build 方法返回 NyPizza，而 Calzone.Builder 中的 build 方法返回 Calzone。 这种技术，其一个子类的方法被声明为返回在超类中声明的返回类型的子类型，称为协变返回类型（covariant return typing）。 它允许客户端使用这些 builder，而不需要强制转换。</p>
+}</code></pre><p>请注意，每个子类 builder 中的 build 方法被声明为返回正确的子类：NyPizza.Builder 的 build 方法返回 NyPizza，而 Calzone.Builder 中的 build 方法返回 Calzone。 这种技术，其一个子类的方法被声明为返回在超类中声明的返回类型的子类型，称为协变返回类型（covariant return typing）。 它允许客户端使用这些 builder，而不需要强制转换。</p>
 <p>　　这些「分层 builder（hierarchical builders）」的客户端代码基本上与简单的 NutritionFacts builder 的代码相同。为了简洁起见，下面显示的示例客户端代码假设枚举常量的静态导入：</p>
 <pre><code>NyPizza pizza = new NyPizza.Builder(SMALL)
         .addTopping(SAUSAGE).addTopping(ONION).build();
 Calzone calzone = new Calzone.Builder()
-        .addTopping(HAM).sauceInside().build();
-</code></pre><p>builder 对构造方法的一个微小的优势是，builder 可以有多个可变参数，因为每个参数都是在它自己的方法中指定的。或者，builder 可以将传递给多个调用的参数聚合到单个属性中，如前面的 addTopping 方法所演示的那样。</p>
+        .addTopping(HAM).sauceInside().build();</code></pre><p>builder 对构造方法的一个微小的优势是，builder 可以有多个可变参数，因为每个参数都是在它自己的方法中指定的。或者，builder 可以将传递给多个调用的参数聚合到单个属性中，如前面的 addTopping 方法所演示的那样。</p>
 <p>　　Builder 模式非常灵活。 单个 builder 可以重复使用来构建多个对象。 builder 的参数可以在构建方法的调用之间进行调整，以改变创建的对象。 builder 可以在创建对象时自动填充一些属性，例如每次创建对象时增加的序列号。</p>
 <p>　　Builder 模式也有缺点。为了创建对象，首先必须创建它的 builder。虽然创建这个 builder 的成本在实践中不太可能被注意到，但在看中性能的场合下这可能就是一个问题。而且，builder 模式比伸缩构造方法模式更冗长，因此只有在有足够的参数时才值得使用它，比如四个或更多。但是请记住，你可能在以后会想要添加更多的参数。但是，如果你一开始是使用的构造方法或静态工厂，当类演化到参数数量失控的时候再转到Builder模式，过时的构造方法或静态工厂就会面临尴尬的处境。因此，通常最好从一开始就创建一个 builder。</p>
 <p>　　总而言之，当设计类的构造方法或静态工厂的参数超过几个时，Builder 模式是一个不错的选择，特别是如果许多参数是可选的或相同类型的。builder模式客户端代码比使用伸缩构造方法（telescoping constructors）更容易读写，并且builder模式比 JavaBeans 更安全。</p>

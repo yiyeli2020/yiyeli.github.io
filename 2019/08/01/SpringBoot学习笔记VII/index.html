@@ -259,8 +259,7 @@ public class RelativePathUriTemplateController {
   public void findPet(@PathVariable String ownerId, @PathVariable String petId, Model model) {    
     // implementation omitted
   }
-}
-</code></pre><p>上面代码把URI template 中变量 ownerId的值和petId的值，绑定到方法的参数上。若方法参数名称和需要绑定的uri template中变量名称不一致，需要在@PathVariable(“name”)指定uri template中的名称。</p>
+}</code></pre><p>上面代码把URI template 中变量 ownerId的值和petId的值，绑定到方法的参数上。若方法参数名称和需要绑定的uri template中变量名称不一致，需要在@PathVariable(“name”)指定uri template中的名称。</p>
 <h2 id="RequestHeader、-CookieValue"><a href="#RequestHeader、-CookieValue" class="headerlink" title="@RequestHeader、@CookieValue"></a>@RequestHeader、@CookieValue</h2><p><strong><em>@RequestHeader注解，可以把Request请求header部分的值绑定到方法的参数上。</em></strong></p>
 <p>示例代码：</p>
 <p>这是一个Request 的header部分：</p>
@@ -269,26 +268,22 @@ Accept                  text/html,application/xhtml+xml,application/xml;q=0.9
 Accept-Language         fr,en-gb;q=0.7,en;q=0.3
 Accept-Encoding         gzip,deflate
 Accept-Charset          ISO-8859-1,utf-8;q=0.7,*;q=0.7
-Keep-Alive              300
-</code></pre><p>下面的代码，把request header部分的 Accept-Encoding的值，绑定到参数encoding上了， Keep-Alive header的值绑定到参数keepAlive上。</p>
+Keep-Alive              300</code></pre><p>下面的代码，把request header部分的 Accept-Encoding的值，绑定到参数encoding上了， Keep-Alive header的值绑定到参数keepAlive上。</p>
 <pre><code>@RequestMapping(&quot;/displayHeaderInfo.do&quot;)
 public void displayHeaderInfo(@RequestHeader(&quot;Accept-Encoding&quot;) String encoding,
                               @RequestHeader(&quot;Keep-Alive&quot;) long keepAlive)  {
 
   //...
 
-}
-</code></pre><p><strong><em>@CookieValue 可以把Request header中关于cookie的值绑定到方法的参数上。</em></strong></p>
+}</code></pre><p><strong><em>@CookieValue 可以把Request header中关于cookie的值绑定到方法的参数上。</em></strong></p>
 <p>例如有如下Cookie值：</p>
-<pre><code>JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84
-</code></pre><p>参数绑定的代码：</p>
+<pre><code>JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84</code></pre><p>参数绑定的代码：</p>
 <pre><code>@RequestMapping(&quot;/displayHeaderInfo.do&quot;)
 public void displayHeaderInfo(@CookieValue(&quot;JSESSIONID&quot;) String cookie)  {
 
   //...
 
-}
-</code></pre><p>即把JSESSIONID的值绑定到参数cookie上。</p>
+}</code></pre><p>即把JSESSIONID的值绑定到参数cookie上。</p>
 <h2 id="RequestParam-RequestBody"><a href="#RequestParam-RequestBody" class="headerlink" title="@RequestParam, @RequestBody"></a>@RequestParam, @RequestBody</h2><h3 id="RequestParam"><a href="#RequestParam" class="headerlink" title="@RequestParam"></a>@RequestParam</h3><p>A） 常用来处理简单类型的绑定，通过Request.getParameter() 获取的String可直接转换为简单类型的情况（ String–&gt; 简单类型的转换操作由ConversionService配置的转换器来完成）；因为使用request.getParameter()方式获取参数，所以可以处理get 方式中queryString的值，也可以处理post方式中 body data的值；</p>
 <p>B）用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST；</p>
 <p>C) 该注解有两个属性： value、required； value用来指定要传入值的id名称，required用来指示参数是否必须绑定；</p>
@@ -307,15 +302,13 @@ public class EditPetForm {
         return &quot;petForm&quot;;
     }
 
-    // ...
-</code></pre><h3 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h3><p>该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；</p>
+    // ...</code></pre><h3 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h3><p>该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；</p>
 <p>它是通过使用HandlerAdapter 配置的HttpMessageConverters来解析post data body，然后绑定到相应的bean上的。</p>
 <p>因为配置有FormHttpMessageConverter，所以也可以用来处理 application/x-www-form-urlencoded的内容，处理完的结果放在一个MultiValueMap&lt;String, String&gt;里，这种情况在某些特殊需求下使用，详情查看FormHttpMessageConverter api;</p>
 <p>示例代码：</p>
 <pre><code>@RequestMapping(value = &quot;/something&quot;, method = RequestMethod.PUT)
 public void handle(@RequestBody String body, Writer writer) throws IOException {
-  writer.write(body);
-</code></pre><h2 id="SessionAttributes-ModelAttribute"><a href="#SessionAttributes-ModelAttribute" class="headerlink" title="@SessionAttributes, @ModelAttribute"></a>@SessionAttributes, @ModelAttribute</h2><h3 id="SessionAttributes"><a href="#SessionAttributes" class="headerlink" title="@SessionAttributes:"></a>@SessionAttributes:</h3><p>该注解用来绑定HttpSession中的attribute对象的值，便于在方法中的参数里使用。</p>
+  writer.write(body);</code></pre><h2 id="SessionAttributes-ModelAttribute"><a href="#SessionAttributes-ModelAttribute" class="headerlink" title="@SessionAttributes, @ModelAttribute"></a>@SessionAttributes, @ModelAttribute</h2><h3 id="SessionAttributes"><a href="#SessionAttributes" class="headerlink" title="@SessionAttributes:"></a>@SessionAttributes:</h3><p>该注解用来绑定HttpSession中的attribute对象的值，便于在方法中的参数里使用。</p>
 <p>该注解有value、types两个属性，可以通过名字和类型指定要使用的attribute 对象；</p>
 <p>示例代码：</p>
 <pre><code>@Controller
@@ -323,8 +316,7 @@ public void handle(@RequestBody String body, Writer writer) throws IOException {
 @SessionAttributes(&quot;pet&quot;)
 public class EditPetForm {
     // ...
-}
-</code></pre><h3 id="ModelAttribute"><a href="#ModelAttribute" class="headerlink" title="@ModelAttribute"></a>@ModelAttribute</h3><p>该注解有两个用法，一个是用于方法上，一个是用于参数上；</p>
+}</code></pre><h3 id="ModelAttribute"><a href="#ModelAttribute" class="headerlink" title="@ModelAttribute"></a>@ModelAttribute</h3><p>该注解有两个用法，一个是用于方法上，一个是用于参数上；</p>
 <p>用于方法上时：  通常用来在处理@RequestMapping之前，为请求绑定需要从后台查询的model；</p>
 <p>用于参数上时： 用来通过名称对应，把相应名称的值绑定到注解的参数bean上；要绑定的值来源于：</p>
 <p>A） @SessionAttributes 启用的attribute 对象上；</p>
@@ -338,14 +330,12 @@ public class EditPetForm {
 @ModelAttribute
 public Account addAccount(@RequestParam String number) {
     return accountManager.findAccount(number);
-}
-</code></pre><p>这种方式实际的效果就是在调用@RequestMapping的方法之前，为request对象的model里put（“account”， Account）；</p>
+}</code></pre><p>这种方式实际的效果就是在调用@RequestMapping的方法之前，为request对象的model里put（“account”， Account）；</p>
 <p>用在参数上的@ModelAttribute示例代码：</p>
 <pre><code>@RequestMapping(value=&quot;/owners/{ownerId}/pets/{petId}/edit&quot;, method = RequestMethod.POST)
 public String processSubmit(@ModelAttribute Pet pet) {
 
-}
-</code></pre><p>首先查询 @SessionAttributes有无绑定的Pet对象，若没有则查询@ModelAttribute方法层面上是否绑定了Pet对象，若没有则将URI template中的值按对应的名称绑定到Pet对象的各属性上。</p>
+}</code></pre><p>首先查询 @SessionAttributes有无绑定的Pet对象，若没有则查询@ModelAttribute方法层面上是否绑定了Pet对象，若没有则将URI template中的值按对应的名称绑定到Pet对象的各属性上。</p>
 <h2 id="在不给定注解的情况下，参数是怎样绑定的？"><a href="#在不给定注解的情况下，参数是怎样绑定的？" class="headerlink" title="在不给定注解的情况下，参数是怎样绑定的？"></a>在不给定注解的情况下，参数是怎样绑定的？</h2><p>通过分析AnnotationMethodHandlerAdapter和RequestMappingHandlerAdapter的源代码发现，方法的参数在不给定参数的情况下：</p>
 <p>若要绑定的对象时简单类型：  调用@RequestParam来处理的。 </p>
 <p>若要绑定的对象时复杂类型：  调用@ModelAttribute来处理的。</p>
@@ -361,8 +351,7 @@ public String processSubmit(@ModelAttribute Pet pet) {
     @RequestMapping(value=&quot;/data/custom&quot;, method=RequestMethod.GET)
     public @ResponseBody String custom(@RequestAttribute(&quot;foo&quot;) String foo) {
         return &quot;Got &apos;foo&apos; request attribute value &apos;&quot; + foo + &quot;&apos;&quot;;
-    }
-</code></pre><p>例2：请求拦截器创建的属性。<br>创建一个拦截器类 TestFilter</p>
+    }</code></pre><p>例2：请求拦截器创建的属性。<br>创建一个拦截器类 TestFilter</p>
 <pre><code>@WebFilter(filterName = &quot;myFilter&quot;,description = &quot;测试过滤器&quot;,urlPatterns = {&quot;/*&quot;})
 public class TestFilter implements Filter {
     @Override
@@ -381,15 +370,13 @@ public class TestFilter implements Filter {
     public void destroy() {
 
     }
-}
-</code></pre><p>请求创建的属性：</p>
+}</code></pre><p>请求创建的属性：</p>
 <pre><code>@RequestMapping(value=&quot;/data/custom&quot;, method=RequestMethod.GET)
     public @ResponseBody String custom(@RequestAttribute(&quot;foo&quot;) String foo,
                                        @RequestAttribute(&quot;test&quot;) String test) {
         System.out.println(&quot;Got &apos;foo&apos; request attribute value &apos;&quot; + foo + &quot;&apos;------&quot;+test);
         return &quot;Got &apos;foo&apos; request attribute value &apos;&quot; + foo + &quot;&apos;------&quot;+test;
-    }
-</code></pre><p>日志中打印的有：</p>
+    }</code></pre><p>日志中打印的有：</p>
 <p>我是过滤器类<br>Got ‘foo’ request attribute value ‘hello world’——you got it</p>
 <h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://blog.csdn.net/walkerJong/article/details/7946109" target="_blank" rel="noopener">https://blog.csdn.net/walkerJong/article/details/7946109</a></p>
 

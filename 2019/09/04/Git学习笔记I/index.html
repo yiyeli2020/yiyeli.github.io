@@ -242,26 +242,20 @@
           
         <p>Git切换新分支，git fetch与git pull的区别，及常用命令集锦</p>
 <a id="more"></a>
-<h1 id="查看本地已有的分支"><a href="#查看本地已有的分支" class="headerlink" title="查看本地已有的分支"></a>查看本地已有的分支</h1><pre><code>git branch
-</code></pre><h1 id="本地建立新分支并推送到远程仓库"><a href="#本地建立新分支并推送到远程仓库" class="headerlink" title="本地建立新分支并推送到远程仓库"></a>本地建立新分支并推送到远程仓库</h1><h2 id="创建本地分支"><a href="#创建本地分支" class="headerlink" title="创建本地分支"></a>创建本地分支</h2><p>  git checkout -b 新分支名字</p>
+<h1 id="查看本地已有的分支"><a href="#查看本地已有的分支" class="headerlink" title="查看本地已有的分支"></a>查看本地已有的分支</h1><pre><code>git branch</code></pre><h1 id="本地建立新分支并推送到远程仓库"><a href="#本地建立新分支并推送到远程仓库" class="headerlink" title="本地建立新分支并推送到远程仓库"></a>本地建立新分支并推送到远程仓库</h1><h2 id="创建本地分支"><a href="#创建本地分支" class="headerlink" title="创建本地分支"></a>创建本地分支</h2><p>  git checkout -b 新分支名字</p>
 <p>执行该指令后，会在本地创建一个新分支，该分支是从当前分支上建出的，所以所有文件内容都和当前分支一模一样，这是正常的。创建成功后，将自动切换至新分支上。</p>
 <h2 id="推送本地分支到远程仓库"><a href="#推送本地分支到远程仓库" class="headerlink" title="推送本地分支到远程仓库"></a>推送本地分支到远程仓库</h2><p>  git push –sest-upstream origin 分支名字</p>
 <h1 id="将远程git仓库里的指定分支拉取到本地（本地不存在的分支）"><a href="#将远程git仓库里的指定分支拉取到本地（本地不存在的分支）" class="headerlink" title="将远程git仓库里的指定分支拉取到本地（本地不存在的分支）"></a>将远程git仓库里的指定分支拉取到本地（本地不存在的分支）</h1><p>首先更新远程分支列表</p>
 <pre><code>git remote update origin --prune
 或者
 
-git remote update origin -p
-</code></pre><p>然后将指定分支拉取到本地</p>
-<pre><code>git checkout -b 本地分支名 origin/远程分支名
-</code></pre><p>这个将会自动创建一个新的本地分支，并与指定的远程分支关联起来。</p>
+git remote update origin -p</code></pre><p>然后将指定分支拉取到本地</p>
+<pre><code>git checkout -b 本地分支名 origin/远程分支名</code></pre><p>这个将会自动创建一个新的本地分支，并与指定的远程分支关联起来。</p>
 <p>如果出现提示：</p>
 <pre><code>fatal: Cannot update paths and switch to branch &apos;dev2&apos; at the same time.
-Did you intend to checkout &apos;origin/dev2&apos; which can not be resolved as commit?
-</code></pre><p>表示拉取不成功。我们需要先执行</p>
-<pre><code>git fetch
-</code></pre><p>然后再执行</p>
-<pre><code>git checkout -b 本地分支名 origin/远程分支名
-</code></pre><p>即可。</p>
+Did you intend to checkout &apos;origin/dev2&apos; which can not be resolved as commit?</code></pre><p>表示拉取不成功。我们需要先执行</p>
+<pre><code>git fetch</code></pre><p>然后再执行</p>
+<pre><code>git checkout -b 本地分支名 origin/远程分支名</code></pre><p>即可。</p>
 <h1 id="git-fetch与git-pull的区别"><a href="#git-fetch与git-pull的区别" class="headerlink" title="git fetch与git pull的区别"></a>git fetch与git pull的区别</h1><p>FETCH_HEAD： 是一个版本链接，记录在本地的一个文件中，指向着目前已经从远程仓库取下来的分支的末端版本。</p>
 <p>commit-id：在每次本地工作完成后，都会做一个git commit 操作来保存当前工作到本地的repo， 此时会产生一个commit-id，这是一个能唯一标识一个版本的序列号。 在使用git push后，这个序列号还会同步到远程仓库。</p>
 <p>有了以上的概念再来说说git fetch</p>
@@ -274,16 +268,14 @@ git diff tmp
 git merge tmp
 //合并temp分支到本地的master分支
 git branch -d temp
-//如果不想保留temp分支 可以用这步删除
-</code></pre><h2 id="如果直接使用git-fetch，则步骤如下："><a href="#如果直接使用git-fetch，则步骤如下：" class="headerlink" title="如果直接使用git fetch，则步骤如下："></a>如果直接使用git fetch，则步骤如下：</h2><p>创建并更新本地远程分支。即创建并更新origin/xxx 分支，拉取代码到origin/xxx分支上。</p>
+//如果不想保留temp分支 可以用这步删除</code></pre><h2 id="如果直接使用git-fetch，则步骤如下："><a href="#如果直接使用git-fetch，则步骤如下：" class="headerlink" title="如果直接使用git fetch，则步骤如下："></a>如果直接使用git fetch，则步骤如下：</h2><p>创建并更新本地远程分支。即创建并更新origin/xxx 分支，拉取代码到origin/xxx分支上。</p>
 <p>在FETCH_HEAD中设定当前分支-origin/当前分支对应，如直接到时候git merge就可以将origin/abc合并到abc分支上。</p>
 <h2 id="git-fetch-origin"><a href="#git-fetch-origin" class="headerlink" title="git fetch origin"></a>git fetch origin</h2><p>只是手动指定了要fetch的remote。在不指定分支时通常默认为master</p>
 <h2 id="git-fetch-origin-dev"><a href="#git-fetch-origin-dev" class="headerlink" title="git fetch origin dev"></a>git fetch origin dev</h2><p>指定远程remote和FETCH_HEAD，并且只拉取该分支的提交。</p>
 <h2 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull :"></a>git pull :</h2><p>首先，基于本地的FETCH_HEAD记录，比对本地的FETCH_HEAD记录与远程仓库的版本号，然后git fetch 获得当前指向的远程分支的后续版本的数据，然后再利用git merge将其与本地的当前分支合并。所以可以认为git pull是git fetch和git merge两个步骤的结合。</p>
 <p>git pull的用法如下：</p>
 <pre><code>git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
-//取回远程主机某个分支的更新，再与本地的指定分支合并。
-</code></pre><p>因此，与git pull相比git fetch相当于是从远程获取最新版本到本地，但不会自动merge。如果需要有选择的合并git fetch是更好的选择。效果相同时git pull将更为快捷。</p>
+//取回远程主机某个分支的更新，再与本地的指定分支合并。</code></pre><p>因此，与git pull相比git fetch相当于是从远程获取最新版本到本地，但不会自动merge。如果需要有选择的合并git fetch是更好的选择。效果相同时git pull将更为快捷。</p>
 <h1 id="git-命令集锦"><a href="#git-命令集锦" class="headerlink" title="git 命令集锦"></a>git 命令集锦</h1><h2 id="git-设定"><a href="#git-设定" class="headerlink" title="git 设定"></a>git 设定</h2><pre><code>git config --global user.name
 
 git config --global user.email
@@ -292,8 +284,7 @@ git config --global color.ui true
 
 git config --global alias. &lt;命令名称&gt;
 
-比如：git config —global alias.st status
-</code></pre><h2 id="git常用"><a href="#git常用" class="headerlink" title="git常用"></a>git常用</h2><pre><code>git init
+比如：git config —global alias.st status</code></pre><h2 id="git常用"><a href="#git常用" class="headerlink" title="git常用"></a>git常用</h2><pre><code>git init
 其反操作：rm -rf .git
 
 git clone
@@ -328,8 +319,7 @@ git reflog 查看命令历史
 
 rm 删除本地file
 
-git rm 删除版本库file
-</code></pre><h2 id="git分支操作"><a href="#git分支操作" class="headerlink" title="git分支操作"></a>git分支操作</h2><pre><code>git branch
+git rm 删除版本库file</code></pre><h2 id="git分支操作"><a href="#git分支操作" class="headerlink" title="git分支操作"></a>git分支操作</h2><pre><code>git branch
 
 git branch -r 显示远端分支
 
@@ -347,23 +337,17 @@ git checkout -b &lt;分支名称&gt;：表示 建立並切換 至该分支
 
 git merge &lt;分支名称&gt;
 
-git reset --merge 放弃merge
-</code></pre><h2 id="远端操作"><a href="#远端操作" class="headerlink" title="远端操作"></a>远端操作</h2><pre><code>git remote 显示远端数据库列表
+git reset --merge 放弃merge</code></pre><h2 id="远端操作"><a href="#远端操作" class="headerlink" title="远端操作"></a>远端操作</h2><pre><code>git remote 显示远端数据库列表
 
 git remote add &lt;名称&gt; 添加远端数据库
 
-git checkout &lt;本地分支名称&gt; origin/&lt;远端分支名称&gt;
-</code></pre><h2 id="取远端分支建立本地端分支"><a href="#取远端分支建立本地端分支" class="headerlink" title="取远端分支建立本地端分支"></a>取远端分支建立本地端分支</h2><pre><code>git push &lt;分支名称&gt;
-</code></pre><h2 id="在远端建立分支-上传-或更新-內容至远端分支"><a href="#在远端建立分支-上传-或更新-內容至远端分支" class="headerlink" title="在远端建立分支 / 上传(或更新)內容至远端分支"></a>在远端建立分支 / 上传(或更新)內容至远端分支</h2><pre><code>git fetch &lt;分支名称&gt;
-</code></pre><h2 id="查看远端数据库分支的修改內容"><a href="#查看远端数据库分支的修改內容" class="headerlink" title="查看远端数据库分支的修改內容"></a>查看远端数据库分支的修改內容</h2><pre><code>git pull &lt;分支名称&gt; 合并(或更新)远端至本地端分支
+git checkout &lt;本地分支名称&gt; origin/&lt;远端分支名称&gt;</code></pre><h2 id="取远端分支建立本地端分支"><a href="#取远端分支建立本地端分支" class="headerlink" title="取远端分支建立本地端分支"></a>取远端分支建立本地端分支</h2><pre><code>git push &lt;分支名称&gt;</code></pre><h2 id="在远端建立分支-上传-或更新-內容至远端分支"><a href="#在远端建立分支-上传-或更新-內容至远端分支" class="headerlink" title="在远端建立分支 / 上传(或更新)內容至远端分支"></a>在远端建立分支 / 上传(或更新)內容至远端分支</h2><pre><code>git fetch &lt;分支名称&gt;</code></pre><h2 id="查看远端数据库分支的修改內容"><a href="#查看远端数据库分支的修改內容" class="headerlink" title="查看远端数据库分支的修改內容"></a>查看远端数据库分支的修改內容</h2><pre><code>git pull &lt;分支名称&gt; 合并(或更新)远端至本地端分支
 
 注：pull = fetch + merge
 
 git push :&lt;分支名称&gt; 刪除远端分支
 
-git remote set-url &lt;名称&gt; &lt;新连接位址&gt;
-</code></pre><h2 id="修改远端数据库地址"><a href="#修改远端数据库地址" class="headerlink" title="修改远端数据库地址"></a>修改远端数据库地址</h2><pre><code>git remote rename &lt;旧名称&gt; &lt;新名称&gt;
-</code></pre><h2 id="修改远端数据库名称"><a href="#修改远端数据库名称" class="headerlink" title="修改远端数据库名称"></a>修改远端数据库名称</h2><h2 id="暂存"><a href="#暂存" class="headerlink" title="暂存"></a>暂存</h2><pre><code>git stash 暂存现在的修改狀況
+git remote set-url &lt;名称&gt; &lt;新连接位址&gt;</code></pre><h2 id="修改远端数据库地址"><a href="#修改远端数据库地址" class="headerlink" title="修改远端数据库地址"></a>修改远端数据库地址</h2><pre><code>git remote rename &lt;旧名称&gt; &lt;新名称&gt;</code></pre><h2 id="修改远端数据库名称"><a href="#修改远端数据库名称" class="headerlink" title="修改远端数据库名称"></a>修改远端数据库名称</h2><h2 id="暂存"><a href="#暂存" class="headerlink" title="暂存"></a>暂存</h2><pre><code>git stash 暂存现在的修改狀況
 
 git stash list 列出暂存清单
 
@@ -373,15 +357,13 @@ git stash pop 取出上一次暂存(该暂存会被移除)
 
 git stash@{id} 指定特定暂存
 
-git stash clear 清空所有暂存
-</code></pre><h2 id="操作提交记录"><a href="#操作提交记录" class="headerlink" title="操作提交记录"></a>操作提交记录</h2><pre><code>git commit --amend 修改上一次的commit
+git stash clear 清空所有暂存</code></pre><h2 id="操作提交记录"><a href="#操作提交记录" class="headerlink" title="操作提交记录"></a>操作提交记录</h2><pre><code>git commit --amend 修改上一次的commit
 
 git reset HEAD 放弃该修改记录 (reset)
 
 git reset --soft HEAD^ 取消上一次 commit，並 保留 修改纪录
 
-git reset --hard HEAD^ 取消上一次 commit，並 刪除 修改纪录
-</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】 <a href="https://blog.csdn.net/riddle1981/article/details/74938111" target="_blank" rel="noopener">https://blog.csdn.net/riddle1981/article/details/74938111</a></p>
+git reset --hard HEAD^ 取消上一次 commit，並 刪除 修改纪录</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】 <a href="https://blog.csdn.net/riddle1981/article/details/74938111" target="_blank" rel="noopener">https://blog.csdn.net/riddle1981/article/details/74938111</a></p>
 
       
       

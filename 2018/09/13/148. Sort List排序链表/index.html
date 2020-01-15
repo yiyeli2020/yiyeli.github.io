@@ -242,13 +242,13 @@
           
         <p>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。</p>
 <a id="more"></a>
+
+
 <p>示例 1:</p>
 <pre><code>输入: 4-&gt;2-&gt;1-&gt;3
-输出: 1-&gt;2-&gt;3-&gt;4
-</code></pre><p>示例 2:</p>
+输出: 1-&gt;2-&gt;3-&gt;4</code></pre><p>示例 2:</p>
 <pre><code>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0
-输出: -1-&gt;0-&gt;3-&gt;4-&gt;5
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="方法1-归并排序"><a href="#方法1-归并排序" class="headerlink" title="方法1 归并排序"></a>方法1 归并排序</h3><p>要求时间复杂度为O(nlogn)，那么不能用quickSort了（最坏O(n^2)），所以使用mergeSort.</p>
+输出: -1-&gt;0-&gt;3-&gt;4-&gt;5</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="方法1-归并排序"><a href="#方法1-归并排序" class="headerlink" title="方法1 归并排序"></a>方法1 归并排序</h3><p>要求时间复杂度为O(nlogn)，那么不能用quickSort了（最坏O(n^2)），所以使用mergeSort.</p>
 <p>通常写排序算法都是基于数组的，这题要求基于链表。所以需要自己设计函数获得middle元素，从而进行切分。</p>
 <p>参考Linked List Cycle II中的快慢指针思想，从而可以获得middle元素。<br>（题外话：之前在面试网易互娱研发职位时也被问到如何实现归并，当时答的并不是很好，所以说基础扎实真的非常重要，这类基础问题平时做到理解和会写还不够，在压力情景下必须要做到条件反射才行，最少也要在引导下独立写出来。）</p>
 <pre><code>/**
@@ -318,8 +318,7 @@ public:
         prev-&gt;next = NULL;  // cut
         return slow;
     }
-};
-</code></pre><h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><pre><code> /**
+};</code></pre><h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><pre><code> /**
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -391,8 +390,7 @@ private:
         while(cur-&gt;next) cur=cur-&gt;next;
         return cur;
     }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

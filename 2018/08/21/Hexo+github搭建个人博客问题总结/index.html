@@ -242,13 +242,13 @@
           
         <p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p>
 <a id="more"></a>
+
 <h2 id="问题1：本地同时配置多个github账号导致博客部署失败"><a href="#问题1：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题1：本地同时配置多个github账号导致博客部署失败"></a>问题1：本地同时配置多个github账号导致博客部署失败</h2><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p>
 <pre><code>remote: Permission to B/B.github.io.git denied to A.
 fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403
 FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
 Error: remote: Permission to B/B.github.io.git denied to A.
-fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403
-</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p>
+fatal: unable to access &apos;https://github.com/B/B.github.io.git/&apos;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p>
 <pre><code># 该配置用于账户A
 Host A # Host 服务器别名
 HostName github.com  # HostName 服务器ip地址或机器名
@@ -258,16 +258,13 @@ IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路�
 Host B # Host 服务器别名
 HostName github.com # HostName 服务器ip地址或机器名
 User B # User连接服务器的用户名
-IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径
-</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p>
+IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p>
 <h2 id="问题2：历史删除文件仍存在于repository中"><a href="#问题2：历史删除文件仍存在于repository中" class="headerlink" title="问题2：历史删除文件仍存在于repository中"></a>问题2：历史删除文件仍存在于repository中</h2><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p>
 <h2 id="问题3：Hexo-deploy-发布不成功"><a href="#问题3：Hexo-deploy-发布不成功" class="headerlink" title="问题3：Hexo deploy 发布不成功"></a>问题3：Hexo deploy 发布不成功</h2><p>始终停留在</p>
-<pre><code>nothing to commit (working directory clean)
-</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p>
+<pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git/ 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p>
 <pre><code>rm -rf .deploy_git
 hexo generater
-hexo deploy
-</code></pre>
+hexo deploy</code></pre>
       
       
         <div class="page-reward">

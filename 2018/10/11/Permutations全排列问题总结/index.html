@@ -242,6 +242,8 @@
           
         <p>总结几个常见的全排列问题<br>46.Permutations 全排列<br>47.PermutationsII 全排列II<br>31.Next Permutations 下一个排列<br>60.Permutation Sequence 第k个排列<br>266.Palindrome Permutation 回文排列<br>267.Palindrome PermutationII 回文排列II</p>
 <a id="more"></a>
+
+
 <h2 id="46-Permutations-全排列"><a href="#46-Permutations-全排列" class="headerlink" title="46.Permutations 全排列"></a>46.Permutations 全排列</h2><p>给定一个没有重复数字的序列，返回其所有可能的全排列。</p>
 <p>示例:</p>
 <pre><code>输入: [1,2,3]
@@ -253,8 +255,7 @@
   [2,3,1],
   [3,1,2],
   [3,2,1]
-]
-</code></pre><h3 id="回溯思路"><a href="#回溯思路" class="headerlink" title="回溯思路"></a>回溯思路</h3><p>回溯的写法，每次交换nums里面的两个数字，经过回溯可以生成所有的排列情况</p>
+]</code></pre><h3 id="回溯思路"><a href="#回溯思路" class="headerlink" title="回溯思路"></a>回溯思路</h3><p>回溯的写法，每次交换nums里面的两个数字，经过回溯可以生成所有的排列情况</p>
 <pre><code>class Solution {
 public:
     vector&lt;vector&lt;int&gt;&gt; permute(vector&lt;int&gt;&amp; nums) {
@@ -287,8 +288,7 @@ public:
             swap(num[begin],num[i]);
         }
     }
-};
-</code></pre><h3 id="DFS思路"><a href="#DFS思路" class="headerlink" title="DFS思路"></a>DFS思路</h3><p>这种方法是CareerCup书上的方法，也挺不错的，这道题是思想是这样的：</p>
+};</code></pre><h3 id="DFS思路"><a href="#DFS思路" class="headerlink" title="DFS思路"></a>DFS思路</h3><p>这种方法是CareerCup书上的方法，也挺不错的，这道题是思想是这样的：</p>
 <p>当n=1时，数组中只有一个数a1，其全排列只有一种，即为a1</p>
 <p>当n=2时，数组中此时有a1a2，其全排列有两种，a1a2和a2a1，那么此时我们考虑和上面那种情况的关系，我们发现，其实就是在a1的前后两个位置分别加入了a2</p>
 <p>当n=3时，数组中有a1a2a3，此时全排列有六种，分别为a1a2a3, a1a3a2, a2a1a3, a2a3a1, a3a1a2, 和 a3a2a1。那么根据上面的结论，实际上是在a1a2和a2a1的基础上在不同的位置上加入a3而得到的。</p>
@@ -323,8 +323,7 @@ void dfs(vector&lt;int&gt; &amp;num, vector&lt;vector&lt;int&gt;&gt; &amp;ans) {
 
     ans = ans1;
 }
-};
-</code></pre><h2 id="47-PermutationsII-全排列II"><a href="#47-PermutationsII-全排列II" class="headerlink" title="47.PermutationsII 全排列II"></a>47.PermutationsII 全排列II</h2><p>给定一个可包含重复数字的序列，返回所有不重复的全排列。</p>
+};</code></pre><h2 id="47-PermutationsII-全排列II"><a href="#47-PermutationsII-全排列II" class="headerlink" title="47.PermutationsII 全排列II"></a>47.PermutationsII 全排列II</h2><p>给定一个可包含重复数字的序列，返回所有不重复的全排列。</p>
 <p>示例:</p>
 <pre><code>输入: [1,1,2]
 输出:
@@ -332,8 +331,7 @@ void dfs(vector&lt;int&gt; &amp;num, vector&lt;vector&lt;int&gt;&gt; &amp;ans) {
   [1,1,2],
   [1,2,1],
   [2,1,1]
-]
-</code></pre><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><p>  这里我们先考虑一下，它与上题唯一的不同在于：在DFS函数中，做循环遍历时，如果与当前元素相同的一个元素已经被取用过，则要跳过所有值相同的元素。<br>  举个例子：对于序列&lt;1,1,2,3&gt;。在DFS首遍历时，1 作为首元素被加到list中，并进行后续元素的添加；那么，当DFS跑完第一个分支，遍历到1 (第二个)时，这个1 不再作为首元素添加到list中，因为1 作为首元素的情况已经在第一个分支中考虑过了。<br>  为了实现这一剪枝思路，有了如下的解题算法。</p>
+]</code></pre><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><p>  这里我们先考虑一下，它与上题唯一的不同在于：在DFS函数中，做循环遍历时，如果与当前元素相同的一个元素已经被取用过，则要跳过所有值相同的元素。<br>  举个例子：对于序列&lt;1,1,2,3&gt;。在DFS首遍历时，1 作为首元素被加到list中，并进行后续元素的添加；那么，当DFS跑完第一个分支，遍历到1 (第二个)时，这个1 不再作为首元素添加到list中，因为1 作为首元素的情况已经在第一个分支中考虑过了。<br>  为了实现这一剪枝思路，有了如下的解题算法。</p>
 <p>解题算法：</p>
 <p>  1. 先对给定的序列nums进行排序，使得大小相同的元素排在一起。<br>  2. 新建一个used数组，大小与nums相同，用来标记在本次DFS读取中，位置i的元素是否已经被添加到list中了。<br>  3. 根据思路可知，我们选择跳过一个数，当且仅当这个数与前一个数相等，并且前一个数未被添加到list中。</p>
 <pre><code>class Solution {
@@ -355,15 +353,13 @@ public:
         recursion(num, 0, num.size(), res);
         return res;
     }
-};
-</code></pre><h2 id="31-Next-Permutations-下一个排列"><a href="#31-Next-Permutations-下一个排列" class="headerlink" title="31.Next Permutations 下一个排列"></a>31.Next Permutations 下一个排列</h2><p>实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。</p>
+};</code></pre><h2 id="31-Next-Permutations-下一个排列"><a href="#31-Next-Permutations-下一个排列" class="headerlink" title="31.Next Permutations 下一个排列"></a>31.Next Permutations 下一个排列</h2><p>实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。</p>
 <p>如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。</p>
 <p>必须原地修改，只允许使用额外常数空间。</p>
 <p>以下是一些例子，输入位于左侧列，其相应输出位于右侧列。</p>
 <pre><code>1,2,3 → 1,3,2
 3,2,1 → 1,2,3
-1,1,5 → 1,5,1
-</code></pre><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>  这里，先考虑一个序列的最大最小情况。当一个序列为非递减序列时，它必然是该组数的最小的排列数；同理，当一个序列为非递增序列时，它必然是该组数的最大的排列数。  </p>
+1,1,5 → 1,5,1</code></pre><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>  这里，先考虑一个序列的最大最小情况。当一个序列为非递减序列时，它必然是该组数的最小的排列数；同理，当一个序列为非递增序列时，它必然是该组数的最大的排列数。  </p>
 <p>  由此，我们可以知道，本题的关键即是求出数组末尾的最长的非递增子序列。<br>  不妨假设在数组nums中，nums[k+1]…nums[n]均满足前一个元素大于等于后一个元素，即这一子序列非递增。<br>  那么，我们要做的，就是把nums[k]与其后序列中稍大于nums[k]的数交换，接着再逆序nums[k+1]…nums[n]即可。</p>
 <pre><code>class Solution {
 public:
@@ -386,26 +382,21 @@ public:
             reverse(nums.begin() + k + 1, nums.end());
         }
     }
-};
-</code></pre><h2 id="60-Permutation-Sequence-第k个排列"><a href="#60-Permutation-Sequence-第k个排列" class="headerlink" title="60.Permutation Sequence 第k个排列"></a>60.Permutation Sequence 第k个排列</h2><p>给出集合 [1,2,3,…,n]，其所有元素共有 n! 种排列。</p>
+};</code></pre><h2 id="60-Permutation-Sequence-第k个排列"><a href="#60-Permutation-Sequence-第k个排列" class="headerlink" title="60.Permutation Sequence 第k个排列"></a>60.Permutation Sequence 第k个排列</h2><p>给出集合 [1,2,3,…,n]，其所有元素共有 n! 种排列。</p>
 <p>按大小顺序列出所有排列情况，并一一标记，当 n = 3 时, 所有排列如下：</p>
 <pre><code>&quot;123&quot;
 &quot;132&quot;
 &quot;213&quot;
 &quot;231&quot;
 &quot;312&quot;
-&quot;321&quot;
-</code></pre><p>给定 n 和 k，返回第 k 个排列。</p>
+&quot;321&quot;</code></pre><p>给定 n 和 k，返回第 k 个排列。</p>
 <p>说明：</p>
 <pre><code>给定 n 的范围是 [1, 9]。
-给定 k 的范围是[1,  n!]。
-</code></pre><p>示例 1:</p>
+给定 k 的范围是[1,  n!]。</code></pre><p>示例 1:</p>
 <pre><code>输入: n = 3, k = 3
-输出: &quot;213&quot;
-</code></pre><p>示例 2:</p>
+输出: &quot;213&quot;</code></pre><p>示例 2:</p>
 <pre><code>输入: n = 4, k = 9
-输出: &quot;2314&quot;
-</code></pre><h3 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h3><p>  这里我们先考虑一个特殊情况，当n=4时，序列为[1,2,3,4]，有以下几种情况：<br>  “1+(2,3,4)的全排列”<br>  “2+(1,3,4)的全排列”<br>  “3+(1,2,4)的全排列”<br>  “4+(1,2,3)的全排列”<br>  我们已经知道，对于n个数的全排列，有n!种情况。所以，3个数的全排列就有6种情况。<br>  <br>  如果我们这里给定的k为14，那么它将会出现在：<br>    “3+(1,2,4)的全排列”<br>  这一情况中。</p>
+输出: &quot;2314&quot;</code></pre><h3 id="思路：-1"><a href="#思路：-1" class="headerlink" title="思路："></a>思路：</h3><p>  这里我们先考虑一个特殊情况，当n=4时，序列为[1,2,3,4]，有以下几种情况：<br>  “1+(2,3,4)的全排列”<br>  “2+(1,3,4)的全排列”<br>  “3+(1,2,4)的全排列”<br>  “4+(1,2,3)的全排列”<br>  我们已经知道，对于n个数的全排列，有n!种情况。所以，3个数的全排列就有6种情况。<br>  <br>  如果我们这里给定的k为14，那么它将会出现在：<br>    “3+(1,2,4)的全排列”<br>  这一情况中。</p>
 <p>  我们可以程式化地得到这个结果：取k=13(从0开始计数)，(n-1)!=3!=6，k/(n-1)!=2，而3在有序序列[1,2,3,4]中的索引就是2。<br>  同理，我们继续计算，新的k=13%6=1，新的n=3，那么1/(n-1)!=2/2=0。在序列[1,2,4]中，索引0的数是1。那么，此时的字符串为”31”。<br>  继续迭代，新的k=1%2=1，新的n=2，那么k/(n-1)!=1/1=1。在序列[2,4]中，索引为1的数是4。那么，此时的字符串为”314”。最后在串尾添上仅剩的2，可以得到字符串”3142”。<br>  经过验算，此串确实是序列[1,2,3,4]的全排列数中第14大的序列。</p>
 <p>解题算法：</p>
 <p>  1. 创建一个长度为n 的数组array，存放对应下标n的阶乘值。<br>  2. 再新建一个长度为n 的数组nums，初始值为nums[i]=i+1，用来存放待选的字符序列。<br>  3. 将得到的k减1后，开始迭代。迭代的规则是：迭代n次，每次选nums数组中下标为k/(n-1)!的数放在字符串的末尾，新的k=k%(n-1)!，新的n=n-1。<br>  4. 最后，返回得到的字符串。</p>
@@ -435,8 +426,7 @@ public:
         }
         return ret;
     }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

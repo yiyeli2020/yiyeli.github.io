@@ -260,8 +260,7 @@
 <p>Shape.java</p>
 <pre><code>public interface Shape {
    void draw();
-}
-</code></pre><p>步骤 2<br>创建实现接口的实体类。</p>
+}</code></pre><p>步骤 2<br>创建实现接口的实体类。</p>
 <p>Rectangle.java</p>
 <pre><code>public class Rectangle implements Shape {
 
@@ -285,8 +284,7 @@ public class Circle implements Shape {
    public void draw() {
       System.out.println(&quot;Inside Circle::draw() method.&quot;);
    }
-}
-</code></pre><p>步骤 3<br>创建一个工厂，生成基于给定信息的实体类的对象。</p>
+}</code></pre><p>步骤 3<br>创建一个工厂，生成基于给定信息的实体类的对象。</p>
 <p>ShapeFactory.java</p>
 <pre><code>public class ShapeFactory {
 
@@ -304,8 +302,7 @@ public class Circle implements Shape {
       }
       return null;
    }
-}
-</code></pre><p>步骤 4<br>使用该工厂，通过传递类型信息来获取实体类的对象。</p>
+}</code></pre><p>步骤 4<br>使用该工厂，通过传递类型信息来获取实体类的对象。</p>
 <p>FactoryPatternDemo.java</p>
 <pre><code>public class FactoryPatternDemo {
 
@@ -330,12 +327,10 @@ public class Circle implements Shape {
       //调用 Square 的 draw 方法
       shape3.draw();
    }
-}
-</code></pre><p>步骤 5<br>执行程序，输出结果：</p>
+}</code></pre><p>步骤 5<br>执行程序，输出结果：</p>
 <pre><code>Inside Circle::draw() method.
 Inside Rectangle::draw() method.
-Inside Square::draw() method.
-</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】 <a href="https://www.runoob.com/design-pattern/factory-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/factory-pattern.html</a></p>
+Inside Square::draw() method.</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】 <a href="https://www.runoob.com/design-pattern/factory-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/factory-pattern.html</a></p>
 
       
       

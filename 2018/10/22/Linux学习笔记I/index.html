@@ -242,9 +242,9 @@
           
         <p>学习Linux命令</p>
 <a id="more"></a>
+
 <h1 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h1><p>cat 命令用于连接文件并打印到标准输出设备上。</p>
-<h1 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h1><pre><code>cat [-AbeEnstTuv] [--help] [--version] fileName
-</code></pre><h1 id="参数说明："><a href="#参数说明：" class="headerlink" title="参数说明："></a>参数说明：</h1><p>-n 或 –number：由 1 开始对所有输出的行数编号。</p>
+<h1 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h1><pre><code>cat [-AbeEnstTuv] [--help] [--version] fileName</code></pre><h1 id="参数说明："><a href="#参数说明：" class="headerlink" title="参数说明："></a>参数说明：</h1><p>-n 或 –number：由 1 开始对所有输出的行数编号。</p>
 <p>-b 或 –number-nonblank：和 -n 相似，只不过对于空白行不编号。</p>
 <p>-s 或 –squeeze-blank：当遇到有连续两行以上的空白行，就代换为一行的空白行。</p>
 <p>-v 或 –show-nonprinting：使用 ^ 和 M- 符号，除了 LFD 和 TAB 之外。</p>
@@ -254,16 +254,11 @@
 <p>-e：等价于”-vE”选项；</p>
 <p>-t：等价于”-vT”选项；</p>
 <h1 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h1><p>把 textfile1 的文档内容加上行号后输入 textfile2 这个文档里：</p>
-<pre><code>cat -n textfile1 &gt; textfile2
-</code></pre><p>把 textfile1 和 textfile2 的文档内容加上行号（空白行不加）之后将内容附加到 textfile3 文档里：</p>
-<pre><code>cat -b textfile1 textfile2 &gt;&gt; textfile3
-</code></pre><p>清空 /etc/test.txt 文档内容：</p>
-<pre><code>cat /dev/null &gt; /etc/test.txt
-</code></pre><p>cat 也可以用来制作镜像文件。例如要制作软盘的镜像文件，将软盘放好后输入：</p>
-<pre><code>cat /dev/fd0 &gt; OUTFILE
-</code></pre><p>相反的，如果想把 image file 写到软盘，输入：</p>
-<pre><code>cat IMG_FILE &gt; /dev/fd0
-</code></pre><h1 id="dev-null"><a href="#dev-null" class="headerlink" title="dev/null"></a>dev/null</h1><p>在类 Unix 系统中，/dev/null 称空设备，是一个特殊的设备文件，它丢弃一切写入其中的数据（但报告写入操作成功），读取它则会立即得到一个 EOF。</p>
+<pre><code>cat -n textfile1 &gt; textfile2</code></pre><p>把 textfile1 和 textfile2 的文档内容加上行号（空白行不加）之后将内容附加到 textfile3 文档里：</p>
+<pre><code>cat -b textfile1 textfile2 &gt;&gt; textfile3</code></pre><p>清空 /etc/test.txt 文档内容：</p>
+<pre><code>cat /dev/null &gt; /etc/test.txt</code></pre><p>cat 也可以用来制作镜像文件。例如要制作软盘的镜像文件，将软盘放好后输入：</p>
+<pre><code>cat /dev/fd0 &gt; OUTFILE</code></pre><p>相反的，如果想把 image file 写到软盘，输入：</p>
+<pre><code>cat IMG_FILE &gt; /dev/fd0</code></pre><h1 id="dev-null"><a href="#dev-null" class="headerlink" title="dev/null"></a>dev/null</h1><p>在类 Unix 系统中，/dev/null 称空设备，是一个特殊的设备文件，它丢弃一切写入其中的数据（但报告写入操作成功），读取它则会立即得到一个 EOF。</p>
 <p>而使用 cat $filename &gt; /dev/null 则不会得到任何信息，因为我们将本来该通过标准输出显示的文件信息重定向到了 /dev/null 中。</p>
 <p>使用 cat $filename 1 &gt; /dev/null 也会得到同样的效果，因为默认重定向的 1 就是标准输出。 如果你对 shell 脚本或者重定向比较熟悉的话，应该会联想到 2 ，也即标准错误输出。</p>
 <p>如果我们不想看到错误输出呢？我们可以禁止标准错误 cat $badname 2 &gt; /dev/null。</p>

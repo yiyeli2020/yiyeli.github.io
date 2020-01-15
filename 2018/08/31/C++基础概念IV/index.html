@@ -246,6 +246,8 @@
 <p>3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。</p>
 <p>4.类的总大小也遵守类似class字节对齐的，调整规则。</p>
 <a id="more"></a>
+
+
 <h2 id="1-空类"><a href="#1-空类" class="headerlink" title="1.空类"></a>1.空类</h2><pre><code>#include&lt;iostream&gt;
 using namespace std;
 class A {
@@ -260,8 +262,7 @@ public:
 int main() {
     cout &lt;&lt; &quot;sizeof A=&quot; &lt;&lt; sizeof(A) &lt;&lt; endl;
     cout &lt;&lt; &quot;sizeof B=&quot; &lt;&lt; sizeof(B) &lt;&lt; endl;
-}
-</code></pre><p>空类的大小都为1<br>   因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址，每个实例在内存中都有独一无二的地址。同样空类也会被实例化，所以编译器会给空类隐含的添加一个字节，这样空类实例化之后就有了独一无二的地址了。所以空类的sizeof为1。</p>
+}</code></pre><p>空类的大小都为1<br>   因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址，每个实例在内存中都有独一无二的地址。同样空类也会被实例化，所以编译器会给空类隐含的添加一个字节，这样空类实例化之后就有了独一无二的地址了。所以空类的sizeof为1。</p>
 <p>   而析构函数，跟构造函数这些成员函数，是跟sizeof无关的，也不难理解因为我们的sizeof是针对实例，而普通成员函数，是针对类体的，一个类的成员函数，多个实例也共用相同的函数指针，所以自然不能归为实例的大小</p>
 <h2 id="2-含有静态变量和虚析构函数的类"><a href="#2-含有静态变量和虚析构函数的类" class="headerlink" title="2.含有静态变量和虚析构函数的类"></a>2.含有静态变量和虚析构函数的类</h2><pre><code>class Base  
 {  
@@ -294,8 +295,7 @@ int main()
     cout&lt;&lt;sizeof(Base)&lt;&lt;endl;  
     cout&lt;&lt;sizeof(Derive)&lt;&lt;endl;  
     return 0;  
-}
-</code></pre><p>Base类里的int  a;char *p;占8个字节。</p>
+}</code></pre><p>Base类里的int  a;char *p;占8个字节。</p>
 <p>而虚析构函数virtual ~Base();的指针占4子字节。</p>
 <p>其他成员函数不归入sizeof统计。</p>
 <p>Derive类首先要具有Base类的部分，也就是占12字节。</p>
@@ -313,8 +313,7 @@ private:
     char *p;  
     char c;  
 
-};  
-</code></pre><p>一个char c;增加了4字节（char本身占1个字节），说明类的大小也遵守类似class字节对齐的补齐规则。<br>一般来说，普通继承的空间计算结果应当是sizeof(基类)+sizeof(派生类)，然后考虑对齐，内存空间必须是类中数据成员所占用最大空间的整数倍。不过这是一般情况，具体怎么算要看编译器，比如将上述代码中的两个数据成员交换位置，结果则可能不同。</p>
+};  </code></pre><p>一个char c;增加了4字节（char本身占1个字节），说明类的大小也遵守类似class字节对齐的补齐规则。<br>一般来说，普通继承的空间计算结果应当是sizeof(基类)+sizeof(派生类)，然后考虑对齐，内存空间必须是类中数据成员所占用最大空间的整数倍。不过这是一般情况，具体怎么算要看编译器，比如将上述代码中的两个数据成员交换位置，结果则可能不同。</p>
 <h2 id="4-含虚函数的子类普通继承含虚函数的父类"><a href="#4-含虚函数的子类普通继承含虚函数的父类" class="headerlink" title="4.含虚函数的子类普通继承含虚函数的父类"></a>4.含虚函数的子类普通继承含虚函数的父类</h2><pre><code>class Test
 {
 public:
@@ -326,11 +325,9 @@ class Test2 : public Test
 public:
     int a;
     virtual void set(){}
-};
-</code></pre><p>虽然子类和父类都包含虚函数， 但它们存放于同一个虚表中，因此只需要一个指针，在普通继承下，不管是子类还是父类包含虚函数，子类的<strong>sizeof=sizeof(基类非静态数据成员)+sizeof(派生类非静态数据成员)+sizeof(指针)</strong>。</p>
+};</code></pre><p>虽然子类和父类都包含虚函数， 但它们存放于同一个虚表中，因此只需要一个指针，在普通继承下，不管是子类还是父类包含虚函数，子类的<strong>sizeof=sizeof(基类非静态数据成员)+sizeof(派生类非静态数据成员)+sizeof(指针)</strong>。</p>
 <h2 id="5-子类虚继承父类-C-中虚拟继承的概念"><a href="#5-子类虚继承父类-C-中虚拟继承的概念" class="headerlink" title="5.子类虚继承父类(C++中虚拟继承的概念)"></a>5.子类虚继承父类(C++中虚拟继承的概念)</h2><h3 id="5-1-C-中虚拟继承的概念"><a href="#5-1-C-中虚拟继承的概念" class="headerlink" title="5.1.C++中虚拟继承的概念"></a>5.1.C++中虚拟继承的概念</h3><p>为了解决从不同途径继承来的同名的数据成员在内存中有不同的拷贝造成数据不一致问题，将共同基类设置为虚基类。这时从不同的路径继承过来的同名数据成员在内存中就只有一个拷贝，同一个函数名也只有一个映射。这样不仅就解决了二义性问题，也节省了内存，避免了数据不一致的问题。</p>
-<pre><code>class 派生类名：virtual 继承方式  基类名
-</code></pre><p>virtual是关键字，声明该基类为派生类的虚基类。<br>在多继承情况下，虚基类关键字的作用范围和继承方式关键字相同，只对紧跟其后的基类起作用。<br>声明了虚基类之后，虚基类在进一步派生过程中始终和派生类一起，维护同一个基类子对象的拷贝。</p>
+<pre><code>class 派生类名：virtual 继承方式  基类名</code></pre><p>virtual是关键字，声明该基类为派生类的虚基类。<br>在多继承情况下，虚基类关键字的作用范围和继承方式关键字相同，只对紧跟其后的基类起作用。<br>声明了虚基类之后，虚基类在进一步派生过程中始终和派生类一起，维护同一个基类子对象的拷贝。</p>
 <p>执行顺序</p>
 <pre><code>首先执行虚基类的构造函数，多个虚基类的构造函数按照被继承的顺序构造；
 
@@ -340,9 +337,7 @@ public:
 
 执行派生类自己的构造函数；
 
-析构以与构造相反的顺序执行；
-</code></pre><h3 id="5-2-子类虚继承父类"><a href="#5-2-子类虚继承父类" class="headerlink" title="5.2.子类虚继承父类"></a>5.2.子类虚继承父类</h3><p>虚继承比较特别，一般的计算公式应当是<strong>sizeof(子类)=sizeof(基类)+sizeof(虚表指针)+sizeof(子类非静态数据成员)
-</strong></p>
+析构以与构造相反的顺序执行；</code></pre><h3 id="5-2-子类虚继承父类"><a href="#5-2-子类虚继承父类" class="headerlink" title="5.2.子类虚继承父类"></a>5.2.子类虚继承父类</h3><p>虚继承比较特别，一般的计算公式应当是*<em>sizeof(子类)=sizeof(基类)+sizeof(虚表指针)+sizeof(子类非静态数据成员)<br>*</em></p>
 <pre><code>class A
 {
 public:
@@ -352,8 +347,7 @@ class B : virtual public A
 {
 public:
     int b;
-};
-</code></pre><p>sizeof结果都是12，基类A大小为4，子类B数据成员为4，因为是虚继承，可能需要一个指向虚基类的指针，再占用4字节，得到12。</p>
+};</code></pre><p>sizeof结果都是12，基类A大小为4，子类B数据成员为4，因为是虚继承，可能需要一个指向虚基类的指针，再占用4字节，得到12。</p>
 <p>然而，对于包含虚函数的子类虚继承不含虚函数的父类时，结果发生了变化</p>
 <pre><code>class A
 {
@@ -365,8 +359,7 @@ class B : virtual public A
 public:
     int a;
     virtual void set(){}
-};
-</code></pre><p>在Codeblocks下结果仍为12，VS2010下却为16。子类增加了一个虚函数，Codeblocks下结果不变，在VS下结果却发生了变化。</p>
+};</code></pre><p>在Codeblocks下结果仍为12，VS2010下却为16。子类增加了一个虚函数，Codeblocks下结果不变，在VS下结果却发生了变化。</p>
 <p>可以这样认为，在VS下，计算公式可能如下：<strong>sizeof(子类)=sizeof(基类)+sizeof(指示虚基类的指针)+sizeof(子类非静态数据成员)+sizeof(虚表指针)</strong>。在CB下可能对内存进行了优化（个人推测）</p>
 <p>对于子类和父类中都含虚函数的虚继承，结果如下：</p>
 <pre><code>class Test
@@ -380,8 +373,7 @@ class Test2 : virtual Test
 public:
     int a;
     virtual void set(){}
-};
-</code></pre><p>在Codeblocks下结果为16，VS2010下为20。<br>这是因为，使用了虚继承，子类和父类的虚函数存放在不同的虚表中，因此子类和父类都需要一个指向虚表的指针。</p>
+};</code></pre><p>在Codeblocks下结果为16，VS2010下为20。<br>这是因为，使用了虚继承，子类和父类的虚函数存放在不同的虚表中，因此子类和父类都需要一个指向虚表的指针。</p>
 <h2 id="6-多重继承"><a href="#6-多重继承" class="headerlink" title="6.多重继承"></a>6.多重继承</h2><pre><code>#include&lt;iostream&gt;
 using namespace std;
 class A
@@ -410,14 +402,12 @@ int main() {
     cout &lt;&lt; &quot;sizeof B=&quot; &lt;&lt; sizeof(B) &lt;&lt; endl;
     cout &lt;&lt; &quot;sizeof C=&quot; &lt;&lt; sizeof(C) &lt;&lt; endl;
     cout &lt;&lt; &quot;sizeof D=&quot; &lt;&lt; sizeof(D) &lt;&lt; endl;
-}
-</code></pre><p>就是基类的相加。<strong>sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)</strong></p>
+}</code></pre><p>就是基类的相加。<strong>sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)</strong></p>
 <pre><code>sizeof A=4
 sizeof B=8
 sizeof C=8
 sizeof D=20
-请按任意键继续. . .
-</code></pre><h2 id="7-多重虚继承"><a href="#7-多重虚继承" class="headerlink" title="7.多重虚继承"></a>7.多重虚继承</h2><p>虚继承存在的意义就是为了减少内存开销和二义性，实现对象共享。</p>
+请按任意键继续. . .</code></pre><h2 id="7-多重虚继承"><a href="#7-多重虚继承" class="headerlink" title="7.多重虚继承"></a>7.多重虚继承</h2><p>虚继承存在的意义就是为了减少内存开销和二义性，实现对象共享。</p>
 <pre><code>class A
 {
 public:
@@ -437,8 +427,7 @@ class D : public B, public C
 {
 public:
     int d;
-};
-</code></pre><p>sizeof(D)在CB和VS下都是24。D中包含a,b,c,d四个数据成员，还包含两个指向虚基类A的指针，这种情况下，VS和CB都没有将两个指针合为一个。这种情况也可以这样考虑，sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)，但由于是虚继承，虚基类A中数据成员a只需要保留一份，而我们算了两次，所以还需要减去A的数据成员，所以公式应当是sizeof(D)=sizeof(B)+sizeof(C)-sizeof(A的非静态数据成员)+sizeof(子类非静态数据成员)。</p>
+};</code></pre><p>sizeof(D)在CB和VS下都是24。D中包含a,b,c,d四个数据成员，还包含两个指向虚基类A的指针，这种情况下，VS和CB都没有将两个指针合为一个。这种情况也可以这样考虑，sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)，但由于是虚继承，虚基类A中数据成员a只需要保留一份，而我们算了两次，所以还需要减去A的数据成员，所以公式应当是sizeof(D)=sizeof(B)+sizeof(C)-sizeof(A的非静态数据成员)+sizeof(子类非静态数据成员)。</p>
 <h2 id="8-字节对齐"><a href="#8-字节对齐" class="headerlink" title="8.字节对齐"></a>8.字节对齐</h2><p>１:数据成员对齐规则：结构(struct)(或联合(union))的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置要从该成员大小或者成员的子成员大小（只要该成员有子成员，比如说是数组，结构体等）的整数倍开始(比如int在32位机为４字节,则要从４的整数倍地址开始存储。</p>
 <p>２:结构体作为成员:如果一个结构里有某些结构体成员,则结构体成员要从其内部最大元素大小的整数倍地址开始存储.(struct a里存有struct b,b里有char,int ,double等元素,那b应该从8的整数倍开始存储.)</p>
 <p>３:收尾工作:结构体的总大小,也就是sizeof的结果,.必须是其内部最大成员的整数倍.不足的要补齐.</p>
@@ -480,8 +469,7 @@ int main() {
 sizeof 枚举结构 enum number =4
 sizeof 定义后的枚举变量 variable num1=4
 size of  赋值后的枚举变量 =4
-请按任意键继续. . .
-</code></pre>
+请按任意键继续. . .</code></pre>
       
       
         <div class="page-reward">

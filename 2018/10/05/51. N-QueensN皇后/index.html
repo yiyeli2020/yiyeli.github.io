@@ -242,6 +242,9 @@
           
         <p>n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
 <a id="more"></a>
+
+
+
 <p>给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。</p>
 <p>每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 ‘Q’ 和 ‘.’ 分别代表了皇后和空位。</p>
 <p>示例:</p>
@@ -257,8 +260,7 @@
   &quot;...Q&quot;,
   &quot;.Q..&quot;]
 ]
-解释: 4 皇后问题存在两个不同的解法。
-</code></pre><h2 id="思路1-递归"><a href="#思路1-递归" class="headerlink" title="思路1 递归"></a>思路1 递归</h2><p>尝试每个可能存在皇后的位置</p>
+解释: 4 皇后问题存在两个不同的解法。</code></pre><h2 id="思路1-递归"><a href="#思路1-递归" class="headerlink" title="思路1 递归"></a>思路1 递归</h2><p>尝试每个可能存在皇后的位置</p>
 <pre><code>class Solution {
 private:
     vector&lt;vector&lt;string&gt;&gt; res;
@@ -290,8 +292,7 @@ public:
         return true;
     }
 
-};
-</code></pre><h2 id="思路2：DFS"><a href="#思路2：DFS" class="headerlink" title="思路2：DFS"></a>思路2：DFS</h2><p>queen用来记录皇后的横纵坐标位置，xy_dif用来记录横纵坐标之差，xy_sum用来记录横纵坐标之和，p + q == x + y 时在同一条对角线上， p - q == x - y时在同一条反对角线上</p>
+};</code></pre><h2 id="思路2：DFS"><a href="#思路2：DFS" class="headerlink" title="思路2：DFS"></a>思路2：DFS</h2><p>queen用来记录皇后的横纵坐标位置，xy_dif用来记录横纵坐标之差，xy_sum用来记录横纵坐标之和，p + q == x + y 时在同一条对角线上， p - q == x - y时在同一条反对角线上</p>
 <pre><code>def solveNQueens(self, n):
     def DFS(queens, xy_dif, xy_sum):
         p = len(queens)
@@ -303,8 +304,7 @@ public:
                 DFS(queens+[q], xy_dif+[p-q], xy_sum+[p+q])  
     result = [] #全局变量
     DFS([],[],[])
-    return [ [&quot;.&quot;*i + &quot;Q&quot; + &quot;.&quot;*(n-i-1) for i in sol] for sol in result]
-</code></pre>
+    return [ [&quot;.&quot;*i + &quot;Q&quot; + &quot;.&quot;*(n-i-1) for i in sol] for sol in result]</code></pre>
       
       
         <div class="page-reward">

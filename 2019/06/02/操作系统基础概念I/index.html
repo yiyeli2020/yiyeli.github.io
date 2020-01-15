@@ -244,6 +244,8 @@
           
         <p>总结操作系统基础概念</p>
 <a id="more"></a>
+
+
 <h2 id="（一）请分别简单说一说进程和线程以及它们的区别。"><a href="#（一）请分别简单说一说进程和线程以及它们的区别。" class="headerlink" title="（一）请分别简单说一说进程和线程以及它们的区别。"></a>（一）请分别简单说一说进程和线程以及它们的区别。</h2><h3 id="1-进程是资源分配的基本单位"><a href="#1-进程是资源分配的基本单位" class="headerlink" title="1.进程是资源分配的基本单位"></a>1.进程是资源分配的基本单位</h3><p>进程是具有一定功能的程序关于某个数据集合上的一次运行活动，进程是系统进行资源调度和分配的基本单位。</p>
 <h3 id="2-线程是独立调度的基本单位"><a href="#2-线程是独立调度的基本单位" class="headerlink" title="2.线程是独立调度的基本单位"></a>2.线程是独立调度的基本单位</h3><p>线程是进程的实体，是CPU调度和分派的基本单位，它是比进程更小的能独立运行的基本单位。<br>一个进程可以有多个线程，多个线程也可以并发执行</p>
 <h3 id="3-区别"><a href="#3-区别" class="headerlink" title="3.区别"></a>3.区别</h3><h4 id="I-拥有资源"><a href="#I-拥有资源" class="headerlink" title="I 拥有资源"></a>I 拥有资源</h4><p>进程是资源分配的基本单位，而线程不拥有资源，线程可以访问隶属雨进程的资源</p>
@@ -259,16 +261,14 @@
 <h3 id="1-管道"><a href="#1-管道" class="headerlink" title="1.管道"></a>1.管道</h3><p><strong><em>普通管道PIPE</em></strong></p>
 <p>管道是通过调用匹配pipe函数创建的，fd[0]用于读，fd[1]用于写。</p>
 <pre><code>#include&lt;unistd.h&gt;
-int pipe(int fd[2]);
-</code></pre><p>管道具有以下限制：</p>
+int pipe(int fd[2]);</code></pre><p>管道具有以下限制：</p>
 <p>  （1）只支持半双工通信（单向交替传输）</p>
 <p>  （2）只能在父子进程中使用（只能在具有亲缘关系的进程间流动，进程的亲缘关系通常是父子进程）</p>
 <p><strong><em>命名管道FIFO</em></strong></p>
 <p>  也是半双工的通信方式，它去除了管道只能在父子进程中使用的限制，允许无亲缘关系的进程间进行通信</p>
 <pre><code>#include&lt;sys/stat.h&gt;
 int mkfifo(const char *path, mode_t mode);
-int mkfifoat(int fd,const char *path,mode_t mode);
-</code></pre><p>FIFO常用于客户-服务器应用程序中，FIFO用作汇聚点，在客户进程和服务器进程之间传递数据。</p>
+int mkfifoat(int fd,const char *path,mode_t mode);</code></pre><p>FIFO常用于客户-服务器应用程序中，FIFO用作汇聚点，在客户进程和服务器进程之间传递数据。</p>
 <h3 id="2-系统IPC"><a href="#2-系统IPC" class="headerlink" title="2.系统IPC"></a>2.系统IPC</h3><p><strong><em>消息队列</em></strong></p>
 <p>是消息的链表，存放在内核中并由消息队列标识符标识。<br>相比于FIFO，消息队列有以下优点：</p>
 <p>  （1）消息队列能够独立于读写进程的存在，从而避免了FIFO中同步管道的打开和关闭时可能产生的困难。</p>

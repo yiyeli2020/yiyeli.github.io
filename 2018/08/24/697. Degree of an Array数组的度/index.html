@@ -243,15 +243,14 @@
         <p>给定一个非空且只包含非负数的整数数组 nums, 数组的度的定义是指数组里任一元素出现频数的最大值。</p>
 <p>你的任务是找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。</p>
 <a id="more"></a>
+
+
 <p>示例 1:</p>
 <p>输入:</p>
-<pre><code>[1, 2, 2, 3, 1]
-</code></pre><p>输出: 2<br>解释:<br>输入数组的度是2，因为元素1和2的出现频数最大，均为2.<br>连续子数组里面拥有相同度的有如下所示:</p>
-<pre><code>[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]
-</code></pre><p>最短连续子数组[2, 2]的长度为2，所以返回2.<br>示例 2:</p>
+<pre><code>[1, 2, 2, 3, 1]</code></pre><p>输出: 2<br>解释:<br>输入数组的度是2，因为元素1和2的出现频数最大，均为2.<br>连续子数组里面拥有相同度的有如下所示:</p>
+<pre><code>[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]</code></pre><p>最短连续子数组[2, 2]的长度为2，所以返回2.<br>示例 2:</p>
 <p>输入:</p>
-<pre><code>[1,2,2,3,1,4,2]
-</code></pre><p>输出: 6<br>注意:</p>
+<pre><code>[1,2,2,3,1,4,2]</code></pre><p>输出: 6<br>注意:</p>
 <p>nums.length 在1到50,000区间范围内。<br>nums[i] 是一个在0到49,999范围内的整数。</p>
 <!-- more -->
 <h2 id="Brute-Force思路"><a href="#Brute-Force思路" class="headerlink" title="Brute Force思路"></a>Brute Force思路</h2><p>穷举所有的子数组然后将其度与原数组的度比较，相等则更新最小长度。但会超时。</p>
@@ -279,8 +278,7 @@ public:
         }
         return degree;
     }
-};
-</code></pre><h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><p>使用两个哈希表，一个记录字符的开始位置，另一个记录字符的出现频率<br>一旦一个特定字符的频率大于其他的，我们更新这个变量的长度，当两个变量有同样的频率，只比较它们的长度选择较短的一个</p>
+};</code></pre><h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><p>使用两个哈希表，一个记录字符的开始位置，另一个记录字符的出现频率<br>一旦一个特定字符的频率大于其他的，我们更新这个变量的长度，当两个变量有同样的频率，只比较它们的长度选择较短的一个</p>
 <pre><code>class Solution {
 public:
     int findShortestSubArray(vector&lt;int&gt;&amp; nums) {
@@ -301,8 +299,7 @@ public:
 
         return len;
     }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

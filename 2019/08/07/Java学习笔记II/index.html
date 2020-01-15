@@ -272,8 +272,7 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>ArithmeticException</td>
 <td>当出现异常的运算条件时，抛出此异常。例如，一个整数”除以零”时，抛出此类的一个实例。</td>
 </tr>
@@ -333,8 +332,7 @@
 <td>UnsupportedOperationException</td>
 <td>当不支持请求的操作时，抛出该异常。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>下面的表中列出了 Java 定义在 java.lang 包中的检查性异常类。</p>
 <table>
 <thead>
@@ -343,8 +341,7 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>ClassNotFoundException</td>
 <td>应用程序试图加载类时，找不到相应的类，抛出该异常。</td>
 </tr>
@@ -372,8 +369,7 @@
 <td>NoSuchMethodException</td>
 <td>请求的方法不存在</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="异常方法"><a href="#异常方法" class="headerlink" title="异常方法"></a>异常方法</h2><p>下面的列表是 Throwable 类的主要方法:</p>
 <table>
 <thead>
@@ -382,8 +378,7 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>public String getMessage()</td>
 <td>返回关于发生的异常的详细信息。这个消息在Throwable 类的构造函数中初始化了。</td>
 </tr>
@@ -407,8 +402,7 @@
 <td>public Throwable fillInStackTrace()</td>
 <td>用当前的调用栈层次填充Throwable 对象栈层次，添加到栈层次任何先前信息中。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h2><p>使用 try 和 catch 关键字可以捕获异常。try/catch 代码块放在异常可能发生的地方。</p>
 <p>try/catch代码块中的代码称为保护代码，使用 try/catch 的语法如下：</p>
 <pre><code>try
@@ -417,8 +411,7 @@
 }catch(ExceptionName e1)
 {
    //Catch 块
-}
-</code></pre><p>Catch 语句包含要捕获异常类型的声明。当保护代码块中发生一个异常时，try 后面的 catch 块就会被检查。</p>
+}</code></pre><p>Catch 语句包含要捕获异常类型的声明。当保护代码块中发生一个异常时，try 后面的 catch 块就会被检查。</p>
 <p>如果发生的异常包含在 catch 块中，异常会被传递到该 catch 块，这和传递一个参数到方法是一样。</p>
 <h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面的例子中声明有两个元素的一个数组，当代码试图访问数组的第三个元素的时候就会抛出一个异常。</p>
 <p>ExcepTest.java 文件代码：</p>
@@ -435,11 +428,9 @@ public class ExcepTest{
       }
       System.out.println(&quot;Out of the block&quot;);
    }
-}
-</code></pre><p>以上代码编译运行输出结果如下：</p>
+}</code></pre><p>以上代码编译运行输出结果如下：</p>
 <pre><code>Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: 3
-Out of the block
-</code></pre><h3 id="多重捕获块"><a href="#多重捕获块" class="headerlink" title="多重捕获块"></a>多重捕获块</h3><p>一个 try 代码块后面跟随多个 catch 代码块的情况就叫多重捕获。</p>
+Out of the block</code></pre><h3 id="多重捕获块"><a href="#多重捕获块" class="headerlink" title="多重捕获块"></a>多重捕获块</h3><p>一个 try 代码块后面跟随多个 catch 代码块的情况就叫多重捕获。</p>
 <p>多重捕获块的语法如下所示：</p>
 <pre><code>try{
    // 程序代码
@@ -449,8 +440,7 @@ Out of the block
   // 程序代码
 }catch(异常类型2 异常的变量名2){
   // 程序代码
-}
-</code></pre><p>上面的代码段包含了 3 个 catch块。</p>
+}</code></pre><p>上面的代码段包含了 3 个 catch块。</p>
 <p>可以在 try 语句后面添加任意数量的 catch 块。</p>
 <p>如果保护代码中发生异常，异常被抛给第一个 catch 块。</p>
 <p>如果抛出异常的数据类型与 ExceptionType1 匹配，它在这里就会被捕获。</p>
@@ -466,8 +456,7 @@ Out of the block
 } catch(IOException i) {
     i.printStackTrace();
     return -1;
-}
-</code></pre><h2 id="throws-throw-关键字："><a href="#throws-throw-关键字：" class="headerlink" title="throws/throw 关键字："></a>throws/throw 关键字：</h2><p>如果一个方法没有捕获到一个检查性异常，那么该方法必须使用 throws 关键字来声明。</p>
+}</code></pre><h2 id="throws-throw-关键字："><a href="#throws-throw-关键字：" class="headerlink" title="throws/throw 关键字："></a>throws/throw 关键字：</h2><p>如果一个方法没有捕获到一个检查性异常，那么该方法必须使用 throws 关键字来声明。</p>
 <p>throws 关键字放在方法签名的尾部。</p>
 <p>也可以使用 throw 关键字抛出一个异常，无论它是新实例化的还是刚捕获到的。</p>
 <p>下面方法的声明抛出一个 RemoteException 异常：</p>
@@ -480,8 +469,7 @@ public class className
     throw new RemoteException();
   }
   //Remainder of class definition
-}
-</code></pre><p>一个方法可以声明抛出多个异常，多个异常之间用逗号隔开。</p>
+}</code></pre><p>一个方法可以声明抛出多个异常，多个异常之间用逗号隔开。</p>
 <p>例如，下面的方法声明抛出 RemoteException 和 InsufficientFundsException：</p>
 <pre><code>import java.io.*;
 public class className
@@ -492,8 +480,7 @@ public class className
        // Method implementation
    }
    //Remainder of class definition
-}
-</code></pre><h2 id="finally关键字"><a href="#finally关键字" class="headerlink" title="finally关键字"></a>finally关键字</h2><p>finally 关键字用来创建在 try 代码块后面执行的代码块。</p>
+}</code></pre><h2 id="finally关键字"><a href="#finally关键字" class="headerlink" title="finally关键字"></a>finally关键字</h2><p>finally 关键字用来创建在 try 代码块后面执行的代码块。</p>
 <p>无论是否发生异常，finally 代码块中的代码总会被执行。</p>
 <p>在 finally 代码块中，可以运行清理类型等收尾善后性质的语句。</p>
 <p>finally 代码块出现在 catch 代码块最后，语法如下：</p>
@@ -505,8 +492,7 @@ public class className
   // 程序代码
 }finally{
   // 程序代码
-}
-</code></pre><h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><p>ExcepTest.java 文件代码：</p>
+}</code></pre><h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><p>ExcepTest.java 文件代码：</p>
 <pre><code>public class ExcepTest{
   public static void main(String args[]){
     int a[] = new int[2];
@@ -521,12 +507,10 @@ public class className
        System.out.println(&quot;The finally statement is executed&quot;);
     }
   }
-}
-</code></pre><p>以上实例编译运行结果如下：</p>
+}</code></pre><p>以上实例编译运行结果如下：</p>
 <pre><code>Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: 3
 First element value: 6
-The finally statement is executed
-</code></pre><p>注意下面事项：</p>
+The finally statement is executed</code></pre><p>注意下面事项：</p>
 <p>catch 不能独立于 try 存在。</p>
 <p>在 try/catch 后面添加 finally 块并非强制性要求的。</p>
 <p>try 代码后不能既没 catch 块也没 finally 块。</p>
@@ -537,8 +521,7 @@ The finally statement is executed
 <p>如果你想写一个运行时异常类，那么需要继承 RuntimeException 类。</p>
 <p>可以像下面这样定义自己的异常类：</p>
 <pre><code>class MyException extends Exception{
-}
-</code></pre><p>只继承Exception 类来创建的异常类是检查性异常类。</p>
+}</code></pre><p>只继承Exception 类来创建的异常类是检查性异常类。</p>
 <p>下面的 InsufficientFundsException 类是用户定义的异常类，它继承自 Exception。</p>
 <p>一个异常类和其它任何类一样，包含有变量和方法。</p>
 <h3 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h3><p>以下实例是一个银行账户的模拟，通过银行卡的号码完成识别，可以进行存钱和取钱的操作。</p>
@@ -559,8 +542,7 @@ public class InsufficientFundsException extends Exception
   {
     return amount;
   }
-}
-</code></pre><p>为了展示如何使用我们自定义的异常类，</p>
+}</code></pre><p>为了展示如何使用我们自定义的异常类，</p>
 <p>在下面的 CheckingAccount 类中包含一个 withdraw() 方法抛出一个 InsufficientFundsException 异常。</p>
 <p>CheckingAccount.java 文件代码：</p>
 <pre><code>// 文件名称 CheckingAccount.java
@@ -605,8 +587,7 @@ public class CheckingAccount
    {
       return number;
    }
-}
-</code></pre><p>下面的 BankDemo 程序示范了如何调用 CheckingAccount 类的 deposit() 和 withdraw() 方法。</p>
+}</code></pre><p>下面的 BankDemo 程序示范了如何调用 CheckingAccount 类的 deposit() 和 withdraw() 方法。</p>
 <p>BankDemo.java 文件代码：</p>
 <pre><code>//文件名称 BankDemo.java
 public class BankDemo
@@ -629,8 +610,7 @@ public class BankDemo
          e.printStackTrace();
       }
     }
-}
-</code></pre><p>编译上面三个文件，并运行程序 BankDemo，得到结果如下所示：</p>
+}</code></pre><p>编译上面三个文件，并运行程序 BankDemo，得到结果如下所示：</p>
 <pre><code>Depositing $500...
 
 Withdrawing $100...
@@ -639,8 +619,7 @@ Withdrawing $600...
 Sorry, but you are short $200.0
 InsufficientFundsException
         at CheckingAccount.withdraw(CheckingAccount.java:25)
-        at BankDemo.main(BankDemo.java:13)
-</code></pre><h2 id="通用异常"><a href="#通用异常" class="headerlink" title="通用异常"></a>通用异常</h2><p>在Java中定义了两种类型的异常和错误。</p>
+        at BankDemo.main(BankDemo.java:13)</code></pre><h2 id="通用异常"><a href="#通用异常" class="headerlink" title="通用异常"></a>通用异常</h2><p>在Java中定义了两种类型的异常和错误。</p>
 <h3 id="JVM-Java虚拟机-异常："><a href="#JVM-Java虚拟机-异常：" class="headerlink" title="JVM(Java虚拟机) 异常："></a>JVM(Java虚拟机) 异常：</h3><p>由 JVM 抛出的异常或错误。例如：NullPointerException 类，ArrayIndexOutOfBoundsException 类，ClassCastException 类。</p>
 <h3 id="程序级异常："><a href="#程序级异常：" class="headerlink" title="程序级异常："></a>程序级异常：</h3><p>由程序或者API程序抛出的异常。例如 IllegalArgumentException 类，IllegalStateException 类。</p>
 <h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<br><a href="https://www.runoob.com/java/java-exceptions.html" target="_blank" rel="noopener">https://www.runoob.com/java/java-exceptions.html</a></p>

@@ -242,6 +242,7 @@
           
         <p>简单总结Java工程师的学习路径，之后还会详细介绍，总结了最近用到的一些知识和注意事项如定时组件，注释，日志，注解等。</p>
 <a id="more"></a>
+
 <h1 id="中级Java工程师（十年学习计划）"><a href="#中级Java工程师（十年学习计划）" class="headerlink" title="中级Java工程师（十年学习计划）"></a>中级Java工程师（十年学习计划）</h1><p>JVM调优，class如何编译生成<br>分布式事务<br>分布式组件/工具zoomkeeper<br>缓存的使用（redis）<br>分库分表<br>微服务，看SpringCloud源码<br>并发编程<br>Spring源码（建议看两到三遍）</p>
 <h1 id="最近半年学习方向（两个方向）："><a href="#最近半年学习方向（两个方向）：" class="headerlink" title="最近半年学习方向（两个方向）："></a>最近半年学习方向（两个方向）：</h1><p>1.Spring源码，例如bean初始化<br>2.AQS</p>
 <h2 id="定时组件学习"><a href="#定时组件学习" class="headerlink" title="定时组件学习"></a>定时组件学习</h2><h2 id="注释写法"><a href="#注释写法" class="headerlink" title="注释写法"></a>注释写法</h2><p>从Controller到DTO再到Service，每个类中的函数都要有注释，包括功能，参数，返回值，格式如下：<br>Service中的例子：</p>
@@ -249,14 +250,12 @@
  * 创建商户
  * @param tblMerchantEntity
  * @return
- */
-</code></pre><p>DTO中的例子：</p>
+ */</code></pre><p>DTO中的例子：</p>
 <pre><code>/**
 * @Description: 商户dto
 * @Author: yiye.li
 * @Date: 2019-07-29 10:45
-*/
-</code></pre><p><strong><em>注释写法，可以先按照步骤写出注释，然后再相应等填充代码</em></strong></p>
+*/</code></pre><p><strong><em>注释写法，可以先按照步骤写出注释，然后再相应等填充代码</em></strong></p>
 <h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>（日志级别分为info，debug，warning，error等），可用于debug。<br>例程：</p>
 <pre><code>@Override
 public MerchantResponseDTO MybatisSelectByMerchantNo(TblMerchantEntity RequesttblMerchantEntity){
@@ -308,8 +307,7 @@ public MerchantResponseDTO MybatisSelectByMerchantNo(TblMerchantEntity Requesttb
     }
 
     return merchantResponseDTO;
-}
-</code></pre><p>日志技巧.var</p>
+}</code></pre><p>日志技巧.var</p>
 <h2 id="实现SpringBoot热部署"><a href="#实现SpringBoot热部署" class="headerlink" title="实现SpringBoot热部署"></a>实现SpringBoot热部署</h2>
       
       

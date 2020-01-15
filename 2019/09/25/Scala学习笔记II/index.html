@@ -242,13 +242,14 @@
           
         <p>Scala学习：=&gt;语法糖,模式匹配</p>
 <a id="more"></a>
+
+
 <h1 id="Scala的“-gt-”符号简介"><a href="#Scala的“-gt-”符号简介" class="headerlink" title="Scala的“=&gt;”符号简介"></a>Scala的“=&gt;”符号简介</h1><p>Scala中的=&gt;符号可以看做是创建函数实例的语法糖。例如：A =&gt; T，A,B =&gt; T表示一个函数的输入参数类型是“A”，“A,B”，返回值类型是T。请看下面这个实例：</p>
 <pre><code>scala&gt; val f: Int =&gt; String = myInt =&gt; &quot;The value of myInt is: &quot; + myInt.toString()
 f: Int =&gt; String = &lt;function1&gt;
 
 scala&gt; println(f(3))
-The value of myInt is: 3
-</code></pre><p>另外，() =&gt; T表示函数输入参数为空，而A =&gt; Unit则表示函数没有返回值。</p>
+The value of myInt is: 3</code></pre><p>另外，() =&gt; T表示函数输入参数为空，而A =&gt; Unit则表示函数没有返回值。</p>
 <pre><code>object HelloScala {
 
   def main(args: Array[String])  {
@@ -270,8 +271,7 @@ The value of myInt is: 3
     println(b.apply(5).apply(6));
 
   }
-}
-</code></pre><h1 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h1><pre><code>object scala {
+}</code></pre><h1 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h1><pre><code>object scala {
     def main(args: Array[String]):Unit={
         println(matchTest(3))
     }
@@ -280,8 +280,7 @@ The value of myInt is: 3
       case 2=&gt;&quot;two&quot;
       case _=&gt;&quot;many&quot;
     }
-}
-</code></pre><p>match 对应 Java 里的 switch，但是写在选择器表达式之后。即： 选择器 match {备选项}。</p>
+}</code></pre><p>match 对应 Java 里的 switch，但是写在选择器表达式之后。即： 选择器 match {备选项}。</p>
 <p>match 表达式通过以代码编写的先后次序尝试每个模式来完成计算，只要发现有一个匹配的case，剩下的case不会继续匹配。</p>
 <p>接下来我们来看一个不同数据类型的模式匹配：</p>
 <pre><code>object scala {
@@ -297,13 +296,11 @@ The value of myInt is: 3
       case y:Int=&gt;&quot;scala.Int&quot;
       case _=&gt;&quot;many&quot;
     }
-}
-</code></pre><p>输出结果为：</p>
+}</code></pre><p>输出结果为：</p>
 <pre><code>2
 many
 one
-scala.Int
-</code></pre><p>实例中第一个 case 对应整型数值 1，第二个 case 对应字符串值 two，第三个 case 对应类型模式，用于判断传入的值是否为整型，相比使用isInstanceOf来判断类型，使用模式匹配更好。第四个 case 表示默认的全匹配备选项，即没有找到其他匹配时的匹配项，类似 switch 中的 default。</p>
+scala.Int</code></pre><p>实例中第一个 case 对应整型数值 1，第二个 case 对应字符串值 two，第三个 case 对应类型模式，用于判断传入的值是否为整型，相比使用isInstanceOf来判断类型，使用模式匹配更好。第四个 case 表示默认的全匹配备选项，即没有找到其他匹配时的匹配项，类似 switch 中的 default。</p>
 <h2 id="使用样例类"><a href="#使用样例类" class="headerlink" title="使用样例类"></a>使用样例类</h2><p>使用了case关键字的类定义就是就是样例类(case classes)，样例类是种特殊的类，经过优化以用于模式匹配。</p>
 <p>以下是样例类的简单实例:</p>
 <h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】 <a href="https://www.orchome.com/401" target="_blank" rel="noopener">https://www.orchome.com/401</a></p>

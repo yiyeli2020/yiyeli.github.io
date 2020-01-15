@@ -242,6 +242,7 @@
           
         <p>重新温习Mysqlkey 、primary key 、unique key 与index的区别</p>
 <a id="more"></a>
+
 <h1 id="key与primary-key区别"><a href="#key与primary-key区别" class="headerlink" title="key与primary key区别"></a>key与primary key区别</h1><pre><code>CREATE TABLE wh_logrecord (
   logrecord_id int(11) NOT NULL auto_increment,
   user_name varchar(100) default NULL,
@@ -249,8 +250,7 @@
   logrecord_operation varchar(100) default NULL,
   PRIMARY KEY (logrecord_id),
   KEY wh_logrecord_user_name (user_name)
-  )
-</code></pre><h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>  KEY wh_logrecord_user_name (user_name)</p>
+  )</code></pre><h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>  KEY wh_logrecord_user_name (user_name)</p>
 <p>  本表的user_name字段与wh_logrecord_user_name表user_name字段建立外键</p>
 <p>  括号外是建立外键的对应表，括号内是对应字段</p>
 <p>  类似还有 KEY user(userid)</p>
@@ -282,8 +282,7 @@
 <p>3，主键和唯一键约束是通过参考索引实施的，如果插入的值均为NULL，则根据索引的原理，全NULL值不被记录在索引上，所以插入全NULL值时，可以有重复的，而其他的则不能插入重复值。</p>
 <pre><code>alter table t add constraint uk_t_1 unique (a,b);
 insert into t (a ,b ) values (null,1);    # 不能重复
-insert into t (a ,b ) values (null,null); # 可以重复
-</code></pre><h1 id="使用UNIQUE-KEY"><a href="#使用UNIQUE-KEY" class="headerlink" title="使用UNIQUE KEY"></a>使用UNIQUE KEY</h1><pre><code>CREATE TABLE `secure_vulnerability_warning` (
+insert into t (a ,b ) values (null,null); # 可以重复</code></pre><h1 id="使用UNIQUE-KEY"><a href="#使用UNIQUE-KEY" class="headerlink" title="使用UNIQUE KEY"></a>使用UNIQUE KEY</h1><pre><code>CREATE TABLE `secure_vulnerability_warning` (
   `id` int(10) NOT NULL auto_increment,
   `date` date NOT NULL,
   `type` varchar(100) NOT NULL,
@@ -301,8 +300,7 @@ insert into t (a ,b ) values (null,null); # 可以重复
   `last_set_ok_time` datetime default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `date` (`date`,`hash`)
-  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8
-</code></pre><p>UNIQUE KEY的用途：主要是用来防止数据插入的时候重复的。</p>
+  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8</code></pre><p>UNIQUE KEY的用途：主要是用来防止数据插入的时候重复的。</p>
 <p>1，创建表时</p>
 <pre><code>CREATE TABLE Persons(
   Id_P int NOT NULL,
@@ -310,16 +308,14 @@ insert into t (a ,b ) values (null,null); # 可以重复
   FirstName varchar(255),
   Address varchar(255),
   City varchar(255),
-  UNIQUE (Id_P))
-</code></pre><p>如果需要命名 UNIQUE 约束，以及为多个列定义 UNIQUE 约束，请使用下面的 SQL 语法：</p>
+  UNIQUE (Id_P))</code></pre><p>如果需要命名 UNIQUE 约束，以及为多个列定义 UNIQUE 约束，请使用下面的 SQL 语法：</p>
 <pre><code>CREATE TABLE Persons(
   Id_P int NOT NULL,
   LastName varchar(255) NOT NULL,
   FirstName varchar(255),
   Address varchar(255),
   City varchar(255),
-  CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName))
-</code></pre><p>2，当表已被创建时，如需在 “Id_P” 列创建 UNIQUE 约束，请使用下列 SQL：</p>
+  CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName))</code></pre><p>2，当表已被创建时，如需在 “Id_P” 列创建 UNIQUE 约束，请使用下列 SQL：</p>
 <p>ALTER TABLE PersonsADD UNIQUE (Id_P)<br>如需命名 UNIQUE 约束，并定义多个列的 UNIQUE 约束，请使用下面的 SQL 语法：</p>
 <p>ALTER TABLE PersonsADD CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)</p>
 <p>3，撤销 UNIQUE 约束如需撤销 UNIQUE 约束，请使用下面的 SQL：</p>

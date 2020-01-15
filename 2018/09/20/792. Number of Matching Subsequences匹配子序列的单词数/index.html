@@ -242,13 +242,14 @@
           
         <p>给定字符串 S 和单词字典 words, 求 words[i] 中是 S 的子序列的单词个数。</p>
 <a id="more"></a>
+
+
 <pre><code>示例:
 输入:
 S = &quot;abcde&quot;
 words = [&quot;a&quot;, &quot;bb&quot;, &quot;acd&quot;, &quot;ace&quot;]
 输出: 3
-解释: 有三个是 S 的子序列的单词: &quot;a&quot;, &quot;acd&quot;, &quot;ace&quot;。
-</code></pre><p>注意:</p>
+解释: 有三个是 S 的子序列的单词: &quot;a&quot;, &quot;acd&quot;, &quot;ace&quot;。</code></pre><p>注意:</p>
 <p>所有在words和 S 里的单词都只由小写字母组成。<br>S 的长度在 [1, 50000]。<br>words 的长度在 [1, 5000]。<br>words[i]的长度在[1, 50]。</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><pre><code>class Solution {
 public:
@@ -294,8 +295,7 @@ public:
     //     return waiting[0].size();//3.当遍历完 S ，返回计数器的的结果即是最后答案。
     //   //  4.复杂度估计O(nk)，n为 S 的长度，k 表示删除一个节点后，需要重新分配字符串的平均个数。最坏情况下 k=m ， m 为 words 的个数。不过常规情况下 k&lt;&lt;m
     // }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

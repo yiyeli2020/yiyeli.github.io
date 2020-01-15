@@ -246,6 +246,7 @@
           
         <p>介绍了SpringMVC的基本概念和HTTP中Get与POST的区别。</p>
 <a id="more"></a>
+
 <h1 id="原理详解"><a href="#原理详解" class="headerlink" title="原理详解"></a>原理详解</h1><h2 id="SpringMVC是什么"><a href="#SpringMVC是什么" class="headerlink" title="SpringMVC是什么"></a>SpringMVC是什么</h2><p>早期 Java Web 的开发中，统一把显示层、控制层、数据层的操作全部交给 JSP 或者 JavaBean 来进行处理，我们称之为 Model1：<br><img src="assets/markdown-img-paste-20190730171141304.png" alt="https://upload-images.jianshu.io/upload_images/7896890-7b3f9cd59394b017.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/963"></p>
 <p>出现的弊端：</p>
 <p>1.JSP 和 Java Bean 之间严重耦合，Java 代码和 HTML 代码也耦合在了一起</p>
@@ -277,8 +278,7 @@
 <th>描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>HEAD</td>
 <td>与GET类似，但只获取HTTP报头，返回的响应中没有文档主体</td>
 </tr>
@@ -310,11 +310,9 @@
 <td>POST</td>
 <td>向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h3 id="GET方法"><a href="#GET方法" class="headerlink" title="GET方法"></a>GET方法</h3><p>查询字符串（名称/值对）是在GET请求的URL中发送的，即请求的数据会附在 URL 之后（放在请求行中），以 ? 分割 URL 和传输数据，多个参数用 &amp; 连接：</p>
-<pre><code>http://localhost:8080/Merchant/SelectByMerchantNo?name1=value1&amp;name2=value2
-</code></pre><p>GET 请求可被缓存，如果下一次传输的数据相同，那么就会返回缓存中的内容，以求更快地展示数据。</p>
+<pre><code>http://localhost:8080/Merchant/SelectByMerchantNo?name1=value1&amp;name2=value2</code></pre><p>GET 请求可被缓存，如果下一次传输的数据相同，那么就会返回缓存中的内容，以求更快地展示数据。</p>
 <p>GET 请求保留在浏览器历史记录中</p>
 <p>GET 请求可被收藏为书签</p>
 <p>GET 请求不应在处理敏感数据时使用</p>
@@ -327,8 +325,7 @@
 <h3 id="POST方法"><a href="#POST方法" class="headerlink" title="POST方法"></a>POST方法</h3><p>查询字符串（名称/值对）是在 POST 请求的 HTTP 消息主体中发送的：</p>
 <pre><code>POST /test/demo_form.asp HTTP/1.1
 Host: w3schools.com
-name1=value1&amp;name2=value2
-</code></pre><p>POST 请求不会被缓存</p>
+name1=value1&amp;name2=value2</code></pre><p>POST 请求不会被缓存</p>
 <p>POST 请求不会保留在浏览器历史记录中</p>
 <p>POST 不能被收藏为书签</p>
 <p>根据 HTTP 规范，POST 表示可能修改变服务器上的资源的请求。例如我们在刷知乎的时候对某篇文章进行点赞，就是提交的 POST 请求，因为它改变了服务器中的数据（该篇文章的点赞数）。</p>
@@ -344,8 +341,7 @@ name1=value1&amp;name2=value2
 <th>POST</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>后退按钮/刷新</td>
 <td>无害</td>
 <td>数据会被重新提交（浏览器应该告知用户数据会被重新提交</td>
@@ -385,8 +381,7 @@ name1=value1&amp;name2=value2
 <td>数据在URL中对所有人都是可见的</td>
 <td>数据不会显示在URL中</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>上面说了那么多 GET 方法和 POST 方法各自的特点，它们在外在的表现上似乎是有着诸多的不同，但是实际上，它们的本质是一样的，并无区别。</p>
 <p>它们都是 HTTP 请求协议的请求方法，而 HTTP 又是基于TCP/IP的关于数据如何在万维网中如何通信的协议，所以 GET/POST 实际上都是 TCP 链接。</p>
 <p>也就是说，GET 和 POST 所做的事其实是一样的，如果你给 GET 加上请求数据，给 POST 加上 URL 参数，这在技术上是完全可行的，事实上确实有一些人为了贪图方便在更新资源时用了GET，因为用POST必须要到FORM（表单），这样会麻烦一点（但是强烈不建议这样子做！！！）。</p>

@@ -246,6 +246,8 @@
           
         <p>整理一下互联网公司语言基础（C++）面试高频题</p>
 <a id="more"></a>
+
+
 <p>##（1） 指针和引用的区别</p>
 <h3 id="联系"><a href="#联系" class="headerlink" title="联系:"></a>联系:</h3><h4 id="a"><a href="#a" class="headerlink" title="a."></a>a.</h4><p>指针和引用本质上都是地址的概念,引用在内部其实是用const指针来实现的.</p>
 <h4 id="b"><a href="#b" class="headerlink" title="b."></a>b.</h4><p>给函数传递参数的时候,一级指针和引用作为函数参数的时候可以达到相同的效果.</p>
@@ -299,8 +301,7 @@ int main(void)
                              这个时候arr代表的是数组的整体;*/
      bar(arr);/*这里传递的就是数组的整体*/
      return 0;
-}
-</code></pre><p>##（2） 堆和栈的区别</p>
+}</code></pre><p>##（2） 堆和栈的区别</p>
 <h4 id="a-管理方式不同"><a href="#a-管理方式不同" class="headerlink" title="a.管理方式不同:"></a>a.管理方式不同:</h4><p>栈是由编译器自动分配和释放,使用方便;而对于堆来说,分配和释放都必须由程序员来手动完成,不易管理,容易造成内存泄漏和内存碎片.</p>
 <h4 id="b-可用内存空间不同"><a href="#b-可用内存空间不同" class="headerlink" title="b.可用内存空间不同:"></a>b.可用内存空间不同:</h4><p>对于栈来说,它可用的内存空间比较小;而对于堆来说它可以使用的空间比栈要大的多.</p>
 <h4 id="c-能否产生碎片不同"><a href="#c-能否产生碎片不同" class="headerlink" title="c.能否产生碎片不同:"></a>c.能否产生碎片不同:</h4><p>由于栈采用的是后进先出的机制,所以栈空间没有内存碎片的产生;而对于堆来说,由于频繁的使用new/delete势必会造成内存空间分配的不连续,从而造成大量的碎片,使程序的效率降低.</p>
@@ -311,8 +312,7 @@ int main(void)
 <h4 id="a-运算符和库函数的区别"><a href="#a-运算符和库函数的区别" class="headerlink" title="a.运算符和库函数的区别"></a>a.运算符和库函数的区别</h4><p>new/delete是运算符,只能在C++中使用,它可以重载;mallloc/free是C的标准库函数,在C/C++中都可以使用.</p>
 <h4 id="b-2"><a href="#b-2" class="headerlink" title="b."></a>b.</h4><p>对于非内部的数据类型的对象而言,光用malloc/free是无法满足动态对象的要求的.对象在创建的时候需要执行构造函数,对象在消亡之前需要执行析构函数.而molloc/free是库函数而不是运算符,不在编译器的控制范围之内,编译器不能将执行构造函数和析构函数的任务强加给malloc/free.因此C++需要一个能够完成动态分配内存和初始化的new,以及一个能够完成清理和释放内存的运算符delete.</p>
 <h4 id="c-2"><a href="#c-2" class="headerlink" title="c."></a>c.</h4><p>new的返回值是指定类型的指针,可以自动的计算所需要分配的内存大小.而malloc的返回值是一个void类型的指针,我们在使用的时候要进行强制类型转换,并且分配的大小也要程序员手动的计算.</p>
-<h4 id="d-2"><a href="#d-2" class="headerlink" title="d."></a>d.</h4><p>new/delete完全覆盖了malloc/free的功能,只所以还要保留malloc/free,是因为我们的C++程序有时要调用用C编写的而C中又没有new/delete,只能使用malloc/free.</p>
-<p>##（4） C和C++的区别</p>
+<h4 id="d-2"><a href="#d-2" class="headerlink" title="d."></a>d.</h4><p>new/delete完全覆盖了malloc/free的功能,只所以还要保留malloc/free,是因为我们的C++程序有时要调用用C编写的而C中又没有new/delete,只能使用malloc/free.<br>##（4） C和C++的区别</p>
 <p>C/C++的联系：</p>
 <p>C++是C的超集，兼容大部分C的语法的结构；<br>联系嘛我只能想到这个，毕竟cplusplus嘛！<br>C/C++区别：</p>
 <p>第一点就应该想到C是面向过程的语言，而C++是面向对象的语言</p>
@@ -324,7 +324,7 @@ int main(void)
 <p>C 中用const修饰的变量不可以用在定义数组时的大小，但是C++用const修饰的变量可以（如果不进行&amp;,解引用的操作的话，是存放在符号表的，不开辟内存）；</p>
 <p>当然还有局部变量的声明规则不同，多态，C++特有输入输出流之类的，很多，下面就不再列出来了；</p>
 <p>##（5） C++、Java的联系与区别，包括语言特性、垃圾回收、应用场景等（java的垃圾回收机制）</p>
-<p>通常，我们聊到Java，第一印象“面向对象”，“没有指针，编写效率高，执行效率较低”。更深入、专业一点就谈论 “java内存自动回收(GC垃圾回收机制)，多线程编程”。<strong><br>java的三大特性是封装、继承和多态。</strong></p>
+<p>通常，我们聊到Java，第一印象“面向对象”，“没有指针，编写效率高，执行效率较低”。更深入、专业一点就谈论 “java内存自动回收(GC垃圾回收机制)，多线程编程”。**<br>java的三大特性是封装、继承和多态。**</p>
 <p>总结如下：</p>
 <p>1、 JAVA的应用在高层，C++在中间件和底层</p>
 <p>2、 JAVA离不开业务逻辑，而C++可以离开业务为JAVA们服务</p>
@@ -380,23 +380,21 @@ int main(void)
 <h4 id="（3）-1"><a href="#（3）-1" class="headerlink" title="（3）"></a>（3）</h4><p>在一个函数声明中，const可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值；</p>
 <h4 id="（4）-1"><a href="#（4）-1" class="headerlink" title="（4）"></a>（4）</h4><p>对于类的成员函数，若指定其为const类型，则表明其是一个常函数，不能修改类的成员变量；</p>
 <h4 id="（5）-1"><a href="#（5）-1" class="headerlink" title="（5）"></a>（5）</h4><p>对于类的成员函数，有时候必须指定其返回值为const类型，以使得其返回值不为“左值”。例如：<br>const classA operator<em>(const classA&amp; a1,const classA&amp; a2);<br>　　operator</em>的返回结果必须是一个const对象。如果不是，这样的变态代码也不会编译出错：</p>
-<p>classA a, b, c;<br>(a <em> b) = c; // 对a</em>b的结果赋值<br>　　操作(a * b) = c显然不符合编程者的初衷，也没有任何意义。</p>
+<p>classA a, b, c;<br>(a * b) = c; // 对a*b的结果赋值<br>　　操作(a * b) = c显然不符合编程者的初衷，也没有任何意义。</p>
 <h2 id="（9）-const和static在类中使用的注意事项（定义、初始化和使用）"><a href="#（9）-const和static在类中使用的注意事项（定义、初始化和使用）" class="headerlink" title="（9） const和static在类中使用的注意事项（定义、初始化和使用）"></a>（9） const和static在类中使用的注意事项（定义、初始化和使用）</h2><h2 id="（10）-C-中的const类成员函数（用法和意义）"><a href="#（10）-C-中的const类成员函数（用法和意义）" class="headerlink" title="（10） C++中的const类成员函数（用法和意义）"></a>（10） C++中的const类成员函数（用法和意义）</h2><p>常量成员函数声明：如：int get() const;</p>
 <h3 id="规则："><a href="#规则：" class="headerlink" title="规则："></a>规则：</h3><p>1.常量成员函数不修改对象。<br>2.常量成员函数在定义和声明中都应加const限定<br>3.非常量成员函数不能被常量成员函数调用，但构造函数和析构函数除外。<br>4.常量（const对象）对象只能调用常量成员函数。（const对象的数据成员在对象寿命周期内不能改变，因此其只能调用常量成员函数）。</p>
 <h3 id="意义："><a href="#意义：" class="headerlink" title="意义："></a>意义：</h3><p>1.使成员函数的意义更加清楚，将成员函数分修改对象和不修改对象两类。<br>2.增加程序的健壮性，常量成员函数企图修改数据成员或调用非常量成员函数，编译器会指出错误。</p>
-<h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><p>对于X类型的非常量成员函数而言，其this指针的类型是 X <em> const，该指针自身是常量；但是对于X类型的常量成员函数而言，其this指针的类型是const X </em> const，是一个常量指针。</p>
+<h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><p>对于X类型的非常量成员函数而言，其this指针的类型是 X * const，该指针自身是常量；但是对于X类型的常量成员函数而言，其this指针的类型是const X * const，是一个常量指针。</p>
 <h2 id="（11）-计算下面几个类的大小："><a href="#（11）-计算下面几个类的大小：" class="headerlink" title="（11） 计算下面几个类的大小："></a>（11） 计算下面几个类的大小：</h2><pre><code>class A {};: sizeof(A) = 1;
 class A { virtual Fun(){} };: sizeof(A) = 4(32位机器)/8(64位机器);
 class A { static int a; };: sizeof(A) = 1;
 class A { int a; };: sizeof(A) = 4;
-class A { static int a; int b; };: sizeof(A) = 4;
-</code></pre><p>（12） 给一个代码，求输出结果</p>
+class A { static int a; int b; };: sizeof(A) = 4;</code></pre><p>（12） 给一个代码，求输出结果</p>
 <pre><code>class A
 {
 public:
 A(int x){}
-}
-</code></pre><p>问：A a = 1;是否正确, 如果正确, 那么它调用了哪些函数？<br>这类题目更常见的是在基类和子类有不同实现方法。（虚函数相关，栗子很多，不多说了）</p>
+}</code></pre><p>问：A a = 1;是否正确, 如果正确, 那么它调用了哪些函数？<br>这类题目更常见的是在基类和子类有不同实现方法。（虚函数相关，栗子很多，不多说了）</p>
 <h2 id="（13）-C-的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等"><a href="#（13）-C-的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等" class="headerlink" title="（13） C++的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等"></a>（13） C++的STL介绍（这个系列也很重要，建议侯捷老师的这方面的书籍与视频），其中包括内存管理allocator，函数，实现机理，多线程实现等</h2><h2 id="（14）-STL源码中的hash表的实现"><a href="#（14）-STL源码中的hash表的实现" class="headerlink" title="（14） STL源码中的hash表的实现"></a>（14） STL源码中的hash表的实现</h2><p><a href="https://blog.csdn.net/c602273091/article/details/54798805" target="_blank" rel="noopener">https://blog.csdn.net/c602273091/article/details/54798805</a><br>哈希表（Hash table，也叫散列表）， 是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。</p>
 <p>哈希表hash table(key，value) 的做法其实很简单，就是把Key通过一个固定的算法函数既所谓的哈希函数转换成一个整型数字，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在以该数字为下标的数组空间里。</p>
 <p>而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位。</p>
@@ -422,8 +420,7 @@ protected:
     pointer _Myfirst;//pointer to beginning of array
     pointer _Mylast;//pointer to current end of sequence
     pointer _Myend;//pointer to end of array
-};
-</code></pre><p>示意图如下：<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5pefakcgj30as088my3.jpg" alt="image"></p>
+};</code></pre><p>示意图如下：<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5pefakcgj30as088my3.jpg" alt="image"></p>
 <p>两个关键大小：<br>大小：size=_Mylast - _Myfirst；<br>容量：capacity=_Myend - _Myfirst；<br>分别对应于resize()、reserve()两个函数。<br>size表示vector中已有元素的个数，容量表示vector最多可存储的元素的个数；为了降低二次分配时的成本，vector实际配置的大小可能比客户需求的更大一些，以备将来扩充，这就是容量的概念。即capacity&gt;=size，当等于时，容器此时已满，若再要加入新的元素时，就要重新进行内存分配，整个vector的数据都要移动到新内存。二次分配成本较高，在实际操作时，应尽量预留一定空间，避免二次分配。</p>
 <h3 id="二、构造与析构"><a href="#二、构造与析构" class="headerlink" title="二、构造与析构"></a>二、构造与析构</h3><h3 id="1、构造"><a href="#1、构造" class="headerlink" title="1、构造"></a>1、构造</h3><p>vector的构造函数主要有以下几种：</p>
 <pre><code>vector(): _Mybase(){
@@ -442,8 +439,7 @@ vector(const _Myt&amp; _Right) : _Mybase(_Right._Alval){
     //construct by copying _Right
     if(_Buy(_Right.size()))
         _Mylast=_Ucopy(_Right.begin(),_Right.end(),_Myfirst);
-}
-</code></pre><p>vector优异性能的秘诀之一，就是配置比其所容纳的元素所需更多的内存，一般在使用vector之前，就先预留足够空间，以避免二次分配，这样可以使vector的性能达到最佳。因此元素个数_Count是个远比元素值 _Val重要的参数，因此当构造一个vector时，首要参数一定是元素个数。<br>由上各构造函数可知，基本上所有构造函数都是基于_Construct _n() 的</p>
+}</code></pre><p>vector优异性能的秘诀之一，就是配置比其所容纳的元素所需更多的内存，一般在使用vector之前，就先预留足够空间，以避免二次分配，这样可以使vector的性能达到最佳。因此元素个数_Count是个远比元素值 _Val重要的参数，因此当构造一个vector时，首要参数一定是元素个数。<br>由上各构造函数可知，基本上所有构造函数都是基于_Construct _n() 的</p>
 <pre><code>bool _Buy(size_type _Capacity){
     //allocate array with _Capacity elements
     _Myfirst=0,_Mylast=0,_Myend=0;
@@ -461,8 +457,7 @@ void _Construct_n(size_type _Count,const _Ty&amp; _Val){
     //构造含有_Count个值为_Val的元素的容器
     if(_Buy(_Count))
         _Mylast= _Ufill(_Myfirst,_Count,_Val);
-}
-</code></pre><h3 id="2、析构"><a href="#2、析构" class="headerlink" title="2、析构"></a>2、析构</h3><p>vector的析构函数很简单，就是先销毁所有已存在的元素，然后释放所有内存</p>
+}</code></pre><h3 id="2、析构"><a href="#2、析构" class="headerlink" title="2、析构"></a>2、析构</h3><p>vector的析构函数很简单，就是先销毁所有已存在的元素，然后释放所有内存</p>
 <pre><code>void _Tidy()
     {   // free all storage
     if (_Myfirst != 0)
@@ -471,8 +466,7 @@ void _Construct_n(size_type _Count,const _Ty&amp; _Val){
         this-&gt;_Alval.deallocate(_Myfirst, _Myend - _Myfirst);
         }
     _Myfirst = 0, _Mylast = 0, _Myend = 0;
-    }
-</code></pre><h3 id="三、插入和删除元素"><a href="#三、插入和删除元素" class="headerlink" title="三、插入和删除元素"></a>三、插入和删除元素</h3><p>vector的插入和删除元素是通过push_ back () 、 pop_back()两个接口来实现的，他们的内部实现也非常简单</p>
+    }</code></pre><h3 id="三、插入和删除元素"><a href="#三、插入和删除元素" class="headerlink" title="三、插入和删除元素"></a>三、插入和删除元素</h3><p>vector的插入和删除元素是通过push_ back () 、 pop_back()两个接口来实现的，他们的内部实现也非常简单</p>
 <pre><code>void push_back(const _Ty&amp; _Val)
     {   // insert element at end
     if (size() &lt; capacity())
@@ -488,8 +482,7 @@ void pop_back()
         _Destroy(_Mylast - 1, _Mylast);
         --_Mylast;
         }
-    }
-</code></pre><p>当没有备用空间时候，push_back将调用insert进行扩容。将内存扩充原来2倍，然后将原数据复制过来，然后释放掉原数据，最后调整三个迭代器的数值_Myfirst,_Mylast,_Myend。所以扩容之后，指向原vector的迭代器会失效，必须重新调用成员函数获取才可以，所以使用迭代器最好时时刻刻重新获取，否则可能引发错误。</p>
+    }</code></pre><p>当没有备用空间时候，push_back将调用insert进行扩容。将内存扩充原来2倍，然后将原数据复制过来，然后释放掉原数据，最后调整三个迭代器的数值_Myfirst,_Mylast,_Myend。所以扩容之后，指向原vector的迭代器会失效，必须重新调用成员函数获取才可以，所以使用迭代器最好时时刻刻重新获取，否则可能引发错误。</p>
 <pre><code>template &lt;class T, class Alloc&gt;
 void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
   if (_Mylast != _Myend) {//还有备用空间
@@ -522,8 +515,7 @@ void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
     _Mylast = new_finish;
     _Myend = new_start + len;
   }
-}
-</code></pre><h3 id="四、其他接口"><a href="#四、其他接口" class="headerlink" title="四、其他接口"></a>四、其他接口</h3><h3 id="1、reserve-操作"><a href="#1、reserve-操作" class="headerlink" title="1、reserve()操作"></a>1、reserve()操作</h3><p>之前提到过reserve（Count） 函数主要是预留Count大小的空间，对应的是容器的容量，目的是保证（_Myend - _Myfirst）&gt;=Count。只有当空间不足时，才会操作，即重新分配一块内存，将原有元素拷贝到新内存，并销毁原有内存</p>
+}</code></pre><h3 id="四、其他接口"><a href="#四、其他接口" class="headerlink" title="四、其他接口"></a>四、其他接口</h3><h3 id="1、reserve-操作"><a href="#1、reserve-操作" class="headerlink" title="1、reserve()操作"></a>1、reserve()操作</h3><p>之前提到过reserve（Count） 函数主要是预留Count大小的空间，对应的是容器的容量，目的是保证（_Myend - _Myfirst）&gt;=Count。只有当空间不足时，才会操作，即重新分配一块内存，将原有元素拷贝到新内存，并销毁原有内存</p>
 <pre><code>void reserve(size_type _Count)
     {   // determine new minimum length of allocated storage
     if (capacity() &lt; _Count)
@@ -540,16 +532,14 @@ void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
         _Mylast = _Ptr + _Size;
         _Myfirst = _Ptr;
         }
-    }
-</code></pre><h3 id="2、resize-操作"><a href="#2、resize-操作" class="headerlink" title="2、resize()操作"></a>2、resize()操作</h3><p>resize（Count） 函数主要是用于改变size的，也就是改变vector的大小，最终改变的是（_Mylast - _Myfirst）的值，当size &lt; Count时,就插入元素，当size &gt;Count时，就擦除元素。</p>
+    }</code></pre><h3 id="2、resize-操作"><a href="#2、resize-操作" class="headerlink" title="2、resize()操作"></a>2、resize()操作</h3><p>resize（Count） 函数主要是用于改变size的，也就是改变vector的大小，最终改变的是（_Mylast - _Myfirst）的值，当size &lt; Count时,就插入元素，当size &gt;Count时，就擦除元素。</p>
 <pre><code>void resize(size_type _Newsize, _Ty _Val)
     {   // determine new length, padding with _Val elements as needed
     if (size() &lt; _Newsize)
         _Insert_n(end(), _Newsize - size(), _Val);
     else if (_Newsize &lt; size())
         erase(begin() + _Newsize, end());
-    }
-</code></pre><h3 id="3、-Insert-n-操作"><a href="#3、-Insert-n-操作" class="headerlink" title="3、_Insert_n()操作"></a>3、_Insert_n()操作</h3><p>resize()操作和insert()操作都会利用到_Insert_n()这个函数，这个函数非常重要，也比其他函数稍微复杂一点<br>虽然_Insert_n(_where, _Count, _Val ) 函数比较长，但是操作都非常简单，主要可以分为以下几种情况：</p>
+    }</code></pre><h3 id="3、-Insert-n-操作"><a href="#3、-Insert-n-操作" class="headerlink" title="3、_Insert_n()操作"></a>3、_Insert_n()操作</h3><p>resize()操作和insert()操作都会利用到_Insert_n()这个函数，这个函数非常重要，也比其他函数稍微复杂一点<br>虽然_Insert_n(_where, _Count, _Val ) 函数比较长，但是操作都非常简单，主要可以分为以下几种情况：</p>
 <p>1、_Count == 0，不需要插入，直接返回</p>
 <p>2、max_size() - size() &lt; _Count，超过系统设置的最大容量，会溢出，造成Xlen（）异常</p>
 <p>3、_Capacity &lt; size() + _Count，vector的容量不足以插入Count个元素，需要进行二次分配，扩大vector的容量。 在VS下，vector容量会扩大50%，即 _Capacity = _Capacity + _Capacity / 2;<br>若仍不足，则 _Capacity = size() + _Count;</p>
@@ -565,8 +555,7 @@ void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
        _Ptr = _Ufill(_Ptr, _Count, _Val);  // add new stuff
        _Umove(_VEC_ITER_BASE(_Where), _Mylast, _Ptr);  // copy suffix
        //内存释放与变量更新
-       }
-</code></pre><p>这种情况下，数据从原始容器移动到新分配内存时是从前到后移动的<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5tyr1p07j30h20by41b.jpg" alt="image"><br>4、空间足够，且被插入元素的位置比较靠近_Mylast,即已有元素的尾部</p>
+       }</code></pre><p>这种情况下，数据从原始容器移动到新分配内存时是从前到后移动的<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5tyr1p07j30h20by41b.jpg" alt="image"><br>4、空间足够，且被插入元素的位置比较靠近_Mylast,即已有元素的尾部</p>
 <p>这种情况下不需要再次进行内存分配，且数据是从后往前操作的。首先是将where~last向后移动，为待插入数据预留Count大小的空间，然后从_Mylast处开始填充，然后将从where处开始填充剩余元素</p>
 <pre><code>else if ((size_type)(_Mylast - _VEC_ITER_BASE(_Where)) &lt; _Count)
         {   // new stuff spills off end
@@ -577,8 +566,7 @@ void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
         _Mylast += _Count;
         std::fill(_VEC_ITER_BASE(_Where), _Mylast - _Count,
             _Val);  // insert up to old end
-        }
-</code></pre><p>5、空间足够，但插入的位置比较靠前<br>            {   // new stuff can all be assigned<br>            _Ty _Tmp = _Val;    // in case _Val is in sequence</p>
+        }</code></pre><p>5、空间足够，但插入的位置比较靠前<br>            {   // new stuff can all be assigned<br>            _Ty _Tmp = _Val;    // in case _Val is in sequence</p>
 <pre><code>pointer _Oldend = _Mylast;
 _Mylast = _Umove(_Oldend - _Count, _Oldend,
     _Mylast);   // copy suffix
@@ -586,8 +574,7 @@ _STDEXT _Unchecked_move_backward(_VEC_ITER_BASE(_Where), _Oldend - _Count,
     _Oldend);   // copy hole
 std::fill(_VEC_ITER_BASE(_Where), _VEC_ITER_BASE(_Where) + _Count,
     _Tmp);  // insert into hole
-}
-</code></pre><h3 id="4、erase-操作"><a href="#4、erase-操作" class="headerlink" title="4、erase()操作"></a>4、erase()操作</h3><pre><code>iterator erase(const_iterator _First_arg,
+}</code></pre><h3 id="4、erase-操作"><a href="#4、erase-操作" class="headerlink" title="4、erase()操作"></a>4、erase()操作</h3><pre><code>iterator erase(const_iterator _First_arg,
     const_iterator _Last_arg)
     {   // erase [_First, _Last)
     iterator _First = _Make_iter(_First_arg);
@@ -602,16 +589,14 @@ std::fill(_VEC_ITER_BASE(_Where), _VEC_ITER_BASE(_Where) + _Count,
         _Mylast = _Ptr;
         }
     return (_First);
-    }
-</code></pre><p>主要操作就是将后半部分的有效元素向前拷贝，并将后面空间的无效元素析构，并更新_Mylast变量<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5ua8ciphj30i90ahgns.jpg" alt="image"></p>
+    }</code></pre><p>主要操作就是将后半部分的有效元素向前拷贝，并将后面空间的无效元素析构，并更新_Mylast变量<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5ua8ciphj30i90ahgns.jpg" alt="image"></p>
 <h3 id="5、assign-操作"><a href="#5、assign-操作" class="headerlink" title="5、assign()操作"></a>5、assign()操作</h3><p>assign()操作最终都会调用到下面的函数，主要操作是首先擦除容器中已有的全部元素，在从头开始插入Count个Val元素</p>
 <pre><code>void _Assign_n(size_type _Count, const _Ty&amp; _Val)
     {   // assign _Count * _Val
     _Ty _Tmp = _Val;    // in case _Val is in sequence
     erase(begin(), end());
     insert(begin(), _Count, _Tmp);
-    }
-</code></pre><h2 id="（17）-vector使用的注意点及其原因，频繁对vector调用push-back-对性能的影响和原因。"><a href="#（17）-vector使用的注意点及其原因，频繁对vector调用push-back-对性能的影响和原因。" class="headerlink" title="（17） vector使用的注意点及其原因，频繁对vector调用push_back()对性能的影响和原因。"></a>（17） vector使用的注意点及其原因，频繁对vector调用push_back()对性能的影响和原因。</h2><p>vector使用注意事项：</p>
+    }</code></pre><h2 id="（17）-vector使用的注意点及其原因，频繁对vector调用push-back-对性能的影响和原因。"><a href="#（17）-vector使用的注意点及其原因，频繁对vector调用push-back-对性能的影响和原因。" class="headerlink" title="（17） vector使用的注意点及其原因，频繁对vector调用push_back()对性能的影响和原因。"></a>（17） vector使用的注意点及其原因，频繁对vector调用push_back()对性能的影响和原因。</h2><p>vector使用注意事项：</p>
 <p>（1）max_size函数返回的是vector中的内存分配器allocator能够分配的最大内存空间，即vector所能管控的最大序列长度，注意和capacity的区别。</p>
 <p>（2）resize重新调整大小，既可以减小也可以增加size（数组的有效长度），但是内存并不一定减小。</p>
 <p>（3）insert是在所指的元素之前进行插入，erase返回的迭代器指向被最后删除的元素的下一个元素。</p>
@@ -619,8 +604,7 @@ std::fill(_VEC_ITER_BASE(_Where), _VEC_ITER_BASE(_Where) + _Count,
 <p>（5）当预先知道所需的存储空间时，可以使用reserve预先分配内存。</p>
 <p>（6）vector对象作为一个高效的栈使用时，应该让容器保持一定的预留存储空间，频繁的重新分配内存会影响栈的性能，可以使用reserve预分配内存，使用push_back、pop_back和back插入、删除和读取最后一个元素。</p>
 <p>（7）clear只是保证了析构所有的元素，即size()=0，但并不保证释放所有的存储空间，即capacity不一定等于0，可以使用如下方式释放所有内存：</p>
-<pre><code>vec.swap(vector&lt;T&gt;());
-</code></pre><p>在原来空间不够存储新值时，每次调用push_back方法都会重新分配新的空间以满足新数据的添加操作。</p>
+<pre><code>vec.swap(vector&lt;T&gt;());</code></pre><p>在原来空间不够存储新值时，每次调用push_back方法都会重新分配新的空间以满足新数据的添加操作。</p>
 <p>如果在程序中频繁进行这种操作，还是比较消耗性能的。</p>
 <h2 id="（18）-C-中的重载和重写的区别："><a href="#（18）-C-中的重载和重写的区别：" class="headerlink" title="（18） C++中的重载和重写的区别："></a>（18） C++中的重载和重写的区别：</h2><p><a href="https://blog.csdn.net/zx3517288/article/details/48976097" target="_blank" rel="noopener">https://blog.csdn.net/zx3517288/article/details/48976097</a><br>重载：是指同一可访问区内被声明的几个具有不同参数列（参数的类型，个数，顺序不同）的同名函数，根据参数列表确定调用哪个函数，重载不关心函数返回类型。</p>
 <p>示例：</p>
@@ -631,8 +615,7 @@ public:
   void test(int i, double j);//overload
   void test(double i, int j);//overload
   int test(int i);         //错误，非重载。注意重载不关心函数返回类型。
-};
-</code></pre><p>重写(覆盖)：是指派生类中存在重新定义的函数。其函数名，参数列表，返回值类型，所有都必须同基类中被重写的函数一致。只有函数体不同（花括号内），派生类调用时会调用派生类的重写函数，不会调用被重写函数。重写的基类中被重写的函数必须有virtual修饰。</p>
+};</code></pre><p>重写(覆盖)：是指派生类中存在重新定义的函数。其函数名，参数列表，返回值类型，所有都必须同基类中被重写的函数一致。只有函数体不同（花括号内），派生类调用时会调用派生类的重写函数，不会调用被重写函数。重写的基类中被重写的函数必须有virtual修饰。</p>
 <p>示例：</p>
 <pre><code>#include&lt;iostream&gt;
 
@@ -656,8 +639,7 @@ int main()
     pb-&gt;fun(3);//Derived::fun(int)
 
     system(&quot;pause&quot;);
-    return 0;
-</code></pre><p>重载和重写的区别：</p>
+    return 0;</code></pre><p>重载和重写的区别：</p>
 <p>（1）范围区别：重写和被重写的函数在不同的类中，重载和被重载的函数在同一类中。</p>
 <p>（2）参数区别：重写与被重写的函数参数列表一定相同，重载和被重载的函数参数列表一定不同。</p>
 <p>（3）virtual的区别：重写的基类必须要有virtual修饰，重载函数和被重载函数可以被virtual修饰，也可以没有。</p>
@@ -714,8 +696,7 @@ int main(int argc,char * argv[])
     printf(&quot;     常全局变量:%p\n&quot;,&amp;const_global);
     printf(&quot;           函数:%p\n&quot;,main);
     return 0;
-}
-</code></pre><h3 id="2-从上面可以看出c-c-的内存分配方式主要有三种"><a href="#2-从上面可以看出c-c-的内存分配方式主要有三种" class="headerlink" title="(2)从上面可以看出c/c++的内存分配方式主要有三种"></a>(2)从上面可以看出c/c++的内存分配方式主要有三种</h3><h4 id="a-从静态存储区域分配"><a href="#a-从静态存储区域分配" class="headerlink" title="a.从静态存储区域分配:"></a>a.从静态存储区域分配:</h4><p>   内存在程序编译时已经分配好,这块内存在程序的整个运行期间都存在.速度快,不容易出错.因为由系统会善后.</p>
+}</code></pre><h3 id="2-从上面可以看出c-c-的内存分配方式主要有三种"><a href="#2-从上面可以看出c-c-的内存分配方式主要有三种" class="headerlink" title="(2)从上面可以看出c/c++的内存分配方式主要有三种"></a>(2)从上面可以看出c/c++的内存分配方式主要有三种</h3><h4 id="a-从静态存储区域分配"><a href="#a-从静态存储区域分配" class="headerlink" title="a.从静态存储区域分配:"></a>a.从静态存储区域分配:</h4><p>   内存在程序编译时已经分配好,这块内存在程序的整个运行期间都存在.速度快,不容易出错.因为由系统会善后.</p>
 <h4 id="b-在栈上分配内存"><a href="#b-在栈上分配内存" class="headerlink" title="b.在栈上分配内存:"></a>b.在栈上分配内存:</h4><p>   在执行函数的时候,函数内非静态局部变量的存储单元都是在栈上创建,函数执行结束的时候这些存储单元自动被释放.栈内存分配内置于处理器的指令集中,效率很高但是分配的内容有限.</p>
 <h4 id="c-从堆中分配内存"><a href="#c-从堆中分配内存" class="headerlink" title="c.从堆中分配内存:"></a>c.从堆中分配内存:</h4><p>即是动态分配内存.程序在运行的时候使用malloc/new申请任意大小的内存,程序员自己负责在何时用free/delete释放内存.动态内存的生存期由程序员决定,使用非常的灵活.如果在堆上分配了内存,就有责任去回收它,否则运行程序会出现内存泄漏,另外频繁的分配和释放不同大小的堆空间将会产生堆内碎片.不易管理;</p>
 <h2 id="（20）-介绍面向对象的三大特性，并且举例说明每一个。"><a href="#（20）-介绍面向对象的三大特性，并且举例说明每一个。" class="headerlink" title="（20） 介绍面向对象的三大特性，并且举例说明每一个。"></a>（20） 介绍面向对象的三大特性，并且举例说明每一个。</h2><h3 id="1-封装"><a href="#1-封装" class="headerlink" title="(1)封装:"></a>(1)封装:</h3><p>将客观事物封装成抽象的类,并且设计者可以对类的成员进行访问控制权限控制. 这样一方面可以做到数据的隐藏,保护数据安全;另一方面,封装可以修改类的内部实现而不用修改调用了该类的用户的代码.同时封装还有利于代码的 方便复用；</p>
@@ -746,24 +727,18 @@ private:
     int b;
 };
 
-//A，B的实现省略
-</code></pre><p>因为A有virtual void f（），和g（），所以编译器为A类准备了一个虚表vtableA，内容如下：</p>
+//A，B的实现省略</code></pre><p>因为A有virtual void f（），和g（），所以编译器为A类准备了一个虚表vtableA，内容如下：</p>
 <pre><code>A::f 的地址
-A::g 的地址
-</code></pre><p>B因为继承了A，所以编译器也为B准备了一个虚表vtableB，内容如下：</p>
+A::g 的地址</code></pre><p>B因为继承了A，所以编译器也为B准备了一个虚表vtableB，内容如下：</p>
 <pre><code>A::f 的地址
-B::g 的地址
-</code></pre><p>注意：因为B::ｇ是重写了的，所以B的虚表的g放的是B::g的入口地址，但是f是从上面的A继承下来的，所以f的地址是A::f的入口地址。</p>
+B::g 的地址</code></pre><p>注意：因为B::ｇ是重写了的，所以B的虚表的g放的是B::g的入口地址，但是f是从上面的A继承下来的，所以f的地址是A::f的入口地址。</p>
 <p>然后某处有语句 B bB;的时候，编译器分配空间时，除了A的int a，B的成员int b；以外，还分配了一个虚指针vptr，指向B的虚表vtableB，bB的布局如下：</p>
 <pre><code>vptr ： 指向B的虚表vtableB
 int a： 继承A的成员
-int b： B成员
-</code></pre><p>当如下语句的时候：</p>
-<pre><code>A *pa = &amp;bB;
-</code></pre><p>pa的结构就是A的布局（就是说用pa只能访问的到bB对象的前两项，访问不到第三项int b）</p>
+int b： B成员</code></pre><p>当如下语句的时候：</p>
+<pre><code>A *pa = &amp;bB;</code></pre><p>pa的结构就是A的布局（就是说用pa只能访问的到bB对象的前两项，访问不到第三项int b）</p>
 <p>那么pa-&gt;g()中，编译器知道的是，g是一个声明为virtual的成员函数，而且其入口地址放在表格（无论是vtalbeA表还是vtalbeB表）的第2项，那么编译器编译这条语句的时候就如是转换：</p>
-<pre><code>call *(pa-&gt;vptr)[1]（C语言的数组索引从0开始）。
-</code></pre><p>这一项放的是B：：g()的入口地址，则就实现了多态。（注意bB的vptr指向的是B的虚表vtableB）</p>
+<pre><code>call *(pa-&gt;vptr)[1]（C语言的数组索引从0开始）。</code></pre><p>这一项放的是B：：g()的入口地址，则就实现了多态。（注意bB的vptr指向的是B的虚表vtableB）</p>
 <p>另外要注意的是，如上的实现并不是唯一的，C++标准只要求用这种机制实现多态，至于虚指针vptr到底放在一个对象布局的哪里，标准没有要求，每个编译器自己决定。以上的结果是根据g++ 4.3.4经过反汇编分析出来的。</p>
 <h2 id="（23）-实现编译器处理虚函数表应该如何处理"><a href="#（23）-实现编译器处理虚函数表应该如何处理" class="headerlink" title="（23） 实现编译器处理虚函数表应该如何处理"></a>（23） 实现编译器处理虚函数表应该如何处理</h2><h2 id="（24）-析构函数一般写成虚函数的原因"><a href="#（24）-析构函数一般写成虚函数的原因" class="headerlink" title="（24） 析构函数一般写成虚函数的原因"></a>（24） 析构函数一般写成虚函数的原因</h2><p><strong>构造函数不能是虚函数，析构函数可以是虚函数且推荐最好设置为虚函数。</strong>下面我们来看看为什么。</p>
 <p>那么为什么析构函数推荐最好设置为虚函数呢？当我们delete(a)的时候，如果析构函数不是虚函数，那么调用的将会是基类base的析构函数。而当继承的时候，通常派生类会在基类的基础上定义自己的成员，此时我们当时是希望可以调用派生类的析构函数对新定义的成员也进行析构啦。</p>
@@ -779,8 +754,7 @@ int b： B成员
 7.子类初始化列表内容进行构造
 8.子类构造函数体调用
 （注意一点，初始化列表内的数据不按书写顺序，而是按类内部的定义顺序）
-析构的顺序恰好相反，所以也不要在析构函数中调用虚函数，那样也是没有意义的。
-</code></pre><h2 id="（26）-构造函数或者析构函数中调用虚函数会怎样"><a href="#（26）-构造函数或者析构函数中调用虚函数会怎样" class="headerlink" title="（26） 构造函数或者析构函数中调用虚函数会怎样"></a>（26） 构造函数或者析构函数中调用虚函数会怎样</h2><p>对于构造函数和析构函数与虚函数的关系我们也可以从另一方面来理解。通常是如例子中base *a=new(A)这样创建一个对象时调用构造函数，此时我们是在new函数中直接指定类名字的，当然会直接调用对应类的构造函数，不会出现基类类型实际指向子类的情况出现。而调用析构函数通常是针对对象的操作，如delete(a)，此时我们当然希望可以调用到a实际指向的类型（类A）的析构函数，故需要设置为虚函数。</p>
+析构的顺序恰好相反，所以也不要在析构函数中调用虚函数，那样也是没有意义的。</code></pre><h2 id="（26）-构造函数或者析构函数中调用虚函数会怎样"><a href="#（26）-构造函数或者析构函数中调用虚函数会怎样" class="headerlink" title="（26） 构造函数或者析构函数中调用虚函数会怎样"></a>（26） 构造函数或者析构函数中调用虚函数会怎样</h2><p>对于构造函数和析构函数与虚函数的关系我们也可以从另一方面来理解。通常是如例子中base *a=new(A)这样创建一个对象时调用构造函数，此时我们是在new函数中直接指定类名字的，当然会直接调用对应类的构造函数，不会出现基类类型实际指向子类的情况出现。而调用析构函数通常是针对对象的操作，如delete(a)，此时我们当然希望可以调用到a实际指向的类型（类A）的析构函数，故需要设置为虚函数。</p>
 <pre><code>class ClxBase
 {
 public:
@@ -801,18 +775,14 @@ public:
 
 ClxBase *pTest = new ClxDerived;
 pTest-&gt;DoSomething();
-delete pTest;
-</code></pre><p> 输出结果是：</p>
+delete pTest;</code></pre><p> 输出结果是：</p>
 <pre><code>Do something in class ClxDerived!
-Output from the destructor of class ClxDerived!
-</code></pre><p>而如果去掉基类中析构函数的virtual关键字输出则变成</p>
+Output from the destructor of class ClxDerived!</code></pre><p>而如果去掉基类中析构函数的virtual关键字输出则变成</p>
 <pre><code>Do something in class ClxDerived!
-Output from the destructor of class ClxDerived!
-</code></pre><p>也就是说，类ClxDerived的析构函数根本没有被调用！一般情况下类的析构函数里面都是释放内存资源，而析构函数不被调用的话就会造成内存泄漏。我想所有的C++程序员都知道这样的危险性。当然，如果在析构函数中做了其他工作的话，那你的所有努力也都是白费力气。</p>
+Output from the destructor of class ClxDerived!</code></pre><p>也就是说，类ClxDerived的析构函数根本没有被调用！一般情况下类的析构函数里面都是释放内存资源，而析构函数不被调用的话就会造成内存泄漏。我想所有的C++程序员都知道这样的危险性。当然，如果在析构函数中做了其他工作的话，那你的所有努力也都是白费力气。</p>
 <h2 id="（27）-纯虚函数"><a href="#（27）-纯虚函数" class="headerlink" title="（27） 纯虚函数"></a>（27） 纯虚函数</h2><p><strong>C++纯虚函数</strong></p>
 <h3 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h3><p>　纯虚函数是在基类中声明的虚函数，它在基类中没有定义，但要求任何派生类都要定义自己的实现方法。在基类中实现纯虚函数的方法是在函数原型后加“=0”</p>
-<pre><code>　virtual void funtion1()=0
-</code></pre><h3 id="二、引入原因"><a href="#二、引入原因" class="headerlink" title="二、引入原因"></a>二、引入原因</h3><p>1、为了方便使用多态特性<br>我们常常需要在基类中定义虚拟函数。</p>
+<pre><code>　virtual void funtion1()=0</code></pre><h3 id="二、引入原因"><a href="#二、引入原因" class="headerlink" title="二、引入原因"></a>二、引入原因</h3><p>1、为了方便使用多态特性<br>我们常常需要在基类中定义虚拟函数。</p>
 <p>2、在很多情况下，基类本身生成对象是不合情理的。例如，动物作为一个基类可以派生出老虎、孔雀等子类，但动物本身生成对象明显不合常理。</p>
 <p>为了解决上述问题，引入了纯虚函数的概念，<strong>将函数定义为纯虚函数（方法：virtual ReturnType Function()= 0;）</strong>，则编译器要求在派生类中必须予以重写以实现多态性。<strong>同时含有纯虚拟函数的类称为抽象类，它不能生成对象。</strong>这样就很好地解决了上述两个问题。<br>声明了纯虚函数的类是一个抽象类。所以，用户不能创建类的实例，只能创建它的派生类的实例。<br>纯虚函数最显著的特征是：它们必须在继承类中重新声明函数（不要后面的＝0，否则该派生类也不能实例化），而且它们在抽象类中往往没有定义。<br>定义纯虚函数的目的在于，使派生类仅仅只是继承函数的接口。</p>
 <p>纯虚函数的意义，让所有的类对象（主要是派生类对象）都可以执行纯虚函数的动作，但类无法为纯虚函数提供一个合理的缺省实现。所以类纯虚函数的声明就是在告诉子类的设计者，“你必须提供一个纯虚函数的实现，但我不知道你会怎样实现它”。</p>
@@ -820,7 +790,7 @@ Output from the destructor of class ClxDerived!
 <p>（2）抽象类的作用：<br>抽象类的主要作用是将有关的操作作为结果接口组织在一个继承层次结构中，由它来为派生类提供一个公共的根，派生类将具体实现在其基类中作为接口的操作。所以派生类实际上刻画了一组子类的操作接口的通用语义，这些语义也传给子类，子类可以具体实现这些语义，也可以再将这些语义传给自己的子类。</p>
 <p>（3）使用抽象类时注意：<br>•   抽象类只能作为基类来使用，其纯虚函数的实现由派生类给出。如果派生类中没有重新定义纯虚函数，而只是继承基类的纯虚函数，则这个派生类仍然还是一个抽象类。如果派生类中给出了基类纯虚函数的实现，则该派生类就不再是抽象类了，它是一个可以建立对象的具体的类。<br>•   抽象类是不能定义对象的。</p>
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>1、<strong>纯虚函数声明如下： virtual void funtion1()=0;</strong> 纯虚函数一定没有定义，纯虚函数用来规范派生类的行为，即接口。包含纯虚函数的类是抽象类，抽象类不能定义实例，但可以声明指向实现该抽象类的具体类的指针或引用。</p>
-<p>2、虚函数声明如下：virtual ReturnType FunctionName(Parameter)；虚函数必须实现，如果不实现，编译器将报错，错误提示为：<br>error LNK<em>**</em>: unresolved external symbol “public: virtual void __thiscall ClassName::virtualFunctionName(void)”</p>
+<p>2、虚函数声明如下：virtual ReturnType FunctionName(Parameter)；虚函数必须实现，如果不实现，编译器将报错，错误提示为：<br>error LNK****: unresolved external symbol “public: virtual void __thiscall ClassName::virtualFunctionName(void)”</p>
 <p>3、对于虚函数来说，父类和子类都有各自的版本。由多态方式调用的时候动态绑定。</p>
 <p>4、实现了纯虚函数的子类，该纯虚函数在子类中就编程了虚函数，子类的子类即孙子类可以覆盖该虚函数，由多态方式调用的时候动态绑定。</p>
 <p>5、虚函数是C++中用于实现多态(polymorphism)的机制。核心理念就是通过基类访问派生类定义的函数。</p>
@@ -841,8 +811,7 @@ Output from the destructor of class ClxDerived!
 
     类名(const 类名 &amp;对象名);    // 函数定义
 
-}
-</code></pre><p>2<br>拷贝构造函数分为浅拷贝和深拷贝两种，浅拷贝和深拷贝主要区别就是复制指针时是否重新创建内存空间。</p>
+}</code></pre><p>2<br>拷贝构造函数分为浅拷贝和深拷贝两种，浅拷贝和深拷贝主要区别就是复制指针时是否重新创建内存空间。</p>
 <p>如果没有没有创建内存只赋值地址为浅拷贝，创建新内存把值全部拷贝一份就是深拷贝。</p>
 <p>浅拷贝在类里面有指针成员的情况下只会复制指针的地址，会导致两个成员指针指向同一块内存，这样在要是分别delete释放时就会出现问题，因此需要用深拷贝。先看看下面的例子：</p>
 <p>3<br>例子中建立了两个猫对象，b创建时调用拷贝构造函数拷贝了名字，然后a被delete掉，再调用b的Say()方法。如果使用默认的浅拷贝拷贝构造函数将会无法输出正确的名字，所以需要定义自己的拷贝构造函数。另外值得一提的是拷贝构造函数不是赋值运算符=号，如果对象已经创建在用=号复制，需要重载=号运算符函数。</p>
@@ -866,8 +835,7 @@ Output from the destructor of class ClxDerived!
 
       private:
       int m_value;  // 类私有的数据成员
-      }
-</code></pre><h3 id="二、-构造函数的种类"><a href="#二、-构造函数的种类" class="headerlink" title="二、 构造函数的种类"></a>二、 构造函数的种类</h3><pre><code>#include &lt;iostream&gt;
+      }</code></pre><h3 id="二、-构造函数的种类"><a href="#二、-构造函数的种类" class="headerlink" title="二、 构造函数的种类"></a>二、 构造函数的种类</h3><pre><code>#include &lt;iostream&gt;
 using namespace std;
 
 class Complex
@@ -942,8 +910,7 @@ public:
         // 把等号左边的对象再次传出,目的是为了支持连等 eg:a=b=c 系统首先运行 b=c 然后运行 a=(b=c的返回值,这里应该是复制c值后的b对象)
         return *this;
     }
-};
-</code></pre><h3 id="三、使用上面定义的类对象来说明各个构造函数的用法："><a href="#三、使用上面定义的类对象来说明各个构造函数的用法：" class="headerlink" title="三、使用上面定义的类对象来说明各个构造函数的用法："></a>三、使用上面定义的类对象来说明各个构造函数的用法：</h3><pre><code>int main()
+};</code></pre><h3 id="三、使用上面定义的类对象来说明各个构造函数的用法："><a href="#三、使用上面定义的类对象来说明各个构造函数的用法：" class="headerlink" title="三、使用上面定义的类对象来说明各个构造函数的用法："></a>三、使用上面定义的类对象来说明各个构造函数的用法：</h3><pre><code>int main()
 {   
     // 调用了无参构造函数，数据成员初值被赋值为0.0
     Complex c1,c2;
@@ -973,8 +940,7 @@ public:
     // 其实这儿就涉及了C++中的两种初始化的方式：复制初始化和赋值初始化。
     // 其中c5采用的是复制初始化，而c4采用的是赋值初始化，这两种方式都是要调用拷贝构造函数的。
 
-}
-</code></pre><h2 id="（33）-什么情况下会调用拷贝构造函数（三种情况）"><a href="#（33）-什么情况下会调用拷贝构造函数（三种情况）" class="headerlink" title="（33） 什么情况下会调用拷贝构造函数（三种情况）"></a>（33） 什么情况下会调用拷贝构造函数（三种情况）</h2><p>（1）用类的一个对象去初始化另一个对象时</p>
+}</code></pre><h2 id="（33）-什么情况下会调用拷贝构造函数（三种情况）"><a href="#（33）-什么情况下会调用拷贝构造函数（三种情况）" class="headerlink" title="（33） 什么情况下会调用拷贝构造函数（三种情况）"></a>（33） 什么情况下会调用拷贝构造函数（三种情况）</h2><p>（1）用类的一个对象去初始化另一个对象时</p>
 <p>（2）当函数的形参是类的对象时（也就是值传递时），如果是引用传递则不会调用</p>
 <p>（3）当函数的返回值是类的对象或引用时</p>
 <p>简单示例：</p>
@@ -1032,8 +998,7 @@ int _tmain(int argc, _TCHAR* argv[])
     A e1=get_A_1();     //调用拷贝构造函数  
 
     return 0;  
-}  
-</code></pre><h2 id="（34）-结构体内存对齐方式和为什么要进行内存对齐？"><a href="#（34）-结构体内存对齐方式和为什么要进行内存对齐？" class="headerlink" title="（34） 结构体内存对齐方式和为什么要进行内存对齐？"></a>（34） 结构体内存对齐方式和为什么要进行内存对齐？</h2><p>１:数据成员对齐规则：结构(struct)(或联合(union))的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置要从该成员大小或者成员的子成员大小（只要该成员有子成员，比如说是数组，结构体等）的整数倍开始(比如int在32位机为４字节,则要从４的整数倍地址开始存储。</p>
+}  </code></pre><h2 id="（34）-结构体内存对齐方式和为什么要进行内存对齐？"><a href="#（34）-结构体内存对齐方式和为什么要进行内存对齐？" class="headerlink" title="（34） 结构体内存对齐方式和为什么要进行内存对齐？"></a>（34） 结构体内存对齐方式和为什么要进行内存对齐？</h2><p>１:数据成员对齐规则：结构(struct)(或联合(union))的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置要从该成员大小或者成员的子成员大小（只要该成员有子成员，比如说是数组，结构体等）的整数倍开始(比如int在32位机为４字节,则要从４的整数倍地址开始存储。</p>
 <p>２:结构体作为成员:如果一个结构里有某些结构体成员,则结构体成员要从其内部最大元素大小的整数倍地址开始存储.(struct a里存有struct b,b里有char,int ,double等元素,那b应该从8的整数倍开始存储.)</p>
 <p>３:收尾工作:结构体的总大小,也就是sizeof的结果,.必须是其内部最大成员的整数倍.不足的要补齐.</p>
 <p>4:在代码前加一句#pragma pack(1),告诉编译器,所有的对齐都按照1的整数倍对齐,换句话说就是没有对齐规则.如果#pragma pack (n)中指定的n大于结构体中最大成员的size，则其不起作用，结构体仍然按照size最大的成员进行对界</p>
@@ -1047,28 +1012,24 @@ int _tmain(int argc, _TCHAR* argv[])
 &lt;返回类型&gt;&lt;函数名&gt;(參数表)
 {
     函数体
-}
-</code></pre><p>当中，template是定义模板函数的关键字；template后面的尖括号不能省略；typename（或class)是声明数据类型參数标识符的关键字。用以说明它后面的标识符是数据类型标识符。这样，在以后定义的这个函数中，凡希望依据实參数据类型来确定数据类型的变量，都能够用数据类型參数标识符来说明，从而使这个变量能够适应不同的数据类型。</p>
+}</code></pre><p>当中，template是定义模板函数的关键字；template后面的尖括号不能省略；typename（或class)是声明数据类型參数标识符的关键字。用以说明它后面的标识符是数据类型标识符。这样，在以后定义的这个函数中，凡希望依据实參数据类型来确定数据类型的变量，都能够用数据类型參数标识符来说明，从而使这个变量能够适应不同的数据类型。</p>
 <p>比如：</p>
 <pre><code>template&lt;typename（或class) T&gt;
 T fuc(T x, T y)
 {
     T x;
     //……
-}
-</code></pre><p>函数模板仅仅是声明了一个函数的描写叙述即模板。不是一个能够直接运行的函数，仅仅有依据实际情况用实參的数据类型取代类型參数标识符之后，才干产生真正的函数。</p>
+}</code></pre><p>函数模板仅仅是声明了一个函数的描写叙述即模板。不是一个能够直接运行的函数，仅仅有依据实际情况用实參的数据类型取代类型參数标识符之后，才干产生真正的函数。</p>
 <h3 id="（2）模板函数："><a href="#（2）模板函数：" class="headerlink" title="（2）模板函数："></a>（2）模板函数：</h3><p>模板函数的生成就是将函数模板的类型形參实例化的过程。</p>
 <p>比如：</p>
 <pre><code>double d;
     int a;
-    fuc(d,a);
-</code></pre><p>则系统将用实參d的数据类型double去取代函数模板中的T生成函数：</p>
+    fuc(d,a);</code></pre><p>则系统将用实參d的数据类型double去取代函数模板中的T生成函数：</p>
 <pre><code>double fuc(double x,int y)
 {
     double x;
     //……
-}
-</code></pre><h2 id="（41）-成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？"><a href="#（41）-成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？" class="headerlink" title="（41） 成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？"></a>（41） 成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？</h2><p>概念：以一个冒号开始，接着是以逗号分隔的数据成员列表，每个数据成员后面跟一个放在括号中的初始化式，对成员进行初始化。</p>
+}</code></pre><h2 id="（41）-成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？"><a href="#（41）-成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？" class="headerlink" title="（41） 成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？"></a>（41） 成员初始化列表的概念，为什么用成员初始化列表会快一些（性能优势）？</h2><p>概念：以一个冒号开始，接着是以逗号分隔的数据成员列表，每个数据成员后面跟一个放在括号中的初始化式，对成员进行初始化。</p>
 <p>效率：构造函数之前执行默认初始化。而成员初始化列表，可以立即初始化，所以更快些。</p>
 <p>成员是const对象和引用必须初始化。</p>
 <h2 id="（42）-用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）"><a href="#（42）-用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）" class="headerlink" title="（42） 用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）"></a>（42） 用过C11吗，知道C11新特性吗？（有面试官建议熟悉C11）</h2><p>C++11：C++11包括大量的新特性：包括lambda表达式，类型推导关键字auto、decltype，和模板的大量改进。</p>
@@ -1084,31 +1045,26 @@ auto ch = &apos;A&apos;;
 auto func = less&lt;int&gt;();  
 vector&lt;int&gt; iv;  
 auto ite = iv.begin();  
-auto p = new foo() // 对自定义类型进行类型推导
-</code></pre><p>auto不光有以上的应用，它在模板中也是大显身手，比如下例这个加工产品的例子中，如果不使用auto就必须声明Product这一模板参数：</p>
+auto p = new foo() // 对自定义类型进行类型推导</code></pre><p>auto不光有以上的应用，它在模板中也是大显身手，比如下例这个加工产品的例子中，如果不使用auto就必须声明Product这一模板参数：</p>
 <pre><code>template &lt;typename Product, typename Creator&gt;  
 void processProduct(const Creator&amp; creator) {  
     Product* val = creator.makeObject();  
     // do somthing with val  
-}         
-</code></pre><p>如果使用auto，则可以这样写：</p>
+}         </code></pre><p>如果使用auto，则可以这样写：</p>
 <pre><code>template &lt;typename Creator&gt;  
 void processProduct(const Creator&amp; creator) {  
     auto val = creator.makeObject();  
     // do somthing with val  
-}
-</code></pre><p>抛弃了麻烦的模板参数，整个代码变得更加正解了。</p>
+}</code></pre><p>抛弃了麻烦的模板参数，整个代码变得更加正解了。</p>
 <h4 id="decltype"><a href="#decltype" class="headerlink" title="decltype"></a>decltype</h4><p>decltype实际上有点像auto的反函数，auto可以让你声明一个变量，而decltype则可以从一个变量或表达式中得到类型，有实例如下：</p>
 <pre><code>int x = 3;  
-decltype(x) y = x;
-</code></pre><p>有人会问，decltype的实用之处在哪里呢，我们接着上边的例子继续说下去，如果上文中的加工产品的例子中我们想把产品作为返回值该怎么办呢？我们可以这样写：</p>
+decltype(x) y = x;</code></pre><p>有人会问，decltype的实用之处在哪里呢，我们接着上边的例子继续说下去，如果上文中的加工产品的例子中我们想把产品作为返回值该怎么办呢？我们可以这样写：</p>
 <pre><code>template &lt;typename Creator&gt;  
 auto processProduct(const Creator&amp; creator) -&gt; decltype(creator.makeObject()) {  
     auto val = creator.makeObject();  
     // do somthing with val  
 }
-nullptr
-</code></pre><p>nullptr是为了解决原来C++中NULL的二义性问题而引进的一种新的类型，因为NULL实际上代表的是0，</p>
+nullptr</code></pre><p>nullptr是为了解决原来C++中NULL的二义性问题而引进的一种新的类型，因为NULL实际上代表的是0，</p>
 <pre><code>void F(int a){  
     cout&lt;&lt;a&lt;&lt;endl;  
 }  
@@ -1129,13 +1085,11 @@ int main(){
     F(nullptr);  
 
     return 0;  
-}
-</code></pre><h3 id="序列for循环"><a href="#序列for循环" class="headerlink" title="序列for循环"></a>序列for循环</h3><p>在C++中for循环可以使用类似java的简化的for循环，可以用于遍历数组，容器，string以及由begin和end函数定义的序列（即有Iterator），示例代码如下：</p>
+}</code></pre><h3 id="序列for循环"><a href="#序列for循环" class="headerlink" title="序列for循环"></a>序列for循环</h3><p>在C++中for循环可以使用类似java的简化的for循环，可以用于遍历数组，容器，string以及由begin和end函数定义的序列（即有Iterator），示例代码如下：</p>
 <pre><code>map&lt;string, int&gt; m{{"a", 1}, {"b", 2}, {"c", 3}};  
 for (auto p : m){  
     cout&lt;&lt;p.first&lt;&lt;&quot; : &quot;&lt;&lt;p.second&lt;&lt;endl;  
-}
-</code></pre><h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>lambda表达式类似Javascript中的闭包，它可以用于创建并定义匿名的函数对象，以简化编程工作。Lambda的语法如下：</p>
+}</code></pre><h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>lambda表达式类似Javascript中的闭包，它可以用于创建并定义匿名的函数对象，以简化编程工作。Lambda的语法如下：</p>
 <pre><code>[函数对象参数]（操作符重载函数参数）-&gt;返回值类型{函数体}
 
 vector&lt;int&gt; iv{5, 4, 3, 2, 1};  
@@ -1145,47 +1099,37 @@ for_each(iv.begin(), iv.end(), [b](int &amp;x){cout&lt;&lt;(x + b)&lt;&lt;endl;}
 
 for_each(iv.begin(), iv.end(), [=](int &amp;x){x *= (a + b);});     // (2)  
 
-for_each(iv.begin(), iv.end(), [=](int &amp;x)-&gt;int{return x * (a + b);});// (3)
-</code></pre><p>[]内的参数指的是Lambda表达式可以取得的全局变量。(1)函数中的b就是指函数可以得到在Lambda表达式外的全局变量，如果在[]中传入=的话，即是可以取得所有的外部变量，如（2）和（3）Lambda表达式<br>()内的参数是每次调用函数时传入的参数。<br>-&gt;后加上的是Lambda表达式返回值的类型，如（3）中返回了一个int类型的变量</p>
+for_each(iv.begin(), iv.end(), [=](int &amp;x)-&gt;int{return x * (a + b);});// (3)</code></pre><p>[]内的参数指的是Lambda表达式可以取得的全局变量。(1)函数中的b就是指函数可以得到在Lambda表达式外的全局变量，如果在[]中传入=的话，即是可以取得所有的外部变量，如（2）和（3）Lambda表达式<br>()内的参数是每次调用函数时传入的参数。<br>-&gt;后加上的是Lambda表达式返回值的类型，如（3）中返回了一个int类型的变量</p>
 <h3 id="变长参数的模板"><a href="#变长参数的模板" class="headerlink" title="变长参数的模板"></a>变长参数的模板</h3><p>我们在C++中都用过pair，pair可以使用make_pair构造，构造一个包含两种不同类型的数据的容器。比如，如下代码：</p>
 <pre><code>auto p = make_pair(1, &quot;C++ 11&quot;);
 由于在C++11中引入了变长参数模板，所以发明了新的数据类型：tuple，tuple是一个N元组，可以传入1个， 2个甚至多个不同类型的数据
 
 auto t1 = make_tuple(1, 2.0, &quot;C++ 11&quot;);  
-auto t2 = make_tuple(1, 2.0, &quot;C++ 11&quot;, {1, 0, 2});
-</code></pre><p>这样就避免了从前的pair中嵌套pair的丑陋做法，使得代码更加整洁</p>
+auto t2 = make_tuple(1, 2.0, &quot;C++ 11&quot;, {1, 0, 2});</code></pre><p>这样就避免了从前的pair中嵌套pair的丑陋做法，使得代码更加整洁</p>
 <p>另一个经常见到的例子是Print函数，在C语言中printf可以传入多个参数，在C++11中，我们可以用变长参数模板实现更简洁的Print</p>
 <pre><code>template&lt;typename head, typename... tail&gt;  
 void Print(Head head, typename... tail) {  
     cout&lt;&lt; head &lt;&lt;endl;  
     Print(tail...);  
-}
-</code></pre><p>Print中可以传入多个不同种类的参数，如下：</p>
+}</code></pre><p>Print中可以传入多个不同种类的参数，如下：</p>
 <p>Print(1, 1.0, “C++11”);</p>
 <h3 id="更加优雅的初始化方法"><a href="#更加优雅的初始化方法" class="headerlink" title="更加优雅的初始化方法"></a>更加优雅的初始化方法</h3><p>在引入C++11之前，只有数组能使用初始化列表，其他容器想要使用初始化列表，只能用以下方法：</p>
 <pre><code>int arr[3] = {1, 2, 3}  
-vector&lt;int&gt; v(arr, arr + 3);
-</code></pre><p>在C++11中，我们可以使用以下语法来进行替换：</p>
+vector&lt;int&gt; v(arr, arr + 3);</code></pre><p>在C++11中，我们可以使用以下语法来进行替换：</p>
 <pre><code>int arr[3]{1, 2, 3};  
 vector&lt;int&gt; iv{1, 2, 3};  
 map&lt;int, string&gt;{{1, "a"}, {2, "b"}};  
-string str{&quot;Hello World&quot;};
-</code></pre><h3 id="C-14：C-14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。"><a href="#C-14：C-14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。" class="headerlink" title="C++14：C++14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。"></a>C++14：C++14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。</h3><h3 id="Lambda函数"><a href="#Lambda函数" class="headerlink" title="Lambda函数"></a>Lambda函数</h3><p>C++14的泛型Lambda使编写如下语句成为可能：</p>
-<pre><code>auto lambda = [](auto x, auto y) {return x + y;};
-</code></pre><p>而另一方面，C++11要求Lambda参数使用具体的类型声明，比如：</p>
-<pre><code>auto lambda = [](int x, int y) {return x + y;};
-</code></pre><p>此外，新标准中的std::move函数可用于捕获Lambda表达式中的变量，这是通过移动对象而非复制或引用对象实现的：</p>
+string str{&quot;Hello World&quot;};</code></pre><h3 id="C-14：C-14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。"><a href="#C-14：C-14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。" class="headerlink" title="C++14：C++14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。"></a>C++14：C++14的主要特性可以分为三个领域：Lambda函数、constexpr和类型推导。</h3><h3 id="Lambda函数"><a href="#Lambda函数" class="headerlink" title="Lambda函数"></a>Lambda函数</h3><p>C++14的泛型Lambda使编写如下语句成为可能：</p>
+<pre><code>auto lambda = [](auto x, auto y) {return x + y;};</code></pre><p>而另一方面，C++11要求Lambda参数使用具体的类型声明，比如：</p>
+<pre><code>auto lambda = [](int x, int y) {return x + y;};</code></pre><p>此外，新标准中的std::move函数可用于捕获Lambda表达式中的变量，这是通过移动对象而非复制或引用对象实现的：</p>
 <pre><code>std::unique_ptr ptr(new int(10));
-auto lambda = [value = std::move(ptr)] {return *value;};
-</code></pre><h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>在C++11中，使用constexpr声明的函数可以在编译时执行，生成一个值，用在需要常量表达式的地方，比如作为初始化模板的整形参数。C++11的constexpr函数只能包含一个表达式，C++14放松了这些限制，支持诸如if 和switch等条件语句，支持循环，其中包括基于区间（range）的for 循环。</p>
+auto lambda = [value = std::move(ptr)] {return *value;};</code></pre><h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>在C++11中，使用constexpr声明的函数可以在编译时执行，生成一个值，用在需要常量表达式的地方，比如作为初始化模板的整形参数。C++11的constexpr函数只能包含一个表达式，C++14放松了这些限制，支持诸如if 和switch等条件语句，支持循环，其中包括基于区间（range）的for 循环。</p>
 <h3 id="类型推导"><a href="#类型推导" class="headerlink" title="类型推导"></a>类型推导</h3><p>C++11仅支持Lambda函数的类型推导，C++14对其加以扩展，支持所有函数的返回类型推导：</p>
-<pre><code>auto DeducedReturnTypeFunction();
-</code></pre><p>因为C++14是强类型语言，有些限制需要考虑：</p>
+<pre><code>auto DeducedReturnTypeFunction();</code></pre><p>因为C++14是强类型语言，有些限制需要考虑：</p>
 <p>如果一个函数的实现中有多个返回语句，这些语句一定要推导出同样的类型。<br>返回类型推导可以用在前向声明中，但是在使用它们之前，翻译单元中必须能够得到函数定义。<br>返回类型推导可以用在递归函数中，但是递归调用必须以至少一个返回语句作为先导，以便编译器推导出返回类型。<br>C++14带来的另一个类型推导方面的改进是decltype(auto)语法，它支持使用与auto同样的机制计算给定表达式的类型。auto和 decltype在C++11中就已经出现了，但是它们在推导类型时使用了不同的机制，这可能会产生不同的结果。</p>
 <p>C++14中的其他改变包括可以声明变量模板，支持使用0b或0B前缀来声明二进制字面常量。InfoQ已经介绍过C++14中可能破坏C++11程序的其他小型修改。</p>
 <h2 id="（43）-C-的调用惯例（简单一点C-函数调用的压栈过程）"><a href="#（43）-C-的调用惯例（简单一点C-函数调用的压栈过程）" class="headerlink" title="（43） C++的调用惯例（简单一点C++函数调用的压栈过程）"></a>（43） C++的调用惯例（简单一点C++函数调用的压栈过程）</h2><h2 id="（44）-C-的四种强制转换"><a href="#（44）-C-的四种强制转换" class="headerlink" title="（44） C++的四种强制转换"></a>（44） C++的四种强制转换</h2><p>C语言中的强制类型转换可以随意的转换我们想要的类型了,格式如下</p>
-<pre><code>(类型) 变量名;
-</code></pre><p>为什么c++还要引入新的4种类型转换呢?</p>
+<pre><code>(类型) 变量名;</code></pre><p>为什么c++还要引入新的4种类型转换呢?</p>
 <p>  这是因为新的类型转换控制符可以很好的控制类型转换的过程,允许控制各种类型不同的转换.</p>
 <p>  还有一点好处是C++的类型转换控制符能告诉程序员或读者我们这个转换的目的是什么,我们<br> 只要看一下代码的类型转换控制符,就能明白我们想要达到什么样的目的.</p>
 <h3 id="1-static-cast-lt-T-gt-content-静态转换-在编译期间处理"><a href="#1-static-cast-lt-T-gt-content-静态转换-在编译期间处理" class="headerlink" title="1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理"></a>1)static_cast &lt;T*&gt; (content)  静态转换.在编译期间处理</h3><p>   它主要用于C++中内置的基本数据类型之间的转换.但是没有运行时类型的检测来保证转换的安全性.</p>

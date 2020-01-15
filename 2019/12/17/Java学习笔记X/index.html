@@ -274,13 +274,11 @@ public String getCm5(ModelMap map) {
 public String getToken( String tokenType){
     CMPlusClient cmclient = cm5UtilService.getCmPlusClient();
     return cmclient.getToken(tokenType);
-}
-</code></pre><p>由于后端传递的targetUrl中的&amp;会被转义为&amp;，所以添加过滤函数</p>
+}</code></pre><p>由于后端传递的targetUrl中的&amp;会被转义为&amp;，所以添加过滤函数</p>
 <pre><code> function unescapeHTML(a){
   a = &quot;&quot; + a;
   return a.replace(/&amp;lt;/g, &quot;&lt;&quot;).replace(/&amp;gt;/g, &quot;&gt;&quot;).replace(/&amp;amp;/g, &quot;&amp;&quot;).replace(/&amp;quot;/g, &apos;&quot;&apos;).replace(/&amp;apos;/g, &quot;&apos;&quot;);
-}
-</code></pre><p>前端页面cm5.html中要注意js脚本的路径是否存在：<br>    <script src="static/js/jquery-1.11.1.min.js" type="text/javascript"></script></p>
+}</code></pre><p>前端页面cm5.html中要注意js脚本的路径是否存在：<br>    <script src="static/js/jquery-1.11.1.min.js" type="text/javascript"></script></p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="https://my.oschina.net/smfx1314/blog/3053056" target="_blank" rel="noopener">https://my.oschina.net/smfx1314/blog/3053056</a><br>【2】<a href="https://www.jianshu.com/p/35020e29206c" target="_blank" rel="noopener">https://www.jianshu.com/p/35020e29206c</a><br>【3】<a href="http://xbhong.top/2018/02/28/ajax/" target="_blank" rel="noopener">http://xbhong.top/2018/02/28/ajax/</a></p>
 
       

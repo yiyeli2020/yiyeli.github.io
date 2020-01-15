@@ -242,6 +242,9 @@
           
         <p>给定一个区间的集合，找到需要移除区间的最小数量，使剩余区间互不重叠。</p>
 <a id="more"></a>
+
+
+
 <p>注意:</p>
 <p>可以认为区间的终点总是大于它的起点。<br>区间 [1,2] 和 [2,3] 的边界相互“接触”，但没有相互重叠。</p>
 <pre><code>示例 1:
@@ -262,8 +265,7 @@
 
 输入: [ [1,2], [2,3] ]
 
-输出: 0
-</code></pre><p>解释: 你不需要移除任何区间，因为它们已经是无重叠的了。</p>
+输出: 0</code></pre><p>解释: 你不需要移除任何区间，因为它们已经是无重叠的了。</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><pre><code>/**
  * Definition for an interval.
  * struct Interval {
@@ -297,8 +299,7 @@ public:
         }
         return res;
     }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

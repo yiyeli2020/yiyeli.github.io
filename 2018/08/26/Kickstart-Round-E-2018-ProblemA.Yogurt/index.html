@@ -263,8 +263,7 @@
 Case #1: 1
 Case #2: 3
 Case #3: 2
-Case #4: 5
-</code></pre><p>Note that the last two sample cases would not appear in the Small dataset.</p>
+Case #4: 5</code></pre><p>Note that the last two sample cases would not appear in the Small dataset.</p>
 <p>In Sample Case #1, each of the two cups of yogurt will expire in one day. Today, Lucy can consume one of them, but she can only consume at most one cup each day, so she cannot consume both. Tomorrow, Lucy cannot consume the remaining cup of yogurt, because it will have expired.</p>
 <p>In Sample Case #3, Lucy can consume up to two cups each day, so she can consume all of the yogurt.</p>
 <h2 id="思路1（Brute-force"><a href="#思路1（Brute-force" class="headerlink" title="思路1（Brute force)"></a>思路1（Brute force)</h2><p>模拟每天发生的过程，先将输入的保质期数组A排序，将最大的保质期天数定义为maxday，然后从今天到maxday进行循环，每天更新最多能喝的杯数和当前的保质期数组。<br>这里在比赛过程中犯了两个错误，见代码注释</p>
@@ -326,8 +325,7 @@ int main() {
         //fclose(stdin);//关闭文件
         //fclose(stdout);//关闭文件
         return 0;
-}
-</code></pre><h2 id="思路2（Brute-force-改进版本"><a href="#思路2（Brute-force-改进版本" class="headerlink" title="思路2（Brute force)改进版本"></a>思路2（Brute force)改进版本</h2><p>在每天的模拟过程中用lower_bound找到第一个非零的位置，然后将改天中连续K个杯子状态置为已喝，这样可以将时间复杂度从O(n*n)变为O(nlog(n))</p>
+}</code></pre><h2 id="思路2（Brute-force-改进版本"><a href="#思路2（Brute-force-改进版本" class="headerlink" title="思路2（Brute force)改进版本"></a>思路2（Brute force)改进版本</h2><p>在每天的模拟过程中用lower_bound找到第一个非零的位置，然后将改天中连续K个杯子状态置为已喝，这样可以将时间复杂度从O(n*n)变为O(nlog(n))</p>
 <pre><code>#include &lt;iostream&gt;
 #include&lt;unordered_map&gt;
 #include&lt;cstdio&gt;
@@ -380,8 +378,7 @@ int main() {
         //fclose(stdin);//关闭文件
         //fclose(stdout);//关闭文件
         return 0;
-    }
-</code></pre><h2 id="思路3："><a href="#思路3：" class="headerlink" title="思路3："></a>思路3：</h2><p>这是E轮中第一名选手ijn的解法，核心代码用五行实现了我十行的功能，浓缩的都是精华啊</p>
+    }</code></pre><h2 id="思路3："><a href="#思路3：" class="headerlink" title="思路3："></a>思路3：</h2><p>这是E轮中第一名选手ijn的解法，核心代码用五行实现了我十行的功能，浓缩的都是精华啊</p>
 <pre><code>#include&lt;bits/stdc++.h&gt;
 using namespace std;
 int t,n,m,a[5005],i,j,k,ans;
@@ -406,8 +403,7 @@ int main()
         printf(&quot;%d\n&quot;,ans);
     }
     return 0;
-}
-</code></pre><p>将其    改写成易于理解的形式</p>
+}</code></pre><p>将其    改写成易于理解的形式</p>
 <pre><code>void solve() {
     int N, K;
     cin &gt;&gt; N &gt;&gt; K;
@@ -422,8 +418,7 @@ int main()
         for (; i &lt;= N &amp;&amp; a[i] &lt;= k; i++);//跳过过期的杯子
     }
     cout &lt;&lt; num &lt;&lt; endl;
-}
-</code></pre>
+}</code></pre>
       
       
         <div class="page-reward">

@@ -242,15 +242,20 @@
           
         <p>填充同一层的兄弟节点II</p>
 <a id="more"></a>
+
+
+
 <p>给定一个二叉树</p>
 <pre><code>struct TreeLinkNode {
   TreeLinkNode *left;
   TreeLinkNode *right;
   TreeLinkNode *next;
-}
-</code></pre><p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。</p>
+}</code></pre><p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。</p>
 <p>初始状态下，所有 next 指针都被设置为 NULL。</p>
 <!-- more -->
+
+
+
 <p>说明:</p>
 <p>你只能使用额外常数空间。<br>使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。<br>示例:</p>
 <p>给定二叉树，</p>
@@ -258,14 +263,12 @@
    /  \
   2    3
  / \    \
-4   5    7
-</code></pre><p>调用你的函数后，该二叉树变为：</p>
+4   5    7</code></pre><p>调用你的函数后，该二叉树变为：</p>
 <pre><code>     1 -&gt; NULL
    /  \
   2 -&gt; 3 -&gt; NULL
  / \    \
-4-&gt; 5 -&gt; 7 -&gt; NULL
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>用三个指针，head指向下一层的第一个结点，prev指向下一层的当前结点，cur指向当前层的当前结点，分层遍历，再按照当前结点是否有左结点和右结点分情况讨论，以当前结点有左结点为例，如果prev为空，说明当前层尚未被遍历过，因此初始化head，若非空说明已经被遍历过，上一个被遍历过的结点是prev，因此将prev的next指向当前结点左结点，然后推进一步，将prev置为cur-&gt;left</p>
+4-&gt; 5 -&gt; 7 -&gt; NULL</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>用三个指针，head指向下一层的第一个结点，prev指向下一层的当前结点，cur指向当前层的当前结点，分层遍历，再按照当前结点是否有左结点和右结点分情况讨论，以当前结点有左结点为例，如果prev为空，说明当前层尚未被遍历过，因此初始化head，若非空说明已经被遍历过，上一个被遍历过的结点是prev，因此将prev的next指向当前结点左结点，然后推进一步，将prev置为cur-&gt;left</p>
 <pre><code>/**
  * Definition for binary tree with next pointer.
  * struct TreeLinkNode {
@@ -314,8 +317,7 @@ public:
         }
 
     }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

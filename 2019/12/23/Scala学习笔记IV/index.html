@@ -242,21 +242,20 @@
           
         <p>数据库连接和事务处理</p>
 <a id="more"></a>
+
 <h1 id="Session-管理"><a href="#Session-管理" class="headerlink" title="Session 管理"></a>Session 管理</h1><p>现在有了一个数据库对象可以打开一个数据库（Slick 函数库封装了一个 Session 对象）</p>
 <p>Database 的 withSession 方法，创建一个 Session 对象，它可以传递给一个函数，函数返回时自动关闭这个 Session 对象，如果你使用连接池，关闭 Session 对象，自动将连接退回连接池。</p>
 <pre><code>val query = for (c &lt;- coffees) yield c.name
 val result = db.withSession {
     session =&gt;
     query.list()( session )
-}
-</code></pre><p>可以看到，我们可以在 withSession 之外定义查询，只有在实际执行查询时才需要一个 Session 对象，要注意的是 Session 的缺省模式为自动提交（auto-commit )模式。每个数据库指令（比如 insert )都自动提交给数据库。 如果需要将几个指令作为一个整体，那么就需要使用事务处理（Transaction） 上面的例子，我们在执行查询时，明确指明了 session 对象，你可以使用隐含对象来避免这种情况，比如：</p>
+}</code></pre><p>可以看到，我们可以在 withSession 之外定义查询，只有在实际执行查询时才需要一个 Session 对象，要注意的是 Session 的缺省模式为自动提交（auto-commit )模式。每个数据库指令（比如 insert )都自动提交给数据库。 如果需要将几个指令作为一个整体，那么就需要使用事务处理（Transaction） 上面的例子，我们在执行查询时，明确指明了 session 对象，你可以使用隐含对象来避免这种情况，比如：</p>
 <pre><code>val query = for (c &lt;- coffees) yield c.name
 val result = db.withSession {
     implicit session =&gt;
     query.list // &lt;- takes session implicitly
 }
-// query.list // &lt;- would not compile, no implicit value of type Session
-</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://wiki.jikexueyuan.com/project/slick-guide/database-and-transaction-processing.html" target="_blank" rel="noopener">http://wiki.jikexueyuan.com/project/slick-guide/database-and-transaction-processing.html</a></p>
+// query.list // &lt;- would not compile, no implicit value of type Session</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://wiki.jikexueyuan.com/project/slick-guide/database-and-transaction-processing.html" target="_blank" rel="noopener">http://wiki.jikexueyuan.com/project/slick-guide/database-and-transaction-processing.html</a></p>
 
       
       

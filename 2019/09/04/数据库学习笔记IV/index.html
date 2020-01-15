@@ -242,6 +242,7 @@
           
         <p>SQL插入，多表查询</p>
 <a id="more"></a>
+
 <h1 id="权限配置"><a href="#权限配置" class="headerlink" title="权限配置"></a>权限配置</h1><p>在reporting数据库中找到auth_users 表，代表的是用户信息，auth_roles代表的是不同的角色信息</p>
 <p>auth_users_roles_rela代表的是不同用户所具有的角色，auth_resources代表资源，其中要添加之前写的inner和core里controller所具有的方法，type为FUNCTION，url就是执行的url，例如/notes/updateNote，level设置为1<br>auth_role_resources_rela是不同角色所具有的资源信息，<br>现在要使用SQL语句添加新的资源，将用户yang.kai</p>
 <h1 id="页面权限配置"><a href="#页面权限配置" class="headerlink" title="页面权限配置"></a>页面权限配置</h1><p>resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，现将<a href="http://std-report-fe.laincloud.xyz/#/reportool中的不同级别菜单的http请求url添加到reporting数据库的资源中" target="_blank" rel="noopener">http://std-report-fe.laincloud.xyz/#/reportool中的不同级别菜单的http请求url添加到reporting数据库的资源中</a></p>
@@ -256,8 +257,7 @@ VALUES
 (&apos;邮件模板&apos;,-1,&apos;MENU&apos;,&apos;reporting&apos;,&apos;/night/template/mail&apos;,&apos;ACTIVE&apos;,0,1,0),
 (&apos;新增模板&apos;,-1,&apos;MENU&apos;,&apos;reporting&apos;,&apos;/night/template/mail&apos;,&apos;ACTIVE&apos;,0,1,0),
 (&apos;定时任务列表&apos;,-1,&apos;MENU&apos;,&apos;reporting&apos;,&apos;/reportool/jobs&apos;,&apos;ACTIVE&apos;,0,1,0),
-(&apos;我的笔记&apos;,-1,&apos;MENU&apos;,&apos;reporting&apos;,&apos;/reportool/notes&apos;,&apos;ACTIVE&apos;,0,1,0);
-</code></pre><p>再次添加一些界面：</p>
+(&apos;我的笔记&apos;,-1,&apos;MENU&apos;,&apos;reporting&apos;,&apos;/reportool/notes&apos;,&apos;ACTIVE&apos;,0,1,0);</code></pre><p>再次添加一些界面：</p>
 <pre><code>INSERT INTO reporting.auth_resources
 (resource_name, external_id,resource_type,application_name,resource_url,status,parent_id,level,sort)
 VALUES
@@ -271,16 +271,13 @@ VALUES
 (&apos;根据当前用户获取所有功能展示树信息&apos;,-1,&apos;FUNCTION&apos;,&apos;reporting&apos;,&apos;/auth/role/getFunctionLayout&apos;,&apos;ACTIVE&apos;,0,1,0),
 (&apos;分页查询角色信息&apos;,-1,&apos;FUNCTION&apos;,&apos;reporting&apos;,&apos;/auth/role/queryRolesInfo&apos;,&apos;ACTIVE&apos;,0,1,0),
 (&apos;分页查询所有操作员信息&apos;,-1,&apos;FUNCTION&apos;,&apos;reporting&apos;,&apos;/auth/user/queryInfo&apos;,&apos;ACTIVE&apos;,0,1,0),
-(&apos;更新操作员状态（冻结/解冻）&apos;,-1,&apos;FUNCTION&apos;,&apos;reporting&apos;,&apos;/auth/user/updateStatus&apos;,&apos;ACTIVE&apos;,0,1,0)
-</code></pre><h1 id="INSERT语句"><a href="#INSERT语句" class="headerlink" title="INSERT语句"></a>INSERT语句</h1><p>基本语法是：</p>
-<pre><code>INSERT INTO &lt;表名&gt; (字段1, 字段2, ...) VALUES (值1, 值2, ...);
-</code></pre><p>例如：<br>    INSERT INTO auth_resources<br>    (resource_name, external_id,resource_type,application_name,resource_url,status,parent_id,level,sort)<br>    VALUES<br>    (‘根据ID删除笔记’,-1,’FUNCTION’,’reporting’,’/notes/deleteNote’,’ACTIVE’,0,1,0)</p>
+(&apos;更新操作员状态（冻结/解冻）&apos;,-1,&apos;FUNCTION&apos;,&apos;reporting&apos;,&apos;/auth/user/updateStatus&apos;,&apos;ACTIVE&apos;,0,1,0)</code></pre><h1 id="INSERT语句"><a href="#INSERT语句" class="headerlink" title="INSERT语句"></a>INSERT语句</h1><p>基本语法是：</p>
+<pre><code>INSERT INTO &lt;表名&gt; (字段1, 字段2, ...) VALUES (值1, 值2, ...);</code></pre><p>例如：<br>    INSERT INTO auth_resources<br>    (resource_name, external_id,resource_type,application_name,resource_url,status,parent_id,level,sort)<br>    VALUES<br>    (‘根据ID删除笔记’,-1,’FUNCTION’,’reporting’,’/notes/deleteNote’,’ACTIVE’,0,1,0)</p>
 <p>还可以同时添加多条数据：</p>
 <pre><code>INSERT INTO &lt;表名&gt; (字段1, 字段2, ...)
 VALUES (值1, 值2, ...),
 (值3, 值4, ...),
-(值5, 值6, ...);
-</code></pre><p>例如在auth_role_resources_rela中添加不同角色所拥有的资源信息：<br>    INSERT INTO auth_role_resources_rela<br>    (role_id,resource_id,status,created,updated)<br>    VALUES<br>    (3,1,’ACTIVE’,NOW(),NOW()),<br>    (3,2,’ACTIVE’,NOW(),NOW())</p>
+(值5, 值6, ...);</code></pre><p>例如在auth_role_resources_rela中添加不同角色所拥有的资源信息：<br>    INSERT INTO auth_role_resources_rela<br>    (role_id,resource_id,status,created,updated)<br>    VALUES<br>    (3,1,’ACTIVE’,NOW(),NOW()),<br>    (3,2,’ACTIVE’,NOW(),NOW())</p>
 <p>再添加一些权限</p>
 <pre><code>INSERT INTO auth_role_resources_rela
 (role_id,resource_id,status,created,updated)
@@ -289,8 +286,7 @@ VALUES
 (3,247,&apos;ACTIVE&apos;,NOW(),NOW()),
 (3,248,&apos;ACTIVE&apos;,NOW(),NOW()),
 (3,249,&apos;ACTIVE&apos;,NOW(),NOW()),
-(3,250,&apos;ACTIVE&apos;,NOW(),NOW())
-</code></pre><p>例如在线上生产环境中添加角色权限<br>    INSERT INTO reporting.auth_user_roles_rela<br>    (user_id,role_id,create_user,status,created,updated)<br>    VALUES<br>    (14,1,‘yiyeli@<strong><em>.cn’,’ACTIVE’,NOW(),NOW()),<br>    (14,5,‘yiyeli@</em></strong>.cn’,’ACTIVE’,NOW(),NOW())</p>
+(3,250,&apos;ACTIVE&apos;,NOW(),NOW())</code></pre><p>例如在线上生产环境中添加角色权限<br>    INSERT INTO reporting.auth_user_roles_rela<br>    (user_id,role_id,create_user,status,created,updated)<br>    VALUES<br>    (14,1,‘yiyeli@<strong><em>.cn’,’ACTIVE’,NOW(),NOW()),<br>    (14,5,‘yiyeli@</em></strong>.cn’,’ACTIVE’,NOW(),NOW())</p>
 <p>例如添加某个用户具有的角色信息：</p>
 <pre><code>INSERT INTO reporting.auth_user_roles_rela
 (user_id,role_id,create_user,status,created,updated)
@@ -309,23 +305,20 @@ INSERT INTO reporting.auth_user_roles_rela
 (user_id,role_id,create_user,status,created,updated)
 VALUES
 (41,21,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(41,23,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW())
-</code></pre><p>在角色表中添加新的角色</p>
+(41,23,&apos;zhenxinlin2&apos;,&apos;ACTIVE&apos;,NOW(),NOW())</code></pre><p>在角色表中添加新的角色</p>
 <pre><code>INSERT INTO reporting.auth_roles
 (application_name,department,role_name,layout_id,role_type,role_level,resource_level,description,status,created,updated)
 VALUES
 
 (&apos;platform&apos;,&apos;商通贷&apos;,&apos;platform-FUNCTION&apos;,&apos;47&apos;,&apos;FUNCTION&apos;,1,&apos;HIGHT&apos;, &apos;角色树根节点&apos;,&apos;ACTIVE&apos;,NOW(),NOW()),
-(&apos;reporting&apos;,&apos;商通贷&apos;,&apos;reporting-FUNCTION&apos;,&apos;47&apos;,&apos;FUNCTION&apos;,1,&apos;HIGHT&apos;, &apos;角色树根节点&apos;,&apos;ACTIVE&apos;,NOW(),NOW())
-</code></pre><h1 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h1><p>auth_users表，代表的是用户信息，auth_roles代表的是不同的角色信息，</p>
+(&apos;reporting&apos;,&apos;商通贷&apos;,&apos;reporting-FUNCTION&apos;,&apos;47&apos;,&apos;FUNCTION&apos;,1,&apos;HIGHT&apos;, &apos;角色树根节点&apos;,&apos;ACTIVE&apos;,NOW(),NOW())</code></pre><h1 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h1><p>auth_users表，代表的是用户信息，auth_roles代表的是不同的角色信息，</p>
 <p>auth_users_roles_rela代表的是不同用户所具有的角色，</p>
 <p>现在要根据用户账号查询某个用户所具有的所有角色id</p>
 <pre><code>SELECT role_id
 FROM auth_users
 INNER JOIN auth_user_roles_rela
 ON auth_users.id=auth_user_roles_rela.user_id
-WHERE auth_users.account=&apos;kai.yang&apos;
-</code></pre><p>根据角色id到auth_role_resources_rela中找到该角色所拥有的资源resource_id<br>    SELECT resource_id<br>    FROM auth_role_resources_rela<br>    WHERE role_id=(<br>      SELECT role_id<br>      FROM auth_users<br>      INNER JOIN auth_user_roles_rela<br>      ON auth_users.id=auth_user_roles_rela.user_id<br>      WHERE auth_users.account=’kai.yang’<br>      )</p>
+WHERE auth_users.account=&apos;kai.yang&apos;</code></pre><p>根据角色id到auth_role_resources_rela中找到该角色所拥有的资源resource_id<br>    SELECT resource_id<br>    FROM auth_role_resources_rela<br>    WHERE role_id=(<br>      SELECT role_id<br>      FROM auth_users<br>      INNER JOIN auth_user_roles_rela<br>      ON auth_users.id=auth_user_roles_rela.user_id<br>      WHERE auth_users.account=’kai.yang’<br>      )</p>
 <p>根据角色id连接查询auth_resources中的资源名称</p>
 <pre><code>SELECT auth_resources.id,resource_name,resource_type,resource_url
 FROM auth_resources
@@ -337,8 +330,7 @@ WHERE auth_role_resources_rela.role_id=(
   INNER JOIN auth_user_roles_rela
   ON auth_users.id=auth_user_roles_rela.user_id
   WHERE auth_users.account=&apos;kai.yang&apos;
-  )
-</code></pre><h2 id="注意INNER-JOIN查询的写法"><a href="#注意INNER-JOIN查询的写法" class="headerlink" title="注意INNER JOIN查询的写法"></a>注意INNER JOIN查询的写法</h2><pre><code>先确定主表，仍然使用FROM &lt;表1&gt;的语法；
+  )</code></pre><h2 id="注意INNER-JOIN查询的写法"><a href="#注意INNER-JOIN查询的写法" class="headerlink" title="注意INNER JOIN查询的写法"></a>注意INNER JOIN查询的写法</h2><pre><code>先确定主表，仍然使用FROM &lt;表1&gt;的语法；
 
 再确定需要连接的表，使用INNER JOIN &lt;表2&gt;的语法；
 
@@ -346,10 +338,8 @@ WHERE auth_role_resources_rela.role_id=(
 
 可选：加上WHERE子句、ORDER BY等子句。
 
-使用别名不是必须的，但可以更好地简化查询语句。
-</code></pre><h2 id="内连接和外连接的区别："><a href="#内连接和外连接的区别：" class="headerlink" title="内连接和外连接的区别："></a>内连接和外连接的区别：</h2><p>假设查询语句是：</p>
-<pre><code>SELECT ... FROM tableA ??? JOIN tableB ON tableA.column1 = tableB.column2;
-</code></pre><p>我们把tableA看作左表，把tableB看成右表，那么</p>
+使用别名不是必须的，但可以更好地简化查询语句。</code></pre><h2 id="内连接和外连接的区别："><a href="#内连接和外连接的区别：" class="headerlink" title="内连接和外连接的区别："></a>内连接和外连接的区别：</h2><p>假设查询语句是：</p>
+<pre><code>SELECT ... FROM tableA ??? JOIN tableB ON tableA.column1 = tableB.column2;</code></pre><p>我们把tableA看作左表，把tableB看成右表，那么</p>
 <p><strong><em>INNER JOIN是选出两张表都存在的记录</em></strong></p>
 <p><strong><em>LEFT OUTER JOIN是选出左表存在的记录</em></strong></p>
 <p><strong><em>RIGHT OUTER JOIN是选出右表存在的记录</em></strong></p>

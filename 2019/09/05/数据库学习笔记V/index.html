@@ -242,6 +242,7 @@
           
         <p>使用ALTER命令修改数据表名或者修改数据表字段</p>
 <a id="more"></a>
+
 <p>当我们需要修改数据表名或者修改数据表字段时，就需要使用到MySQL ALTER命令。</p>
 <h1 id="创建一张表"><a href="#创建一张表" class="headerlink" title="创建一张表"></a>创建一张表</h1><p>表名为：tablename。</p>
 <pre><code>root@host# mysql -u root -p password;
@@ -261,13 +262,10 @@ mysql&gt; SHOW COLUMNS FROM tablename;
 | i     | int(11) | YES  |     | NULL    |       |
 | c     | char(1) | YES  |     | NULL    |       |
 +-------+---------+------+-----+---------+-------+
-2 rows in set (0.00 sec)
-</code></pre><h1 id="删除，添加或修改表字段"><a href="#删除，添加或修改表字段" class="headerlink" title="删除，添加或修改表字段"></a>删除，添加或修改表字段</h1><p>如下命令使用了 ALTER 命令及 DROP 子句来删除以上创建表的 i 字段：</p>
-<pre><code>mysql&gt; ALTER TABLE tablename  DROP i;
-</code></pre><p>如果数据表中只剩余一个字段则无法使用DROP来删除字段。</p>
+2 rows in set (0.00 sec)</code></pre><h1 id="删除，添加或修改表字段"><a href="#删除，添加或修改表字段" class="headerlink" title="删除，添加或修改表字段"></a>删除，添加或修改表字段</h1><p>如下命令使用了 ALTER 命令及 DROP 子句来删除以上创建表的 i 字段：</p>
+<pre><code>mysql&gt; ALTER TABLE tablename  DROP i;</code></pre><p>如果数据表中只剩余一个字段则无法使用DROP来删除字段。</p>
 <p>MySQL 中使用 ADD 子句来向数据表中添加列，如下实例在表 tablename 中添加 i 字段，并定义数据类型:</p>
-<pre><code>mysql&gt; ALTER TABLE tablename ADD i INT;
-</code></pre><p>执行以上命令后，i 字段会自动添加到数据表字段的末尾。</p>
+<pre><code>mysql&gt; ALTER TABLE tablename ADD i INT;</code></pre><p>执行以上命令后，i 字段会自动添加到数据表字段的末尾。</p>
 <pre><code>mysql&gt; SHOW COLUMNS FROM tablename;
 +-------+---------+------+-----+---------+-------+
 | Field | Type    | Null | Key | Default | Extra |
@@ -275,27 +273,21 @@ mysql&gt; SHOW COLUMNS FROM tablename;
 | c     | char(1) | YES  |     | NULL    |       |
 | i     | int(11) | YES  |     | NULL    |       |
 +-------+---------+------+-----+---------+-------+
-2 rows in set (0.00 sec)
-</code></pre><p>如果你需要指定新增字段的位置，可以使用MySQL提供的关键字 FIRST (设定位第一列)， AFTER 字段名（设定位于某个字段之后）。</p>
+2 rows in set (0.00 sec)</code></pre><p>如果你需要指定新增字段的位置，可以使用MySQL提供的关键字 FIRST (设定位第一列)， AFTER 字段名（设定位于某个字段之后）。</p>
 <p>尝试以下 ALTER TABLE 语句, 在执行成功后，使用 SHOW COLUMNS 查看表结构的变化：</p>
 <pre><code>ALTER TABLE tablename DROP i;
 ALTER TABLE tablename ADD i INT FIRST;
 ALTER TABLE tablename DROP i;
-ALTER TABLE tablename ADD i INT AFTER c;
-</code></pre><p>FIRST 和 AFTER 关键字可用于 ADD 与 MODIFY 子句，所以如果你想重置数据表字段的位置就需要先使用 DROP 删除字段然后使用 ADD 来添加字段并设置位置。</p>
+ALTER TABLE tablename ADD i INT AFTER c;</code></pre><p>FIRST 和 AFTER 关键字可用于 ADD 与 MODIFY 子句，所以如果你想重置数据表字段的位置就需要先使用 DROP 删除字段然后使用 ADD 来添加字段并设置位置。</p>
 <p>类似使用到的语句：</p>
-<pre><code>ALTER TABLE tbl_jobs ADD data_send varchar(32)
-</code></pre><h1 id="修改字段类型及名称"><a href="#修改字段类型及名称" class="headerlink" title="修改字段类型及名称"></a>修改字段类型及名称</h1><p>如果需要修改字段类型及名称, 你可以在ALTER命令中使用 MODIFY 或 CHANGE 子句 。</p>
+<pre><code>ALTER TABLE tbl_jobs ADD data_send varchar(32)</code></pre><h1 id="修改字段类型及名称"><a href="#修改字段类型及名称" class="headerlink" title="修改字段类型及名称"></a>修改字段类型及名称</h1><p>如果需要修改字段类型及名称, 你可以在ALTER命令中使用 MODIFY 或 CHANGE 子句 。</p>
 <p>例如，把字段 c 的类型从 CHAR(1) 改为 CHAR(10)，可以执行以下命令:</p>
-<pre><code>mysql&gt; ALTER TABLE tablename MODIFY c CHAR(10);
-</code></pre><p>使用 CHANGE 子句, 语法有很大的不同。 在 CHANGE 关键字之后，紧跟着的是你要修改的字段名，然后指定新字段名及类型。尝试如下实例：</p>
+<pre><code>mysql&gt; ALTER TABLE tablename MODIFY c CHAR(10);</code></pre><p>使用 CHANGE 子句, 语法有很大的不同。 在 CHANGE 关键字之后，紧跟着的是你要修改的字段名，然后指定新字段名及类型。尝试如下实例：</p>
 <pre><code>mysql&gt; ALTER TABLE tablename CHANGE i j BIGINT;
-mysql&gt; ALTER TABLE tablename CHANGE j j INT;
-</code></pre><h1 id="ALTER-TABLE-对-Null-值和默认值的影响"><a href="#ALTER-TABLE-对-Null-值和默认值的影响" class="headerlink" title="ALTER TABLE 对 Null 值和默认值的影响"></a>ALTER TABLE 对 Null 值和默认值的影响</h1><p>当你修改字段时，你可以指定是否包含值或者是否设置默认值。</p>
+mysql&gt; ALTER TABLE tablename CHANGE j j INT;</code></pre><h1 id="ALTER-TABLE-对-Null-值和默认值的影响"><a href="#ALTER-TABLE-对-Null-值和默认值的影响" class="headerlink" title="ALTER TABLE 对 Null 值和默认值的影响"></a>ALTER TABLE 对 Null 值和默认值的影响</h1><p>当你修改字段时，你可以指定是否包含值或者是否设置默认值。</p>
 <p>以下实例，指定字段 j 为 NOT NULL 且默认值为100 。</p>
 <pre><code>mysql&gt; ALTER TABLE tablename
-    -&gt; MODIFY j BIGINT NOT NULL DEFAULT 100;
-</code></pre><p>如果你不设置默认值，MySQL会自动设置该字段默认为 NULL。</p>
+    -&gt; MODIFY j BIGINT NOT NULL DEFAULT 100;</code></pre><p>如果你不设置默认值，MySQL会自动设置该字段默认为 NULL。</p>
 <h1 id="修改字段默认值"><a href="#修改字段默认值" class="headerlink" title="修改字段默认值"></a>修改字段默认值</h1><p>你可以使用 ALTER 来修改字段的默认值，尝试以下实例：</p>
 <pre><code>mysql&gt; ALTER TABLE tablename ALTER i SET DEFAULT 1000;
 mysql&gt; SHOW COLUMNS FROM tablename;
@@ -305,8 +297,7 @@ mysql&gt; SHOW COLUMNS FROM tablename;
 | c     | char(1) | YES  |     | NULL    |       |
 | i     | int(11) | YES  |     | 1000    |       |
 +-------+---------+------+-----+---------+-------+
-2 rows in set (0.00 sec)
-</code></pre><p>你也可以使用 ALTER 命令及 DROP子句来删除字段的默认值，如下实例：</p>
+2 rows in set (0.00 sec)</code></pre><p>你也可以使用 ALTER 命令及 DROP子句来删除字段的默认值，如下实例：</p>
 <pre><code>mysql&gt; ALTER TABLE tablename ALTER i DROP DEFAULT;
 mysql&gt; SHOW COLUMNS FROM tablename;
 +-------+---------+------+-----+---------+-------+
@@ -316,8 +307,7 @@ mysql&gt; SHOW COLUMNS FROM tablename;
 | i     | int(11) | YES  |     | NULL    |       |
 +-------+---------+------+-----+---------+-------+
 2 rows in set (0.00 sec)
-Changing a Table Type:
-</code></pre><h1 id="修改数据表类型"><a href="#修改数据表类型" class="headerlink" title="修改数据表类型"></a>修改数据表类型</h1><p>可以使用 ALTER 命令及 TYPE 子句来完成。尝试以下实例，我们将表 tablename 的类型修改为 MYISAM ：</p>
+Changing a Table Type:</code></pre><h1 id="修改数据表类型"><a href="#修改数据表类型" class="headerlink" title="修改数据表类型"></a>修改数据表类型</h1><p>可以使用 ALTER 命令及 TYPE 子句来完成。尝试以下实例，我们将表 tablename 的类型修改为 MYISAM ：</p>
 <p>注意：查看数据表类型可以使用 SHOW TABLE STATUS 语句。</p>
 <pre><code>mysql&gt; ALTER TABLE tablename ENGINE = MYISAM;
 mysql&gt;  SHOW TABLE STATUS LIKE &apos;tablename&apos;\G
@@ -337,21 +327,17 @@ Max_data_length: 25769803775
      Check_time: NULL
  Create_options:
         Comment:
-1 row in set (0.00 sec)
-</code></pre><h1 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h1><p>如果需要修改数据表的名称，可以在 ALTER TABLE 语句中使用 RENAME 子句来实现。</p>
+1 row in set (0.00 sec)</code></pre><h1 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h1><p>如果需要修改数据表的名称，可以在 ALTER TABLE 语句中使用 RENAME 子句来实现。</p>
 <p>尝试以下实例将数据表 tablename 重命名为 alter_tbl：</p>
-<pre><code>mysql&gt; ALTER TABLE tablename RENAME TO alter_tbl;
-</code></pre><h1 id="修改unique-key"><a href="#修改unique-key" class="headerlink" title="修改unique-key"></a>修改unique-key</h1><p>mysql可以使用unique key来确保数据的准确性，unique key可以是一个字段，也可以是多个字段，对应已经存在的unique key如何修改呢？分两步来完成，先drop掉，然后在创建。需要注意的是drop时关键字是“index”，而创建时关键词是“unique key”，命令如下：</p>
+<pre><code>mysql&gt; ALTER TABLE tablename RENAME TO alter_tbl;</code></pre><h1 id="修改unique-key"><a href="#修改unique-key" class="headerlink" title="修改unique-key"></a>修改unique-key</h1><p>mysql可以使用unique key来确保数据的准确性，unique key可以是一个字段，也可以是多个字段，对应已经存在的unique key如何修改呢？分两步来完成，先drop掉，然后在创建。需要注意的是drop时关键字是“index”，而创建时关键词是“unique key”，命令如下：</p>
 <p>alter table table_name drop index <code>uk_name</code>;</p>
 <p>alter table table_name add unique key <code>new_uk_name</code> (<code>col1</code>,<code>col2</code>);<br>注意：如果表中已经存在数据，可能会创建失败，原因是col1, col2无法满足unique。</p>
 <p>例如auth_roles表中原有的<br>    UNIQUE KEY <code>role_unin_name</code> (<code>application_name</code>,<code>department</code>,<code>role_name</code>)</p>
 <p>现在先drop掉</p>
-<pre><code>ALTER TABLE auth_roles DROP index `role_unin_name`
-</code></pre><p>然后再创建</p>
+<pre><code>ALTER TABLE auth_roles DROP index `role_unin_name`</code></pre><p>然后再创建</p>
 <p>  ALTER TABLE auth_roles ADD UNIQUE KEY <code>role_unin_name</code> (<code>application_name</code>,<code>department</code>,<code>role_name</code>,<br>  <code>role_type</code>)<br>其它用过的：</p>
 <p>  ALTER TABLE<br>      <code>reporting</code>.<code>auth_users</code> CHANGE <code>application_name</code> department_name VARCHAR(64)</p>
-<h1 id="修改表的某列为同一值"><a href="#修改表的某列为同一值" class="headerlink" title="修改表的某列为同一值"></a>修改表的某列为同一值</h1><pre><code>update 表名 set 列名=想改的值
-</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="https://www.runoob.com/mysql/mysql-alter.html" target="_blank" rel="noopener">https://www.runoob.com/mysql/mysql-alter.html</a></p>
+<h1 id="修改表的某列为同一值"><a href="#修改表的某列为同一值" class="headerlink" title="修改表的某列为同一值"></a>修改表的某列为同一值</h1><pre><code>update 表名 set 列名=想改的值</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="https://www.runoob.com/mysql/mysql-alter.html" target="_blank" rel="noopener">https://www.runoob.com/mysql/mysql-alter.html</a></p>
 
       
       

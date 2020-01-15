@@ -246,8 +246,7 @@
 <h1 id="连接器Joiner"><a href="#连接器Joiner" class="headerlink" title="连接器Joiner"></a>连接器Joiner</h1><p>用分隔符把字符串序列连接起来也可能会遇上不必要的麻烦。如果字符串序列中含有null，那连接操作会更难。Fluent风格的Joiner让连接字符串更简单。</p>
 <p>  Joiner joiner = Joiner.on(“; “).skipNulls();<br>  return joiner.join(“Harry”, null, “Ron”, “Hermione”);</p>
 <p>上述代码返回”Harry; Ron; Hermione”。另外，useForNull(String)方法可以给定某个字符串来替换null，而不像skipNulls()方法是直接忽略null。<br> Joiner也可以用来连接对象类型，在这种情况下，它会把对象的toString()值连接起来。</p>
-<pre><code>Joiner.on(&quot;,&quot;).join(Arrays.asList(1, 5, 7)); // returns &quot;1,5,7&quot;
-</code></pre><p>警告：joiner实例总是不可变的。用来定义joiner目标语义的配置方法总会返回一个新的joiner实例。<br>这使得joiner实例都是线程安全的，你可以将其定义为static final常量。</p>
+<pre><code>Joiner.on(&quot;,&quot;).join(Arrays.asList(1, 5, 7)); // returns &quot;1,5,7&quot;</code></pre><p>警告：joiner实例总是不可变的。用来定义joiner目标语义的配置方法总会返回一个新的joiner实例。<br>这使得joiner实例都是线程安全的，你可以将其定义为static final常量。</p>
 <h1 id="传统连接方法"><a href="#传统连接方法" class="headerlink" title="传统连接方法"></a>传统连接方法</h1><p>相比之下传统的以某个分隔符来进行拼接的代码如下：</p>
 <pre><code>public static String concatString(List&lt;String&gt; lists,String delimiter){
     StringBuilder builder=new StringBuilder();
@@ -265,14 +264,12 @@ public  static  void  main(String[] args) {
   list.add(&quot;delimiter&quot;);
   list.add(&quot;codingstyle&quot;);
   System.out.println(concatString(list,&quot;-&quot;));
-}
-</code></pre><h1 id="MapJoiner"><a href="#MapJoiner" class="headerlink" title="MapJoiner"></a>MapJoiner</h1><p>MapJoiner的用法和Joiner类似,不过MapJoiner主要针对map的字符串拼接例：</p>
+}</code></pre><h1 id="MapJoiner"><a href="#MapJoiner" class="headerlink" title="MapJoiner"></a>MapJoiner</h1><p>MapJoiner的用法和Joiner类似,不过MapJoiner主要针对map的字符串拼接例：</p>
 <pre><code>Map&lt;String,String&gt; maps=Maps.newHashMap();
 maps.put(&quot;MapJoiner&quot;,&quot;1&quot;);
 maps.put(&quot;String&quot;,&quot;delimiter&quot;);
 String ss=Joiner.on(&quot;$&quot;).withKeyValueSeparator(&quot;=&quot;).join(maps);
-System.out.println(ss);
-</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html</a></p>
+System.out.println(ss);</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html" target="_blank" rel="noopener">https://wizardforcel.gitbooks.io/guava-tutorial/content/1.html</a></p>
 <p>【2】<a href="https://blog.csdn.net/u012415194/article/details/84880258" target="_blank" rel="noopener">https://blog.csdn.net/u012415194/article/details/84880258</a></p>
 
       

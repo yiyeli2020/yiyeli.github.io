@@ -242,6 +242,7 @@
           
         <p>给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。</p>
 <a id="more"></a>
+
 <p>你可以对一个单词进行如下三种操作：</p>
 <p>插入一个字符<br>删除一个字符<br>替换一个字符<br>示例 1:</p>
 <pre><code>输入: word1 = &quot;horse&quot;, word2 = &quot;ros&quot;
@@ -249,8 +250,7 @@
 解释:
 horse -&gt; rorse (将 &apos;h&apos; 替换为 &apos;r&apos;)
 rorse -&gt; rose (删除 &apos;r&apos;)
-rose -&gt; ros (删除 &apos;e&apos;)
-</code></pre><p>示例 2:</p>
+rose -&gt; ros (删除 &apos;e&apos;)</code></pre><p>示例 2:</p>
 <pre><code>输入: word1 = &quot;intention&quot;, word2 = &quot;execution&quot;
 输出: 5
 解释:
@@ -258,12 +258,10 @@ intention -&gt; inention (删除 &apos;t&apos;)
 inention -&gt; enention (将 &apos;i&apos; 替换为 &apos;e&apos;)
 enention -&gt; exention (将 &apos;n&apos; 替换为 &apos;x&apos;)
 exention -&gt; exection (将 &apos;n&apos; 替换为 &apos;c&apos;)
-exection -&gt; execution (插入 &apos;u&apos;)
-</code></pre><h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><h3 id="基本设定"><a href="#基本设定" class="headerlink" title="基本设定"></a>基本设定</h3><p>用p[i][j]表示<code>word1[0...i-1]</code>转化为<code>word2[0...j-1]</code>所需的最小步数，注意右边是开区间，不包括word1[i]和word2[j]。</p>
+exection -&gt; execution (插入 &apos;u&apos;)</code></pre><h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><h3 id="基本设定"><a href="#基本设定" class="headerlink" title="基本设定"></a>基本设定</h3><p>用p[i][j]表示<code>word1[0...i-1]</code>转化为<code>word2[0...j-1]</code>所需的最小步数，注意右边是开区间，不包括word1[i]和word2[j]。</p>
 <h3 id="边界条件"><a href="#边界条件" class="headerlink" title="边界条件"></a>边界条件</h3><p>动态规划要确定一个边界条件，在这里，边界条件是“将一个字符串（空或非空）转化为空字符串，以及反过来”，而所需的最小步数就是原字符串的长度。显然，就是i或j为0时:</p>
 <pre><code>p[i][0] = i
-p[0][j] = j
-</code></pre><h3 id="一般情况"><a href="#一般情况" class="headerlink" title="一般情况"></a>一般情况</h3><p>一般情况就是，已知<code>p[i-1][j]、p[i][j-1]、p[i-1][j-1]</code>等，求p[i][j]。当<code>word1[i-1] == word2[j-1]</code>时，不需要额外的变换，因此<code>p[i][j] = p[i-1][j-1]</code>。否则，根据题目的意思，这时有三种策略可以选择：</p>
+p[0][j] = j</code></pre><h3 id="一般情况"><a href="#一般情况" class="headerlink" title="一般情况"></a>一般情况</h3><p>一般情况就是，已知<code>p[i-1][j]、p[i][j-1]、p[i-1][j-1]</code>等，求p[i][j]。当<code>word1[i-1] == word2[j-1]</code>时，不需要额外的变换，因此<code>p[i][j] = p[i-1][j-1]</code>。否则，根据题目的意思，这时有三种策略可以选择：</p>
 <h4 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h4><p>这是在“将word1[0…i-2]转化为word2[0…j-2]”的基础上多增加一个步骤，即<code>p[i][j] = p[i-1][j-1]+1</code>。</p>
 <h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>考虑如下情况：<br>word1[0…i-1]等于”abc”<br>word2[0…j-1]等于”bbcd” 此时我们处在word1[i-1]和word2[j-1]的位置，要在word1[i-1]后插入’d’，而在此之前，我们需要知道如何将word1[0…i-1]转化为word2[0…j-2]，即将”abc”转化为”bbc”，然后在此基础上增加一个插入的步骤，所以<code>p[i][j] = p[i][j-1]+1</code>。</p>
 <h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>这种情况的分析与插入大致类似，这里便不再赘述：<code>p[i][j] = p[i-1][j]+1</code>。</p>
@@ -271,8 +269,7 @@ p[0][j] = j
 <pre><code>dp[i][0] = i;
 dp[0][j] = j;
 dp[i][j] = dp[i - 1][j - 1], if word1[i - 1] == word2[j - 1];
-dp[i][j] = min(dp[i - 1][j - 1] + 1, dp[i - 1][j] + 1, dp[i][j - 1] + 1), (其它情况）
-</code></pre><p>分析完了所有的策略，那么如何确定什么情况下采用哪种策略呢？答案是，我们无法对此进行准确的分类，直截了当的办法是，选择最小值。</p>
+dp[i][j] = min(dp[i - 1][j - 1] + 1, dp[i - 1][j] + 1, dp[i][j - 1] + 1), (其它情况）</code></pre><p>分析完了所有的策略，那么如何确定什么情况下采用哪种策略呢？答案是，我们无法对此进行准确的分类，直截了当的办法是，选择最小值。</p>
 <pre><code>class Solution {
 public:
     int minDistance(string word1, string word2) {
@@ -291,8 +288,7 @@ public:
         }
         return dp[m][n];
     }
-};
-</code></pre><p>事实上我们并不需要每次都更新dp[i][j]，我们只需要dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]。事实上我们不需要保留整个m*n矩阵，保留一列或一行就够了，代码空间复杂度能够被优化到O(m) 或 O(n)。</p>
+};</code></pre><p>事实上我们并不需要每次都更新dp[i][j]，我们只需要dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]。事实上我们不需要保留整个m*n矩阵，保留一列或一行就够了，代码空间复杂度能够被优化到O(m) 或 O(n)。</p>
 <pre><code>class Solution {
 public:
     int minDistance(string word1, string word2) {
@@ -313,8 +309,7 @@ public:
         }
         return cur[m];
     }
-};
-</code></pre><h2 id="进阶版（英文单词拼写纠错推荐）"><a href="#进阶版（英文单词拼写纠错推荐）" class="headerlink" title="进阶版（英文单词拼写纠错推荐）"></a>进阶版（英文单词拼写纠错推荐）</h2><p>这是滴滴出行2018校园招聘的笔试编程题</p>
+};</code></pre><h2 id="进阶版（英文单词拼写纠错推荐）"><a href="#进阶版（英文单词拼写纠错推荐）" class="headerlink" title="进阶版（英文单词拼写纠错推荐）"></a>进阶版（英文单词拼写纠错推荐）</h2><p>这是滴滴出行2018校园招聘的笔试编程题</p>
 <h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><p>英文单词拼写的时候可能会出现拼写错误的情况(typo)。下面的题目，我们尝试实现拼写纠错推荐的功能。</p>
 <p>字串编辑距离是衡量字串间相似度的常见手段。</p>
 <p>①字串编辑距离：是指利用字符操作，把字符串A转换成字符串B所需要的最少操作数。</p>
@@ -331,10 +326,8 @@ public:
 <p><strong>输出</strong></p>
 <p>·按照上面的纠错规则字串相似度最小编辑距离进行排序，给出3个(如有)对应的纠错候选。 ·如得分相同，则按照输入顺序进行排序。</p>
 <p><strong>样例输入</strong></p>
-<pre><code>slep slap sleep step shoe shop snap slep
-</code></pre><p><strong>样例输出</strong></p>
-<pre><code>slep slap step
-</code></pre>
+<pre><code>slep slap sleep step shoe shop snap slep</code></pre><p><strong>样例输出</strong></p>
+<pre><code>slep slap step</code></pre>
       
       
         <div class="page-reward">

@@ -246,6 +246,7 @@
           
         <p>总结vector的原理</p>
 <a id="more"></a>
+
 <h2 id="一、vector的定义"><a href="#一、vector的定义" class="headerlink" title="一、vector的定义"></a>一、vector的定义</h2><pre><code>template&lt;class _Ty,class _Ax&gt;
 class vector:public _Vector_val&lt;_Ty,_Ax&gt;{
 public:
@@ -254,8 +255,7 @@ protected:
     pointer _Myfirst;//pointer to beginning of array
     pointer _Mylast;//pointer to current end of sequence
     pointer _Myend;//pointer to end of array
-};
-</code></pre><p>示意图如下：<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5pefakcgj30as088my3.jpg" alt="image"></p>
+};</code></pre><p>示意图如下：<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5pefakcgj30as088my3.jpg" alt="image"></p>
 <p>两个关键大小：<br>大小：size=_Mylast - _Myfirst；<br>容量：capacity=_Myend - _Myfirst；<br>分别对应于resize()、reserve()两个函数。<br>size表示vector中已有元素的个数，容量表示vector最多可存储的元素的个数；为了降低二次分配时的成本，vector实际配置的大小可能比客户需求的更大一些，以备将来扩充，这就是容量的概念。即capacity&gt;=size，当等于时，容器此时已满，若再要加入新的元素时，就要重新进行内存分配，整个vector的数据都要移动到新内存。二次分配成本较高，在实际操作时，应尽量预留一定空间，避免二次分配。</p>
 <h2 id="二、构造与析构"><a href="#二、构造与析构" class="headerlink" title="二、构造与析构"></a>二、构造与析构</h2><h3 id="1、构造"><a href="#1、构造" class="headerlink" title="1、构造"></a>1、构造</h3><p>vector的构造函数主要有以下几种：</p>
 <pre><code>vector(): _Mybase(){
@@ -274,8 +274,7 @@ vector(const _Myt&amp; _Right) : _Mybase(_Right._Alval){
     //construct by copying _Right
     if(_Buy(_Right.size()))
         _Mylast=_Ucopy(_Right.begin(),_Right.end(),_Myfirst);
-}
-</code></pre><p>vector优异性能的秘诀之一，就是配置比其所容纳的元素所需更多的内存，一般在使用vector之前，就先预留足够空间，以避免二次分配，这样可以使vector的性能达到最佳。因此元素个数_Count是个远比元素值 _Val重要的参数，因此当构造一个vector时，首要参数一定是元素个数。<br>由上各构造函数可知，基本上所有构造函数都是基于_Construct _n() 的</p>
+}</code></pre><p>vector优异性能的秘诀之一，就是配置比其所容纳的元素所需更多的内存，一般在使用vector之前，就先预留足够空间，以避免二次分配，这样可以使vector的性能达到最佳。因此元素个数_Count是个远比元素值 _Val重要的参数，因此当构造一个vector时，首要参数一定是元素个数。<br>由上各构造函数可知，基本上所有构造函数都是基于_Construct _n() 的</p>
 <pre><code>bool _Buy(size_type _Capacity){
     //allocate array with _Capacity elements
     _Myfirst=0,_Mylast=0,_Myend=0;
@@ -293,8 +292,7 @@ void _Construct_n(size_type _Count,const _Ty&amp; _Val){
     //构造含有_Count个值为_Val的元素的容器
     if(_Buy(_Count))
         _Mylast= _Ufill(_Myfirst,_Count,_Val);
-}
-</code></pre><h3 id="2、析构"><a href="#2、析构" class="headerlink" title="2、析构"></a>2、析构</h3><p>vector的析构函数很简单，就是先销毁所有已存在的元素，然后释放所有内存</p>
+}</code></pre><h3 id="2、析构"><a href="#2、析构" class="headerlink" title="2、析构"></a>2、析构</h3><p>vector的析构函数很简单，就是先销毁所有已存在的元素，然后释放所有内存</p>
 <pre><code>void _Tidy()
     {   // free all storage
     if (_Myfirst != 0)
@@ -303,8 +301,7 @@ void _Construct_n(size_type _Count,const _Ty&amp; _Val){
         this-&gt;_Alval.deallocate(_Myfirst, _Myend - _Myfirst);
         }
     _Myfirst = 0, _Mylast = 0, _Myend = 0;
-    }
-</code></pre><h2 id="三、插入和删除元素"><a href="#三、插入和删除元素" class="headerlink" title="三、插入和删除元素"></a>三、插入和删除元素</h2><p>vector的插入和删除元素是通过push_ back () 、 pop_back()两个接口来实现的，他们的内部实现也非常简单</p>
+    }</code></pre><h2 id="三、插入和删除元素"><a href="#三、插入和删除元素" class="headerlink" title="三、插入和删除元素"></a>三、插入和删除元素</h2><p>vector的插入和删除元素是通过push_ back () 、 pop_back()两个接口来实现的，他们的内部实现也非常简单</p>
 <pre><code>void push_back(const _Ty&amp; _Val)
     {   // insert element at end
     if (size() &lt; capacity())
@@ -320,8 +317,7 @@ void pop_back()
         _Destroy(_Mylast - 1, _Mylast);
         --_Mylast;
         }
-    }
-</code></pre><p>当没有备用空间时候，push_back将调用insert进行扩容。将内存扩充原来2倍，然后将原数据复制过来，然后释放掉原数据，最后调整三个迭代器的数值_Myfirst,_Mylast,_Myend。所以扩容之后，指向原vector的迭代器会失效，必须重新调用成员函数获取才可以，所以使用迭代器最好时时刻刻重新获取，否则可能引发错误。</p>
+    }</code></pre><p>当没有备用空间时候，push_back将调用insert进行扩容。将内存扩充原来2倍，然后将原数据复制过来，然后释放掉原数据，最后调整三个迭代器的数值_Myfirst,_Mylast,_Myend。所以扩容之后，指向原vector的迭代器会失效，必须重新调用成员函数获取才可以，所以使用迭代器最好时时刻刻重新获取，否则可能引发错误。</p>
 <pre><code>template &lt;class T, class Alloc&gt;
 void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
   if (_Mylast != _Myend) {//还有备用空间
@@ -354,8 +350,7 @@ void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
     _Mylast = new_finish;
     _Myend = new_start + len;
   }
-}
-</code></pre><h2 id="四、其他接口"><a href="#四、其他接口" class="headerlink" title="四、其他接口"></a>四、其他接口</h2><h3 id="1、reserve-操作"><a href="#1、reserve-操作" class="headerlink" title="1、reserve()操作"></a>1、reserve()操作</h3><p>之前提到过reserve（Count） 函数主要是预留Count大小的空间，对应的是容器的容量，目的是保证（_Myend - _Myfirst）&gt;=Count。只有当空间不足时，才会操作，即重新分配一块内存，将原有元素拷贝到新内存，并销毁原有内存</p>
+}</code></pre><h2 id="四、其他接口"><a href="#四、其他接口" class="headerlink" title="四、其他接口"></a>四、其他接口</h2><h3 id="1、reserve-操作"><a href="#1、reserve-操作" class="headerlink" title="1、reserve()操作"></a>1、reserve()操作</h3><p>之前提到过reserve（Count） 函数主要是预留Count大小的空间，对应的是容器的容量，目的是保证（_Myend - _Myfirst）&gt;=Count。只有当空间不足时，才会操作，即重新分配一块内存，将原有元素拷贝到新内存，并销毁原有内存</p>
 <pre><code>void reserve(size_type _Count)
     {   // determine new minimum length of allocated storage
     if (capacity() &lt; _Count)
@@ -372,16 +367,14 @@ void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
         _Mylast = _Ptr + _Size;
         _Myfirst = _Ptr;
         }
-    }
-</code></pre><h3 id="2、resize-操作"><a href="#2、resize-操作" class="headerlink" title="2、resize()操作"></a>2、resize()操作</h3><p>resize（Count） 函数主要是用于改变size的，也就是改变vector的大小，最终改变的是（_Mylast - _Myfirst）的值，当size &lt; Count时,就插入元素，当size &gt;Count时，就擦除元素。</p>
+    }</code></pre><h3 id="2、resize-操作"><a href="#2、resize-操作" class="headerlink" title="2、resize()操作"></a>2、resize()操作</h3><p>resize（Count） 函数主要是用于改变size的，也就是改变vector的大小，最终改变的是（_Mylast - _Myfirst）的值，当size &lt; Count时,就插入元素，当size &gt;Count时，就擦除元素。</p>
 <pre><code>void resize(size_type _Newsize, _Ty _Val)
     {   // determine new length, padding with _Val elements as needed
     if (size() &lt; _Newsize)
         _Insert_n(end(), _Newsize - size(), _Val);
     else if (_Newsize &lt; size())
         erase(begin() + _Newsize, end());
-    }
-</code></pre><h3 id="3、-Insert-n-操作"><a href="#3、-Insert-n-操作" class="headerlink" title="3、_Insert_n()操作"></a>3、_Insert_n()操作</h3><p>resize()操作和insert()操作都会利用到_Insert_n()这个函数，这个函数非常重要，也比其他函数稍微复杂一点<br>虽然_Insert_n(_where, _Count, _Val ) 函数比较长，但是操作都非常简单，主要可以分为以下几种情况：</p>
+    }</code></pre><h3 id="3、-Insert-n-操作"><a href="#3、-Insert-n-操作" class="headerlink" title="3、_Insert_n()操作"></a>3、_Insert_n()操作</h3><p>resize()操作和insert()操作都会利用到_Insert_n()这个函数，这个函数非常重要，也比其他函数稍微复杂一点<br>虽然_Insert_n(_where, _Count, _Val ) 函数比较长，但是操作都非常简单，主要可以分为以下几种情况：</p>
 <p>1、_Count == 0，不需要插入，直接返回</p>
 <p>2、max_size() - size() &lt; _Count，超过系统设置的最大容量，会溢出，造成Xlen（）异常</p>
 <p>3、_Capacity &lt; size() + _Count，vector的容量不足以插入Count个元素，需要进行二次分配，扩大vector的容量。 在VS下，vector容量会扩大50%，即 _Capacity = _Capacity + _Capacity / 2;<br>若仍不足，则 _Capacity = size() + _Count;</p>
@@ -397,8 +390,7 @@ void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
        _Ptr = _Ufill(_Ptr, _Count, _Val);  // add new stuff
        _Umove(_VEC_ITER_BASE(_Where), _Mylast, _Ptr);  // copy suffix
        //内存释放与变量更新
-       }
-</code></pre><p>这种情况下，数据从原始容器移动到新分配内存时是从前到后移动的<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5tyr1p07j30h20by41b.jpg" alt="image"><br>4、空间足够，且被插入元素的位置比较靠近_Mylast,即已有元素的尾部</p>
+       }</code></pre><p>这种情况下，数据从原始容器移动到新分配内存时是从前到后移动的<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5tyr1p07j30h20by41b.jpg" alt="image"><br>4、空间足够，且被插入元素的位置比较靠近_Mylast,即已有元素的尾部</p>
 <p>这种情况下不需要再次进行内存分配，且数据是从后往前操作的。首先是将where~last向后移动，为待插入数据预留Count大小的空间，然后从_Mylast处开始填充，然后将从where处开始填充剩余元素</p>
 <pre><code>else if ((size_type)(_Mylast - _VEC_ITER_BASE(_Where)) &lt; _Count)
         {   // new stuff spills off end
@@ -409,8 +401,7 @@ void vector&lt;T, Alloc&gt;::insert(iterator position, const T&amp; x) {
         _Mylast += _Count;
         std::fill(_VEC_ITER_BASE(_Where), _Mylast - _Count,
             _Val);  // insert up to old end
-        }
-</code></pre><p>5、空间足够，但插入的位置比较靠前<br>            {   // new stuff can all be assigned<br>            _Ty _Tmp = _Val;    // in case _Val is in sequence</p>
+        }</code></pre><p>5、空间足够，但插入的位置比较靠前<br>            {   // new stuff can all be assigned<br>            _Ty _Tmp = _Val;    // in case _Val is in sequence</p>
 <pre><code>pointer _Oldend = _Mylast;
 _Mylast = _Umove(_Oldend - _Count, _Oldend,
     _Mylast);   // copy suffix
@@ -418,8 +409,7 @@ _STDEXT _Unchecked_move_backward(_VEC_ITER_BASE(_Where), _Oldend - _Count,
     _Oldend);   // copy hole
 std::fill(_VEC_ITER_BASE(_Where), _VEC_ITER_BASE(_Where) + _Count,
     _Tmp);  // insert into hole
-}
-</code></pre><h3 id="4、erase-操作"><a href="#4、erase-操作" class="headerlink" title="4、erase()操作"></a>4、erase()操作</h3><pre><code>iterator erase(const_iterator _First_arg,
+}</code></pre><h3 id="4、erase-操作"><a href="#4、erase-操作" class="headerlink" title="4、erase()操作"></a>4、erase()操作</h3><pre><code>iterator erase(const_iterator _First_arg,
     const_iterator _Last_arg)
     {   // erase [_First, _Last)
     iterator _First = _Make_iter(_First_arg);
@@ -434,16 +424,14 @@ std::fill(_VEC_ITER_BASE(_Where), _VEC_ITER_BASE(_Where) + _Count,
         _Mylast = _Ptr;
         }
     return (_First);
-    }
-</code></pre><p>主要操作就是将后半部分的有效元素向前拷贝，并将后面空间的无效元素析构，并更新_Mylast变量<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5ua8ciphj30i90ahgns.jpg" alt="image"></p>
+    }</code></pre><p>主要操作就是将后半部分的有效元素向前拷贝，并将后面空间的无效元素析构，并更新_Mylast变量<br>这里写图片描述<br><img src="http://ww1.sinaimg.cn/large/0071ouepgy1fv5ua8ciphj30i90ahgns.jpg" alt="image"></p>
 <h3 id="5、assign-操作"><a href="#5、assign-操作" class="headerlink" title="5、assign()操作"></a>5、assign()操作</h3><p>assign()操作最终都会调用到下面的函数，主要操作是首先擦除容器中已有的全部元素，在从头开始插入Count个Val元素</p>
 <pre><code>void _Assign_n(size_type _Count, const _Ty&amp; _Val)
     {   // assign _Count * _Val
     _Ty _Tmp = _Val;    // in case _Val is in sequence
     erase(begin(), end());
     insert(begin(), _Count, _Tmp);
-    }
-</code></pre>
+    }</code></pre>
       
       
         <div class="page-reward">

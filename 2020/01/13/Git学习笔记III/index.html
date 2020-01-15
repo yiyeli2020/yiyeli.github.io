@@ -252,8 +252,7 @@
 <h1 id="Git-Commit信息的编写"><a href="#Git-Commit信息的编写" class="headerlink" title="Git Commit信息的编写"></a>Git Commit信息的编写</h1><p>如果有对应JIRA问题，编写格式可以直接以JIRA问题为准（这样可以在IDEA中查看代码时能够快速链接到该问题的描述）</p>
 <pre><code>Git JIRA 提交信息
 JIRA-56
-http://jira/XXX
-</code></pre><p>如果没有JIRA问题，首先尝试在JIRA系统上建立问题并按照第一条原则。如果确实没有必要，则需要在提交时指定问题类型，基本的模板为：</p>
+http://jira/XXX</code></pre><p>如果没有JIRA问题，首先尝试在JIRA系统上建立问题并按照第一条原则。如果确实没有必要，则需要在提交时指定问题类型，基本的模板为：</p>
 <pre><code>Git 普通问题提交信息
 &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
 type
@@ -271,8 +270,7 @@ scope
 subject  commit 目的的简短描述。
 以动词开头，使用第一人称现在时，比如change，而不是changed或changes
 第一个字母小写
-结尾不加句号（。）
-</code></pre><h1 id="Git-标准流程"><a href="#Git-标准流程" class="headerlink" title="Git 标准流程"></a>Git 标准流程</h1><p>Git分支管理流程遵循以下几点：</p>
+结尾不加句号（。）</code></pre><h1 id="Git-标准流程"><a href="#Git-标准流程" class="headerlink" title="Git 标准流程"></a>Git 标准流程</h1><p>Git分支管理流程遵循以下几点：</p>
 <p>developer没有任何权限能直接将codepush到develop、release和master分支。<br>developer开发feature时先建立issue之后再从develop创建相应的feature分支。<br>feature开发完毕后提交测试，测试可对此feature分支需要按照之前设计的case进行测试，并将bug录入到JIRA中。<br>上线日前1天从develop分支创建release分支命名规则遵守：release_yyyy/MM/dd<br>与产品沟通最后确认上线内容，并于涉及到的项目组沟通确认上线日配合验证测试。<br>将所有需要上线的feature分支提交merge request到release分支此时由中级或高级developer进行code review。<br>代码合并后测试进行主干的测试。确保上线前一天封版（理论上上线当天不进行代码改动）。<br>上线当上午发送上线通知邮件。</p>
 <h1 id="代码提交规范："><a href="#代码提交规范：" class="headerlink" title="代码提交规范："></a>代码提交规范：</h1><p>首先master 拉取分支—–&gt;建立开发分支——&gt;开发完成-→合并develop 分支—-&gt;提交测试—–&gt;测试完成—-&gt;开发分支合并到master分支</p>
 <h2 id="流程阻塞型功能提测"><a href="#流程阻塞型功能提测" class="headerlink" title="流程阻塞型功能提测"></a>流程阻塞型功能提测</h2><p>如果为后端必须零流量进行线上的回归，再开权限。</p>
@@ -283,24 +281,17 @@ subject  commit 目的的简短描述。
 <h1 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h1><p>查看当前分支信息</p>
 <pre><code>git branch -a  （-a 表示列出所有的本地分支以及远程分支）
 git branch -d xxx (删除合并过的分支xxx)
-git branch -D xxx (强制删除分支xxx，及时xxx未被合并过)
-</code></pre><p>切换分支</p>
+git branch -D xxx (强制删除分支xxx，及时xxx未被合并过)</code></pre><p>切换分支</p>
 <pre><code>git checkout xxx (切换至存在的分支)
-git checkout -b yyy (以当前分支为基础，新建分支yyy，并切换至分支yyy)
-</code></pre><p>更改工作区内容至暂存区</p>
+git checkout -b yyy (以当前分支为基础，新建分支yyy，并切换至分支yyy)</code></pre><p>更改工作区内容至暂存区</p>
 <pre><code>git add . (添加所有文件至暂存区)
 git add  source/to/file (添加指定文件至暂存区)
 git rm source/to/file (删除工作区和暂存区的指定文件)
-git mv source/to/file destination/to/file (移动工作区和暂存区的指定文件)
-</code></pre><p>提交暂存区内容至本地分支</p>
-<pre><code>git commit -m &quot;&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;&quot;
-</code></pre><p>同步本地分支至远程分支</p>
-<pre><code>git push origin branch
-</code></pre><p>拉取远程代码至本地</p>
+git mv source/to/file destination/to/file (移动工作区和暂存区的指定文件)</code></pre><p>提交暂存区内容至本地分支</p>
+<pre><code>git commit -m &quot;&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;&quot;</code></pre><p>同步本地分支至远程分支</p>
+<pre><code>git push origin branch</code></pre><p>拉取远程代码至本地</p>
 <pre><code>git fetch
-git rebase master
-</code></pre><h1 id="SourceTree"><a href="#SourceTree" class="headerlink" title="SourceTree"></a>SourceTree</h1><pre><code>SourceTree 是 Windows 和Mac OS X 下的 Git 客户端，下载地址：https://www.sourcetreeapp.com/
-</code></pre><h2 id="提交代码-（git-commit-amp-push）"><a href="#提交代码-（git-commit-amp-push）" class="headerlink" title="提交代码 （git commit &amp; push）"></a>提交代码 （git commit &amp; push）</h2><p>1.提交代码前应仔细看代码变更，不提交的改动可以选择暂存或舍弃。</p>
+git rebase master</code></pre><h1 id="SourceTree"><a href="#SourceTree" class="headerlink" title="SourceTree"></a>SourceTree</h1><pre><code>SourceTree 是 Windows 和Mac OS X 下的 Git 客户端，下载地址：https://www.sourcetreeapp.com/</code></pre><h2 id="提交代码-（git-commit-amp-push）"><a href="#提交代码-（git-commit-amp-push）" class="headerlink" title="提交代码 （git commit &amp; push）"></a>提交代码 （git commit &amp; push）</h2><p>1.提交代码前应仔细看代码变更，不提交的改动可以选择暂存或舍弃。</p>
 <p>2.选择要提交的文件后，会显示在已暂存文件列表中。</p>
 <p>3.填写提交信息。</p>
 <p>4.提交（勾选立即推送可立即推送到远端）</p>

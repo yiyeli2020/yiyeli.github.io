@@ -243,23 +243,21 @@
         <p>给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。</p>
 <p>两个相邻元素间的距离为 1 。</p>
 <a id="more"></a>
+
+
 <p>示例 1:<br>输入:</p>
 <pre><code>0 0 0
 0 1 0
-0 0 0
-</code></pre><p>输出:</p>
+0 0 0</code></pre><p>输出:</p>
 <pre><code>0 0 0
 0 1 0
-0 0 0
-</code></pre><p>示例 2:<br>输入:</p>
+0 0 0</code></pre><p>示例 2:<br>输入:</p>
 <pre><code>0 0 0
 0 1 0
-1 1 1
-</code></pre><p>输出:</p>
+1 1 1</code></pre><p>输出:</p>
 <pre><code>0 0 0
 0 1 0
-1 2 1
-</code></pre><p>注意:</p>
+1 2 1</code></pre><p>注意:</p>
 <p>给定矩阵的元素个数不超过 10000。<br>给定矩阵中至少有一个元素是 0。<br>矩阵中的元素只在四个方向上相邻: 上、下、左、右。</p>
 <h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>计算的距离是<a href="https://baike.baidu.com/item/%E6%9B%BC%E5%93%88%E9%A1%BF%E8%B7%9D%E7%A6%BB/743092?fr=aladdin" target="_blank" rel="noopener">曼哈顿距离</a></p>
 <p>因为这道题是求值为1的点到值为0的区域的最短距离，因为是在图上求最短距离，所以可以用广度优先搜索方法求解，该方法在求最小生成树和迪杰斯特拉最短路径算法的思想中都有体现。本质上是有一个已知最优路线（最优一般指距离最短）区域，这个区域被放进queue中，这道题的这个区域就是0区域，所以一开始要将0区域都找出来，并把它们push进queue里，然后开始BFS，每遇到一个<strong>未访问过的点（matrix[i][j]值为-1）和合法的点（不超过map）</strong>的区域，就将它加一并push进queue中，这样，图map总会被遍历完，而且总是最小值。</p>
@@ -297,8 +295,7 @@ public:
         }
         return matrix;
     }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Yiye Li">
 <meta property="og:description" content="Hexo标签与md文件冲突问题解决">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-03T10:38:29.369Z">
+<meta property="og:updated_time" content="2020-01-15T07:19:44.739Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo标签与md文件冲突问题解决">
 <meta name="twitter:description" content="Hexo标签与md文件冲突问题解决">
@@ -242,27 +242,24 @@
           
         <p>Hexo标签与md文件冲突问题解决</p>
 <a id="more"></a>
+
 <p>今天使用 Github+Hexo 搭建的博客写文章时遇到一个 Bug，查阅资料解决之后，发现很多人都遇到过由于 nunjucks 模板标签导致 MD 文件解析报错的问题，于是记录一下这个问题的解决方法。</p>
 <h1 id="报错及原因"><a href="#报错及原因" class="headerlink" title="报错及原因"></a>报错及原因</h1><p>  今天使用 hexo generate 生成文章时，出现了如下报错：</p>
 <pre><code>INFO  Start processing
 FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
 Template render error: (unknown path) [Line 17, Column 30]
   unexpected token: }}
-    at Object._prettifyError
-</code></pre><p>出现上述情况的原因是 Markdown 文件中内容含有的 {{  }} 标签与 nunjucks 模板引擎的标签发生了冲突。{{}}等这些标签都是模板引擎的占位标签，如果 MarkDown 文件中包含这些标签，且不被 <code>`</code> 代码块包裹，那么解析时就会把 MD 文件中的标签动态解析了，于是导致 MD 文件解析时报错。</p>
+    at Object._prettifyError</code></pre><p>出现上述情况的原因是 Markdown 文件中内容含有的双大括号 标签与 nunjucks 模板引擎的标签发生了冲突。双大括号等这些标签都是模板引擎的占位标签，如果 MarkDown 文件中包含这些标签，且不被 ``` 代码块包裹，那么解析时就会把 MD 文件中的标签动态解析了，于是导致 MD 文件解析时报错。</p>
 <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><h2 id="修改-Markdown-文件"><a href="#修改-Markdown-文件" class="headerlink" title="修改 Markdown 文件"></a>修改 Markdown 文件</h2><p>将含有双大括号的内容首尾添加如下标签进行处理：</p>
 <pre><code>{% raw %}
     {{ 双大括号内包裹的内容 }}
-    {% endraw %}
-</code></pre><p>用这个标签虽然可以解决问题，但之后再遇到类似的情况每次都需要对 MarkDown 文件进行修改。下面介绍一种更便捷的方法。</p>
+    {% endraw %}</code></pre><p>用这个标签虽然可以解决问题，但之后再遇到类似的情况每次都需要对 MarkDown 文件进行修改。下面介绍一种更便捷的方法。</p>
 <h2 id="修改-nunjucks-模块源代码"><a href="#修改-nunjucks-模块源代码" class="headerlink" title="修改 nunjucks 模块源代码"></a>修改 nunjucks 模块源代码</h2><p>我们还可以直接在 nunjucks 模块上修改源代码，更改有冲突的渲染标签。<br>首先打开这个文件，路径如下：<br>    node_modules/nunjucks/src/lexer.js<br>找到下述两行代码：</p>
 <pre><code>var VARIABLE_START = &apos;{{';
-    var VARIABLE_END = '}}&apos;;
-</code></pre><p>将其修改为：</p>
+    var VARIABLE_END = '}}&apos;;</code></pre><p>将其修改为：</p>
 <pre><code>var VARIABLE_START = &apos;{$&apos;;
-var VARIABLE_END = &apos;$}&apos;;
-</code></pre><p>将有冲突的模板引擎的占位符更改为其他字符，进行模板解析时就不会与 MarkDown 的内容发生冲突了，且这种方法对所有 MarkDown 文件都是有效的，一劳永逸。<br>类似的，如果出现类似符号的解析错误时，也可以根据情况将其更改为其他占位符（自定义）。</p>
-<h2 id="搜索、RSS-插件同步修改"><a href="#搜索、RSS-插件同步修改" class="headerlink" title="搜索、RSS 插件同步修改"></a>搜索、RSS 插件同步修改</h2><p>若博客使用 hexo-generator-search 或 hexo-generator-feed 等其他依赖于 nunjucks 模板的插件，那么这些插件的模板处理标签也需要进行同步修改。以搜索插件为例，打开如下路径的文件：<br>node_modules/hexo-generator-search/templates/search.xml<br>根据之前修改的 nunjucks 的内容，将此文件的 {{ 和 }} 也更改为  即可。</p>
+var VARIABLE_END = &apos;$}&apos;;</code></pre><p>将有冲突的模板引擎的占位符更改为其他字符，进行模板解析时就不会与 MarkDown 的内容发生冲突了，且这种方法对所有 MarkDown 文件都是有效的，一劳永逸。<br>类似的，如果出现类似符号的解析错误时，也可以根据情况将其更改为其他占位符（自定义）。</p>
+<h2 id="搜索、RSS-插件同步修改"><a href="#搜索、RSS-插件同步修改" class="headerlink" title="搜索、RSS 插件同步修改"></a>搜索、RSS 插件同步修改</h2><p>若博客使用 hexo-generator-search 或 hexo-generator-feed 等其他依赖于 nunjucks 模板的插件，那么这些插件的模板处理标签也需要进行同步修改。以搜索插件为例，打开如下路径的文件：<br>node_modules/hexo-generator-search/templates/search.xml<br>根据之前修改的 nunjucks 的内容，将此文件的  也更改为 {$ 和 $} 即可。</p>
 <h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><p>如果在项目下执行 npm install 更新 nunjucks 模板时，那么之前更改的内容会被还原，需要重新对有冲突的符号进行更改。</p>
 <h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>【1】<a href="https://www.jianshu.com/p/6032a1a2dc25" target="_blank" rel="noopener">https://www.jianshu.com/p/6032a1a2dc25</a></p>
 
@@ -323,7 +320,7 @@ var VARIABLE_END = &apos;$}&apos;;
         <p><span>本文标题:</span><a href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
         <p><span>发布时间:</span>2020年01月03日 - 18时23分</p>
-        <p><span>最后更新:</span>2020年01月03日 - 18时38分</p>
+        <p><span>最后更新:</span>2020年01月15日 - 15时19分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/01/03/Hexo标签与md文件冲突问题解决/" title="Hexo标签与md文件冲突问题解决">http://yoursite.com/2020/01/03/Hexo标签与md文件冲突问题解决/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/03/Hexo标签与md文件冲突问题解决/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

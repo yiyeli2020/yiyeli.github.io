@@ -242,6 +242,7 @@
           
         <p>总结C++基础概念</p>
 <a id="more"></a>
+
 <h2 id="1、typename与class"><a href="#1、typename与class" class="headerlink" title="1、typename与class"></a>1、typename与class</h2><p>Q:在c++Template中非常多地方都用到了typename与class这两个关键字，并且好像能够替换，是不是这两个关键字全然一样呢?</p>
 <p>答：class用于定义类，在模板引入c++后，最初定义模板的方法为：template，这里class关键字表明T是一个类型。后来为了避免class在这两个地方的使用可能给人带来混淆，所以引入了typename这个关键字。它的作用同class一样表明后面的符号为一个类型。这样在定义模板的时候就能够使用以下的方式了： template.在模板定义语法中关键字class与typename的作用全然一样。</p>
 <h2 id="2-类模板与模板类的概念"><a href="#2-类模板与模板类的概念" class="headerlink" title="2.类模板与模板类的概念"></a>2.类模板与模板类的概念</h2><h3 id="（1）-什么是类模板"><a href="#（1）-什么是类模板" class="headerlink" title="（1） 什么是类模板"></a>（1） 什么是类模板</h3><p>一个类模板（也称为类属类或类生成类）同意用户为类定义一种模式。使得类中的某些数据成员、默写成员函数的參数、某些成员函数的返回值，能够取随意类型（包含系统提前定义的和用户自己定义的）。<br>假设一个类中数据成员的数据类型不能确定。或者是某个成员函数的參数或返回值的类型不能确定。就必须将此类声明为模板，它的存在不是代表一个详细的、实际的类，而是代表着一类类。</p>
@@ -250,8 +251,7 @@
 class foo
 {
 ……
-}
-</code></pre><p>foo 为类名，在类定义体中，如採用通用数据类型的成员，函数參数的前面需加上T。当中通用类型T能够作为普通成员变量的类型，还能够作为const和static成员变量以及成员函数的參数和返回类型之用。</p>
+}</code></pre><p>foo 为类名，在类定义体中，如採用通用数据类型的成员，函数參数的前面需加上T。当中通用类型T能够作为普通成员变量的类型，还能够作为const和static成员变量以及成员函数的參数和返回类型之用。</p>
 <p>比如：</p>
 <pre><code>template&lt;class T&gt;
 class Test{
@@ -265,29 +265,25 @@ public:
     ~Test(){}
     void print();
     T operator+(T x);
-};
-</code></pre><p><strong>B. 在类定义体外定义成员函数时，若此成员函数中有模板參数存在，则除了须要和一般类的体外定义成员函数一样的定义外，还需在函数体外进行模板声明</strong><br>比如</p>
+};</code></pre><p><strong>B. 在类定义体外定义成员函数时，若此成员函数中有模板參数存在，则除了须要和一般类的体外定义成员函数一样的定义外，还需在函数体外进行模板声明</strong><br>比如</p>
 <pre><code>template&lt;class T&gt;
 void Test&lt;T&gt;::print(){
     std::cout&lt;&lt;&quot;n=&quot;&lt;&lt;n&lt;&lt;std::endl;
     std::cout&lt;&lt;&quot;i=&quot;&lt;&lt;i&lt;&lt;std::endl;
     std::cout&lt;&lt;&quot;cnt=&quot;&lt;&lt;cnt&lt;&lt;std::endl;
 
-}
-</code></pre><p>假设函数是以通用类型为返回类型，则要在函数名前的类名后缀上“”。</p>
+}</code></pre><p>假设函数是以通用类型为返回类型，则要在函数名前的类名后缀上“”。</p>
 <p>比如：</p>
 <pre><code>template&lt;class T&gt;
 Test&lt;T&gt;::Test(T k):i(k){n=k;cnt++;}
 template&lt;class T&gt;
 T Test&lt;T&gt;::operator+(T x){
                return n + x;
-               }
-</code></pre><p><strong>C. 在类定义体外初始化const成员和static成员变量的做法和普通类体外初始化const成员和static成员变量的做法基本上是一样的，唯一的差别是需再对模板进行声明，比如</strong></p>
+               }</code></pre><p><strong>C. 在类定义体外初始化const成员和static成员变量的做法和普通类体外初始化const成员和static成员变量的做法基本上是一样的，唯一的差别是需再对模板进行声明，比如</strong></p>
 <pre><code>template&lt;class T&gt;
 int Test&lt;T&gt;::cnt=0;
 template&lt;class T&gt;
-Test&lt;T&gt;::Test(T k):i(k){n=k;cnt++;}
-</code></pre><h3 id="（3）-类模板的使用"><a href="#（3）-类模板的使用" class="headerlink" title="（3） 类模板的使用"></a>（3） 类模板的使用</h3><p>类模板的使用实际上是将类模板实例化成一个详细的类。它的格式为：类名&lt;实际的类型&gt;。<br>模板类是类模板实例化后的一个产物。说个形象点的样例吧。</p>
+Test&lt;T&gt;::Test(T k):i(k){n=k;cnt++;}</code></pre><h3 id="（3）-类模板的使用"><a href="#（3）-类模板的使用" class="headerlink" title="（3） 类模板的使用"></a>（3） 类模板的使用</h3><p>类模板的使用实际上是将类模板实例化成一个详细的类。它的格式为：类名&lt;实际的类型&gt;。<br>模板类是类模板实例化后的一个产物。说个形象点的样例吧。</p>
 <p>我把类模板比作一个做饼干同的模子，而模板类就是用这个模子做出来的饼干，至于这个饼干是什么味道的就要看你自己在实例化时用的是什么材料了，你能够做巧克力饼干，也能够做豆沙饼干，这些饼干的除了材料不一样外，其它的东西都是一样的了。</p>
 <h2 id="3-函数模板和模板函数"><a href="#3-函数模板和模板函数" class="headerlink" title="3.函数模板和模板函数"></a>3.函数模板和模板函数</h2><h3 id="（1）函数模板"><a href="#（1）函数模板" class="headerlink" title="（1）函数模板"></a>（1）函数模板</h3><p>函数模板能够用来创建一个通用的函数。以支持多种不同的形參。避免重载函数的函数体反复设计。</p>
 <p>它的最大特点是把函数使用的数据类型作为參数。</p>
@@ -296,28 +292,24 @@ Test&lt;T&gt;::Test(T k):i(k){n=k;cnt++;}
 &lt;返回类型&gt;&lt;函数名&gt;(參数表)
 {
     函数体
-}
-</code></pre><p>当中，template是定义模板函数的关键字；template后面的尖括号不能省略；typename（或class)是声明数据类型參数标识符的关键字。用以说明它后面的标识符是数据类型标识符。这样，在以后定义的这个函数中，凡希望依据实參数据类型来确定数据类型的变量，都能够用数据类型參数标识符来说明，从而使这个变量能够适应不同的数据类型。</p>
+}</code></pre><p>当中，template是定义模板函数的关键字；template后面的尖括号不能省略；typename（或class)是声明数据类型參数标识符的关键字。用以说明它后面的标识符是数据类型标识符。这样，在以后定义的这个函数中，凡希望依据实參数据类型来确定数据类型的变量，都能够用数据类型參数标识符来说明，从而使这个变量能够适应不同的数据类型。</p>
 <p>比如：</p>
 <pre><code>template&lt;typename（或class) T&gt;
 T fuc(T x, T y)
 {
     T x;
     //……
-}
-</code></pre><p>函数模板仅仅是声明了一个函数的描写叙述即模板。不是一个能够直接运行的函数，仅仅有依据实际情况用实參的数据类型取代类型參数标识符之后，才干产生真正的函数。</p>
+}</code></pre><p>函数模板仅仅是声明了一个函数的描写叙述即模板。不是一个能够直接运行的函数，仅仅有依据实际情况用实參的数据类型取代类型參数标识符之后，才干产生真正的函数。</p>
 <h3 id="（2）模板函数："><a href="#（2）模板函数：" class="headerlink" title="（2）模板函数："></a>（2）模板函数：</h3><p>模板函数的生成就是将函数模板的类型形參实例化的过程。</p>
 <p>比如：</p>
 <pre><code>double d;
     int a;
-    fuc(d,a);
-</code></pre><p>则系统将用实參d的数据类型double去取代函数模板中的T生成函数：</p>
+    fuc(d,a);</code></pre><p>则系统将用实參d的数据类型double去取代函数模板中的T生成函数：</p>
 <pre><code>double fuc(double x,int y)
 {
     double x;
     //……
-}
-</code></pre>
+}</code></pre>
       
       
         <div class="page-reward">

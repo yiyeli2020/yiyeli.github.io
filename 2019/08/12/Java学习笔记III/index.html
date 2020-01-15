@@ -242,12 +242,12 @@
           
         <p>总结Java8 Lambda表达式，对涉及到到final关键字做了回顾</p>
 <a id="more"></a>
+
 <h1 id="Java8-Lambda表达式"><a href="#Java8-Lambda表达式" class="headerlink" title="Java8 Lambda表达式"></a>Java8 Lambda表达式</h1><p>Lambda 表达式，也可称为闭包，它是推动 Java 8 发布的最重要新特性。<br>Lambda 允许把函数作为一个方法的参数（函数作为参数传递进方法中）。<br>使用 Lambda 表达式可以使代码变的更加简洁紧凑。</p>
 <h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>lambda 表达式的语法格式如下：</p>
 <pre><code>(parameters) -&gt; expression
 或
-(parameters) -&gt;{ statements; }
-</code></pre><p>以下是lambda表达式的重要特征:</p>
+(parameters) -&gt;{ statements; }</code></pre><p>以下是lambda表达式的重要特征:</p>
 <p>可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。</p>
 <p>可选的参数圆括号：一个参数无需定义圆括号，但多个参数需要定义圆括号。</p>
 <p>可选的大括号：如果主体包含了一个语句，就不需要使用大括号。</p>
@@ -266,8 +266,7 @@ x -&gt; 2 * x
 (int x, int y) -&gt; x + y  
 
 // 5. 接受一个 string 对象,并在控制台打印,不返回任何值(看起来像是返回void)  
-(String s) -&gt; System.out.print(s)
-</code></pre><p>在 Java8Tester.java 文件输入以下代码：</p>
+(String s) -&gt; System.out.print(s)</code></pre><p>在 Java8Tester.java 文件输入以下代码：</p>
 <pre><code>public class Java8Tester {
    public static void main(String args[]){
       Java8Tester tester = new Java8Tester();
@@ -312,8 +311,7 @@ x -&gt; 2 * x
    private int operate(int a, int b, MathOperation mathOperation){
       return mathOperation.operation(a, b);
    }
-}
-</code></pre><p>执行以上脚本，输出结果为：</p>
+}</code></pre><p>执行以上脚本，输出结果为：</p>
 <pre><code>$ javac Java8Tester.java
 $ java Java8Tester
 10 + 5 = 15
@@ -321,8 +319,7 @@ $ java Java8Tester
 10 x 5 = 50
 10 / 5 = 2
 Hello Runoob
-Hello Google
-</code></pre><p>使用 Lambda 表达式需要注意以下两点：</p>
+Hello Google</code></pre><p>使用 Lambda 表达式需要注意以下两点：</p>
 <p>Lambda 表达式主要用来定义行内执行的方法类型接口，例如，一个简单方法接口。在上面例子中，我们使用各种类型的Lambda表达式来定义MathOperation接口的方法。然后我们定义了sayMessage的执行。</p>
 <p>Lambda 表达式免去了使用匿名方法的麻烦，并且给予Java简单但是强大的函数化的编程能力。</p>
 <h2 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h2><p>lambda 表达式只能引用标记了 final 的外层局部变量，这就是说不能在 lambda 内部修改定义在域外的局部变量，否则会编译错误。<br>在 Java8Tester.java 文件输入以下代码：</p>
@@ -339,12 +336,10 @@ public static void main(String args[]){
 interface GreetingService {
   void sayMessage(String message);
 }
-}
-</code></pre><p>执行以上脚本，输出结果为：</p>
+}</code></pre><p>执行以上脚本，输出结果为：</p>
 <pre><code>$ javac Java8Tester.java
 $ java Java8Tester
-Hello! Runoob
-</code></pre><p>我们也可以直接在 lambda 表达式中访问外层的局部变量：</p>
+Hello! Runoob</code></pre><p>我们也可以直接在 lambda 表达式中访问外层的局部变量：</p>
 <pre><code>public class Java8Tester {
     public static void main(String args[]) {
         final int num = 1;
@@ -355,18 +350,15 @@ Hello! Runoob
     public interface Converter&lt;T1, T2&gt; {
         void convert(int i);
     }
-}
-</code></pre><p>lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）</p>
+}</code></pre><p>lambda 表达式的局部变量可以不用声明为 final，但是必须不可被后面的代码修改（即隐性的具有 final 的语义）</p>
 <pre><code>int num = 1;  
 Converter&lt;Integer, String&gt; s = (param) -&gt; System.out.println(String.valueOf(param + num));
 s.convert(2);
 num = 5;  
 //报错信息：Local variable num defined in an enclosing scope must be final or effectively
- final
-</code></pre><p>在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量。</p>
+ final</code></pre><p>在 Lambda 表达式当中不允许声明一个与局部变量同名的参数或者局部变量。</p>
 <pre><code>String first = &quot;&quot;;  
-Comparator&lt;String&gt; comparator = (first, second) -&gt; Integer.compare(first.length(), second.length());  //编译会出错
-</code></pre><h1 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h1><p>final是一个关键字，可以用于修饰类，成员变量，成员方法。</p>
+Comparator&lt;String&gt; comparator = (first, second) -&gt; Integer.compare(first.length(), second.length());  //编译会出错</code></pre><h1 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h1><p>final是一个关键字，可以用于修饰类，成员变量，成员方法。</p>
 <h2 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h2><p>它修饰的类不能被继承。</p>
 <p>它修饰的成员变量是一个常量。</p>
 <p>它修饰的成员方法是不能被子类重写的。</p>

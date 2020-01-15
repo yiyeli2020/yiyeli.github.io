@@ -252,8 +252,7 @@
     public String welcome() {
     return service.retrieveWelcomeMessage();
     }
-}
-</code></pre><p>调用后发现一切正常，此时，功能提交，需要进行测试，而由于实际应用环境与测试环境有所区别，需要替换WelcomeServiceImpl为一个MockWelcomeServiceImpl，以方便测试，怎么办？没有其他办法，只有改代码：</p>
+}</code></pre><p>调用后发现一切正常，此时，功能提交，需要进行测试，而由于实际应用环境与测试环境有所区别，需要替换WelcomeServiceImpl为一个MockWelcomeServiceImpl，以方便测试，怎么办？没有其他办法，只有改代码：</p>
 <pre><code>public class WelcomeController {
     private WelcomeService service = new MockWelcomeServiceImpl();
 
@@ -263,8 +262,7 @@
 测试OK后再将代码改回去，这种方式太过于繁琐，且对代码的侵入性很强；
 下面看通过Spring的IOC如何实现，首先将WelcomeService交由Spring管理：
 
-&lt;bean name=&quot;WelcomeService&quot; class=&quot;XXX.XXX.XXX.service.impl.WelcomeServiceImpl&quot;/&gt;
-</code></pre><p>然后在业务代码处通过Spring IOC拿到具体对象：</p>
+&lt;bean name=&quot;WelcomeService&quot; class=&quot;XXX.XXX.XXX.service.impl.WelcomeServiceImpl&quot;/&gt;</code></pre><p>然后在业务代码处通过Spring IOC拿到具体对象：</p>
 <pre><code>public class WelcomeController {
     @Autowired
     private WelcomeService service;
@@ -273,17 +271,14 @@
     public String welcome() {
         return service.retrieveWelcomeMessage();
     }
-}
-</code></pre><p>测试的时候，只需要更改配置文件，将WelcomeService对应的实现改为MockWelcomeServiceImpl即可：</p>
-<pre><code>&lt;bean name=&quot;WelcomeService&quot; class=&quot;XXX.XXX.XXX.service.impl.MockWelcomeServiceImpl&quot;/&gt;
-</code></pre><p>这种方式对业务代码没有任何侵入，它有效的实现松耦合，大家都知道紧耦合的代码是业务发展的噩梦；同时，Spring IOC提供的远不止这些，如通过单例减少创建无用的对象，通过延迟加载优化初始化成本等<br>当然，Spring 的核心功能远不知这些，如：</p>
+}</code></pre><p>测试的时候，只需要更改配置文件，将WelcomeService对应的实现改为MockWelcomeServiceImpl即可：</p>
+<pre><code>&lt;bean name=&quot;WelcomeService&quot; class=&quot;XXX.XXX.XXX.service.impl.MockWelcomeServiceImpl&quot;/&gt;</code></pre><p>这种方式对业务代码没有任何侵入，它有效的实现松耦合，大家都知道紧耦合的代码是业务发展的噩梦；同时，Spring IOC提供的远不止这些，如通过单例减少创建无用的对象，通过延迟加载优化初始化成本等<br>当然，Spring 的核心功能远不知这些，如：</p>
 <pre><code>Spring AOP
 Spring JDBC
 Spring MVC
 Spring ORM
 Spring JMS
-Spring Test
-</code></pre><p>其实不通过Spring框架依然可以实现这些功能特定，但是Spring 提供了更优雅的抽象接口以方便对这些功能的组装，同时又给予每个具体实现以灵活的配置；另外，基于Spring，你可以方便的与其他框架进行集成，如hibernate，ibatis等，Spring官方的原则是绝不重复造轮子，有好的解决方案只需要通过Spring进行集成即可。纵览Spring的结构，你会发现Spring Framework 本身并未提供太多具体的功能，它主要专注于让你的项目代码组织更加优雅，使其具有极好的灵活性和扩展性，同时又能通过Spring集成业界优秀的解决方案，想了解Spring的核心实现机制可参考tiny spring 项目</p>
+Spring Test</code></pre><p>其实不通过Spring框架依然可以实现这些功能特定，但是Spring 提供了更优雅的抽象接口以方便对这些功能的组装，同时又给予每个具体实现以灵活的配置；另外，基于Spring，你可以方便的与其他框架进行集成，如hibernate，ibatis等，Spring官方的原则是绝不重复造轮子，有好的解决方案只需要通过Spring进行集成即可。纵览Spring的结构，你会发现Spring Framework 本身并未提供太多具体的功能，它主要专注于让你的项目代码组织更加优雅，使其具有极好的灵活性和扩展性，同时又能通过Spring集成业界优秀的解决方案，想了解Spring的核心实现机制可参考tiny spring 项目</p>
 <h2 id="什么是Spring-MVC？它解决了什么问题？"><a href="#什么是Spring-MVC？它解决了什么问题？" class="headerlink" title="什么是Spring MVC？它解决了什么问题？"></a>什么是Spring MVC？它解决了什么问题？</h2><p>Spring MVC是Spring的一部分，Spring 出来以后，大家觉得很好用，于是按照这种模式设计了一个 MVC框架（一些用Spring 解耦的组件），主要用于开发WEB应用和网络接口，它是Spring的一个模块，通过Dispatcher Servlet, ModelAndView 和 View Resolver，让应用开发变得很容易，一个典型的Spring MVC应用开发分为下面几步：<br>首先通过配置文件声明Dispatcher Servlet：</p>
 <pre><code>&lt;servlet&gt;
     &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
@@ -298,8 +293,7 @@ Spring Test
 &lt;servlet-mapping&gt;
     &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
     &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;
-</code></pre><p>通过配置文件声明servlet详情，如MVC resource，data source，bean等</p>
+&lt;/servlet-mapping&gt;</code></pre><p>通过配置文件声明servlet详情，如MVC resource，data source，bean等</p>
 <pre><code>&lt;mvc:resources mapping=&quot;/css/**/*&quot; location=&quot;/static/css/&quot; cache-period=&quot;21600&quot;/&gt;
 &lt;mvc:resources mapping=&quot;/js/**/*&quot; location=&quot;/static/js/&quot; cache-period=&quot;21600&quot;/&gt;
 &lt;mvc:resources mapping=&quot;/views/**/*.html&quot; location=&quot;/static/views/&quot; cache-period=&quot;21600&quot;/&gt;
@@ -331,8 +325,7 @@ Spring Test
             &lt;property name=&quot;refreshInterval&quot; value=&quot;30000&quot;/&gt;
         &lt;/bean&gt;
     &lt;/property&gt;
-&lt;/bean&gt;
-</code></pre><p>若需添加其它功能，如security，则需添加对应配置：<br>    <http pattern="/css/**/*" security="none"><br>    <http pattern="/js/**/*" security="none"><br>    <http pattern="/views/**/*.html" security="none"><br>    <http pattern="/fonts/**/*" security="none"><br>    <http pattern="/ueditor/**/*" security="none"><br>    <http pattern="/img/**/*" security="none"></http></http></http></http></http></http></p>
+&lt;/bean&gt;</code></pre><p>若需添加其它功能，如security，则需添加对应配置：<br>    <http pattern="/css/**/*" security="none"><br>    <http pattern="/js/**/*" security="none"><br>    <http pattern="/views/**/*.html" security="none"><br>    <http pattern="/fonts/**/*" security="none"><br>    <http pattern="/ueditor/**/*" security="none"><br>    <http pattern="/img/**/*" security="none"></http></http></http></http></http></http></p>
 <pre><code>&lt;http use-expressions=&quot;true&quot; entry-point-ref=&quot;omsAuthenticationEntryPoint&quot;&gt;
     &lt;logout logout-url=&quot;/omsmc/authentication/logout/*&quot; success-handler-ref=&quot;omsLogoutSuccessHandler&quot;&gt;&lt;/logout&gt;
     &lt;intercept-url pattern=&apos;/omsmc/authentication/login*&apos; access=&quot;permitAll&quot; /&gt;
@@ -342,8 +335,7 @@ Spring Test
     &lt;custom-filter ref=&quot;omsUsernamePasswordAuthenticationFilter&quot; position=&quot;FORM_LOGIN_FILTER&quot; /&gt;
     &lt;remember-me services-ref=&quot;omsRememberMeServices&quot; key=&quot;yfboms&quot;/&gt;
     &lt;csrf disabled=&quot;true&quot;/&gt;
-&lt;/http&gt;
-</code></pre><p>增加业务代码，如controller，service，model等，最后生成war包，通过容器进行启动</p>
+&lt;/http&gt;</code></pre><p>增加业务代码，如controller，service，model等，最后生成war包，通过容器进行启动</p>
 <h2 id="什么是Spring-Boot？它解决了什么问题？"><a href="#什么是Spring-Boot？它解决了什么问题？" class="headerlink" title="什么是Spring Boot？它解决了什么问题？"></a>什么是Spring Boot？它解决了什么问题？</h2><p>初期的Spring通过代码加配置的形式为项目提供了良好的灵活性和扩展性，但随着Spring越来越庞大，其配置文件也越来越繁琐，太多复杂的xml文件也一直是Spring被人诟病的地方，特别是近些年其他简洁的WEB方案层出不穷，如基于Python或Node.Js，几行代码就能实现一个WEB服务器，对比起来，大家渐渐觉得Spring那一套太过繁琐，此时，Spring社区推出了Spring Boot，它的目的在于实现自动配置，降低项目搭建的复杂度，如需要搭建一个接口服务，通过Spring Boot，几行代码即可实现，请看代码示例：</p>
 <pre><code>//引入spring-boot-starter-web依赖
 &lt;dependency&gt;
@@ -364,8 +356,7 @@ public class MockServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(MockServerApplication.class, args);
     }
-}
-</code></pre><p>你甚至都不用额外的WEB容器，直接生成jar包执行即可，因为spring-boot-starter-web模块中包含有一个内置tomcat，可以直接提供容器使用；基于Spring Boot，不是说原来的配置没有了，而是Spring Boot有一套默认配置，我们可以把它看做比较通用的约定，而Spring Boot遵循的也是约定优于配置原则，同时，如果你需要使用到Spring以往提供的各种复杂但功能强大的配置功能，Spring Boot一样支持<br>在Spring Boot中，你会发现你引入的所有包都是starter形式，如：</p>
+}</code></pre><p>你甚至都不用额外的WEB容器，直接生成jar包执行即可，因为spring-boot-starter-web模块中包含有一个内置tomcat，可以直接提供容器使用；基于Spring Boot，不是说原来的配置没有了，而是Spring Boot有一套默认配置，我们可以把它看做比较通用的约定，而Spring Boot遵循的也是约定优于配置原则，同时，如果你需要使用到Spring以往提供的各种复杂但功能强大的配置功能，Spring Boot一样支持<br>在Spring Boot中，你会发现你引入的所有包都是starter形式，如：</p>
 <p>spring-boot-starter-web-services，针对SOAP Web Services</p>
 <p>spring-boot-starter-web，针对Web应用与网络接口</p>
 <p>spring-boot-starter-jdbc，针对JDBC</p>
@@ -389,14 +380,12 @@ public class MockServerApplication {
     public void setUserDao(UserDao userDao) { // 用于属性的方法上
         this.userDao = userDao;
     }
-}
-</code></pre><p>  @Autowired注解是<strong>按照类型（byType）装配</strong>依赖对象，默认情况下它要求依赖对象必须存在，如果允许null值，可以设置它的required属性为false。如果我们想使用按照名称（byName）来装配，可以结合@Qualifier注解一起使用。如下：</p>
+}</code></pre><p>  @Autowired注解是<strong>按照类型（byType）装配</strong>依赖对象，默认情况下它要求依赖对象必须存在，如果允许null值，可以设置它的required属性为false。如果我们想使用按照名称（byName）来装配，可以结合@Qualifier注解一起使用。如下：</p>
 <pre><code>public class TestServiceImpl {
     @Autowired
     @Qualifier(&quot;userDao&quot;)
     private UserDao userDao;
-}
-</code></pre><h4 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h4><p>@Resource默认按照ByName自动注入，<strong><em> 是JDK1.6支持的注解，按照名称进行装配，</em></strong><br>由J2EE提供，需要导入包javax.annotation.Resource。@Resource有两个重要的属性：name和type，而Spring将@Resource注解的name属性解析为bean的名字，而type属性则解析为bean的类型。所以，如果使用name属性，则使用byName的自动注入策略，而使用type属性时则使用byType自动注入策略。如果既不制定name也不制定type属性，这时将通过反射机制使用byName自动注入策略。</p>
+}</code></pre><h4 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h4><p>@Resource默认按照ByName自动注入，<strong>* 是JDK1.6支持的注解，按照名称进行装配，*</strong><br>由J2EE提供，需要导入包javax.annotation.Resource。@Resource有两个重要的属性：name和type，而Spring将@Resource注解的name属性解析为bean的名字，而type属性则解析为bean的类型。所以，如果使用name属性，则使用byName的自动注入策略，而使用type属性时则使用byType自动注入策略。如果既不制定name也不制定type属性，这时将通过反射机制使用byName自动注入策略。</p>
 <pre><code>public class TestServiceImpl {
     // 下面两种@Resource只要使用一种即可
     @Resource(name=&quot;userDao&quot;)
@@ -406,21 +395,16 @@ public class MockServerApplication {
     public void setUserDao(UserDao userDao) { // 用于属性的setter方法上
         this.userDao = userDao;
     }
-}
-</code></pre><p>  注：最好是将@Resource放在setter方法上，因为这样更符合面向对象的思想，通过set、get去操作属性，而不是直接去操作属性。</p>
-<h5 id="Resource装配顺序："><a href="#Resource装配顺序：" class="headerlink" title="@Resource装配顺序："></a>@Resource装配顺序：</h5><p><strong><em> ①如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常。</em></strong></p>
-<p><strong><em> ②如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常。</em></strong></p>
-<p><strong><em> ③如果指定了type，则从上下文中找到类似匹配的唯一bean进行装配，找不到或是找到多个，都会抛出异常。</em></strong></p>
-<p><strong><em> ④如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配。</em></strong></p>
-<pre><code>@Resource的作用相当于@Autowired，只不过@Autowired按照byType自动注入。
-</code></pre><h1 id="Mac-OS-Linux命令查询网络端口占用情况，查找-杀死进程"><a href="#Mac-OS-Linux命令查询网络端口占用情况，查找-杀死进程" class="headerlink" title="Mac OS/Linux命令查询网络端口占用情况，查找/杀死进程"></a>Mac OS/Linux命令查询网络端口占用情况，查找/杀死进程</h1><h2 id="netstat命令"><a href="#netstat命令" class="headerlink" title="netstat命令"></a>netstat命令</h2><pre><code>netstat -an | grep 3306
-</code></pre><p>3306替换成需要grep的端口号</p>
+}</code></pre><p>  注：最好是将@Resource放在setter方法上，因为这样更符合面向对象的思想，通过set、get去操作属性，而不是直接去操作属性。</p>
+<h5 id="Resource装配顺序："><a href="#Resource装配顺序：" class="headerlink" title="@Resource装配顺序："></a>@Resource装配顺序：</h5><p><strong>* ①如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常。*</strong></p>
+<p><strong>* ②如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常。*</strong></p>
+<p><strong>* ③如果指定了type，则从上下文中找到类似匹配的唯一bean进行装配，找不到或是找到多个，都会抛出异常。*</strong></p>
+<p><strong>* ④如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配。*</strong></p>
+<pre><code>@Resource的作用相当于@Autowired，只不过@Autowired按照byType自动注入。</code></pre><h1 id="Mac-OS-Linux命令查询网络端口占用情况，查找-杀死进程"><a href="#Mac-OS-Linux命令查询网络端口占用情况，查找-杀死进程" class="headerlink" title="Mac OS/Linux命令查询网络端口占用情况，查找/杀死进程"></a>Mac OS/Linux命令查询网络端口占用情况，查找/杀死进程</h1><h2 id="netstat命令"><a href="#netstat命令" class="headerlink" title="netstat命令"></a>netstat命令</h2><pre><code>netstat -an | grep 3306</code></pre><p>3306替换成需要grep的端口号</p>
 <h2 id="lsof命令"><a href="#lsof命令" class="headerlink" title="lsof命令"></a>lsof命令</h2><p>通过list open file命令可以查看到当前打开文件，在linux中所有事物都是以文件形式存在，包括网络连接及硬件设备。</p>
-<pre><code>lsof -i:80
-</code></pre><p>-i参数表示网络链接，:80指明端口号，该命令会同时列出PID，方便kill</p>
+<pre><code>lsof -i:80</code></pre><p>-i参数表示网络链接，:80指明端口号，该命令会同时列出PID，方便kill</p>
 <p>查看所有进程监听的端口</p>
-<pre><code>sudo lsof -i -P | grep -i &quot;listen&quot;
-</code></pre><h2 id="lsof命令参数"><a href="#lsof命令参数" class="headerlink" title="lsof命令参数"></a>lsof命令参数</h2><p>-a 列出打开文件存在的进程</p>
+<pre><code>sudo lsof -i -P | grep -i &quot;listen&quot;</code></pre><h2 id="lsof命令参数"><a href="#lsof命令参数" class="headerlink" title="lsof命令参数"></a>lsof命令参数</h2><p>-a 列出打开文件存在的进程</p>
 <p>-c&lt;进程名&gt; 列出指定进程所打开的文件</p>
 <p>-g  列出GID号进程详情</p>
 <p>-d&lt;文件号&gt; 列出占用该文件号的进程</p>

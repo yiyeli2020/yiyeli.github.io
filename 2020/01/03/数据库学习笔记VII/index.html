@@ -243,19 +243,16 @@
         <p>MySQL建表,LIMIT,OFFSET的用法,Rank函数的用法   </p>
 <a id="more"></a>
 <h1 id="MySQL建表"><a href="#MySQL建表" class="headerlink" title="MySQL建表"></a>MySQL建表</h1><p>下面是通用的SQL语法用来创建MySQL表：</p>
-<pre><code>CREATE TABLE table_name (column_name column_type);
-</code></pre><p>现在，我们将在 test 数据库中创建以下表。</p>
+<pre><code>CREATE TABLE table_name (column_name column_type);</code></pre><p>现在，我们将在 test 数据库中创建以下表。</p>
 <pre><code>create table tutorials_tbl(
    tutorial_id INT NOT NULL AUTO_INCREMENT,
    tutorial_title VARCHAR(100) NOT NULL,
    tutorial_author VARCHAR(40) NOT NULL,
    submission_date DATE,
    PRIMARY KEY ( tutorial_id )
-);
-</code></pre><p>在这里，一些数据项需要解释：<br>字段使用NOT NULL属性，是因为我们不希望这个字段的值为NULL。 因此，如果用户将尝试创建具有NULL值的记录，那么MySQL会产生错误。</p>
+);</code></pre><p>在这里，一些数据项需要解释：<br>字段使用NOT NULL属性，是因为我们不希望这个字段的值为NULL。 因此，如果用户将尝试创建具有NULL值的记录，那么MySQL会产生错误。</p>
 <p>字段的AUTO_INCREMENT属性告诉MySQL自动增加id字段下一个可用编号。</p>
-<h1 id="LIMIT-OFFSET"><a href="#LIMIT-OFFSET" class="headerlink" title="LIMIT,OFFSET"></a>LIMIT,OFFSET</h1><pre><code>SELECT column_name FROM table_name LIMIT 4 OFFSET 3;
-</code></pre><p>LIMIT 4 OFFSET 3指示MySQL等DBMS返回从第3行（从0行计数）起的4行数据。第一个数字是检索的行数，第二个数字是指从哪儿开始。</p>
+<h1 id="LIMIT-OFFSET"><a href="#LIMIT-OFFSET" class="headerlink" title="LIMIT,OFFSET"></a>LIMIT,OFFSET</h1><pre><code>SELECT column_name FROM table_name LIMIT 4 OFFSET 3;</code></pre><p>LIMIT 4 OFFSET 3指示MySQL等DBMS返回从第3行（从0行计数）起的4行数据。第一个数字是检索的行数，第二个数字是指从哪儿开始。</p>
 <p>MySQL和MariaDB支持简化版的LIMIT 4 OFFSET 3语句，即LIMIT 3,4。使用这个语法，之前的值对应OFFSET之后的值对应LIMIT 。</p>
 <p> limit10000,20的意思扫描满足条件的10020行，扔掉前面的10000行，返回最后的20行.</p>
 <p>参考练习题：<a href="https://leetcode.com/problems/nth-highest-salary" target="_blank" rel="noopener">https://leetcode.com/problems/nth-highest-salary</a></p>
@@ -272,8 +269,7 @@
         INSERT INTO `continent`(`name`) VALUES (&apos;cont&apos;+crs);
         SET crs = crs + 1;
     END WHILE;
-END $$
-</code></pre><p> DELIMITER ;</p>
+END $$</code></pre><p> DELIMITER ;</p>
 <h1 id="mysql-SET定义变量"><a href="#mysql-SET定义变量" class="headerlink" title="mysql SET定义变量"></a>mysql SET定义变量</h1><p>mysql set也可以用来定于变量，定义变量的形式是以”@”开始，如：”@变量名”。</p>
 <p>mysql SET定义变量实例：</p>
 <p>   mysql&gt; SET @t1=0, @t2=1, @t3=2;</p>

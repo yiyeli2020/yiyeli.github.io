@@ -242,6 +242,8 @@
           
         <p>剑指offer已经刷过两遍，总结一下思路方便回忆</p>
 <a id="more"></a>
+
+
 <h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13.在O(1)时间删除链表结点"></a>13.在O(1)时间删除链表结点</h2><pre><code>分情况讨论：
 先在链表中顺序搜索
 要删除的节点i不是尾结点：
@@ -257,8 +259,7 @@
 }
 链表有多个结点而且要删除的结点是尾结点{
     从头结点顺序遍历，只要找到该结点i的前序结点就可以，然后执行删除操作
-}
-</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p>
+}</code></pre><h2 id="14-调整数组顺序使奇数位于偶数前面"><a href="#14-调整数组顺序使奇数位于偶数前面" class="headerlink" title="14.调整数组顺序使奇数位于偶数前面"></a>14.调整数组顺序使奇数位于偶数前面</h2><h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><p>顺序扫描碰到偶数就将其放到末尾</p>
 <h3 id="初级解法"><a href="#初级解法" class="headerlink" title="初级解法"></a>初级解法</h3><p>双指针指向头尾部分，头偶尾奇则交换两个数字</p>
 <h3 id="可扩展解法"><a href="#可扩展解法" class="headerlink" title="可扩展解法"></a>可扩展解法</h3><p>仍使用头尾指针，但用函数指针的方法将判断奇偶的函数解耦出来，整体逻辑框架不需要改动</p>
 <h2 id="15-链表中倒数第K个节点"><a href="#15-链表中倒数第K个节点" class="headerlink" title="15.链表中倒数第K个节点"></a>15.链表中倒数第K个节点</h2><p>快慢指针，快指针比慢指针领先k-1步出发，快指针到尾节点时慢指针指向的是所求</p>
@@ -293,8 +294,7 @@ ListNode* ReverseList(ListNode* pHead)
     PReverseHead-&gt;m_pNext-&gt;m_pNext = PReverseHead;//进入尾节点
     PReverseHead-&gt;m_pNext = NULL;
     return pHead;
-}
-</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>
+}</code></pre><h2 id="28-字符串的排列"><a href="#28-字符串的排列" class="headerlink" title="28.字符串的排列"></a>28.字符串的排列</h2>
       
       
         <div class="page-reward">

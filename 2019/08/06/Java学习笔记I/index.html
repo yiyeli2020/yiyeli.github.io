@@ -292,8 +292,7 @@ public abstract class Employee
    {
      return number;
    }
-}
-</code></pre><p>注意到该 Employee 类没有什么不同，尽管该类是抽象类，但是它仍然有 3 个成员变量，7 个成员方法和 1 个构造方法。 现在如果你尝试如下的例子：</p>
+}</code></pre><p>注意到该 Employee 类没有什么不同，尽管该类是抽象类，但是它仍然有 3 个成员变量，7 个成员方法和 1 个构造方法。 现在如果你尝试如下的例子：</p>
 <p>AbstractDemo.java 文件代码：</p>
 <pre><code>/* 文件名 : AbstractDemo.java */
 public class AbstractDemo
@@ -306,13 +305,11 @@ public class AbstractDemo
       System.out.println(&quot;\n Call mailCheck using Employee reference--&quot;);
       e.mailCheck();
     }
-}
-</code></pre><p>当你尝试编译AbstractDemo类时，会产生如下错误：</p>
+}</code></pre><p>当你尝试编译AbstractDemo类时，会产生如下错误：</p>
 <pre><code>Employee.java:46: Employee is abstract; cannot be instantiated
       Employee e = new Employee(&quot;George W.&quot;, &quot;Houston, TX&quot;, 43);
                    ^
-1 error
-</code></pre><h2 id="继承抽象类"><a href="#继承抽象类" class="headerlink" title="继承抽象类"></a>继承抽象类</h2><p>我们能通过一般的方法继承Employee类：</p>
+1 error</code></pre><h2 id="继承抽象类"><a href="#继承抽象类" class="headerlink" title="继承抽象类"></a>继承抽象类</h2><p>我们能通过一般的方法继承Employee类：</p>
 <p>Salary.java 文件代码：</p>
 <pre><code>/* 文件名 : Salary.java */
 public class Salary extends Employee
@@ -346,8 +343,7 @@ public class Salary extends Employee
       System.out.println(&quot;Computing salary pay for &quot; + getName());
       return salary/52;
    }
-}
-</code></pre><p>尽管我们不能实例化一个 Employee 类的对象，但是如果我们实例化一个 Salary 类对象，该对象将从 Employee 类继承 7 个成员方法，且通过该方法可以设置或获取三个成员变量。</p>
+}</code></pre><p>尽管我们不能实例化一个 Employee 类的对象，但是如果我们实例化一个 Salary 类对象，该对象将从 Employee 类继承 7 个成员方法，且通过该方法可以设置或获取三个成员变量。</p>
 <p>AbstractDemo.java 文件代码：</p>
 <pre><code>/* 文件名 : AbstractDemo.java */
 public class AbstractDemo
@@ -363,8 +359,7 @@ public class AbstractDemo
       System.out.println(&quot;\n Call mailCheck using Employee reference--&quot;);
       e.mailCheck();
     }
-}
-</code></pre><p>以上程序编译运行结果如下：</p>
+}</code></pre><p>以上程序编译运行结果如下：</p>
 <pre><code>Constructing an Employee
 Constructing an Employee
 Call mailCheck using  Salary reference --
@@ -373,8 +368,7 @@ Mailing check to Mohd Mohtashim with salary 3600.0
 
 Call mailCheck using Employee reference--
 Within mailCheck of Salary class
-Mailing check to John Adams with salary 2400.
-</code></pre><h2 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h2><p>如果你想设计这样一个类，该类包含一个特别的成员方法，该方法的具体实现由它的子类确定，那么你可以在父类中声明该方法为抽象方法。</p>
+Mailing check to John Adams with salary 2400.</code></pre><h2 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h2><p>如果你想设计这样一个类，该类包含一个特别的成员方法，该方法的具体实现由它的子类确定，那么你可以在父类中声明该方法为抽象方法。</p>
 <p>Abstract 关键字同样可以用来声明抽象方法，抽象方法只包含一个方法名，而没有方法体。</p>
 <p>抽象方法没有定义，方法名后面直接跟一个分号，而不是花括号。</p>
 <pre><code>public abstract class Employee
@@ -386,8 +380,7 @@ Mailing check to John Adams with salary 2400.
    public abstract double computePay();
 
    //其余代码
-}
-</code></pre><p>声明抽象方法会造成以下两个结果：</p>
+}</code></pre><p>声明抽象方法会造成以下两个结果：</p>
 <p>如果一个类包含抽象方法，那么该类必须是抽象类。</p>
 <p>任何子类必须重写父类的抽象方法，或者声明自身为抽象类。</p>
 <p>继承抽象方法的子类必须重写该方法。否则，该子类也必须声明为抽象类。最终，必须有子类实现该抽象方法，否则，从最初的父类到最终的子类都不能用来实例化对象。</p>
@@ -405,8 +398,7 @@ public class Salary extends Employee
    }
 
    //其余代码
-}
-</code></pre><p>抽象类总结规定</p>
+}</code></pre><p>抽象类总结规定</p>
 <ol>
 <li><p>抽象类不能被实例化(初学者很容易犯的错)，如果被实例化，就会报错，编译无法通过。只有抽象类的非抽象子类可以创建对象。</p>
 </li>
@@ -451,8 +443,7 @@ public class Salary extends Employee
 <pre><code>[可见度] interface 接口名称 [extends 其他的接口名] {
         // 声明变量
         // 抽象方法
-}
-</code></pre><p>Interface关键字用来声明一个接口。下面是接口声明的一个简单例子。<br>NameOfInterface.java 文件代码：</p>
+}</code></pre><p>Interface关键字用来声明一个接口。下面是接口声明的一个简单例子。<br>NameOfInterface.java 文件代码：</p>
 <pre><code>/* 文件名 : NameOfInterface.java */
 import java.lang.*;
 //引入包
@@ -461,8 +452,7 @@ public interface NameOfInterface
 {
    //任何类型 final, static 字段
    //抽象方法
-}
-</code></pre><p>接口有以下特性：</p>
+}</code></pre><p>接口有以下特性：</p>
 <p>接口是隐式抽象的，当声明一个接口的时候，不必使用abstract关键字。</p>
 <p>接口中每一个方法也是隐式抽象的，声明时同样不需要abstract关键字。</p>
 <p>接口中的方法都是公有的。</p>
@@ -472,13 +462,11 @@ public interface NameOfInterface
 interface Animal {
    public void eat();
    public void travel();
-}
-</code></pre><h2 id="接口的实现"><a href="#接口的实现" class="headerlink" title="接口的实现"></a>接口的实现</h2><p>当类实现接口的时候，类要实现接口中所有的方法。否则，类必须声明为抽象的类。</p>
+}</code></pre><h2 id="接口的实现"><a href="#接口的实现" class="headerlink" title="接口的实现"></a>接口的实现</h2><p>当类实现接口的时候，类要实现接口中所有的方法。否则，类必须声明为抽象的类。</p>
 <p>类使用implements关键字实现接口。在类声明中，Implements关键字放在class声明后面。</p>
 <p>实现一个接口的语法，可以使用这个公式：</p>
 <p>Animal.java 文件代码：</p>
-<pre><code>...implements 接口名称[, 其他接口名称, 其他接口名称..., ...] ...
-</code></pre><p>实例<br>MammalInt.java 文件代码：</p>
+<pre><code>...implements 接口名称[, 其他接口名称, 其他接口名称..., ...] ...</code></pre><p>实例<br>MammalInt.java 文件代码：</p>
 <pre><code>/* 文件名 : MammalInt.java * /
 public class MammalInt implements Animal{
 
@@ -499,11 +487,9 @@ public class MammalInt implements Animal{
       m.eat();
       m.travel();
    }
-}
-</code></pre><p>以上实例编译运行结果如下:</p>
+}</code></pre><p>以上实例编译运行结果如下:</p>
 <pre><code>Mammal eats
-Mammal travels
-</code></pre><p>重写接口中声明的方法时，需要注意以下规则：</p>
+Mammal travels</code></pre><p>重写接口中声明的方法时，需要注意以下规则：</p>
 <p>类在实现接口的方法时，不能抛出强制性异常，只能在接口中，或者继承接口的抽象类中抛出该强制性异常。</p>
 <p>类在重写方法时要保持一致的方法名，并且应该保持相同或者相兼容的返回值类型。</p>
 <p>如果实现接口的类是抽象类，那么就没必要实现该接口的方法。</p>
@@ -535,21 +521,18 @@ public interface Hockey extends Sports
    public void visitingGoalScored();
    public void endOfPeriod(int period);
    public void overtimePeriod(int ot);
-}
-</code></pre><p>Hockey接口自己声明了四个方法，从Sports接口继承了两个方法，这样，实现Hockey接口的类需要实现六个方法。</p>
+}</code></pre><p>Hockey接口自己声明了四个方法，从Sports接口继承了两个方法，这样，实现Hockey接口的类需要实现六个方法。</p>
 <p>相似的，实现Football接口的类需要实现五个方法，其中两个来自于Sports接口。<br>接口的多继承</p>
 <p>在Java中，类的多继承是不合法，但接口允许多继承。</p>
 <p>在接口的多继承中extends关键字只需要使用一次，在其后跟着继承接口。 如下所示：</p>
-<pre><code>public interface Hockey extends Sports, Event
-</code></pre><p>以上的程序片段是合法定义的子接口，与类不同的是，接口允许多继承，而 Sports及 Event 可能定义或是继承相同的方法</p>
+<pre><code>public interface Hockey extends Sports, Event</code></pre><p>以上的程序片段是合法定义的子接口，与类不同的是，接口允许多继承，而 Sports及 Event 可能定义或是继承相同的方法</p>
 <h2 id="标记接口"><a href="#标记接口" class="headerlink" title="标记接口"></a>标记接口</h2><p>最常用的继承接口是没有包含任何方法的接口。</p>
 <p>标记接口是没有任何方法和属性的接口.它仅仅表明它的类属于一个特定的类型,供其他代码来测试允许做一些事情。</p>
 <p>标记接口作用：简单形象的说就是给某个对象打个标（盖个戳），使对象拥有某个或某些特权。</p>
 <p>例如：java.awt.event 包中的 MouseListener 接口继承的 java.util.EventListener 接口定义如下：</p>
 <pre><code>package java.util;
 public interface EventListener
-{}
-</code></pre><p>没有任何方法的接口被称为标记接口。标记接口主要用于以下两种目的：</p>
+{}</code></pre><p>没有任何方法的接口被称为标记接口。标记接口主要用于以下两种目的：</p>
 <p>建立一个公共的父接口：</p>
 <p>正如EventListener接口，这是由几十个其他接口扩展的Java API，你可以使用一个标记接口来建立一组接口的父接口。例如：当一个接口继承了EventListener接口，Java虚拟机(JVM)就知道该接口将要被用于一个事件的代理方案。</p>
 <p>向一个类添加数据类型：</p>

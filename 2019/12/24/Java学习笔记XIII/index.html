@@ -242,6 +242,8 @@
           
         <p>Java中Calendar，LocalDateTime的用法和区别</p>
 <a id="more"></a>
+
+
 <p>例如使用LocalDateTime：</p>
 <pre><code>private static void localDateTimeTest() throws ModuleBusinessException{
     LocalDateTime currentTime=LocalDateTime.now();
@@ -253,8 +255,7 @@
     if(currentTime.isAfter(suspendLoanTime) &amp;&amp; currentTime.isBefore(recoverLoanTime)){
         throw new ModuleBusinessException(&quot;尊敬的用户您好，1月23日10:00-1月31日9:59暂停XX，1月31日10:00恢复XX，届时会短信通知到您，需要您再次来到APP继续XX&quot;);
     }
-}
-</code></pre><p>而使用Calendar时有个容易被坑的地方，calendar.set()中月份字段从0开始：</p>
+}</code></pre><p>而使用Calendar时有个容易被坑的地方，calendar.set()中月份字段从0开始：</p>
 <pre><code>private static void dateTimeTest() throws ModuleBusinessException {
     Calendar calendar=Calendar.getInstance();
     Date currentTime=calendar.getTime();
@@ -268,8 +269,7 @@
     if(!currentTime.after(suspendLoanTime) || !currentTime.before(recoverLoanTime)){
         throw new ModuleBusinessException(&quot;尊敬的用户您好，1月23日10:00-1月31日9:59暂停XX，1月31日10:00恢复XX，届时会短信通知到您，需要您再次来到APP继续XX&quot;);
     }
-}
-</code></pre><h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p>【1】</p>
+}</code></pre><h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p>【1】</p>
 
       
       

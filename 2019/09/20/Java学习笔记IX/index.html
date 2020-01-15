@@ -242,15 +242,14 @@
           
         <p>Java8 中的新特性：Optional类</p>
 <a id="more"></a>
+
 <p>看到代码中出现的Optional，所以来研究一下：</p>
-<pre><code>Optional&lt;LoanPostloanInfosEntity&gt; postloanInfo = loanPostloanInfosRepository.getByContractId(contractId);
-</code></pre><p>  Optional 类是一个可以为null的容器对象。如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。</p>
+<pre><code>Optional&lt;LoanPostloanInfosEntity&gt; postloanInfo = loanPostloanInfosRepository.getByContractId(contractId);</code></pre><p>  Optional 类是一个可以为null的容器对象。如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。</p>
 <p>  Optional 是个容器：它可以保存类型T的值，或者仅仅保存null。Optional提供很多有用的方法，这样我们就不用显式进行空值检测。</p>
 <p>  Optional 类的引入很好的解决空指针异常。</p>
 <h1 id="类声明"><a href="#类声明" class="headerlink" title="类声明"></a>类声明</h1><p>  以下是一个 java.util.Optional<t> 类的声明：</t></p>
 <pre><code>public final class Optional&lt;T&gt;
-extends Object
-</code></pre><h1 id="Optional实例"><a href="#Optional实例" class="headerlink" title="Optional实例"></a>Optional实例</h1><pre><code>import java.util.Optional;
+extends Object</code></pre><h1 id="Optional实例"><a href="#Optional实例" class="headerlink" title="Optional实例"></a>Optional实例</h1><pre><code>import java.util.Optional;
 public class Java8Tester {
     public static void optionalPrac(){
         Integer value1 = null;
@@ -279,8 +278,7 @@ public class Java8Tester {
     }
     public static void main(String args[]){
         optionalPrac();
-}
-</code></pre><p>}</p>
+}</code></pre><p>}</p>
 <h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<br><a href="https://www.runoob.com/java/java8-optional-class.html" target="_blank" rel="noopener">https://www.runoob.com/java/java8-optional-class.html</a></p>
 
       

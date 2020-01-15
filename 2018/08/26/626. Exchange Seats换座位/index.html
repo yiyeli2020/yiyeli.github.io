@@ -245,6 +245,10 @@
 <p>小美想改变相邻俩学生的座位。</p>
 <p>你能不能帮她写一个 SQL query 来输出小美想要的结果呢？</p>
 <a id="more"></a>
+
+
+
+
 <p>示例：</p>
 <pre><code>+---------+---------+
 |    id   | student |
@@ -254,8 +258,7 @@
 |    3    | Emerson |
 |    4    | Green   |
 |    5    | Jeames  |
-+---------+---------+
-</code></pre><p>假如数据输入的是上表，则输出结果如下：</p>
++---------+---------+</code></pre><p>假如数据输入的是上表，则输出结果如下：</p>
 <pre><code>+---------+---------+
 |    id   | student |
 +---------+---------+
@@ -264,16 +267,14 @@
 |    3    | Green   |
 |    4    | Emerson |
 |    5    | Jeames  |
-+---------+---------+
-</code></pre><p>注意：</p>
++---------+---------+</code></pre><p>注意：</p>
 <p>如果学生人数是奇数，则不需要改变最后一个同学的座位。</p>
 <h2 id="思路I：使用流控制语句CASE"><a href="#思路I：使用流控制语句CASE" class="headerlink" title="思路I：使用流控制语句CASE"></a>思路I：使用流控制语句CASE</h2><h3 id="算法："><a href="#算法：" class="headerlink" title="算法："></a>算法：</h3><p>对于奇数ID的学生，交换后新的ID是（ID+1），最后一个座位的学生除外。</p>
 <p>对于偶数ID的学生，新的ID是（ID-1），为了查询ID数量，可以使用查询：</p>
 <pre><code>SELECT
     COUNT(*) AS counts
 FROM
-    seat
-</code></pre><p>然后我们可以使用CASE语句和MOD()函数来为每个学生交换座位</p>
+    seat</code></pre><p>然后我们可以使用CASE语句和MOD()函数来为每个学生交换座位</p>
 <h3 id="MYSQL"><a href="#MYSQL" class="headerlink" title="MYSQL"></a>MYSQL</h3><pre><code>SELECT
     (CASE
         WHEN MOD(id,2) != 0 AND counts !=id THEN id+1
@@ -286,8 +287,7 @@ FROM
     (SELECT COUNT(*) AS counts
     FROM
         seat) AS seat_counts
-ORDER BY id ASC;
-</code></pre><h2 id="思路II：使用位运算和COALESCE"><a href="#思路II：使用位运算和COALESCE" class="headerlink" title="思路II：使用位运算和COALESCE()"></a>思路II：使用位运算和COALESCE()</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>位运算表达式(id+1)^1-1能够计算交换后的新的id</p>
+ORDER BY id ASC;</code></pre><h2 id="思路II：使用位运算和COALESCE"><a href="#思路II：使用位运算和COALESCE" class="headerlink" title="思路II：使用位运算和COALESCE()"></a>思路II：使用位运算和COALESCE()</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>位运算表达式(id+1)^1-1能够计算交换后的新的id</p>
 <pre><code>SELECT id,(id+1)^1-1, student FROM seat;
 
 | id | (id+1)^1-1 | student |
@@ -296,8 +296,7 @@ ORDER BY id ASC;
 | 2  | 1          | Doris   |
 | 3  | 4          | Emerson |
 | 4  | 3          | Green   |
-| 5  | 6          | Jeames  |
-</code></pre><p>然后我们能够用一个临时的表将座位填入</p>
+| 5  | 6          | Jeames  |</code></pre><p>然后我们能够用一个临时的表将座位填入</p>
 <pre><code>SELECT
     *
 FROM
@@ -312,8 +311,7 @@ ORDER BY s1.id;
 | 2  | Doris   | 1  | Abbot   |
 | 3  | Emerson | 4  | Green   |
 | 4  | Green   | 3  | Emerson |
-| 5  | Jeames  |    |         |
-</code></pre><p>前两列来自s1后两列来自s2</p>
+| 5  | Jeames  |    |         |</code></pre><p>前两列来自s1后两列来自s2</p>
 <p>最后我们可以输出s1.id 和 s2.student。可是s2.student时空的当id为末尾时，因此我们可以使用函数COALESCE()来生成最后一个记录的正确输出</p>
 <h3 id="MYSQL-1"><a href="#MYSQL-1" class="headerlink" title="MYSQL"></a>MYSQL</h3><pre><code>SELECT
     s1.id, COALESCE(s2.student,s1.student) AS student
@@ -321,8 +319,7 @@ FROM
     seat s1
         LEFT JOIN
     seat s2 ON ((S1.id+1)^1)-1= s2.id
-ORDER BY s1.id;
-</code></pre>
+ORDER BY s1.id;</code></pre>
       
       
         <div class="page-reward">

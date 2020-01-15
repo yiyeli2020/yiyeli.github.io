@@ -243,6 +243,8 @@
         <p>最初在一个记事本上只有一个字符 ‘A’。你每次可以对这个记事本进行两种操作：</p>
 <p>Copy All (复制全部) : 你可以复制这个记事本中的所有字符(部分的复制是不允许的)。<br>Paste (粘贴) : 你可以粘贴你上一次复制的字符。<br>给定一个数字 n 。你需要使用最少的操作次数，在记事本中打印出恰好 n 个 ‘A’。输出能够打印出 n 个 ‘A’ 的最少操作次数。</p>
 <a id="more"></a>
+
+
 <p>示例 1:</p>
 <pre><code>输入: 3
 输出: 3
@@ -250,10 +252,8 @@
 最初, 我们只有一个字符 &apos;A&apos;。
 第 1 步, 我们使用 Copy All 操作。
 第 2 步, 我们使用 Paste 操作来获得 &apos;AA&apos;。
-第 3 步, 我们使用 Paste 操作来获得 &apos;AAA&apos;。
-</code></pre><p>说明:</p>
-<pre><code>n 的取值范围是 [1, 1000] 。
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实这道题就是将N分解为M个数字的乘积，且M个数字的和最小</p>
+第 3 步, 我们使用 Paste 操作来获得 &apos;AAA&apos;。</code></pre><p>说明:</p>
+<pre><code>n 的取值范围是 [1, 1000] 。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实这道题就是将N分解为M个数字的乘积，且M个数字的和最小</p>
 <p>我们寻找一个因子d使得我们能够做d次拷贝（n/d）来得到n</p>
 <p>做d次拷贝需要采取d步（第一步全部复制，d-1次粘贴）</p>
 <p>我们需要通过循环来找到这个d</p>
@@ -267,8 +267,7 @@
            }
        }
        return s;
-   }
-</code></pre>
+   }</code></pre>
       
       
         <div class="page-reward">

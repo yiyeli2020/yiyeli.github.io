@@ -242,9 +242,10 @@
           
         <p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p>
 <a id="more"></a>
+
 <p>例如：</p>
-<p>输入: 二叉搜索树:<br>              5<br>            /   \<br>           2     13</p>
-<p>输出: 转换为累加树:<br>             18<br>            /   \<br>          20     13</p>
+<p>输入: 二叉搜索树:<br>              5<br>            /   <br>           2     13</p>
+<p>输出: 转换为累加树:<br>             18<br>            /   <br>          20     13</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p>
 <pre><code>class Solution {
 private:
@@ -261,8 +262,7 @@ public:
         travel(root);
         return root;
     }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

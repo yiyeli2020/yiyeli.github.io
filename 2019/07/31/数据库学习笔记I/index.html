@@ -251,38 +251,32 @@
 <p>你可以写成</p>
 <pre><code>select  column_1  as  列1,
         column_2  as  列2   
-        from  table  as  表
-</code></pre><p>上面的语句就可以解释为，选择 column_1  作为  列1,column_2 作为   列2  从 table  当成 表</p>
-<p><strong><em>SELECT </em> FROM Employee AS emp*</strong></p>
+        from  table  as  表</code></pre><p>上面的语句就可以解释为，选择 column_1  作为  列1,column_2 作为   列2  从 table  当成 表</p>
+<p><strong><em>SELECT * FROM Employee AS emp</em></strong></p>
 <p>这句意思是查找所有Employee 表里面的数据，并把Employee表格命名为 emp。<br>当你命名一个表之后，你可以在下面用 emp 代替 Employee.<br>例如 SELECT * FROM emp.</p>
 <p><strong><em>把查询对像起个别名的作用</em></strong></p>
-<pre><code>select ID as 用户ID，Name as 用户名 from Table_user
-</code></pre><p>查出结果就以中文显示</p>
+<pre><code>select ID as 用户ID，Name as 用户名 from Table_user</code></pre><p>查出结果就以中文显示</p>
 <pre><code>select mytableA.* ,mytableB.*
 from
 tb_user as mytableA
 join
 Tb_UserGroup as mytableB
-on mytableA.ID=mytableB.ID。
-</code></pre><p>这样就可以把查询结果起别名</p>
+on mytableA.ID=mytableB.ID。</code></pre><p>这样就可以把查询结果起别名</p>
 <h1 id="SQL分页查询"><a href="#SQL分页查询" class="headerlink" title="SQL分页查询"></a>SQL分页查询</h1><p>使用SELECT查询时，如果结果集数据量很大，比如几万行数据，放在一个页面显示的话数据量太大，不如分页显示，每次显示100条。</p>
 <p>要实现分页功能，实际上就是从结果集中显示第1 ~ 100条记录作为第1页，显示第101~200条记录作为第2页，以此类推。</p>
 <p>因此，分页实际上就是从结果集中“截取”出第M~N条记录。这个查询可以通过LIMIT <m> OFFSET <n>子句实现。</n></m></p>
 <p>例如基本查询语句：</p>
 <pre><code>SELECT id,name,gender,score
 FROM students
-ORDER BY score DESC;
-</code></pre><p>现在将结果集分页，每页3条记录。要获取第一页的记录，可以使用 LIMIT 3 OFFSET 0:</p>
+ORDER BY score DESC;</code></pre><p>现在将结果集分页，每页3条记录。要获取第一页的记录，可以使用 LIMIT 3 OFFSET 0:</p>
 <pre><code>SELECT id,name,gender,score
 FROM students
 ORDER BY score DESC
-LIMIT 3 OFFSET 0;
-</code></pre><p>上述查询LIMIT 3 OFFSET 0表示：<br>对结果集从0号记录开始，最多取3条（注意SQL记录集对索引从0开始）。<br>若要查询第2页，那么我们只需要跳过前3条记录，即对结果集从3号记录开始查询，把OFFSET设定为3:</p>
+LIMIT 3 OFFSET 0;</code></pre><p>上述查询LIMIT 3 OFFSET 0表示：<br>对结果集从0号记录开始，最多取3条（注意SQL记录集对索引从0开始）。<br>若要查询第2页，那么我们只需要跳过前3条记录，即对结果集从3号记录开始查询，把OFFSET设定为3:</p>
 <pre><code>SELECT id,name,gender,score
 FROM students
 ORDER BY score DESC
-LIMIT 3 OFFSET 3;
-</code></pre><p>类似的，查询第3页的时候，OFFSET应该设为6，查询第4页的时候，OFFSET应该设为9.如果查询的表第4页只有1条记录，则最终结果按照实际数量1显示，LIMIT 3表示的意思是“最多3条记录”。</p>
+LIMIT 3 OFFSET 3;</code></pre><p>类似的，查询第3页的时候，OFFSET应该设为6，查询第4页的时候，OFFSET应该设为9.如果查询的表第4页只有1条记录，则最终结果按照实际数量1显示，LIMIT 3表示的意思是“最多3条记录”。</p>
 <p>可见分页查询的关键在于，首先要确定每页需要显示的结果数量pageSize，然后根据当前页的索引pageIndex（从1开始），确定LIMIT和OFFSET应该设定的值：</p>
 <p>LIMIT总是设定为pageSize；<br>OFFSET计算公式为pageSize*（pageIndex-1）。</p>
 <h2 id="扩展思考"><a href="#扩展思考" class="headerlink" title="扩展思考"></a>扩展思考</h2><p>如果原本记录集只有10条记录，但我们将OFFSET设置为20，结果会怎样呢？<br>答案是OFFSET超过查询的最大数量并不会报错，而是会得到一个空的结果集</p>
@@ -292,14 +286,12 @@ LIMIT 3 OFFSET 3;
 <pre><code>一般语法:
 select a.* , b.*
 from table_a as a, table_b as b
-where a.id = b.id;
-</code></pre><h2 id="外连接查询"><a href="#外连接查询" class="headerlink" title="外连接查询"></a>外连接查询</h2><p>需要通过指定字段来进行连接。当该字段取值相等时，可以查询出该记录；而且当该字段不等时，也可以查询出来。包括左连接，右连接查询。</p>
+where a.id = b.id;</code></pre><h2 id="外连接查询"><a href="#外连接查询" class="headerlink" title="外连接查询"></a>外连接查询</h2><p>需要通过指定字段来进行连接。当该字段取值相等时，可以查询出该记录；而且当该字段不等时，也可以查询出来。包括左连接，右连接查询。</p>
 <pre><code>一般语法：
 select 属性名列表
 from 表1
 left | right join 表2
-on 表1.属性名 = 表2.属性名;
-</code></pre><h3 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h3><p>left join 是left outer join的简写，它的全称是左外连接，是外连接中的一种。<br>左(外)连接，左表(a_table)的记录将会全部表示出来，而右表(b_table)只会显示符合搜索条件的记录。右表记录不足的地方均为NULL。<br><img src="assets/markdown-img-paste-2019080116575036.png" alt="https://img-blog.csdn.net/20171209142610819?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGxnMTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+on 表1.属性名 = 表2.属性名;</code></pre><h3 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h3><p>left join 是left outer join的简写，它的全称是左外连接，是外连接中的一种。<br>左(外)连接，左表(a_table)的记录将会全部表示出来，而右表(b_table)只会显示符合搜索条件的记录。右表记录不足的地方均为NULL。<br><img src="assets/markdown-img-paste-2019080116575036.png" alt="https://img-blog.csdn.net/20171209142610819?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGxnMTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
 <h3 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h3><p>右外连接与左外连接相对称，<br>right join是right outer join的简写，它的全称是右外连接，是外连接中的一种。<br>与左(外)连接相反，右(外)连接，左表(a_table)只会显示符合搜索条件的记录，而右表(b_table)的记录将会全部表示出来。左表记录不足的地方均为NULL。<br><img src="assets/markdown-img-paste-20190801175330121.png" alt="https://img-blog.csdn.net/20171209144056668?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGxnMTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
 <h3 id="外连接查询加条件语句"><a href="#外连接查询加条件语句" class="headerlink" title="外连接查询加条件语句"></a>外连接查询加条件语句</h3><p>使用外连接查询时，可以加上各种条件进行筛选。</p>
 <pre><code>select table1.column1, table2.column1
@@ -309,8 +301,7 @@ on table1.column2 = table2.column3;
 
 select table1.column1, table2.column1
 from table1,table2
-where table1.column2 = table2.column3;
-</code></pre><h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><p>子查询时将一个查询语句嵌套在另一个查询语句中，内层查询语句的查询结果，可以为外层查询语句提供查询条件。在特定情况下：一个查询语句的条件需要另一个查询语句来获取。<br>子查询，又叫内部查询，相对于内部查询，包含内部查询的就称为外部查询。</p>
+where table1.column2 = table2.column3;</code></pre><h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><p>子查询时将一个查询语句嵌套在另一个查询语句中，内层查询语句的查询结果，可以为外层查询语句提供查询条件。在特定情况下：一个查询语句的条件需要另一个查询语句来获取。<br>子查询，又叫内部查询，相对于内部查询，包含内部查询的就称为外部查询。</p>
 <p>子查询可以包含普通select可以包括的任何子句，比如：distinct、 group by、order by、limit、join和union等；但是对应的外部查询必须是以下语句之一：select、insert、update、delete、set或 者do。</p>
 <p>注：一个查询语句只能有一个order by ，在子查询中只能位于外部查询后面.</p>
 <h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>子查询分为如下几类：<br>1）. 标量子查询：返回单一值的标量，最简单的形式。<br>2）. 列子查询：返回的结果集是 N 行一列。<br>3）. 行子查询：返回的结果集是一行 N 列。<br>4）. 表子查询：返回的结果集是 N 行 N 列。<br>可以使用的操作符：= &gt; &lt; &gt;= &lt;= &lt;&gt; ANY IN SOME ALL EXISTS</p>
@@ -319,30 +310,24 @@ where table1.column2 = table2.column3;
 <p>从computer表中查询哪些人分数高于任何一个奖学金的最低分。</p>
 <pre><code>select * from computer_stu
 where score &gt;= ANY
-                  (select score From  scholarship);
-</code></pre><h3 id="带有all关键字的子查询"><a href="#带有all关键字的子查询" class="headerlink" title="带有all关键字的子查询"></a>带有all关键字的子查询</h3><p>表示需要满足所有的条件。只有满足内层查询语句返回的所有结果，才可以执行外层查询语句。</p>
+                  (select score From  scholarship);</code></pre><h3 id="带有all关键字的子查询"><a href="#带有all关键字的子查询" class="headerlink" title="带有all关键字的子查询"></a>带有all关键字的子查询</h3><p>表示需要满足所有的条件。只有满足内层查询语句返回的所有结果，才可以执行外层查询语句。</p>
 <h3 id="带有exists关键字的子查询"><a href="#带有exists关键字的子查询" class="headerlink" title="带有exists关键字的子查询"></a>带有exists关键字的子查询</h3><p>exists关键字表示存在，内层查询语句不返回查询的记录，而是返回一个真假值，如果内层查询语句查询到满足条件的记录，就返回一个true，外层查询语句将进行查询。</p>
 <pre><code>select * from employee
 where exists (select d_name from department where d_id = 1003);
-//如果department存在d_id为1003，则查询employee表。
-</code></pre><p>还可以分为相关子查询，独立子查询。以上子查询与外层查询没有关联，称为独立子查询，如果子查询有用到外层查询的字段，则称相关子查询，相关子查询容易产生性能问题。</p>
+//如果department存在d_id为1003，则查询employee表。</code></pre><p>还可以分为相关子查询，独立子查询。以上子查询与外层查询没有关联，称为独立子查询，如果子查询有用到外层查询的字段，则称相关子查询，相关子查询容易产生性能问题。</p>
 <h2 id="TOP关键字"><a href="#TOP关键字" class="headerlink" title="TOP关键字"></a>TOP关键字</h2><p>TOP关键字在SQL语言中用来限制返回结果集中的记录条数<br>（1）返回确定数目的记录个数</p>
 <p>语法格式：</p>
-<pre><code>SELECT TOP n &lt;列名表&gt; FROM &lt;表名&gt; [查询条件]
-</code></pre><p>其中，n为要返回结果集中的记录条数</p>
+<pre><code>SELECT TOP n &lt;列名表&gt; FROM &lt;表名&gt; [查询条件]</code></pre><p>其中，n为要返回结果集中的记录条数</p>
 <p>（2）返回结果集中指定百分比的记录数</p>
 <p>语法格式：</p>
-<pre><code>SELECT TOP n PERCENT &lt;列名表&gt; FROM &lt;表名&gt; [查询条件]
-</code></pre><p>其中，n为所返回的记录数所占结果集中记录数目的百分比数</p>
+<pre><code>SELECT TOP n PERCENT &lt;列名表&gt; FROM &lt;表名&gt; [查询条件]</code></pre><p>其中，n为所返回的记录数所占结果集中记录数目的百分比数</p>
 <p>使用例子：<br>查询某个条件多条数据中创建时间最新的一条</p>
 <pre><code>select top 1 * from tablename
 where id=123456
-order by 时间 desc      
-</code></pre><p>但是需要注意的是在MySQL中没有此语法，MySQL中使用limit来实现相关功能。<br>同样的例子，MySQL中可以写为：</p>
+order by 时间 desc      </code></pre><p>但是需要注意的是在MySQL中没有此语法，MySQL中使用limit来实现相关功能。<br>同样的例子，MySQL中可以写为：</p>
 <pre><code>select * from tablename
 where id=123456
- order by 时间 desc limit 1
-</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600</a><br>【2】<a href="https://blog.csdn.net/plg17/article/details/78758593" target="_blank" rel="noopener">https://blog.csdn.net/plg17/article/details/78758593</a><br>【3】<a href="https://cloud.tencent.com/developer/article/1333120" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1333120</a></p>
+ order by 时间 desc limit 1</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600</a><br>【2】<a href="https://blog.csdn.net/plg17/article/details/78758593" target="_blank" rel="noopener">https://blog.csdn.net/plg17/article/details/78758593</a><br>【3】<a href="https://cloud.tencent.com/developer/article/1333120" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1333120</a></p>
 
       
       

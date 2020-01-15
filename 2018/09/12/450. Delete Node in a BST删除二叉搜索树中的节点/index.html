@@ -244,6 +244,9 @@
 <p>一般来说，删除节点可分为两个步骤：</p>
 <p>首先找到需要删除的节点；<br>如果找到了，删除它。<br>说明： 要求算法时间复杂度为 O(h)，h 为树的高度。</p>
 <a id="more"></a>
+
+
+
 <p>示例:</p>
 <pre><code>root = [5,3,6,2,4,null,7]
 key = 3
@@ -270,41 +273,11 @@ key = 3
    / \
   2   6
    \   \
-    4   7
-</code></pre><h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>有一种比较巧的方法，不仅适用于BST，也适用于普通的二叉树。<br>首先用递归的方法来寻找到需要删除的节点，如果找到了开始判断：<br>若该节点右子树为空，那么就删除节点，只返回该节点的左子节点。<br>若该节点右子树不为空，那么就去寻找该右子树中最小的节点，也就是最左边的叶子节点，然后将该叶子节点的值与该节点做交换。</p>
-<p>然后递归的对左右子树做重复操作，最后返回根节点。<br>但它的时间复杂度是O（N）还不满足题目要求<br>    /**</p>
-<pre><code> * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* deleteNode(TreeNode* root, int key) {
-        if(!root) return NULL;
-        if(root-&gt;val==key){
-            if(!root-&gt;right){
-                TreeNode* left=root-&gt;left;
-                delete root;
-                return left;
-            }else{
-                TreeNode *right=root-&gt;right;
-                while(right-&gt;left)
-                    right=right-&gt;left;
-                swap(root-&gt;val,right-&gt;val);
-            }
-        }
-        root-&gt;left=deleteNode(root-&gt;left,key);
-        root-&gt;right=deleteNode(root-&gt;right,key);
-        return root;
+    4   7</code></pre><h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>有一种比较巧的方法，不仅适用于BST，也适用于普通的二叉树。<br>首先用递归的方法来寻找到需要删除的节点，如果找到了开始判断：<br>若该节点右子树为空，那么就删除节点，只返回该节点的左子节点。<br>若该节点右子树不为空，那么就去寻找该右子树中最小的节点，也就是最左边的叶子节点，然后将该叶子节点的值与该节点做交换。</p>
+<p>然后递归的对左右子树做重复操作，最后返回根节点。<br>但它的时间复杂度是O（N）还不满足题目要求<br>    /<em>*<br>     * Definition for a binary tree node.<br>     * struct TreeNode {<br>     *     int val;<br>     *     TreeNode *left;<br>     *     TreeNode *right;<br>     *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}<br>     * };<br>     */<br>    class Solution {<br>    public:<br>        TreeNode</em> deleteNode(TreeNode* root, int key) {<br>            if(!root) return NULL;<br>            if(root-&gt;val==key){<br>                if(!root-&gt;right){<br>                    TreeNode* left=root-&gt;left;<br>                    delete root;<br>                    return left;<br>                }else{<br>                    TreeNode *right=root-&gt;right;<br>                    while(right-&gt;left)<br>                        right=right-&gt;left;<br>                    swap(root-&gt;val,right-&gt;val);<br>                }<br>            }<br>            root-&gt;left=deleteNode(root-&gt;left,key);<br>            root-&gt;right=deleteNode(root-&gt;right,key);<br>            return root;</p>
+<pre><code>    }
 
-    }
-
-};
-</code></pre><p>做以下改进,这种方法其实并未真正实现删除节点</p>
+};</code></pre><p>做以下改进,这种方法其实并未真正实现删除节点</p>
 <pre><code>TreeNode* deleteNode(TreeNode* root, int key) {
     if( !root )
         return nullptr;
@@ -328,8 +301,7 @@ public:
     if( root-&gt;val &lt; key )
         root-&gt;right = deleteNode( root-&gt;right , key );
     return root;
-}
-</code></pre>
+}</code></pre>
       
       
         <div class="page-reward">

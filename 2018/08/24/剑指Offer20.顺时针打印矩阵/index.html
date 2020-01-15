@@ -243,10 +243,10 @@
         <p>与其类似的一道题是LeetCode上的54. Spiral Matrix</p>
 <p>题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。</p>
 <a id="more"></a>
+
 <h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>设矩阵的行数为row，列数为col，以一个5X5的矩阵为例，第一圈左上角坐标为（0，0），第二圈左上角坐标为（1，1），行列坐标相同，因此选取（start，start）作为起点。</p>
 <p>最后一圈只有一个数字，对应坐标为（2，2）。注意到5&gt;2<em>2。对于6X6的矩阵6&gt;2</em>2仍然成立。因此可以得到让循环继续的条件是</p>
-<pre><code>col&gt;start*2 &amp;&amp; row&gt;start*2
-</code></pre><p>可以解释为因为矩阵是对称的，所以为了能完整打印一圈startX和startY不会超出行列数的一半</p>
+<pre><code>col&gt;start*2 &amp;&amp; row&gt;start*2</code></pre><p>可以解释为因为矩阵是对称的，所以为了能完整打印一圈startX和startY不会超出行列数的一半</p>
 <p>考虑如何实现打印一圈的功能，可以分为向右-&gt;向下-&gt;向上-&gt;向左四步，值得注意的是最后一圈可能退化成只有一行，一列或一个数字，因此此时打印一圈就不需要四步，而缩减为三步、两步、一步。<br>所以要分析打印每一步的前提条件。</p>
 <p>打印第一步时候不需要前提条件</p>
 <p>打印第二步时至少需要有两行，endY&gt;startY</p>
@@ -447,8 +447,7 @@ int main(int argc, char* argv[])
     Test(5, 4);
 
     return 0;
-}
-</code></pre>
+}</code></pre>
       
       
         <div class="page-reward">

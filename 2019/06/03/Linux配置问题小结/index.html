@@ -242,6 +242,9 @@
           
         <p>记录Linux配置问题的解决方案，在Ubuntu 18.04中安装terminator 并在右键菜单中添加open in termintor;解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题;解决了Linux下无线网卡rtl8821CE/rtl8723ce驱动无法驱动的问题。</p>
 <a id="more"></a>
+
+
+
 <h2 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h2><ol>
 <li>Ubuntu 18.04 安装terminator 并在右键菜单中添加open in termintor</li>
 <li>解决了搜狗输入法在Ubuntu 18.04 中无法安装和安装后无法使用的问题</li>
@@ -249,24 +252,18 @@
 </ol>
 <h2 id="Terminator安装和右键菜单添加解决方案"><a href="#Terminator安装和右键菜单添加解决方案" class="headerlink" title="Terminator安装和右键菜单添加解决方案"></a>Terminator安装和右键菜单添加解决方案</h2><p>  题外话，安利下terminator，是Linux环境下一款非常赞的命令行管理工具，前段时间微软宣布推出名为Windows Terminal的新款命令行工具，在个人看来也是姗姗来迟的将terminator能实现的功能在windows中实现了。</p>
 <p>  安装terminator</p>
-<pre><code>sudo apt install terminator
-</code></pre><p>  网上大多用dconf系统配置编辑器将terminator设为默认，但在我的系统中这样在文件位置中右键打开时还是只能打开默认的终端，用起来很不方便，直到找到了这种方法（<a href="https://blog.csdn.net/bestBT/article/details/81221378）。" target="_blank" rel="noopener">https://blog.csdn.net/bestBT/article/details/81221378）。</a><br>  安装Nautilus-actions</p>
+<pre><code>sudo apt install terminator</code></pre><p>  网上大多用dconf系统配置编辑器将terminator设为默认，但在我的系统中这样在文件位置中右键打开时还是只能打开默认的终端，用起来很不方便，直到找到了这种方法（<a href="https://blog.csdn.net/bestBT/article/details/81221378）。" target="_blank" rel="noopener">https://blog.csdn.net/bestBT/article/details/81221378）。</a><br>  安装Nautilus-actions</p>
 <pre><code>sudo add-apt-repository ppa:daniel-marynicz/filemanager-actions
-sudo apt-get install filemanager-actions-nautilus-extension
-</code></pre><p>使用fma-config-tool 来配置。<br>1.新建动作，在action（动作）界面中勾选第二项Display item in location context menu。在Context label中输入想写的名字“在Terminator中打开”。<br>2.在Command（命令）界面中输入路径/usr/bin/terminator，参数中输入–working-directory=%d/%b。<br>3.这样操作完在terminator中打开还在右键的二级菜单中，所以点右上角齿轮标志（编辑您的首选项），在运行时首选项-》Nautilus菜单布局中取消勾选Create a root “FileManager-Actions” menu，这样就可以愉快的使用Terminator了。</p>
+sudo apt-get install filemanager-actions-nautilus-extension</code></pre><p>使用fma-config-tool 来配置。<br>1.新建动作，在action（动作）界面中勾选第二项Display item in location context menu。在Context label中输入想写的名字“在Terminator中打开”。<br>2.在Command（命令）界面中输入路径/usr/bin/terminator，参数中输入–working-directory=%d/%b。<br>3.这样操作完在terminator中打开还在右键的二级菜单中，所以点右上角齿轮标志（编辑您的首选项），在运行时首选项-》Nautilus菜单布局中取消勾选Create a root “FileManager-Actions” menu，这样就可以愉快的使用Terminator了。</p>
 <h2 id="搜狗拼音输入法安装问题解决方案"><a href="#搜狗拼音输入法安装问题解决方案" class="headerlink" title="搜狗拼音输入法安装问题解决方案"></a>搜狗拼音输入法安装问题解决方案</h2><p>一开始嫌麻烦所以用Linux自带的Ibus系统下的输入法，但各种问题实在忍不了，所以还是装了搜狗拼音法，中间遇到几个问题只找到这个靠谱的解决方法（<a href="https://ywnz.com/linuxjc/1476.html）。" target="_blank" rel="noopener">https://ywnz.com/linuxjc/1476.html）。</a></p>
 <p>在根据指导方法安装搜狗拼音输入法后，会遇到很多依赖问题，一路折腾后会发现搜狗拼音依赖的fcitx-libs-qt这个包在ubuntu18.04的源里面是不存在的。替代品似乎是libfcitx-qt0，但也很难搞。</p>
 <h3 id="下载旧版"><a href="#下载旧版" class="headerlink" title="下载旧版"></a>下载旧版</h3><p>搜狗官方的最新版（sogoupinyin_2.2.0.0102_amd64.deb）是不能用的，原因不作深究。需要下载一个旧版本（sogoupinyin_2.1.0.0086_amd64.deb）。<br>将该deb包放置于一个空目录。</p>
-<h3 id="创建软件包目录"><a href="#创建软件包目录" class="headerlink" title="创建软件包目录"></a>创建软件包目录</h3><pre><code>mkdir -p extract/DEBIAN
-</code></pre><h3 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h3><pre><code>dpkg-deb -x sogoupinyin_2.1.0.0086_amd64.deb extract/
+<h3 id="创建软件包目录"><a href="#创建软件包目录" class="headerlink" title="创建软件包目录"></a>创建软件包目录</h3><pre><code>mkdir -p extract/DEBIAN</code></pre><h3 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h3><pre><code>dpkg-deb -x sogoupinyin_2.1.0.0086_amd64.deb extract/
 
-dpkg-deb -e sogoupinyin_2.1.0.0086_amd64.deb extract/DEBIAN
-</code></pre><h3 id="修改control文件"><a href="#修改control文件" class="headerlink" title="修改control文件"></a>修改control文件</h3><p>用任意文本编辑器打开extract/DEBIAN/control 找到Depends行，删除fcitx-libs和fcitx-libs-qt，保存退出。<br>其中要找的Depends行长这个样子</p>
-<pre><code>Depends: fcitx (&gt;= 1:4.2.8.3-3~), fcitx-frontend-gtk2, fcitx-frontend-gtk3, fcitx-frontend-qt4, fcitx-module-kimpanel, im-config, libopencc2 | libopencc1, lsb-release, unzip, x11-utils, libc6 (&gt;= 2.8), libgcc1 (&gt;= 1:4.1.1), libgdk-pixbuf2.0-0 (&gt;= 2.22.0), libglib2.0-0 (&gt;= 2.16.0), libidn11 (&gt;= 1.13), libnotify4 (&gt;= 0.7.0), libqt4-dbus (&gt;= 4:4.8.0), libqt4-declarative (&gt;= 4:4.8.0), libqt4-network (&gt;= 4:4.8.0), libqtcore4 (&gt;= 4:4.8.0), libqtgui4 (&gt;= 4:4.8.0), libstdc++6 (&gt;= 4.6), libx11-6, zlib1g (&gt;= 1:1.2.0)
-</code></pre><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><pre><code>mkdir build
+dpkg-deb -e sogoupinyin_2.1.0.0086_amd64.deb extract/DEBIAN</code></pre><h3 id="修改control文件"><a href="#修改control文件" class="headerlink" title="修改control文件"></a>修改control文件</h3><p>用任意文本编辑器打开extract/DEBIAN/control 找到Depends行，删除fcitx-libs和fcitx-libs-qt，保存退出。<br>其中要找的Depends行长这个样子</p>
+<pre><code>Depends: fcitx (&gt;= 1:4.2.8.3-3~), fcitx-frontend-gtk2, fcitx-frontend-gtk3, fcitx-frontend-qt4, fcitx-module-kimpanel, im-config, libopencc2 | libopencc1, lsb-release, unzip, x11-utils, libc6 (&gt;= 2.8), libgcc1 (&gt;= 1:4.1.1), libgdk-pixbuf2.0-0 (&gt;= 2.22.0), libglib2.0-0 (&gt;= 2.16.0), libidn11 (&gt;= 1.13), libnotify4 (&gt;= 0.7.0), libqt4-dbus (&gt;= 4:4.8.0), libqt4-declarative (&gt;= 4:4.8.0), libqt4-network (&gt;= 4:4.8.0), libqtcore4 (&gt;= 4:4.8.0), libqtgui4 (&gt;= 4:4.8.0), libstdc++6 (&gt;= 4.6), libx11-6, zlib1g (&gt;= 1:1.2.0)</code></pre><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><pre><code>mkdir build
 
-dpkg-deb -b extract/ build/
-</code></pre><p>执行完毕build目录下会生成一个新的deb包。</p>
+dpkg-deb -b extract/ build/</code></pre><p>执行完毕build目录下会生成一个新的deb包。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>先彻底卸载掉搜狗输入法，并删除以下配置文件：</p>
 <p>.sogouinput</p>
 <p>.config/fcitx</p>
@@ -284,22 +281,17 @@ dpkg-deb -b extract/ build/
 <p>（rtl8723de 的话 自己 去git上下吧）</p>
 <h3 id="3-编译驱动"><a href="#3-编译驱动" class="headerlink" title="3.编译驱动"></a>3.编译驱动</h3><p>  <strong><em>解压rtl8821ce.zip</em></strong></p>
 <p>  <strong><em>修改文件Makefile</em></strong></p>
-<pre><code>export TopDIR ?= $(srctree)/drivers/net/wireless/rtl8821ce
-</code></pre><p>从这行 “export TopDIR ?= 后面改成当前目录 例如我的：</p>
-<pre><code>export TopDIR ?= /home/horsun/Downloads/rtl8821ce
-</code></pre><p><strong><em>保存修改</em></strong></p>
+<pre><code>export TopDIR ?= $(srctree)/drivers/net/wireless/rtl8821ce</code></pre><p>从这行 “export TopDIR ?= 后面改成当前目录 例如我的：</p>
+<pre><code>export TopDIR ?= /home/horsun/Downloads/rtl8821ce</code></pre><p><strong><em>保存修改</em></strong></p>
 <p>  分别进行：</p>
 <pre><code>make
 sudo make install
-sudo modprobe -a 8821ce
-</code></pre><p>遇到问题</p>
-<pre><code>modprobe: ERROR: could not insert &apos;8812au&apos;: Exec format error
-</code></pre><p><strong><em>执行</em></strong></p>
+sudo modprobe -a 8821ce</code></pre><p>遇到问题</p>
+<pre><code>modprobe: ERROR: could not insert &apos;8812au&apos;: Exec format error</code></pre><p><strong><em>执行</em></strong></p>
 <pre><code>make clean
 make
 sudo make install
-sudo modprobe 8812au
-</code></pre>
+sudo modprobe 8812au</code></pre>
       
       
         <div class="page-reward">

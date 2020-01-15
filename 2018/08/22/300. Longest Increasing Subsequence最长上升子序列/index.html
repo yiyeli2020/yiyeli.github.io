@@ -242,6 +242,7 @@
           
         <p>给定一个无序的整数数组，找到其中最长上升子序列的长度。</p>
 <a id="more"></a>
+
 <p>示例:</p>
 <p>输入:<br>    [10,9,2,5,3,7,101,18]</p>
 <p>输出: 4</p>
@@ -265,8 +266,7 @@ public:
         }
         return res;
     }
-};
-</code></pre><h2 id="进阶：二分查找法"><a href="#进阶：二分查找法" class="headerlink" title="进阶：二分查找法"></a>进阶：二分查找法</h2><p>我们来看一种思路更清晰的二分查找法，跟上面那种方法很类似，思路是先建立一个空的dp数组，然后开始遍历原数组，对于每一个遍历到的数字，我们用二分查找法在dp数组找第一个不小于它的数字，如果这个数字不存在，那么直接在dp数组后面加上遍历到的数字，如果存在，则将这个数字更新为当前遍历到的数字，最后返回dp数字的长度即可.</p>
+};</code></pre><h2 id="进阶：二分查找法"><a href="#进阶：二分查找法" class="headerlink" title="进阶：二分查找法"></a>进阶：二分查找法</h2><p>我们来看一种思路更清晰的二分查找法，跟上面那种方法很类似，思路是先建立一个空的dp数组，然后开始遍历原数组，对于每一个遍历到的数字，我们用二分查找法在dp数组找第一个不小于它的数字，如果这个数字不存在，那么直接在dp数组后面加上遍历到的数字，如果存在，则将这个数字更新为当前遍历到的数字，最后返回dp数字的长度即可.</p>
 <p>特别注意的是dp数组的值可能不是一个真实的LIS。{4， 2， 4， 5， 3， 7}，那么算完后的ends数组为{2， 3， 5， 7}，可以发现它不是一个原数组的LIS，只是长度相等而已参见代码如下：</p>
 <pre><code>class Solution {
 public:
@@ -284,8 +284,7 @@ public:
         }
         return dp.size();
     }
-};
-</code></pre><h2 id="进阶：利用lowerbound函数的二分查找法"><a href="#进阶：利用lowerbound函数的二分查找法" class="headerlink" title="进阶：利用lowerbound函数的二分查找法"></a>进阶：利用lowerbound函数的二分查找法</h2><p>还有一种比较tricky的二分查找法，利用到了C++中STL的lower_bound函数，lower_bound返回数组中第一个不小于指定值的元素，跟上面的算法类似，我们还需要一个一维数组v，然后对于遍历到的nums中每一个元素，找其lower_bound，如果没有lower_bound，说明新元素比一维数组的尾元素还要大，直接添加到数组v中，跟之前解法的思路相同了。如果有lower_bound，说明新元素不是最大的，将其lower_bound替换为新元素，这个过程跟之前解法的二分查找法的部分实现相同功能，最后也是返回数组v的长度，注意数组v也不一定是真实的LIS，参见代码如下：</p>
+};</code></pre><h2 id="进阶：利用lowerbound函数的二分查找法"><a href="#进阶：利用lowerbound函数的二分查找法" class="headerlink" title="进阶：利用lowerbound函数的二分查找法"></a>进阶：利用lowerbound函数的二分查找法</h2><p>还有一种比较tricky的二分查找法，利用到了C++中STL的lower_bound函数，lower_bound返回数组中第一个不小于指定值的元素，跟上面的算法类似，我们还需要一个一维数组v，然后对于遍历到的nums中每一个元素，找其lower_bound，如果没有lower_bound，说明新元素比一维数组的尾元素还要大，直接添加到数组v中，跟之前解法的思路相同了。如果有lower_bound，说明新元素不是最大的，将其lower_bound替换为新元素，这个过程跟之前解法的二分查找法的部分实现相同功能，最后也是返回数组v的长度，注意数组v也不一定是真实的LIS，参见代码如下：</p>
 <pre><code>class Solution {
 public:
     int lengthOfLIS(vector&lt;int&gt;&amp; nums) {
@@ -297,8 +296,7 @@ public:
         }
         return dp.size();
     }
-};
-</code></pre><h2 id="进阶：利用upperbound函数的二分查找法"><a href="#进阶：利用upperbound函数的二分查找法" class="headerlink" title="进阶：利用upperbound函数的二分查找法"></a>进阶：利用upperbound函数的二分查找法</h2><p>upper_bound是返回数组中第一个大于指定值的元素，和lower_bound的区别时，它不能返回和指定值相等的元素，那么当新进来的数和数组中尾元素一样大时，upper_bound无法返回这个元素，那么按之前算法的处理方法是加到数组中，这样就不是严格的递增子串了，所以我们要做个处理，在处理每个新进来的元素时，先判断数组v中有无此元素，有的话直接跳过，这样就避免了相同数字的情况，参见代码如下：</p>
+};</code></pre><h2 id="进阶：利用upperbound函数的二分查找法"><a href="#进阶：利用upperbound函数的二分查找法" class="headerlink" title="进阶：利用upperbound函数的二分查找法"></a>进阶：利用upperbound函数的二分查找法</h2><p>upper_bound是返回数组中第一个大于指定值的元素，和lower_bound的区别时，它不能返回和指定值相等的元素，那么当新进来的数和数组中尾元素一样大时，upper_bound无法返回这个元素，那么按之前算法的处理方法是加到数组中，这样就不是严格的递增子串了，所以我们要做个处理，在处理每个新进来的元素时，先判断数组v中有无此元素，有的话直接跳过，这样就避免了相同数字的情况，参见代码如下：</p>
 <pre><code>class Solution {
 public:
     int lengthOfLIS(vector&lt;int&gt;&amp; nums) {
@@ -311,8 +309,7 @@ public:
         }
         return dp.size();
     }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

@@ -242,6 +242,8 @@
           
         <p>给定一个表示分数的非负整数数组。 玩家1从数组任意一端拿取一个分数，随后玩家2继续从剩余数组任意一端拿取分数，然后玩家1拿，……。每次一个玩家只能拿取一个分数，分数被拿取之后不再可取。直到没有剩余分数可取时游戏结束。最终获得分数总和最多的玩家获胜。</p>
 <a id="more"></a>
+
+
 <p>给定一个表示分数的数组，预测玩家1是否会成为赢家。你可以假设每个玩家的玩法都会使他的分数最大化。</p>
 <p>示例 1:</p>
 <pre><code>输入: [1, 5, 2]
@@ -249,21 +251,17 @@
 解释: 一开始，玩家1可以从1和2中进行选择。
 如果他选择2（或者1），那么玩家2可以从1（或者2）和5中进行选择。如果玩家2选择了5，那么玩家1则只剩下1（或者2）可选。
 所以，玩家1的最终分数为 1 + 2 = 3，而玩家2为 5。
-因此，玩家1永远不会成为赢家，返回 False。
-</code></pre><p>示例 2:</p>
+因此，玩家1永远不会成为赢家，返回 False。</code></pre><p>示例 2:</p>
 <pre><code>输入: [1, 5, 233, 7]
 输出: True
 解释: 玩家1一开始选择1。然后玩家2必须从5和7中进行选择。无论玩家2选择了哪个，玩家1都可以选择233。
-最终，玩家1（234分）比玩家2（12分）获得更多的分数，所以返回 True，表示玩家1可以成为赢家。
-</code></pre><p>注意:</p>
+最终，玩家1（234分）比玩家2（12分）获得更多的分数，所以返回 True，表示玩家1可以成为赢家。</code></pre><p>注意:</p>
 <p>1 &lt;= 给定的数组长度 &lt;= 20.<br>数组里所有分数都为非负数且不会大于10000000。<br>如果最终两个玩家的分数相等，那么玩家1仍为赢家。</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>存储玩家1能从任意子数组[i,j]中获得的最大分数</p>
 <p>给定一个数组A[i,j]，玩家1能够取一个数A[i]或者A[j]，在那之后，形成了一个新的数组A[i+1,j]或者A[i,j-1]，轮到玩家2挑选。玩家1能从子数组中得到的是玩家2剩下的最大分数。<br>DP公式：</p>
-<pre><code>dp(i, j) = max(sum(i, j-1) - dp(i, j-1) + nums[j], sum(i+1, j) - dp(i+1, j) + nums[i])
-</code></pre><p>也可以将sum(i,j)从公式中消除，我们可以存储玩家1和玩家2的差而不是存储玩家1从每个子数组中能得到的最大值，例如，如果玩家1得到A，玩家2得到B，我们可以使用dp来存储A-B<br>如果A=dp(i,j)，那么B=sum(i,j)-dp(i,j)<br>因此</p>
+<pre><code>dp(i, j) = max(sum(i, j-1) - dp(i, j-1) + nums[j], sum(i+1, j) - dp(i+1, j) + nums[i])</code></pre><p>也可以将sum(i,j)从公式中消除，我们可以存储玩家1和玩家2的差而不是存储玩家1从每个子数组中能得到的最大值，例如，如果玩家1得到A，玩家2得到B，我们可以使用dp来存储A-B<br>如果A=dp(i,j)，那么B=sum(i,j)-dp(i,j)<br>因此</p>
 <pre><code>dp&apos;(i, j) = dp(i, j) - ( sum(i, j) - dp(i, j) )
-= 2*dp(i, j) - sum(i, j),
-</code></pre><p>所以</p>
+= 2*dp(i, j) - sum(i, j),</code></pre><p>所以</p>
 <pre><code>2*dp(i, j) = dp&apos;(i, j) + sum(i, j) (this will be used below)
 
 dp&apos;(i, j) = dp(i, j) - ( sum(i, j) - dp(i, j) )
@@ -272,10 +270,8 @@ dp&apos;(i, j) = dp(i, j) - ( sum(i, j) - dp(i, j) )
 = max(sum(i, j) - 2*dp(i, j-1), sum(i, j) - 2*dp(i+1, j) )
 = max(sum(i, j) - ( dp&apos;(i, j-1) + sum(i, j-1) ), sum(i, j) - ( dp&apos;(i+1, j) + sum(i+1, j)))
 = max(sum(i, j) - sum(i, j-1) - dp&apos;(i, j-1), sum(i, j) - sum(i+1, j) - dp&apos;(i+1, j))
-= max(nums[j] - dp&apos;(i, j-1), nums[i] - dp&apos;(i+1, j))
-</code></pre><p>最后的公式:</p>
-<pre><code>dp(i, j) = max(nums[j] - dp(i, j-1), nums[i] - dp(i+1, j))
-</code></pre><p>代码如下：</p>
+= max(nums[j] - dp&apos;(i, j-1), nums[i] - dp&apos;(i+1, j))</code></pre><p>最后的公式:</p>
+<pre><code>dp(i, j) = max(nums[j] - dp(i, j-1), nums[i] - dp(i+1, j))</code></pre><p>代码如下：</p>
 <pre><code>class Solution{
 public:
  bool PredictTheWinner(vector&lt;int&gt;&amp; nums) {
@@ -289,8 +285,7 @@ public:
         }
         return dp[0][n-1] &gt;= 0; // player1 get more score points than player2
     }
-};
-</code></pre>
+};</code></pre>
       
       
         <div class="page-reward">

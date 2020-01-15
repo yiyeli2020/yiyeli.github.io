@@ -242,6 +242,7 @@
           
         <p>Java并发编程中synchronized的概念</p>
 <a id="more"></a>
+
 <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>synchronized 是 Java 中的关键字，是利用锁的机制来实现同步的。<br>锁机制有如下两种特性：</p>
 <h2 id="互斥性："><a href="#互斥性：" class="headerlink" title="互斥性："></a>互斥性：</h2><p>即在同一时间只允许一个线程持有某个对象锁，通过这种特性来实现多线程中的协调机制，这样在同一时间只有一个线程对需同步的代码块(复合操作)进行访问。互斥性我们也往往称为操作的原子性。</p>
 <h2 id="可见性："><a href="#可见性：" class="headerlink" title="可见性："></a>可见性：</h2><p>必须确保在锁被释放之前，对共享变量所做的修改，对于随后获得该锁的另一个线程是可见的（即在获得锁时应获得最新共享变量的值），否则另一个线程可能是在本地缓存的某个副本上继续操作从而引起不一致。</p>
@@ -251,13 +252,10 @@
 <h2 id="根据修饰对象分类"><a href="#根据修饰对象分类" class="headerlink" title="根据修饰对象分类"></a>根据修饰对象分类</h2><p>synchronized 可以修饰方法和代码块</p>
 <h3 id="修饰代码块"><a href="#修饰代码块" class="headerlink" title="修饰代码块"></a>修饰代码块</h3><pre><code>synchronized(this|object) {}
 
-synchronized(类.class) {}
-</code></pre><h3 id="修饰方法"><a href="#修饰方法" class="headerlink" title="修饰方法"></a>修饰方法</h3><p>修饰非静态方法</p>
+synchronized(类.class) {}</code></pre><h3 id="修饰方法"><a href="#修饰方法" class="headerlink" title="修饰方法"></a>修饰方法</h3><p>修饰非静态方法</p>
 <p>修饰静态方法</p>
-<h2 id="根据获取的锁分类"><a href="#根据获取的锁分类" class="headerlink" title="根据获取的锁分类"></a>根据获取的锁分类</h2><h3 id="获取对象锁"><a href="#获取对象锁" class="headerlink" title="获取对象锁"></a>获取对象锁</h3><pre><code>synchronized(this|object) {}
-</code></pre><p>修饰非静态方法</p>
-<h3 id="获取类锁"><a href="#获取类锁" class="headerlink" title="获取类锁"></a>获取类锁</h3><pre><code>synchronized(类.class) {}
-</code></pre><p>修饰静态方法</p>
+<h2 id="根据获取的锁分类"><a href="#根据获取的锁分类" class="headerlink" title="根据获取的锁分类"></a>根据获取的锁分类</h2><h3 id="获取对象锁"><a href="#获取对象锁" class="headerlink" title="获取对象锁"></a>获取对象锁</h3><pre><code>synchronized(this|object) {}</code></pre><p>修饰非静态方法</p>
+<h3 id="获取类锁"><a href="#获取类锁" class="headerlink" title="获取类锁"></a>获取类锁</h3><pre><code>synchronized(类.class) {}</code></pre><p>修饰静态方法</p>
 <h1 id="synchronized-的用法详解"><a href="#synchronized-的用法详解" class="headerlink" title="synchronized 的用法详解"></a>synchronized 的用法详解</h1><p>这里根据获取的锁分类来分析 synchronized 的用法</p>
 <h2 id="获取对象锁-1"><a href="#获取对象锁-1" class="headerlink" title="获取对象锁"></a>获取对象锁</h2><h3 id="对于同一对象"><a href="#对于同一对象" class="headerlink" title="对于同一对象"></a>对于同一对象</h3><p>同步线程类：</p>
 <pre><code>class SyncThread implements Runnable {
@@ -317,8 +315,7 @@ synchronized(类.class) {}
             e.printStackTrace();
         }
     }
-}
-</code></pre><p>测试代码：</p>
+}</code></pre><p>测试代码：</p>
 <pre><code>public class SyncTest {
 
     public static void main(String... args) {
@@ -336,8 +333,7 @@ synchronized(类.class) {}
         C_thread1.start();
         C_thread2.start();
     }
-}
-</code></pre><p>运行结果：</p>
+}</code></pre><p>运行结果：</p>
 <pre><code>B_thread2_Sync1: 14:44:20
 A_thread1_Async_Start: 14:44:20
 B_thread1_Sync1: 14:44:20
@@ -353,29 +349,24 @@ B_thread2_Sync1_Start: 14:44:24
 B_thread2_Sync1_End: 14:44:26
 C_thread2_Sync2: 14:44:26
 C_thread2_Sync2_Start: 14:44:26
-C_thread2_Sync2_End: 14:44:28
-</code></pre><p>结果分析：</p>
+C_thread2_Sync2_End: 14:44:28</code></pre><p>结果分析：</p>
 <p>A 类线程访问方法中没有同步代码块，A 类线程是异步的，所以有线程访问对象的同步代码块时，另外的线程可以访问该对象的非同步代码块：</p>
 <pre><code>A_thread1_Async_Start: 14:44:20
 A_thread2_Async_Start: 14:44:20
 A_thread1_Async_End: 14:44:22
-A_thread2_Async_End: 14:44:22
-</code></pre><p>B 类线程访问的方法中有同步代码块，B 类线程是同步的，一个线程在访问对象的同步代码块，另一个访问对象的同步代码块的线程会被阻塞：</p>
+A_thread2_Async_End: 14:44:22</code></pre><p>B 类线程访问的方法中有同步代码块，B 类线程是同步的，一个线程在访问对象的同步代码块，另一个访问对象的同步代码块的线程会被阻塞：</p>
 <pre><code>B_thread1_Sync1_End: 14:44:24
 B_thread2_Sync1_Start: 14:44:24
 B_thread2_Sync1_End: 14:44:26
 synchronized(this|object) {} 代码块 {} 之外的代码依然是异步的：
 B_thread2_Sync1: 14:44:20
-B_thread1_Sync1: 14:44:20
-</code></pre><p>C 类线程访问的是 synchronized 修饰非静态方法，C 类线程是同步的，一个线程在访问对象的同步代方法，另一个访问对象同步方法的线程会被阻塞：</p>
+B_thread1_Sync1: 14:44:20</code></pre><p>C 类线程访问的是 synchronized 修饰非静态方法，C 类线程是同步的，一个线程在访问对象的同步代方法，另一个访问对象同步方法的线程会被阻塞：</p>
 <pre><code>C_thread1_Sync2_Start: 14:44:20
 C_thread1_Sync2_End: 14:44:22
 C_thread2_Sync2_Start: 14:44:26
-C_thread2_Sync2_End: 14:44:28
-</code></pre><p>synchronized 修饰非静态方法，作用范围是整个方法，所以方法中所有的代码都是同步的：</p>
+C_thread2_Sync2_End: 14:44:28</code></pre><p>synchronized 修饰非静态方法，作用范围是整个方法，所以方法中所有的代码都是同步的：</p>
 <pre><code>C_thread1_Sync2: 14:44:20
-C_thread2_Sync2: 14:44:26
-</code></pre><p>由结果可知 B 类和 C 类线程顺序执行，类中 synchronized(this|object) {} 代码块和 synchronized 修饰非静态方法获取的锁是同一个锁，即该类的对象的对象锁。所以 B 类线程和 C 类线程也是同步的：</p>
+C_thread2_Sync2: 14:44:26</code></pre><p>由结果可知 B 类和 C 类线程顺序执行，类中 synchronized(this|object) {} 代码块和 synchronized 修饰非静态方法获取的锁是同一个锁，即该类的对象的对象锁。所以 B 类线程和 C 类线程也是同步的：</p>
 <pre><code>B_thread1_Sync1_Start: 14:44:22
 B_thread1_Sync1_End: 14:44:24
 C_thread1_Sync2_Start: 14:44:20
@@ -383,8 +374,7 @@ C_thread1_Sync2_End: 14:44:22
 B_thread2_Sync1_Start: 14:44:24
 B_thread2_Sync1_End: 14:44:26
 C_thread2_Sync2_Start: 14:44:26
-C_thread2_Sync2_End: 14:44:28
-</code></pre><h3 id="对于不同对象"><a href="#对于不同对象" class="headerlink" title="对于不同对象"></a>对于不同对象</h3><p>修改测试代码为：</p>
+C_thread2_Sync2_End: 14:44:28</code></pre><h3 id="对于不同对象"><a href="#对于不同对象" class="headerlink" title="对于不同对象"></a>对于不同对象</h3><p>修改测试代码为：</p>
 <pre><code>public class SyncTest {
 
     public static void main(String... args) {
@@ -401,8 +391,7 @@ C_thread2_Sync2_End: 14:44:28
         C_thread1.start();
         C_thread2.start();
     }
-}
-</code></pre><p>运行结果：</p>
+}</code></pre><p>运行结果：</p>
 <pre><code>A_thread2_Async_Start: 15:01:34
 C_thread2_Sync2: 15:01:34
 B_thread2_Sync1: 15:01:34
@@ -418,8 +407,7 @@ A_thread1_Async_End: 15:01:36
 C_thread2_Sync2_End: 15:01:36
 B_thread2_Sync1_End: 15:01:36
 B_thread1_Sync1_End: 15:01:36
-A_thread2_Async_End: 15:01:36
-</code></pre><p>结果分析：</p>
+A_thread2_Async_End: 15:01:36</code></pre><p>结果分析：</p>
 <p>两个线程访问不同对象的 synchronized(this|object) {} 代码块和 synchronized 修饰非静态方法是异步的，同一个类的不同对象的对象锁互不干扰。</p>
 <h2 id="获取类锁-1"><a href="#获取类锁-1" class="headerlink" title="获取类锁"></a>获取类锁</h2><h3 id="对于同一对象-1"><a href="#对于同一对象-1" class="headerlink" title="对于同一对象"></a>对于同一对象</h3><p>同步线程类：</p>
 <pre><code>class SyncThread implements Runnable {
@@ -479,8 +467,7 @@ A_thread2_Async_End: 15:01:36
             e.printStackTrace();
         }
     }
-}
-</code></pre><p>测试代码：</p>
+}</code></pre><p>测试代码：</p>
 <pre><code>public class SyncTest {
 
     public static void main(String... args) {
@@ -498,8 +485,7 @@ A_thread2_Async_End: 15:01:36
         C_thread1.start();
         C_thread2.start();
     }
-}
-</code></pre><p>运行结果：</p>
+}</code></pre><p>运行结果：</p>
 <pre><code>B_thread1_Sync1: 15:08:13
 C_thread1_Sync2: 15:08:13
 B_thread2_Sync1: 15:08:13
@@ -515,8 +501,7 @@ B_thread1_Sync1_Start: 15:08:17
 B_thread1_Sync1_End: 15:08:19
 C_thread2_Sync2: 15:08:19
 C_thread2_Sync2_Start: 15:08:19
-C_thread2_Sync2_End: 15:08:21
-</code></pre><p>结果分析：</p>
+C_thread2_Sync2_End: 15:08:21</code></pre><p>结果分析：</p>
 <p>由结果可以看出，在同一对象的情况下，synchronized(类.class) {} 代码块或 synchronized 修饰静态方法和 synchronized(this|object) {} 代码块和 synchronized 修饰非静态方法的行为一致。</p>
 <h3 id="对于不同对象-1"><a href="#对于不同对象-1" class="headerlink" title="对于不同对象"></a>对于不同对象</h3><p>修改测试代码为：</p>
 <pre><code>public class SyncTest {
@@ -535,8 +520,7 @@ C_thread2_Sync2_End: 15:08:21
         C_thread1.start();
         C_thread2.start();
     }
-}
-</code></pre><p>运行结果：</p>
+}</code></pre><p>运行结果：</p>
 <pre><code>A_thread2_Async_Start: 15:17:28
 B_thread2_Sync1: 15:17:28
 A_thread1_Async_Start: 15:17:28
@@ -552,8 +536,7 @@ B_thread2_Sync1_Start: 15:17:32
 B_thread2_Sync1_End: 15:17:34
 C_thread2_Sync2: 15:17:34
 C_thread2_Sync2_Start: 15:17:34
-C_thread2_Sync2_End: 15:17:36
-</code></pre><p>结果分析：</p>
+C_thread2_Sync2_End: 15:17:36</code></pre><p>结果分析：</p>
 <p>两个线程访问不同对象的 synchronized(类.class) {} 代码块或 synchronized 修饰静态方法还是同步的，类中 synchronized(类.class) {} 代码块和 synchronized 修饰静态方法获取的锁是类锁。对于同一个类的不同对象的类锁是同一个。</p>
 <h2 id="类中同时有-synchronized-类-class-代码块或-synchronized-修饰静态方法和-synchronized-this-object-代码块和-synchronized-修饰非静态方法时会怎样？"><a href="#类中同时有-synchronized-类-class-代码块或-synchronized-修饰静态方法和-synchronized-this-object-代码块和-synchronized-修饰非静态方法时会怎样？" class="headerlink" title="类中同时有 synchronized(类.class) {} 代码块或 synchronized 修饰静态方法和 synchronized(this|object) {} 代码块和 synchronized 修饰非静态方法时会怎样？"></a>类中同时有 synchronized(类.class) {} 代码块或 synchronized 修饰静态方法和 synchronized(this|object) {} 代码块和 synchronized 修饰非静态方法时会怎样？</h2><p>修改同步线程类：</p>
 <pre><code>class SyncThread implements Runnable {
@@ -609,8 +592,7 @@ C_thread2_Sync2_End: 15:17:36
             e.printStackTrace();
         }
     }
-}
-</code></pre><p>修改测试代码：</p>
+}</code></pre><p>修改测试代码：</p>
 <pre><code>public class SyncTest {
 
     public static void main(String... args) {
@@ -619,13 +601,11 @@ C_thread2_Sync2_End: 15:17:36
         B_thread1.start();
         C_thread1.start();
     }
-}
-</code></pre><p>运行结果：</p>
+}</code></pre><p>运行结果：</p>
 <pre><code>B_thread1_Sync1_Start: 15:35:21
 C_thread1_Sync2_Start: 15:35:21
 B_thread1_Sync1_End: 15:35:23
-C_thread1_Sync2_End: 15:35:23
-</code></pre><p>运行结果分析：</p>
+C_thread1_Sync2_End: 15:35:23</code></pre><p>运行结果分析：</p>
 <p>由结果可以看到 B 类线程和 C 类线程是异步的，即 synchronized 修饰静态方法和 synchronized 修饰非静态方法是异步的，对于 synchronized(类.class) {} 代码块和 synchronized(this|object) {} 代码块也是一样的。所以对象锁和类锁是独立的，互不干扰。</p>
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>synchronized关键字不能继承。</p>
 <p> 对于父类中的 synchronized 修饰方法，子类在覆盖该方法时，默认情况下不是同步的，必须显示的使用 synchronized 关键字修饰才行。</p>

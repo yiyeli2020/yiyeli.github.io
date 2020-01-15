@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Yiye Li">
 <meta property="og:description" content="Hexo的spfk主题修改">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-15T06:41:31.095Z">
+<meta property="og:updated_time" content="2020-01-15T07:14:04.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo的spfk主题修改">
 <meta name="twitter:description" content="Hexo的spfk主题修改">
@@ -242,10 +242,10 @@
           
         <p>Hexo的spfk主题修改</p>
 <a id="more"></a>
+
 <p>新年新气象，使用Hexo的spfk主题博客很久了，想要做一些主题上的改动，准备在保持简洁风格前提下适当加一些有趣的小功能。</p>
 <h1 id="Hexo博客添加live2d卡通人物"><a href="#Hexo博客添加live2d卡通人物" class="headerlink" title="Hexo博客添加live2d卡通人物"></a>Hexo博客添加live2d卡通人物</h1><p>因为之前自己对卡通形象不太感冒所以没有在博客里加入卡通人物，这次在live2d里找到了几个还比较有趣的形象。<br>参见：<br><a href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md" target="_blank" rel="noopener">https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md</a><br>Hexo</p>
-<h2 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块:"></a>安装模块:</h2><pre><code>npm install --save hexo-helper-live2d
-</code></pre><h2 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h2><p>请向Hexo的_config.yml 文件或主题的_config.yml 文件中添加配置:</p>
+<h2 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块:"></a>安装模块:</h2><pre><code>npm install --save hexo-helper-live2d</code></pre><h2 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h2><p>请向Hexo的_config.yml 文件或主题的_config.yml 文件中添加配置:</p>
 <pre><code>live2d:
   enable: true
   scriptFrom: local
@@ -263,8 +263,7 @@
   mobile:
     show: true
   react:
-    opacity: 0.7
-</code></pre><h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>有许多方法来使用不同的模型:</p>
+    opacity: 0.7</code></pre><h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>有许多方法来使用不同的模型:</p>
 <p>a. live2d_models子目录名称<br>在博客根目录下创建一个 live2d_models 文件夹.</p>
 <p>在此文件夹内新建一个子文件夹.</p>
 <p>将 Live2D 模型复制到这个子文件夹中.</p>
@@ -280,8 +279,7 @@
 
 在 /live2d_models/mymiku/ 中.
 
-将 mymiku 输入到位于_config.yml 的 model.use 中.
-</code></pre><p>b. 相对于博客根目录的自定义路径<br>可直接输入相对于博客根目录的自定义路径到 model.use 中.</p>
+将 mymiku 输入到位于_config.yml 的 model.use 中.</code></pre><p>b. 相对于博客根目录的自定义路径<br>可直接输入相对于博客根目录的自定义路径到 model.use 中.</p>
 <p>示例: ./wives/wanko</p>
 <p>c. npm 模块名<br>使用现有的的模型<br>需要先使用 npm install 模型的包名 来安装,</p>
 <p>然后将包名输入位于_config.yml 的 model.use 中.</p>
@@ -299,10 +297,11 @@ gyp ERR! node -v v12.6.0
 gyp ERR! node-gyp -v v3.8.0
 gyp ERR! not ok
 node-pre-gyp ERR! build error
-node-pre-gyp ERR! stack Error: Failed to execute &apos;/usr/local/Cellar/node/12.6.0/bin/node /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js build --fallback-to-build --module=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64/fse.node --module_name=fse --module_path=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64 --napi_version=4 --node_abi_napi=napi&apos; (1)
-</code></pre><p>类似问题在<a href="https://github.com/nodejs/node-gyp/issues/1547中找到：" target="_blank" rel="noopener">https://github.com/nodejs/node-gyp/issues/1547中找到：</a></p>
-<p>执行命令：<br>    sudo npm install live2d-widget-model-gf -g –unsafe-perm</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="https://cniter.github.io/posts/b1e9411b.html" target="_blank" rel="noopener">https://cniter.github.io/posts/b1e9411b.html</a><br>【2】<a href="https://blog.csdn.net/qq_36759224/article/details/85420403" target="_blank" rel="noopener">https://blog.csdn.net/qq_36759224/article/details/85420403</a><br>【3】<a href="https://zhuanlan.zhihu.com/p/69213954" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/69213954</a><br>【4】<a href="https://www.itrhx.com/2018/08/27/A04-Hexo-blog-topic-personalization/" target="_blank" rel="noopener">https://www.itrhx.com/2018/08/27/A04-Hexo-blog-topic-personalization/</a><br>【5】<a href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md" target="_blank" rel="noopener">https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md</a></p>
+node-pre-gyp ERR! stack Error: Failed to execute &apos;/usr/local/Cellar/node/12.6.0/bin/node /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js build --fallback-to-build --module=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64/fse.node --module_name=fse --module_path=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64 --napi_version=4 --node_abi_napi=napi&apos; (1)</code></pre><p>类似问题在<a href="https://github.com/nodejs/node-gyp/issues/1547中找到：" target="_blank" rel="noopener">https://github.com/nodejs/node-gyp/issues/1547中找到：</a></p>
+<p>执行命令：<br>    sudo npm i –unsafe-perm</p>
+<pre><code>sudo npm audit fix --force
+
+sudo npm install live2d-widget-model-gf</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="https://cniter.github.io/posts/b1e9411b.html" target="_blank" rel="noopener">https://cniter.github.io/posts/b1e9411b.html</a><br>【2】<a href="https://blog.csdn.net/qq_36759224/article/details/85420403" target="_blank" rel="noopener">https://blog.csdn.net/qq_36759224/article/details/85420403</a><br>【3】<a href="https://zhuanlan.zhihu.com/p/69213954" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/69213954</a><br>【4】<a href="https://www.itrhx.com/2018/08/27/A04-Hexo-blog-topic-personalization/" target="_blank" rel="noopener">https://www.itrhx.com/2018/08/27/A04-Hexo-blog-topic-personalization/</a><br>【5】<a href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md" target="_blank" rel="noopener">https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md</a></p>
 
       
       
@@ -361,7 +360,7 @@ node-pre-gyp ERR! stack Error: Failed to execute &apos;/usr/local/Cellar/node/12
         <p><span>本文标题:</span><a href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
         <p><span>发布时间:</span>2020年01月15日 - 11时34分</p>
-        <p><span>最后更新:</span>2020年01月15日 - 14时41分</p>
+        <p><span>最后更新:</span>2020年01月15日 - 15时14分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/01/15/Hexo的spfk主题修改/" title="Hexo的spfk主题修改">http://yoursite.com/2020/01/15/Hexo的spfk主题修改/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/15/Hexo的spfk主题修改/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

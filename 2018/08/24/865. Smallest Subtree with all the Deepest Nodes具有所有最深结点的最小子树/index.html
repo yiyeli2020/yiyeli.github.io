@@ -247,12 +247,14 @@
 <p>一个结点的子树是该结点加上它的所有后代的集合。</p>
 <p>返回能满足“以该结点为根的子树中包含所有最深的结点”这一条件的具有最大深度的结点。</p>
 <a id="more"></a>
+
+
+
+
 <p>示例：</p>
 <p>输入：</p>
-<pre><code>[3,5,1,6,2,0,8,null,null,7,4]
-</code></pre><p>输出：</p>
-<pre><code>[2,7,4]
-</code></pre><p><img src="https://ws1.sinaimg.cn/large/0071ouepgy1ful3h7lug7j30k20h2t9l.jpg" alt="image"></p>
+<pre><code>[3,5,1,6,2,0,8,null,null,7,4]</code></pre><p>输出：</p>
+<pre><code>[2,7,4]</code></pre><p><img src="https://ws1.sinaimg.cn/large/0071ouepgy1ful3h7lug7j30k20h2t9l.jpg" alt="image"></p>
 <p>解释：</p>
 <p>我们返回值为 2 的结点，在图中用黄色标记。<br>在图中用蓝色标记的是树的最深的结点。<br>输入 “[3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]” 是对给定的树的序列化表述。<br>输出 “[2, 7, 4]” 是对根结点的值为 2 的子树的序列化表述。<br>输入和输出都具有 TreeNode 类型。</p>
 <p>提示：</p>
@@ -272,8 +274,7 @@ pair&lt;int, TreeNode*&gt; deep(TreeNode* root) {
 
     int d1 = l.first, d2 = r.first;
     return {max(d1, d2) + 1, d1 == d2 ? root : d1 &gt; d2 ? l.second : r.second};
-}
-</code></pre>
+}</code></pre>
       
       
         <div class="page-reward">
