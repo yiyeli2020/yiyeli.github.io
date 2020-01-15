@@ -82,5 +82,16 @@ Cloneable 接口的目的是作为一个 mixin 接口 （详见第 20 条），�
 
 　　这种情况永远不会发生，因为调用 Stack 类中的唯一构造方法。 实际上，clone 方法作为另一种构造方法; 必须确保它不会损坏原始对象，并且可以在克隆上正确建立不变量。 为了使 Stack 上的 clone 方法正常工作，它必须复制 stack 对象的内部。 最简单的方法是对元素数组递归调用 clone 方法：
 
+    // Clone method for class with references to mutable state
+    @Override public Stack clone() {
+        try {
+            Stack result = (Stack) super.clone();
+            result.elements = elements.clone();
+            return result;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
 # 参考资料：
 【1】http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/13.%20%E8%B0%A8%E6%85%8E%E5%9C%B0%E9%87%8D%E5%86%99%20clone%20%E6%96%B9%E6%B3%95
