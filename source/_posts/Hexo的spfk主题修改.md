@@ -5,7 +5,7 @@ tags: [Hexo]
 
 ---
 
-Hexo的spfk主题修改
+Hexo的spfk主题修改：添加字数统计和阅读时长，添加网站运行时间，访问量统计，添加live2d卡通人物
 
 <!-- more -->
 
