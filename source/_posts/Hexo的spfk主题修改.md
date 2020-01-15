@@ -103,7 +103,7 @@ c. npm 模块名
 
     sudo npm audit fix --force
 
-
+    sudo npm install live2d-widget-model-gf
 # 参考资料
 【1】https://cniter.github.io/posts/b1e9411b.html
 【2】https://blog.csdn.net/qq_36759224/article/details/85420403
