@@ -4,6 +4,8 @@
             <div class="footer-left">
                 &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
             </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：<%= totalcount(site) %></span>
                 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
                     <script>
                         var now = new Date();
@@ -21,8 +23,6 @@
                         }
                     setInterval("createtime()",250);
                     </script>
-                <i class="fas fa-chart-area"></i>
-                    <span class="post-count">总字数：<%= totalcount(site) %></span>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
             </div>
