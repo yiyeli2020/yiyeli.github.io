@@ -99,11 +99,68 @@ c. npm 模块名
 类似问题在https://github.com/nodejs/node-gyp/issues/1547中找到：
 
 执行命令：
+
     sudo npm i --unsafe-perm
 
     sudo npm audit fix --force
 
     sudo npm install live2d-widget-model-gf
+
+但做完这个功能后个人感觉有点花哨，容易分散阅读注意力，就暂时不上线了。
+
+# 添加字数统计和阅读时长
+
+先在博客目录下执行以下命令安装 hexo-wordcount 插件：
+
+    $ npm i --save hexo-wordcount
+同样的，以 spfk 主题为例，在 \themes\hexo-theme-spfk\layout\_partial\post 目录下创建 word.ejs 文件，在 word.ejs 文件中写入以下代码：
+
+    <div style="margin-top:10px;">
+        <span class="post-time">
+          <span class="post-meta-item-icon">
+            <i class="fa fa-keyboard-o"></i>
+            <span class="post-meta-item-text">  字数统计: </span>
+            <span class="post-count"><%= wordcount(post.content) %>字</span>
+          </span>
+        </span>
+        &nbsp; | &nbsp;
+        <span class="post-time">
+          <span class="post-meta-item-icon">
+            <i class="fa fa-hourglass-half"></i>
+            <span class="post-meta-item-text">  阅读时长: </span>
+            <span class="post-count"><%= min2read(post.content) %>分</span>
+          </span>
+        </span>
+    </div>
+
+然后在 \themes\hexo-theme-spfk\layout\_partial\article.ejs 中适当位置添加以下代码：
+添加前：
+
+    <% if (post.link || post.title){ %>
+      <header class="article-header">
+        <%- partial('post/title', {class_name: 'article-title'}) %>
+      </header>
+
+添加后：
+
+    <% if (post.link || post.title){ %>
+      <header class="article-header">
+        <%- partial('post/title', {class_name: 'article-title'}) %>
+      <% if(theme.word_count && !post.no_word_count){ %>
+        <%- partial('post/word') %>
+        <% } %>
+      </header>
+最后在主题目录下的 _config.yml 添加以下配置
+
+    word_count: true
+
+另外：要在博客底部显示所有文章的总字数，可以点击此处，根据你博客底部文件的类型选择相应的代码放在适当的位置即可，前提是要安装好 hexo-wordcount 插件，例如我使用 spfk 主题，在 \themes\material-x\layout\_partial 目录下的 footer.ejs 文件中添加如下代码：
+
+    <i class="fas fa-chart-area"></i>
+    <span class="post-count">字数统计：<%= totalcount(site) %></span>
+
+
+
 # 参考资料
 【1】https://cniter.github.io/posts/b1e9411b.html
 【2】https://blog.csdn.net/qq_36759224/article/details/85420403

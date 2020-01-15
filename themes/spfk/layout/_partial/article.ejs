@@ -11,6 +11,9 @@
     <% if (post.link || post.title){ %>
       <header class="article-header">
         <%- partial('post/title', {class_name: 'article-title'}) %>
+      <% if(theme.word_count && !post.no_word_count){ %>
+        <%- partial('post/word') %>
+        <% } %>
       </header>
       <% if (!index){ %>
       <div class="article-info article-info-post">
@@ -74,7 +77,7 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
           });
           function dashangToggle(){
-            
+
             $(".hide_box").fadeToggle();
             $(".shang_box").fadeToggle();
           }
