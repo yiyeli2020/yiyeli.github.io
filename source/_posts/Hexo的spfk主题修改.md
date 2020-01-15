@@ -178,7 +178,7 @@ c. npm 模块名
                     <div class="footer-left">
                         &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
                     </div>
-                    <div class="fas fa-chart-area"></div>
+                    <i class="fas fa-chart-area"></i>
                         <span class="post-count">总字数：<%= totalcount(site) %></span>
                     <div class="footer-right">
                         <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
@@ -210,8 +210,12 @@ c. npm 模块名
     setInterval("createtime()",250);
     </script>
 
+# 访问量统计
 
-
+使用不蒜子提供的服务，因为其域名更改，所以把原有的：
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+域名改一下即可：
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
