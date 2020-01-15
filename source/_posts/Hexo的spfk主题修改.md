@@ -159,6 +159,34 @@ c. npm 模块名
     <i class="fas fa-chart-area"></i>
     <span class="post-count">字数统计：<%= totalcount(site) %></span>
 
+添加前的位置：
+
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+
+添加后的位置：
+
+            <div class="outer">
+                <div id="footer-info">
+                    <div class="footer-left">
+                        &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
+                    </div>
+                    <div class="fas fa-chart-area"></div>
+                        <span class="post-count">总字数：<%= totalcount(site) %></span>
+                    <div class="footer-right">
+                        <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+                    </div>
+                </div>
+
+
+
 # 添加网站运行时间
 
 一个比较好的小功能，可以看见自己的博客运行多久了，时间一天天的增加，成就感也会一天天增加的
