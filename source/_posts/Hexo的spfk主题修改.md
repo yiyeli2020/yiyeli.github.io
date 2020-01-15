@@ -32,7 +32,7 @@ Hexo
       tagMode: false
       debug: false
       model:
-        use: live2d-widget-model-wanko
+        use: live2d-widget-model-gf
       display:
         position: right
         width: 150
@@ -97,6 +97,9 @@ c. npm 模块名
     node-pre-gyp ERR! stack Error: Failed to execute '/usr/local/Cellar/node/12.6.0/bin/node /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js build --fallback-to-build --module=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64/fse.node --module_name=fse --module_path=/Users/liyiye/yiye-project/liyiye012.github.io/node_modules/fsevents/lib/binding/Release/node-v72-darwin-x64 --napi_version=4 --node_abi_napi=napi' (1)
 
 类似问题在https://github.com/nodejs/node-gyp/issues/1547中找到：
+
+执行命令：
+    sudo npm install live2d-widget-model-gf -g --unsafe-perm
 
 
 # 参考资料
