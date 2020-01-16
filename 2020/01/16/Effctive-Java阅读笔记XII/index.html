@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>数据库学习笔记VI | Yiye Li</title>
+  <title>Effctive-Java阅读笔记XII | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MySQL优化及常用函数CONCAT,IFNULL,case when then else end用法,数据排序 asc、desc,Where与Having的区别">
-<meta name="keywords" content="Mysql">
+  <meta name="description" content="第四章阅读：类和接口 23.类层次结构优于标签类">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库学习笔记VI">
-<meta property="og:url" content="http://yoursite.com/2019/11/05/数据库学习笔记VI/index.html">
+<meta property="og:title" content="Effctive-Java阅读笔记XII">
+<meta property="og:url" content="http://yoursite.com/2020/01/16/Effctive-Java阅读笔记XII/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="MySQL优化及常用函数CONCAT,IFNULL,case when then else end用法,数据排序 asc、desc,Where与Having的区别">
+<meta property="og:description" content="第四章阅读：类和接口 23.类层次结构优于标签类">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-03T02:22:57.585Z">
+<meta property="og:updated_time" content="2020-01-16T09:45:11.550Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库学习笔记VI">
-<meta name="twitter:description" content="MySQL优化及常用函数CONCAT,IFNULL,case when then else end用法,数据排序 asc、desc,Where与Having的区别">
+<meta name="twitter:title" content="Effctive-Java阅读笔记XII">
+<meta name="twitter:description" content="第四章阅读：类和接口 23.类层次结构优于标签类">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-数据库学习笔记VI" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Effctive-Java阅读笔记XII" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/11/05/数据库学习笔记VI/" class="article-date">
-      <time datetime="2019-11-05T03:54:12.000Z" itemprop="datePublished">2019-11-05</time>
+      <a href="/2020/01/16/Effctive-Java阅读笔记XII/" class="article-date">
+      <time datetime="2020-01-16T09:17:12.000Z" itemprop="datePublished">2020-01-16</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      数据库学习笔记VI
+      Effctive-Java阅读笔记XII
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.7k字</span>
+        <span class="post-count">840字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">6分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2019年11月/">2019年11月</a>
+    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,71 +260,52 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>MySQL优化及常用函数CONCAT,IFNULL,<br>case when then else end用法,数据排序 asc、desc,<br>Where与Having的区别</p>
+        <p>第四章阅读：类和接口</p>
+<p>23.类层次结构优于标签类</p>
 <a id="more"></a>
-<h1 id="SQL-CONCAT-函数"><a href="#SQL-CONCAT-函数" class="headerlink" title="SQL CONCAT 函数"></a>SQL CONCAT 函数</h1><p>CONCAT 函数用于将两个字符串连接为一个字符串，试一下下面这个例子：</p>
-<pre><code>SQL&gt; SELECT CONCAT(&apos;FIRST &apos;, &apos;SECOND&apos;);
-+----------------------------+
-| CONCAT(&apos;FIRST &apos;, &apos;SECOND&apos;) |
-+----------------------------+
-| FIRST SECOND               |
-+----------------------------+
-1 row in set (0.00 sec)</code></pre><h1 id="case-when-then-else-end用法"><a href="#case-when-then-else-end用法" class="headerlink" title="case when then else end用法"></a>case when then else end用法</h1><pre><code>-简单case函数
-case sex
-  when &apos;1&apos; then &apos;男&apos;
-  when &apos;2&apos; then &apos;女’
-  else &apos;其他&apos; end
---case搜索函数
-case when sex = &apos;1&apos; then &apos;男&apos;
-     when sex = &apos;2&apos; then &apos;女&apos;
-     else &apos;其他&apos; end  </code></pre><p>需要注重的问题，case函数只返回第一个符合条件的值，剩下的case部分将会被自动忽略。</p>
-<p>参考练习题目：<a href="https://leetcode.com/problems/swap-salary/submissions/" target="_blank" rel="noopener">https://leetcode.com/problems/swap-salary/submissions/</a></p>
-<h1 id="GROUP-BY-语句"><a href="#GROUP-BY-语句" class="headerlink" title="GROUP BY 语句"></a>GROUP BY 语句</h1><p>GROUP BY 语句用于结合合计函数，根据一个或多个列对结果集进行分组。</p>
-<p>实例<br>我们拥有下面这个 “Orders” 表：</p>
-<pre><code>O_Id    OrderDate    OrderPrice    Customer
-1    2008/12/29    1000    Bush
-2    2008/11/23    1600    Carter
-3    2008/10/05    700    Bush
-4    2008/09/28    300    Bush
-5    2008/08/06    2000    Adams
-6    2008/07/21    100    Carter</code></pre><p>现在，我们希望查找每个客户的总金额（总订单）。</p>
-<p>我们想要使用 GROUP BY 语句对客户进行组合。</p>
-<p>我们使用下列 SQL 语句：</p>
-<pre><code>SELECT Customer,SUM(OrderPrice) FROM Orders
-GROUP BY Customer</code></pre><p>结果集类似这样：</p>
-<pre><code>Customer    SUM(OrderPrice)
-Bush    2000
-Carter    1700
-Adams    2000</code></pre><h1 id="IFNULL函数"><a href="#IFNULL函数" class="headerlink" title="IFNULL函数"></a>IFNULL函数</h1><p>MySQL控制流函数之一，它接受两个参数，如果不是NULL，则返回第一个参数。 否则，IFNULL函数返回第二个参数。<br>两个参数可以是文字值或表达式。<br>以下说明了IFNULL函数的语法：</p>
-<pre><code>IFNULL(expression_1,expression_2);</code></pre><p>如果expression_1不为NULL，则IFNULL函数返回expression_1; 否则返回expression_2的结果。<br>IFNULL函数根据使用的上下文返回字符串或数字。<br>如果要返回基于TRUE或FALSE条件的值，而不是NULL，则应使用IF函数。</p>
-<pre><code>SELECT IFNULL(NULL,&apos;IFNULL function&apos;); -- returns IFNULL function</code></pre><p>参考练习题目：<a href="https://leetcode.com/problems/second-highest-salary/" target="_blank" rel="noopener">https://leetcode.com/problems/second-highest-salary/</a></p>
-<h1 id="数据排序-asc、desc"><a href="#数据排序-asc、desc" class="headerlink" title="数据排序 asc、desc"></a>数据排序 asc、desc</h1><p>1、单一字段排序order by 字段名称<br>作用： 通过哪个或哪些字段进行排序<br>含义： 排序采用 order by 子句，order by 后面跟上排序字段，排序字段可以放多个，多个采用逗号间隔，order by默认采用升序（asc），如果存在 where 子句，那么 order by 必须放到where 语句后面。<br>（1）、按照薪水由小到大排序（系统默认由小到大）<br>例如： select ename,sal from emp order by sal;<br>（2）、取得job 为 MANAGER 的员工，按照薪水由小到大排序（系统默<br>认由小到大）<br>例如： select ename,job,sal from emp where job = ”MANAGER”order by sal;<br>如果包含 where 语句 order by 必须放到 where 后面，如果没有 where 语句 order by 放到表的后面；</p>
-<p>2、手动指定字段排序<br>（1）、手动指定按照薪水由小到大排序（升序关键字 asc）<br>例如： select ename,sal from emp order by sal asc;<br>（2）、手动指定按照薪水由大到小排序（降序关键字desc）<br>例如： select ename,sal from emp order by sal desc;<br>3、多个字段排序<br>（1）、按照 job 和薪水倒序排序<br>例如： select ename,job,ename from emp order by job desc,sal desc;<br>注意： 如果采用多个字段排序，如果根据第一个字段排序重复了，会根据第二个字段排序；<br>4、使用字段位置排序<br>（1）、按照薪水升序排序（不建议采用此方法，采用数字含义不明确，可读性不强，程序不健壮）<br>select * from emp order by 6;<br>参考练习题目：<a href="https://leetcode.com/problems/not-boring-movies/" target="_blank" rel="noopener">https://leetcode.com/problems/not-boring-movies/</a></p>
-<h1 id="Where与Having的区别"><a href="#Where与Having的区别" class="headerlink" title="Where与Having的区别"></a>Where与Having的区别</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>“Where” 是一个约束声明，使用Where来约束来之数据库的数据，Where是在结果返回之前起作用的，且Where中不能使用聚合函数。</p>
-<p>“Having”是一个过滤声明，是在查询返回结果集以后对查询结果进行的过滤操作，在Having中可以使用聚合函数。</p>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>在说区别之前，得先介绍GROUP BY这个子句，而在说GROUP子句前，又得先说说“聚合函数”——SQL语言中一种特殊的函数。例如SUM, COUNT, MAX, AVG等。这些函数和其它函数的根本区别就是它们一般作用在多条记录上。</p>
-<p>如：<br>    SELECT SUM(population) FROM vv_t_bbc ;</p>
-<p>这里的SUM作用在所有返回记录的population字段上，结果就是该查询只返回一个结果，即所有国家的总人口数。</p>
-<p>　 　而通过使用GROUP BY 子句，可以让SUM 和 COUNT 这些函数对属于一组的数据起作用。当你指定 GROUP BY region 时，只有属于同一个region（地区）的一组数据才将返回一行值，也就是说，表中所有除region（地区）外的字段，只能通过 SUM, COUNT等聚合函数运算后返回一个值。</p>
-<p>   下面再说说“HAVING”和“WHERE”：<br>　HAVING子句可以让我们筛选成组后的各组数据，WHERE子句在聚合前先筛选记录．也就是说作用在GROUP BY 子句和HAVING子句前；而 HAVING子句在聚合后对组记录进行筛选。</p>
-<p>　　让我们还是通过具体的实例来理解GROUP BY 和 HAVING 子句：</p>
-<h3 id="SQL实例"><a href="#SQL实例" class="headerlink" title="SQL实例"></a>SQL实例</h3><p>一、显示每个地区的总人口数和总面积：</p>
-<pre><code>SELECT region, SUM(population), SUM(area)
-FROM bbc
-GROUP BY region</code></pre><p>先以region把返回记录分成多个组，这就是GROUP BY的字面含义。分完组后，然后用聚合函数对每组中的不同字段（一或多条记录）作运算。</p>
-<p>二、显示每个地区的总人口数和总面积．仅显示那些人口数量超过1000000的地区。</p>
-<pre><code>SELECT region, SUM(population), SUM(area)
-FROM bbc
-GROUP BY region
-HAVING SUM(population)&gt;1000000</code></pre><p>[注]在这里，我们不能用where来筛选超过1000000的地区，因为表中不存在这样一条记录。</p>
-<p>　　相反，HAVING子句可以让我们筛选成组后的各组数据．</p>
-<p>ps:如果想根据sum后的字段进行排序可以在后面加上：order by sum(population) desc/asc</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>1.当分组筛选的时候 用having</p>
-<h2 id="2-其它情况用where"><a href="#2-其它情况用where" class="headerlink" title="2.其它情况用where"></a>2.其它情况用where</h2><p>用having就一定要和group by连用，<br>用group by不一有having （它只是一个筛选条件用的）</p>
-<p>只要条件里面的字段, 不是表里面原先有的字段就需要用having。</p>
-<p>SQL在查询表的时候先把查询的字段放到了内存里，而where查询的时候是从表里面查的，其余需要用having。</p>
-<p>参考练习题：<a href="https://leetcode.com/problems/classes-more-than-5-students" target="_blank" rel="noopener">https://leetcode.com/problems/classes-more-than-5-students</a></p>
-<p>#参考资料<br>【1】 <a href="https://tech.meituan.com/2014/06/30/mysql-index.html" target="_blank" rel="noopener">https://tech.meituan.com/2014/06/30/mysql-index.html</a><br>【2】 <a href="https://blog.csdn.net/qq_37923253/article/details/79688313" target="_blank" rel="noopener">https://blog.csdn.net/qq_37923253/article/details/79688313</a></p>
+
+<h1 id="类层次结构优于标签类"><a href="#类层次结构优于标签类" class="headerlink" title="类层次结构优于标签类"></a>类层次结构优于标签类</h1><p>　　有时你可能会碰到一个类，它的实例有两个或更多的风格，并且包含一个标签字段（tag field），表示实例的风格。 例如，考虑这个类，它可以表示一个圆形或矩形：</p>
+<pre><code>// Tagged class - vastly inferior to a class hierarchy!
+class Figure {
+    enum Shape { RECTANGLE, CIRCLE };
+
+    // Tag field - the shape of this figure
+    final Shape shape;
+
+    // These fields are used only if shape is RECTANGLE
+    double length;
+    double width;
+
+    // This field is used only if shape is CIRCLE
+    double radius;
+
+    // Constructor for circle
+    Figure(double radius) {
+        shape = Shape.CIRCLE;
+        this.radius = radius;
+    }
+
+    // Constructor for rectangle
+    Figure(double length, double width) {
+        shape = Shape.RECTANGLE;
+        this.length = length;
+        this.width = width;
+    }
+
+    double area() {
+        switch(shape) {
+          case RECTANGLE:
+            return length * width;
+          case CIRCLE:
+            return Math.PI * (radius * radius);
+          default:
+            throw new AssertionError(shape);
+        }
+    }
+}</code></pre><p>　　这样的标签类具有许多缺点。 它们充斥着杂乱无章的样板代码，包括枚举声明，标签字段和 switch 语句。 可读性更差，因为多个实现在一个类中混杂在一起。 内存使用增加，因为实例负担属于其他风格不相关的领域。 字段不能成为 final，除非构造方法初始化不相关的字段，导致更多的样板代码。 构造方法在编译器的帮助下，必须设置标签字段并初始化正确的数据字段：如果初始化错误的字段，程序将在运行时失败。 除非可以修改其源文件，否则不能将其添加到标记的类中。 如果你添加一个风格，你必须记得给每个 switch 语句添加一个 case，否则这个类将在运行时失败。 最后，一个实例的数据类型没有提供任何关于风格的线索。 总之，<strong><em>标签类是冗长的，容易出错的，而且效率低下。</em></strong><br>　　幸运的是，像 Java 这样的面向对象的语言为定义一个能够表示多种风格对象的单一数据类型提供了更好的选择：子类型化（subtyping）。标签类仅仅是一个类层次的简单的模仿。</p>
+<p>　　要将标签类转换为类层次，首先定义一个包含抽象方法的抽象类，该标签类的行为取决于标签值。 在 Figure 类中，只有一个这样的方法，就是 area 方法。 这个抽象类是类层次的根。 如果有任何方法的行为不依赖于标签的值，把它们放在这个类中。 同样，如果有所有的方法使用的数据字段，把它们放在这个类。Figure 类中不存在这种与类型无关的方法或字段。</p>
+<p>　　接下来，为原始标签类的每种类型定义一个根类的具体子类。 在我们的例子中，有两个类型：圆形和矩形。 在每个子类中包含特定于改类型的数据字段。 在我们的例子中，半径字段是属于圆的，长度和宽度字段都是矩形的。 还要在每个子类中包含根类中每个抽象方法的适当实现。 这里是对应于 Figure 类的类层次：</p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/23.%20%E7%B1%BB%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E4%BC%98%E4%BA%8E%E6%A0%87%E7%AD%BE%E7%B1%BB" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/23.%20%E7%B1%BB%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E4%BC%98%E4%BA%8E%E6%A0%87%E7%AD%BE%E7%B1%BB</a></p>
 
       
       
@@ -380,13 +361,13 @@ HAVING SUM(population)&gt;1000000</code></pre><p>[注]在这里，我们不能�
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></p>
+        <p><span>本文标题:</span><a href="/2020/01/16/Effctive-Java阅读笔记XII/">Effctive-Java阅读笔记XII</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2019年11月05日 - 11时54分</p>
-        <p><span>最后更新:</span>2020年01月03日 - 10时22分</p>
+        <p><span>发布时间:</span>2020年01月16日 - 17时17分</p>
+        <p><span>最后更新:</span>2020年01月16日 - 17时45分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/11/05/数据库学习笔记VI/" title="数据库学习笔记VI">http://yoursite.com/2019/11/05/数据库学习笔记VI/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/11/05/数据库学习笔记VI/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/16/Effctive-Java阅读笔记XII/" title="Effctive-Java阅读笔记XII">http://yoursite.com/2020/01/16/Effctive-Java阅读笔记XII/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/16/Effctive-Java阅读笔记XII/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -399,18 +380,9 @@ HAVING SUM(population)&gt;1000000</code></pre><p>[注]在这里，我们不能�
 
 <nav id="article-nav">
   
-    <a href="/2019/12/17/Java学习笔记X/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Java学习笔记X
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/11/05/设计模式学习笔记II/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式学习笔记II</div>
+    <a href="/2020/01/16/Effctive-Java阅读笔记XI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Effctive-Java阅读笔记XI</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -421,7 +393,7 @@ HAVING SUM(population)&gt;1000000</code></pre><p>[注]在这里，我们不能�
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL-CONCAT-函数"><span class="toc-number">1.</span> <span class="toc-text">SQL CONCAT 函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#case-when-then-else-end用法"><span class="toc-number">2.</span> <span class="toc-text">case when then else end用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GROUP-BY-语句"><span class="toc-number">3.</span> <span class="toc-text">GROUP BY 语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IFNULL函数"><span class="toc-number">4.</span> <span class="toc-text">IFNULL函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据排序-asc、desc"><span class="toc-number">5.</span> <span class="toc-text">数据排序 asc、desc</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Where与Having的区别"><span class="toc-number">6.</span> <span class="toc-text">Where与Having的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">6.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区别"><span class="toc-number">6.2.</span> <span class="toc-text">区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL实例"><span class="toc-number">6.2.1.</span> <span class="toc-text">SQL实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">6.3.</span> <span class="toc-text">结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-其它情况用where"><span class="toc-number">6.4.</span> <span class="toc-text">2.其它情况用where</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#类层次结构优于标签类"><span class="toc-number">1.</span> <span class="toc-text">类层次结构优于标签类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">2.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -487,13 +459,11 @@ HAVING SUM(population)&gt;1000000</code></pre><p>[注]在这里，我们不能�
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/12/17/Java学习笔记X/" title="上一篇: Java学习笔记X">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/11/05/设计模式学习笔记II/" title="下一篇: 设计模式学习笔记II">
+            <a href="/2020/01/16/Effctive-Java阅读笔记XI/" title="下一篇: Effctive-Java阅读笔记XI">
                 <i class="fa fa-angle-right"></i>
             </a>
         
