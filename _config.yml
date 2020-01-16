@@ -93,7 +93,7 @@ live2d:
   tagMode: true
   debug: true
   model:
-    use: Gantzert_Felixander
+    use: live2d-widget-model-gf
   display:
     position: left
     width: 150
