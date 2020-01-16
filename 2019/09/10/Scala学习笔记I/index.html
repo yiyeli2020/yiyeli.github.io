@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Scala学习笔记I | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Scala学习：集合，柯里化，implicit关键字">
+<meta name="keywords" content="Scala">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala学习笔记I">
+<meta property="og:url" content="http://yoursite.com/2019/09/10/Scala学习笔记I/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="Scala学习：集合，柯里化，implicit关键字">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-09-25T07:17:36.347Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala学习笔记I">
+<meta name="twitter:description" content="Scala学习：集合，柯里化，implicit关键字">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 13.64px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 17.27px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 14.55px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 12.73px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 10.91px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 18.18px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 12.73px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 10.91px;">Database</a> <a href="/tags/Database，SQL/" style="font-size: 10px;">Database，SQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 12.73px;">Depth-first Search</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 12.73px;">Design Pattern，Java</a> <a href="/tags/Dynamic-Programming/" style="font-size: 16.36px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 13.64px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Greedy/" style="font-size: 10.91px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 12.73px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 11.82px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 12.73px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19.09px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10.91px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Mysql/" style="font-size: 14.55px;">Mysql</a> <a href="/tags/Operating-System/" style="font-size: 10.91px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 13.64px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 11.82px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 13.64px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 10.91px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.91px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 15.45px;">Tree</a> <a href="/tags/Trie/" style="font-size: 11.82px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Scala学习笔记I" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/09/10/Scala学习笔记I/" class="article-date">
+      <time datetime="2019-09-10T03:32:12.000Z" itemprop="datePublished">2019-09-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Scala学习笔记I
+    </h1>
+  
+
+      
+        <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.8k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">10分</span>
+      </span>
+    </span>
+</div>
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2019年9月/">2019年9月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Scala学习：集合，柯里化，implicit关键字</p>
+<a id="more"></a>
+
+<h1 id="Set（集合）"><a href="#Set（集合）" class="headerlink" title="Set（集合）"></a>Set（集合）</h1><h1 id="fold-foldLeft和foldRight区别与联系"><a href="#fold-foldLeft和foldRight区别与联系" class="headerlink" title="fold,foldLeft和foldRight区别与联系"></a>fold,foldLeft和foldRight区别与联系</h1><p>从本质上说，fold函数将一种格式的输入数据转化成另外一种格式返回。</p>
+<pre><code>def fold(){
+  val a=List(1,2,3,4)
+  val res=a.fold(0){
+    (z,i) =&gt; z+i
+  }
+  println(res)  //res=10
+}</code></pre><p>List中的fold方法需要输入两个参数：初始值以及一个函数。输入的函数也需要输入两个参数：累加值和当前item的索引。那么上面的代码片段发生了什么事？</p>
+<p>代码开始运行的时候，初始值0作为第一个参数传进到fold函数中，list中的第一个item作为第二个参数传进fold函数中。</p>
+<p>1、fold函数开始对传进的两个参数进行计算，在本例中，仅仅是做加法计算，然后返回计算的值；</p>
+<p>2、Fold函数然后将上一步返回的值作为输入函数的第一个参数，并且把list中的下一个item作为第二个参数传进继续计算，同样返回计算的值；</p>
+<p>3、第2步将重复计算，直到list中的所有元素都被遍历之后，返回最后的计算值，整个过程结束；</p>
+<p>4、这虽然是一个简单的例子，让我们来看看一些比较有用的东西。早在后面将会介绍foldLeft函数，并解释它和fold之间的区别，目前，你只需要想象foldLeft函数和fold函数运行过程一样。</p>
+<h1 id="Scala-函数柯里化-Currying"><a href="#Scala-函数柯里化-Currying" class="headerlink" title="Scala 函数柯里化(Currying)"></a>Scala 函数柯里化(Currying)</h1><p>柯里化(Currying)指的是将原来接受两个参数的函数变成新的接受一个参数的函数的过程。新的函数返回一个以原有第二个参数为参数的函数。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>首先我们定义一个函数:</p>
+<pre><code>def add(x:Int,y:Int)=x+y</code></pre><p>那么我们应用的时候，应该是这样用：add(1,2)</p>
+<p>现在我们把这个函数变一下形：</p>
+<pre><code>def add(x:Int)(y:Int) = x + y</code></pre><p>那么我们应用的时候，应该是这样用：add(1)(2),最后结果都一样是3，这种方式（过程）就叫柯里化。</p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>add(1)(2) 实际上是依次调用两个普通函数（非柯里化函数），第一次调用使用一个参数 x，返回一个函数类型的值，第二次使用参数y调用这个函数类型的值。</p>
+<p>实质上最先演变成这样一个方法：</p>
+<pre><code>def add(x:Int)=(y:Int)=&gt;x+y</code></pre><p>那么这个函数是什么意思呢？ 接收一个x为参数，返回一个匿名函数，该匿名函数的定义是：接收一个Int型参数y，函数体为x+y。现在我们来对这个方法进行调用。</p>
+<pre><code>val result = add(1)</code></pre><p>返回一个result，那result的值应该是一个匿名函数：(y:Int)=&gt;1+y</p>
+<p>所以为了得到结果，我们继续调用result。</p>
+<pre><code>val sum = result(2)</code></pre><p>最后打印出来的结果就是3。</p>
+<h1 id="Implicit详解"><a href="#Implicit详解" class="headerlink" title="Implicit详解"></a>Implicit详解</h1><p>在 Scala 中的 implicit 定义指编译器在需要修复类型匹配时可以用来自动插入的定义。比如说，如果 x+y 类型不匹配，那么编译器可能试着使用 convert(x) + y， 其中 convert 由某个 implicit 定义的，这有点类似一个整数和一个浮点数相加，编译器可以自动把整数转换为浮点数。Scala 的 implicit 定义是对这种情况的一个推广，你可以定义一个类型在需要时，如何自动转换成另外一种类型。</p>
+<p>Scala 的 implicit 定义符合下面一些规则：</p>
+<h2 id="标记规则"><a href="#标记规则" class="headerlink" title="标记规则"></a>标记规则</h2><p>只有哪些使用 implicit 关键字的定义才是可以使用的隐式定义。关键字 implicit 用来标记一个隐式定义。编译器才可以选择它作为隐式变化的候选项。你可以使用 implicit 来标记任意变量，函数或是对象。</p>
+<p>例如下面为一个隐式函数定义：</p>
+<pre><code>implicit def intToString(x:Int) : x.toString</code></pre><p>编译器只有在 convert 被标记成 implicit 才会将 x + y 改成convert(x) + y 。当然这是在 x + y 类型不匹配时。</p>
+<h2 id="范围规则"><a href="#范围规则" class="headerlink" title="范围规则"></a>范围规则</h2><p>编译器在选择备选 implicit 定义时，只会选取当前作用域的定义，比如说编译器不会去调用 someVariable.convert。如果你需要使用 someVariable.convert，你必须把 someVarible 引入到当前作用域。也就是说编译器在选择备选 implicit 时，只有当 convert 是当前作用域下单个标志符时才会作为备选 implicit。比如说，对于一个函数库来说，在一个 Preamble 对象中定义一些常用的隐式类型转换非常常见，因此需要使用 Preamble 的代码可以使用 “import Preamble._”  把这些 implicit 定义引入到当前作用域才可以。</p>
+<p>这个规则有一个例外，编译器也会在类的伙伴对象定义中查找所需的 implicit 定义。例如下面的定义：</p>
+<pre><code>object Dollar {
+    implicit def dollarToEuro(x:Dollar):Euro = ...
+    ...
+}
+class Dollar {
+   ...
+}</code></pre><p>如果在 class Dollar 的方法有需要 Euro 类型，但输入数据使用的是 Dollar，编译器会在其伙伴对象 object Dollar 查找所需的隐式类型转换，本例定义一个从 Dollar 到 Euro 的 implicit 定义可以使用。</p>
+<h2 id="一次规则"><a href="#一次规则" class="headerlink" title="一次规则"></a>一次规则</h2><p>编译器在需要使用 implicit 定义时，只会试图转换一次，也就是编译器永远不会把 x + y 改写成 convert1(convert2(x)) + y。</p>
+<h2 id="优先规则"><a href="#优先规则" class="headerlink" title="优先规则"></a>优先规则</h2><p>编译器不会在 x+y 已经是合法的情况下去调用 implicit 规则。</p>
+<h2 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h2><p>你可以为 implicit 定义任意的名称。通常情况下你可以任意命名，implicit 的名称只在两种情况下有用：一是你想在一个方法中明确指明，另外一个是想把那一个引入到当前作用域。比如我们定义一个对象，包含两个 implicit定义：</p>
+<pre><code>object MyConversions {
+    implicit def stringWrapper(s:String):IndexedSeq[Char] = ...
+    implicit def intToString(x:Int):String = ...
+}</code></pre><p>在你的应用中，你想使用 stringWrapper 变换，而不想把整数自动转换成字符串，你可以只引入 stringWrapper。</p>
+<pre><code>import  MyConversions.stringWrapper</code></pre><h2 id="编译器使用-implicit-的几种情况"><a href="#编译器使用-implicit-的几种情况" class="headerlink" title="编译器使用 implicit 的几种情况"></a>编译器使用 implicit 的几种情况</h2><p>有三种情况使用 implicit: 一是转换成预期的数据类型，二是转换 selection 的 receiver，三是隐含参数。转换成预期的数据类型比如你有一个方法参数类型是 IndexedSeq[Char]，在你传入 String 时，编译器发现类型不匹配，就检查当前作用域是否有从 String 到 IndexedSeq 隐式转换。</p>
+<p>转换 selection 的 receiver 允许你适应某些方法调用，比如 “abc”.exist ，”abc”类型为 String，本身没有定义 exist 方法，这时编辑器就检查当前作用域内 String 的隐式转换后的类型是否有 exist 方法，发现 stringWrapper 转换后成 IndexedSeq 类型后，可以有 exist 方法，这个和 C# 静态扩展方法功能类似。</p>
+<p>隐含参数有点类似是缺省参数，如果在调用方法时没有提供某个参数，编译器会查找当前作用域是否有符合条件的 implicit 对象作为参数传入（有点类似 dependency injection)。</p>
+<h2 id="implicit-function-隐式函数"><a href="#implicit-function-隐式函数" class="headerlink" title="implicit function 隐式函数"></a>implicit function 隐式函数</h2><h3 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h3><p>第一种implicit的用法，是将其加在function定义的前面，形式为:</p>
+<pre><code>implicit def int2String(someInt: Int): String = {
+  //...
+}</code></pre><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>这种用法可以用来进行implicit conversion，隐式转换，也就是说，编译器可以选择在合适的时候调用这些函数来进行一个转换，来保证类型的正确性，比如我可以通过定义一个implicit的转换函数将java的类型转换为scala的类型，这样在需要scala类型但是却使用java类型作为参数的时候，编译器会自动加入这个转换函数.</p>
+<pre><code>object HelloScala {
+  implicit def conv(a: Int) = {
+    println(&quot;in conv&quot;)
+    a.toString
+  }
+  def say(b: String) = println(b)
+
+  def main(args: Array[String])  {
+    say(5)
+  }
+}
+//输出结果:
+// in conv
+// 5
+//这说明过程是say(conv(5))
+//原因是编译器在检查的时候发现需要一个String类型的参数，但是代入的是一个Int，于是
+//他会在范围内寻找implicit的function，找到了符合这个要求的String =&gt; Int的function，于是调用</code></pre><h2 id="implicit-parameter-amp-implicit-value-隐式参数和隐式值"><a href="#implicit-parameter-amp-implicit-value-隐式参数和隐式值" class="headerlink" title="implicit parameter &amp; implicit value 隐式参数和隐式值"></a>implicit parameter &amp; implicit value 隐式参数和隐式值</h2><h3 id="形式-1"><a href="#形式-1" class="headerlink" title="形式"></a>形式</h3><h3 id="隐式参数"><a href="#隐式参数" class="headerlink" title="隐式参数"></a>隐式参数</h3><p>隐式参数是在函数中，将参数标志出implicit，形式为:</p>
+<pre><code>def func(implicit x: Int)
+def func2(x: Int)(implicit y: Int)
+def func3(implicit x: Int, y: Int)</code></pre><p>这三种形式是有区别的，在参数中implicit只能出现一次，而在此之后，所有的参数都会变为implicit。</p>
+<pre><code>func: x是implicit的
+func2: 只有y是implicit的
+func3: x和y都是implicit的</code></pre><p>注意避免以下几种错误写法:<br>      //以下三种情况无法编译通过<br>      def err(x: Int, implicit y: Int)<br>      def err(implicit x: Int)(implicit y: Int)<br>      def err(implicit x: Int)(y: Int)<br>这三种情况都是无法编译通过的</p>
+<h2 id="隐式值"><a href="#隐式值" class="headerlink" title="隐式值"></a>隐式值</h2><pre><code>implicit object Test
+implicit val x = 5
+implicit var y</code></pre><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>这种用法的作用主要是两种用法搭配起来来达到一个效果，隐式参数表明这个参数是可以缺少的，也就是说在调用的时候这个参数可以不用出现，那么这个值由什么填充呢？ 那就是用隐式的值了，以下的例子说明了这一点:<br>    object HelloScala {<br>      abstract class Sayable{<br>        def say<br>      }<br>      implicit object hello extends Sayable{<br>        override def say()={<br>          println(“hello”)<br>        }<br>      }<br>      def func(implicit x:Sayable): Unit ={<br>        x.say<br>      }<br>      implicit val impVal=5<br>      def func1(implicit x:Int)={<br>        println(x)<br>      }<br>      def main(args: Array[String])  {<br>        func<br>        func1<br>      }<br>    }</p>
+<p>输出结果为:</p>
+<pre><code>im in hello
+5</code></pre><p>因为object的类型并不是object的名字，所以使用了一个抽象class来指明type。</p>
+<p>在调用func的时候，没有代入参数，其参数是由编译器检查之后决定的，而这里决定的就是唯一的可能，hello那个object，所以这里的say调用的就是hello object里的say</p>
+<p>在调用func1的时候，同样没有代入参数，需要一个Int作为参数，编译器寻找值的时候寻找到impVal是implicit的值，所以这里选择impVal作为他的值，输出了5</p>
+<h2 id="implicit-class-隐式类"><a href="#implicit-class-隐式类" class="headerlink" title="implicit class 隐式类"></a>implicit class 隐式类</h2><p>这是一个在scala 2.10中新增的用法</p>
+<h3 id="形式-2"><a href="#形式-2" class="headerlink" title="形式"></a>形式</h3><pre><code>implicit class MyClass(x: Int)</code></pre><h3 id="作用-2"><a href="#作用-2" class="headerlink" title="作用"></a>作用</h3><p>这里的作用主要是其主构造函数可以作为隐式转换的参数，相当于其主构造函数可以用来当做一个implicit的function，下面举例说明一下:</p>
+<pre><code>object HelloScala {
+  implicit class MyName(x: Int) {
+    println(&quot;im in cons&quot;)
+    val y = x
+  }
+
+  def say(x: MyName) = {
+    println(x.y)
+  }
+
+  def main(args: Array[String])  {
+    say(5)
+  }
+}</code></pre><p>输出结果:</p>
+<pre><code>im in cons
+5</code></pre><p>这里的MyName是一个隐式类，其主构造函数可以用作隐式转换，所以say需要一个MyName类型的参数，但是调用的时候给的是一个Int，这里就会调用MyName的主构造函数转换为一个MyName的对象，然后再println其y的值</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】 <a href="https://www.iteblog.com/archives/1228.html" target="_blank" rel="noopener">https://www.iteblog.com/archives/1228.html</a><br>【2】 <a href="https://www.runoob.com/scala/currying-functions.html" target="_blank" rel="noopener">https://www.runoob.com/scala/currying-functions.html</a><br>【3】 <a href="https://blog.csdn.net/qq_29343201/article/details/58588470" target="_blank" rel="noopener">https://blog.csdn.net/qq_29343201/article/details/58588470</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2019年09月10日 - 11时32分</p>
+        <p><span>最后更新:</span>2019年09月25日 - 15时17分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/09/10/Scala学习笔记I/" title="Scala学习笔记I">http://yoursite.com/2019/09/10/Scala学习笔记I/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/10/Scala学习笔记I/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2019/09/16/Shell学习笔记I/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Shell学习笔记I
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/06/Java学习笔记VIII/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java学习笔记VIII</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Set（集合）"><span class="toc-number">1.</span> <span class="toc-text">Set（集合）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#fold-foldLeft和foldRight区别与联系"><span class="toc-number">2.</span> <span class="toc-text">fold,foldLeft和foldRight区别与联系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Scala-函数柯里化-Currying"><span class="toc-number">3.</span> <span class="toc-text">Scala 函数柯里化(Currying)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.1.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现过程"><span class="toc-number">3.2.</span> <span class="toc-text">实现过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Implicit详解"><span class="toc-number">4.</span> <span class="toc-text">Implicit详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#标记规则"><span class="toc-number">4.1.</span> <span class="toc-text">标记规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#范围规则"><span class="toc-number">4.2.</span> <span class="toc-text">范围规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一次规则"><span class="toc-number">4.3.</span> <span class="toc-text">一次规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优先规则"><span class="toc-number">4.4.</span> <span class="toc-text">优先规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命名规则"><span class="toc-number">4.5.</span> <span class="toc-text">命名规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译器使用-implicit-的几种情况"><span class="toc-number">4.6.</span> <span class="toc-text">编译器使用 implicit 的几种情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#implicit-function-隐式函数"><span class="toc-number">4.7.</span> <span class="toc-text">implicit function 隐式函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#形式"><span class="toc-number">4.7.1.</span> <span class="toc-text">形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-number">4.7.2.</span> <span class="toc-text">作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#implicit-parameter-amp-implicit-value-隐式参数和隐式值"><span class="toc-number">4.8.</span> <span class="toc-text">implicit parameter &amp; implicit value 隐式参数和隐式值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#形式-1"><span class="toc-number">4.8.1.</span> <span class="toc-text">形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隐式参数"><span class="toc-number">4.8.2.</span> <span class="toc-text">隐式参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式值"><span class="toc-number">4.9.</span> <span class="toc-text">隐式值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用-1"><span class="toc-number">4.9.1.</span> <span class="toc-text">作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#implicit-class-隐式类"><span class="toc-number">4.10.</span> <span class="toc-text">implicit class 隐式类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#形式-2"><span class="toc-number">4.10.1.</span> <span class="toc-text">形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用-2"><span class="toc-number">4.10.2.</span> <span class="toc-text">作用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/09/16/Shell学习笔记I/" title="上一篇: Shell学习笔记I">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/09/06/Java学习笔记VIII/" title="下一篇: Java学习笔记VIII">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记X/">Effctive-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记IX/">Effctive-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记VIII/">Effctive-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effctive-Java阅读笔记VII/">Effctive-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effctive-Java阅读笔记VI/">Effctive-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effctive-Java阅读笔记V/">Effctive-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java编程思想-第二十三章阅读笔记/">Java编程思想-第二十三章阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effctive-Java阅读笔记III/">Effctive-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effctive-Java阅读笔记IV/">Effctive-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effctive-Java阅读笔记II/">Effctive-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effctive-Java阅读笔记I/">Effctive-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II/">Git学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I/">数据库学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <!-- <i class="fas fa-chart-area"></i> -->
+                    <span class="post-count">总字数：231.8k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
