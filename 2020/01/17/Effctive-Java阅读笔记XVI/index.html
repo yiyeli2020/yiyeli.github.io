@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Effctive-Java阅读笔记XVI | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第五章阅读： 泛型 31.使用限定通配符来增加 API 的灵活性记住基本规则： producer-extends, consumer-super（PECS）。 还要记住，所有 Comparable 和 Comparator 都是消费者。如果一个参数化类型代表一个 T 生产者，使用 &amp;lt;? extends T&amp;gt;；如果它代表 T 消费者，则使用 &amp;lt;? super T&amp;gt;。32.合理">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effctive-Java阅读笔记XVI">
+<meta property="og:url" content="http://yoursite.com/2020/01/17/Effctive-Java阅读笔记XVI/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="第五章阅读： 泛型 31.使用限定通配符来增加 API 的灵活性记住基本规则： producer-extends, consumer-super（PECS）。 还要记住，所有 Comparable 和 Comparator 都是消费者。如果一个参数化类型代表一个 T 生产者，使用 &amp;lt;? extends T&amp;gt;；如果它代表 T 消费者，则使用 &amp;lt;? super T&amp;gt;。32.合理">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-16T18:33:30.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effctive-Java阅读笔记XVI">
+<meta name="twitter:description" content="第五章阅读： 泛型 31.使用限定通配符来增加 API 的灵活性记住基本规则： producer-extends, consumer-super（PECS）。 还要记住，所有 Comparable 和 Comparator 都是消费者。如果一个参数化类型代表一个 T 生产者，使用 &amp;lt;? extends T&amp;gt;；如果它代表 T 消费者，则使用 &amp;lt;? super T&amp;gt;。32.合理">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 13.64px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 17.27px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 14.55px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 12.73px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 10.91px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 18.18px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 12.73px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 10.91px;">Database</a> <a href="/tags/Database，SQL/" style="font-size: 10px;">Database，SQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 12.73px;">Depth-first Search</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 12.73px;">Design Pattern，Java</a> <a href="/tags/Dynamic-Programming/" style="font-size: 16.36px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 13.64px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Greedy/" style="font-size: 10.91px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 12.73px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 11.82px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 12.73px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19.09px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10.91px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Mysql/" style="font-size: 14.55px;">Mysql</a> <a href="/tags/Operating-System/" style="font-size: 10.91px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 13.64px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 11.82px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 13.64px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 10.91px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.91px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 15.45px;">Tree</a> <a href="/tags/Trie/" style="font-size: 11.82px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Effctive-Java阅读笔记XVI" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/01/17/Effctive-Java阅读笔记XVI/" class="article-date">
+      <time datetime="2020-01-16T17:33:12.000Z" itemprop="datePublished">2020-01-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Effctive-Java阅读笔记XVI
+    </h1>
+  
+
+      
+        <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">6.4k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">24分</span>
+      </span>
+    </span>
+</div>
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>第五章阅读： 泛型</p>
+<p>31.使用限定通配符来增加 API 的灵活性<br>记住基本规则： producer-extends, consumer-super（PECS）。 还要记住，所有 Comparable 和 Comparator 都是消费者。如果一个参数化类型代表一个 T 生产者，使用 &lt;? extends T&gt;；如果它代表 T 消费者，则使用 &lt;? super T&gt;。<br>32.合理地结合泛型和可变参数<br>可变参数和泛型不能很好地交互，因为可变参数机制是在数组上面构建的脆弱的抽象，并且数组具有与泛型不同的类型规则。 虽然泛型可变参数不是类型安全的，但它们是合法的。 如果选择使用泛型（或参数化）可变参数编写方法，请首先确保该方法是类型安全的，然后使用 @SafeVarargs 注解对其进行标注</p>
+<a id="more"></a>
+
+<h1 id="使用限定通配符来增加-API-的灵活性"><a href="#使用限定通配符来增加-API-的灵活性" class="headerlink" title="使用限定通配符来增加 API 的灵活性"></a>使用限定通配符来增加 API 的灵活性</h1><p>　　如条目 28 所述，参数化类型是不变的。换句话说，对于任何两个不同类型的 Type1 和 Type，List<type1> 既不是 List<type2> 子类型也不是其父类型。尽管 List<string> 不是 List<object> 的子类型是违反直觉的，但它确实是有道理的。 可以将任何对象放入 List<object> 中，但是只能将字符串放入 List<string> 中。 由于 List<string> 不能做 List<object> 所能做的所有事情，所以它不是一个子类型（条目 10 中的里氏替代原则）。</object></string></string></object></object></string></type2></type1></p>
+<p>　　相对于提供的不可变的类型，有时你需要比此更多的灵活性。 考虑条目 29 中的 Stack 类。下面是它的公共 API：</p>
+<pre><code>public class Stack&lt;E&gt; {
+
+    public Stack();
+
+    public void push(E e);
+
+    public E pop();
+
+    public boolean isEmpty();
+
+}</code></pre><p>　　假设我们想要添加一个方法来获取一系列元素，并将它们全部推送到栈上。 以下是第一种尝试：</p>
+<pre><code>// pushAll method without wildcard type - deficient!
+public void pushAll(Iterable&lt;E&gt; src) {
+    for (E e : src)
+        push(e);
+}</code></pre><p>　　这种方法可以干净地编译，但不完全令人满意。 如果可遍历的 src 元素类型与栈的元素类型完全匹配，那么它工作正常。 但是，假设有一个 Stack<number>，并调用 push(intVal)，其中 intVal 的类型是 Integer。 这是因为 Integer 是 Number 的子类型。 从逻辑上看，这似乎也应该起作用：</number></p>
+<pre><code>Stack&lt;Number&gt; numberStack = new Stack&lt;&gt;();
+Iterable&lt;Integer&gt; integers = ... ;
+numberStack.pushAll(integers);</code></pre><p>　　但是，如果你尝试了，会得到这个错误消息，因为参数化类型是不变的：</p>
+<pre><code>StackTest.java:7: error: incompatible types: Iterable&lt;Integer&gt;
+cannot be converted to Iterable&lt;Number&gt;
+        numberStack.pushAll(integers);
+                            ^</code></pre><p>　　幸运的是，有对应的解决方法。 该语言提供了一种特殊的参数化类型来调用一个限定通配符类型来处理这种情况。 pushAll 的输入参数的类型不应该是「E 的 Iterable 接口」，而应该是「E 的某个子类型的 Iterable 接口」，并且有一个通配符类型，这意味着：Iterable&lt;? extends E&gt;。 （关键字 extends 的使用有点误导：回忆条目 29 中，子类型被定义为每个类型都是它自己的子类型，即使它本身没有继承。）让我们修改 pushAll 来使用这个类型：</p>
+<pre><code>// Wildcard type for a parameter that serves as an E producer
+public void pushAll(Iterable&lt;? extends E&gt; src) {
+    for (E e : src)
+        push(e);
+}</code></pre><p>　　有了这个改变，Stack 类不仅可以干净地编译，而且客户端代码也不会用原始的 pushAll 声明编译。 因为 Stack 和它的客户端干净地编译，你知道一切都是类型安全的。</p>
+<p>　　现在假设你想写一个 popAll 方法，与 pushAll 方法相对应。 popAll 方法从栈中弹出每个元素并将元素添加到给定的集合中。 以下是第一次尝试编写 popAll 方法的过程：</p>
+<pre><code>// popAll method without wildcard type - deficient!
+public void popAll(Collection&lt;E&gt; dst) {
+    while (!isEmpty())
+        dst.add(pop());
+}</code></pre><p>　　同样，如果目标集合的元素类型与栈的元素类型完全匹配，则干净编译并且工作正常。 但是，这又不完全令人满意。 假设你有一个 Stac<number> 和 Object 类型的变量。 如果从栈中弹出一个元素并将其存储在该变量中，它将编译并运行而不会出错。 所以你也不能这样做吗？</number></p>
+<pre><code>Stack&lt;Number&gt; numberStack = new Stack&lt;Number&gt;();
+
+Collection&lt;Object&gt; objects = ... ;
+
+numberStack.popAll(objects);</code></pre><p>　　如果尝试将此客户端代码与之前显示的 popAll 版本进行编译，则会得到与我们的第一版 pushAll 非常类似的错误：Collection<object> 不是 Collection<number> 的子类型。 通配符类型再一次提供了一条出路。 popAll 的输入参数的类型不应该是「E 的集合」，而应该是「E 的某个父类型的集合」（其中父类型被定义为 E 是它自己的父类型[JLS，4.10]）。 再次，有一个通配符类型，正是这个意思：Collection&lt;? super E&gt;。 让我们修改 popAll 来使用它：</number></object></p>
+<pre><code>// Wildcard type for parameter that serves as an E consumer
+public void popAll(Collection&lt;? super E&gt; dst) {
+    while (!isEmpty())
+        dst.add(pop());
+}</code></pre><p>　　通过这个改动，Stack 类和客户端代码都可以干净地编译。<br>　　这个结论很清楚。<strong><em>为了获得最大的灵活性，对代表生产者或消费者的输入参数使用通配符类型。</em></strong> 如果一个输入参数既是一个生产者又是一个消费者，那么通配符类型对你没有好处：你需要一个精确的类型匹配，这就是没有任何通配符的情况。</p>
+<p>　　这里有一个助记符来帮助你记住使用哪种通配符类型： PECS 代表： producer-extends，consumer-super。</p>
+<p>　　换句话说，如果一个参数化类型代表一个 T 生产者，使用 &lt;? extends T&gt;；如果它代表 T 消费者，则使用 &lt;? super T&gt;。 在我们的 Stack 示例中，pushAll 方法的 src 参数生成栈使用的 E 实例，因此 src 的合适类型为 Iterable&lt;? extends E&gt;；popAll 方法的 dst 参数消费 Stack 中的 E 实例，因此 dst 的合适类型是 Collection &lt;? super E&gt;。 PECS 助记符抓住了使用通配符类型的基本原则。 Naftalin 和 Wadler 称之为获取和放置原则（Get and Put Principle）[Naftalin07,2.4]。</p>
+<p>　　记住这个助记符之后，让我们来看看本章中以前项目的一些方法和构造方法声明。 条目 28 中的 Chooser 类构造方法有这样的声明：</p>
+<pre><code>public Chooser(Collection&lt;T&gt; choices)</code></pre><p>　　这个构造方法只使用集合选择来生产类型 T 的值（并将它们存储起来以备后用），所以它的声明应该使用一个 extends T 的通配符类型。下面是得到的构造方法声明：</p>
+<pre><code>// Wildcard type for parameter that serves as an T producer
+
+public Chooser(Collection&lt;? extends T&gt; choices)</code></pre><p>　　这种改变在实践中会有什么不同吗？ 是的，会有不同。 假你有一个 List<integer>，并且想把它传递给 Chooser<number> 的构造方法。 这不会与原始声明一起编译，但是它只会将限定通配符类型添加到声明中。</number></integer></p>
+<p>　　现在看看条目 30 中的 union 方法。下是声明：</p>
+<pre><code>public static &lt;E&gt; Set&lt;E&gt; union(Set&lt;E&gt; s1, Set&lt;E&gt; s2)</code></pre><p>　　两个参数 s1 和 s2 都是 E 的生产者，所以 PECS 助记符告诉我们该声明应该如下：</p>
+<pre><code>public static &lt;E&gt; Set&lt;E&gt; union(Set&lt;? extends E&gt; s1,  Set&lt;? extends E&gt; s2)</code></pre><p>　　请注意，返回类型仍然是 Set<e>。 不要使用限定通配符类型作为返回类型。除了会为用户提供额外的灵活性，还强制他们在客户端代码中使用通配符类型。 通过修改后的声明，此代码将清晰地编译：</e></p>
+<pre><code>Set&lt;Integer&gt;  integers =  Set.of(1, 3, 5);
+
+Set&lt;Double&gt;   doubles  =  Set.of(2.0, 4.0, 6.0);
+
+Set&lt;Number&gt;   numbers  =  union(integers, doubles);</code></pre><p>　　如果使用得当，类的用户几乎不会看到通配符类型。 他们使方法接受他们应该接受的参数，拒绝他们应该拒绝的参数。 如果一个类的用户必须考虑通配符类型，那么它的 API 可能有问题。<br>　　在 Java 8 之前，类型推断规则不够聪明，无法处理先前的代码片段，这要求编译器使用上下文指定的返回类型（或目标类型）来推断 E 的类型。union 方法调用的目标类型如前所示是 Set<number>。 如果尝试在早期版本的 Java 中编译片段（以及适合的 Set.of 工厂替代版本），将会看到如此长的错综复杂的错误消息：</number></p>
+<pre><code>Union.java:14: error: incompatible types
+        Set&lt;Number&gt; numbers = union(integers, doubles);
+                                   ^
+  required: Set&lt;Number&gt;
+  found:    Set&lt;INT#1&gt;
+  where INT#1,INT#2 are intersection types:
+    INT#1 extends Number,Comparable&lt;? extends INT#2&gt;
+    INT#2 extends Number,Comparable&lt;?&gt;</code></pre><p>　　幸运的是有办法来处理这种错误。 如果编译器不能推断出正确的类型，你可以随时告诉它使用什么类型的显式类型参数[JLS，15.12]。 甚至在 Java 8 中引入目标类型之前，这不是你必须经常做的事情，这很好，因为显式类型参数不是很漂亮。 通过添加显式类型参数，如下所示，代码片段在 Java 8 之前的版本中进行了干净编译：</p>
+<pre><code>// Explicit type parameter - required prior to Java 8
+Set&lt;Number&gt; numbers = Union.&lt;Number&gt;union(integers, doubles);</code></pre><p>　　接下来让我们把注意力转向条目 30 中的 max 方法。这里是原始声明：</p>
+<pre><code>public static &lt;T extends Comparable&lt;T&gt;&gt; T max(List&lt;T&gt; list)</code></pre><p>　为了从原来到修改后的声明，我们两次应用了 PECS。首先直接的应用是参数列表。 它生成 T 实例，所以将类型从 List<t> 更改为 List&lt;? extends T&gt;。 棘手的应用是类型参数 T。这是我们第一次看到通配符应用于类型参数。 最初，T 被指定为继承 Comparable<t>，但 Comparable 的 T 消费 T 实例（并生成指示顺序关系的整数）。 因此，参数化类型 Comparable<t> 被替换为限定通配符类型 Comparable&lt;? super T&gt;。 Comparable 实例总是消费者，所以通常应该使用 Comparable&lt;? super T&gt; 优于 Comparable<t>。 Comparator 也是如此。因此，通常应该使用 Comparator&lt;? super T&gt; 优于 Comparator<t>。<br>　　修改后的 max 声明可能是本书中最复杂的方法声明。 增加的复杂性是否真的起作用了吗？ 同样，它的确如此。 这是一个列表的简单例子，它被原始声明排除，但在被修改后的版本里是允许的：</t></t></t></t></t></p>
+<pre><code>List&lt;ScheduledFuture&lt;?&gt;&gt; scheduledFutures = ... ;</code></pre><p>　　无法将原始方法声明应用于此列表的原因是 ScheduledFuture 不实现 Comparable<scheduledfuture>。 相反，它是 Delayed 的子接口，它继承了 Comparable<delayed>。 换句话说，一个 ScheduledFuture 实例不仅仅和其他的 ScheduledFuture 实例相比较： 它可以与任何 Delayed 实例比较，并且足以导致原始的声明拒绝它。 更普遍地说，通配符要求来支持没有直接实现 Comparable（或 Comparator）的类型，但继承了一个类型。</delayed></scheduledfuture></p>
+<p>　　还有一个关于通配符相关的话题。 类型参数和通配符之间具有双重性，许多方法可以用一个或另一个声明。 例如，下面是两个可能的声明，用于交换列表中两个索引项目的静态方法。 第一个使用无限制类型参数（条目 30），第二个使用无限制通配符：</p>
+<pre><code>// Two possible declarations for the swap method
+public static &lt;E&gt; void swap(List&lt;E&gt; list, int i, int j);
+public static void swap(List&lt;?&gt; list, int i, int j);</code></pre><p>　　这两个声明中的哪一个更可取，为什么？ 在公共 API 中，第二个更好，因为它更简单。 你传入一个列表（任何列表），该方法交换索引的元素。 没有类型参数需要担心。 通常， <strong><em>如果类型参数在方法声明中只出现一次，请将其替换为通配符。</em></strong> 如果它是一个无限制的类型参数，请将其替换为无限制的通配符; 如果它是一个限定类型参数，则用限定通配符替换它。</p>
+<p>　　第二个 swap 方法声明有一个问题。 这个简单的实现不会编译：</p>
+<pre><code>public static void swap(List&lt;?&gt; list, int i, int j) {
+    list.set(i, list.set(j, list.get(i)));
+}</code></pre><p>　　试图编译它会产生这个不太有用的错误信息：</p>
+<pre><code>Swap.java:5: error: incompatible types: Object cannot be
+converted to CAP#1
+        list.set(i, list.set(j, list.get(i)));
+                                        ^
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?</code></pre><p>　　看起来我们不能把一个元素放回到我们刚刚拿出来的列表中。 问题是列表的类型是 List<?>，并且不能将除 null 外的任何值放入 List<?> 中。 幸运的是，有一种方法可以在不使用不安全的转换或原始类型的情况下实现此方法。 这个想法是写一个私有辅助方法来捕捉通配符类型。 辅助方法必须是泛型方法才能捕获类型。 以下是它的定义：</p>
+<pre><code>public static void swap(List&lt;?&gt; list, int i, int j) {
+    swapHelper(list, i, j);
+}
+
+// Private helper method for wildcard capture
+private static &lt;E&gt; void swapHelper(List&lt;E&gt; list, int i, int j) {
+    list.set(i, list.set(j, list.get(i)));
+}</code></pre><p>　　swapHelper 方法知道该列表是一个 List<e>。 因此，它知道从这个列表中获得的任何值都是 E 类型，并且可以安全地将任何类型的 E 值放入列表中。 这个稍微复杂的 swap 的实现可以干净地编译。 它允许我们导出基于通配符的漂亮声明，同时利用内部更复杂的泛型方法。 swap 方法的客户端不需要面对更复杂的 swapHelper 声明，但他们从中受益。 辅助方法具有我们认为对公共方法来说过于复杂的签名。</e></p>
+<p>　　总之，在你的 API 中使用通配符类型，虽然棘手，但使得 API 更加灵活。 如果编写一个将被广泛使用的类库，正确使用通配符类型应该被认为是强制性的。 记住基本规则： producer-extends, consumer-super（PECS）。 还要记住，所有 Comparable 和 Comparator 都是消费者。</p>
+<h1 id="合理地结合泛型和可变参数"><a href="#合理地结合泛型和可变参数" class="headerlink" title="合理地结合泛型和可变参数"></a>合理地结合泛型和可变参数</h1><p>　　在 Java 5 中，可变参数方法（详见第 53 条）和泛型都被添加到平台中，所以你可能希望它们能够正常交互; 可悲的是，他们并没有。 可变参数的目的是允许客户端将一个可变数量的参数传递给一个方法，但这是一个脆弱的抽象（leaky abstraction）：当你调用一个可变参数方法时，会创建一个数组来保存可变参数；那个应该是实现细节的数组是可见的。 因此，当可变参数具有泛型或参数化类型时，会导致编译器警告混淆。</p>
+<p>　　回顾条目 28，非具体化（non-reifiable）的类型是其运行时表示比其编译时表示具有更少信息的类型，并且几乎所有泛型和参数化类型都是不可具体化的。 如果某个方法声明其可变参数为非具体化的类型，则编译器将在该声明上生成警告。 如果在推断类型不可确定的可变参数参数上调用该方法，那么编译器也会在调用中生成警告。 警告看起来像这样：</p>
+<pre><code>warning: [unchecked] Possible heap pollution from
+    parameterized vararg type List&lt;String&gt;</code></pre><p>　　当参数化类型的变量引用不属于该类型的对象时会发生堆污染（Heap pollution）[JLS，4.12.2]。 它会导致编译器的自动生成的强制转换失败，违反了泛型类型系统的基本保证。</p>
+<p>　　例如，请考虑以下方法，该方法是第 127 页上的代码片段的一个不太明显的变体：</p>
+<pre><code>// Mixing generics and varargs can violate type safety!
+static void dangerous(List&lt;String&gt;... stringLists) {
+    List&lt;Integer&gt; intList = List.of(42);
+    Object[] objects = stringLists;
+    objects[0] = intList;             // Heap pollution
+    String s = stringLists[0].get(0); // ClassCastException
+}</code></pre><p>　　此方法没有可见的强制转换，但在调用一个或多个参数时抛出 ClassCastException 异常。 它的最后一行有一个由编译器生成的隐形转换。 这种转换失败，表明类型安全性已经被破坏，并且将值保存在泛型可变参数数组参数中是不安全的。</p>
+<p>　　这个例子引发了一个有趣的问题：为什么声明一个带有泛型可变参数的方法是合法的，当明确创建一个泛型数组是非法的时候呢？ 换句话说，为什么前面显示的方法只生成一个警告，而 127 页上的代码片段会生成一个错误？ 答案是，具有泛型或参数化类型的可变参数参数的方法在实践中可能非常有用，因此语言设计人员选择忍受这种不一致。 事实上，Java 类库导出了几个这样的方法，包括 Arrays.asList(T… a)，Collections.addAll(Collection&lt;? super T&gt; c, T… elements)，EnumSet.of(E first, E… rest)。 与前面显示的危险方法不同，这些类库方法是类型安全的。</p>
+<p>　　在 Java 7 中，@SafeVarargs 注解已添加到平台，以允许具有泛型可变参数的方法的作者自动禁止客户端警告。 实质上，@SafeVarargs 注解构成了作者对类型安全的方法的承诺。 为了交换这个承诺，编译器同意不要警告用户调用可能不安全的方法。</p>
+<p>　　除非它实际上是安全的，否则注意不要使用 @SafeVarargs 注解标注一个方法。 那么需要做些什么来确保这一点呢？ 回想一下，调用方法时会创建一个泛型数组，以容纳可变参数。 如果方法没有在数组中存储任何东西（它会覆盖参数）并且不允许对数组的引用进行转义（这会使不受信任的代码访问数组），那么它是安全的。 换句话说，如果可变参数数组仅用于从调用者向方法传递可变数量的参数——毕竟这是可变参数的目的——那么该方法是安全的。</p>
+<p>　　值得注意的是，你可以违反类型安全性，即使不会在可变参数数组中存储任何内容。 考虑下面的泛型可变参数方法，它返回一个包含参数的数组。 乍一看，它可能看起来像一个方便的小工具：</p>
+<pre><code>// UNSAFE - Exposes a reference to its generic parameter array!
+static &lt;T&gt; T[] toArray(T... args) {
+    return args;
+}</code></pre><p>　　这个方法只是返回它的可变参数数组。 该方法可能看起来并不危险，但它是该数组的类型由传递给方法的参数的编译时类型决定，编译器可能没有足够的信息来做出正确的判断。 由于此方法返回其可变参数数组，它可以将堆污染传播到调用栈上。<br>　　为了具体说明，请考虑下面的泛型方法，它接受三个类型 T 的参数，并返回一个包含两个参数的数组，随机选择：</p>
+<pre><code>static &lt;T&gt; T[] pickTwo(T a, T b, T c) {
+    switch(ThreadLocalRandom.current().nextInt(3)) {
+      case 0: return toArray(a, b);
+      case 1: return toArray(a, c);
+      case 2: return toArray(b, c);
+    }
+    throw new AssertionError(); // Can&apos;t get here
+}</code></pre><p>　　这个方法本身不是危险的，除了调用具有泛型可变参数的 toArray 方法之外，不会产生警告。</p>
+<p>　　编译此方法时，编译器会生成代码以创建一个将两个 T 实例传递给 toArray 的可变参数数组。 这段代码分配了一个 Object[] 类型的数组，它是保证保存这些实例的最具体的类型，而不管在调用位置传递给 pickTwo 的对象是什么类型。 toArray 方法只是简单地将这个数组返回给 pickTwo，然后 pickTwo 将它返回给调用者，所以 pickTwo 总是返回一个 Object[] 类型的数组。</p>
+<pre><code>public static void main(String[] args) {
+    String[] attributes = pickTwo(&quot;Good&quot;, &quot;Fast&quot;, &quot;Cheap&quot;);
+}</code></pre><p>　　这种方法没有任何问题，因此它编译时不会产生任何警告。 但是当运行它时，抛出一个 ClassCastException 异常，尽管不包含可见的转换。 你没有看到的是，编译器已经生成了一个隐藏的强制转换为由 pickTwo 返回的值的 String[] 类型，以便它可以存储在属性中。 转换失败，因为 Object[] 不是 String[] 的子类型。 这种故障相当令人不安，因为它从实际导致堆污染（toArray）的方法中移除了两个级别，并且在实际参数存储在其中之后，可变参数数组未被修改。</p>
+<p>　　这个例子是为了让人们认识到给另一个方法访问一个泛型的可变参数数组是不安全的，除了两个例外：将数组传递给另一个可变参数方法是安全的，这个方法是用 @SafeVarargs 正确标注的， 将数组传递给一个非可变参数的方法是安全的，该方法仅计算数组内容的一些方法。</p>
+<p>　　这里是安全使用泛型可变参数的典型示例。 此方法将任意数量的列表作为参数，并按顺序返回包含所有输入列表元素的单个列表。 由于该方法使用 @SafeVarargs 进行标注，因此在声明或其调用站位置上不会生成任何警告：</p>
+<pre><code>// Safe method with a generic varargs parameter
+@SafeVarargs
+static &lt;T&gt; List&lt;T&gt; flatten(List&lt;? extends T&gt;... lists) {
+    List&lt;T&gt; result = new ArrayList&lt;&gt;();
+    for (List&lt;? extends T&gt; list : lists)
+        result.addAll(list);
+    return result;
+}</code></pre><p>　　决定何时使用 @SafeVarargs 注解的规则很简单：在每种方法上使用 @SafeVarargs，并使用泛型或参数化类型的可变参数，这样用户就不会因不必要的和令人困惑的编译器警告而担忧。 这意味着你不应该写危险或者 toArray 等不安全的可变参数方法。 每次编译器警告你可能会受到来自你控制的方法中泛型可变参数的堆污染时，请检查该方法是否安全。 提醒一下，在下列情况下，泛型可变参数方法是安全的：</p>
+<h2 id="它不会在可变参数数组中存储任何东西"><a href="#它不会在可变参数数组中存储任何东西" class="headerlink" title="它不会在可变参数数组中存储任何东西"></a>它不会在可变参数数组中存储任何东西</h2><h2 id="它不会使数组（或克隆）对不可信代码可见。"><a href="#它不会使数组（或克隆）对不可信代码可见。" class="headerlink" title="它不会使数组（或克隆）对不可信代码可见。"></a>它不会使数组（或克隆）对不可信代码可见。</h2><p>如果违反这些禁令中的任何一项，请修复。<br>　　请注意，SafeVarargs 注解只对不能被重写的方法是合法的，因为不可能保证每个可能的重写方法都是安全的。 在 Java 8 中，注解仅在静态方法和 final 实例方法上合法; 在 Java 9 中，它在私有实例方法中也变为合法。</p>
+<p>　　使用 SafeVarargs 注解的替代方法是采用条目 28 的建议，并用 List 参数替换可变参数（这是一个变相的数组）。 下面是应用于我们的 flatten 方法时，这种方法的样子。 请注意，只有参数声明被更改了：</p>
+<pre><code>// List as a typesafe alternative to a generic varargs parameter
+static &lt;T&gt; List&lt;T&gt; flatten(List&lt;List&lt;? extends T&gt;&gt; lists) {
+    List&lt;T&gt; result = new ArrayList&lt;&gt;();
+    for (List&lt;? extends T&gt; list : lists)
+        result.addAll(list);
+    return result;
+}</code></pre><p>　　然后可以将此方法与静态工厂方法 List.of 结合使用，以允许可变数量的参数。 请注意，这种方法依赖于 List.of 声明使用 @SafeVarargs 注解：</p>
+<pre><code>audience = flatten(List.of(friends, romans, countrymen));</code></pre><p>　　这种方法的优点是编译器可以证明这种方法是类型安全的。 不必使用 @SafeVarargs 注解来证明其安全性，也不用担心在确定安全性时可能会犯错。 主要缺点是客户端代码有点冗长，运行可能会慢一些。</p>
+<p>　　这个技巧也可以用在不可能写一个安全的可变参数方法的情况下，就像第 147 页的 toArray 方法那样。它的列表模拟是 List.of 方法，所以我们甚至不必编写它；Java 类库作者已经为我们完成了这项工作。 pickTwo 方法然后变成这样：</p>
+<p>　　main 方变成这样：</p>
+<pre><code>public static void main(String[] args) {
+    List&lt;String&gt; attributes = pickTwo(&quot;Good&quot;, &quot;Fast&quot;, &quot;Cheap&quot;);
+}</code></pre><p>　　生成的代码是类型安全的，因为它只使用泛型，不是数组。</p>
+<p>　　总而言之，可变参数和泛型不能很好地交互，因为可变参数机制是在数组上面构建的脆弱的抽象，并且数组具有与泛型不同的类型规则。 虽然泛型可变参数不是类型安全的，但它们是合法的。 如果选择使用泛型（或参数化）可变参数编写方法，请首先确保该方法是类型安全的，然后使用 @SafeVarargs 注解对其进行标注，以免造成使用不愉快。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/31.%20%E4%BD%BF%E7%94%A8%E9%99%90%E5%AE%9A%E9%80%9A%E9%85%8D%E7%AC%A6%E6%9D%A5%E5%A2%9E%E5%8A%A0API%E7%9A%84%E7%81%B5%E6%B4%BB%E6%80%A7" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/31.%20%E4%BD%BF%E7%94%A8%E9%99%90%E5%AE%9A%E9%80%9A%E9%85%8D%E7%AC%A6%E6%9D%A5%E5%A2%9E%E5%8A%A0API%E7%9A%84%E7%81%B5%E6%B4%BB%E6%80%A7</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/01/17/Effctive-Java阅读笔记XVI/">Effctive-Java阅读笔记XVI</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2020年01月17日 - 01时33分</p>
+        <p><span>最后更新:</span>2020年01月17日 - 02时33分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/17/Effctive-Java阅读笔记XVI/" title="Effctive-Java阅读笔记XVI">http://yoursite.com/2020/01/17/Effctive-Java阅读笔记XVI/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/17/Effctive-Java阅读笔记XVI/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2020/01/17/Effctive-Java阅读笔记XVII/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Effctive-Java阅读笔记XVII
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/17/Effctive-Java阅读笔记XV/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Effctive-Java阅读笔记XV</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用限定通配符来增加-API-的灵活性"><span class="toc-number">1.</span> <span class="toc-text">使用限定通配符来增加 API 的灵活性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#合理地结合泛型和可变参数"><span class="toc-number">2.</span> <span class="toc-text">合理地结合泛型和可变参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#它不会在可变参数数组中存储任何东西"><span class="toc-number">2.1.</span> <span class="toc-text">它不会在可变参数数组中存储任何东西</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#它不会使数组（或克隆）对不可信代码可见。"><span class="toc-number">2.2.</span> <span class="toc-text">它不会使数组（或克隆）对不可信代码可见。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/01/17/Effctive-Java阅读笔记XVII/" title="上一篇: Effctive-Java阅读笔记XVII">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/01/17/Effctive-Java阅读笔记XV/" title="下一篇: Effctive-Java阅读笔记XV">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effctive-Java阅读笔记XVII/">Effctive-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effctive-Java阅读笔记XVI/">Effctive-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effctive-Java阅读笔记XV/">Effctive-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记XIV/">Effctive-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记XIII/">Effctive-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记XII/">Effctive-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记XI/">Effctive-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记X/">Effctive-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记IX/">Effctive-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effctive-Java阅读笔记VIII/">Effctive-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effctive-Java阅读笔记VII/">Effctive-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effctive-Java阅读笔记VI/">Effctive-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effctive-Java阅读笔记V/">Effctive-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java编程思想-第二十三章阅读笔记/">Java编程思想-第二十三章阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effctive-Java阅读笔记III/">Effctive-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effctive-Java阅读笔记IV/">Effctive-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effctive-Java阅读笔记II/">Effctive-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effctive-Java阅读笔记I/">Effctive-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II/">Git学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I/">数据库学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：264k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
