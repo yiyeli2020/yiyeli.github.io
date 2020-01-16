@@ -8,6 +8,9 @@ tags: [Java]
 第四章阅读：类和接口
 
 23.类层次结构优于标签类
+当遇到一个带有标签字段的现有类时，可以考虑将其重构为一个类层次结构。
+24.支持使用静态成员类而不是非静态类
+
 
 <!-- more -->
 
@@ -59,6 +62,46 @@ tags: [Java]
 　　要将标签类转换为类层次，首先定义一个包含抽象方法的抽象类，该标签类的行为取决于标签值。 在 Figure 类中，只有一个这样的方法，就是 area 方法。 这个抽象类是类层次的根。 如果有任何方法的行为不依赖于标签的值，把它们放在这个类中。 同样，如果有所有的方法使用的数据字段，把它们放在这个类。Figure 类中不存在这种与类型无关的方法或字段。
 
 　　接下来，为原始标签类的每种类型定义一个根类的具体子类。 在我们的例子中，有两个类型：圆形和矩形。 在每个子类中包含特定于改类型的数据字段。 在我们的例子中，半径字段是属于圆的，长度和宽度字段都是矩形的。 还要在每个子类中包含根类中每个抽象方法的适当实现。 这里是对应于 Figure 类的类层次：
+
+    // Class hierarchy replacement for a tagged class
+    abstract class Figure {
+        abstract double area();
+    }
+
+    class Circle extends Figure {
+        final double radius;
+
+        Circle(double radius) { this.radius = radius; }
+
+        @Override double area() { return Math.PI * (radius * radius); }
+    }
+    class Rectangle extends Figure {
+        final double length;
+        final double width;
+
+        Rectangle(double length, double width) {
+            this.length = length;
+            this.width  = width;
+        }
+        @Override double area() { return length * width; }
+    }
+
+　　这个类层次纠正了之前提到的标签类的每个缺点。 代码简单明了，不包含原文中的样板文件。 每种类型的实现都是由自己的类来分配的，而这些类都没有被无关的数据字段所占用。 所有的字段是 final 的。 编译器确保每个类的构造方法初始化其数据字段，并且每个类都有一个针对在根类中声明的每个抽象方法的实现。 这消除了由于缺少 switch-case 语句而导致的运行时失败的可能性。 多个程序员可以独立地继承类层次，并且可以相互操作，而无需访问根类的源代码。 每种类型都有一个独立的数据类型与之相关联，允许程序员指出变量的类型，并将变量和输入参数限制为特定的类型。
+
+　　类层次的另一个优点是可以使它们反映类型之间的自然层次关系，从而提高了灵活性，并提高了编译时类型检查的效率。 假设原始示例中的标签类也允许使用正方形。 类层次可以用来反映一个正方形是一种特殊的矩形（假设它们是不可变的）：
+
+    class Square extends Rectangle {
+        Square(double side) {
+            super(side, side);
+        }
+    }
+　　请注意，上述层次结构中的字段是直接访问的，而不是通过访问器方法访问的。 这里是为了简洁起见，如果类层次是公开的（详见第 16 条），这将是一个糟糕的设计。
+
+　　总之，标签类很少有适用的情况。 如果你想写一个带有显式标签字段的类，请考虑标签字段是否可以被删除，并是否能被类层次结构替换。 当遇到一个带有标签字段的现有类时，可以考虑将其重构为一个类层次结构。
+
+# 支持使用静态成员类而不是非静态类
+
+
 
 
 # 参考资料：
