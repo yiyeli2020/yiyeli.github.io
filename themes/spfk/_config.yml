@@ -61,7 +61,7 @@ duoshuo:
   # http://<要填的部分>.duoshuo.com (domain只填上<>里的内容，不要填整个网址)
 
 gitment:
-  on: true
+  # on: true
   owner: yiye
   repo: liyiye012.github.io
   client_id:
@@ -193,29 +193,3 @@ TipTitle: true
 
 # Loading
 # Loading: true
-live2d:
-  enable: true
-  scriptFrom: local
-  pluginRootPath: live2dw/
-  pluginJsPath: lib/
-  pluginModelPath: assets/
-  tagMode: false
-  debug: false
-  model:
-    scale: 1
-    hHeadPos: 0.5
-    vHeadPos: 0.618
-    use: live2d-widget-model-gf
-  display:
-    superSample: 2
-    width: 150
-    height: 300
-    position: right
-    hOffset: 0
-    vOffset: -20
-  mobile:
-    show: true
-    scale: 0.5
-  react:
-    opacityDefault: 0.7
-    opacityOnHover: 0.2
