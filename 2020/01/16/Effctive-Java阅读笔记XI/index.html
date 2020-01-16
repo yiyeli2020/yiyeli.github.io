@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>设计模式学习笔记I | Yiye Li</title>
+  <title>Effctive-Java阅读笔记XI | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="设计模式学习笔记">
-<meta name="keywords" content="Design Pattern，Java">
+  <meta name="description" content="第四章阅读：类和接口 21.为后代设计接口">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式学习笔记I">
-<meta property="og:url" content="http://yoursite.com/2019/10/17/设计模式学习笔记I/index.html">
+<meta property="og:title" content="Effctive-Java阅读笔记XI">
+<meta property="og:url" content="http://yoursite.com/2020/01/16/Effctive-Java阅读笔记XI/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="设计模式学习笔记">
+<meta property="og:description" content="第四章阅读：类和接口 21.为后代设计接口">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-17T03:06:59.684Z">
+<meta property="og:updated_time" content="2020-01-16T08:25:01.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式学习笔记I">
-<meta name="twitter:description" content="设计模式学习笔记">
+<meta name="twitter:title" content="Effctive-Java阅读笔记XI">
+<meta name="twitter:description" content="第四章阅读：类和接口 21.为后代设计接口">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-设计模式学习笔记I" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Effctive-Java阅读笔记XI" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/10/17/设计模式学习笔记I/" class="article-date">
-      <time datetime="2019-10-17T02:56:12.000Z" itemprop="datePublished">2019-10-17</time>
+      <a href="/2020/01/16/Effctive-Java阅读笔记XI/" class="article-date">
+      <time datetime="2020-01-16T08:23:12.000Z" itemprop="datePublished">2020-01-16</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      设计模式学习笔记I
+      Effctive-Java阅读笔记XI
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">941字</span>
+        <span class="post-count">61字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
+        <span class="post-count">1分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2019年10月/">2019年10月</a>
+    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-Pattern，Java/">Design Pattern，Java</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,102 +260,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>设计模式学习笔记</p>
+        <p>第四章阅读：类和接口</p>
+<p>21.为后代设计接口</p>
 <a id="more"></a>
-<h1 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h1><p>装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。</p>
-<p>这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。</p>
-<p>我们通过下面的实例来演示装饰器模式的用法。其中，我们将把一个形状装饰上不同的颜色，同时又不改变形状类。</p>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>意图：动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。</p>
-<p>主要解决：一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。</p>
-<p>何时使用：在不想增加很多子类的情况下扩展类。</p>
-<p>如何解决：将具体功能职责划分，同时继承装饰者模式。</p>
-<p>关键代码： 1、Component 类充当抽象角色，不应该具体实现。 2、修饰类引用和继承 Component 类，具体扩展类重写父类方法。</p>
-<p>应用实例： 1、孙悟空有 72 变，当他变成”庙宇”后，他的根本还是一只猴子，但是他又有了庙宇的功能。 2、不论一幅画有没有画框都可以挂在墙上，但是通常都是有画框的，并且实际上是画框被挂在墙上。在挂在墙上之前，画可以被蒙上玻璃，装到框子里；这时画、玻璃和画框形成了一个物体。</p>
-<p>优点：装饰类和被装饰类可以独立发展，不会相互耦合，装饰模式是继承的一个替代模式，装饰模式可以动态扩展一个实现类的功能。</p>
-<p>缺点：多层装饰比较复杂。</p>
-<p>使用场景： 1、扩展一个类的功能。 2、动态增加功能，动态撤销。</p>
-<p>注意事项：可代替继承。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>我们将创建一个 Shape 接口和实现了 Shape 接口的实体类。然后我们创建一个实现了 Shape 接口的抽象装饰类 ShapeDecorator，并把 Shape 对象作为它的实例变量。</p>
-<p>RedShapeDecorator 是实现了 ShapeDecorator 的实体类。</p>
-<p>DecoratorPatternDemo，我们的演示类使用 RedShapeDecorator 来装饰 Shape 对象。<br><a href="https://www.runoob.com/wp-content/uploads/2014/08/decorator_pattern_uml_diagram.jpg" target="_blank" rel="noopener">https://www.runoob.com/wp-content/uploads/2014/08/decorator_pattern_uml_diagram.jpg</a></p>
-<h2 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤 1"></a>步骤 1</h2><p>创建一个接口：</p>
-<p>Shape.java</p>
-<pre><code>public interface Shape {
-   void draw();
-}</code></pre><h2 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤 2"></a>步骤 2</h2><p>创建实现接口的实体类。</p>
-<p>Rectangle.java</p>
-<pre><code>public class Rectangle implements Shape {
 
-   @Override
-   public void draw() {
-      System.out.println(&quot;Shape: Rectangle&quot;);
-   }
-}</code></pre><p>Circle.java</p>
-<pre><code>public class Circle implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Shape: Circle&quot;);
-   }
-}</code></pre><h2 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤 3"></a>步骤 3</h2><p>创建实现了 Shape 接口的抽象装饰类。</p>
-<p>ShapeDecorator.java</p>
-<pre><code>public abstract class ShapeDecorator implements Shape {
-   protected Shape decoratedShape;
-
-   public ShapeDecorator(Shape decoratedShape){
-      this.decoratedShape = decoratedShape;
-   }
-
-   public void draw(){
-      decoratedShape.draw();
-   }  
-}</code></pre><h2 id="步骤-4"><a href="#步骤-4" class="headerlink" title="步骤 4"></a>步骤 4</h2><p>创建扩展了 ShapeDecorator 类的实体装饰类。</p>
-<p>RedShapeDecorator.java</p>
-<pre><code>public class RedShapeDecorator extends ShapeDecorator {
-
-   public RedShapeDecorator(Shape decoratedShape) {
-      super(decoratedShape);     
-   }
-
-   @Override
-   public void draw() {
-      decoratedShape.draw();         
-      setRedBorder(decoratedShape);
-   }
-
-   private void setRedBorder(Shape decoratedShape){
-      System.out.println(&quot;Border Color: Red&quot;);
-   }
-}</code></pre><h2 id="步骤-5"><a href="#步骤-5" class="headerlink" title="步骤 5"></a>步骤 5</h2><p>使用 RedShapeDecorator 来装饰 Shape 对象。</p>
-<p>DecoratorPatternDemo.java</p>
-<pre><code>public class DecoratorPatternDemo {
-   public static void main(String[] args) {
-
-      Shape circle = new Circle();
-      ShapeDecorator redCircle = new RedShapeDecorator(new Circle());
-      ShapeDecorator redRectangle = new RedShapeDecorator(new Rectangle());
-      //Shape redCircle = new RedShapeDecorator(new Circle());
-      //Shape redRectangle = new RedShapeDecorator(new Rectangle());
-      System.out.println(&quot;Circle with normal border&quot;);
-      circle.draw();
-
-      System.out.println(&quot;\nCircle of red border&quot;);
-      redCircle.draw();
-
-      System.out.println(&quot;\nRectangle of red border&quot;);
-      redRectangle.draw();
-   }
-}</code></pre><h2 id="步骤-6"><a href="#步骤-6" class="headerlink" title="步骤 6"></a>步骤 6</h2><p>执行程序，输出结果：</p>
-<pre><code>Circle with normal border
-Shape: Circle
-
-Circle of red border
-Shape: Circle
-Border Color: Red
-
-Rectangle of red border
-Shape: Rectangle
-Border Color: Red</code></pre><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】 <a href="https://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/decorator-pattern.html</a></p>
+<h1 id="为后代设计接口"><a href="#为后代设计接口" class="headerlink" title="为后代设计接口"></a>为后代设计接口</h1><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/21.%20%E4%B8%BA%E5%90%8E%E4%BB%A3%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/21.%20%E4%B8%BA%E5%90%8E%E4%BB%A3%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3</a></p>
 
       
       
@@ -411,13 +320,13 @@ Border Color: Red</code></pre><h1 id="参考资料"><a href="#参考资料" clas
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></p>
+        <p><span>本文标题:</span><a href="/2020/01/16/Effctive-Java阅读笔记XI/">Effctive-Java阅读笔记XI</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2019年10月17日 - 10时56分</p>
-        <p><span>最后更新:</span>2019年10月17日 - 11时06分</p>
+        <p><span>发布时间:</span>2020年01月16日 - 16时23分</p>
+        <p><span>最后更新:</span>2020年01月16日 - 16时25分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/10/17/设计模式学习笔记I/" title="设计模式学习笔记I">http://yoursite.com/2019/10/17/设计模式学习笔记I/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/10/17/设计模式学习笔记I/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/16/Effctive-Java阅读笔记XI/" title="Effctive-Java阅读笔记XI">http://yoursite.com/2020/01/16/Effctive-Java阅读笔记XI/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/16/Effctive-Java阅读笔记XI/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -430,18 +339,9 @@ Border Color: Red</code></pre><h1 id="参考资料"><a href="#参考资料" clas
 
 <nav id="article-nav">
   
-    <a href="/2019/11/05/设计模式学习笔记II/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          设计模式学习笔记II
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/09/25/Scala学习笔记II/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Scala学习笔记II</div>
+    <a href="/2020/01/16/Effctive-Java阅读笔记X/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Effctive-Java阅读笔记X</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -452,7 +352,7 @@ Border Color: Red</code></pre><h1 id="参考资料"><a href="#参考资料" clas
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#装饰器模式"><span class="toc-number">1.</span> <span class="toc-text">装饰器模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍"><span class="toc-number">2.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现"><span class="toc-number">3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤-1"><span class="toc-number">3.1.</span> <span class="toc-text">步骤 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤-2"><span class="toc-number">3.2.</span> <span class="toc-text">步骤 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤-3"><span class="toc-number">3.3.</span> <span class="toc-text">步骤 3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤-4"><span class="toc-number">3.4.</span> <span class="toc-text">步骤 4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤-5"><span class="toc-number">3.5.</span> <span class="toc-text">步骤 5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤-6"><span class="toc-number">3.6.</span> <span class="toc-text">步骤 6</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#为后代设计接口"><span class="toc-number">1.</span> <span class="toc-text">为后代设计接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">2.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -518,13 +418,11 @@ Border Color: Red</code></pre><h1 id="参考资料"><a href="#参考资料" clas
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/11/05/设计模式学习笔记II/" title="上一篇: 设计模式学习笔记II">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/09/25/Scala学习笔记II/" title="下一篇: Scala学习笔记II">
+            <a href="/2020/01/16/Effctive-Java阅读笔记X/" title="下一篇: Effctive-Java阅读笔记X">
                 <i class="fa fa-angle-right"></i>
             </a>
         
