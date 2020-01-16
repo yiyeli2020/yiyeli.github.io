@@ -5,18 +5,18 @@
   
   <title>Effctive-Java阅读笔记XI | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第四章阅读：类和接口 21.为后代设计接口">
+  <meta name="description" content="第四章阅读：类和接口 21.为后代设计接口应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的。在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。22.接口仅用来定义类型">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Effctive-Java阅读笔记XI">
 <meta property="og:url" content="http://yoursite.com/2020/01/16/Effctive-Java阅读笔记XI/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="第四章阅读：类和接口 21.为后代设计接口">
+<meta property="og:description" content="第四章阅读：类和接口 21.为后代设计接口应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的。在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。22.接口仅用来定义类型">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-16T08:25:01.339Z">
+<meta property="og:updated_time" content="2020-01-16T09:03:49.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effctive-Java阅读笔记XI">
-<meta name="twitter:description" content="第四章阅读：类和接口 21.为后代设计接口">
+<meta name="twitter:description" content="第四章阅读：类和接口 21.为后代设计接口应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的。在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。22.接口仅用来定义类型">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">61字</span>
+        <span class="post-count">1.9k字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -261,10 +261,45 @@
       
           
         <p>第四章阅读：类和接口</p>
-<p>21.为后代设计接口</p>
+<p>21.为后代设计接口<br>应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的。在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。<br>22.接口仅用来定义类型</p>
 <a id="more"></a>
 
-<h1 id="为后代设计接口"><a href="#为后代设计接口" class="headerlink" title="为后代设计接口"></a>为后代设计接口</h1><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/21.%20%E4%B8%BA%E5%90%8E%E4%BB%A3%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/21.%20%E4%B8%BA%E5%90%8E%E4%BB%A3%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3</a></p>
+<h1 id="为后代设计接口"><a href="#为后代设计接口" class="headerlink" title="为后代设计接口"></a>为后代设计接口</h1><p>　　在 Java 8 之前，不可能在不破坏现有实现的情况下为接口添加方法。 如果向接口添加了一个新方法，现有的实现通常会缺少该方法，从而导致编译时错误。 在 Java 8 中，添加了默认方法（default method）构造[JLS 9.4]，目的是允许将方法添加到现有的接口。 但是增加新的方法到现有的接口是充满风险的。</p>
+<p>　　默认方法的声明包含一个默认实现，该方法允许实现接口的类直接使用，而不必实现默认方法。 虽然在 Java 中添加默认方法可以将方法添加到现有接口，但不能保证这些方法可以在所有已有的实现中使用。 默认的方法被「注入（injected）」到现有的实现中，没有经过实现类的知道或同意。 在 Java 8 之前，这些实现是用默认的接口编写的，它们的接口永远不会获得任何新的方法。</p>
+<p>　　许多新的默认方法被添加到 Java 8 的核心集合接口中，主要是为了方便使用 lambda 表达式（第 6 章）。 Java 类库的默认方法是高质量的通用实现，在大多数情况下，它们工作正常。 但是，编写一个默认方法并不总是可能的，它保留了每个可能的实现的所有不变量。</p>
+<p>　　例如，考虑在 Java 8 中添加到 Collection 接口的 removeIf 方法。此方法删除给定布尔方法（或 Predicate 函数式接口）返回 true 的所有元素。默认实现被指定为使用迭代器遍历集合，调用每个元素的谓词，并使用迭代器的 remove 方法删除谓词返回 true 的元素。 据推测，这个声明看起来像这样：默认实现被指定为使用迭代器遍历集合，调用每个元素的 Predicate 函数式接口，并使用迭代器的 remove 方法删除 Predicate 函数式接口返回 true 的元素。 根据推测，这个声明看起来像这样：</p>
+<pre><code>// Default method added to the Collection interface in Java 8
+default boolean removeIf(Predicate&lt;? super E&gt; filter) {
+    Objects.requireNonNull(filter);
+    boolean result = false;
+    for (Iterator&lt;E&gt; it = iterator(); it.hasNext(); ) {
+        if (filter.test(it.next())) {
+            it.remove();
+            result = true;
+        }
+    }
+    return result;
+}</code></pre><p>　　这是可能为 removeIf 方法编写的最好的通用实现，但遗憾的是，它在一些实际的 Collection 实现中失败了。 例如，考虑 org.apache.commons.collections4.collection.SynchronizedCollection 方法。 这个类出自 Apache Commons 类库中，与 java.util 包中的静态工厂 Collections.synchronizedCollection 方法返回的类相似。 Apache 版本还提供了使用客户端提供的对象进行锁定的能力，以代替集合。 换句话说，它是一个包装类（条目 18），它们的所有方法在委托给包装集合类之前在一个锁定对象上进行同步。</p>
+<p>　　Apache 的 SynchronizedCollection 类仍然在积极维护，但在撰写本文时，并未重写 removeIf 方法。 如果这个类与 Java 8 一起使用，它将继承 removeIf 的默认实现，但实际上不能保持类的基本承诺：自动同步每个方法调用。 默认实现对同步一无所知，并且不能访问包含锁定对象的属性。 如果客户端在另一个线程同时修改集合的情况下调用 SynchronizedCollection 实例上的 removeIf 方法，则可能会导致 ConcurrentModificationException 异常或其他未指定的行为。</p>
+<p>　　为了防止在类似的 Java 平台类库实现中发生这种情况，比如 Collections.synchronizedCollection 返回的包级私有的类，JDK 维护者必须重写默认的 removeIf 实现和其他类似的方法来在调用默认实现之前执行必要的同步。 原来不属于 Java 平台的集合实现没有机会与接口更改进行类似的改变，有些还没有这样做。</p>
+<p>　　<strong><em>在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。</em></strong> 虽然不是非常普遍，但这个问题也不是一个孤立的事件。 在 Java 8 中添加到集合接口的一些方法已知是易受影响的，并且已知一些现有的实现会受到影响。</p>
+<p>　　应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的，在这种情况下，你应该仔细考虑，以确定现有的接口实现是否会被默认的方法实现所破坏。然而，默认方法对于在创建接口时提供标准的方法实现非常有用，以减轻实现接口的任务（详见第 20 条）。</p>
+<p>　　还值得注意的是，默认方法不是被用来设计，来支持从接口中移除方法或者改变现有方法的签名的目的。在不破坏现有客户端的情况下，这些接口都不可能发生更改。</p>
+<p>　　准则是清楚的。 尽管默认方法现在是 Java 平台的一部分，<strong><em>但是非常悉心地设计接口仍然是非常重要的</em></strong>。 虽然默认方法可以将方法添加到现有的接口，但这样做有很大的风险。 如果一个接口包含一个小缺陷，可能会永远惹怒用户。 如果一个接口严重缺陷，可能会破坏包含它的 API。</p>
+<p>　　因此，在发布之前测试每个新接口是非常重要的。 多个程序员应该以不同的方式实现每个接口。 至少，你应该准备三种不同的实现。 编写多个使用每个新接口的实例来执行各种任务的客户端程序同样重要。 这将大大确保每个接口都能满足其所有的预期用途。 这些步骤将允许你在发布之前发现接口中的缺陷，但仍然可以轻松地修正它们。 虽然在接口被发布后可能会修正一些存在的缺陷，但不要太指望这一点。</p>
+<h1 id="接口仅用来定义类型"><a href="#接口仅用来定义类型" class="headerlink" title="接口仅用来定义类型"></a>接口仅用来定义类型</h1><p>　　当类实现接口时，该接口作为一种类型（type），可以用来引用类的实例。因此，一个类实现了一个接口，因此表明客户端可以如何处理类的实例。为其他目的定义接口是不合适的。</p>
+<p>　　一种失败的接口就是所谓的常量接口（constant interface）。 这样的接口不包含任何方法; 它只包含静态 final 属性，每个输出一个常量。 使用这些常量的类实现接口，以避免需要用类名限定常量名。 这里是一个例子：</p>
+<pre><code>// Constant interface antipattern - do not use!
+public interface PhysicalConstants {
+    // Avogadro&apos;s number (1/mol)
+    static final double AVOGADROS_NUMBER   = 6.022_140_857e23;
+
+    // Boltzmann constant (J/K)
+    static final double BOLTZMANN_CONSTANT = 1.380_648_52e-23;
+
+    // Mass of the electron (kg)
+    static final double ELECTRON_MASS      = 9.109_383_56e-31;
+}</code></pre><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/21.%20%E4%B8%BA%E5%90%8E%E4%BB%A3%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/21.%20%E4%B8%BA%E5%90%8E%E4%BB%A3%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3</a></p>
 
       
       
@@ -323,7 +358,7 @@
         <p><span>本文标题:</span><a href="/2020/01/16/Effctive-Java阅读笔记XI/">Effctive-Java阅读笔记XI</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
         <p><span>发布时间:</span>2020年01月16日 - 16时23分</p>
-        <p><span>最后更新:</span>2020年01月16日 - 16时25分</p>
+        <p><span>最后更新:</span>2020年01月16日 - 17时03分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/01/16/Effctive-Java阅读笔记XI/" title="Effctive-Java阅读笔记XI">http://yoursite.com/2020/01/16/Effctive-Java阅读笔记XI/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/16/Effctive-Java阅读笔记XI/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -352,7 +387,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#为后代设计接口"><span class="toc-number">1.</span> <span class="toc-text">为后代设计接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">2.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#为后代设计接口"><span class="toc-number">1.</span> <span class="toc-text">为后代设计接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接口仅用来定义类型"><span class="toc-number">2.</span> <span class="toc-text">接口仅用来定义类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">3.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -461,7 +496,7 @@
                 &copy; 2020 Yiye Li
             </div>
                 <i class="fas fa-chart-area"></i>
-                    <span class="post-count">总字数：237.5k</span>
+                    <span class="post-count">总字数：239.4k</span>
                 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
                     <script>
                         var now = new Date();
