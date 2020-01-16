@@ -9,6 +9,8 @@ tags: [Java]
 09.使用 try-with-resources 语句替代 try-finally 语句
 10.重写 equals 方法时遵守通用约定
 
+除非必须：在很多情况下，不要重写 equals 方法，从 Object 继承的实现完全是你想要的。 如果你确实重写了 equals 方法，那么一定要比较这个类的所有重要属性，并且以保护前面 equals 约定里五个规定的方式去比较：自反性，对称性，传递性，一致性，非空性。
+
 <!-- more -->
 # 使用 try-with-resources 语句替代 try-finally 语句
 

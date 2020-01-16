@@ -6,7 +6,7 @@ tags: [Design Pattern，Java]
 
 ---
 
-静态静态工厂方法
+静态工厂方法
 
 <!-- more -->
 

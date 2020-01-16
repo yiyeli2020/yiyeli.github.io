@@ -8,6 +8,7 @@ tags: [Java]
 第二章阅读：创建和销毁对象
 07.消除过期的对象引用
 08.避免使用 Finalizer 和 Cleaner 机制
+除了作为一个安全网或者终止非关键的本地资源，不要使用 Cleaner 机制，或者是在 Java 9 发布之前的 finalizers 机制。
 <!-- more -->
 
 # 消除过期的对象引用
@@ -106,5 +107,67 @@ Finalizer 机制是不可预知的，往往是危险的，而且通常是不必�
 
 　　Cleaner 机制使用起来有点棘手。下面是演示该功能的一个简单的 Room 类。假设 Room 对象必须在被回收前清理干净。Room 类实现 AutoCloseable 接口；它的自动清理安全网使用的是一个 Cleaner 机制，这仅仅是一个实现细节。与 Finalizer 机制不同，Cleaner 机制不污染一个类的公共 API：
 
+    // An autocloseable class using a cleaner as a safety net
+    public class Room implements AutoCloseable {
+        private static final Cleaner cleaner = Cleaner.create();
+
+        // Resource that requires cleaning. Must not refer to Room!
+        private static class State implements Runnable {
+            int numJunkPiles; // Number of junk piles in this room
+
+            State(int numJunkPiles) {
+                this.numJunkPiles = numJunkPiles;
+            }
+
+            // Invoked by close method or cleaner
+            @Override
+            public void run() {
+                System.out.println("Cleaning room");
+                numJunkPiles = 0;
+            }
+        }
+
+        // The state of this room, shared with our cleanable
+        private final State state;
+
+        // Our cleanable. Cleans the room when it’s eligible for gc
+        private final Cleaner.Cleanable cleanable;
+
+        public Room(int numJunkPiles) {
+            state = new State(numJunkPiles);
+            cleanable = cleaner.register(this, state);
+        }
+
+        @Override
+        public void close() {
+            cleanable.clean();
+        }
+    }
+　　静态内部 State 类拥有 Cleaner 机制清理房间所需的资源。 在这里，它仅仅包含 numJunkPiles 属性，它代表混乱房间的数量。 更实际地说，它可能是一个 final 修饰的 long 类型的指向本地对等类的指针。 State 类实现了 Runnable 接口，其 run 方法最多只能调用一次，只能被我们在 Room 构造方法中用 Cleaner 机制注册 State 实例时得到的 Cleanable 调用。 对 run 方法的调用通过以下两种方法触发：通常，通过调用 Room 的 close 方法内调用 Cleanable 的 clean 方法来触发。 如果在 Room 实例有资格进行垃圾回收的时候客户端没有调用 close 方法，那么 Cleaner 机制将（希望）调用 State 的 run 方法。
+
+　　一个 State 实例不引用它的 Room 实例是非常重要的。如果它引用了，则创建了一个循环，阻止了 Room 实例成为垃圾收集的资格（以及自动清除）。因此，State 必须是静态的嵌内部类，因为非静态内部类包含对其宿主类的实例的引用（详见第 24 条）。同样，使用 lambda 表达式也是不明智的，因为它们很容易获取对宿主类对象的引用。
+
+　　就像我们之前说的，Room 的 Cleaner 机制仅仅被用作一个安全网。如果客户将所有 Room 的实例放在 try-with-resource 块中，则永远不需要自动清理。行为良好的客户端如下所示：
+
+    public class Adult {
+        public static void main(String[] args) {
+            try (Room myRoom = new Room(7)) {
+                System.out.println("Goodbye");
+            }
+        }
+    }
+
+　　正如你所预料的，运行 Adult 程序会打印 Goodbye 字符串，随后打印 Cleaning room 字符串。但是如果时不合规矩的程序，它从来不清理它的房间会是什么样的?
+
+    public class Teenager {
+        public static void main(String[] args) {
+            new Room(99);
+            System.out.println("Peace out");
+        }
+    }
+
+　　你可能期望它打印出 Peace out，然后打印 Cleaning room 字符串，但在我的机器上，它从不打印 Cleaning room 字符串；仅仅是程序退出了。 这是我们之前谈到的不可预见性。 Cleaner 机制的规范说：“System.exit 方法期间的清理行为是特定于实现的。 不保证清理行为是否被调用。”虽然规范没有说明，但对于正常的程序退出也是如此。 在我的机器上，将 System.gc() 方法添加到 Teenager 类的 main 方法足以让程序退出之前打印 Cleaning room，但不能保证在你的机器上会看到相同的行为。
+
+　　总之，除了作为一个安全网或者终止非关键的本地资源，不要使用 Cleaner 机制，或者是在 Java 9 发布之前的 finalizers 机制。即使是这样，也要当心不确定性和性能影响。
 # 参考资料：
 【1】https://sjsdfg.github.io/effective-java-3rd-chinese/#/notes/08.%20%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8Finalizer%E5%92%8CCleaner%E6%9C%BA%E5%88%B6

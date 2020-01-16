@@ -7,7 +7,9 @@ tags: [Java]
 
 第三章阅读：Methods Common to All Objects
 11.重写 equals 方法时同时也要重写 hashcode 方法
+每次重写 equals 方法时都必须重写 hashCode 方法，否则程序将无法正常运行。hashCode 方法必须遵从 Object 类指定的常规约定，并且必须执行合理的工作，将不相等的哈希码分配给不相等的实例。
 12.始终重写 toString 方法
+除非父类已经这样做了，否则在每个实例化的类中重写 Object 的 toString 实现。 它使得类更加舒适地使用和协助调试。 toString 方法应该以一种美观的格式返回对象的简明有用的描述。
 
 <!-- more -->
 
