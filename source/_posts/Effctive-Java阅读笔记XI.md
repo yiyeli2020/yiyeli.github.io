@@ -10,7 +10,7 @@ tags: [Java]
 21.为后代设计接口
 应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的。在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。
 22.接口仅用来定义类型
-
+接口只能用于定义类型。 它们不应该只是被用于导出常量。
 
 <!-- more -->
 
@@ -70,6 +70,40 @@ tags: [Java]
         // Mass of the electron (kg)
         static final double ELECTRON_MASS      = 9.109_383_56e-31;
     }
+
+　　常量接口模式是对接口的糟糕使用。 类在内部使用一些常量，完全属于实现细节。实现一个常量接口会导致这个实现细节泄漏到类的导出 API 中。对类的用户来说，类实现一个常量接口是没有意义的。事实上，它甚至可能使他们感到困惑。更糟糕的是，它代表了一个承诺：如果在将来的版本中修改了类，不再需要使用常量，那么它仍然必须实现接口，以确保二进制兼容性。如果一个非 final 类实现了常量接口，那么它的所有子类的命名空间都会被接口中的常量所污染。
+
+　　Java 平台类库中有多个常量接口，如 java.io.ObjectStreamConstants。 这些接口应该被视为不规范的，不应该被效仿。
+
+　　如果你想导出常量，有几个合理的选择方案。 如果常量与现有的类或接口紧密相关，则应将其添加到该类或接口中。 例如，所有数字基本类型的包装类，如 Integer 和 Double，都会导出 MIN_VALUE 和 MAX_VALUE 常量。 如果常量最好被看作枚举类型的成员，则应该使用枚举类型（详见第 34 条）导出它们。 否则，你应该用一个不可实例化的工具类来导出常量（详见第 4 条）。 下是前面所示的 PhysicalConstants 示例的工具类的版本：
+
+    // Constant utility class
+    package com.effectivejava.science;
+
+    public class PhysicalConstants {
+      private PhysicalConstants() { }  // Prevents instantiation
+
+      public static final double AVOGADROS_NUMBER = 6.022_140_857e23;
+      public static final double BOLTZMANN_CONST  = 1.380_648_52e-23;
+      public static final double ELECTRON_MASS    = 9.109_383_56e-31;
+    }
+
+　　顺便提一下，请注意在数字文字中使用下划线字符_ 。 从 Java 7 开始，合法的下划线对数字字面量的值没有影响，但是如果使用得当的话可以使它们更容易阅读。 无论是固定的浮点数，如果他们包含五个或更多的连续数字，考虑将下划线添加到数字字面量中。 对于底数为 10 的数字，无论是整型还是浮点型的，都应该用下划线将数字分成三个数字组，表示一千的正负幂。
+
+　　通常，实用工具类要求客户端使用类名来限定常量名，例如 PhysicalConstants.AVOGADROS_NUMBER。 如果大量使用实用工具类导出的常量，则通过使用静态导入来限定具有类名的常量：
+
+    // Use of static import to avoid qualifying constants
+    import static com.effectivejava.science.PhysicalConstants.*;
+
+    public class Test {
+        double  atoms(double mols) {
+            return AVOGADROS_NUMBER * mols;
+        }
+        ...
+        // Many more uses of PhysicalConstants justify static import
+    }
+
+　　总之，接口只能用于定义类型。 它们不应该只是被用于导出常量。
 
 
 
