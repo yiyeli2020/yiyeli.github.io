@@ -61,7 +61,7 @@ duoshuo:
   # http://<要填的部分>.duoshuo.com (domain只填上<>里的内容，不要填整个网址)
 
 gitment:
-  # on: true
+  on: true
   owner: yiye
   repo: liyiye012.github.io
   client_id:
