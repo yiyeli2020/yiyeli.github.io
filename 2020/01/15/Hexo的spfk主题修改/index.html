@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Yiye Li">
 <meta property="og:description" content="Hexo的spfk主题修改：添加字数统计和阅读时长，添加网站运行时间，访问量统计，添加live2d卡通人物">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-17T10:09:06.368Z">
+<meta property="og:updated_time" content="2020-01-17T10:15:13.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo的spfk主题修改">
 <meta name="twitter:description" content="Hexo的spfk主题修改：添加字数统计和阅读时长，添加网站运行时间，访问量统计，添加live2d卡通人物">
@@ -220,6 +220,25 @@
   
 
         
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.4k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">11分</span>
+      </span>
+    </span>
+</div>
+
+          
       </header>
       
       <div class="article-info article-info-post">
@@ -274,7 +293,7 @@
   &lt;% if(theme.word_count &amp;&amp; !post.no_word_count){ %&gt;
     &lt;%- partial(&apos;post/word&apos;) %&gt;
     &lt;% } %&gt;
-  &lt;/header&gt;</code></pre><p>但是这样发现在阅读每条博客时tag会和字数统计重叠</p>
+  &lt;/header&gt;</code></pre><p>但是这样发现在阅读每条博客时tag会和字数统计重叠，前端布局有待改动</p>
 <p>最后在主题目录下的 _config.yml 添加以下配置</p>
 <pre><code>word_count: true</code></pre><p>另外：要在博客底部显示所有文章的总字数，可以点击此处，根据你博客底部文件的类型选择相应的代码放在适当的位置即可，前提是要安装好 hexo-wordcount 插件，例如我使用 spfk 主题，在 \themes\material-x\layout_partial 目录下的 footer.ejs 文件中添加如下代码：</p>
 <pre><code>&lt;i class=&quot;fas fa-chart-area&quot;&gt;&lt;/i&gt;
@@ -453,7 +472,7 @@ sudo npm install live2d-widget-model-gf</code></pre><p>但做完这个功能后�
         <p><span>本文标题:</span><a href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
         <p><span>发布时间:</span>2020年01月15日 - 11时34分</p>
-        <p><span>最后更新:</span>2020年01月17日 - 18时09分</p>
+        <p><span>最后更新:</span>2020年01月17日 - 18时15分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/01/15/Hexo的spfk主题修改/" title="Hexo的spfk主题修改">http://yoursite.com/2020/01/15/Hexo的spfk主题修改/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/15/Hexo的spfk主题修改/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
