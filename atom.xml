@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-17T01:50:18.592Z</updated>
+  <updated>2020-01-17T08:34:55.470Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>1179. Reformat Department Table</title>
+    <link href="http://yoursite.com/2020/01/17/1179.%20Reformat%20Department%20Table/"/>
+    <id>http://yoursite.com/2020/01/17/1179. Reformat Department Table/</id>
+    <published>2020-01-17T08:03:12.000Z</published>
+    <updated>2020-01-17T08:34:55.470Z</updated>
+    
+    <content type="html"><![CDATA[<p>行转列(PIVOT)与列转行(UNPIVOT)的应用</p><a id="more"></a><p>以下是每个部门在每个月份的收入：</p><pre><code>Department table:+------+---------+-------+| id   | revenue | month |+------+---------+-------+| 1    | 8000    | Jan   || 2    | 9000    | Jan   || 3    | 10000   | Feb   || 1    | 7000    | Feb   || 1    | 6000    | Mar   |+------+---------+-------+</code></pre><p>但我们现在想要重组表的格式，变为：</p><pre><code>Result table:+------+-------------+-------------+-------------+-----+-------------+| id   | Jan_Revenue | Feb_Revenue | Mar_Revenue | ... | Dec_Revenue |+------+-------------+-------------+-------------+-----+-------------+| 1    | 8000        | 7000        | 6000        | ... | null        || 2    | 9000        | null        | null        | ... | null        || 3    | null        | 10000       | null        | ... | null        |+------+-------------+-------------+-------------+-----+-------------+</code></pre><p>比较直接的方法是：</p><pre><code>SELECT    id,    MAX(CASE WHEN month = &apos;Jan&apos; THEN revenue ELSE null END) AS Jan_Revenue,    MAX(CASE WHEN month = &apos;Feb&apos; THEN revenue ELSE null END) AS Feb_Revenue,    MAX(CASE WHEN month = &apos;Mar&apos; THEN revenue ELSE null END) AS Mar_Revenue,    MAX(CASE WHEN month = &apos;Apr&apos; THEN revenue ELSE null END) AS Apr_Revenue,    MAX(CASE WHEN month = &apos;May&apos; THEN revenue ELSE null END) AS May_Revenue,    MAX(CASE WHEN month = &apos;Jun&apos; THEN revenue ELSE null END) AS Jun_Revenue,    MAX(CASE WHEN month = &apos;Jul&apos; THEN revenue ELSE null END) AS Jul_Revenue,    MAX(CASE WHEN month = &apos;Aug&apos; THEN revenue ELSE null END) AS Aug_Revenue,    MAX(CASE WHEN month = &apos;Sep&apos; THEN revenue ELSE null END) AS Sep_Revenue,    MAX(CASE WHEN month = &apos;Oct&apos; THEN revenue ELSE null END) AS Oct_Revenue,    MAX(CASE WHEN month = &apos;Nov&apos; THEN revenue ELSE null END) AS Nov_Revenue,    MAX(CASE WHEN month = &apos;Dec&apos; THEN revenue ELSE null END) AS Dec_RevenueFROM DepartmentGROUP BY id</code></pre><p>使用行转列(PIVOT)：</p><pre><code>SELECT    id,    Jan AS Jan_Revenue,    Feb AS Feb_Revenue,    Mar AS Mar_Revenue,    Apr AS Apr_Revenue,    May AS May_Revenue,    Jun AS Jun_Revenue,    Jul AS Jul_Revenue,    Aug AS Aug_Revenue,    Sep AS Sep_Revenue,    Oct AS Oct_Revenue,    Nov AS Nov_Revenue,    Dec AS Dec_RevenueFROM DepartmentPIVOT(    MAX(revenue)    FOR month IN (Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)        ) AS MonthsRevenue</code></pre><p>也就是说，行转列后，原来的某个列的值变做了列名，在这里就是原来month列的值“Jan”,”Feb”…”Dec”边做了列名，而我们需要做的另一个工作就是计算这些列的值（这里的“计算”其实就是PIVOT里面的聚合函数(sum,avg等)）</p><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode.com/problems/reformat-department-table/discuss/382960/MSSQL-Multiple-joins-GroupBy-and-Pivot-table-solutions" target="_blank" rel="noopener">https://leetcode.com/problems/reformat-department-table/discuss/382960/MSSQL-Multiple-joins-GroupBy-and-Pivot-table-solutions</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;行转列(PIVOT)与列转行(UNPIVOT)的应用&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2020年1月" scheme="http://yoursite.com/categories/2020%E5%B9%B41%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Database" scheme="http://yoursite.com/tags/Database/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Effective-Java阅读笔记XVII</title>
     <link href="http://yoursite.com/2020/01/17/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0XVII/"/>
     <id>http://yoursite.com/2020/01/17/Effective-Java阅读笔记XVII/</id>
     <published>2020-01-16T18:33:12.000Z</published>
-    <updated>2020-01-17T01:50:18.592Z</updated>
+    <updated>2020-01-17T07:41:42.601Z</updated>
     
-    <content type="html"><![CDATA[<p>第五章阅读： 泛型<br>33.优先考虑类型安全的异构容器</p><a id="more"></a><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/33.%20%E4%BC%98%E5%85%88%E8%80%83%E8%99%91%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%BC%82%E6%9E%84%E5%AE%B9%E5%99%A8" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/33.%20%E4%BC%98%E5%85%88%E8%80%83%E8%99%91%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%BC%82%E6%9E%84%E5%AE%B9%E5%99%A8</a></p>]]></content>
+    <content type="html"><![CDATA[<p>第五章阅读： 泛型<br>33.优先考虑类型安全的异构容器</p><a id="more"></a><p>　　泛型的常见用法包括集合，如 Set<e> 和 Map&lt;K，V&gt; 和单个元素容器，如 ThreadLocal<t> 和 AtomicReference<t>。 在所有这些用途中，它都是参数化的容器。 这限制了每个容器只能有固定数量的类型参数。 通常这正是你想要的。 一个 Set 有单一的类型参数，表示它的元素类型; 一个 Map 有两个，代表它的键和值的类型；等等。</t></t></e></p><p>　　然而有时候，你需要更多的灵活性。 例如，数据库一行记录可以具有任意多列，并且能够以类型安全的方式访问它们是很好的。 幸运的是，有一个简单的方法可以达到这个效果。 这个想法是参数化键（key）而不是容器。 然后将参数化的键提交给容器以插入或检索值。 泛型类型系统用于保证值的类型与其键一致。</p><p>　　作为这种方法的一个简单示例，请考虑一个 Favorites 类，它允许其客户端保存和检索任意多种类型的 favorite 实例。 该类型的 Class 对象将扮演参数化键的一部分。其原因是这 Class 类是泛型的。 类的类型从字面上来说不是简单的 Class，而是 Class<t>。 例如，String.class 的类型为 Class<string>，Integer.class 的类型为 Class<integer>。 当在方法中传递字面类传递编译时和运行时类型信息时，它被称为类型令牌（type token）[Bracha04]。</integer></string></t></p><p>　　Favorites 类的 API 很简单。 它看起来就像一个简单 Map 类，除了该键是参数化的以外。 客户端在设置和获取 favorites 实例时呈现一个 Class 对象。 如下是 API：</p><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/33.%20%E4%BC%98%E5%85%88%E8%80%83%E8%99%91%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%BC%82%E6%9E%84%E5%AE%B9%E5%99%A8" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/33.%20%E4%BC%98%E5%85%88%E8%80%83%E8%99%91%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%BC%82%E6%9E%84%E5%AE%B9%E5%99%A8</a></p>]]></content>
     
     <summary type="html">
     
@@ -444,28 +468,6 @@
     
     
       <category term="Design Pattern，Java" scheme="http://yoursite.com/tags/Design-Pattern%EF%BC%8CJava/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据库学习笔记VI</title>
-    <link href="http://yoursite.com/2020/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VII/"/>
-    <id>http://yoursite.com/2020/01/03/数据库学习笔记VII/</id>
-    <published>2020-01-03T03:12:12.000Z</published>
-    <updated>2020-01-06T01:30:00.687Z</updated>
-    
-    <content type="html"><![CDATA[<p>MySQL建表,LIMIT,OFFSET的用法,Rank函数的用法   </p><a id="more"></a><h1 id="MySQL建表"><a href="#MySQL建表" class="headerlink" title="MySQL建表"></a>MySQL建表</h1><p>下面是通用的SQL语法用来创建MySQL表：</p><pre><code>CREATE TABLE table_name (column_name column_type);</code></pre><p>现在，我们将在 test 数据库中创建以下表。</p><pre><code>create table tutorials_tbl(   tutorial_id INT NOT NULL AUTO_INCREMENT,   tutorial_title VARCHAR(100) NOT NULL,   tutorial_author VARCHAR(40) NOT NULL,   submission_date DATE,   PRIMARY KEY ( tutorial_id ));</code></pre><p>在这里，一些数据项需要解释：<br>字段使用NOT NULL属性，是因为我们不希望这个字段的值为NULL。 因此，如果用户将尝试创建具有NULL值的记录，那么MySQL会产生错误。</p><p>字段的AUTO_INCREMENT属性告诉MySQL自动增加id字段下一个可用编号。</p><h1 id="LIMIT-OFFSET"><a href="#LIMIT-OFFSET" class="headerlink" title="LIMIT,OFFSET"></a>LIMIT,OFFSET</h1><pre><code>SELECT column_name FROM table_name LIMIT 4 OFFSET 3;</code></pre><p>LIMIT 4 OFFSET 3指示MySQL等DBMS返回从第3行（从0行计数）起的4行数据。第一个数字是检索的行数，第二个数字是指从哪儿开始。</p><p>MySQL和MariaDB支持简化版的LIMIT 4 OFFSET 3语句，即LIMIT 3,4。使用这个语法，之前的值对应OFFSET之后的值对应LIMIT 。</p><p> limit10000,20的意思扫描满足条件的10020行，扔掉前面的10000行，返回最后的20行.</p><p>参考练习题：<a href="https://leetcode.com/problems/nth-highest-salary" target="_blank" rel="noopener">https://leetcode.com/problems/nth-highest-salary</a></p><h1 id="mysql变量的种类"><a href="#mysql变量的种类" class="headerlink" title="mysql变量的种类"></a>mysql变量的种类</h1><p>用户变量：以”@”开始，形式为”@变量名”。用户变量跟mysql客户端是绑定的，设置的变量，只对当前用户使用的客户端生效<br>全局变量：定义时，以如下两种形式出现，set GLOBAL 变量名  或者  set @@global.变量名，对所有客户端生效。只有具有super权限才可以设置全局变量<br>会话变量：只对连接的客户端有效。<br>局部变量：作用范围在begin到end语句块之间。在该语句块里设置的变量。declare语句专门用于定义局部变量。set语句是设置不同类型的变量，包括会话变量和全局变量<br>通俗理解术语之间的区别：</p><p>用户定义的变量就叫用户变量。这样理解的话，会话变量和全局变量都可以是用户定义的变量。只是他们是对当前客户端生效还是对所有客户端生效的区别了。所以，用户变量包括了会话变量和全局变量</p><p>局部变量与用户变量的区分在于:<br>1.用户变量是以”@”开头的。局部变量没有这个符号。<br>2.定义变量不同。用户变量使用set语句，局部变量使用declare语句定义<br>3.作用范围。局部变量只在begin-end语句块之间有效。在begin-end语句块运行完之后，局部变量就消失了。</p><p>所以，最后它们之间的层次关系是：变量包括局部变量和用户变量。用户变量包括会话变量和全局变量。</p><h1 id="mysql-declare定义变量"><a href="#mysql-declare定义变量" class="headerlink" title="mysql declare定义变量"></a>mysql declare定义变量</h1><p>mysql declare用于定义变量，在存储过程和函数中通过declare定义变量在BEGIN…END中，且在语句之前。并且可以通过重复定义多个变量</p><p>declare变量的作用范围同编程里面类似，在这里一般是在对应的begin和end之间。在end之后这个变量就没有作用了，不能使用了。这个同编程一样。</p><p>注意：declare定义的变量名不能带‘@’符号，mysql在这点做的确实不够直观，往往变量名会被错成参数或者字段名。</p><p>mysql存储过程中使用declare定义变量，实例如下：</p><p> DROP PROCEDURE IF EXISTS insert_ten_rows $$<br> CREATE PROCEDURE insert_ten_rows ()<br>     BEGIN<br>         DECLARE crs INT DEFAULT 0;</p><pre><code>    WHILE crs &lt; 10 DO        INSERT INTO `continent`(`name`) VALUES (&apos;cont&apos;+crs);        SET crs = crs + 1;    END WHILE;END $$</code></pre><p> DELIMITER ;</p><h1 id="mysql-SET定义变量"><a href="#mysql-SET定义变量" class="headerlink" title="mysql SET定义变量"></a>mysql SET定义变量</h1><p>mysql set也可以用来定于变量，定义变量的形式是以”@”开始，如：”@变量名”。</p><p>mysql SET定义变量实例：</p><p>   mysql&gt; SET @t1=0, @t2=1, @t3=2;</p><p>   mysql&gt; select @t1;<br>   +——+<br>   | @t1  |<br>   +——+<br>   | 0    |<br>   +——+</p><p>   mysql&gt; select @t2;<br>   +——+<br>   | @t2  |<br>   +——+<br>   | 1    |<br>   +——+</p><p>   mysql&gt; select @t3;<br>   +——+<br>   | @t3  |<br>   +——+<br>   | 2    |<br>   +——+</p><p>   mysql&gt;</p><p>复杂一点的实例：</p><p>   mysql&gt; SET @t1=0, @t2=1, @t3=2;</p><p>   mysql&gt; SELECT @t1:=(@t2:=1)+@t3:=4,@t1,@t2,@t3;<br>   +———————-+——+——+——+<br>   | @t1:=(@t2:=1)+@t3:=4 | @t1  | @t2  | @t3  |<br>   +———————-+——+——+——+<br>   |                    5 | 5    | 1    | 4    |<br>   +———————-+——+——+——+</p><h1 id="mysql-declare和set定义变量的区别"><a href="#mysql-declare和set定义变量的区别" class="headerlink" title="mysql declare和set定义变量的区别"></a>mysql declare和set定义变量的区别</h1><p>mysql declare和set定义变量，除了一个不加@和一个加@这个区别之外，还有以下区别：</p><p> declare用来定义局部变量</p><p> @用来定义会话变量</p><p> declare变量的作用范围同编程里面类似，在这里一般是在对应的begin和end之间。在end之后这个变量就没有作用了，不能使用了。这个同编程一样。</p><p> 另外有种变量叫做会话变量(session variable)，也叫做用户定义的变量(user defined variable)。这种变量要在变量名称前面加上“@”符号，叫做会话变量，代表整个会话过程他都是有作用的，这个有点类似于全局变量一样。这种变量用途比较广，因为只要在一个会话内(就是某个应用的一个连接过程中)，这个变量可以在被调用的存储过程或者代码之间共享数据。</p><h1 id="rank函数"><a href="#rank函数" class="headerlink" title="rank函数"></a>rank函数</h1><p>用于返回结果集的分区内每行的排名， 行的排名是相关行之前的排名数加一。简单来说rank函数就是对查询出来的记录进行排名，与row_number函数不同的是，rank函数考虑到了over子句中排序字段值相同的情况，如果使用rank函数来生成序号，over子句中排序字段值相同的序号是一样的，后面字段值不相同的序号将跳过相同的排名号排下一个，也就是相关行之前的排名数加一，可以理解为根据当前的记录数生成序号，后面的记录依此类推。</p><p>select RANK() OVER(order by column_name) as rank,* from table_name</p><p>#参考资料<br>【1】 <a href="https://tech.meituan.com/2014/06/30/mysql-index.html" target="_blank" rel="noopener">https://tech.meituan.com/2014/06/30/mysql-index.html</a><br>【2】 <a href="https://blog.csdn.net/qq_37923253/article/details/79688313" target="_blank" rel="noopener">https://blog.csdn.net/qq_37923253/article/details/79688313</a><br>【3】 <a href="http://www.manongjc.com/article/1441.html" target="_blank" rel="noopener">http://www.manongjc.com/article/1441.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;MySQL建表,LIMIT,OFFSET的用法,Rank函数的用法   &lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2020年1月" scheme="http://yoursite.com/categories/2020%E5%B9%B41%E6%9C%88/"/>
-    
-    
-      <category term="Mysql" scheme="http://yoursite.com/tags/Mysql/"/>
     
   </entry>
   
