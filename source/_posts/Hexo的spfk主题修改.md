@@ -53,6 +53,8 @@ Hexo的spfk主题修改：添加字数统计和阅读时长，添加网站运行
         <%- partial('post/word') %>
         <% } %>
       </header>
+但是这样发现在阅读每条博客时tag会和字数统计重叠
+
 最后在主题目录下的 _config.yml 添加以下配置
 
     word_count: true
