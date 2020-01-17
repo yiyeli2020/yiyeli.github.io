@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Effective-Java阅读笔记IX | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第四章阅读：类和接口 17.最小化可变性18.组合优于继承灵魂三问：　如果你试图让 B 类继承 A 类时，问自己这个问题：每个 B 都是 A 吗？ 如果你不能如实回答这个问题，那么 B 就不应该继承 A。在决定使用继承来代替组合之前，你应该问自己最后一组问题。对于试图继承的类，它的 API 有没有缺陷呢？ 如果有，你是否愿意将这些缺陷传播到你的类的 API 中？继承传播父类的 API 中的任何缺陷">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective-Java阅读笔记IX">
+<meta property="og:url" content="http://yoursite.com/2020/01/16/Effective-Java阅读笔记IX/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="第四章阅读：类和接口 17.最小化可变性18.组合优于继承灵魂三问：　如果你试图让 B 类继承 A 类时，问自己这个问题：每个 B 都是 A 吗？ 如果你不能如实回答这个问题，那么 B 就不应该继承 A。在决定使用继承来代替组合之前，你应该问自己最后一组问题。对于试图继承的类，它的 API 有没有缺陷呢？ 如果有，你是否愿意将这些缺陷传播到你的类的 API 中？继承传播父类的 API 中的任何缺陷">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-17T01:50:19.121Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effective-Java阅读笔记IX">
+<meta name="twitter:description" content="第四章阅读：类和接口 17.最小化可变性18.组合优于继承灵魂三问：　如果你试图让 B 类继承 A 类时，问自己这个问题：每个 B 都是 A 吗？ 如果你不能如实回答这个问题，那么 B 就不应该继承 A。在决定使用继承来代替组合之前，你应该问自己最后一组问题。对于试图继承的类，它的 API 有没有缺陷呢？ 如果有，你是否愿意将这些缺陷传播到你的类的 API 中？继承传播父类的 API 中的任何缺陷">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 13.64px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 17.27px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 14.55px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 12.73px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 10.91px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 18.18px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 12.73px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 10.91px;">Database</a> <a href="/tags/Database，SQL/" style="font-size: 10px;">Database，SQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 12.73px;">Depth-first Search</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 12.73px;">Design Pattern，Java</a> <a href="/tags/Dynamic-Programming/" style="font-size: 16.36px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 13.64px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Greedy/" style="font-size: 10.91px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 12.73px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 11.82px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 12.73px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19.09px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10.91px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Mysql/" style="font-size: 14.55px;">Mysql</a> <a href="/tags/Operating-System/" style="font-size: 10.91px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 13.64px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 11.82px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 13.64px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 10.91px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.91px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 15.45px;">Tree</a> <a href="/tags/Trie/" style="font-size: 11.82px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Effective-Java阅读笔记IX" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/01/16/Effective-Java阅读笔记IX/" class="article-date">
+      <time datetime="2020-01-16T03:28:12.000Z" itemprop="datePublished">2020-01-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Effective-Java阅读笔记IX
+    </h1>
+  
+
+      
+        <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">7.9k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">29分</span>
+      </span>
+    </span>
+</div>
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>第四章阅读：类和接口</p>
+<p>17.最小化可变性<br>18.组合优于继承<br>灵魂三问：<br>　如果你试图让 B 类继承 A 类时，问自己这个问题：每个 B 都是 A 吗？ 如果你不能如实回答这个问题，那么 B 就不应该继承 A。在决定使用继承来代替组合之前，你应该问自己最后一组问题。对于试图继承的类，它的 API 有没有缺陷呢？ 如果有，你是否愿意将这些缺陷传播到你的类的 API 中？继承传播父类的 API 中的任何缺陷，而组合可以让你设计一个隐藏这些缺陷的新 API。</p>
+<a id="more"></a>
+
+<h1 id="最小化可变性"><a href="#最小化可变性" class="headerlink" title="最小化可变性"></a>最小化可变性</h1><p>　　不可变类简单来说是其实例不能被修改的类。 包含在每个实例中的所有信息在对象的生命周期中是固定的，因此不会观察到任何变化。 Java 平台类库包含许多不可变的类，包括 String 类、基本类型包装类以及 BigInteger 类和 BigDecimal 类。 有很多很好的理由：不可变类比可变类更易于设计，实现和使用。 他们不容易出错，并且更安全。</p>
+<p>　　要使一个类成为不可变类，请遵循以下五条规则：</p>
+<h2 id="不要提供修改对象状态的方法（也称为-mutators，设值方法）。"><a href="#不要提供修改对象状态的方法（也称为-mutators，设值方法）。" class="headerlink" title="不要提供修改对象状态的方法（也称为 mutators，设值方法）。"></a>不要提供修改对象状态的方法（也称为 mutators，设值方法）。</h2><h2 id="确保这个类不能被继承。"><a href="#确保这个类不能被继承。" class="headerlink" title="确保这个类不能被继承。"></a>确保这个类不能被继承。</h2><p>这可以防止粗心或者恶意的子类假装对象的状态已经改变，从而破坏类的不可变行为。 防止子类化，通常是通过 final 修饰类，但是我们稍后将讨论另一种方法。<br>##把所有字段设置为 final。<br>通过系统强制执行的方式，清楚地表达了你的意图。 另外，如果一个新创建的实例的引用在缺乏同步机制的情况下从一个线程传递到另一个线程，就必须保证正确的行为，正如内存模型[JLS，17.5; Goetz06 16] 所述。</p>
+<h2 id="把所有的字段设置为-private。"><a href="#把所有的字段设置为-private。" class="headerlink" title="把所有的字段设置为 private。"></a>把所有的字段设置为 private。</h2><p>这可以防止客户端获得对字段引用的可变对象的访问权限，并直接修改这些对象。 虽然技术上允许不可变类具有包含基本类型数值的公有的 final 字段或对不可变对象的引用，但不建议这样做，因为这样使得在以后的版本中无法再改变内部的表示状态（详见第 15 和 16 条）。</p>
+<h2 id="确保对任何可变组件的互斥访问。"><a href="#确保对任何可变组件的互斥访问。" class="headerlink" title="确保对任何可变组件的互斥访问。"></a>确保对任何可变组件的互斥访问。</h2><p>如果你的类有任何引用可变对象的字段，请确保该类的客户端无法获得对这些对象的引用。 切勿将这样的属性初始化为客户端提供的对象引用，或从访问方法返回属性。 在构造方法，访问方法和 readObject 方法（详见第 88 条）中进行防御性拷贝（详见第 50 条）。<br>　　以前条目中的许多示例类都是不可变的。 其中一个例子是条目 11 中的 PhoneNumber 类，它具有每个字段的访问方法（accessors），但没有相应的设值方法（mutators）。下面一个稍微复杂一点的例子：</p>
+<pre><code>// Immutable complex number class
+public final class Complex {
+
+    private final double re;
+    private final double im;
+
+    public Complex(double re, double im) {
+        this.re = re;
+        this.im = im;
+    }
+
+    public double realPart() {
+        return re;
+    }
+
+    public double imaginaryPart() {
+        return im;
+    }
+
+    public Complex plus(Complex c) {
+        return new Complex(re + c.re, im + c.im);
+    }
+
+    public Complex minus(Complex c) {
+        return new Complex(re - c.re, im - c.im);
+    }
+
+    public Complex times(Complex c) {
+        return new Complex(re * c.re - im * c.im,
+                re * c.im + im * c.re);
+    }
+
+    public Complex dividedBy(Complex c) {
+        double tmp = c.re * c.re + c.im * c.im;
+        return new Complex((re * c.re + im * c.im) / tmp,
+                (im * c.re - re * c.im) / tmp);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Complex)) {
+            return false;
+        }
+
+        Complex c = (Complex) o;
+
+        // See page 47 to find out why we use compare instead of ==
+        return Double.compare(c.re, re) == 0
+                &amp;&amp; Double.compare(c.im, im) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * Double.hashCode(re) + Double.hashCode(im);
+    }
+
+    @Override
+    public String toString() {
+        return &quot;(&quot; + re + &quot; + &quot; + im + &quot;i)&quot;;
+    }
+}</code></pre><p>　　这个类代表了一个复数（包含实部和虚部的数字）。 除了标准的 Object 方法之外，它还为实部和虚部提供访问方法，并提供四个基本的算术运算：加法，减法，乘法和除法。 注意算术运算如何创建并返回一个新的 Complex 实例，而不是修改这个实例。 这种模式被称为函数式方法，因为方法返回将操作数应用于函数的结果，而不修改它们。 与其对应的过程式的（procedural）或命令式的（imperative）的方法相对比，在这种方法中，将一个过程作用在操作数上，导致其状态改变。 请注意，方法名称是介词（如 plus）而不是动词（如 add）。 这强调了方法不会改变对象的值的事实。 BigInteger 和 BigDecimal 类没有遵守这个命名约定，并导致许多使用错误。</p>
+<p>　　如果你不熟悉函数式方法，可能会觉得它显得不自然，但它具有不变性，具有许多优点。 不可变对象很简单。 一个不可变的对象可以完全处于一种状态，也就是被创建时的状态。 如果确保所有的构造方法都建立了类不变量，那么就保证这些不变量在任何时候都保持不变，使用此类的程序员无需再做额外的工作。 另一方面，可变对象可以具有任意复杂的状态空间。 如果文档没有提供由设置（mutator）方法执行的状态转换的精确描述，那么可靠地使用可变类可能是困难的或不可能的。</p>
+<p>　　<strong><em>不可变对象本质上是线程安全的；它们不需要同步</em></strong> 。 被多个线程同时访问它们时，不会遭到破坏。 这是实现线程安全的最简单方法。 由于没有线程可以观察到另一个线程对不可变对象的影响，所以 <strong><em>不可变对象可以被自由地共享</em></strong> 。 因此，不可变类应鼓励客户端尽可能重用现有的实例。 一个简单的方法是为常用的值提供公共的静态 final 常量。 例如，Complex 类可能提供这些常量：</p>
+<pre><code>public static final Complex ZERO = new Complex(0, 0);
+public static final Complex ONE  = new Complex(1, 0);
+public static final Complex I    = new Complex(0, 1);</code></pre><p>　　这种方法可以更进一步。 一个不可变的类可以提供静态的工厂（详见第 1 条）来缓存经常被请求的实例，以避免在现有的实例中创建新的实例。 所有基本类型的包装类和 BigInteger 类都是这样做的。 使用这样的静态工厂会使客户端共享实例而不是创建新实例，从而减少内存占用和垃圾回收成本。 在设计新类时，选择静态工厂代替公共构造方法，可以在以后增加缓存的灵活性，而不需要修改客户端。</p>
+<p>　　不可变对象可以自由分享的结果是，你永远不需要做出防御性拷贝（defensive copies）（详见第 50 条）。 事实上，永远不需要做任何拷贝，因为这些拷贝永远等于原始对象。 因此，你不需要也不应该在一个不可变的类上提供一个 clone 方法或拷贝构造方法（copy constructor）（详见第 13 条）。 这一点在 Java 平台的早期阶段还不是很好理解，所以 String 类有一个拷贝构造方法，但是它应该尽量很少使用（详见第 6 条）。</p>
+<p>　　<strong><em>不仅可以共享不可变的对象，而且可以共享内部信息</em></strong> 。 例如，BigInteger 类在内部使用符号数值表示法。 符号用 int 值表示，数值用 int 数组表示。 negate 方法生成了一个数值相同但符号相反的新 BigInteger 实例。 即使它是可变的，也不需要复制数组；新创建的 BigInteger 指向与原始相同的内部数组。</p>
+<p>　　<strong><em>不可变对象为其他对象提供了很好的构件（building blocks）</em></strong>，无论是可变的还是不可变的。 如果知道一个复杂组件的内部对象不会发生改变，那么维护复杂对象的不变量就容易多了。这一原则的特例是，不可变对象可以构成 Map 对象的键和 Set 的元素，一旦不可变对象作为 Map 的键或 Set 里的元素，即使破坏了 Map 和 Set 的不可变性，但不用担心它们的值会发生变化。</p>
+<p>　　<strong><em>不可变对象无偿地提供了的原子失败机制（详见第 76 条）</em></strong>。 它们的状态永远不会改变，所以不可能出现临时的不一致。</p>
+<p>　　<strong><em>不可变类的主要缺点是对于每个不同的值都需要一个单独的对象</em></strong>。 创建这些对象可能代价很高，特别是是大型的对象下。 例如，假设你有一个百万位的 BigInteger ，你想改变它的低位：</p>
+<pre><code>BigInteger moby = ...;
+moby = moby.flipBit(0);</code></pre><p>　　flipBit 方法创建一个新的 BigInteger 实例，也是一百万位长，与原始位置只有一位不同。 该操作需要与 BigInteger 大小成比例的时间和空间。 将其与 java.util.BitSet 对比。 像 BigInteger 一样，BitSet 表示一个任意长度的位序列，但与 BigInteger 不同，BitSet 是可变的。 BitSet 类提供了一种方法，允许你在固定时间内更改百万位实例中单个位的状态：</p>
+<pre><code>BitSet moby = ...;
+moby.flip(0);</code></pre><p>　　如果执行一个多步操作，在每一步生成一个新对象，除最终结果之外丢弃所有对象，则性能问题会被放大。这里有两种方式来处理这个问题。第一种办法，先猜测一下会经常用到哪些多步的操作，然后讲它们作为基本类型提供。如果一个多步操作是作为一个基本类型提供的，那么不可变类就不必在每一步创建一个独立的对象。在内部，不可变的类可以是任意灵活的。 例如，BigInteger 有一个包级私有的可变的“伙伴类（companion class）”，它用来加速多步操作，比如模幂运算（modular exponentiation）。出于前面所述的所有原因，使用可变伙伴类比使用 BigInteger 要困难得多。 幸运的是，你不必使用它：BigInteger 类的实现者为你做了很多努力。</p>
+<p>　　如果你可以准确预测客户端要在你的不可变类上执行哪些复杂的操作，那么包级私有可变伙伴类的方式可以正常工作。如果不是的话，那么最好的办法就是提供一个公开的可变伙伴类。 这种方法在 Java 平台类库中的主要例子是 String 类，它的可变伙伴类是 StringBuilder（及其过时的前身 StringBuffer 类）。</p>
+<p>　　现在你已经知道如何创建一个不可改变类，并且了解不变性的优点和缺点，下面我们来讨论几个设计方案。 回想一下，为了保证不变性，一个类不得允许子类化。 这可以通过使类用 final 修饰，但是还有另外一个更灵活的选择。 而不是使不可变类设置为 final，<strong><em>可以使其所有的构造方法私有或包级私有，并添加公共静态工厂，而不是公共构造方法</em></strong>（详见第 1 条）。 为了具体说明这种方法，下面以 Complex 为例，看看如何使用这种方法：</p>
+<pre><code>// Immutable class with static factories instead of constructors
+public class Complex {
+
+    private final double re;
+    private final double im;
+
+    private Complex(double re, double im) {
+        this.re = re;
+        this.im = im;
+    }
+
+    public static Complex valueOf(double re, double im) {
+        return new Complex(re, im);
+    }
+
+    ... // Remainder unchanged
+}</code></pre><p>　　这种方法往往是最好的选择。 这是最灵活的，因为它允许使用多个包级私有实现类。 对于驻留在包之外的客户端，不可变类实际上是 final 的，因为不可能继承来自另一个包的类，并且缺少公共或受保护的构造方法。 除了允许多个实现类的灵活性以外，这种方法还可以通过改进静态工厂的对象缓存功能来调整后续版本中类的性能。<br>　　当 BigInteger 和 BigDecimal 刚被编写出来的时候，“不可变类必须是 final”的说法还没有得到广泛地理解，因此它们的所有方法都可能被重写。不幸的是，为了保持向后兼容性，这一问题无法得以纠正。如果你编写一个安全性取决于来自不受信任的客户端的 BigInteger 或 BigDecimal 参数的不变类时，则必须检查该参数是否为“真实的”BigInteger 或者 BigDecimal，而不应该是不受信任的子类的实例。如果是后者，则必须在假设可能是可变的情况下保护性拷贝（defensively copy）（详见第 50 条）：</p>
+<pre><code>public static BigInteger safeInstance(BigInteger val) {
+    return val.getClass() == BigInteger.class ?
+            val : new BigInteger(val.toByteArray());
+}</code></pre><p>　　在本条目开头关于不可变类的规则说明，没有方法可以修改对象，并且它的所有属性必须是 final 的。事实上，这些规则比实际需要的要强硬一些，其实可以有所放松来提高性能。 事实上，任何方法都不能在对象的状态中产生外部可见的变化。 然而，一些不可变类具有一个或多个非 final 属性，在第一次需要时将开销昂贵的计算结果缓存在这些属性中。 如果再次请求相同的值，则返回缓存的值，从而节省了重新计算的成本。 这个技巧的作用恰恰是因为对象是不可变的，这保证了如果重复的话，计算会得到相同的结果。</p>
+<p>　　例如，PhoneNumber 类的 hashCode 方法（详见第 11 条）在第一次调用改方法时计算哈希码，并在再次调用时 对其进行缓存。 这种延迟初始化（详见第 83 条）的一个例子，String 类也使用到了。</p>
+<p>　　关于序列化应该加上一个警告。 如果你选择使您的不可变类实现 Serializable 接口，并且它包含一个或多个引用可变对象的属性，则必须提供显式的 readObject 或 readResolve 方法，或者使用 ObjectOutputStream.writeUnshared 和 ObjectInputStream.readUnshared 方法，即默认的序列化形式也是可以接受的。 否则攻击者可能会创建一个可变的类的实例。 这个主题会在条目 88 中会详细介绍。</p>
+<p>　　总而言之，坚决不要为每个属性编写一个 get 方法后再编写一个对应的 set 方法。<strong><em>除非有充分的理由使类成为可变类，否则类应该是不可变的</em></strong>。 不可变类提供了许多优点，唯一的缺点是在某些情况下可能会出现性能问题。 你应该始终使用较小的值对象（如 PhoneNumber 和 Complex），使其不可变。（Java 平台类库中有几个类，如 java.util.Date 和 java.awt.Point，本应该是不可变的，但实际上并不是）。你应该认真考虑创建更大的值对象，例如 String 和 BigInteger ，设成不可改变的。 只有当你确认有必要实现令人满意的性能（详见第 67 条）时，才应该为不可改变类提供一个公开的可变伙伴类。</p>
+<p>　　对于一些类来说，不变性是不切实际的。<strong><em>如果一个类不能设计为不可变类，那么也要尽可能地限制它的可变性</em></strong> 。减少对象可以存在的状态数量，可以更容易地分析对象，以及降低出错的可能性。因此，除非有足够的理由把属性设置为非 final 的情况下，否则应该每个属性都设置为 final 的。把本条目的建议与条目 15 的建议结合起来，你自然的倾向就是：<strong><em>除非有充分的理由不这样做，否则应该把每个属性声明为私有 final 的</em></strong>。</p>
+<p>　　<strong><em>构造方法应该创建完全初始化的对象，并建立所有的不变性。</em></strong> 除非有令人信服的理由，否则不要提供独立于构造方法或静态工厂的公共初始化方法。 同样，不要提供一个“reinitialize”方法，使对象可以被重用，就好像它是用不同的初始状态构建的。 这样的方法通常以增加的复杂度为代价，仅仅提供很少的性能优势。</p>
+<p>　　CountDownLatch 类是这些原理的例证。 它是可变的，但它的状态空间有意保持最小范围内。 创建一个实例，使用它一次，并完成：一旦 countdown 锁的计数器已经达到零，不能再重用它。</p>
+<p>　　在这个条目中，应该添加关于 Complex 类的最后一个注释。 这个例子只是为了说明不变性。 这不是一个工业强度复杂的复数实现。 它对复数使用了乘法和除法的标准公式，这些公式不正确会进行不正确的四舍五入，没有为复数的 NaN 和无穷大提供良好的语义[Kahan91，Smith62，Thomas94]。</p>
+<h1 id="组合优于继承"><a href="#组合优于继承" class="headerlink" title="组合优于继承"></a>组合优于继承</h1><p>　　继承是实现代码重用的有效方式，但并不总是最好的工具。使用不当，会导致脆弱的软件。 在包中使用继承是安全的，其中子类和父类的实现都在同一个程序员的控制之下。对应专门为了继承而设计的，并且有文档说明的类来说（详见第 19 条），使用继承也是安全的。 然而，从普通的具体类跨越包级边界继承，是危险的。 提醒一下，本书使用「继承」一词，其含义是实现继承（当一个类扩展另一个类时）。 在本条目中讨论的问题不适用于接口继承（当类实现接口，或者当接口继承另一个接口时）。</p>
+<p>　　<strong><em>与方法调用不同，继承打破了封装[Snyder86]</em></strong>。 换句话说，一个子类依赖于其父类的实现细节来保证其正确的功能。 父类的实现可能会从发布版本不断变化，如果是这样，子类可能会被破坏，即使它的代码没有任何改变。 因此，一个子类必须与其超类一起更新而变化，除非父类的作者为了继承的目的而专门设计它，并对应有文档的说明。</p>
+<p>　　为了具体说明，假设有一个使用 HashSet 的程序。 为了调整程序的性能，需要查询 HashSet ，从创建它之后已经添加了多少个元素（不要和当前的元素数量混淆，当元素被删除时数量也会下降）。 为了提供这个功能，编写了一个 HashSet 变体，它保留了尝试元素插入的数量，并导出了这个插入数量的一个访问方法。 HashSet 类包含两个添加元素的方法，分别是 add 和 addAll，所以我们重写这两个方法：</p>
+<pre><code>// Broken - Inappropriate use of inheritance!
+public class InstrumentedHashSet&lt;E&gt; extends HashSet&lt;E&gt; {
+    // The number of attempted element insertions
+    private int addCount = 0;
+
+    public InstrumentedHashSet() {
+    }
+
+    public InstrumentedHashSet(int initCap, float loadFactor) {
+        super(initCap, loadFactor);
+    }
+    @Override public boolean add(E e) {
+        addCount++;
+        return super.add(e);
+    }
+    @Override public boolean addAll(Collection&lt;? extends E&gt; c) {
+        addCount += c.size();
+        return super.addAll(c);
+    }
+    public int getAddCount() {
+        return addCount;
+    }
+}</code></pre><p>这个类看起来很合理，但是不能正常工作。 假设创建一个实例并使用 addAll 方法添加三个元素。 顺便提一句，请注意，下面代码使用在 Java 9 中添加的静态工厂方法 List.of 来创建一个列表；如果使用的是早期版本，请改为使用 Arrays.asList：</p>
+<pre><code>InstrumentedHashSet&lt;String&gt; s = new InstrumentedHashSet&lt;&gt;();
+s.addAll(List.of(&quot;Snap&quot;, &quot;Crackle&quot;, &quot;Pop&quot;));</code></pre><p>　　我们期望 getAddCount 方法返回的结果是 3，但实际上返回了 6。哪里出来问题？在 HashSet 内部，addAll 方法是基于它的 add 方法来实现的，即使 HashSet 文档中没有指名其实现细节，倒也是合理的。InstrumentedHashSet 中的 addAll 方法首先给 addCount 属性设置为 3，然后使用 super.addAll 方法调用了 HashSet 的 addAll 实现。然后反过来又调用在 InstrumentedHashSet 类中重写的 add 方法，每个元素调用一次。这三次调用又分别给 addCount 加 1，所以，一共增加了 6：通过 addAll 方法每个增加的元素都被计算了两次。</p>
+<p>　　我们可以通过消除 addAll 方法的重写来“修复”子类。 尽管生成的类可以正常工作，但是它依赖于它的正确方法，因为 HashSet 的 addAll 方法是在其 add 方法之上实现的。 这个“自我使用（self-use）”是一个实现细节，并不保证在 Java 平台的所有实现中都可以适用，并且可以随发布版本而变化。 因此，产生的 InstrumentedHashSet 类是脆弱的。</p>
+<p>　　稍微好一点的做法是，重写 addAll 方法遍历指定集合，为每个元素调用 add 方法一次。 不管 HashSet 的 addAll 方法是否在其 add 方法上实现，都会保证正确的结果，因为 HashSet 的 addAll 实现将不再被调用。然而，这种技术并不能解决所有的问题。 这相当于重新实现了父类方法，这样的方法可能不能确定到底是否《时》自用（self-use）的，实现起来也是困难的，耗时的，容易出错的，并且可能会降低性能。 此外，这种方式并不能总是奏效，因为子类无法访问一些私有属性，所以有些方法就无法实现。</p>
+<p>　　导致子类脆弱的一个相关原因是，它们的父类在后续的发布版本中可以添加新的方法。假设一个程序的安全性依赖于这样一个事实：所有被插入到集中的元素都满足一个先决条件。可以通过对集合进行子类化，然后并重写所有添加元素的方法，以确保在添加每个元素之前满足这个先决条件，来确保这一问题。如果在后续的版本中，父类没有新增添加元素的方法，那么这样做没有问题。但是，一旦父类增加了这样的新方法，则很有可能由于调用了未被重写的新方法，将非法的元素添加到子类的实例中。这不是个纯粹的理论问题。在把 Hashtable 和 Vector 类加入到 Collections 框架中的时候，就修复了几个类似性质的安全漏洞。</p>
+<p>　　这两个问题都源于重写方法。 如果仅仅添加新的方法并且不要重写现有的方法，可能会认为继承一个类是安全的。 虽然这种扩展更为安全，但这并非没有风险。 如果父类在后续版本中添加了一个新的方法，并且你不幸给了子类一个具有相同签名和不同返回类型的方法，那么你的子类编译失败[JLS，8.4.8.3]。 如果已经为子类提供了一个与新的父类方法具有相同签名和返回类型的方法，那么你现在正在重写它，因此将遇到前面所述的问题。 此外，你的方法是否会履行新的父类方法的约定，这是值得怀疑的，因为在你编写子类方法时，这个约定还没有写出来。</p>
+<p>　　幸运的是，有一种方法可以避免上述所有的问题。<strong><em>不要继承一个现有的类，而应该给你的新类增加一个私有属性，该属性是 现有类的实例引用，这种设计被称为组合（composition）</em></strong>，因为现有的类成为新类的组成部分。<strong><em>新类中的每个实例方法调用现有类的包含实例上的相应方法并返回结果。这被称为转发（forwarding），而新类中的方法被称为转发方法</em></strong>。由此产生的类将坚如磐石，不依赖于现有类的实现细节。即使将新的方法添加到现有的类中，也不会对新类产生影响。为了具体说用，下面代码使用组合和转发方法替代 InstrumentedHashSet 类。请注意，实现分为两部分，类本身和一个可重用的转发类，其中包含所有的转发方法，没有别的方法：</p>
+<pre><code>// Reusable forwarding class
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
+
+public class ForwardingSet&lt;E&gt; implements Set&lt;E&gt; {
+
+    private final Set&lt;E&gt; s;
+
+    public ForwardingSet(Set&lt;E&gt; s) {
+        this.s = s;
+    }
+
+    public void clear() {
+        s.clear();
+    }
+
+    public boolean contains(Object o) {
+        return s.contains(o);
+    }
+
+    public boolean isEmpty() {
+        return s.isEmpty();
+    }
+
+    public int size() {
+        return s.size();
+    }
+
+    public Iterator&lt;E&gt; iterator() {
+        return s.iterator();
+    }
+
+    public boolean add(E e) {
+        return s.add(e);
+    }
+
+    public boolean remove(Object o) {
+        return s.remove(o);
+    }
+
+    public boolean containsAll(Collection&lt;?&gt; c) {
+        return s.containsAll(c);
+    }
+
+    public boolean addAll(Collection&lt;? extends E&gt; c) {
+        return s.addAll(c);
+    }
+
+    public boolean removeAll(Collection&lt;?&gt; c) {
+        return s.removeAll(c);
+    }
+
+    public boolean retainAll(Collection&lt;?&gt; c) {
+        return s.retainAll(c);
+    }
+
+    public Object[] toArray() {
+        return s.toArray();
+    }
+
+    public &lt;T&gt; T[] toArray(T[] a) {
+        return s.toArray(a);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return s.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return s.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return s.toString();
+    }
+}
+
+
+// Wrapper class - uses composition in place of inheritance
+import java.util.Collection;
+import java.util.Set;
+
+public class InstrumentedSet&lt;E&gt; extends ForwardingSet&lt;E&gt; {
+
+    private int addCount = 0;
+
+    public InstrumentedSet(Set&lt;E&gt; s) {
+        super(s);
+    }
+
+    @Override public boolean add(E e) {
+        addCount++;
+        return super.add(e);
+    }
+
+    @Override public boolean addAll(Collection&lt;? extends E&gt; c) {
+        addCount += c.size();
+        return super.addAll(c);
+    }
+
+    public int getAddCount() {
+        return addCount;
+    }
+}</code></pre><p>InstrumentedSet 类的设计是通过存在的 Set 接口来实现的，该接口包含 HashSet 类的功能特性。除了功能强大，这个设计是非常灵活的。InstrumentedSet 类实现了 Set 接口，并有一个构造方法，其参数也是 Set 类型的。本质上，这个类把 Set 转换为另一个类型 Set， 同时添加了计数的功能。与基于继承的方法不同，该方法仅适用于单个具体类，并且父类中每个需要支持构造方法，提供单独的构造方法，所以可以使用包装类来包装任何 Set 实现，并且可以与任何预先存在的构造方法结合使用：</p>
+<pre><code>Set&lt;Instant&gt; times = new InstrumentedSet&lt;&gt;(new TreeSet&lt;&gt;(cmp));
+Set&lt;E&gt; s = new InstrumentedSet&lt;&gt;(new HashSet&lt;&gt;(INIT_CAPACITY));</code></pre><p>　　InstrumentedSet 类甚至可以用于临时替换没有计数功能下使用的集合实例：</p>
+<pre><code>static void walk(Set&lt;Dog&gt; dogs) {
+    InstrumentedSet&lt;Dog&gt; iDogs = new InstrumentedSet&lt;&gt;(dogs);
+    ... // Within this method use iDogs instead of dogs
+}</code></pre><p>　　InstrumentedSet 类被称为包装类，因为每个 InstrumentedSet 实例都包含（“包装”）另一个 Set 实例。 这也被称为装饰器模式[Gamma95]，因为 InstrumentedSet 类通过添加计数功能来“装饰”一个集合。 有时组合和转发的结合被不精确地地称为委托（delegation）。 从技术上讲，除非包装对象把自身传递给被包装对象，否则不是委托[Lieberman86; Gamma95]。</p>
+<p>　　包装类的缺点很少。 一个警告是包装类不适合在回调框架（callback frameworks）中使用，其中对象将自我引用传递给其他对象以用于后续调用（「回调」）。 因为一个被包装的对象不知道它外面的包装对象，所以它传递一个指向自身的引用（this），回调时并不记得外面的包装对象。 这被称为 SELF 问题[Lieberman86]。 有些人担心转发方法调用的性能影响，以及包装对象对内存占用。 两者在实践中都没有太大的影响。 编写转发方法有些繁琐，但是只需为每个接口编写一次可重用的转发类，并且提供转发类。 例如，Guava 为所有的 Collection 接口提供转发类[Guava]。</p>
+<p>　　只有在子类真的是父类的子类型的情况下，继承才是合适的。 换句话说，只有在两个类之间存在「is-a」关系的情况下，B 类才能继承 A 类。 如果你试图让 B 类继承 A 类时，问自己这个问题：每个 B 都是 A 吗？ 如果你不能如实回答这个问题，那么 B 就不应该继承 A。如果答案是否定的，那么 B 通常包含一个 A 的私有实例，并且暴露一个不同的 API ：A 不是 B 的重要部分 ，只是其实现细节。</p>
+<p>　　在 Java 平台类库中有一些明显的违反这个原则的情况。 例如，stacks 实例并不是 vector 实例，所以 Stack 类不应该继承 Vector 类。 同样，一个属性列表不是一个哈希表，所以 Properties 不应该继承 Hashtable 类。 在这两种情况下，组合方式更可取。</p>
+<p>　　如果在合适组合的地方使用继承，则会不必要地公开实现细节。由此产生的 API 将与原始实现联系在一起，永远限制类的性能。更严重的是，通过暴露其内部，客户端可以直接访问它们。至少，它可能导致混淆语义。例如，属性 p 指向 Properties 实例，那么 p.getProperty(key) 和 p.get(key) 就有可能返回不同的结果：前者考虑了默认的属性表，而后者是继承 Hashtable 的，它则没有考虑默认属性列表。最严重的是，客户端可以通过直接修改超父类来破坏子类的不变性。在 Properties 类，设计者希望只有字符串被允许作为键和值，但直接访问底层的 Hashtable 允许违反这个不变性。一旦违反，就不能再使用属性 API 的其他部分（load 和 store 方法）。在发现这个问题的时候，纠正这个问题为时已晚，因为客户端依赖于使用非字符串键和值了。</p>
+<p>　　在决定使用继承来代替组合之前，你应该问自己最后一组问题。对于试图继承的类，它的 API 有没有缺陷呢？ 如果有，你是否愿意将这些缺陷传播到你的类的 API 中？继承传播父类的 API 中的任何缺陷，而组合可以让你设计一个隐藏这些缺陷的新 API。</p>
+<p>　　总之，继承是强大的，但它是有问题的，因为它违反封装。 只有在子类和父类之间存在真正的子类型关系时才适用。 即使如此，如果子类与父类不在同一个包中，并且父类不是为继承而设计的，继承可能会导致脆弱性。 为了避免这种脆弱性，使用合成和转发代替继承，特别是如果存在一个合适的接口来实现包装类。 包装类不仅比子类更健壮，而且更强大。</p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/17.%20%E6%9C%80%E5%B0%8F%E5%8C%96%E5%8F%AF%E5%8F%98%E6%80%A7" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/17.%20%E6%9C%80%E5%B0%8F%E5%8C%96%E5%8F%AF%E5%8F%98%E6%80%A7</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2020年01月16日 - 11时28分</p>
+        <p><span>最后更新:</span>2020年01月17日 - 09时50分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/16/Effective-Java阅读笔记IX/" title="Effective-Java阅读笔记IX">http://yoursite.com/2020/01/16/Effective-Java阅读笔记IX/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/16/Effective-Java阅读笔记IX/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2020/01/16/Effective-Java阅读笔记X/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Effective-Java阅读笔记X
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/16/Effective-Java阅读笔记VIII/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Effective-Java阅读笔记VIII</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#最小化可变性"><span class="toc-number">1.</span> <span class="toc-text">最小化可变性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#不要提供修改对象状态的方法（也称为-mutators，设值方法）。"><span class="toc-number">1.1.</span> <span class="toc-text">不要提供修改对象状态的方法（也称为 mutators，设值方法）。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确保这个类不能被继承。"><span class="toc-number">1.2.</span> <span class="toc-text">确保这个类不能被继承。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#把所有的字段设置为-private。"><span class="toc-number">1.3.</span> <span class="toc-text">把所有的字段设置为 private。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确保对任何可变组件的互斥访问。"><span class="toc-number">1.4.</span> <span class="toc-text">确保对任何可变组件的互斥访问。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#组合优于继承"><span class="toc-number">2.</span> <span class="toc-text">组合优于继承</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">3.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/01/16/Effective-Java阅读笔记X/" title="上一篇: Effective-Java阅读笔记X">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/01/16/Effective-Java阅读笔记VIII/" title="下一篇: Effective-Java阅读笔记VIII">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java编程思想-第二十三章阅读笔记/">Java编程思想-第二十三章阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II/">Git学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I/">数据库学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：264k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>

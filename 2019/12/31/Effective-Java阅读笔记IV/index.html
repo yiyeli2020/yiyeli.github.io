@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Effective-Java阅读笔记IV | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第二章阅读：创建和销毁对象07.消除过期的对象引用08.避免使用 Finalizer 和 Cleaner 机制除了作为一个安全网或者终止非关键的本地资源，不要使用 Cleaner 机制，或者是在 Java 9 发布之前的 finalizers 机制。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective-Java阅读笔记IV">
+<meta property="og:url" content="http://yoursite.com/2019/12/31/Effective-Java阅读笔记IV/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="第二章阅读：创建和销毁对象07.消除过期的对象引用08.避免使用 Finalizer 和 Cleaner 机制除了作为一个安全网或者终止非关键的本地资源，不要使用 Cleaner 机制，或者是在 Java 9 发布之前的 finalizers 机制。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-17T01:50:19.117Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effective-Java阅读笔记IV">
+<meta name="twitter:description" content="第二章阅读：创建和销毁对象07.消除过期的对象引用08.避免使用 Finalizer 和 Cleaner 机制除了作为一个安全网或者终止非关键的本地资源，不要使用 Cleaner 机制，或者是在 Java 9 发布之前的 finalizers 机制。">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 13.64px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 17.27px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 14.55px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 12.73px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 10.91px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 18.18px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 12.73px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 10.91px;">Database</a> <a href="/tags/Database，SQL/" style="font-size: 10px;">Database，SQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 12.73px;">Depth-first Search</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 12.73px;">Design Pattern，Java</a> <a href="/tags/Dynamic-Programming/" style="font-size: 16.36px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 13.64px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Greedy/" style="font-size: 10.91px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 12.73px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 11.82px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 12.73px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19.09px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 10.91px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Mysql/" style="font-size: 14.55px;">Mysql</a> <a href="/tags/Operating-System/" style="font-size: 10.91px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 13.64px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 11.82px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 13.64px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 10.91px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.91px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 15.45px;">Tree</a> <a href="/tags/Trie/" style="font-size: 11.82px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Effective-Java阅读笔记IV" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/12/31/Effective-Java阅读笔记IV/" class="article-date">
+      <time datetime="2019-12-31T07:06:12.000Z" itemprop="datePublished">2019-12-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Effective-Java阅读笔记IV
+    </h1>
+  
+
+      
+        <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">5k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">18分</span>
+      </span>
+    </span>
+</div>
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2019年12月/">2019年12月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>第二章阅读：创建和销毁对象<br>07.消除过期的对象引用<br>08.避免使用 Finalizer 和 Cleaner 机制<br>除了作为一个安全网或者终止非关键的本地资源，不要使用 Cleaner 机制，或者是在 Java 9 发布之前的 finalizers 机制。</p>
+<a id="more"></a>
+
+<h1 id="消除过期的对象引用"><a href="#消除过期的对象引用" class="headerlink" title="消除过期的对象引用"></a>消除过期的对象引用</h1><p>如果你从使用手动内存管理的语言（如 C 或 C++）切换到像 Java 这样的带有垃圾收集机制的语言，那么作为程序员的工作就会变得容易多了，因为你的对象在使用完毕以后就自动回收了。当你第一次体验它的时候，它就像魔法一样。这很容易让人觉得你不需要考虑内存管理，但这并不完全正确。</p>
+<pre><code>// Can you spot the &quot;memory leak&quot;?
+public class Stack {
+    private Object[] elements;
+    private int size = 0;
+    private static final int DEFAULT_INITIAL_CAPACITY = 16;
+
+    public Stack() {
+        elements = new Object[DEFAULT_INITIAL_CAPACITY];
+    }
+
+    public void push(Object e) {
+        ensureCapacity();
+        elements[size++] = e;
+    }
+
+    public Object pop() {
+        if (size == 0)
+            throw new EmptyStackException();
+        return elements[--size];
+    }
+
+    /**
+     * Ensure space for at least one more element, roughly
+     * doubling the capacity each time the array needs to grow.
+     ** /
+    private void ensureCapacity() {
+        if (elements.length == size)
+            elements = Arrays.copyOf(elements, 2 * size + 1);
+    }
+}</code></pre><p>这个程序没有什么明显的错误（但是对于泛型版本，请参阅条目 29）。 你可以对它进行详尽的测试，它都会成功地通过每一项测试，但有一个潜在的问题。 笼统地说，程序有一个「内存泄漏」，由于垃圾回收器的活动的增加，或内存占用的增加，静默地表现为性能下降。 在极端的情况下，这样的内存泄漏可能会导致磁盘分页（disk paging），甚至导致内存溢出（OutOfMemoryError）的失败，但是这样的故障相对较少。</p>
+<p>　　那么哪里发生了内存泄漏？ 如果一个栈增长后收缩，那么从栈弹出的对象不会被垃圾收集，即使使用栈的程序不再引用这些对象。 这是因为栈维护对这些对象的过期引用（obsolete references）。 过期引用简单来说就是永远不会解除的引用。 在这种情况下，元素数组「活动部分（active portion）」之外的任何引用都是过期的。 活动部分是由索引下标小于 size 的元素组成。</p>
+<p>　　垃圾收集语言中的内存泄漏（更适当地称为无意的对象保留 unintentional object retentions）是隐蔽的。 如果无意中保留了对象引用，那么不仅这个对象排除在垃圾回收之外，而且该对象引用的任何对象也是如此。 即使只有少数对象引用被无意地保留下来，也可以阻止垃圾回收机制对许多对象的回收，这对性能产生很大的影响。</p>
+<p>　　这类问题的解决方法很简单：一旦对象引用过期，将它们设置为 null。 在我们的 Stack 类的情景下，只要从栈中弹出，元素的引用就设置为过期。 pop 方法的修正版本如下所示：</p>
+<pre><code>public Object pop() {
+    if (size == 0)
+        throw new EmptyStackException();
+    Object result = elements[--size];
+    elements[size] = null; // Eliminate obsolete reference
+    return result;
+}</code></pre><p>取消过期引用的另一个好处是，如果它们随后被错误地引用，程序立即抛出 NullPointerException 异常，而不是悄悄地做继续做错误的事情。尽可能快地发现程序中的错误是有好处的。</p>
+<p>　　当程序员第一次被这个问题困扰时，他们可能会在程序结束后立即清空所有对象引用。这既不是必要的，也不是可取的；它不必要地搞乱了程序。清空对象引用应该是例外而不是规范。消除过期引用的最好方法是让包含引用的变量超出范围。如果在最近的作用域范围内定义每个变量 （详见第 57 条），这种自然就会出现这种情况。</p>
+<p>　　那么什么时候应该清空一个引用呢？Stack 类的哪个方面使它容易受到内存泄漏的影响？简单地说，它管理自己的内存。存储池（storage pool）由 elements 数组的元素组成（对象引用单元，而不是对象本身）。数组中活动部分的元素 (如前面定义的) 被分配，其余的元素都是空闲的。垃圾收集器没有办法知道这些；对于垃圾收集器来说，elements 数组中的所有对象引用都同样有效。只有程序员知道数组的非活动部分不重要。程序员可以向垃圾收集器传达这样一个事实，一旦数组中的元素变成非活动的一部分，就可以手动清空这些元素的引用。</p>
+<p>　　一般来说，当一个类自己管理内存时，程序员应该警惕内存泄漏问题。 每当一个元素被释放时，元素中包含的任何对象引用都应该被清除。</p>
+<p>　　另一个常见的内存泄漏来源是缓存。 一旦将对象引用放入缓存中，很容易忘记它的存在，并且在它变得无关紧要之后，仍然保留在缓存中。对于这个问题有几种解决方案。如果你正好想实现了一个缓存：只要在缓存之外存在对某个项（entry）的键（key）引用，那么这项就是明确有关联的，就可以用 WeakHashMap 来表示缓存；这些项在过期之后自动删除。记住，只有当缓存中某个项的生命周期是由外部引用到键（key）而不是值（value）决定时，WeakHashMap 才有用。</p>
+<p>　　更常见的情况是，缓存项有用的生命周期不太明确，随着时间的推移一些项变得越来越没有价值。在这种情况下，缓存应该偶尔清理掉已经废弃的项。这可以通过一个后台线程 (也许是 ScheduledThreadPoolExecutor) 或将新的项添加到缓存时顺便清理。LinkedHashMap 类使用它的 removeEldestEntry 方法实现了后一种方案。对于更复杂的缓存，可能直接需要使用 java.lang.ref。</p>
+<p>　　第三个常见的内存泄漏来源是监听器和其他回调。如果你实现了一个 API，其客户端注册回调，但是没有显式地撤销注册回调，除非采取一些操作，否则它们将会累积。确保回调是垃圾收集的一种方法是只存储弱引用（weak references），例如，仅将它们保存在 WeakHashMap 的键（key）中。</p>
+<p>　　因为内存泄漏通常不会表现为明显的故障，所以它们可能会在系统中保持多年。 通常仅在仔细的代码检查或借助堆分析器（heap profiler）的调试工具才会被发现。 因此，学习如何预见这些问题，并防止这些问题发生，是非常值得的。</p>
+<h1 id="避免使用-Finalizer-和-Cleaner-机制"><a href="#避免使用-Finalizer-和-Cleaner-机制" class="headerlink" title="避免使用 Finalizer 和 Cleaner 机制"></a>避免使用 Finalizer 和 Cleaner 机制</h1><p>Finalizer 机制是不可预知的，往往是危险的，而且通常是不必要的。 它们的使用会导致不稳定的行为，糟糕的性能和移植性问题。 Finalizer 机制有一些特殊的用途，我们稍后会在这个条目中介绍，但是通常应该避免它们。 从 Java 9 开始，Finalizer 机制已被弃用，但仍被 Java 类库所使用。 Java 9 中 Cleaner 机制代替了 Finalizer 机制。 Cleaner 机制不如 Finalizer 机制那样危险，但仍然是不可预测，运行缓慢并且通常是不必要的。</p>
+<p>　　提醒 C++程序员不要把 Java 中的 Finalizer 或 Cleaner 机制当成的 C++ 析构函数的等价物。 在 C++ 中，析构函数是回收对象相关资源的正常方式，是与构造方法相对应的。 在 Java 中，当一个对象变得不可达时，垃圾收集器回收与对象相关联的存储空间，不需要开发人员做额外的工作。 C++ 析构函数也被用来回收其他非内存资源。 在 Java 中，try-with-resources 或 try-finally 块用于此目的（详见第 9 条）。</p>
+<p>　　Finalizer 和 Cleaner 机制的一个缺点是不能保证他们能够及时执行[JLS，12.6]。 在一个对象变得无法访问时，到 Finalizer 和 Cleaner 机制开始运行时，这期间的时间是任意长的。 这意味着你永远不应该 Finalizer 和 Cleaner 机制做任何时间敏感（time-critical）的事情。 例如，依赖于 Finalizer 和 Cleaner 机制来关闭文件是严重的错误，因为打开的文件描述符是有限的资源。 如果由于系统迟迟没有运行 Finalizer 和 Cleaner 机制而导致许多文件被打开，程序可能会失败，因为它不能再打开文件了。</p>
+<p>　　及时执行 Finalizer 和 Cleaner 机制是垃圾收集算法的一个功能，这种算法在不同的实现中有很大的不同。程序的行为依赖于 Finalizer 和 Cleaner 机制的及时执行，其行为也可能大不不同。 这样的程序完全可以在你测试的 JVM 上完美运行，然而在你最重要的客户的机器上可能运行就会失败。</p>
+<p>　　延迟终结（finalization）不只是一个理论问题。为一个类提供一个 Finalizer 机制可以任意拖延它的实例的回收。一位同事调试了一个长时间运行的 GUI 应用程序，这个应用程序正在被一个 OutOfMemoryError 错误神秘地死掉。分析显示，在它死亡的时候，应用程序的 Finalizer 机制队列上有成千上万的图形对象正在等待被终结和回收。不幸的是，Finalizer 机制线程的运行优先级低于其他应用程序线程，所以对象被回收的速度低于进入队列的速度。语言规范并不保证哪个线程执行 Finalizer 机制，因此除了避免使用 Finalizer 机制之外，没有轻便的方法来防止这类问题。在这方面， Cleaner 机制比 Finalizer 机制要好一些，因为 Java 类的创建者可以控制自己 cleaner 机制的线程，但 cleaner 机制仍然在后台运行，在垃圾回收器的控制下运行，但不能保证及时清理。</p>
+<p>　　Java 规范不能保证 Finalizer 和 Cleaner 机制能及时运行；它甚至不能能保证它们是否会运行。当一个程序结束后，一些不可达对象上的 Finalizer 和 Cleaner 机制仍然没有运行。因此，不应该依赖于 Finalizer 和 Cleaner 机制来更新持久化状态。例如，依赖于 Finalizer 和 Cleaner 机制来释放对共享资源（如数据库）的持久锁，这是一个使整个分布式系统陷入停滞的好方法。</p>
+<p>　　不要相信 System.gc 和 System.runFinalization 方法。 他们可能会增加 Finalizer 和 Cleaner 机制被执行的几率，但不能保证一定会执行。 曾经声称做出这种保证的两个方法：System.runFinalizersOnExit 和它的孪生兄弟 Runtime.runFinalizersOnExit，包含致命的缺陷，并已被弃用了几十年[ThreadStop]。</p>
+<p>　　Finalizer 机制的另一个问题是在执行 Finalizer 机制过程中，未捕获的异常会被忽略，并且该对象的 Finalizer 机制也会终止 [JLS, 12.6]。未捕获的异常会使其他对象陷入一种损坏的状态（corrupt state）。如果另一个线程试图使用这样一个损坏的对象，可能会导致任意不确定的行为。通常情况下，未捕获的异常将终止线程并打印堆栈跟踪（ stacktrace），但如果发生在 Finalizer 机制中，则不会发出警告。Cleaner 机制没有这个问题，因为使用 Cleaner 机制的类库可以控制其线程。</p>
+<p>　　使用 finalizer 和 cleaner 机制会导致严重的性能损失。 在我的机器上，创建一个简单的 AutoCloseable 对象，使用 try-with-resources 关闭它，并让垃圾回收器回收它的时间大约是 12 纳秒。 使用 finalizer 机制，而时间增加到 550 纳秒。 换句话说，使用 finalizer 机制创建和销毁对象的速度要慢 50 倍。 这主要是因为 finalizer 机制会阻碍有效的垃圾收集。 如果使用它们来清理类的所有实例（在我的机器上的每个实例大约是 500 纳秒），那么 cleaner 机制的速度与 finalizer 机制的速度相当，但是如果仅将它们用作安全网（safety net），则 cleaner 机制要快得多，如下所述。 在这种环境下，创建，清理和销毁一个对象在我的机器上需要大约 66 纳秒，这意味着如果你不使用安全网的话，需要支付 5 倍（而不是 50 倍）的保险。</p>
+<p>　　finalizer 机制有一个严重的安全问题：它们会打开你的类来进行 finalizer 机制攻击。finalizer 机制攻击的想法很简单：如果一个异常是从构造方法或它的序列化中抛出的——readObject 和 readResolve 方法 （第 12 章）——恶意子类的 finalizer 机制可以运行在本应该「中途夭折（died on the vine）」的部分构造对象上。finalizer 机制可以在静态字属性记录对对象的引用，防止其被垃圾收集。一旦记录了有缺陷的对象，就可以简单地调用该对象上的任意方法，而这些方法本来就不应该允许存在。从构造方法中抛出异常应该足以防止对象出现；而在 finalizer 机制存在下，则不是。这样的攻击会带来可怕的后果。Final 类不受 finalizer 机制攻击的影响，因为没有人可以编写一个 final 类的恶意子类。为了保护非 final 类不受 finalizer 机制攻击，编写一个 final 的 finalize 方法，它什么都不做。</p>
+<p>　　那么，你应该怎样做呢？为对象封装需要结束的资源（如文件或线程），而不是为该类编写 Finalizer 和 Cleaner 机制？让你的类实现 AutoCloseable 接口即可，并要求客户在在不再需要时调用每个实例 close 方法，通常使用 try-with-resources 确保终止，即使面对有异常抛出情况（详见第 9 条）。一个值得一提的细节是实例必须跟踪是否已经关闭：close 方法必须记录在对象里不再有效的属性，其他方法必须检查该属性，如果在对象关闭后调用它们，则抛出 IllegalStateException 异常。</p>
+<p>　　那么，Finalizer 和 Cleaner 机制有什么好处呢？它们可能有两个合法用途。一个是作为一个安全网（safety net），以防资源的拥有者忽略了它的 close 方法。虽然不能保证 Finalizer 和 Cleaner 机制会迅速运行 (或者根本就没有运行)，最好是把资源释放晚点出来，也要好过客户端没有这样做。如果你正在考虑编写这样的安全网 Finalizer 机制，请仔细考虑一下这样保护是否值得付出对应的代价。一些 Java 库类，如 FileInputStream、FileOutputStream、ThreadPoolExecutor 和 java.sql.Connection，都有作为安全网的 Finalizer 机制。</p>
+<p>　　第二种合理使用 Cleaner 机制的方法与本地对等类（native peers）有关。本地对等类是一个由普通对象委托的本地 (非 Java) 对象。由于本地对等类不是普通的 Java 对象，所以垃圾收集器并不知道它，当它的 Java 对等对象被回收时，本地对等类也不会回收。假设性能是可以接受的，并且本地对等类没有关键的资源，那么 Finalizer 和 Cleaner 机制可能是这项任务的合适的工具。但如果性能是不可接受的，或者本地对等类持有必须迅速回收的资源，那么类应该有一个 close 方法，正如前面所述。</p>
+<p>　　Cleaner 机制使用起来有点棘手。下面是演示该功能的一个简单的 Room 类。假设 Room 对象必须在被回收前清理干净。Room 类实现 AutoCloseable 接口；它的自动清理安全网使用的是一个 Cleaner 机制，这仅仅是一个实现细节。与 Finalizer 机制不同，Cleaner 机制不污染一个类的公共 API：</p>
+<pre><code>// An autocloseable class using a cleaner as a safety net
+public class Room implements AutoCloseable {
+    private static final Cleaner cleaner = Cleaner.create();
+
+    // Resource that requires cleaning. Must not refer to Room!
+    private static class State implements Runnable {
+        int numJunkPiles; // Number of junk piles in this room
+
+        State(int numJunkPiles) {
+            this.numJunkPiles = numJunkPiles;
+        }
+
+        // Invoked by close method or cleaner
+        @Override
+        public void run() {
+            System.out.println(&quot;Cleaning room&quot;);
+            numJunkPiles = 0;
+        }
+    }
+
+    // The state of this room, shared with our cleanable
+    private final State state;
+
+    // Our cleanable. Cleans the room when it’s eligible for gc
+    private final Cleaner.Cleanable cleanable;
+
+    public Room(int numJunkPiles) {
+        state = new State(numJunkPiles);
+        cleanable = cleaner.register(this, state);
+    }
+
+    @Override
+    public void close() {
+        cleanable.clean();
+    }
+}</code></pre><p>　　静态内部 State 类拥有 Cleaner 机制清理房间所需的资源。 在这里，它仅仅包含 numJunkPiles 属性，它代表混乱房间的数量。 更实际地说，它可能是一个 final 修饰的 long 类型的指向本地对等类的指针。 State 类实现了 Runnable 接口，其 run 方法最多只能调用一次，只能被我们在 Room 构造方法中用 Cleaner 机制注册 State 实例时得到的 Cleanable 调用。 对 run 方法的调用通过以下两种方法触发：通常，通过调用 Room 的 close 方法内调用 Cleanable 的 clean 方法来触发。 如果在 Room 实例有资格进行垃圾回收的时候客户端没有调用 close 方法，那么 Cleaner 机制将（希望）调用 State 的 run 方法。</p>
+<p>　　一个 State 实例不引用它的 Room 实例是非常重要的。如果它引用了，则创建了一个循环，阻止了 Room 实例成为垃圾收集的资格（以及自动清除）。因此，State 必须是静态的嵌内部类，因为非静态内部类包含对其宿主类的实例的引用（详见第 24 条）。同样，使用 lambda 表达式也是不明智的，因为它们很容易获取对宿主类对象的引用。</p>
+<p>　　就像我们之前说的，Room 的 Cleaner 机制仅仅被用作一个安全网。如果客户将所有 Room 的实例放在 try-with-resource 块中，则永远不需要自动清理。行为良好的客户端如下所示：</p>
+<pre><code>public class Adult {
+    public static void main(String[] args) {
+        try (Room myRoom = new Room(7)) {
+            System.out.println(&quot;Goodbye&quot;);
+        }
+    }
+}</code></pre><p>　　正如你所预料的，运行 Adult 程序会打印 Goodbye 字符串，随后打印 Cleaning room 字符串。但是如果时不合规矩的程序，它从来不清理它的房间会是什么样的?</p>
+<pre><code>public class Teenager {
+    public static void main(String[] args) {
+        new Room(99);
+        System.out.println(&quot;Peace out&quot;);
+    }
+}</code></pre><p>　　你可能期望它打印出 Peace out，然后打印 Cleaning room 字符串，但在我的机器上，它从不打印 Cleaning room 字符串；仅仅是程序退出了。 这是我们之前谈到的不可预见性。 Cleaner 机制的规范说：“System.exit 方法期间的清理行为是特定于实现的。 不保证清理行为是否被调用。”虽然规范没有说明，但对于正常的程序退出也是如此。 在我的机器上，将 System.gc() 方法添加到 Teenager 类的 main 方法足以让程序退出之前打印 Cleaning room，但不能保证在你的机器上会看到相同的行为。</p>
+<p>　　总之，除了作为一个安全网或者终止非关键的本地资源，不要使用 Cleaner 机制，或者是在 Java 9 发布之前的 finalizers 机制。即使是这样，也要当心不确定性和性能影响。</p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://sjsdfg.github.io/effective-java-3rd-chinese/#/notes/08.%20%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8Finalizer%E5%92%8CCleaner%E6%9C%BA%E5%88%B6" target="_blank" rel="noopener">https://sjsdfg.github.io/effective-java-3rd-chinese/#/notes/08.%20%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8Finalizer%E5%92%8CCleaner%E6%9C%BA%E5%88%B6</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2019年12月31日 - 15时06分</p>
+        <p><span>最后更新:</span>2020年01月17日 - 09时50分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/12/31/Effective-Java阅读笔记IV/" title="Effective-Java阅读笔记IV">http://yoursite.com/2019/12/31/Effective-Java阅读笔记IV/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/12/31/Effective-Java阅读笔记IV/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2020/01/02/Java开发规范/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Java开发规范
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/31/Effective-Java阅读笔记III/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Effective-Java阅读笔记III</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#消除过期的对象引用"><span class="toc-number">1.</span> <span class="toc-text">消除过期的对象引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#避免使用-Finalizer-和-Cleaner-机制"><span class="toc-number">2.</span> <span class="toc-text">避免使用 Finalizer 和 Cleaner 机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">3.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/01/02/Java开发规范/" title="上一篇: Java开发规范">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/12/31/Effective-Java阅读笔记III/" title="下一篇: Effective-Java阅读笔记III">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java编程思想-第二十三章阅读笔记/">Java编程思想-第二十三章阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II/">Git学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I/">数据库学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：264k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
