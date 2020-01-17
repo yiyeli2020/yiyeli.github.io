@@ -164,15 +164,42 @@ any关键字表示满足其中任一条件，使用any关键字时，只要满�
 
 表示需要满足所有的条件。只有满足内层查询语句返回的所有结果，才可以执行外层查询语句。
 
-### 带有exists关键字的子查询
+### EXISTS和NOT EXISTS用法
 
-exists关键字表示存在，内层查询语句不返回查询的记录，而是返回一个真假值，如果内层查询语句查询到满足条件的记录，就返回一个true，外层查询语句将进行查询。
+EXISTS关键字表示存在，内层查询语句不返回查询的记录，而是返回一个真假值，如果内层查询语句查询到满足条件的记录，就返回一个true，外层查询语句将进行查询。
 
     select * from employee
     where exists (select d_name from department where d_id = 1003);
     //如果department存在d_id为1003，则查询employee表。
 还可以分为相关子查询，独立子查询。以上子查询与外层查询没有关联，称为独立子查询，如果子查询有用到外层查询的字段，则称相关子查询，相关子查询容易产生性能问题。
 
+EXISTS （sql 返回结果集为真）
+NOT EXISTS (sql 不返回结果集为真）
+
+表A
+
+    ID NAME
+    1    A1
+    2    A2
+    3    A3
+表B
+
+    ID AID NAME
+    1    1 B1
+    2    2 B2
+    3    2 B3
+
+表A和表B是１对多的关系 A.ID => B.AID
+
+    SELECT ID,NAME
+    FROM A
+    WHERE EXIST (
+      SELECT * FROM B
+      WHERE A.ID=B.AID)
+执行结果为
+
+    1 A1
+    2 A2
 ## TOP关键字
 TOP关键字在SQL语言中用来限制返回结果集中的记录条数
 （1）返回确定数目的记录个数
@@ -204,8 +231,73 @@ TOP关键字在SQL语言中用来限制返回结果集中的记录条数
       select * from tablename
       where id=123456
        order by 时间 desc limit 1
+# NOT IN 关键字
+
+示例：
+    select customers.name as 'Customers'
+    from customers
+    where customers.id not in
+    (
+        select customerid from orders
+    );
+
+参考练习：https://leetcode.com/problems/customers-who-never-order/solution/
+# MySQL中IN、NOT IN、EXISTS、NOT EXISTS的差别
+
+## IN和EXISTS
+in是把外表和内表作hash连接，而exists是对外表作loop循环，每次loop循环再对内表进行查询，一直以来认为exists比in效率高的说法是不准确的。如果查询的两个表大小相当，那么用in和exists差别不大；如果两个表中一个较小一个较大，则子查询表大的用exists，子查询表小的用in。
+
+例如：表A(小表)，表B(大表)
+
+    select * from A where cc in(select cc from B)　　               -->效率低，用到了A表上cc列的索引；
+    select * from A where exists(select cc from B where cc=A.cc)　　-->效率高，用到了B表上cc列的索引;
+相反的
+
+    select * from B where cc in(select cc from A)　　               -->效率高，用到了B表上cc列的索引;
+    select * from B where exists(select cc from A where cc=B.cc)　　-->效率低，用到了A表上cc列的索引;
+
+## not in和not exists
+
+如果查询语句使用了not in，那么对内外表都进行全表扫描，没有用到索引；而not exists的子查询依然能用到表上的索引。所以无论哪个表大，用not exists都比not in要快。
+
+## in与=的区别
+
+    select name from student where name in('zhang','wang','zhao');
+
+与
+
+    select name from student where name='zhang' or name='wang' or name='zhao'
+结果是相同的。
+
+## 关于EXISTS：
+EXISTS用于检查子查询是否至少会返回一行数据，该子查询实际上并不返回任何数据，而是返回值True或False。
+
+EXISTS 指定一个子查询，检测行的存在。
+
+语法： EXISTS subquery
+
+参数： subquery 是一个受限的 SELECT 语句 (不允许有 COMPUTE 子句和 INTO 关键字)。
+
+结果类型： Boolean 如果子查询包含行，则返回 TRUE ，否则返回 FLASE 。
+
+结论：
+
+    select * from A where exists (select 1 from B where A.id=B.id)
+EXISTS(包括 NOT EXISTS )子句的返回值是一个boolean值。 EXISTS内部有一个子查询语句(SELECT ... FROM...),我将其称为EXIST的内查询语句。其内查询语句返回一个结果集, EXISTS子句根据其内查询语句的结果集空或者非空，返回一个布尔值。
+
+一种通俗的可以理解为：将外查询表的每一行，代入内查询作为检验，如果内查询返回的结果取非空值，则EXISTS子句返回TRUE，这一行行可作为外查询的结果行，否则不能作为结果。
+
+分析器会先看语句的第一个词，当它发现第一个词是SELECT关键字的时候，它会跳到FROM关键字，然后通过FROM关键字找到表名并把表装入内存。接着是找WHERE关键字，如果找不到则返回到SELECT找字段解析，如果找到WHERE，则分析其中的条件，完成后再回到SELECT分析字段。最后形成一张我们要的虚表。
+
+WHERE关键字后面的是条件表达式。条件表达式计算完成后，会有一个返回值，即非0或0，非0即为真(true)，0即为假(false)。同理WHERE后面的条件也有一个返回值，真或假，来确定接下来执不执行SELECT。
+
+分析器先找到关键字SELECT，然后跳到FROM关键字将STUDENT表导入内存，并通过指针找到第一条记录，接着找到WHERE关键字计算它的条件表达式，如果为真那么把这条记录装到一个虚表当中，指针再指向下一条记录。如果为假那么指针直接指向下一条记录，而不进行其它操作。一直检索完整个表，并把检索出来的虚拟表返回给用户。EXISTS是条件表达式的一部分，它也有一个返回值(true或false)。
+
+
+
 # 参考资料：
 
 【1】https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600
 【2】https://blog.csdn.net/plg17/article/details/78758593
 【3】https://cloud.tencent.com/developer/article/1333120
+【4】https://www.jianshu.com/p/24e4e8437686
