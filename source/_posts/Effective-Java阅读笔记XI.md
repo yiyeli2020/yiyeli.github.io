@@ -1,4 +1,4 @@
-title: Effctive-Java阅读笔记XI
+title: Effective-Java阅读笔记XI
 date: 2020-1-16 16:23:12
 categories: 2020年1月
 tags: [Java]

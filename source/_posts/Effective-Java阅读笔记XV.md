@@ -1,4 +1,4 @@
-title: Effctive-Java阅读笔记XV
+title: Effective-Java阅读笔记XV
 date: 2020-1-17 00:33:12
 categories: 2020年1月
 tags: [Java]

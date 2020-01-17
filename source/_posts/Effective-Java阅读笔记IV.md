@@ -1,4 +1,4 @@
-title: Effctive-Java阅读笔记IV
+title: Effective-Java阅读笔记IV
 date: 2019-12-31 15:06:12
 categories: 2019年12月
 tags: [Java]
