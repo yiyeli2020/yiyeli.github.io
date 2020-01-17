@@ -12,15 +12,15 @@
       <header class="article-header">
         <%- partial('post/title', {class_name: 'article-title'}) %>
       </header>
+      <% if(theme.word_count && !post.no_word_count && index){ %>
+        <%- partial('post/word') %>
+        <% } %>
       <% if (!index){ %>
       <div class="article-info article-info-post">
         <%- partial('post/category') %>
         <%- partial('post/tag') %>
         <div class="clearfix"></div>
       </div>
-      <% if(theme.word_count && !post.no_word_count){ %>
-        <%- partial('post/word') %>
-        <% } %>
       <% } %>
     <% } %>
     <div class="article-entry" itemprop="articleBody">
