@@ -45,7 +45,7 @@
     <link href="http://yoursite.com/2020/01/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VIII/"/>
     <id>http://yoursite.com/2020/01/17/数据库学习笔记VIII/</id>
     <published>2020-01-17T09:51:12.000Z</published>
-    <updated>2020-01-17T09:42:02.075Z</updated>
+    <updated>2020-01-19T09:04:25.389Z</updated>
     
     <content type="html"><![CDATA[<p>MS SQL Server和MySQL区别  </p><a id="more"></a><h1 id="MS-SQL-Server和MySQL区别"><a href="#MS-SQL-Server和MySQL区别" class="headerlink" title="MS SQL Server和MySQL区别"></a>MS SQL Server和MySQL区别</h1><p>MySQL支持enum,和set类型，SQL Server不支持</p><p>MySQL不支持nchar,nvarchar,ntext类型</p><p>MySQL的递增语句是AUTO_INCREMENT，而MS SQL是identity(1,1)</p><p>MS SQL不支持replace into 语句，但是在最新的sql20008里面，也支持merge语法</p><p>MySQL支持insert into table1 set t1 = “”, t2 = “”,但是MSSQL不支持这样写</p><p>MySQL支持insert into tabl1 values (1,1), (1,1), (1,1),(1,1),(1,1), (1,1), (1,1)</p><p>MS SQL不支持limit语句，是非常遗憾的，只能用top 取代limt0,N，row_number()over()函数取代limit N,M</p><p>MySQL在创建表时要为每个表指定一个存储引擎类型，而MS SQL只支持一种存储引擎</p><p>PHP连接MySQL和MS SQL的方式都差不多，只需要将函数的MySQL替换成MS SQL即可。</p><p>MySQL的管理工具有几个比较好的，MySQL_front,和官方那个套件，不过都没有SSMS的使用方便，这是MySQL很大的一个缺点。</p><p>MySQL需要为表指定存储类型</p><p>MS SQL识别符是,[type]表示他区别于关键字，但是MySQL却是 `，也就是按键1左边的那个符号</p><p>MSSQL支持getdate()方法获取当前时间日期，但是MySQL里面可以分日期类型和时间类型，获取当前日期是cur_date()，当前完整时间是now()函数</p><p>MySQL不支持默认值为当前时间的datetime类型（MSSQL很容易做到），在MySQL里面是用timestamp类型</p><p>MS SQL里面检查是否有这个表再删除，需要这样：<br>    　　if exists (select * from dbo.systs<br>    where id = t_id(N”uc_newpm”)andTPROPERTY(id,N”IsUserTable”)=1)<br>　　但是在MySQL里面只需要 DROP TABLE IF EXISTS cdb_forums;</p><p>MySQL text字段类型不允许有默认值</p><p>MySQL的一个表的总共字段长度不超过65XXX。</p><p>MS SQL默认到处表创建语句的默认值表示是((0)),而在MySQL里面是不允许带两括号的</p><p>同样的负载压力，MySQL要消耗更少的CPU和内存，MS SQL的确是很耗资源。</p><p>MySQL支持无符号型的整数，那么比不支持无符号型的MS SQL就能多出一倍的最大数存储</p><p>MySQL不支持在MSSQL里面使用非常方便的varchar(max)类型，这个类型在MSSQL里面既可做一般数据存储，也可以做blob数据存储</p><p>MySQL创建非聚集索引只需要在创建表的时候指定为key就行，比如：KEYdisplayorder(fid,displayorder) 在MS SQL里面必须要：</p><p>  　　create unique nonclustered index<br>  　　index_uc_protectedmrs_username_appid on dbo.uc_protectedmrs<br>  　　(username asc,appid asc)<br>一个很表面的区别就是MySQL的安装特别简单，而且文件大小才110M（非安装版）</p><p>MySQL的存储过程只是出现在最新的版本中，稳定性和性能可能不如MS SQL。</p><p>MySQL支持date,time,year类型，MS SQL到2008才支持date和time。</p><p>#参考资料<br>【1】 <a href="https://blog.csdn.net/xc_zhou/article/details/89002519" target="_blank" rel="noopener">https://blog.csdn.net/xc_zhou/article/details/89002519</a></p>]]></content>
     
@@ -58,7 +58,7 @@
       <category term="2020年1月" scheme="http://yoursite.com/categories/2020%E5%B9%B41%E6%9C%88/"/>
     
     
-      <category term="Mysql" scheme="http://yoursite.com/tags/Mysql/"/>
+      <category term="Database，MySQL" scheme="http://yoursite.com/tags/Database%EF%BC%8CMySQL/"/>
     
   </entry>
   
