@@ -5,7 +5,7 @@ tags: [Mysql]
 
 ---
 
-SQL插入，多表查询
+SQL建表，插入，多表查询
 
 
 <!-- more -->
@@ -17,6 +17,14 @@ auth_users_roles_rela代表的是不同用户所具有的角色，auth_resources
 auth_role_resources_rela是不同角色所具有的资源信息，
 现在要使用SQL语句添加新的资源，将用户yang.kai
 
+# 建表语句CREATE
+
+    create table tableName(
+       Id int,
+       Name varchar(64),
+       Salary int,
+       DepartmentId int
+    )
 
 # 页面权限配置
 resource_type 为MENU，level=0时为一级菜单，level=1时为二级菜单，现将http://std-report-fe.laincloud.xyz/#/reportool中的不同级别菜单的http请求url添加到reporting数据库的资源中
