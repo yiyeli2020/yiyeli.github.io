@@ -1,7 +1,7 @@
 title: 数据库学习笔记VII
 date: 2020-1-3 11:12:12
 categories: 2020年1月
-tags: [Mysql]
+tags: [Database，MySQL]
 
 ---
 MySQL建表,LIMIT,OFFSET的用法,Rank函数的用法   

@@ -1,7 +1,7 @@
 title: 数据库学习笔记II
 date: 2019-8-9 15:12:12
 categories: 2019年8月
-tags: [Java,Mysql]
+tags: [Database，MySQL]
 
 ---
 

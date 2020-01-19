@@ -1,7 +1,7 @@
 title: 数据库学习笔记III
 date: 2019-8-27 11:52:12
 categories: 2019年8月
-tags: [Mysql]
+tags: [Database，MySQL]
 
 ---
 

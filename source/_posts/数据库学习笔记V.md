@@ -1,7 +1,7 @@
 title: 数据库学习笔记V
 date: 2019-9-5 10:12:12
 categories: 2019年9月
-tags: [Mysql]
+tags: [Database，MySQL]
 
 ---
 

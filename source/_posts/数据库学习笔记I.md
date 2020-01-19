@@ -2,7 +2,7 @@
 title: 数据库学习笔记I
 date: 2019-7-31 11:12:12
 categories: 2019年7月
-tags: [Database，SQL]
+tags: [Database，MySQL]
 
 ---
 
