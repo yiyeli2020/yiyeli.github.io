@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>Effective-Java阅读笔记XIV | Yiye Li</title>
+  <title>601.Human Traffic of Stadium体育馆的人流量 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第五章阅读： 泛型 27.消除非检查警告未经检查的警告是重要的。 不要忽视他们。 每个未经检查的警告代表在运行时出现 ClassCastException 异常的可能性。 尽可能消除这些警告。 如果无法消除未经检查的警告，并且可以证明引发该警告的代码是安全类型的，则可以在尽可能小的范围内使用 @SuppressWarnings(“unchecked”) 注解来禁止警告。 记录决定在注释中抑制此警告">
-<meta name="keywords" content="Java">
+  <meta name="description" content="查询连续递增的序列">
+<meta name="keywords" content="LeetCode,Database">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective-Java阅读笔记XIV">
-<meta property="og:url" content="http://yoursite.com/2020/01/16/Effective-Java阅读笔记XIV/index.html">
+<meta property="og:title" content="601.Human Traffic of Stadium体育馆的人流量">
+<meta property="og:url" content="http://yoursite.com/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="第五章阅读： 泛型 27.消除非检查警告未经检查的警告是重要的。 不要忽视他们。 每个未经检查的警告代表在运行时出现 ClassCastException 异常的可能性。 尽可能消除这些警告。 如果无法消除未经检查的警告，并且可以证明引发该警告的代码是安全类型的，则可以在尽可能小的范围内使用 @SuppressWarnings(“unchecked”) 注解来禁止警告。 记录决定在注释中抑制此警告">
+<meta property="og:description" content="查询连续递增的序列">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-17T01:50:19.117Z">
+<meta property="og:updated_time" content="2020-01-20T06:44:43.836Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Effective-Java阅读笔记XIV">
-<meta name="twitter:description" content="第五章阅读： 泛型 27.消除非检查警告未经检查的警告是重要的。 不要忽视他们。 每个未经检查的警告代表在运行时出现 ClassCastException 异常的可能性。 尽可能消除这些警告。 如果无法消除未经检查的警告，并且可以证明引发该警告的代码是安全类型的，则可以在尽可能小的范围内使用 @SuppressWarnings(“unchecked”) 注解来禁止警告。 记录决定在注释中抑制此警告">
+<meta name="twitter:title" content="601.Human Traffic of Stadium体育馆的人流量">
+<meta name="twitter:description" content="查询连续递增的序列">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Effective-Java阅读笔记XIV" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-601.Human Traffic of Stadium体育馆的人流量" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/01/16/Effective-Java阅读笔记XIV/" class="article-date">
-      <time datetime="2020-01-16T15:57:12.000Z" itemprop="datePublished">2020-01-16</time>
+      <a href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/" class="article-date">
+      <time datetime="2020-01-20T06:10:12.000Z" itemprop="datePublished">2020-01-20</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Effective-Java阅读笔记XIV
+      601.Human Traffic of Stadium体育馆的人流量
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.6k字</span>
+        <span class="post-count">566字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">13分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -250,7 +250,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,129 +260,56 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>第五章阅读： 泛型</p>
-<p>27.消除非检查警告<br>未经检查的警告是重要的。 不要忽视他们。 每个未经检查的警告代表在运行时出现 ClassCastException 异常的可能性。 尽可能消除这些警告。 如果无法消除未经检查的警告，并且可以证明引发该警告的代码是安全类型的，则可以在尽可能小的范围内使用 @SuppressWarnings(“unchecked”) 注解来禁止警告。 记录决定在注释中抑制此警告的理由。<br>28.列表优于数组<br>数组和泛型具有非常不同的类型规则。 数组是协变的（covariant），被具体化了（reified），数组是协变和具体化的; 泛型是不变的，类型擦除的。 因此，数组提供运行时类型的安全性，但不提供编译时类型的安全性，反之亦然。 一般来说，数组和泛型不能很好地混合工作。 如果发现把它们混合在一起，得到编译时错误或者警告，应该首先用列表来替换数组。</p>
+        <p>查询连续递增的序列</p>
 <a id="more"></a>
 
-<h1 id="消除非检查警告"><a href="#消除非检查警告" class="headerlink" title="消除非检查警告"></a>消除非检查警告</h1><p>　　使用泛型编程时，会看到许多编译器警告：未经检查的强制转换警告，未经检查的方法调用警告，未经检查的参数化可变长度类型警告以及未经检查的转换警告。 你使用泛型获得的经验越多，获得的警告越少，但不要期望新编写的代码能够干净地编译。</p>
-<p>　　许多未经检查的警告很容易消除。 例如，假设你不小心写了以下声明：</p>
-<pre><code>Set&lt;Lark&gt; exaltation = new HashSet();</code></pre><p>　　编译器会提醒你你做错了什么：</p>
-<pre><code>Venery.java:4: warning: [unchecked] unchecked conversion
-        Set&lt;Lark&gt; exaltation = new HashSet();
-                               ^
-  required: Set&lt;Lark&gt;
-  found:    HashSet。</code></pre><p>　然后可以进行指示修正，让警告消失。 请注意，实际上并不需要指定类型参数，只是为了表明它与 Java 7 中引入的钻石运算符（「&lt;&gt;」）一同出现。然后编译器会推断出正确的实际类型参数（在本例中为 Lark）：</p>
-<pre><code>Set&lt;Lark&gt; exaltation = new HashSet&lt;&gt;();</code></pre><p>　　但一些警告更难以消除。 本章充满了这种警告的例子。 当你收到需要进一步思考的警告时，坚持不懈！ 尽可能地消除每一个未经检查的警告。 如果你消除所有的警告，你可以放心，你的代码是类型安全的，这是一件非常好的事情。 这意味着在运行时你将不会得到一个 ClassCastException 异常，并且增加了你的程序将按照你的意图行事的信心。</p>
-<p>　　如果你不能消除警告，但你可以证明引发警告的代码是类型安全的，那么（并且只能这样）用 @SuppressWarnings(“unchecked”) 注解来抑制警告。 如果你在没有首先证明代码是类型安全的情况下压制警告，那么你给自己一个错误的安全感。 代码可能会在不发出任何警告的情况下进行编译，但是它仍然可以在运行时抛出 ClassCastException 异常。 但是，如果你忽略了你认为是安全的未经检查的警告（而不是抑制它们），那么当一个新的警告出现时，你将不会注意到这是一个真正的问题。 新出现的警告就会淹没在所有的错误警告当中。</p>
-<p>　　SuppressWarnings 注解可用于任何声明，从单个局部变量声明到整个类。 始终在尽可能最小的范围内使用 SuppressWarnings 注解。 通常这是一个变量声明或一个非常短的方法或构造方法。 切勿在整个类上使用 SuppressWarnings 注解。 这样做可能会掩盖重要的警告。</p>
-<p>　　如果你发现自己在长度超过一行的方法或构造方法上使用 SuppressWarnings 注解，则可以将其移到局部变量声明上。 你可能需要声明一个新的局部变量，但这是值得的。 例如，考虑这个来自 ArrayList 的 toArray 方法：</p>
-<pre><code>public &lt;T&gt; T[] toArray(T[] a) {
-    if (a.length &lt; size)
-       return (T[]) Arrays.copyOf(elements, size, a.getClass());
-    System.arraycopy(elements, 0, a, 0, size);
-    if (a.length &gt; size)
-       a[size] = null;
-    return a;
-}
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h1><p>在表 stadium 中查询人流量超过 100 的记录，将查询结果与其自身的临时表连接，再使用 WHERE 子句获得满足条件的记录。</p>
+<p>第一步：查询人流量超过 100 的记录，然后将结果与其自身的临时表连接。<br>MySQL</p>
+<pre><code>select distinct t1.*
+from stadium t1, stadium t2, stadium t3
+where t1.people &gt;= 100 and t2.people &gt;= 100 and t3.people &gt;= 100
+;</code></pre><p>共有 6 天人流量超过 100 人，笛卡尔积 后有 216（666） 条记录。</p>
+<p>前 3 列来自表 t1，中间 3 列来自表 t2，最后 3 列来自表 t3。</p>
+<p>表 t1，t2 和 t3 相同，需要考虑添加哪些条件能够得到想要的结果。以 t1 为例，它有可能是高峰期的第 1 天，第 2 天，或第 3 天。</p>
+<p>t1 是高峰期第 1 天：</p>
+<pre><code>(t1.id - t2.id = -1 and t1.id - t3.id = -2 and t2.id - t3.id =-1) -- t1, t2, t3</code></pre><p>t1 是高峰期第 2 天：</p>
+<pre><code>(t2.id - t1.id = -1 and t2.id - t3.id = -2 and t1.id - t3.id =-1) -- t2, t1, t3</code></pre><p>t1 是高峰期第 3 天：</p>
+<pre><code>(t3.id - t2.id = -1 and t2.id - t1.id =-1 and t3.id - t1.id = -2) -- t3, t2, t1</code></pre><p>因此：</p>
+<pre><code>select t1.*
+from stadium t1, stadium t2, stadium t3
+where t1.people &gt;= 100 and t2.people &gt;= 100 and t3.people &gt;= 100
+and
+(
+  (t1.id - t2.id = -1 and t1.id - t3.id = -2 and t2.id - t3.id =-1)  -- t1, t2, t3
+  or
+  (t2.id - t1.id = -1 and t2.id - t3.id = -2 and t1.id - t3.id =-1) -- t2, t1, t3
+  or
+  (t3.id - t2.id = -1 and t2.id - t1.id =-1 and t3.id - t1.id = -2) -- t3, t2, t1
+)
+;
 
-如果编译 ArrayList 类，则该方法会生成此警告：
-ArrayList.java:305: warning: [unchecked] unchecked cast
-       return (T[]) Arrays.copyOf(elements, size, a.getClass());
-                                 ^
-  required: T[]
-  found:    Object[]</code></pre><p>　　在返回语句中设置 SuppressWarnings 注解是非法的，因为它不是一个声明[JLS，9.7]。 你可能会试图把注释放在整个方法上，但是不要这要做。 相反，声明一个局部变量来保存返回值并标注它的声明，如下所示：</p>
-<pre><code>// Adding local variable to reduce scope of @SuppressWarnings
-public &lt;T&gt; T[] toArray(T[] a) {
-    if (a.length &lt; size) {
-        // This cast is correct because the array we&apos;re creating
-        // is of the same type as the one passed in, which is T[].
-        @SuppressWarnings(&quot;unchecked&quot;) T[] result =
-            (T[]) Arrays.copyOf(elements, size, a.getClass());
-        return result;
-    }
-    System.arraycopy(elements, 0, a, 0, size);
-    if (a.length &gt; size)
-        a[size] = null;
-    return a;
-}</code></pre><p>　　所产生的方法干净地编译，并最小化未经检查的警告被抑制的范围。<br>　　<strong><em>每当使用 @SuppressWarnings(“unchecked”) 注解时，请添加注释，说明为什么是安全的。</em></strong> 这将有助于他人理解代码，更重要的是，这将减少有人修改代码的可能性，从而使计算不安全。 如果你觉得很难写这样的注释，请继续思考。 毕竟，你最终可能会发现未经检查的操作是不安全的。</p>
-<p>　　总之，未经检查的警告是重要的。 不要忽视他们。 每个未经检查的警告代表在运行时出现 ClassCastException 异常的可能性。 尽你所能消除这些警告。 如果无法消除未经检查的警告，并且可以证明引发该警告的代码是安全类型的，则可以在尽可能小的范围内使用 @SuppressWarnings(“unchecked”) 注解来禁止警告。 记录你决定在注释中抑制此警告的理由。</p>
-<h1 id="列表优于数组"><a href="#列表优于数组" class="headerlink" title="列表优于数组"></a>列表优于数组</h1><p>　　数组在两个重要方面与泛型不同。 首先，数组是协变的（covariant）。 这个吓人的单词意味着如果 Sub 是 Super 的子类型，则数组类型 Sub[] 是数组类型 Super[] 的子类型。 相比之下，泛型是不变的（invariant）：对于任何两种不同的类型 Type1 和 Type2，List<type1> 既不是 List<type2> 的子类型也不是父类型。[JLS，4.10; Naftalin07, 2.5]。 你可能认为这意味着泛型是不足的，但可以说是数组缺陷。 这段代码是合法的：</type2></type1></p>
-<pre><code>// Fails at runtime!
-Object[] objectArray = new Long[1];
-objectArray[0] = &quot;I don&apos;t fit in&quot;; // Throws ArrayStoreException</code></pre><p>　　但这个不是：</p>
-<pre><code>// Won&apos;t compile!
-List&lt;Object&gt; ol = new ArrayList&lt;Long&gt;(); // Incompatible types
-ol.add(&quot;I don&apos;t fit in&quot;);</code></pre><p>　　无论哪种方式，你不能把一个 String 类型放到一个 Long 类型容器中，但是用一个数组，你会发现在运行时产生了一个错误；对于列表，可以在编译时就能发现错误。 当然，你宁愿在编译时找出错误。</p>
-<p>　　数组和泛型之间的第二个主要区别是数组被具体化了（reified）[JLS，4.7]。 这意味着数组在运行时知道并强制执行它们的元素类型。 如前所述，如果尝试将一个 String 放入 Long 数组中，得到一个 ArrayStoreException 异常。 相反，泛型通过擦除（erasure）来实现[JLS，4.6]。 这意味着它们只在编译时执行类型约束，并在运行时丢弃（或擦除）它们的元素类型信息。 擦除是允许泛型类型与不使用泛型的遗留代码自由互操作（详见第 26 条），从而确保在 Java 5 中平滑过渡到泛型。</p>
-<p>　　由于这些基本差异，数组和泛型不能很好地在一起混合使用。 例如，创建泛型类型的数组，参数化类型的数组，以及类型参数的数组都是非法的。 因此，这些数组创建表达式都不合法：new List<e>[]，new List<string>[]，new E[]。 所有将在编译时导致泛型数组创建错误。</string></e></p>
-<p>　　为什么创建一个泛型数组是非法的？ 因为它不是类型安全的。 如果这是合法的，编译器生成的强制转换程序在运行时可能会因为 ClassCastException 异常而失败。 这将违反泛型类型系统提供的基本保证。</p>
-<p>　　为了具体说明，请考虑下面的代码片段：</p>
-<pre><code>// Why generic array creation is illegal - won&apos;t compile!
-List&lt;String&gt;[] stringLists = new List&lt;String&gt;[1];  // (1)
-List&lt;Integer&gt; intList = List.of(42);               // (2)
-Object[] objects = stringLists;                    // (3)
-objects[0] = intList;                              // (4)
-String s = stringLists[0].get(0);                  // (5)</code></pre><p>　　让我们假设第 1 行创建一个泛型数组是合法的。第 2 行创建并初始化包含单个元素的 List<integer>。第 3 行将 List<string> 数组存储到 Object 数组变量中，这是合法的，因为数组是协变的。第 4 行将 List<integer> 存储在 Object 数组的唯一元素中，这是因为泛型是通过擦除来实现的：List<integer> 实例的运行时类型仅仅是 List，而 List<string>[] 实例是 List[]，所以这个赋值不会产生 ArrayStoreException 异常。现在我们遇到了麻烦。将一个 List<integer> 实例存储到一个声明为仅保存 List<string> 实例的数组中。在第 5 行中，我们从这个数组的唯一列表中检索唯一的元素。编译器自动将检索到的元素转换为 String，但它是一个 Integer，所以我们在运行时得到一个 ClassCastException 异常。为了防止发生这种情况，第 1 行（创建一个泛型数组）必须产生一个编译时错误。</string></integer></string></integer></integer></string></integer></p>
-<p>　　类型 E，List<e> 和 List<string> 等在技术上被称为不可具体化的类型（nonreifiable types）[JLS，4.7]。 直观地说，不可具体化的类型是其运行时表示包含的信息少于其编译时表示的类型。 由于擦除，可唯一确定的参数化类型是无限定通配符类型，如 List<?> 和 Map<?, ?>（详见第 26 条）。 尽管很少有用，创建无限定通配符类型的数组是合法的。</string></e></p>
-<p>　　禁止泛型数组的创建可能会很恼人的。 这意味着，例如，泛型集合通常不可能返回其元素类型的数组（但是参见条目 33 中的部分解决方案）。 这也意味着，当使用可变参数方法（详见第 53 条）和泛型时，会产生令人困惑的警告。 这是因为每次调用可变参数方法时，都会创建一个数组来保存可变参数。 如果此数组的元素类型不可确定，则会收到警告。 SafeVarargs 注解可以用来解决这个问题（详见第 32 条）。</p>
-<p>　　当你在强制转换为数组类型时，得到泛型数组创建错误，或是未经检查的强制转换警告时，最佳解决方案通常是使用集合类型 List<e> 而不是数组类型 E[]。 这样可能会牺牲一些简洁性或性能，但作为交换，你会获得更好的类型安全性和互操作性。</e></p>
-<p>　　例如，假设你想用带有集合的构造方法来编写一个 Chooser 类，并且有个方法返回随机选择的集合的一个元素。 根据传递给构造方法的集合，可以使用选择器作为游戏模具，魔术 8 球或数据源进行蒙特卡罗模拟。 这是一个没有泛型的简单实现：</p>
-<pre><code>// Chooser - a class badly in need of generics!
-public class Chooser {
-    private final Object[] choiceArray;
-
-
-    public Chooser(Collection choices) {
-        choiceArray = choices.toArray();
-    }
-
-
-    public Object choose() {
-        Random rnd = ThreadLocalRandom.current();
-        return choiceArray[rnd.nextInt(choiceArray.length)];
-    }
-}</code></pre><p>　　要使用这个类，每次调用方法时，都必须将 Object 的 choose 方法的返回值转换为所需的类型，如果类型错误，则转换在运行时失败。 我们先根据条目 29 的建议，试图修改 Chooser 类，使其成为泛型的。</p>
-<pre><code>// A first cut at making Chooser generic - won&apos;t compile
-public class Chooser&lt;T&gt; {
-    private final T[] choiceArray;
-
-    public Chooser(Collection&lt;T&gt; choices) {
-        choiceArray = choices.toArray();
-    }
-
-    // choose method unchanged
-}</code></pre><p>　　如果你尝试编译这个类，会得到这个错误信息：</p>
-<pre><code>Chooser.java:9: error: incompatible types: Object[] cannot be
-converted to T[]
-        choiceArray = choices.toArray();
-                                     ^
-  where T is a type-variable:
-    T extends Object declared in class Chooser</code></pre><p>　　没什么大不了的，将 Object 数组转换为 T 数组：</p>
-<pre><code>choiceArray = (T[]) choices.toArray();</code></pre><p>　　这没有了错误，而是得到一个警告：</p>
-<pre><code>Chooser.java:9: warning: [unchecked] unchecked cast
-        choiceArray = (T[]) choices.toArray();
-                                           ^
-  required: T[], found: Object[]
-  where T is a type-variable:
-T extends Object declared in class Chooser</code></pre><p>　　编译器告诉你在运行时不能保证强制转换的安全性，因为程序不会知道 T 代表什么类型——记住，元素类型信息在运行时会被泛型删除。 该程序可以正常工作吗？ 是的，但编译器不能证明这一点。 你可以证明这一点，在注释中提出证据，并用注解来抑制警告，但最好是消除警告的原因（详见第 27 条）。</p>
-<p>　　要消除未经检查的强制转换警告，请使用列表而不是数组。 下面是另一个版本的 Chooser 类，编译时没有错误或警告：</p>
-<pre><code>// List-based Chooser - typesafe
-public class Chooser&lt;T&gt; {
-    private final List&lt;T&gt; choiceList;
-
-
-    public Chooser(Collection&lt;T&gt; choices) {
-        choiceList = new ArrayList&lt;&gt;(choices);
-    }
-
-
-    public T choose() {
-        Random rnd = ThreadLocalRandom.current();
-        return choiceList.get(rnd.nextInt(choiceList.size()));
-    }
-}</code></pre><p>　　这个版本有些冗长，也许运行比较慢，但是值得一提的是，在运行时不会得到 ClassCastException 异常。</p>
-<p>　　总之，数组和泛型具有非常不同的类型规则。 数组是协变和具体化的; 泛型是不变的，类型擦除的。 因此，数组提供运行时类型的安全性，但不提供编译时类型的安全性，反之亦然。 一般来说，数组和泛型不能很好地混合工作。 如果你发现把它们混合在一起，得到编译时错误或者警告，你的第一个冲动应该是用列表来替换数组。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/27.%20%E6%B6%88%E9%99%A4%E9%9D%9E%E6%A3%80%E6%9F%A5%E8%AD%A6%E5%91%8A" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/27.%20%E6%B6%88%E9%99%A4%E9%9D%9E%E6%A3%80%E6%9F%A5%E8%AD%A6%E5%91%8A</a></p>
+| id | date       | people |
+|----|------------|--------|
+| 7  | 2017-01-07 | 199    |
+| 6  | 2017-01-06 | 1455   |
+| 8  | 2017-01-08 | 188    |
+| 7  | 2017-01-07 | 199    |
+| 5  | 2017-01-05 | 145    |
+| 6  | 2017-01-06 | 1455   |</code></pre><p>可以看到查询结果中存在重复的记录，再使用 DISTINCT 去重。</p>
+<pre><code>select distinct t1.*
+from stadium t1, stadium t2, stadium t3
+where t1.people &gt;= 100 and t2.people &gt;= 100 and t3.people &gt;= 100
+and
+(
+      (t1.id - t2.id = -1 and t1.id - t3.id = -2 and t2.id - t3.id =-1)  -- t1, t2, t3
+    or
+    (t2.id - t1.id = -1 and t2.id - t3.id = -2 and t1.id - t3.id =-1) -- t2, t1, t3
+    or
+    (t3.id - t2.id = -1 and t2.id - t1.id =-1 and t3.id - t1.id = -2) -- t3, t2, t1
+)
+order by t1.id
+;</code></pre><p>此题官方题解貌似把t1,t2,t3的id前后顺序搞反了，不过也不影响执行结果。</p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode.com/problems/human-traffic-of-stadium/" target="_blank" rel="noopener">https://leetcode.com/problems/human-traffic-of-stadium/</a></p>
 
       
       
@@ -438,13 +365,13 @@ public class Chooser&lt;T&gt; {
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></p>
+        <p><span>本文标题:</span><a href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/">601.Human Traffic of Stadium体育馆的人流量</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2020年01月16日 - 23时57分</p>
-        <p><span>最后更新:</span>2020年01月17日 - 09时50分</p>
+        <p><span>发布时间:</span>2020年01月20日 - 14时10分</p>
+        <p><span>最后更新:</span>2020年01月20日 - 14时44分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/01/16/Effective-Java阅读笔记XIV/" title="Effective-Java阅读笔记XIV">http://yoursite.com/2020/01/16/Effective-Java阅读笔记XIV/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/16/Effective-Java阅读笔记XIV/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/" title="601.Human Traffic of Stadium体育馆的人流量">http://yoursite.com/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -457,18 +384,9 @@ public class Chooser&lt;T&gt; {
 
 <nav id="article-nav">
   
-    <a href="/2020/01/17/Effective-Java阅读笔记XV/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Effective-Java阅读笔记XV
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/01/16/Effective-Java阅读笔记XIII/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Effective-Java阅读笔记XIII</div>
+    <a href="/2020/01/20/185.Department Top Three Salaries/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">185.Department Top Three Salaries</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -479,7 +397,7 @@ public class Chooser&lt;T&gt; {
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#消除非检查警告"><span class="toc-number">1.</span> <span class="toc-text">消除非检查警告</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#列表优于数组"><span class="toc-number">2.</span> <span class="toc-text">列表优于数组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">2.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -545,13 +463,11 @@ public class Chooser&lt;T&gt; {
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/01/17/Effective-Java阅读笔记XV/" title="上一篇: Effective-Java阅读笔记XV">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/01/16/Effective-Java阅读笔记XIII/" title="下一篇: Effective-Java阅读笔记XIII">
+            <a href="/2020/01/20/185.Department Top Three Salaries/" title="下一篇: 185.Department Top Three Salaries">
                 <i class="fa fa-angle-right"></i>
             </a>
         

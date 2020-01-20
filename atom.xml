@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-20T06:11:28.135Z</updated>
+  <updated>2020-01-20T06:44:43.836Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,22 +17,17 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>601.Human Traffic of Stadium</title>
-    <link href="http://yoursite.com/2020/01/20/601.Human%20Traffic%20of%20Stadium/"/>
-    <id>http://yoursite.com/2020/01/20/601.Human Traffic of Stadium/</id>
+    <title>601.Human Traffic of Stadium体育馆的人流量</title>
+    <link href="http://yoursite.com/2020/01/20/601.Human%20Traffic%20of%20Stadium%E4%BD%93%E8%82%B2%E9%A6%86%E7%9A%84%E4%BA%BA%E6%B5%81%E9%87%8F/"/>
+    <id>http://yoursite.com/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/</id>
     <published>2020-01-20T06:10:12.000Z</published>
-    <updated>2020-01-20T06:11:28.135Z</updated>
+    <updated>2020-01-20T06:44:43.836Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a><h1 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h1><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode.com/problems/human-traffic-of-stadium/" target="_blank" rel="noopener">https://leetcode.com/problems/human-traffic-of-stadium/</a></p>]]></content>
+    <content type="html"><![CDATA[<p>查询连续递增的序列</p><a id="more"></a><h1 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h1><p>在表 stadium 中查询人流量超过 100 的记录，将查询结果与其自身的临时表连接，再使用 WHERE 子句获得满足条件的记录。</p><p>第一步：查询人流量超过 100 的记录，然后将结果与其自身的临时表连接。<br>MySQL</p><pre><code>select distinct t1.*from stadium t1, stadium t2, stadium t3where t1.people &gt;= 100 and t2.people &gt;= 100 and t3.people &gt;= 100;</code></pre><p>共有 6 天人流量超过 100 人，笛卡尔积 后有 216（666） 条记录。</p><p>前 3 列来自表 t1，中间 3 列来自表 t2，最后 3 列来自表 t3。</p><p>表 t1，t2 和 t3 相同，需要考虑添加哪些条件能够得到想要的结果。以 t1 为例，它有可能是高峰期的第 1 天，第 2 天，或第 3 天。</p><p>t1 是高峰期第 1 天：</p><pre><code>(t1.id - t2.id = -1 and t1.id - t3.id = -2 and t2.id - t3.id =-1) -- t1, t2, t3</code></pre><p>t1 是高峰期第 2 天：</p><pre><code>(t2.id - t1.id = -1 and t2.id - t3.id = -2 and t1.id - t3.id =-1) -- t2, t1, t3</code></pre><p>t1 是高峰期第 3 天：</p><pre><code>(t3.id - t2.id = -1 and t2.id - t1.id =-1 and t3.id - t1.id = -2) -- t3, t2, t1</code></pre><p>因此：</p><pre><code>select t1.*from stadium t1, stadium t2, stadium t3where t1.people &gt;= 100 and t2.people &gt;= 100 and t3.people &gt;= 100and(  (t1.id - t2.id = -1 and t1.id - t3.id = -2 and t2.id - t3.id =-1)  -- t1, t2, t3  or  (t2.id - t1.id = -1 and t2.id - t3.id = -2 and t1.id - t3.id =-1) -- t2, t1, t3  or  (t3.id - t2.id = -1 and t2.id - t1.id =-1 and t3.id - t1.id = -2) -- t3, t2, t1);| id | date       | people ||----|------------|--------|| 7  | 2017-01-07 | 199    || 6  | 2017-01-06 | 1455   || 8  | 2017-01-08 | 188    || 7  | 2017-01-07 | 199    || 5  | 2017-01-05 | 145    || 6  | 2017-01-06 | 1455   |</code></pre><p>可以看到查询结果中存在重复的记录，再使用 DISTINCT 去重。</p><pre><code>select distinct t1.*from stadium t1, stadium t2, stadium t3where t1.people &gt;= 100 and t2.people &gt;= 100 and t3.people &gt;= 100and(      (t1.id - t2.id = -1 and t1.id - t3.id = -2 and t2.id - t3.id =-1)  -- t1, t2, t3    or    (t2.id - t1.id = -1 and t2.id - t3.id = -2 and t1.id - t3.id =-1) -- t2, t1, t3    or    (t3.id - t2.id = -1 and t2.id - t1.id =-1 and t3.id - t1.id = -2) -- t3, t2, t1)order by t1.id;</code></pre><p>此题官方题解貌似把t1,t2,t3的id前后顺序搞反了，不过也不影响执行结果。</p><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode.com/problems/human-traffic-of-stadium/" target="_blank" rel="noopener">https://leetcode.com/problems/human-traffic-of-stadium/</a></p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-&lt;h1 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h1&gt;&lt;h1 id=&quot;参考资料：&quot;&gt;&lt;a href=&quot;#参考资料：&quot; class=&quot;hea
-      
+      &lt;p&gt;查询连续递增的序列&lt;/p&gt;
     
     </summary>
     
