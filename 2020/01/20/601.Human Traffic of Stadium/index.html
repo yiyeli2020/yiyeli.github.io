@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>538. Convert BST to Greater Tree把二叉搜索树转换为累加树 | Yiye Li</title>
+  <title>601.Human Traffic of Stadium | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。">
-<meta name="keywords" content="LeetCode,Binary Search Tree">
+  <meta name="description" content="题目描述：参考资料：【1】https://leetcode.com/problems/human-traffic-of-stadium/">
+<meta name="keywords" content="LeetCode,Database">
 <meta property="og:type" content="article">
-<meta property="og:title" content="538. Convert BST to Greater Tree把二叉搜索树转换为累加树">
-<meta property="og:url" content="http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/index.html">
+<meta property="og:title" content="601.Human Traffic of Stadium">
+<meta property="og:url" content="http://yoursite.com/2020/01/20/601.Human Traffic of Stadium/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。">
+<meta property="og:description" content="题目描述：参考资料：【1】https://leetcode.com/problems/human-traffic-of-stadium/">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T04:05:40.033Z">
+<meta property="og:updated_time" content="2020-01-20T06:11:28.135Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="538. Convert BST to Greater Tree把二叉搜索树转换为累加树">
-<meta name="twitter:description" content="给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。">
+<meta name="twitter:title" content="601.Human Traffic of Stadium">
+<meta name="twitter:description" content="题目描述：参考资料：【1】https://leetcode.com/problems/human-traffic-of-stadium/">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-538. Convert BST to Greater Tree把二叉搜索树转换为累加树" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-601.Human Traffic of Stadium" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" class="article-date">
-      <time datetime="2018-08-24T05:36:12.000Z" itemprop="datePublished">2018-08-24</time>
+      <a href="/2020/01/20/601.Human Traffic of Stadium/" class="article-date">
+      <time datetime="2020-01-20T06:10:12.000Z" itemprop="datePublished">2020-01-20</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      538. Convert BST to Greater Tree把二叉搜索树转换为累加树
+      601.Human Traffic of Stadium
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">196字</span>
+        <span class="post-count">17字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search-Tree/">Binary Search Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,29 +260,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。</p>
-<a id="more"></a>
+        <a id="more"></a>
 
-<p>例如：</p>
-<p>输入: 二叉搜索树:<br>              5<br>            /   <br>           2     13</p>
-<p>输出: 转换为累加树:<br>             18<br>            /   <br>          20     13</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二叉搜索树有一个重要的性质，就是中序遍历序列是非递减的<br>解法是一种中序遍历的镜像遍历方法，先用遍历右子树，再改变根节点的值,将其改为所有右子树结点之和，遍历左子树</p>
-<pre><code>class Solution {
-private:
-    int cur_sum = 0;
-public:
-    void travel(TreeNode* root){
-        if (!root) return;
-        if (root-&gt;right) travel(root-&gt;right);
+<h1 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h1><h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode.com/problems/human-traffic-of-stadium/" target="_blank" rel="noopener">https://leetcode.com/problems/human-traffic-of-stadium/</a></p>
 
-        root-&gt;val = (cur_sum += root-&gt;val);
-        if (root-&gt;left) travel(root-&gt;left);
-    }
-    TreeNode* convertBST(TreeNode* root) {
-        travel(root);
-        return root;
-    }
-};</code></pre>
       
       
         <div class="page-reward">
@@ -337,13 +318,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></p>
+        <p><span>本文标题:</span><a href="/2020/01/20/601.Human Traffic of Stadium/">601.Human Traffic of Stadium</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月24日 - 13时36分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 12时05分</p>
+        <p><span>发布时间:</span>2020年01月20日 - 14时10分</p>
+        <p><span>最后更新:</span>2020年01月20日 - 14时11分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/" title="538. Convert BST to Greater Tree把二叉搜索树转换为累加树">http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/01/20/601.Human Traffic of Stadium/" title="601.Human Traffic of Stadium">http://yoursite.com/2020/01/20/601.Human Traffic of Stadium/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/20/601.Human Traffic of Stadium/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -356,18 +337,9 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/08/24/485. Max Consecutive Ones/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          485. Max Consecutive Ones最大连续1的个数
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/24/697. Degree of an Array数组的度/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">697. Degree of an Array数组的度</div>
+    <a href="/2020/01/20/185.Department Top Three Salaries/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">185.Department Top Three Salaries</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -378,7 +350,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目描述："><span class="toc-number">1.</span> <span class="toc-text">题目描述：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">2.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -444,13 +416,11 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/24/485. Max Consecutive Ones/" title="上一篇: 485. Max Consecutive Ones最大连续1的个数">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/24/697. Degree of an Array数组的度/" title="下一篇: 697. Degree of an Array数组的度">
+            <a href="/2020/01/20/185.Department Top Three Salaries/" title="下一篇: 185.Department Top Three Salaries">
                 <i class="fa fa-angle-right"></i>
             </a>
         
