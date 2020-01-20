@@ -4,7 +4,7 @@ categories: 2020年1月
 tags: [Database，MySQL]
 
 ---
-MySQL建表,LIMIT,OFFSET的用法,Rank函数的用法   
+MySQL建表,LIMIT,OFFSET的用法  
 
 <!-- more -->
 #  MySQL建表
@@ -132,11 +132,6 @@ mysql declare和set定义变量，除了一个不加@和一个加@这个区别�
  declare变量的作用范围同编程里面类似，在这里一般是在对应的begin和end之间。在end之后这个变量就没有作用了，不能使用了。这个同编程一样。
 
  另外有种变量叫做会话变量(session variable)，也叫做用户定义的变量(user defined variable)。这种变量要在变量名称前面加上“@”符号，叫做会话变量，代表整个会话过程他都是有作用的，这个有点类似于全局变量一样。这种变量用途比较广，因为只要在一个会话内(就是某个应用的一个连接过程中)，这个变量可以在被调用的存储过程或者代码之间共享数据。
-
-# rank函数
-用于返回结果集的分区内每行的排名， 行的排名是相关行之前的排名数加一。简单来说rank函数就是对查询出来的记录进行排名，与row_number函数不同的是，rank函数考虑到了over子句中排序字段值相同的情况，如果使用rank函数来生成序号，over子句中排序字段值相同的序号是一样的，后面字段值不相同的序号将跳过相同的排名号排下一个，也就是相关行之前的排名数加一，可以理解为根据当前的记录数生成序号，后面的记录依此类推。
-
-select RANK() OVER(order by column_name) as rank,* from table_name
 
 
 
