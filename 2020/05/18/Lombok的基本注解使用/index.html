@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>626. Exchange Seats换座位 | Yiye Li</title>
+  <title>Lombok的基本注解使用 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="小美是一所中学的信息科技老师，她有一张 seat 座位表，平时用来储存学生名字和与他们相对应的座位 id。 其中纵列的 id 是连续递增的 小美想改变相邻俩学生的座位。 你能不能帮她写一个 SQL query 来输出小美想要的结果呢？">
-<meta name="keywords" content="LeetCode,SQL">
+  <meta name="description" content="学习使用Lombok的基本注解：@Data，@AllArgsConstructor，@NoArgsConstructor，@Builder">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="626. Exchange Seats换座位">
-<meta property="og:url" content="http://yoursite.com/2018/08/26/626. Exchange Seats换座位/index.html">
+<meta property="og:title" content="Lombok的基本注解使用">
+<meta property="og:url" content="http://yoursite.com/2020/05/18/Lombok的基本注解使用/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="小美是一所中学的信息科技老师，她有一张 seat 座位表，平时用来储存学生名字和与他们相对应的座位 id。 其中纵列的 id 是连续递增的 小美想改变相邻俩学生的座位。 你能不能帮她写一个 SQL query 来输出小美想要的结果呢？">
+<meta property="og:description" content="学习使用Lombok的基本注解：@Data，@AllArgsConstructor，@NoArgsConstructor，@Builder">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T04:05:48.151Z">
+<meta property="og:updated_time" content="2020-05-18T15:33:47.089Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="626. Exchange Seats换座位">
-<meta name="twitter:description" content="小美是一所中学的信息科技老师，她有一张 seat 座位表，平时用来储存学生名字和与他们相对应的座位 id。 其中纵列的 id 是连续递增的 小美想改变相邻俩学生的座位。 你能不能帮她写一个 SQL query 来输出小美想要的结果呢？">
+<meta name="twitter:title" content="Lombok的基本注解使用">
+<meta name="twitter:description" content="学习使用Lombok的基本注解：@Data，@AllArgsConstructor，@NoArgsConstructor，@Builder">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-626. Exchange Seats换座位" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Lombok的基本注解使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/26/626. Exchange Seats换座位/" class="article-date">
-      <time datetime="2018-08-26T12:33:12.000Z" itemprop="datePublished">2018-08-26</time>
+      <a href="/2020/05/18/Lombok的基本注解使用/" class="article-date">
+      <time datetime="2020-05-18T14:05:12.000Z" itemprop="datePublished">2020-05-18</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      626. Exchange Seats换座位
+      Lombok的基本注解使用
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">512字</span>
+        <span class="post-count">1.1k字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    <a class="article-category-link" href="/categories/2020年5月/">2020年5月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,86 +260,72 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>小美是一所中学的信息科技老师，她有一张 seat 座位表，平时用来储存学生名字和与他们相对应的座位 id。</p>
-<p>其中纵列的 id 是连续递增的</p>
-<p>小美想改变相邻俩学生的座位。</p>
-<p>你能不能帮她写一个 SQL query 来输出小美想要的结果呢？</p>
+        <p>学习使用Lombok的基本注解：@Data，@AllArgsConstructor，@NoArgsConstructor，@Builder</p>
 <a id="more"></a>
 
+<p>Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java 的冗长，尤其是对于简单的 Java 对象（POJO）。它通过注解实现这一目的。</p>
+<h1 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h1><p>在 pom.xml 文件中添加相关依赖：</p>
+<pre><code>&lt;lombok.version&gt;1.16.20&lt;/lombok.version&gt;
 
+&lt;!-- https://mvnrepository.com/artifact/org.projectlombok/lombok --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;version&gt;${lombok.version}&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;</code></pre><h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><p>由于 Lombok 采取的注解形式的，在编译后，自动生成相应的方法，需要下载插件来支持它。<br>以 IDEA 为例：查找插件 lombok plugin 安装即可。</p>
+<p>以 User 实体类为例（set,get,toString 方法），</p>
+<p>拿lombok官网的一个例子来说:<br>    public class Mountain{<br>        private String name;<br>        private double longitude;<br>        private String country;<br>    }<br>要使用这个对象,必须还要写一些getter和setter方法,可能还要写一个构造器、equals方法、或者hash方法.这些方法很冗长而且没有技术含量,我们叫它样板式代码.<br>lombok的主要作用是通过一些注解，消除样板式代码，像这样：</p>
+<pre><code>@Data
+public class Mountain{
+    private String name;
+    private double longitude;
+    private String country;
+}</code></pre><p>然后这个类自动生成了这些方法.</p>
+<h1 id="Data-生成getter-setter等函数"><a href="#Data-生成getter-setter等函数" class="headerlink" title="@Data 生成getter,setter等函数"></a>@Data 生成getter,setter等函数</h1><p>使用这个注解，就不用再去手写Getter,Setter,equals,canEqual,hasCode,toString等方法了，注解后在编译时会自动加进去。@Data 包含了 @ToString、@EqualsAndHashCode、@Getter / @Setter和@RequiredArgsConstructor的功能.</p>
+<h1 id="AllArgsConstructor-生成全参数构造函数"><a href="#AllArgsConstructor-生成全参数构造函数" class="headerlink" title="@AllArgsConstructor 生成全参数构造函数"></a>@AllArgsConstructor 生成全参数构造函数</h1><p>使用后添加一个构造函数，该构造函数含有所有已声明字段属性参数</p>
+<h1 id="NoArgsConstructor-生成全参数构造函数"><a href="#NoArgsConstructor-生成全参数构造函数" class="headerlink" title="@NoArgsConstructor 生成全参数构造函数"></a>@NoArgsConstructor 生成全参数构造函数</h1><p>使用后创建一个无参构造函数,即没有参数的构造函数。</p>
+<h1 id="Builder"><a href="#Builder" class="headerlink" title="@Builder"></a>@Builder</h1><p>关于Builder较为复杂一些，Builder的作用之一是为了解决在某个类有很多构造函数的情况，也省去写很多构造函数的麻烦，在设计模式中的思想是：用一个内部类去实例化一个对象，避免一个类出现过多构造函数，</p>
+<p>举一个例子：</p>
+<pre><code>import lombok.*;
+@Data //生成getter,setter等函数
+@AllArgsConstructor //生成全参数构造函数
+@NoArgsConstructor//生成无参构造函数
+@Builder
+public class User {
+    private String name;
+    private String age;
+    private String sex;
+}</code></pre><p>我们来为User类赋值并打印一下结果：</p>
+<pre><code>public  static   void  main(String[] args){
+    User userAllArgs=new User(&quot;27&quot;,&quot;yiye&quot;,&quot;male&quot;);//有全参数构造函数可如此赋值
+    User userNoArgs=new User();//有无参构造函数时可以如此使用
+    userNoArgs= User.builder().age(&quot;26&quot;).name(&quot;yezi&quot;).sex(&quot;male&quot;).build();//有
+    System.out.println(&quot;userAllArgs:&quot;+userAllArgs);
+    System.out.println(&quot;userNoArgs:&quot;+userNoArgs);
+}</code></pre><p>打印结果是：</p>
+<pre><code>userAllArgs:User(name=27, age=yiye, sex=male)
+userNoArgs:User(name=yezi, age=26, sex=male)</code></pre><h1 id="无参构造函数失效的情况"><a href="#无参构造函数失效的情况" class="headerlink" title="无参构造函数失效的情况"></a>无参构造函数失效的情况</h1><p><strong><em>注意的是，同时使用@Data 和 @AllArgsConstructor 后 ，默认的无参构造函数失效，如果需要它，要重新设置 @NoArgsConstructor</em></strong><br>这里我们要回顾一下Java中无参构造函数的相关知识：</p>
+<ol>
+<li><p>如果一个类没有定义任何构造函数，那么该类会自动生成1个默认的构造函数。默认构造函数没有参数。</p>
+</li>
+<li><p>如果一个类定义了构造函数，但这些构造函数都有参数，那么不会生成默认构造函数，也就是说此时类没有无参的构造函数。</p>
+</li>
+</ol>
+<p>这种错误会出现在一些场合，例如我们定义一个DTO</p>
+<pre><code>@Data
+@AllArgsConstructor
+public class TemplateInfoResponseDTO {
+    private String code;
+    private String msg;
+    private Boolean success;
+    private String data;
+}</code></pre><p>然后通过向某个已提供的接口发送post请求，然后将接收到的结果解析为TemplateInfoResponseDTO，</p>
+<pre><code>String response = httpRequestHelper.sendPostWithLongWaitTime(BaseUrl + GETTEMPLATEINFO_URL, JSON.toJSONString(templateInfo));
+        TemplateInfoResponseDTO templateInfoResponseDTO = JSON.parseObject(response, TemplateInfoResponseDTO.class);</code></pre><p>但是返回的了错误信息是set property error, TemplateInfoResultVO#data，<br>查看该接口平台的日志可以看到，<br>com.alibaba.fastjson.JSONException:default constructor not found. class …… TemplateInfoResponseDTO<br>说明TemplateInfoResponseDTO 没有默认的无参构造函数，所以string 转 object 失败了，因为同时使用@Data 和 @AllArgsConstructor 后 ，默认的无参构造函数失效，要么再加上@NoArgsConstructor注解，要么删除@AllArgsConstructor。</p>
+<p>Lombok更多的注解使用方法参见参考资料【1】</p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://www.jianshu.com/p/365ea41b3573" target="_blank" rel="noopener">https://www.jianshu.com/p/365ea41b3573</a></p>
 
-
-<p>示例：</p>
-<pre><code>+---------+---------+
-|    id   | student |
-+---------+---------+
-|    1    | Abbot   |
-|    2    | Doris   |
-|    3    | Emerson |
-|    4    | Green   |
-|    5    | Jeames  |
-+---------+---------+</code></pre><p>假如数据输入的是上表，则输出结果如下：</p>
-<pre><code>+---------+---------+
-|    id   | student |
-+---------+---------+
-|    1    | Doris   |
-|    2    | Abbot   |
-|    3    | Green   |
-|    4    | Emerson |
-|    5    | Jeames  |
-+---------+---------+</code></pre><p>注意：</p>
-<p>如果学生人数是奇数，则不需要改变最后一个同学的座位。</p>
-<h2 id="思路I：使用流控制语句CASE"><a href="#思路I：使用流控制语句CASE" class="headerlink" title="思路I：使用流控制语句CASE"></a>思路I：使用流控制语句CASE</h2><h3 id="算法："><a href="#算法：" class="headerlink" title="算法："></a>算法：</h3><p>对于奇数ID的学生，交换后新的ID是（ID+1），最后一个座位的学生除外。</p>
-<p>对于偶数ID的学生，新的ID是（ID-1），为了查询ID数量，可以使用查询：</p>
-<pre><code>SELECT
-    COUNT(*) AS counts
-FROM
-    seat</code></pre><p>然后我们可以使用CASE语句和MOD()函数来为每个学生交换座位</p>
-<h3 id="MYSQL"><a href="#MYSQL" class="headerlink" title="MYSQL"></a>MYSQL</h3><pre><code>SELECT
-    (CASE
-        WHEN MOD(id,2) != 0 AND counts !=id THEN id+1
-        WHEN MOD(id,2) !=0 AND counts =id THEN id
-        ELSE id-1
-    END) AS id,
-    student
-FROM
-    seat,
-    (SELECT COUNT(*) AS counts
-    FROM
-        seat) AS seat_counts
-ORDER BY id ASC;</code></pre><h2 id="思路II：使用位运算和COALESCE"><a href="#思路II：使用位运算和COALESCE" class="headerlink" title="思路II：使用位运算和COALESCE()"></a>思路II：使用位运算和COALESCE()</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>位运算表达式(id+1)^1-1能够计算交换后的新的id</p>
-<pre><code>SELECT id,(id+1)^1-1, student FROM seat;
-
-| id | (id+1)^1-1 | student |
-|----|------------|---------|
-| 1  | 2          | Abbot   |
-| 2  | 1          | Doris   |
-| 3  | 4          | Emerson |
-| 4  | 3          | Green   |
-| 5  | 6          | Jeames  |</code></pre><p>然后我们能够用一个临时的表将座位填入</p>
-<pre><code>SELECT
-    *
-FROM
-    seat s1
-        LEFT JOIN
-    seat s2 ON (s1.id+1)^1-1 = s2.id
-ORDER BY s1.id;
-
-| id | student | id | student |
-|----|---------|----|---------|
-| 1  | Abbot   | 2  | Doris   |
-| 2  | Doris   | 1  | Abbot   |
-| 3  | Emerson | 4  | Green   |
-| 4  | Green   | 3  | Emerson |
-| 5  | Jeames  |    |         |</code></pre><p>前两列来自s1后两列来自s2</p>
-<p>最后我们可以输出s1.id 和 s2.student。可是s2.student时空的当id为末尾时，因此我们可以使用函数COALESCE()来生成最后一个记录的正确输出</p>
-<h3 id="MYSQL-1"><a href="#MYSQL-1" class="headerlink" title="MYSQL"></a>MYSQL</h3><pre><code>SELECT
-    s1.id, COALESCE(s2.student,s1.student) AS student
-FROM
-    seat s1
-        LEFT JOIN
-    seat s2 ON ((S1.id+1)^1)-1= s2.id
-ORDER BY s1.id;</code></pre>
       
       
         <div class="page-reward">
@@ -394,13 +380,13 @@ ORDER BY s1.id;</code></pre>
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></p>
+        <p><span>本文标题:</span><a href="/2020/05/18/Lombok的基本注解使用/">Lombok的基本注解使用</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月26日 - 20时33分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 12时05分</p>
+        <p><span>发布时间:</span>2020年05月18日 - 22时05分</p>
+        <p><span>最后更新:</span>2020年05月18日 - 23时33分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/26/626. Exchange Seats换座位/" title="626. Exchange Seats换座位">http://yoursite.com/2018/08/26/626. Exchange Seats换座位/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/26/626. Exchange Seats换座位/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/05/18/Lombok的基本注解使用/" title="Lombok的基本注解使用">http://yoursite.com/2020/05/18/Lombok的基本注解使用/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/05/18/Lombok的基本注解使用/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -413,18 +399,9 @@ ORDER BY s1.id;</code></pre>
 
 <nav id="article-nav">
   
-    <a href="/2018/08/26/139. Word Break单词拆分/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          139. Word Break单词拆分
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Kickstart-Round-E-2018-ProblemA.Yogurt</div>
+    <a href="/2020/05/18/后端开发常用调试技巧集锦/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">后端开发常用调试技巧集锦</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -435,7 +412,7 @@ ORDER BY s1.id;</code></pre>
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路I：使用流控制语句CASE"><span class="toc-number">1.</span> <span class="toc-text">思路I：使用流控制语句CASE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#算法："><span class="toc-number">1.1.</span> <span class="toc-text">算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MYSQL"><span class="toc-number">1.2.</span> <span class="toc-text">MYSQL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思路II：使用位运算和COALESCE"><span class="toc-number">2.</span> <span class="toc-text">思路II：使用位运算和COALESCE()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#算法"><span class="toc-number">2.1.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MYSQL-1"><span class="toc-number">2.2.</span> <span class="toc-text">MYSQL</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装插件"><span class="toc-number">2.</span> <span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-生成getter-setter等函数"><span class="toc-number">3.</span> <span class="toc-text">@Data 生成getter,setter等函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AllArgsConstructor-生成全参数构造函数"><span class="toc-number">4.</span> <span class="toc-text">@AllArgsConstructor 生成全参数构造函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NoArgsConstructor-生成全参数构造函数"><span class="toc-number">5.</span> <span class="toc-text">@NoArgsConstructor 生成全参数构造函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Builder"><span class="toc-number">6.</span> <span class="toc-text">@Builder</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#无参构造函数失效的情况"><span class="toc-number">7.</span> <span class="toc-text">无参构造函数失效的情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">8.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -501,13 +478,11 @@ ORDER BY s1.id;</code></pre>
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/08/26/139. Word Break单词拆分/" title="上一篇: 139. Word Break单词拆分">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/" title="下一篇: Kickstart-Round-E-2018-ProblemA.Yogurt">
+            <a href="/2020/05/18/后端开发常用调试技巧集锦/" title="下一篇: 后端开发常用调试技巧集锦">
                 <i class="fa fa-angle-right"></i>
             </a>
         
