@@ -168,7 +168,7 @@ Lombok 使用 Builder 的时候，需要在默认值的部分加上 @Default 注
 发现此时@Builder支持了默认值的设置，但是直接用无参构造的方法new User()出来的对象没有了默认值，这是需要注意的一点。
 
 
-Lombok更多的注解使用方法参见参考资料【1】
+Lombok更多的注解使用方法参见参考资料【1】，另外可以在IDEA的target/classes文件夹中查看编译后的class文件，看加了注解后的实体编译后自动生成了哪些方法。
 
 # 参考资料：
 【1】https://www.jianshu.com/p/365ea41b3573
