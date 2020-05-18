@@ -31,6 +31,7 @@ Lombok 是一种 Java™ 实用工具，可用来帮助开发人员消除 Java �
 以 User 实体类为例（set,get,toString 方法），
 
 拿lombok官网的一个例子来说:
+
     public class Mountain{
         private String name;
         private double longitude;
@@ -108,9 +109,13 @@ lombok的主要作用是通过一些注解，消除样板式代码，像这样�
     String response = httpRequestHelper.sendPostWithLongWaitTime(BaseUrl + GETTEMPLATEINFO_URL, JSON.toJSONString(templateInfo));
             TemplateInfoResponseDTO templateInfoResponseDTO = JSON.parseObject(response, TemplateInfoResponseDTO.class);
 
-但是返回的了错误信息是set property error, TemplateInfoResultVO#data，
+但是返回的了错误信息是
+
+    set property error, TemplateInfoResultVO#data，
 查看该接口平台的日志可以看到，
-com.alibaba.fastjson.JSONException:default constructor not found. class ...... TemplateInfoResponseDTO
+
+    com.alibaba.fastjson.JSONException:default constructor not found. class ...... TemplateInfoResponseDTO
+
 说明TemplateInfoResponseDTO 没有默认的无参构造函数，所以string 转 object 失败了，因为同时使用@Data 和 @AllArgsConstructor 后 ，默认的无参构造函数失效，要么再加上@NoArgsConstructor注解，要么删除@AllArgsConstructor。
 
 
