@@ -71,13 +71,13 @@ lombok的主要作用是通过一些注解，消除样板式代码，像这样�
     }
 我们来为User类赋值并打印一下结果：
 
-    public  static   void  main(String[] args){
-        User userAllArgs=new User("27","yiye","male");//有全参数构造函数可如此赋值
-        User userNoArgs=new User();//有无参构造函数时可以如此使用
-        userNoArgs= User.builder().age("26").name("yezi").sex("male").build();//有
-        System.out.println("userAllArgs:"+userAllArgs);
-        System.out.println("userNoArgs:"+userNoArgs);
-    }
+    public static void main(String[] args) {
+          User userAllArgs = new User("27", "yiye", "male");//有全参数构造函数可如此赋值
+          User userNoArgs = new User();//有无参构造函数时可以如此使用
+          userNoArgs = User.builder().age("26").name("yezi").sex("male").build();//有
+          System.out.println("userAllArgs:" + userAllArgs);
+          System.out.println("userNoArgs:" + userNoArgs);
+      }
 
 打印结果是：
 
@@ -117,6 +117,55 @@ lombok的主要作用是通过一些注解，消除样板式代码，像这样�
     com.alibaba.fastjson.JSONException:default constructor not found. class ...... TemplateInfoResponseDTO
 
 说明TemplateInfoResponseDTO 没有默认的无参构造函数，所以string 转 object 失败了，因为同时使用@Data 和 @AllArgsConstructor 后 ，默认的无参构造函数失效，要么再加上@NoArgsConstructor注解，要么删除@AllArgsConstructor。
+
+# @Builder支持默认值
+Lombok 使用 Builder 的时候，需要在默认值的部分加上 @Default 注解，否则默认值是无效的
+例如我们给User的属性赋予默认值
+
+    @Data //生成getter,setter等函数
+    @AllArgsConstructor //生成全参数构造函数
+    @NoArgsConstructor//生成无参构造函数
+    @Builder
+    public class User {
+        private String name = "yiye";
+        private String age = "18";
+        private String sex = "male";
+    }
+
+然后打印出来：
+
+    public static void main(String[] args) {
+          User userAllArgs = User.builder().build();
+          System.out.println("userAllArgs:" + userAllArgs);
+          User userNoArgs = new User();
+          System.out.println("userNoArgs:" + userNoArgs);
+      }
+打印结果：
+
+    userAllArgs:User(name=null, age=null, sex=null)
+    userNoArgs:User(name=yiye, age=18, sex=male)
+
+可见@Builder默认是不支持默认值设置，或者说，自动忽略了User里面设置的默认值。
+在有默认值的属性上使用这个注解：@Builder.Default
+
+      @Data //生成getter,setter等函数
+      @AllArgsConstructor //生成全参数构造函数
+      @NoArgsConstructor//生成无参构造函数
+      @Builder
+      public class User {
+          @Builder.Default
+          private String name = "yiye";
+          @Builder.Default
+          private String age = "18";
+          @Builder.Default
+          private String sex = "male";
+      }
+再看打印的结果：
+
+    userAllArgs:User(name=yiye, age=18, sex=male)
+    userNoArgs:User(name=null, age=null, sex=null)
+
+发现此时@Builder支持了默认值的设置，但是直接用无参构造的方法new User()出来的对象没有了默认值，这是需要注意的一点。
 
 
 Lombok更多的注解使用方法参见参考资料【1】
