@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>684.冗余链接 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用并查集找到一条可以删去的边。">
+<meta name="keywords" content="LeetCode,Tree,Union Find,Graph">
+<meta property="og:type" content="article">
+<meta property="og:title" content="684.冗余链接">
+<meta property="og:url" content="http://yoursite.com/2020/05/19/684.冗余链接/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="使用并查集找到一条可以删去的边。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2020/05/19/684.冗余链接/p__O_Nalpha_N___approx_O_N__.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/19/684.冗余链接/p__alpha_.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/19/684.冗余链接/p__O_alpha_N___.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/19/684.冗余链接/p__O_alpha_N___.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/19/684.冗余链接/p__O_alpha_N___.png">
+<meta property="og:updated_time" content="2020-05-19T15:51:25.460Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="684.冗余链接">
+<meta name="twitter:description" content="使用并查集找到一条可以删去的边。">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/19/684.冗余链接/p__O_Nalpha_N___approx_O_N__.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 14px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 17px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 15px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 13px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 11px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 11px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 11px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 18px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 13px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 15px;">Database</a> <a href="/tags/Database，MySQL/" style="font-size: 16px;">Database，MySQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 13px;">Depth-first Search</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 14px;">Design Pattern，Java</a> <a href="/tags/Dynamic-Programming/" style="font-size: 16px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 14px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Graph/" style="font-size: 10px;">Graph</a> <a href="/tags/Greedy/" style="font-size: 11px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 13px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 12px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 13px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/LinkList/" style="font-size: 10px;">LinkList</a> <a href="/tags/Linux/" style="font-size: 11px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Operating-System/" style="font-size: 11px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 14px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 12px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 15px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 11px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 11px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 16px;">Tree</a> <a href="/tags/Trie/" style="font-size: 12px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Union-Find/" style="font-size: 10px;">Union Find</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Wechat/" style="font-size: 10px;">Wechat</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-684.冗余链接" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/19/684.冗余链接/" class="article-date">
+      <time datetime="2020-05-19T02:26:12.000Z" itemprop="datePublished">2020-05-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      684.冗余链接
+    </h1>
+  
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">4k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">16分</span>
+      </span>
+    </span>
+</div>
+
+          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2020年5月/">2020年5月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Graph/">Graph</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tree/">Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Union-Find/">Union Find</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>使用并查集找到一条可以删去的边。</p>
+<a id="more"></a>
+
+<h1 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h1><p>在计算机科学中，并查集是一种树型的数据结构，用于处理一些不交集（Disjoint Sets）的合并及查询问题。有一个联合-查找算法（Union-find Algorithm）定义了两个用于此数据结构的操作：</p>
+<p>Find：确定元素属于哪一个子集。它可以被用来确定两个元素是否属于同一子集。<br>Union：将两个子集合并成同一个集合。</p>
+<p>由于支持这两种操作，一个不相交集也常被称为联合-查找数据结构（Union-find Data Structure）或合并-查找集合（Merge-find Set）。<br>为了更加精确的定义这些方法，需要定义如何表示集合。一种常用的策略是为每个集合选定一个固定的元素，称为代表，以表示整个集合。接着，Find(x) 返回 x 所属集合的代表，而 Union 使用两个集合的代表作为参数。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>本问题中, 树指的是一个连通且无环的无向图。</p>
+<p>输入一个图，该图由一个有着N个节点 (节点值不重复1, 2, …, N) 的树及一条附加的边构成。附加的边的两个顶点包含在1到N中间，这条附加的边不属于树中已存在的边。</p>
+<p>结果图是一个以边组成的二维数组。每一个边的元素是一对[u, v] ，满足 u &lt; v，表示连接顶点u 和v的无向图的边。</p>
+<p>返回一条可以删去的边，使得结果图是一个有着N个节点的树。如果有多个答案，则返回二维数组中最后出现的边。答案边 [u, v] 应满足相同的格式 u &lt; v。</p>
+<p>示例 1：</p>
+<p>输入: [[1,2], [1,3], [2,3]]<br>输出: [2,3]<br>解释: 给定的无向图为:<br>  1<br> / <br>2 - 3<br>示例 2：</p>
+<p>输入: [[1,2], [2,3], [3,4], [1,4], [1,5]]<br>输出: [1,4]<br>解释: 给定的无向图为:<br>5 - 1 - 2<br>    |   |<br>    4 - 3</p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><h2 id="方法一：DFS"><a href="#方法一：DFS" class="headerlink" title="方法一：DFS"></a>方法一：DFS</h2><p><strong>算法：</strong><br>对于每个边 <code>(u, v)</code>，用深度优先搜索遍历图，以查看是否可以将 <code>u</code> 连接到 <code>v</code>。如果可以，则它是重复边。</p>
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：<em>O(N^2)*。其中 *N</em> 是图中的结点数（以及边数）。在最坏的情况下，对于我们包含的每一条边，我们必须搜索图中出现的每一条边。</li>
+<li>空间复杂度：<em>O(N)*，图的当前构造最多有 *N</em> 个结点。</li>
+</ul>
+<h2 id="方法二：并查集"><a href="#方法二：并查集" class="headerlink" title="方法二：并查集"></a>方法二：并查集</h2><p><strong>算法：</strong><br>如果我们熟悉并查集（DSU）数据结构，我们可以直接使用它来解决这个问题：我们只需找到已经连接的图中出现的第一条边。本解释的其余部分将重点介绍实现 DSU 的细节。</p>
+<p>一个 DSU 数据结构可以用来维护图形连接组件的数据，并快速查询它们。有两种操作：</p>
+<ul>
+<li><code>dsu.find(node x)</code>，找到元素 <code>x</code> 所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合。</li>
+<li><code>dsu.union(node x, node y)</code>，把元素 <code>x</code> 和元素 <code>y</code> 所在的集合合并，要求 <code>x</code>和 <code>y</code> 所在的集合不相交，如果相交则不合并。</li>
+</ul>
+<p>为了实现这一点，我们跟踪父结点，它会记录同一连接节点中较小结点的所在的集合。如果结点是它自己的父结点，我们将其称为连接结点的领导者。</p>
+<p>DSU 结构的简单实现如下所示：<br>伪代码 ：<br>我们使用两种技术来提高运行时的复杂性：路径压缩和按秩合并。</p>
+<ul>
+<li>路径压缩涉及将 <code>find</code> 函数中的 <code>x=parent[x]</code> 更改为<code>parent[x]=find(parent[x])</code>。</li>
+<li>按秩合并涉及到将发现的工作量平均分配给领导者。每当 <code>dsu.union(x, y)</code> 时，我们都有两个领导者 <code>xr，yr</code>，并且我们要选择是要 <code>parent[x]=yr</code> 还是 <code>parent[y]=xr</code>。我们选择有更多子节点的领导者作为领导者。</li>
+<li>具体地说，<code>rank</code> 的含义是 <code>x</code> 的跟随者少于 <code>2 ^ rank[x]</code>，这个策略可以作为 <code>dsu.find</code> 中的递归循环可中的界限。</li>
+</ul>
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：<img src="./p__O_Nalpha_N___approx_O_N__.png" alt="O(N\alpha(N))\approxO(N) "> 。其中， <em>N</em> 是图中顶点的数目（以及边的数目），<img src="./p__alpha_.png" alt="\alpha ">  是 <code>Inverse-Ackermann</code> 函数。我们对 <code>dsu.union</code> 进行了多达 <em>N</em> 次查询，这需要花费 <img src="./p__O_alpha_N___.png" alt="O(\alpha(N)) ">  时间。可以去查阅资料为什么 <code>dsu.union</code> 具有 <img src="./p__O_alpha_N___.png" alt="O(\alpha(N)) ">  复杂性、<code>Inverse-Ackermann</code> 函数是什么以及为什么 <img src="./p__O_alpha_N___.png" alt="O(\alpha(N)) ">  大约是 <em>O(1)</em> 的原因。</li>
+<li>空间复杂度：<em>O(N)*，图的当前构造（嵌入在我们的 DSU 结构中）最多有 *N</em> 个结点。</li>
+</ul>
+<h1 id="并查集的实现"><a href="#并查集的实现" class="headerlink" title="并查集的实现"></a>并查集的实现</h1><h2 id="集合树："><a href="#集合树：" class="headerlink" title="集合树："></a>集合树：</h2><p>所有节点以代表节点为父节点构成的多叉树</p>
+<h2 id="节点的代表节点："><a href="#节点的代表节点：" class="headerlink" title="节点的代表节点："></a>节点的代表节点：</h2><p>可以理解为节点的父节点，从当前节点出发，可以向上找到的第一个节点</p>
+<h2 id="集合的代表节点："><a href="#集合的代表节点：" class="headerlink" title="集合的代表节点："></a>集合的代表节点：</h2><p>可以理解为根节点，意味着该集合内所有节点向上走，最终都能到达的节点</p>
+<p>体到这个题上：<br>我们以这个边集合为例子[[1,2], [3,4], [3,2], [1,4], [1,5]]</p>
+<p>一、首先，对于边集合edges的每个元素，我们将其看作两个节点集合</p>
+<p>比如边[2, 3],我们将其看作节点集合2，和节点集合3</p>
+<p>二、在没有添加边的时候，各个节点集合独立，我们需要初始化各个节点集合的代表节点为其自身</p>
+<p>所以，我们先初始化一个容器vector，使得vector[i]=i。</p>
+<p>这里两个i意思不同，作为索引的i是指当前节点，作为值的i是指当前节点所在集合的代表节点。</p>
+<p>比如vector[2] = 2，意味着2这个节点所在集合的代表节点就是2，没有添加边的情况下，所有节点单独成集合，自身就是代表节点</p>
+<p>三、然后我们开始遍历边集合，将边转化为集合的关系</p>
+<p>这里有一点很重要：边[a,b]意味着a所在集合可以和b所在集合合并。</p>
+<p>合并方法很多，这里我们简单地将a集合的代表节点戳到b集合的代表节点上。<br>这意味着，将b集合代表节点作为合并后大集合的代表节点。</p>
+<p>对于一个集合的代表节点s，一定有s-&gt;s，意思是s如果是代表节点，那么它本身不存在代表节点</p>
+<p>假设我们的读取顺序为[[1,2], [3,4], [3,2], [1,4], [1,5]]</p>
+<p>初始化vector[0, 1, 2, 3, 4, 5]</p>
+<p>对应的index [0, 1, 2, 3, 4, 5]</p>
+<p>##########################################################################</p>
+<p>1.读取[1,2]：</p>
+<p>读取顺序为[[1,2], [3,4], [3,2], [1,4], [1,5]]</p>
+<p>当前vector[0, 1, 2, 3, 4, 5]</p>
+<p>当前index [0, 1, 2, 3, 4, 5]</p>
+<p>原本1-&gt;1，2-&gt;2，</p>
+<p>由1节点出发，vector[1]=1, 找到1所在集合的代表节点1</p>
+<p>由2节点出发，vector[2]=2, 找到2所在集合的代表节点2</p>
+<p>于是，将1的代表置为2，vector[1]=2, vector[2]=2</p>
+<p>对应的vector[0, 2, 2, 3, 4, 5]</p>
+<p>对应的index [0, 1, 2, 3, 4, 5]</p>
+<p>##########################################################################</p>
+<p>2.读取[3, 4]</p>
+<p>读取顺序为[[1,2], [3,4], [3,2], [1,4], [1,5]]</p>
+<p>当前vector[0, 2, 2, 3, 4, 5]</p>
+<p>当前index [0, 1, 2, 3, 4, 5]</p>
+<p>同理，将3所在集合的的代表节点3的代表节点置为4</p>
+<p>对应的vector[0, 2, 2, 4, 4, 5]</p>
+<p>对应的index [0, 1, 2, 3, 4, 5]</p>
+<p>##########################################################################<br>3.读取[3, 2]</p>
+<p>读取顺序为[[1,2], [3,4], [3,2], [1,4], [1,5]]</p>
+<p>当前vector[0, 1, 2, 4, 4, 5]</p>
+<p>当前index [0, 1, 2, 3, 4, 5]</p>
+<p>从节点3出发，vector[3]=4, vector[4]=4,于是找到节点3所在集合的代表节点为4</p>
+<p>从节点2出发，vector[2]=2, 找到节点2所在集合的代表节点为2</p>
+<p>于是，将4的代表置为2，vector[4]=2, vector[2]=2</p>
+<p>对应的vector[0, 2, 2, 4, 2, 5]</p>
+<p>对应的index [0, 1, 2, 3, 4, 5]</p>
+<p>##########################################################################<br>4.读取[1, 4]</p>
+<p>读取顺序为[[1,2], [3,4], [3,2], [1,4], [1,5]]</p>
+<p>当前vector[0, 2, 2, 4, 2, 5]</p>
+<p>当前index [0, 1, 2, 3, 4, 5]</p>
+<p>从节点1出发，vector[1]=2, vector[2]=2, 找到节点1所在集合代表节点为2</p>
+<p>从节点4出发，vector[4]=2, vector[2]=2, 找到节点4所在集合代表节点为2</p>
+<p>由于1和4的代表节点相同，说明这两个节点本身就在同一个集合中</p>
+<p>由于原图是无向图，路径是双向可达的，1能够到达2,而且2能够到达4，再加上1能够到达4</p>
+<p>说明1能通过两条路径到达4，,这也意味着这条边出现的时候，原图中一定出现了环</p>
+<p>至于题中要求的，返回最后一条边，其实这就是返回添加过后会构成环的那一条边<br>直白解释就是，在这条边出现之前，图中没有环</p>
+<p>这条边出现，图中也出现环。包括这条边在内，构成环的边都是满足破圈条件的边<br>然而谁是最后一条出现在边集合里的？当然，就是这条构成环的最后一条边<br>##########################################################################</p>
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; findRedundantConnection(vector&lt;vector&lt;int&gt;&gt;&amp; edges) {
+        vector&lt;int&gt; rp(1001);
+        int sz = edges.size();
+        // 初始化各元素为单独的集合，代表节点就是其本身
+        for(int i=0;i&lt;sz;i++)
+            rp[i] = i;
+        for(int j=0;j&lt;sz;j++){
+            // 找到边上两个节点所在集合的代表节点
+            int set1 = find(edges[j][0], rp);
+            int set2 = find(edges[j][1], rp);
+            if(set1 == set2)  // 两个集合代表节点相同，说明出现环，返回答案
+                return edges[j];
+            else    // 两个集合独立，合并集合。将前一个集合代表节点戳到后一个集合代表节点上
+                rp[set1] = set2;
+        }
+        return {0, 0};
+    }
+
+    // 查找路径并返回代表节点，实际上就是给定当前节点，返回该节点所在集合的代表节点
+    // 之前这里写的压缩路径，引起歧义，因为结果没更新到vector里，所以这里改成路径查找比较合适
+    int find(int n, vector&lt;int&gt; &amp;rp){
+        int num = n;
+        while(rp[num] != num)
+            num = rp[num];
+        return num;
+    }
+};</code></pre><h1 id="Java实现并查集"><a href="#Java实现并查集" class="headerlink" title="Java实现并查集"></a>Java实现并查集</h1><p>对于同一棵树的所有节点来说，都拥有共同的祖先节点。</p>
+<p>因此，判断冗余连接的条件即为，判断新加入的边，两个节点是否有共同的祖先。</p>
+<p>（1）如果有共同的祖先，则说明这条边是冗余的边；</p>
+<p>（2）如果没有共同的祖先，则说明这两条边并未加入树中，因此进行合并操作。<br>循环边的记录，获取最后出现的冗余边，就是答案。</p>
+<pre><code>public static class UnionFind {
+    int[] parent;
+    int[] rank;
+
+    public UnionFind(int total) {
+        parent = new int[total];
+        rank = new int[total];
+
+        for (int i = 0; i &lt; total; i++) {
+            parent[i] = i;
+            rank[i] = 1;
+        }
+    }
+
+    public int find(int x) {
+        while (x != parent[x]) {
+            parent[x] = parent[parent[x]];
+            x = parent[x];
+        }
+        return x;
+    }
+
+    public void unionElements(int p, int q) {
+        int pRoot = find(p);
+        int qRoot = find(q);
+
+        if (pRoot == qRoot) {
+            return;
+        }
+
+        if (rank[pRoot] &lt; rank[qRoot]) {
+            parent[pRoot] = qRoot;
+        } else if (rank[pRoot] &gt; rank[qRoot]) {
+            parent[qRoot] = pRoot;
+        } else {
+            parent[pRoot] = qRoot;
+            rank[qRoot] += 1;
+        }
+    }
+}
+
+public int[] findRedundantConnection(int[][] edges) {
+    int[] res = new int[2];
+    UnionFind unionFind = new UnionFind(edges.length);
+
+    // 第一条边肯定未记录至树中，可直接合并节点
+    unionFind.unionElements(edges[0][0] - 1, edges[0][1] - 1);
+    for (int i = 1; i &lt; edges.length; i++) {
+        if (unionFind.find(edges[i][0] - 1) == unionFind.find(edges[i][1] - 1)) {
+            res[0] = edges[i][0];
+            res[1] = edges[i][1];
+        } else {
+            unionFind.unionElements(edges[i][0] - 1, edges[i][1] - 1);
+        }
+    }
+    return res;
+}</code></pre><h1 id="Map实现并查集（Java）"><a href="#Map实现并查集（Java）" class="headerlink" title="Map实现并查集（Java）"></a>Map实现并查集（Java）</h1><p>逻辑很简单，对每一条边：<br>1、如果两个顶点在不同的树上，则合并两个树<br>2、如果两个顶点在相同的树上，那么他们一定构成了闭环</p>
+<p>为了提升效率，getRoot(并查集中的find)方法中对树进行了压缩</p>
+<pre><code>class Solution {
+public int[] findRedundantConnection(int[][] edges) {
+    Map&lt;Integer, Integer&gt; cMap = new HashMap&lt;&gt;();
+    for (int i = 0; i &lt; edges.length; i++) {
+        int pi0 = getRoot(cMap, edges[i][0]);
+        int pi1 = getRoot(cMap, edges[i][1]);
+        if(pi0 != pi1){
+            cMap.put(pi0,pi1);
+        } else {
+            return edges[i];
+        }
+    }
+    return null;
+}
+
+private int getRoot(Map&lt;Integer, Integer&gt; parents, int i){
+    if(parents.get(i) == null){
+        parents.put(i, i);
+        return i;
+    }
+    if(parents.get(i) == i){
+        return i;
+    }
+    return getRoot(parents,parents.get(i));
+}
+}</code></pre><h1 id="证明-：给定一条新的边，两头节点在同一个集合，就意味着出现了环"><a href="#证明-：给定一条新的边，两头节点在同一个集合，就意味着出现了环" class="headerlink" title="证明    ：给定一条新的边，两头节点在同一个集合，就意味着出现了环"></a>证明    ：给定一条新的边，两头节点在同一个集合，就意味着出现了环</h1><p>#####################################################################<br>下面是增加的一部分证明，</p>
+<p>证明一下为什么给定一条新的边，两头节点在同一个集合，就意味着出现了环</p>
+<p>这里有个大前提，因为是无向图，集合里不会同时出现[1,2]和[2,1]这种重合边</p>
+<p>上面的代码遇到集合里有重合边的情况是会出现误判的</p>
+<p>就拿这个[1,2]和[2,1]来举例</p>
+<p>给定[1,2]后，再读取[2,1]，两个节点在同一个集合，然而并没有出现环。</p>
+<p>所以，这里代码工作的前提是不出现重合边<br>#####################################################################</p>
+<p>下面回到最初的问题，为什么给定新边的两个节点在同一集合就意味着出现了环</p>
+<p>假设给定新边的两个节点分别为5,6，新边为[5,6]</p>
+<p>对于一条新出现的边，总共有两种情况，两个节点之一单独成集合，两个节点均不单独成集合</p>
+<p>第一种情况，两个节点之一单独成集合</p>
+<p>假设5单独成集合。这种情况下，两个节点不可能在一个集合里</p>
+<p>因为有一个独立集合（只有节点5），6所在的集合和这个集合必然没有交集</p>
+<p>之后这两个集合进行合并操作</p>
+<p>直观点理解就是，5单独成集合，意味着5第一次出现在图里</p>
+<p>这里只有新边和5相关，所以当前只给定一条和5相关的边，对5而言，就像只举起了一只手</p>
+<p>要形成环，环上每个节点都必须是举起两只手的</p>
+<p>所以这种情况下是不可能出现环的，程序中也是这样判定的</p>
+<p>第二种情况，两个节点均不单独成集合</p>
+<p>这里也可以细分为5和6是否作为该集合的代表节点</p>
+<p>假设5所在集合代表节点为a</p>
+<p>6所在集合代表节点也为a</p>
+<p>2.1第一个分支，如果a不为5和6本身，那么就有5-&gt;…-&gt;a，6-&gt;…-&gt;a，路径双向可达</p>
+<p>可以得到5-&gt;…-&gt;a-&gt;…-&gt;6,对于给定边[5,6]可得5-&gt;6</p>
+<p>所以5到达6有两条路径，出现了环。</p>
+<p>2.2第二个分支，a为5和6之一</p>
+<p>假设，a为5</p>
+<p>2.2.1 首先考虑，6直接指向5这种情况</p>
+<p>出现这种情况，只能是在已经存在集合x-&gt;…-&gt;6时，出现[…,5]这样的边</p>
+<p>其中，…为x-&gt;…-&gt;6路径上除6以外任意节点</p>
+<p>此时…的代表节点为6，5的代表节点为5，合并，6戳到5上，于是出现了6直接指向5</p>
+<p>这种情况下，已经存在6-&gt;…-&gt;5一条路径，再读取到[5,6]，环出现了</p>
+<p>2.2.2 再考虑6不直接指向5的情况，就简单很多了，6-&gt;x-&gt;5</p>
+<p>再读取到[5,6]，6可以通过两条路径到达5，出现环</p>
+<p>综上，在边集合没有重合边的情况下，如果给定新边的两个节点在同一集合中，说明图中出现了环</p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode-cn.com/problems/redundant-connection/solution/tong-su-jiang-jie-bing-cha-ji-bang-zhu-xiao-bai-ku/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/redundant-connection/solution/tong-su-jiang-jie-bing-cha-ji-bang-zhu-xiao-bai-ku/</a></p>
+<p>【2】<a href="https://leetcode-cn.com/problems/redundant-connection/solution/bing-cha-ji-jie-jue-rong-yu-lian-jie-i-by-jxd134/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/redundant-connection/solution/bing-cha-ji-jie-jue-rong-yu-lian-jie-i-by-jxd134/</a></p>
+<p>【3】<a href="https://leetcode-cn.com/problems/redundant-connection/solution/bing-cha-ji-mapshi-xian-de-ling-lei-bing-cha-ji-by/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/redundant-connection/solution/bing-cha-ji-mapshi-xian-de-ling-lei-bing-cha-ji-by/</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/05/19/684.冗余链接/">684.冗余链接</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2020年05月19日 - 10时26分</p>
+        <p><span>最后更新:</span>2020年05月19日 - 23时51分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/05/19/684.冗余链接/" title="684.冗余链接">http://yoursite.com/2020/05/19/684.冗余链接/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/05/19/684.冗余链接/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/18/Lombok的基本注解使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Lombok的基本注解使用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#并查集"><span class="toc-number">1.</span> <span class="toc-text">并查集</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#问题描述"><span class="toc-number">2.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解法"><span class="toc-number">3.</span> <span class="toc-text">解法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法一：DFS"><span class="toc-number">3.1.</span> <span class="toc-text">方法一：DFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法二：并查集"><span class="toc-number">3.2.</span> <span class="toc-text">方法二：并查集</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并查集的实现"><span class="toc-number">4.</span> <span class="toc-text">并查集的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#集合树："><span class="toc-number">4.1.</span> <span class="toc-text">集合树：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点的代表节点："><span class="toc-number">4.2.</span> <span class="toc-text">节点的代表节点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合的代表节点："><span class="toc-number">4.3.</span> <span class="toc-text">集合的代表节点：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java实现并查集"><span class="toc-number">5.</span> <span class="toc-text">Java实现并查集</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Map实现并查集（Java）"><span class="toc-number">6.</span> <span class="toc-text">Map实现并查集（Java）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#证明-：给定一条新的边，两头节点在同一个集合，就意味着出现了环"><span class="toc-number">7.</span> <span class="toc-text">证明    ：给定一条新的边，两头节点在同一个集合，就意味着出现了环</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">8.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/05/18/Lombok的基本注解使用/" title="下一篇: Lombok的基本注解使用">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/19/684.冗余链接/">684.冗余链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Lombok的基本注解使用/">Lombok的基本注解使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/后端开发常用调试技巧集锦/">后端开发常用调试技巧集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/405. 数字转化为十六进制数/">405. 数字转化为十六进制数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/SpringBoot学习笔记VIII-MybatisPlus教程/">SpringBoot学习笔记VIII-MybatisPlus教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/设计模式学习笔记V-策略模式/">设计模式学习笔记V-策略模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/1046. 最后一块石头的重量/">1046. 最后一块石头的重量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/Java学习笔记XIV/">Java学习笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/257.二叉树的所有路径/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/22/24.两两交换链表中的节点/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/微信公众平台开发学习笔记I/">微信公众平台开发学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/">601.Human Traffic of Stadium体育馆的人流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/185.Department Top Three Salaries/">185.Department Top Three Salaries</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/数据库学习笔记IX/">数据库学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/184.Department Highest Salary/">184.Department Highest Salary</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/数据库学习笔记VIII/">数据库学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/1179. Reformat Department Table/">1179. Reformat Department Table</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java编程思想-第二十三章阅读笔记/">Java编程思想-第二十三章阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II/">Git学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I/">数据库学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：284.1k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
