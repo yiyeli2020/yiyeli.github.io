@@ -5,7 +5,7 @@ date: 2020-5-21 22:20:12
 
 categories: 2020年5月
 
-tags: [LeetCode, MultiThread]
+tags: [LeetCode, Concurrency]
 
 ---
 
@@ -31,25 +31,25 @@ AtomicInteger，一个提供原子操作的Integer的类。在Java语言中，++
 下面通过两个简单的例子来看一下 AtomicInteger 的优势在哪:
 
 普通线程同步:
-        
-        
+
+
         class Test2 {
                 private volatile int count = 0;
-        
+
                 public synchronized void increment() {
                           count++; //若要线程安全执行执行count++，需要加锁
                 }
-        
+
                 public int getCount() {
                           return count;
                 }
         }
 使用AtomicInteger:
 
-        
+
         class Test2 {
                 private AtomicInteger count = new AtomicInteger();
-        
+
                 public void increment() {
                           count.incrementAndGet();
                 }
@@ -71,17 +71,17 @@ AtomicInteger的关键域只有一下3个：
     static {    
              try {        
                     valueOffset = unsafe.objectFieldOffset (AtomicInteger.class.getDeclaredField("value"));   
-            } catch (Exception ex) { 
-                   throw new Error(ex); 
+            } catch (Exception ex) {
+                   throw new Error(ex);
             }
         }
     private volatile int value;
-    
+
 这里， unsafe是java提供的获得对对象内存地址访问的类，注释已经清楚的写出了，它的作用就是在更新操作时提供“比较并替换”的作用。实际上就是AtomicInteger中的一个工具。
 valueOffset是用来记录value本身在内存的便宜地址的，这个记录，也主要是为了在更新操作在内存中找到value的位置，方便比较。
 注意：value是用来存储整数的时间变量，这里被声明为volatile，就是为了保证在更新操作时，当前线程可以拿到value最新的值（并发环境下，value可能已经被其他线程更新了）。
 这里，我们以自增的代码为例，可以看到这个并发控制的核心算法：
-    
+
     /**
     *Atomicallyincrementsbyonethecurrentvalue.
     *
@@ -96,7 +96,7 @@ valueOffset是用来记录value本身在内存的便宜地址的，这个记录�
         returnnext;
         }
     }
-    
+
     publicfinalbooleancompareAndSet(intexpect,intupdate){
     //使用unsafe的native方法，实现高效的硬件级别CAS
             returnunsafe.compareAndSwapInt(this,valueOffset,expect,update);
