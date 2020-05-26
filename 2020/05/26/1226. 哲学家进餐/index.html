@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>1226. 哲学家进餐 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="哲学家就餐问题">
+<meta name="keywords" content="LeetCode,Concurrency">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1226. 哲学家进餐">
+<meta property="og:url" content="http://yoursite.com/2020/05/26/1226. 哲学家进餐/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="哲学家就餐问题">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-05-26T13:14:11.720Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1226. 哲学家进餐">
+<meta name="twitter:description" content="哲学家就餐问题">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 13.64px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 17.27px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 14.55px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 12.73px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10.91px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10.91px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 10.91px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 18.18px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 12.73px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/Concurrency/" style="font-size: 15.45px;">Concurrency</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 14.55px;">Database</a> <a href="/tags/Database，MySQL/" style="font-size: 16.36px;">Database，MySQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 12.73px;">Depth-first Search</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 13.64px;">Design Pattern，Java</a> <a href="/tags/Dynamic-Programming/" style="font-size: 16.36px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 13.64px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Graph/" style="font-size: 10px;">Graph</a> <a href="/tags/Greedy/" style="font-size: 10.91px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 12.73px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 11.82px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 12.73px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19.09px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/LinkList/" style="font-size: 10px;">LinkList</a> <a href="/tags/Linux/" style="font-size: 10.91px;">Linux</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Operating-System/" style="font-size: 10.91px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 13.64px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 11.82px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 14.55px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 10.91px;">Stack</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.91px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 16.36px;">Tree</a> <a href="/tags/Trie/" style="font-size: 11.82px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Union-Find/" style="font-size: 10px;">Union Find</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Wechat/" style="font-size: 10px;">Wechat</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-1226. 哲学家进餐" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/26/1226. 哲学家进餐/" class="article-date">
+      <time datetime="2020-05-25T16:05:12.000Z" itemprop="datePublished">2020-05-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      1226. 哲学家进餐
+    </h1>
+  
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">4.8k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">19分</span>
+      </span>
+    </span>
+</div>
+
+          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2020年5月/">2020年5月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Concurrency/">Concurrency</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>哲学家就餐问题</p>
+<a id="more"></a>
+
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>5 个沉默寡言的哲学家围坐在圆桌前，每人面前一盘意面。叉子放在哲学家之间的桌面上。（5 个哲学家，5 根叉子）</p>
+<p>所有的哲学家都只会在思考和进餐两种行为间交替。哲学家只有同时拿到左边和右边的叉子才能吃到面，而同一根叉子在同一时间只能被一个哲学家使用。每个哲学家吃完面后都需要把叉子放回桌面以供其他哲学家吃面。只要条件允许，哲学家可以拿起左边或者右边的叉子，但在没有同时拿到左右叉子时不能进食。</p>
+<p>假设面的数量没有限制，哲学家也能随便吃，不需要考虑吃不吃得下。</p>
+<p>设计一个进餐规则（并行算法）使得每个哲学家都不会挨饿；也就是说，在没有人知道别人什么时候想吃东西或思考的情况下，每个哲学家都可以在吃饭和思考之间一直交替下去。</p>
+<p>哲学家从 0 到 4 按 顺时针 编号。请实现函数</p>
+<pre><code>void wantsToEat(philosopher, pickLeftFork, pickRightFork, eat, putLeftFork, putRightFork)：
+
+philosopher 哲学家的编号。
+pickLeftFork 和 pickRightFork 表示拿起左边或右边的叉子。
+eat 表示吃面。
+putLeftFork 和 putRightFork 表示放下左边或右边的叉子。</code></pre><p>由于哲学家不是在吃面就是在想着啥时候吃面，所以思考这个方法没有对应的回调。<br>给你 5 个线程，每个都代表一个哲学家，请你使用类的同一个对象来模拟这个过程。在最后一次调用结束之前，可能会为同一个哲学家多次调用该函数。</p>
+<p>示例：</p>
+<pre><code>输入：n = 1
+输出：[[4,2,1],[4,1,1],[0,1,1],[2,2,1],[2,1,1],[2,0,3],[2,1,2],[2,2,2],[4,0,3],[4,1,2],[0,2,1],[4,2,2],[3,2,1],[3,1,1],[0,0,3],[0,1,2],[0,2,2],[1,2,1],[1,1,1],[3,0,3],[3,1,2],[3,2,2],[1,0,3],[1,1,2],[1,2,2]]</code></pre><p>解释:</p>
+<pre><code>n 表示每个哲学家需要进餐的次数。
+输出数组描述了叉子的控制和进餐的调用，它的格式如下：
+output[i] = [a, b, c] (3个整数)
+- a 哲学家编号。
+- b 指定叉子：{1 : 左边, 2 : 右边}.
+- c 指定行为：{1 : 拿起, 2 : 放下, 3 : 吃面}。
+如 [4,2,1] 表示 4 号哲学家拿起了右边的叉子。</code></pre><p>提示：</p>
+<pre><code>1 &lt;= n &lt;= 60</code></pre><h1 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h1><p>这道题本质上其实是想考察<strong>如何避免死锁</strong>。<br>易知：当 <em>5</em> 个哲学家都拿着其左边(或右边)的叉子时，会进入死锁。</p>
+<p>PS：死锁的 <em>4</em> 个必要条件：</p>
+<ol>
+<li>互斥条件：一个资源每次只能被一个进程使用，即在一段时间内某资源仅为一个进程所占有。此时若有其他进程请求该资源，则请求进程只能等待。</li>
+<li>请求与保持条件：进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源 已被其他进程占有，此时请求进程被阻塞，但对自己已获得的资源保持不放。</li>
+<li>不可剥夺条件:进程所获得的资源在未使用完毕之前，不能被其他进程强行夺走，即只能 由获得该资源的进程自己来释放（只能是主动释放)。</li>
+<li>循环等待条件: 若干进程间形成首尾相接循环等待资源的关系。</li>
+</ol>
+<p>故<strong>最多</strong>只允许 <em>4</em> 个哲学家去持有叉子，可保证至少有 <em>1</em> 个哲学家能吃上意大利面（即获得到 <em>2</em> 个叉子）。<br>因为最差情况下是：<em>4</em> 个哲学家都各自持有1个叉子，此时还 <strong>剩余 <em>1</em> 个叉子</strong> 可供使用，这 <em>4</em> 个哲学家中必然有1人能获取到这个 <strong>剩余的 <em>1</em> 个叉子</strong>，从而手持 <em>2</em> 个叉子，可以吃意大利面。<br>即：<em>4</em> 个人中，<em>1</em> 个人有 <em>2</em> 个叉子，<em>3</em> 个人各持 <em>1</em> 个叉子，共计 <em>5</em> 个叉子。</p>
+<p>既然<strong>最多</strong>只允许4个哲学家去持有叉子，那么如果只允许3个哲学家去持有叉子是否可行呢？</p>
+<p>当然可行，<em>3</em>个哲学家可以先都各自持有<em>1</em>把叉子，此时还剩余<em>2</em>把叉子；</p>
+<p>当这<em>3</em>个哲学家刚好都相邻(比如：编号为图中的<code>0, 1, 2</code>)，可能会造成只有<em>1</em>个哲学家能吃到意面的情况，具体而言即<code>0</code>号哲学家拿到了其左侧的叉子(编号为<code>1</code>)，<code>1</code>号哲学家也拿到了其左侧的叉子(编号为<code>2</code>)，<code>2</code>号哲学家也拿到了其左侧的叉子(编号为<code>3</code>)，此时只有<code>0</code>号哲学家能拿到其右侧的叉子(编号为<code>0</code>)，因此只有<code>0</code>号哲学家能吃到意面。<br>而其余情况下，<code>3</code>个哲学家中都能有<code>2</code>人吃到意面。<br>即：<em>3</em> 个人中，<em>2</em> 个人各自持有 <em>2</em> 个叉子，<em>1</em> 个人持有 <em>1</em> 个叉子，共计 <em>5</em> 个叉子。</p>
+<p>并且仔细想想，叉子的数目是<strong>固定</strong>的(个数为<code>5</code>)，直觉上来讲<code>3</code>个人去抢<code>5</code>个叉子 比 <code>4</code>个人去抢<code>5</code>个叉子效率高。</p>
+<h1 id="方法一：信号量"><a href="#方法一：信号量" class="headerlink" title="方法一：信号量"></a>方法一：信号量</h1><p>用<code>Semaphore</code>去实现上述的限制：<code>Semaphore eatLimit = new Semaphore(4);</code><br>一共有5个叉子，视为5个<code>ReentrantLock</code>，并将它们全放入1个数组中。</p>
+<p><code>ReentrantLock</code>的使用方法和介绍见我的博文《<strong>1115. 交替打印FooBar</strong>》</p>
+<p>给叉子编号 <em>0, 1, 2, 3, 4</em>（对应数组下标）。<br>具体编号如下图这般设计的：</p>
+<p> <a href="https://pic.leetcode-cn.com/30159b01ce754904bbc76bb81e52cfb5751b074f811ba88919bb3a0b861e02d8-%E5%93%B2%E5%AD%A6%E5%AE%B6%E9%97%AE%E9%A2%98%E5%9B%BE.png" target="_blank" rel="noopener">哲学家问题图.png</a></p>
+<p>有了这些思路，代码实现就变得清晰起来。</p>
+<p>代码具体实现：</p>
+<figure class="highlight java"><figcaption><span>[-方法1]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1个Fork视为1个ReentrantLock，5个叉子即5个ReentrantLock，将其都放入数组中</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock[] lockList = &#123;<span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock()&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//限制 最多只有4个哲学家去持有叉子</span></span><br><span class="line">    <span class="keyword">private</span> Semaphore eatLimit = <span class="keyword">new</span> Semaphore(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DiningPhilosophers</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// call the run() method of any runnable to execute its code</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putRightFork)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> leftFork = (philosopher + <span class="number">1</span>) % <span class="number">5</span>;    <span class="comment">//左边的叉子 的编号</span></span><br><span class="line">        <span class="keyword">int</span> rightFork = philosopher;    <span class="comment">//右边的叉子 的编号</span></span><br><span class="line"></span><br><span class="line">        eatLimit.acquire();    <span class="comment">//限制的人数 -1</span></span><br><span class="line"></span><br><span class="line">        lockList[leftFork].lock();    <span class="comment">//拿起左边的叉子</span></span><br><span class="line">        lockList[rightFork].lock();    <span class="comment">//拿起右边的叉子</span></span><br><span class="line"></span><br><span class="line">        pickLeftFork.run();    <span class="comment">//拿起左边的叉子 的具体执行</span></span><br><span class="line">        pickRightFork.run();    <span class="comment">//拿起右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        eat.run();    <span class="comment">//吃意大利面 的具体执行</span></span><br><span class="line"></span><br><span class="line">        putLeftFork.run();    <span class="comment">//放下左边的叉子 的具体执行</span></span><br><span class="line">        putRightFork.run();    <span class="comment">//放下右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        lockList[leftFork].unlock();    <span class="comment">//放下左边的叉子</span></span><br><span class="line">        lockList[rightFork].unlock();    <span class="comment">//放下右边的叉子</span></span><br><span class="line"></span><br><span class="line">        eatLimit.release();<span class="comment">//限制的人数 +1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>最多</strong>只允许4个哲学家去持有叉子时</p>
+<pre><code>执行耗时:15 ms,击败了78.39% 的Java用户</code></pre><p>而改为<strong>最多</strong>只允许4，3，2，1个哲学家去持有叉子时</p>
+<pre><code>执行耗时都是14 ms,击败了94.24% 的Java用户</code></pre><p>接下来的2个方法来自作者mike-meng，链接见参考资料【2】，他是用C++实现的，将其转为Java代码如下：</p>
+<h1 id="方法-2："><a href="#方法-2：" class="headerlink" title="方法 2："></a><strong>方法 <em>2</em>：</strong></h1><p>设置 <em>1</em> 个临界区以实现 <em>1</em> 个哲学家 “<strong>同时</strong>”拿起左右  <strong><em>2</em> 把叉子</strong>的效果。<br>即进入临界区之后，保证<strong>成功获取</strong>到左右 <strong><em>2</em> 把叉子</strong> 并 执行相关代码后，才退出临界区。</p>
+<p>评论区看到有题友说方法2就是“只让1个哲学家就餐”的思路，无需将叉子视为<code>ReentrantLock</code>。</p>
+<p>下面也给出了“只允许1个哲学家就餐”的代码。</p>
+<p>但是2者之间还是有<strong>细微</strong>的<strong>差别</strong>：<br>方法2是在成功<strong>拿起左右叉子之后</strong>就退出临界区，而“只让1个哲学家就餐”是在<strong>拿起左右叉子 + 吃意面 + 放下左右叉子</strong> 一套流程走完之后才退出临界区。</p>
+<p>前者的情况可大概分为2种，举具体例子说明(可参照上面给出的图片)：</p>
+<ol>
+<li><code>1</code>号哲学家拿起左右叉子(<code>1</code>号叉子 + <code>2</code>号叉子)后就退出临界区，此时<code>4</code>号哲学家成功挤进临界区，他也成功拿起了左右叉子(<code>0</code>号叉子和<code>4</code>号叉子)，然后就退出临界区。</li>
+<li><code>1</code>号哲学家拿起左右叉子(<code>1</code>号叉子 + <code>2</code>号叉子)后就退出临界区，此时<code>2</code>号哲学家成功挤进临界区，他需要拿起<code>2</code>号叉子和<code>3</code>号叉子，但<code>2</code>号叉子有一定的概率还被<code>1</code>号哲学家持有(<code>1</code>号哲学家意面还没吃完)，因此<code>2</code>号哲学家进入临界区后还需要等待<code>2</code>号叉子。至于<code>3</code>号叉子，根本没其他人跟<code>2</code>号哲学家争夺，因此可以将该种情况视为“<code>2</code>号哲学家只拿起了1只叉子，在等待另1只叉子”的情况。</li>
+</ol>
+<p>总之，第1种情况即<strong>先后进入临界区</strong>的<strong>2位哲学家</strong>的左右叉子不存在竞争情况，因此先后进入临界区的2位哲学家进入临界区后都不用等待叉子，直接就餐。此时可视为2个哲学家在同时就餐(当然前1个哲学家有可能已经吃完了，但姑且当作是2个人同时就餐)。</p>
+<p>第2种情况即先后进入临界区的2位哲学家的左右叉子存在竞争情况(说明这2位哲学家的<strong>编号相邻</strong>)，因此<strong>后进入临界区</strong>的哲学家还需要等待1只叉子，才能就餐。此时可视为只有1个哲学家在就餐。</p>
+<p>至于“只允许1个哲学家就餐”的代码，很好理解，每次严格地只让1个哲学家就餐，由于过于严格，以至于都不需要将叉子视为<code>ReentrantLock</code>。</p>
+<p>方法<code>2</code>有一定的概率是“并行”，“只允许1个哲学家就餐”是严格的“串行”。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><figcaption><span>[-方法2]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1个Fork视为1个ReentrantLock，5个叉子即5个ReentrantLock，将其都放入数组中</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock[] lockList = &#123;<span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock()&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//让 1个哲学家可以 “同时”拿起2个叉子(搞个临界区)</span></span><br><span class="line">    <span class="keyword">private</span> ReentrantLock pickBothForks = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DiningPhilosophers</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// call the run() method of any runnable to execute its code</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putRightFork)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> leftFork = (philosopher + <span class="number">1</span>) % <span class="number">5</span>;    <span class="comment">//左边的叉子 的编号</span></span><br><span class="line">        <span class="keyword">int</span> rightFork = philosopher;    <span class="comment">//右边的叉子 的编号</span></span><br><span class="line"></span><br><span class="line">        pickBothForks.lock();    <span class="comment">//进入临界区</span></span><br><span class="line"></span><br><span class="line">        lockList[leftFork].lock();    <span class="comment">//拿起左边的叉子</span></span><br><span class="line">        lockList[rightFork].lock();    <span class="comment">//拿起右边的叉子</span></span><br><span class="line"></span><br><span class="line">        pickLeftFork.run();    <span class="comment">//拿起左边的叉子 的具体执行</span></span><br><span class="line">        pickRightFork.run();    <span class="comment">//拿起右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        pickBothForks.unlock();    <span class="comment">//退出临界区</span></span><br><span class="line"></span><br><span class="line">        eat.run();    <span class="comment">//吃意大利面 的具体执行</span></span><br><span class="line"></span><br><span class="line">        putLeftFork.run();    <span class="comment">//放下左边的叉子 的具体执行</span></span><br><span class="line">        putRightFork.run();    <span class="comment">//放下右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        lockList[leftFork].unlock();    <span class="comment">//放下左边的叉子</span></span><br><span class="line">        lockList[rightFork].unlock();    <span class="comment">//放下右边的叉子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>[-只允许1个哲学家就餐]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> </span>&#123;</span><br><span class="line">    <span class="comment">//只允许1个哲学家就餐</span></span><br><span class="line">    <span class="keyword">private</span> ReentrantLock pickBothForks = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DiningPhilosophers</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// call the run() method of any runnable to execute its code</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putRightFork)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> leftFork = (philosopher + <span class="number">1</span>) % <span class="number">5</span>;    <span class="comment">//左边的叉子 的编号</span></span><br><span class="line">        <span class="keyword">int</span> rightFork = philosopher;    <span class="comment">//右边的叉子 的编号</span></span><br><span class="line"></span><br><span class="line">        pickBothForks.lock();    <span class="comment">//进入临界区</span></span><br><span class="line"></span><br><span class="line">        pickLeftFork.run();    <span class="comment">//拿起左边的叉子 的具体执行</span></span><br><span class="line">        pickRightFork.run();    <span class="comment">//拿起右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        eat.run();    <span class="comment">//吃意大利面 的具体执行</span></span><br><span class="line"></span><br><span class="line">        putLeftFork.run();    <span class="comment">//放下左边的叉子 的具体执行</span></span><br><span class="line">        putRightFork.run();    <span class="comment">//放下右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        pickBothForks.unlock();    <span class="comment">//退出临界区</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="临界资源"><a href="#临界资源" class="headerlink" title="临界资源"></a>临界资源</h2><p>  临界资源是一次仅允许一个进程使用的共享资源。各进程采取互斥的方式，实现共享的资源称作临界资源。属于临界资源的硬件有，打印机，磁带机等；软件有消息队列，变量，数组，缓冲区等。诸进程间采取互斥方式，实现对这种资源的共享。</p>
+<h2 id="临界区："><a href="#临界区：" class="headerlink" title="临界区："></a>临界区：</h2><p>  每个进程中访问临界资源的那段代码称为临界区（criticalsection），每次只允许一个进程进入临界区，进入后，不允许其他进程进入。不论是硬件临界资源还是软件临界资源，多个进程必须互斥的对它进行访问。多个进程涉及到同一个临界资源的的临界区称为相关临界区。使用临界区时，一般不允许其运行时间过长，只要运行在临界区的线程还没有离开，其他所有进入此临界区的线程都会被挂起而进入等待状态，并在一定程度上影响程序的运行性能。</p>
+<h1 id="方法-3："><a href="#方法-3：" class="headerlink" title="方法 3："></a><strong>方法 <em>3</em>：</strong></h1><p>前面说过，该题的本质是考察 <strong>如何避免死锁</strong>。<br>而当5个哲学家都<strong>左手持有</strong>其<strong>左边的叉子</strong> 或 当5个哲学家都<strong>右手持有</strong>其<strong>右边的叉子</strong>时，会发生<strong>死锁</strong>。<br>故只需设计1个避免发生上述情况发生的策略即可。</p>
+<p>即可以让<strong>一部分哲学家</strong>优先去获取其左边的叉子，再去获取其右边的叉子；再让<strong>剩余哲学家</strong>优先去获取其右边的叉子，再去获取其左边的叉子。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><figcaption><span>[-方法3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1个Fork视为1个ReentrantLock，5个叉子即5个ReentrantLock，将其都放入数组中</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock[] lockList = &#123;<span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock(),</span><br><span class="line">            <span class="keyword">new</span> ReentrantLock()&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DiningPhilosophers</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// call the run() method of any runnable to execute its code</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putRightFork)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> leftFork = (philosopher + <span class="number">1</span>) % <span class="number">5</span>;    <span class="comment">//左边的叉子 的编号</span></span><br><span class="line">        <span class="keyword">int</span> rightFork = philosopher;    <span class="comment">//右边的叉子 的编号</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//编号为偶数的哲学家，优先拿起左边的叉子，再拿起右边的叉子</span></span><br><span class="line">        <span class="keyword">if</span> (philosopher % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            lockList[leftFork].lock();    <span class="comment">//拿起左边的叉子</span></span><br><span class="line">            lockList[rightFork].lock();    <span class="comment">//拿起右边的叉子</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//编号为奇数的哲学家，优先拿起右边的叉子，再拿起左边的叉子</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            lockList[rightFork].lock();    <span class="comment">//拿起右边的叉子</span></span><br><span class="line">            lockList[leftFork].lock();    <span class="comment">//拿起左边的叉子</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pickLeftFork.run();    <span class="comment">//拿起左边的叉子 的具体执行</span></span><br><span class="line">        pickRightFork.run();    <span class="comment">//拿起右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        eat.run();    <span class="comment">//吃意大利面 的具体执行</span></span><br><span class="line"></span><br><span class="line">        putLeftFork.run();    <span class="comment">//放下左边的叉子 的具体执行</span></span><br><span class="line">        putRightFork.run();    <span class="comment">//放下右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        lockList[leftFork].unlock();    <span class="comment">//放下左边的叉子</span></span><br><span class="line">        lockList[rightFork].unlock();    <span class="comment">//放下右边的叉子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="改进"><a href="#改进" class="headerlink" title="改进:"></a>改进:</h1><p><strong>位运算</strong>就可以表示<code>5</code>个叉子的<strong>使用状态</strong>，只需用1个<code>volatile</code>修饰的<code>int</code>变量即可 + <code>CAS</code>操作即可。<br>而<code>volatile</code>修饰的<code>int</code>变量 + <code>CAS</code>操作 <code>-&gt;</code> <code>AtomicInteger</code>类</p>
+<figure class="highlight java"><figcaption><span>[-改进的方法1]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> </span>&#123;</span><br><span class="line">    <span class="comment">//初始化为0, 二进制表示则为00000, 说明当前所有叉子都未被使用</span></span><br><span class="line">    <span class="keyword">private</span> AtomicInteger fork = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">//每个叉子的int值(即二进制的00001, 00010, 00100, 01000, 10000)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span>[] forkMask = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>&#125;;</span><br><span class="line">    <span class="comment">//限制 最多只有4个哲学家去持有叉子</span></span><br><span class="line">    <span class="keyword">private</span> Semaphore eatLimit = <span class="keyword">new</span> Semaphore(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DiningPhilosophers</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// call the run() method of any runnable to execute its code</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putRightFork)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> leftMask = forkMask[(philosopher + <span class="number">1</span>) % <span class="number">5</span>], rightMask = forkMask[philosopher];</span><br><span class="line">        eatLimit.acquire();    <span class="comment">//限制的人数 -1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!pickFork(leftMask)) Thread.sleep(<span class="number">1</span>);    <span class="comment">//拿起左边的叉子</span></span><br><span class="line">        <span class="keyword">while</span> (!pickFork(rightMask)) Thread.sleep(<span class="number">1</span>);   <span class="comment">//拿起右边的叉子</span></span><br><span class="line"></span><br><span class="line">        pickLeftFork.run();    <span class="comment">//拿起左边的叉子 的具体执行</span></span><br><span class="line">        pickRightFork.run();    <span class="comment">//拿起右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        eat.run();    <span class="comment">//吃意大利面 的具体执行</span></span><br><span class="line"></span><br><span class="line">        putLeftFork.run();    <span class="comment">//放下左边的叉子 的具体执行</span></span><br><span class="line">        putRightFork.run();    <span class="comment">//放下右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!putFork(leftMask)) Thread.sleep(<span class="number">1</span>);     <span class="comment">//放下左边的叉子</span></span><br><span class="line">        <span class="keyword">while</span> (!putFork(rightMask)) Thread.sleep(<span class="number">1</span>);    <span class="comment">//放下右边的叉子</span></span><br><span class="line"></span><br><span class="line">        eatLimit.release(); <span class="comment">//限制的人数 +1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">pickFork</span><span class="params">(<span class="keyword">int</span> mask)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> expect = fork.get();</span><br><span class="line">        <span class="keyword">return</span> (expect &amp; mask) &gt; <span class="number">0</span> ? <span class="keyword">false</span> : fork.compareAndSet(expect, expect ^ mask);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">putFork</span><span class="params">(<span class="keyword">int</span> mask)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> expect = fork.get();</span><br><span class="line">        <span class="keyword">return</span> fork.compareAndSet(expect, expect ^ mask);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>[-改进的方法2]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> </span>&#123;</span><br><span class="line">    <span class="comment">//初始化为0, 二进制表示则为00000, 说明当前所有叉子都未被使用</span></span><br><span class="line">    <span class="keyword">private</span> AtomicInteger fork = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>), both = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">//每个叉子的int值(即二进制的00001, 00010, 00100, 01000, 10000)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span>[] forkMask = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DiningPhilosophers</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// call the run() method of any runnable to execute its code</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putRightFork)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> leftMask = forkMask[(philosopher + <span class="number">1</span>) % <span class="number">5</span>], rightMask = forkMask[philosopher];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!both.compareAndSet(<span class="number">0</span>, <span class="number">1</span>)) Thread.sleep(<span class="number">1</span>);     <span class="comment">//进入临界区</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!pickFork(leftMask)) Thread.sleep(<span class="number">1</span>);    <span class="comment">//拿起左边的叉子</span></span><br><span class="line">        <span class="keyword">while</span> (!pickFork(rightMask)) Thread.sleep(<span class="number">1</span>);   <span class="comment">//拿起右边的叉子</span></span><br><span class="line"></span><br><span class="line">        pickLeftFork.run();    <span class="comment">//拿起左边的叉子 的具体执行</span></span><br><span class="line">        pickRightFork.run();    <span class="comment">//拿起右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!both.compareAndSet(<span class="number">1</span>, <span class="number">0</span>)) Thread.sleep(<span class="number">1</span>);    <span class="comment">//退出临界区</span></span><br><span class="line"></span><br><span class="line">        eat.run();    <span class="comment">//吃意大利面 的具体执行</span></span><br><span class="line"></span><br><span class="line">        putLeftFork.run();    <span class="comment">//放下左边的叉子 的具体执行</span></span><br><span class="line">        putRightFork.run();    <span class="comment">//放下右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!putFork(rightMask)) Thread.sleep(<span class="number">1</span>);   <span class="comment">//放下右边的叉子</span></span><br><span class="line">        <span class="keyword">while</span> (!putFork(leftMask)) Thread.sleep(<span class="number">1</span>);    <span class="comment">//放下左边的叉子</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">pickFork</span><span class="params">(<span class="keyword">int</span> mask)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> expect = fork.get();</span><br><span class="line">        <span class="keyword">return</span> (expect &amp; mask) &gt; <span class="number">0</span> ? <span class="keyword">false</span> : fork.compareAndSet(expect, expect ^ mask);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">putFork</span><span class="params">(<span class="keyword">int</span> mask)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> expect = fork.get();</span><br><span class="line">        <span class="keyword">return</span> fork.compareAndSet(expect, expect ^ mask);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>[-改进的方法3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DiningPhilosophers</span> </span>&#123;</span><br><span class="line">    <span class="comment">//初始化为0, 二进制表示则为00000, 说明当前所有叉子都未被使用</span></span><br><span class="line">    <span class="keyword">private</span> AtomicInteger fork = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">//每个叉子的int值(即二进制的00001, 00010, 00100, 01000, 10000)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span>[] forkMask = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DiningPhilosophers</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// call the run() method of any runnable to execute its code</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">wantsToEat</span><span class="params">(<span class="keyword">int</span> philosopher,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable pickRightFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable eat,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putLeftFork,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Runnable putRightFork)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> leftMask = forkMask[(philosopher + <span class="number">1</span>) % <span class="number">5</span>], rightMask = forkMask[philosopher];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//编号为偶数的哲学家，优先拿起左边的叉子，再拿起右边的叉子</span></span><br><span class="line">        <span class="keyword">if</span> (philosopher % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!pickFork(leftMask)) Thread.sleep(<span class="number">1</span>);     <span class="comment">//拿起左边的叉子</span></span><br><span class="line">            <span class="keyword">while</span> (!pickFork(rightMask)) Thread.sleep(<span class="number">1</span>);    <span class="comment">//拿起右边的叉子</span></span><br><span class="line">        &#125;<span class="comment">//编号为奇数的哲学家，优先拿起右边的叉子，再拿起左边的叉子</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (!pickFork(rightMask)) Thread.sleep(<span class="number">1</span>);    <span class="comment">//拿起右边的叉子</span></span><br><span class="line">            <span class="keyword">while</span> (!pickFork(leftMask)) Thread.sleep(<span class="number">1</span>);     <span class="comment">//拿起左边的叉子</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pickLeftFork.run();    <span class="comment">//拿起左边的叉子 的具体执行</span></span><br><span class="line">        pickRightFork.run();    <span class="comment">//拿起右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        eat.run();    <span class="comment">//吃意大利面 的具体执行</span></span><br><span class="line"></span><br><span class="line">        putLeftFork.run();    <span class="comment">//放下左边的叉子 的具体执行</span></span><br><span class="line">        putRightFork.run();    <span class="comment">//放下右边的叉子 的具体执行</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!putFork(rightMask)) Thread.sleep(<span class="number">1</span>);    <span class="comment">//放下右边的叉子</span></span><br><span class="line">        <span class="keyword">while</span> (!putFork(leftMask)) Thread.sleep(<span class="number">1</span>);     <span class="comment">//放下左边的叉子</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">pickFork</span><span class="params">(<span class="keyword">int</span> mask)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> expect = fork.get();</span><br><span class="line">        <span class="keyword">return</span> (expect &amp; mask) &gt; <span class="number">0</span> ? <span class="keyword">false</span> : fork.compareAndSet(expect, expect ^ mask);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">putFork</span><span class="params">(<span class="keyword">int</span> mask)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> expect = fork.get();</span><br><span class="line">        <span class="keyword">return</span> fork.compareAndSet(expect, expect ^ mask);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode-cn.com/problems/the-dining-philosophers" target="_blank" rel="noopener">https://leetcode-cn.com/problems/the-dining-philosophers</a></p>
+<p>【2】<a href="https://leetcode-cn.com/problems/the-dining-philosophers/solution/zhe-xue-jia-jiu-can-wen-ti-by-mike-meng/]" target="_blank" rel="noopener">https://leetcode-cn.com/problems/the-dining-philosophers/solution/zhe-xue-jia-jiu-can-wen-ti-by-mike-meng/]</a>(<a href="https://leetcode-cn.com/problems/the-dining-philosophers/solution/zhe-xue-jia-jiu-can-wen-ti-by-mike-meng" target="_blank" rel="noopener">https://leetcode-cn.com/problems/the-dining-philosophers/solution/zhe-xue-jia-jiu-can-wen-ti-by-mike-meng</a></p>
+<p>【3】<a href="https://blog.csdn.net/u013272948/java/article/details/53929572" target="_blank" rel="noopener">https://blog.csdn.net/u013272948/java/article/details/53929572</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/05/26/1226. 哲学家进餐/">1226. 哲学家进餐</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2020年05月26日 - 00时05分</p>
+        <p><span>最后更新:</span>2020年05月26日 - 21时14分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/05/26/1226. 哲学家进餐/" title="1226. 哲学家进餐">http://yoursite.com/2020/05/26/1226. 哲学家进餐/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/05/26/1226. 哲学家进餐/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/24/1195. 交替打印字符串/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">1195. 交替打印字符串</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解题思路："><span class="toc-number">2.</span> <span class="toc-text">解题思路：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法一：信号量"><span class="toc-number">3.</span> <span class="toc-text">方法一：信号量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法-2："><span class="toc-number">4.</span> <span class="toc-text">方法 2：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#临界资源"><span class="toc-number">4.1.</span> <span class="toc-text">临界资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#临界区："><span class="toc-number">4.2.</span> <span class="toc-text">临界区：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法-3："><span class="toc-number">5.</span> <span class="toc-text">方法 3：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#改进"><span class="toc-number">6.</span> <span class="toc-text">改进:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">7.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/05/24/1195. 交替打印字符串/" title="下一篇: 1195. 交替打印字符串">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/1226. 哲学家进餐/">1226. 哲学家进餐</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1195. 交替打印字符串/">1195. 交替打印字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1117. H2O 生成/">1117. H2O 生成</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1116. 打印零与奇偶数/">1116. 打印零与奇偶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/1115. 交替打印FooBar/">1115. 交替打印FooBar</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/Java并发编程/">Java并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/1114.按序打印/">1114.按序打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/19/684.冗余链接/">684.冗余链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Lombok的基本注解使用/">Lombok的基本注解使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/后端开发常用调试技巧集锦/">后端开发常用调试技巧集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/405. 数字转化为十六进制数/">405. 数字转化为十六进制数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/SpringBoot学习笔记VIII-MybatisPlus教程/">SpringBoot学习笔记VIII-MybatisPlus教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/设计模式学习笔记V-策略模式/">设计模式学习笔记V-策略模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/1046. 最后一块石头的重量/">1046. 最后一块石头的重量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/Java学习笔记XIV/">Java学习笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/257.二叉树的所有路径/">257.二叉树的所有路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/22/24.两两交换链表中的节点/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/微信公众平台开发学习笔记I/">微信公众平台开发学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/">601.Human Traffic of Stadium体育馆的人流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/185.Department Top Three Salaries/">185.Department Top Three Salaries</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/数据库学习笔记IX/">数据库学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/184.Department Highest Salary/">184.Department Highest Salary</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/数据库学习笔记VIII/">数据库学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/1179. Reformat Department Table/">1179. Reformat Department Table</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II/">Git学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I/">数据库学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：300k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
