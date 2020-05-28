@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>5. 最长回文子串 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="找到字符串中最长的回文子串，提供了「动态规划』问题的思考路径">
+<meta name="keywords" content="LeetCode,Dynamic Programming,String">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5. 最长回文子串">
+<meta property="og:url" content="http://yoursite.com/2020/05/28/5. 最长回文子串/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="找到字符串中最长的回文子串，提供了「动态规划』问题的思考路径">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2020/05/28/5.%20最长回文子串/p__2_times_N+_1_.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/28/5.%20最长回文子串/p___center_=_argmax_%7Bx_+_p_x___;_%7C_;__0_leq_x__i_%7D__.png">
+<meta property="og:updated_time" content="2020-05-28T12:43:12.628Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5. 最长回文子串">
+<meta name="twitter:description" content="找到字符串中最长的回文子串，提供了「动态规划』问题的思考路径">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/28/5.%20最长回文子串/p__2_times_N+_1_.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 13.33px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 17.5px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 15px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 13.33px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10.83px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10.83px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 10.83px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 12.5px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/Concurrency/" style="font-size: 15px;">Concurrency</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 14.17px;">Database</a> <a href="/tags/Database，MySQL/" style="font-size: 15.83px;">Database，MySQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 13.33px;">Depth-first Search</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 13.33px;">Design Pattern，Java</a> <a href="/tags/Dynamic-Programming/" style="font-size: 17.5px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Graph/" style="font-size: 10.83px;">Graph</a> <a href="/tags/Greedy/" style="font-size: 10.83px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 12.5px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 11.67px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 12.5px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19.17px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/LinkList/" style="font-size: 10px;">LinkList</a> <a href="/tags/Linked-List/" style="font-size: 10px;">Linked List</a> <a href="/tags/Linux/" style="font-size: 10.83px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Operating-System/" style="font-size: 10.83px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 13.33px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 11.67px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 14.17px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 10.83px;">Stack</a> <a href="/tags/String/" style="font-size: 10.83px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.83px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 16.67px;">Tree</a> <a href="/tags/Trie/" style="font-size: 11.67px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Union-Find/" style="font-size: 10.83px;">Union Find</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Wechat/" style="font-size: 10px;">Wechat</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-5. 最长回文子串" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/28/5. 最长回文子串/" class="article-date">
+      <time datetime="2020-05-28T11:50:12.000Z" itemprop="datePublished">2020-05-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      5. 最长回文子串
+    </h1>
+  
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">11.6k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">48分</span>
+      </span>
+    </span>
+</div>
+
+          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2020年5月/">2020年5月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/String/">String</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>找到字符串中最长的回文子串，提供了「动态规划』问题的思考路径</p>
+<a id="more"></a>
+
+
+<h1 id="📖题目描述："><a href="#📖题目描述：" class="headerlink" title="📖题目描述："></a>📖题目描述：</h1><p>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。</p>
+<p>示例 1：</p>
+<pre><code>输入: &quot;babad&quot;
+输出: &quot;bab&quot;
+注意: &quot;aba&quot; 也是一个有效答案。</code></pre><p>示例 2：</p>
+<pre><code>输入: &quot;cbbd&quot;
+输出: &quot;bb&quot;</code></pre><p>这道题上次做还是2017年8月1日，今天重刷感觉还是没吃透，下面的方法和思路是全部借鉴自牛人的题解，写的非常漂亮，比官方题解还好，这是他的博客推荐多学习一个：<a href="https://liweiwei1419.gitee.io/leetcode-algo/#indexCard" target="_blank" rel="noopener">https://liweiwei1419.gitee.io/leetcode-algo/#indexCard</a></p>
+<h1 id="📖解题思路"><a href="#📖解题思路" class="headerlink" title="📖解题思路"></a>📖解题思路</h1><ul>
+<li>以下解法中「暴力算法」是基础，「动态规划」必须掌握，「中心扩散」方法要会写；</li>
+<li>「Manacher 算法」仅用于扩宽视野，绝大多数的算法面试中，面试官都不会要求写这个方法（除非面试者是竞赛选手）。</li>
+</ul>
+<h1 id="📖方法一：暴力匹配-（Brute-Force）"><a href="#📖方法一：暴力匹配-（Brute-Force）" class="headerlink" title="📖方法一：暴力匹配 （Brute Force）"></a>📖方法一：暴力匹配 （Brute Force）</h1><ul>
+<li>根据回文子串的定义，枚举所有长度大于等于 <em>2</em> 的子串，依次判断它们是否是回文；</li>
+<li>在具体实现时，可以只针对大于“当前得到的最长回文子串长度”的子串进行“回文验证”；</li>
+<li>在记录最长回文子串的时候，可以只记录“当前子串的起始位置”和“子串长度”，不必做截取。这一步我们放在后面的方法中实现。</li>
+</ul>
+<p>说明：暴力解法时间复杂度高，但是思路清晰、编写简单。由于编写正确性的可能性很大，<strong>可以使用暴力匹配算法检验我们编写的其它算法是否正确</strong>。优化的解法在很多时候，是基于“暴力解法”，以空间换时间得到的，因此思考清楚暴力解法，分析其缺点，很多时候能为我们打开思路。</p>
+<p><strong>参考代码 1</strong>：Java 代码正常运行，C++ 代码超出内存限制，Python 代码超时。</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> begin = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// s.charAt(i) 每次都会检查数组下标越界，因此先转换成字符数组</span></span><br><span class="line">        <span class="keyword">char</span>[] charArray = s.toCharArray();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 枚举所有长度大于 1 的子串 charArray[i..j]</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; len; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j - i + <span class="number">1</span> &gt; maxLen &amp;&amp; validPalindromic(charArray, i, j)) &#123;</span><br><span class="line">                    maxLen = j - i + <span class="number">1</span>;</span><br><span class="line">                    begin = i;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(begin, begin + maxLen);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 验证子串 s[left..right] 是否为回文串</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">validPalindromic</span><span class="params">(<span class="keyword">char</span>[] charArray, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">if</span> (charArray[left] != charArray[right]) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># 暴力匹配（超时）</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s: str)</span> -&gt; str:</span></span><br><span class="line">        <span class="comment"># 特判</span></span><br><span class="line">        size = len(s)</span><br><span class="line">        <span class="keyword">if</span> size &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        res = s[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 枚举所有长度大于等于 2 的子串</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(size - <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, size):</span><br><span class="line">                <span class="keyword">if</span> j - i + <span class="number">1</span> &gt; max_len <span class="keyword">and</span> self.__valid(s, i, j):</span><br><span class="line">                    max_len = j - i + <span class="number">1</span></span><br><span class="line">                    res = s[i:j + <span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__valid</span><span class="params">(self, s, left, right)</span>:</span></span><br><span class="line">        <span class="comment"># 验证子串 s[left, right] 是否为回文串</span></span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            <span class="keyword">if</span> s[left] != s[right]:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 超时测试用例</span></span><br><span class="line"><span class="comment"># "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">valid</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 验证子串 s[left, right] 是否为回文串</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[left] != s[right]) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 特判</span></span><br><span class="line">        <span class="keyword">int</span> size = s.size();</span><br><span class="line">        <span class="keyword">if</span> (size &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">string</span> res = s.substr(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 枚举所有长度大于等于 2 的子串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; size; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j - i + <span class="number">1</span> &gt; maxLen &amp;&amp; valid(s, i, j)) &#123;</span><br><span class="line">                    maxLen = j - i + <span class="number">1</span>;</span><br><span class="line">                    res = s.substr(i, maxLen);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 超出内存限制，测试用例</span></span><br><span class="line"><span class="comment">// "zudfweormatjycujjirzjpyrmaxurectxrtqedmmgergwdvjmjtstdhcihacqnothgttgqfywcpgnuvwglvfiuxteopoyizgehkwuvvkqxbnufkcbodlhdmbqyghkojrgokpwdhtdrwmvdegwycecrgjvuexlguayzcammupgeskrvpthrmwqaqsdcgycdupykppiyhwzwcplivjnnvwhqkkxildtyjltklcokcrgqnnwzzeuqioyahqpuskkpbxhvzvqyhlegmoviogzwuiqahiouhnecjwysmtarjjdjqdrkljawzasriouuiqkcwwqsxifbndjmyprdozhwaoibpqrthpcjphgsfbeqrqqoqiqqdicvybzxhklehzzapbvcyleljawowluqgxxwlrymzojshlwkmzwpixgfjljkmwdtjeabgyrpbqyyykmoaqdambpkyyvukalbrzoyoufjqeftniddsfqnilxlplselqatdgjziphvrbokofvuerpsvqmzakbyzxtxvyanvjpfyvyiivqusfrsufjanmfibgrkwtiuoykiavpbqeyfsuteuxxjiyxvlvgmehycdvxdorpepmsinvmyzeqeiikajopqedyopirmhymozernxzaueljjrhcsofwyddkpnvcvzixdjknikyhzmstvbducjcoyoeoaqruuewclzqqqxzpgykrkygxnmlsrjudoaejxkipkgmcoqtxhelvsizgdwdyjwuumazxfstoaxeqqxoqezakdqjwpkrbldpcbbxexquqrznavcrprnydufsidakvrpuzgfisdxreldbqfizngtrilnbqboxwmwienlkmmiuifrvytukcqcpeqdwwucymgvyrektsnfijdcdoawbcwkkjkqwzffnuqituihjaklvthulmcjrhqcyzvekzqlxgddjoir"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：<em>O(N^3)*，这里 *N</em> 是字符串的长度，枚举字符串的左边界、右边界，然后继续验证子串是否是回文子串，这三种操作都与 <em>N</em> 相关；</li>
+<li>空间复杂度：<em>O(1)</em>，只使用到常数个临时变量，与字符串长度无关。</li>
+</ul>
+<h1 id="📖方法二：动态规划"><a href="#📖方法二：动态规划" class="headerlink" title="📖方法二：动态规划"></a>📖方法二：动态规划</h1><p>下面是「动态规划』问题的思考路径，供大家参考。</p>
+<p><strong>特别说明</strong>：</p>
+<ul>
+<li>以下「动态规划」的解释只帮助大家了解「动态规划」问题的基本思想；</li>
+<li>「动态规划」问题可以难到非常难，在学习的时候建议不要钻到特别难的问题中去；</li>
+<li>掌握经典的动态规划问题的解法，理解状态的定义的由来、会列出状态转移方程；</li>
+<li>然后再配合适当难度的问题的练习；</li>
+<li>有时间和感兴趣的话可以做一些不太常见的类型的问题，拓宽视野；</li>
+<li>「动态规划」讲得比较好的经典书籍是《算法导论》。</li>
+</ul>
+<p> <a href="https://pic.leetcode-cn.com/1f95da43d1bdeebdd1213bb804034ddc5f906dc61451cd63f2b5ab5d0eb33b33-%E3%80%8C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E3%80%8D%E9%97%AE%E9%A2%98%E6%80%9D%E8%80%83%E6%96%B9%E5%90%91.png" target="_blank" rel="noopener">「动态规划」问题思考方向.png</a></p>
+<p>1、思考状态（重点）</p>
+<ul>
+<li>状态的定义，先尝试「题目问什么，就把什么设置为状态」；</li>
+<li>然后思考「状态如何转移」，如果「状态转移方程」不容易得到，尝试修改定义，目的依然是为了方便得到「状态转移方程」。</li>
+</ul>
+<blockquote>
+<p>「状态转移方程」是原始问题的不同规模的子问题的联系。即大问题的最优解如何由小问题的最优解得到。</p>
+</blockquote>
+<p>2、思考状态转移方程（核心、难点）</p>
+<ul>
+<li><p>状态转移方程是非常重要的，是动态规划的核心，也是难点；</p>
+</li>
+<li><p>常见的推导技巧是：分类讨论。即：对状态空间进行分类；</p>
+</li>
+<li><p>归纳「状态转移方程」是一个很灵活的事情，通常是具体问题具体分析；</p>
+</li>
+<li><p>除了掌握经典的动态规划问题以外，还需要多做题；</p>
+</li>
+<li><p>如果是针对面试，请自行把握难度。掌握常见问题的动态规划解法，理解动态规划解决问题，是从一个小规模问题出发，逐步得到大问题的解，并记录中间过程；</p>
+</li>
+<li><p>「动态规划」方法依然是「空间换时间」思想的体现，常见的解决问题的过程很像在「填表」。</p>
+</li>
+</ul>
+<p>3、思考初始化</p>
+<p>初始化是非常重要的，一步错，步步错。初始化状态一定要设置对，才可能得到正确的结果。</p>
+<ul>
+<li><p>角度 1：直接从状态的语义出发；</p>
+</li>
+<li><p>角度 2：如果状态的语义不好思考，就考虑「状态转移方程」的边界需要什么样初始化的条件；</p>
+</li>
+<li><p>角度 3：从「状态转移方程」方程的下标看是否需要多设置一行、一列表示「哨兵」（sentinel），这样可以避免一些特殊情况的讨论。</p>
+</li>
+</ul>
+<p>4、思考输出</p>
+<p>有些时候是最后一个状态，有些时候可能会综合之前所有计算过的状态。</p>
+<p>5、思考优化空间（也可以叫做表格复用）</p>
+<ul>
+<li>「优化空间」会使得代码难于理解，且是的「状态」丢失原来的语义，初学的时候可以不一步到位。先把代码写正确是更重要；</li>
+<li>「优化空间」在有一种情况下是很有必要的，那就是状态空间非常庞大的时候（处理海量数据），此时空间不够用，就必须「优化空间」；</li>
+<li>非常经典的「优化空间」的典型问题是「0-1 背包」问题和「完全背包」问题。</li>
+</ul>
+<hr>
+<p>（下面是这道问题「动态规划」方法的分析）</p>
+<p>这道题比较烦人的是判断回文子串。因此需要一种能够快速判断原字符串的所有子串是否是回文子串的方法，于是想到了「动态规划」。</p>
+<p>「动态规划」的一个关键的步骤是想清楚「状态如何转移」。事实上，「回文」天然具有「状态转移」性质。</p>
+<ul>
+<li>一个回文去掉两头以后，剩下的部分依然是回文（这里暂不讨论边界情况）；</li>
+</ul>
+<p>依然从回文串的定义展开讨论：</p>
+<ul>
+<li>如果一个字符串的头尾两个字符都不相等，那么这个字符串一定不是回文串；</li>
+<li>如果一个字符串的头尾两个字符相等，才有必要继续判断下去。<ul>
+<li>如果里面的子串是回文，整体就是回文串；</li>
+<li>如果里面的子串不是回文串，整体就不是回文串。</li>
+</ul>
+</li>
+</ul>
+<p>即：<strong>在头尾字符相等的情况下，里面子串的回文性质据定了整个子串的回文性质</strong>，这就是状态转移。因此可以把「状态」定义为原字符串的一个子串是否为回文子串。</p>
+<h4 id="第-1-步：定义状态"><a href="#第-1-步：定义状态" class="headerlink" title="第 1 步：定义状态"></a>第 1 步：定义状态</h4><p><code>dp[i][j]</code> 表示子串 <code>s[i..j]</code> 是否为回文子串，这里子串 <code>s[i..j]</code> 定义为左闭右闭区间，可以取到 <code>s[i]</code> 和 <code>s[j]</code>。</p>
+<h4 id="第-2-步：思考状态转移方程"><a href="#第-2-步：思考状态转移方程" class="headerlink" title="第 2 步：思考状态转移方程"></a>第 2 步：思考状态转移方程</h4><p>在这一步分类讨论（根据头尾字符是否相等），根据上面的分析得到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = (s[i] == s[j]) and dp[i + 1][j - 1]</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<ul>
+<li><p>「动态规划」事实上是在填一张二维表格，由于构成子串，因此 <code>i</code> 和 <code>j</code> 的关系是 <code>i &lt;= j</code> ，因此，只需要填这张表格对角线以上的部分。</p>
+</li>
+<li><p>看到 <code>dp[i + 1][j - 1]</code> 就得考虑边界情况。</p>
+</li>
+</ul>
+<p>边界条件是：表达式 <code>[i + 1, j - 1]</code> 不构成区间，即长度严格小于 <code>2</code>，即 <code>j - 1 - (i + 1) + 1 &lt; 2</code> ，整理得 <code>j - i &lt; 3</code>。</p>
+<p>这个结论很显然：<code>j - i &lt; 3</code> 等价于 <code>j - i + 1 &lt; 4</code>，即当子串 <code>s[i..j]</code> 的长度等于 <code>2</code> 或者等于 <code>3</code> 的时候，其实只需要判断一下头尾两个字符是否相等就可以直接下结论了。</p>
+<ul>
+<li>如果子串 <code>s[i + 1..j - 1]</code> 只有 1 个字符，即去掉两头，剩下中间部分只有 <em>1</em> 个字符，显然是回文；</li>
+<li>如果子串 <code>s[i + 1..j - 1]</code> 为空串，那么子串 <code>s[i, j]</code> 一定是回文子串。</li>
+</ul>
+<p>因此，在 <code>s[i] == s[j]</code> 成立和 <code>j - i &lt; 3</code> 的前提下，直接可以下结论，<code>dp[i][j] = true</code>，否则才执行状态转移。</p>
+<h4 id="第-3-步：考虑初始化"><a href="#第-3-步：考虑初始化" class="headerlink" title="第 3 步：考虑初始化"></a>第 3 步：考虑初始化</h4><p>初始化的时候，单个字符一定是回文串，因此把对角线先初始化为 <code>true</code>，即 <code>dp[i][i] = true</code> 。</p>
+<p>事实上，初始化的部分都可以省去。因为只有一个字符的时候一定是回文，<code>dp[i][i]</code> 根本不会被其它状态值所参考。</p>
+<h4 id="第-4-步：考虑输出"><a href="#第-4-步：考虑输出" class="headerlink" title="第 4 步：考虑输出"></a>第 4 步：考虑输出</h4><p>只要一得到 <code>dp[i][j] = true</code>，就记录子串的长度和起始位置，没有必要截取，这是因为截取字符串也要消耗性能，记录此时的回文子串的「起始位置」和「回文长度」即可。</p>
+<h4 id="第-5-步：考虑优化空间"><a href="#第-5-步：考虑优化空间" class="headerlink" title="第 5 步：考虑优化空间"></a>第 5 步：考虑优化空间</h4><p>因为在填表的过程中，只参考了左下方的数值。事实上可以优化，但是增加了代码编写和理解的难度，丢失可读和可解释性。在这里不优化空间。</p>
+<p>注意事项：总是先得到小子串的回文判定，然后大子串才能参考小子串的判断结果，即填表顺序很重要。</p>
+<p>大家能够可以自己动手，画一下表格，相信会对「动态规划」作为一种「表格法」有一个更好的理解。</p>
+<p><strong>参考代码 2</strong>：</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 特判</span></span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> begin = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// dp[i][j] 表示 s[i, j] 是否是回文串</span></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[len][len];</span><br><span class="line">        <span class="keyword">char</span>[] charArray = s.toCharArray();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            dp[i][i] = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (charArray[i] != charArray[j]) &#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">false</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j - i &lt; <span class="number">3</span>) &#123;</span><br><span class="line">                        dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        dp[i][j] = dp[i + <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 只要 dp[i][j] == true 成立，就表示子串 s[i..j] 是回文，此时记录回文长度和起始位置</span></span><br><span class="line">                <span class="keyword">if</span> (dp[i][j] &amp;&amp; j - i + <span class="number">1</span> &gt; maxLen) &#123;</span><br><span class="line">                    maxLen = j - i + <span class="number">1</span>;</span><br><span class="line">                    begin = i;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(begin, begin + maxLen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s: str)</span> -&gt; str:</span></span><br><span class="line">        size = len(s)</span><br><span class="line">        <span class="keyword">if</span> size &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">        dp = [[<span class="keyword">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(size)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(size)]</span><br><span class="line"></span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(size):</span><br><span class="line">            dp[i][i] = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, size):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, j):</span><br><span class="line">                <span class="keyword">if</span> s[i] == s[j]:</span><br><span class="line">                    <span class="keyword">if</span> j - i &lt; <span class="number">3</span>:</span><br><span class="line">                        dp[i][j] = <span class="keyword">True</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        dp[i][j] = dp[i + <span class="number">1</span>][j - <span class="number">1</span>]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[i][j] = <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> dp[i][j]:</span><br><span class="line">                    cur_len = j - i + <span class="number">1</span></span><br><span class="line">                    <span class="keyword">if</span> cur_len &gt; max_len:</span><br><span class="line">                        max_len = cur_len</span><br><span class="line">                        start = i</span><br><span class="line">        <span class="keyword">return</span> s[start:start + max_len]</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析：</strong></p>
+<ul>
+<li>时间复杂度：<em>O(N^{2})</em>。</li>
+<li>空间复杂度：<em>O(N^{2})</em>，二维 dp 问题，一个状态得用二维有序数对表示，因此空间复杂度是 <em>O(N^{2})</em>。</li>
+</ul>
+<p>写完代码以后，可以纸上写下代码运行的流程，以字符串 <code>&#39;babad&#39;</code> 为例：</p>
+<p> <a href="https://pic.leetcode-cn.com/b95575c883a4fc025e4e8816d4db1f35579d5bd945bfd9128154f882406bfce7-image.png" target="_blank" rel="noopener">image.png</a></p>
+<p>可以发现：</p>
+<p>1、当 <code>i</code> 和 <code>j</code> (图中是 <code>l</code> 和 <code>r</code>) 的差距等于小于 <code>3</code> 的时候，<code>dp</code> 值可以直接判断，不用参考以前的 <code>dp</code> 值；</p>
+<p>2、其它情况，每当计算新 <code>dp</code> 值的时候，都一定会参考「左下角」的 <code>dp</code> 值，即 <code>dp[i + 1][j - 1]</code>（<code>i + 1</code> 表示在下边，<code>j - 1</code> 表示在左边）。</p>
+<p>因此，从上到下写，或者从下到上写，都是可以的。</p>
+<p>下面分别展示了错误的填表顺序和正确的填表顺序，以便大家理解动态规划要满足「无后效性」的意思。</p>
+<p><strong>说明：表格中的数字表示「填表顺序」，从 1 开始</strong>。表格外的箭头和数字也表示「填表顺序」，与表格中的数字含义一致。</p>
+<p> <a href="https://pic.leetcode-cn.com/4a24bbe4e55421f4f7d199b14e961eff792146092dd9a0c18cf06c824728407c-image.png" target="_blank" rel="noopener">image.png</a></p>
+<p> <a href="https://pic.leetcode-cn.com/7e9d1f1dbe2095b0609233faa03b224ab32adf832515de1ce15b496f2cbdf0ab-image.png" target="_blank" rel="noopener">image.png</a></p>
+<p><strong>参考代码 3</strong>：下面这段代码只有内层循环和「参考代码 2」不同，已经标注在注释中。</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[len][len];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            Arrays.fill(dp[i], <span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            dp[i][i] = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">char</span>[] charArray = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="comment">// 只有下面这一行和「参考代码 2」不同，i 正着写、倒过来写都行，因为子串都有参考值</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = j - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (charArray[i] == charArray[j]) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j - i &lt; <span class="number">3</span>) &#123;</span><br><span class="line">                        dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        dp[i][j] = dp[i + <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 只要 dp[i][j] == true 成立，就表示子串 s[i, j] 是回文，此时记录回文长度和起始位置</span></span><br><span class="line">                <span class="keyword">if</span> (dp[i][j]) &#123;</span><br><span class="line">                    <span class="keyword">int</span> curLen = j - i + <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span> (curLen &gt; maxLen) &#123;</span><br><span class="line">                        maxLen = curLen;</span><br><span class="line">                        start = i;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(start, start + maxLen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s: str)</span> -&gt; str:</span></span><br><span class="line">        size = len(s)</span><br><span class="line">        <span class="keyword">if</span> size &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">        dp = [[<span class="keyword">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(size)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(size)]</span><br><span class="line"></span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(size):</span><br><span class="line">            dp[i][i] = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, size):</span><br><span class="line">            <span class="comment"># 只有下面这一行代码不一样</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(j - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">                <span class="keyword">if</span> s[i] == s[j]:</span><br><span class="line">                    <span class="keyword">if</span> j - i &lt; <span class="number">3</span>:</span><br><span class="line">                        dp[i][j] = <span class="keyword">True</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        dp[i][j] = dp[i + <span class="number">1</span>][j - <span class="number">1</span>]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[i][j] = <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> dp[i][j]:</span><br><span class="line">                    cur_len = j - i + <span class="number">1</span></span><br><span class="line">                    <span class="keyword">if</span> cur_len &gt; max_len:</span><br><span class="line">                        max_len = cur_len</span><br><span class="line">                        start = i</span><br><span class="line">        <span class="keyword">return</span> s[start:start + max_len]</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析：</strong>（同上）</p>
+<p>「状态转移方程」其实可以写得更酷一点：借用 <code>or</code> 的短路功能，如果 <code>j - i &lt; 3</code> 成立，其实后面就不用计算了，状态转移方程可以写成如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = (s[i] == s[j]) and (j - i &lt; <span class="number">3</span> or dp[i + <span class="number">1</span>][j - <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>以下代码虽然看起来短了一些，但是丢失了可读性，逻辑运算符混用，虽然加上了括号表示优先级，但如果没有前文铺垫，很难读懂是什么意思。不太推荐大家这么写。</p>
+<p><strong>参考代码 4</strong>：</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[len][len];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            Arrays.fill(dp[i], <span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 初始化</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            dp[i][i] = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">char</span>[] charArray = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; j; i++) &#123;</span><br><span class="line"></span><br><span class="line">                dp[i][j] = charArray[i] == charArray[j] &amp;&amp; (j - i &lt; <span class="number">3</span> || dp[i + <span class="number">1</span>][j - <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 只要 dp[i][j] == true 成立，就表示子串 s[i, j] 是回文，此时记录回文长度和起始位置</span></span><br><span class="line">                <span class="keyword">if</span> (dp[i][j]) &#123;</span><br><span class="line">                    <span class="keyword">int</span> curLen = j - i + <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span> (curLen &gt; maxLen) &#123;</span><br><span class="line">                        maxLen = curLen;</span><br><span class="line">                        start = i;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(start, start + maxLen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s: str)</span> -&gt; str:</span></span><br><span class="line">        size = len(s)</span><br><span class="line">        <span class="keyword">if</span> size &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">        dp = [[<span class="keyword">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(size)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(size)]</span><br><span class="line"></span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, size):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, j):</span><br><span class="line">                </span><br><span class="line">                dp[i][j] = (s[i] == s[j]) <span class="keyword">and</span> (j - i &lt; <span class="number">3</span> <span class="keyword">or</span> dp[i + <span class="number">1</span>][j - <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> dp[i][j]:</span><br><span class="line">                    cur_len = j - i + <span class="number">1</span></span><br><span class="line">                    <span class="keyword">if</span> cur_len &gt; max_len:</span><br><span class="line">                        max_len = cur_len</span><br><span class="line">                        start = i</span><br><span class="line">        <span class="keyword">return</span> s[start:start + max_len]</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析：</strong>（同上）</p>
+<p>总结：</p>
+<ul>
+<li>我们看到，用「动态规划」方法解决问题，有的时候并不是直接面向问题的。</li>
+<li>「动态规划」依然是「空间换时间」思想的体现，并且本身「动态规划」作为一种打表格法，就是在用「空间」换「时间」。</li>
+</ul>
+<p>关于「动态规划」方法执行时间慢的说明：</p>
+<ul>
+<li>动态规划本质上还是「暴力解法」，因为需要枚举左右边界，有 <em>O(N^2)</em> 这么多；</li>
+<li>以下提供的「中心扩散法」枚举了所有可能的回文子串的中心，有 <em>O(2N)</em> 这么多，不在一个级别上。</li>
+</ul>
+<p>上面采用了时间复杂度估算的表示，<em>O(N^2)</em> 表示最高项是 <em>aN^2</em> 的多项式。</p>
+<p>从这个问题我们也可以看出，虽然时间复杂度一样，但是实际执行时间有可能是有差距的，并且时间复杂度是一个估算，没有必要计算得很清楚，这是因为真正的运行时间还和很多因素有关：例如所运行机器的环境，测试用例等。</p>
+<hr>
+<h3 id="方法三：中心扩散法"><a href="#方法三：中心扩散法" class="headerlink" title="方法三：中心扩散法"></a>方法三：中心扩散法</h3><p>暴力法采用双指针两边夹，验证是否是回文子串。</p>
+<p>除了枚举字符串的左右边界以外，比较容易想到的是<strong>枚举可能出现的回文子串的“中心位置”，从“中心位置”尝试尽可能扩散出去，得到一个回文串</strong>。</p>
+<p>因此中心扩散法的思路是：遍历每一个索引，以这个索引为中心，利用“回文串”中心对称的特点，往两边扩散，看最多能扩散多远。</p>
+<p>枚举“中心位置”时间复杂度为 <em>O(N)</em>，从“中心位置”扩散得到“回文子串”的时间复杂度为 <em>O(N)</em>，因此时间复杂度可以降到 <em>O(N^2)</em>。</p>
+<p>在这里要注意一个细节：回文串在长度为奇数和偶数的时候，“回文中心”的形式是不一样的。</p>
+<ul>
+<li><p>奇数回文串的“中心”是一个具体的字符，例如：回文串 <code>&quot;aba&quot;</code> 的中心是字符 <code>&quot;b&quot;</code>；</p>
+</li>
+<li><p>偶数回文串的“中心”是位于中间的两个字符的“空隙”，例如：回文串串 <code>&quot;abba&quot;</code> 的中心是两个 <code>&quot;b&quot;</code> 中间的那个“空隙”。</p>
+<p><a href="https://pic.leetcode-cn.com/572db4731d6a0e32ee9c14773ed476068bebb88883335bc7415cb0b43762303a.jpg" target="_blank" rel="noopener">图 1 ：奇数回文串与偶数回文串</a></p>
+</li>
+</ul>
+<p>我们看一下一个字符串可能的回文子串的中心在哪里？</p>
+<p> <a href="https://pic.leetcode-cn.com/3c4ca880f2dd7463e15ddf7bbd59e2f7d11434b7dbc69b55893660012726ee88.jpg" target="_blank" rel="noopener">图 2：枚举可能的所有回文中心</a></p>
+<p>我们可以设计一个方法，兼容以上两种情况：</p>
+<p>1、如果传入重合的索引编码，进行中心扩散，此时得到的回文子串的长度是奇数；</p>
+<p>2、如果传入相邻的索引编码，进行中心扩散，此时得到的回文子串的长度是偶数。</p>
+<p>具体编码细节在以下的代码的注释中体现。</p>
+<p><strong>参考代码 5</strong>：</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        String res = s.substring(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 中心位置枚举到 len - 2 即可</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            String oddStr = centerSpread(s, i, i);</span><br><span class="line">            String evenStr = centerSpread(s, i, i + <span class="number">1</span>);</span><br><span class="line">            String maxLenStr = oddStr.length() &gt; evenStr.length() ? oddStr : evenStr;</span><br><span class="line">            <span class="keyword">if</span> (maxLenStr.length() &gt; maxLen) &#123;</span><br><span class="line">                maxLen = maxLenStr.length();</span><br><span class="line">                res = maxLenStr;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">centerSpread</span><span class="params">(String s, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// left = right 的时候，此时回文中心是一个字符，回文串的长度是奇数</span></span><br><span class="line">        <span class="comment">// right = left + 1 的时候，此时回文中心是一个空隙，回文串的长度是偶数</span></span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">int</span> i = left;</span><br><span class="line">        <span class="keyword">int</span> j = right;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &lt; len) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s.charAt(i) == s.charAt(j)) &#123;</span><br><span class="line">                i--;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 这里要小心，跳出 while 循环时，恰好满足 s.charAt(i) != s.charAt(j)，因此不能取 i，不能取 j</span></span><br><span class="line">        <span class="keyword">return</span> s.substring(i + <span class="number">1</span>, j);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s: str)</span> -&gt; str:</span></span><br><span class="line">        size = len(s)</span><br><span class="line">        <span class="keyword">if</span> size &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 至少是 1</span></span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        res = s[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(size):</span><br><span class="line">            palindrome_odd, odd_len = self.__center_spread(s, size, i, i)</span><br><span class="line">            palindrome_even, even_len = self.__center_spread(s, size, i, i + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 当前找到的最长回文子串</span></span><br><span class="line">            cur_max_sub = palindrome_odd <span class="keyword">if</span> odd_len &gt;= even_len <span class="keyword">else</span> palindrome_even</span><br><span class="line">            <span class="keyword">if</span> len(cur_max_sub) &gt; max_len:</span><br><span class="line">                max_len = len(cur_max_sub)</span><br><span class="line">                res = cur_max_sub</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__center_spread</span><span class="params">(self, s, size, left, right)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        left = right 的时候，此时回文中心是一个字符，回文串的长度是奇数</span></span><br><span class="line"><span class="string">        right = left + 1 的时候，此时回文中心是一个空隙，回文串的长度是偶数</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        i = left</span><br><span class="line">        j = right</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">and</span> j &lt; size <span class="keyword">and</span> s[i] == s[j]:</span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> s[i + <span class="number">1</span>:j], j - i - <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">centerSpread</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// left = right 的时候，此时回文中心是一个空隙，向两边扩散得到的回文子串的长度是奇数</span></span><br><span class="line">        <span class="comment">// right = left + 1 的时候，此时回文中心是一个字符，向两边扩散得到的回文子串的长度是偶数</span></span><br><span class="line">        <span class="keyword">int</span> size = s.size();</span><br><span class="line">        <span class="keyword">int</span> i = left;</span><br><span class="line">        <span class="keyword">int</span> j = right;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &lt; size) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[i] == s[j]) &#123;</span><br><span class="line">                i--;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 这里要小心，跳出 while 循环时，恰好满足 s.charAt(i) != s.charAt(j)，因此不能取 i，不能取 j</span></span><br><span class="line">        <span class="keyword">return</span> s.substr(i + <span class="number">1</span>, j - i - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 特判</span></span><br><span class="line">        <span class="keyword">int</span> size = s.size();</span><br><span class="line">        <span class="keyword">if</span> (size &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">string</span> res = s.substr(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 中心位置枚举到 len - 2 即可</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="built_in">string</span> oddStr = centerSpread(s, i, i);</span><br><span class="line">            <span class="built_in">string</span> evenStr = centerSpread(s, i, i + <span class="number">1</span>);</span><br><span class="line">            <span class="built_in">string</span> maxLenStr = oddStr.size() &gt; evenStr.size() ? oddStr : evenStr;</span><br><span class="line">            <span class="keyword">if</span> (maxLenStr.length() &gt; maxLen) &#123;</span><br><span class="line">                maxLen = maxLenStr.size();</span><br><span class="line">                res = maxLenStr;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析：</strong></p>
+<ul>
+<li>时间复杂度：<em>O(N^{2})</em>，理由已经叙述。</li>
+<li>空间复杂度：<em>O(1)</em>，只使用到常数个临时变量，与字符串长度无关。</li>
+</ul>
+<p>事实上，还有时间复杂度更优的算法，是由计算机科学家 Manacher 发明的，下面介绍这种算法。</p>
+<h3 id="方法四：Manacher-算法（不用掌握，面试的时候绝大多数情况下不会要求写这个算法，了解思想即可）"><a href="#方法四：Manacher-算法（不用掌握，面试的时候绝大多数情况下不会要求写这个算法，了解思想即可）" class="headerlink" title="方法四：Manacher 算法（不用掌握，面试的时候绝大多数情况下不会要求写这个算法，了解思想即可）"></a>方法四：Manacher 算法（不用掌握，面试的时候绝大多数情况下不会要求写这个算法，了解思想即可）</h3><blockquote>
+<p>说明：以下题解中有一些细节我当时做的时候，没有仔细推敲，已经有朋友指出有错误，请大家根据自己的理解去思考科学家的做法和思想，我暂时没有时间修改这个部分的内容，大家也可以参考其他朋友的题解，给大家造成不便，我很抱歉。</p>
+</blockquote>
+<p>个人觉得知道 Manacher 算法是基于“中心扩散法”，采用和 kmp 算法类似的思想，依然是“以空间换时间”。</p>
+<p>Manacher 算法，被中国程序员戏称为“马拉车”算法。它专门用于解决“最长回文子串”问题，时间复杂度为 <em>O(N)</em>。</p>
+<p>维基百科中对于 Manacher 算法是这样描述的：</p>
+<blockquote>
+<p>[Manacher(1975)] 发现了一种线性时间算法，可以在列出给定字符串中从字符串头部开始的所有回文。并且，Apostolico, Breslauer &amp; Galil (1995) 发现，同样的算法也可以在任意位置查找全部最大回文子串，并且时间复杂度是线性的。因此，他们提供了一种时间复杂度为线性的最长回文子串解法。替代性的线性时间解决 Jeuring (1994), Gusfield (1997)提供的，基于后缀树(suffix trees)。也存在已知的高效并行算法。</p>
+</blockquote>
+<p>Manacher 算法本质上还是中心扩散法，只不过它使用了类似 KMP 算法的技巧，充分挖掘了已经进行回文判定的子串的特点，在遍历的过程中，记录了已经遍历过的子串的信息，也是典型的以空间换时间思想的体现。</p>
+<p>下面介绍 Manacher 算法的具体流程。</p>
+<h4 id="第-1-步：对原始字符串进行预处理（添加分隔符）"><a href="#第-1-步：对原始字符串进行预处理（添加分隔符）" class="headerlink" title="第 1 步：对原始字符串进行预处理（添加分隔符）"></a>第 1 步：对原始字符串进行预处理（添加分隔符）</h4><p>首先在字符串的首尾、相邻的字符中插入分隔符，例如 <code>&quot;babad&quot;</code> 添加分隔符 <code>&quot;#&quot;</code> 以后得到 <code>&quot;#b#a#b#a#d#&quot;</code>。</p>
+<p>对这一点有如下说明：</p>
+<p>1、分隔符是一个字符，种类也只有一个，并且这个字符一定不能是原始字符串中出现过的字符；</p>
+<p>2、加入了分隔符以后，使得“间隙”有了具体的位置，方便后续的讨论，并且<strong>新字符串中的任意一个回文子串在原始字符串中的一定能找到唯一的一个回文子串与之对应</strong>，因此对新字符串的回文子串的研究就能得到原始字符串的回文子串；</p>
+<p>3、新字符串的回文子串的长度一定是奇数；</p>
+<p>4、新字符串的回文子串一定以分隔符作为两边的边界，因此分隔符起到“哨兵”的作用。</p>
+<p> <a href="https://pic.leetcode-cn.com/d9546795e5c73d06b7c77645aef92413f794b3850a62492682a46eb00c9ee711.jpg" target="_blank" rel="noopener">图 3：原始字符串与新字符串的对应关系</a></p>
+<h4 id="第-2-步：计算辅助数组-p"><a href="#第-2-步：计算辅助数组-p" class="headerlink" title="第 2 步：计算辅助数组 p"></a>第 2 步：计算辅助数组 p</h4><p>辅助数组 <code>p</code> 记录了新字符串中以每个字符为中心的回文子串的信息。</p>
+<p>手动的计算方法仍然是“中心扩散法”，此时记录以当前字符为中心，向左右两边同时扩散，记录能够扩散的最大步数。</p>
+<p>以字符串 <code>&quot;abbabb&quot;</code> 为例，说明如何手动计算得到辅助数组 <code>p</code> ，我们要填的就是下面这张表。</p>
+<table>
+<thead>
+<tr>
+<th><strong>char</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>index</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>p</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>第 1 行数组 <code>char</code> ：原始字符串<strong>加上分隔符以后</strong>的每个字符。</p>
+<p>第 2 行数组 <code>index</code> ：这个数组是新字符串的索引数组，它的值是从 <em>0</em> 开始的索引编号。</p>
+<ul>
+<li>我们首先填 <code>p[0]</code>。</li>
+</ul>
+<p>以 <code>char[0] = &#39;#&#39;</code> 为中心，同时向左边向右扩散，走 <em>1</em> 步就碰到边界了，因此能扩散的步数为 <em>0</em>，因此 <code>p[0] = 0</code>；</p>
+<table>
+<thead>
+<tr>
+<th><strong>char</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>index</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>p</strong></td>
+<td><strong>0</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>下面填写 <code>p[1]</code> 。</li>
+</ul>
+<p>以 <code>char[1] = &#39;a&#39;</code> 为中心，同时向左边向右扩散，走 <em>1</em> 步，左右都是 <code>&quot;#&quot;</code>，构成回文子串，于是再继续同时向左边向右边扩散，左边就碰到边界了，最多能扩散的步数”为 <em>1</em>，因此 <code>p[1] = 1</code>；</p>
+<table>
+<thead>
+<tr>
+<th><strong>char</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>index</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>p</strong></td>
+<td>0</td>
+<td><strong>1</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>下面填写 <code>p[2]</code> 。</li>
+</ul>
+<p>以 <code>char[2] = &#39;#&#39;</code> 为中心，同时向左边向右扩散，走 <em>1</em> 步，左边是 <code>&quot;a&quot;</code>，右边是 <code>&quot;b&quot;</code>，不匹配，最多能扩散的步数为 <em>0</em>，因此 <code>p[2] = 0</code>；</p>
+<table>
+<thead>
+<tr>
+<th><strong>char</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>index</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>p</strong></td>
+<td>0</td>
+<td>1</td>
+<td><strong>0</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>下面填写 <code>p[3]</code>。</li>
+</ul>
+<p>以 <code>char[3] = &#39;b&#39;</code> 为中心，同时向左边向右扩散，走 <em>1</em> 步，左右两边都是 <code>“#”</code>，构成回文子串，继续同时向左边向右扩散，左边是 <code>&quot;a&quot;</code>，右边是 <code>&quot;b&quot;</code>，不匹配，最多能扩散的步数为 <em>1</em> ，因此 <code>p[3] = 1</code>；</p>
+<table>
+<thead>
+<tr>
+<th><strong>char</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>index</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>p</strong></td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td><strong>1</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>下面填写 <code>p[4]</code>。</li>
+</ul>
+<p>以 <code>char[4] = &#39;#&#39;</code> 为中心，同时向左边向右扩散，最多可以走 <em>4</em> 步，左边到达左边界，因此 <code>p[4] = 4</code>。</p>
+<table>
+<thead>
+<tr>
+<th><strong>char</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>index</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>p</strong></td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td><strong>4</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>继续填完 p 数组剩下的部分。</li>
+</ul>
+<p>分析到这里，后面的数字不难填出，最后写成如下表格：</p>
+<table>
+<thead>
+<tr>
+<th><strong>char</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>a</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+<th><strong>b</strong></th>
+<th><strong>#</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>index</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>p</strong></td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>5</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p><strong>说明</strong>：有些资料将辅助数组 <code>p</code> 定义为回文半径数组，即 <code>p[i]</code> 记录了以新字符串第 <code>i</code> 个字符为中心的回文字符串的半径（包括第 <code>i</code> 个字符），与我们这里定义的辅助数组 <code>p</code> 有一个字符的偏差，本质上是一样的。</p>
+<p>下面是辅助数组 <code>p</code> 的结论：辅助数组 <code>p</code> 的最大值是 <em>5</em>，对应了原字符串 <code>&quot;abbabb&quot;</code> 的  “最长回文子串” ：<code>&quot;bbabb&quot;</code>。这个结论具有一般性，即：</p>
+<blockquote>
+<p>辅助数组 <code>p</code> 的最大值就是“最长回文子串”的长度。</p>
+</blockquote>
+<p>因此，我们可以在计算辅助数组 <code>p</code> 的过程中记录这个最大值，并且记录最长回文子串。</p>
+<p>简单说明一下这是为什么：</p>
+<ol>
+<li><p>如果新回文子串的中心是一个字符，那么原始回文子串的中心也是一个字符，在新回文子串中，向两边扩散的特点是：“先分隔符，后字符”，同样扩散的步数因为有分隔符 <code>#</code> 的作用，在新字符串中每扩散两步，虽然实际上只扫到一个有效字符，但是相当于在原始字符串中相当于计算了两个字符。<strong>因为最后一定以分隔符结尾，还要计算一个，正好这个就可以把原始回文子串的中心算进去</strong>；</p>
+<p><a href="https://pic.leetcode-cn.com/4ba4319f13bee429bb95ba119dcaefe71c9644bcf9e9be3ba2637d13fcccd3d6.jpg" target="_blank" rel="noopener">图 4：理解辅助数组的数值与原始字符串回文子串的等价性-1</a></p>
+</li>
+</ol>
+<ol start="2">
+<li>如果新回文子串的中心是 <code>#</code>，那么原始回文子串的中心就是一个“空隙”。在新回文子串中，向两边扩散的特点是：“先字符，后分隔符”，扩散的步数因为有分隔符  <code>#</code> 的作用，在新字符串中每扩散两步，虽然实际上只扫到一个有效字符，但是相当于在原始字符串中相当于计算了两个字符。</li>
+</ol>
+<p>因此，“辅助数组 <code>p</code> 的最大值就是“最长回文子串”的长度”这个结论是成立的，可以看下面的图理解上面说的 <em>2</em> 点。</p>
+<p> <a href="https://pic.leetcode-cn.com/05e76869add71c1cbf396bb89ee5ad7f560cc6c5e60926ceaef00a3bbc32c9e4.jpg" target="_blank" rel="noopener">图 4：理解辅助数组的数值与原始字符串回文子串的等价性-2</a></p>
+<p>写到这里，其实已经能写出一版代码，把这一版代码提交到 LeetCode 是可以通过的，这同样也可以验证我们上面的结论是正确的。</p>
+<p><strong>参考代码 6</strong>：</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line">        String str = addBoundaries(s, <span class="string">'#'</span>);</span><br><span class="line">        <span class="keyword">int</span> sLen = <span class="number">2</span> * len + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sLen; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> curLen = centerSpread(str, i);</span><br><span class="line">            <span class="keyword">if</span> (curLen &gt; maxLen) &#123;</span><br><span class="line">                maxLen = curLen;</span><br><span class="line">                start = (i - maxLen) / <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(start, start + maxLen);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">centerSpread</span><span class="params">(String s, <span class="keyword">int</span> center)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">int</span> i = center - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> j = center + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> step = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &lt; len &amp;&amp; s.charAt(i) == s.charAt(j)) &#123;</span><br><span class="line">            i--;</span><br><span class="line">            j++;</span><br><span class="line">            step++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> step;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建预处理字符串</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> s      原始字符串</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> divide 分隔字符</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 使用分隔字符处理以后得到的字符串</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">addBoundaries</span><span class="params">(String s, <span class="keyword">char</span> divide)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (s.indexOf(divide) != -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"参数错误，您传递的分割字符，在输入字符串中存在！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            stringBuilder.append(divide);</span><br><span class="line">            stringBuilder.append(s.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        stringBuilder.append(divide);</span><br><span class="line">        <span class="keyword">return</span> stringBuilder.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># Manacher 算法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s: str)</span> -&gt; str:</span></span><br><span class="line">        <span class="comment"># 特判</span></span><br><span class="line">        size = len(s)</span><br><span class="line">        <span class="keyword">if</span> size &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 得到预处理字符串</span></span><br><span class="line">        t = <span class="string">"#"</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(size):</span><br><span class="line">            t += s[i]</span><br><span class="line">            t += <span class="string">"#"</span></span><br><span class="line">        <span class="comment"># 新字符串的长度</span></span><br><span class="line">        t_len = <span class="number">2</span> * size + <span class="number">1</span></span><br><span class="line">        <span class="comment"># 当前遍历的中心最大扩散步数，其值等于原始字符串的最长回文子串的长度</span></span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        <span class="comment"># 原始字符串的最长回文子串的起始位置，与 max_len 必须同时更新</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(t_len):</span><br><span class="line">            cur_len = self.__center_spread(t, i)</span><br><span class="line">            <span class="keyword">if</span> cur_len &gt; max_len:</span><br><span class="line">                max_len = cur_len</span><br><span class="line">                start = (i - max_len) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> s[start: start + max_len]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__center_spread</span><span class="params">(self, s, center)</span>:</span></span><br><span class="line">        size = len(s)</span><br><span class="line">        i = center - <span class="number">1</span></span><br><span class="line">        j = center + <span class="number">1</span></span><br><span class="line">        step = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">and</span> j &lt; size <span class="keyword">and</span> s[i] == s[j]:</span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">            step += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> step</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">centerSpread</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> center)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.size();</span><br><span class="line">        <span class="keyword">int</span> i = center - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> j = center + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> step = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; j &lt; len &amp;&amp; s[i] == s[j]) &#123;</span><br><span class="line">            i--;</span><br><span class="line">            j++;</span><br><span class="line">            step++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> step;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 特判</span></span><br><span class="line">        <span class="keyword">int</span> size = s.size();</span><br><span class="line">        <span class="keyword">if</span> (size &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 得到预处理字符串</span></span><br><span class="line">        <span class="built_in">string</span> str = <span class="string">"#"</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i) &#123;</span><br><span class="line">            str += s[i];</span><br><span class="line">            str += <span class="string">"#"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> sSize = <span class="number">2</span> * size + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sSize; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> curLen = centerSpread(str, i);</span><br><span class="line">            <span class="keyword">if</span> (curLen &gt; maxLen) &#123;</span><br><span class="line">                maxLen = curLen;</span><br><span class="line">                start = (i - maxLen) / <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substr(start, maxLen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong>：</p>
+<ul>
+<li>时间复杂度：<em>O(N^2)*，这里 *N</em> 是原始字符串的长度。新字符串的长度是 <img src="./p__2_times_N+_1_.png" alt="2\timesN+1 "> ，不计系数与常数项，因此时间复杂度仍为 <em>O(N^2)</em>。</li>
+<li>空间复杂度：<em>O(N)</em>。</li>
+</ul>
+<blockquote>
+<p><strong>科学家的工作：充分利用新字符串的回文性质，计算辅助数组 <code>p</code>。</strong></p>
+</blockquote>
+<p>上面的代码不太智能的地方是，对新字符串每一个位置进行中心扩散，会导致原始字符串的每一个字符被访问多次，一个比较极端的情况就是：<code>#a#a#a#a#a#a#a#a#</code>。事实上，计算机科学家 Manacher 就改进了这种算法，使得在填写新的辅助数组 <code>p</code> 的值的时候，能够参考已经填写过的辅助数组 <code>p</code> 的值，使得新字符串每个字符只访问了一次，整体时间复杂度由 <em>O(N^2)</em> 改进到 <em>O(N)</em>。</p>
+<p>具体做法是：在遍历的过程中，除了循环变量 <code>i</code> 以外，我们还需要记录两个变量，它们是 <code>maxRight</code> 和 <code>center</code> ，它们分别的含义如下：</p>
+<ul>
+<li><code>maxRight</code>：记录当前向右扩展的最远边界，即从开始到现在使用“中心扩散法”能得到的回文子串，它能延伸到的最右端的位置 。对于 <code>maxRight</code> 我们说明 3 点：</li>
+</ul>
+<ol>
+<li><p>“向右最远”是在计算辅助数组 <code>p</code> 的过程中，向右边扩散能走的索引最大的位置，注意：得到一个 <code>maxRight</code> 所对应的回文子串，并不一定是当前得到的“最长回文子串”，很可能的一种情况是，某个回文子串可能比较短，但是它正好在整个字符串比较靠后的位置；</p>
+</li>
+<li><p><code>maxRight</code> 的下一个位置可能是被程序看到的，停止的原因有 2 点：（1）左边界不能扩散，导致右边界受限制也不能扩散，<code>maxRight</code> 的下一个位置看不到；（2）正是因为看到了 <code>maxRight</code> 的下一个位置，导致 <code>maxRight</code> 不能继续扩散。</p>
+</li>
+<li><p>为什么 <code>maxRight</code> 很重要？因为扫描是从左向右进行的， <code>maxRight</code> 能够提供的信息最多，它是一个重要的分类讨论的标准，因此我们需要一个变量记录它。</p>
+</li>
+</ol>
+<ul>
+<li><code>center</code>：<code>center</code> 是与 <code>maxRight</code> 相关的一个变量，它是上述 <code>maxRight</code> 的回文中心的索引值。对于 <code>center</code> 的说明如下：</li>
+</ul>
+<ol>
+<li><code>center</code> 的形式化定义：</li>
+</ol>
+<p><img src="./p___center_=_argmax_%7Bx_+_p_x___;_%7C_;__0_leq_x__i_%7D__.png" alt="center=argmax\{x+p\[x\]\;|\;0\leqx&lt;i\} "> </p>
+<p>说明：<code>x + p[x]</code> 的最大值就是我们定义的 <code>maxRight</code>，<code>i</code> 是循环变量，<code>0&lt;= x&lt; i</code> 表示是在 <code>i</code> 之前的所有索引里得到的最大值  <code>maxRight</code>，它对应的回文中心索引就是上述式子。</p>
+<ol start="2">
+<li><code>maxRight</code> 与 <code>center</code> 是一一对应的关系，即一个  <code>center</code> 的值唯一对应了一个 <code>maxRight</code> 的值；因此 <strong><code>maxRight</code> 与 <code>center</code> 必须要同时更新</strong>。</li>
+</ol>
+<p>下面的讨论就根据循环变量 <code>i</code> 与 <code>maxRight</code> 的关系展开讨论：</p>
+<p>情况 1：当 <code>i &gt;= maxRight</code> 的时候，这就是一开始，以及刚刚把一个回文子串扫描完的情况，此时只能够根据“中心扩散法”一个一个扫描，逐渐扩大 <code>maxRight</code>；</p>
+<p>情况 2：当 <code>i &lt; maxRight</code> 的时候，根据新字符的回文子串的性质，循环变量关于 <code>center</code> 对称的那个索引（记为 <code>mirror</code>）的 <code>p</code> 值就很重要。</p>
+<p>我们先看 <code>mirror</code> 的值是多少，因为 <code>center</code> 是中心，<code>i</code> 和 <code>mirror</code> 关于 <code>center</code> 中心对称，因此 <code>(mirror + i) / 2 = center</code> ，所以 <code>mirror = 2 * center - i</code>。</p>
+<p>根据 <code>p[mirror]</code> 的数值从小到大，具体可以分为如下 3 种情况：</p>
+<p>情况 2（1）：<code>p[mirror]</code> 的数值比较小，不超过 <code>maxRight - i</code>。</p>
+<p>说明：<code>maxRight - i</code> 的值，就是从 <code>i</code> 关于 <code>center</code> 的镜像点开始向左走（不包括它自己），到 <code>maxRight</code> 关于 <code>center</code> 的镜像点的步数</p>
+<p> <a href="https://pic.leetcode-cn.com/aadfb3cfee9715c7d0a8fb8e8938ede16203226710909e093a27e2e2791b9233-image.png" target="_blank" rel="noopener">图 5：Manacher 算法分类讨论情况 2（1）</a></p>
+<p>从图上可以看出，由于“以 <code>center</code> 为中心的回文子串”的对称性，导致了“以 <code>i</code> 为中心的回文子串”与“以 <code>center</code> 为中心的回文子串”也具有对称性，“以 <code>i</code> 为中心的回文子串”与“以 <code>center</code> 为中心的回文子串”不能再扩散了，此时，直接把数值抄过来即可，即 <code>p[i] = p[mirror]</code>。</p>
+<p>情况 2（2）：<code>p[mirror]</code> 的数值恰好等于 <code>maxRight - i</code>。</p>
+<p> <a href="https://pic.leetcode-cn.com/2f25bb6f215a3caba05738cb0be4cdb0b0c380fa9fe0b7e80ee00a1f1840b088-image.png" target="_blank" rel="noopener">图 5：Manacher 算法分类讨论情况 2（2）</a></p>
+<p>说明：仍然是依据“以 <code>center</code> 为中心的回文子串”的对称性，导致了“以 <code>i</code> 为中心的回文子串”与“以 <code>center</code> 为中心的回文子串”也具有对称性。</p>
+<ol>
+<li>因为靠左边的 <code>f</code> 与靠右边的 <code>g</code> 的原因，导致“以 <code>center</code> 为中心的回文子串”不能继续扩散；</li>
+<li>但是“以 <code>i</code> 为中心的回文子串” 还可以继续扩散。</li>
+</ol>
+<p>因此，可以先把 <code>p[mirror]</code> 的值抄过来，然后继续“中心扩散法”，继续增加 <code>maxRight</code>。</p>
+<p>情况 2（3）：<code>p[mirror]</code> 的数值大于 <code>maxRight - i</code>。</p>
+<p> <a href="https://pic.leetcode-cn.com/dac4d98cd3c3963eb5b48a851dd4988c5f998158bf66a77feb134255522838d7-image.png" target="_blank" rel="noopener">图 5：Manacher 算法分类讨论情况 2（3）</a></p>
+<p>说明：仍然是依据“以 <code>center</code> 为中心的回文子串”的对称性，导致了“以 <code>i</code> 为中心的回文子串”与“以 <code>center</code> 为中心的回文子串”也具有对称性。<br>下面证明，<code>p[i] = maxRight - i</code> ，证明的方法还是利用三个回文子串的对称性。</p>
+<p> <a href="https://pic.leetcode-cn.com/d404aff63ecd764aaa70e6bb961a7e4286b8b2afdb6b4ce4bf696fb8eeb55086.jpg" target="_blank" rel="noopener">图 5：Manacher 算法分类讨论情况 2（3）的证明</a></p>
+<p>① 由于“以 <code>center</code> 为中心的回文子串”的对称性， 黄色箭头对应的字符 <code>c</code> 和 <code>e</code> 一定不相等；</p>
+<p>② 由于“以 <code>mirror</code> 为中心的回文子串”的对称性， 绿色箭头对应的字符 <code>c</code> 和 <code>c</code> 一定相等；</p>
+<p>③ 又由于“以 <code>center</code> 为中心的回文子串”的对称性， 蓝色箭头对应的字符 <code>c</code> 和 <code>c</code> 一定相等；</p>
+<p>推出“以 <code>i</code> 为中心的回文子串”的对称性，  红色箭头对应的字符 <code>c</code> 和 <code>e</code> 一定不相等。</p>
+<p>因此，<code>p[i] = maxRight - i</code>，不可能再大。上面是因为我画的图，可能看的朋友会觉得理所当然。事实上，可以使用反证法证明：</p>
+<p>如果“以 <code>i</code> 为中心的回文子串” 再向两边扩散的两个字符 <code>c</code> 和 <code>e</code> 相等，就能够推出黄色、绿色、蓝色、红色箭头所指向的 8 个变量的值都相等，此时“以 <code>center</code> 为中心的回文子串” 就可以再同时向左边和右边扩散 <em>1</em> 格，与 <code>maxRight</code> 的最大性矛盾。</p>
+<p>综合以上 3 种情况，当 <code>i &lt; maxRight</code> 的时候，<code>p[i]</code> 可以参考 <code>p[mirror]</code> 的信息，以 <code>maxRight - i</code> 作为参考标准，<code>p[i]</code> 的值应该是保守的，即二者之中较小的那个值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p[i] = min(maxRight - i, p[mirror]);</span><br></pre></td></tr></table></figure>
+
+<p><strong>参考代码 7</strong>：</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 特判</span></span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 得到预处理字符串</span></span><br><span class="line">        String str = addBoundaries(s, <span class="string">'#'</span>);</span><br><span class="line">        <span class="comment">// 新字符串的长度</span></span><br><span class="line">        <span class="keyword">int</span> sLen = <span class="number">2</span> * len + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数组 p 记录了扫描过的回文子串的信息</span></span><br><span class="line">        <span class="keyword">int</span>[] p = <span class="keyword">new</span> <span class="keyword">int</span>[sLen];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 双指针，它们是一一对应的，须同时更新</span></span><br><span class="line">        <span class="keyword">int</span> maxRight = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> center = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 当前遍历的中心最大扩散步数，其值等于原始字符串的最长回文子串的长度</span></span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 原始字符串的最长回文子串的起始位置，与 maxLen 必须同时更新        </span></span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sLen; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &lt; maxRight) &#123;</span><br><span class="line">                <span class="keyword">int</span> mirror = <span class="number">2</span> * center - i;</span><br><span class="line">                <span class="comment">// 这一行代码是 Manacher 算法的关键所在，要结合图形来理解</span></span><br><span class="line">                p[i] = Math.min(maxRight - i, p[mirror]);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 下一次尝试扩散的左右起点，能扩散的步数直接加到 p[i] 中</span></span><br><span class="line">            <span class="keyword">int</span> left = i - (<span class="number">1</span> + p[i]);</span><br><span class="line">            <span class="keyword">int</span> right = i + (<span class="number">1</span> + p[i]);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// left &gt;= 0 &amp;&amp; right &lt; sLen 保证不越界</span></span><br><span class="line">            <span class="comment">// str.charAt(left) == str.charAt(right) 表示可以扩散 1 次</span></span><br><span class="line">            <span class="keyword">while</span> (left &gt;= <span class="number">0</span> &amp;&amp; right &lt; sLen &amp;&amp; str.charAt(left) == str.charAt(right)) &#123;</span><br><span class="line">                p[i]++;</span><br><span class="line">                left--;</span><br><span class="line">                right++;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 根据 maxRight 的定义，它是遍历过的 i 的 i + p[i] 的最大者</span></span><br><span class="line">            <span class="comment">// 如果 maxRight 的值越大，进入上面 i &lt; maxRight 的判断的可能性就越大，这样就可以重复利用之前判断过的回文信息了</span></span><br><span class="line">            <span class="keyword">if</span> (i + p[i] &gt; maxRight) &#123;</span><br><span class="line">                <span class="comment">// maxRight 和 center 需要同时更新</span></span><br><span class="line">                maxRight = i + p[i];</span><br><span class="line">                center = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (p[i] &gt; maxLen) &#123;</span><br><span class="line">                <span class="comment">// 记录最长回文子串的长度和相应它在原始字符串中的起点</span></span><br><span class="line">                maxLen = p[i];</span><br><span class="line">                start = (i - maxLen) / <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(start, start + maxLen);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建预处理字符串</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> s      原始字符串</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> divide 分隔字符</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 使用分隔字符处理以后得到的字符串</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">addBoundaries</span><span class="params">(String s, <span class="keyword">char</span> divide)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (s.indexOf(divide) != -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"参数错误，您传递的分割字符，在输入字符串中存在！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            stringBuilder.append(divide);</span><br><span class="line">            stringBuilder.append(s.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        stringBuilder.append(divide);</span><br><span class="line">        <span class="keyword">return</span> stringBuilder.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># Manacher 算法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s: str)</span> -&gt; str:</span></span><br><span class="line">        <span class="comment"># 特判</span></span><br><span class="line">        size = len(s)</span><br><span class="line">        <span class="keyword">if</span> size &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 得到预处理字符串</span></span><br><span class="line">        t = <span class="string">"#"</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(size):</span><br><span class="line">            t += s[i]</span><br><span class="line">            t += <span class="string">"#"</span></span><br><span class="line">        <span class="comment"># 新字符串的长度</span></span><br><span class="line">        t_len = <span class="number">2</span> * size + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 数组 p 记录了扫描过的回文子串的信息</span></span><br><span class="line">        p = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(t_len)]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 双指针，它们是一一对应的，须同时更新</span></span><br><span class="line">        max_right = <span class="number">0</span></span><br><span class="line">        center = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 当前遍历的中心最大扩散步数，其值等于原始字符串的最长回文子串的长度</span></span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        <span class="comment"># 原始字符串的最长回文子串的起始位置，与 max_len 必须同时更新</span></span><br><span class="line">        start = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(t_len):</span><br><span class="line">            <span class="keyword">if</span> i &lt; max_right:</span><br><span class="line">                mirror = <span class="number">2</span> * center - i</span><br><span class="line">                <span class="comment"># 这一行代码是 Manacher 算法的关键所在，要结合图形来理解</span></span><br><span class="line">                p[i] = min(max_right - i, p[mirror])</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 下一次尝试扩散的左右起点，能扩散的步数直接加到 p[i] 中</span></span><br><span class="line">            left = i - (<span class="number">1</span> + p[i])</span><br><span class="line">            right = i + (<span class="number">1</span> + p[i])</span><br><span class="line"></span><br><span class="line">            <span class="comment"># left &gt;= 0 and right &lt; t_len 保证不越界</span></span><br><span class="line">            <span class="comment"># t[left] == t[right] 表示可以扩散 1 次</span></span><br><span class="line">            <span class="keyword">while</span> left &gt;= <span class="number">0</span> <span class="keyword">and</span> right &lt; t_len <span class="keyword">and</span> t[left] == t[right]:</span><br><span class="line">                p[i] += <span class="number">1</span></span><br><span class="line">                left -= <span class="number">1</span></span><br><span class="line">                right += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 根据 max_right 的定义，它是遍历过的 i 的 i + p[i] 的最大者</span></span><br><span class="line">            <span class="comment"># 如果 max_right 的值越大，进入上面 i &lt; max_right 的判断的可能性就越大，这样就可以重复利用之前判断过的回文信息了</span></span><br><span class="line">            <span class="keyword">if</span> i + p[i] &gt; max_right:</span><br><span class="line">                <span class="comment"># max_right 和 center 需要同时更新</span></span><br><span class="line">                max_right = i + p[i]</span><br><span class="line">                center = i</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> p[i] &gt; max_len:</span><br><span class="line">                <span class="comment"># 记录最长回文子串的长度和相应它在原始字符串中的起点</span></span><br><span class="line">                max_len = p[i]</span><br><span class="line">                start = (i - max_len) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> s[start: start + max_len]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 特判</span></span><br><span class="line">        <span class="keyword">int</span> size = s.size();</span><br><span class="line">        <span class="keyword">if</span> (size &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 得到预处理字符串</span></span><br><span class="line">        <span class="built_in">string</span> str = <span class="string">"#"</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i) &#123;</span><br><span class="line">            str += s[i];</span><br><span class="line">            str += <span class="string">"#"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 新字符串的长度</span></span><br><span class="line">        <span class="keyword">int</span> strSize = <span class="number">2</span> * size + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 数组 p 记录了扫描过的回文子串的信息</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p(strSize, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 双指针，它们是一一对应的，须同时更新</span></span><br><span class="line">        <span class="keyword">int</span> maxRight = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> center = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 当前遍历的中心最大扩散步数，其值等于原始字符串的最长回文子串的长度</span></span><br><span class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 原始字符串的最长回文子串的起始位置，与 maxLen 必须同时更新</span></span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strSize; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &lt; maxRight) &#123;</span><br><span class="line">                <span class="keyword">int</span> mirror = (<span class="number">2</span> * center) - i;</span><br><span class="line">                <span class="comment">// 这一行代码是 Manacher 算法的关键所在，要结合图形来理解</span></span><br><span class="line">                p[i] = min(maxRight - i, p[mirror]);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 下一次尝试扩散的左右起点，能扩散的步数直接加到 p[i] 中</span></span><br><span class="line">            <span class="keyword">int</span> left = i - (<span class="number">1</span> + p[i]);</span><br><span class="line">            <span class="keyword">int</span> right = i + (<span class="number">1</span> + p[i]);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// left &gt;= 0 &amp;&amp; right &lt; sLen 保证不越界</span></span><br><span class="line">            <span class="comment">// str.charAt(left) == str.charAt(right) 表示可以扩散 1 次</span></span><br><span class="line">            <span class="keyword">while</span> (left &gt;= <span class="number">0</span> &amp;&amp; right &lt; strSize &amp;&amp; str[left] == str[right]) &#123;</span><br><span class="line">                p[i]++;</span><br><span class="line">                left--;</span><br><span class="line">                right++;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 根据 maxRight 的定义，它是遍历过的 i 的 i + p[i] 的最大者</span></span><br><span class="line">            <span class="comment">// 如果 maxRight 的值越大，进入上面 i &lt; maxRight 的判断的可能性就越大，这样就可以重复利用之前判断过的回文信息了</span></span><br><span class="line">            <span class="keyword">if</span> (i + p[i] &gt; maxRight) &#123;</span><br><span class="line">                <span class="comment">// maxRight 和 center 需要同时更新</span></span><br><span class="line">                maxRight = i + p[i];</span><br><span class="line">                center = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (p[i] &gt; maxLen) &#123;</span><br><span class="line">                <span class="comment">// 记录最长回文子串的长度和相应它在原始字符串中的起点</span></span><br><span class="line">                maxLen = p[i];</span><br><span class="line">                start = (i - maxLen) / <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substr(start, maxLen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析：</strong></p>
+<ul>
+<li>时间复杂度：<em>O(N)</em>，Manacher 算法只有在遇到还未匹配的位置时才进行匹配，已经匹配过的位置不再匹配，因此对于字符串 <code>S</code> 的每一个位置，都只进行一次匹配，算法的复杂度为 <em>O(N)</em>。</li>
+<li>空间复杂度：<em>O(N)</em>。</li>
+</ul>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-palindromic-substring/solution/zhong-xin-kuo-san-dong-tai-gui-hua-by-liweiwei1419/</a></p>
+<p>【2】<a href="https://liweiwei1419.gitee.io/leetcode-algo/#indexCard" target="_blank" rel="noopener">https://liweiwei1419.gitee.io/leetcode-algo/#indexCard</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/05/28/5. 最长回文子串/">5. 最长回文子串</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2020年05月28日 - 19时50分</p>
+        <p><span>最后更新:</span>2020年05月28日 - 20时43分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/05/28/5. 最长回文子串/" title="5. 最长回文子串">http://yoursite.com/2020/05/28/5. 最长回文子串/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/05/28/5. 最长回文子串/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/28/131. 分割回文串/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">131. 分割回文串</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#📖题目描述："><span class="toc-number">1.</span> <span class="toc-text">📖题目描述：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#📖解题思路"><span class="toc-number">2.</span> <span class="toc-text">📖解题思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#📖方法一：暴力匹配-（Brute-Force）"><span class="toc-number">3.</span> <span class="toc-text">📖方法一：暴力匹配 （Brute Force）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#📖方法二：动态规划"><span class="toc-number">4.</span> <span class="toc-text">📖方法二：动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第-1-步：定义状态"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">第 1 步：定义状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第-2-步：思考状态转移方程"><span class="toc-number">4.0.0.2.</span> <span class="toc-text">第 2 步：思考状态转移方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第-3-步：考虑初始化"><span class="toc-number">4.0.0.3.</span> <span class="toc-text">第 3 步：考虑初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第-4-步：考虑输出"><span class="toc-number">4.0.0.4.</span> <span class="toc-text">第 4 步：考虑输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第-5-步：考虑优化空间"><span class="toc-number">4.0.0.5.</span> <span class="toc-text">第 5 步：考虑优化空间</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法三：中心扩散法"><span class="toc-number">4.0.1.</span> <span class="toc-text">方法三：中心扩散法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法四：Manacher-算法（不用掌握，面试的时候绝大多数情况下不会要求写这个算法，了解思想即可）"><span class="toc-number">4.0.2.</span> <span class="toc-text">方法四：Manacher 算法（不用掌握，面试的时候绝大多数情况下不会要求写这个算法，了解思想即可）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第-1-步：对原始字符串进行预处理（添加分隔符）"><span class="toc-number">4.0.2.1.</span> <span class="toc-text">第 1 步：对原始字符串进行预处理（添加分隔符）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第-2-步：计算辅助数组-p"><span class="toc-number">4.0.2.2.</span> <span class="toc-text">第 2 步：计算辅助数组 p</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">5.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/05/28/131. 分割回文串/" title="下一篇: 131. 分割回文串">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/5. 最长回文子串/">5. 最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/131. 分割回文串/">131. 分割回文串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/887. 鸡蛋掉落/">887. 鸡蛋掉落</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/27/21. 合并两个有序链表/">21. 合并两个有序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/685.冗余链接II/">685.冗余链接II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/1226. 哲学家进餐/">1226. 哲学家进餐</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1195. 交替打印字符串/">1195. 交替打印字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1117. H2O 生成/">1117. H2O 生成</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1116. 打印零与奇偶数/">1116. 打印零与奇偶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/1115. 交替打印FooBar/">1115. 交替打印FooBar</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/Java并发编程/">Java并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/1114.按序打印/">1114.按序打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/19/684.冗余链接/">684.冗余链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Lombok的基本注解使用/">Lombok的基本注解使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/后端开发常用调试技巧集锦/">后端开发常用调试技巧集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/405. 数字转化为十六进制数/">405. 数字转化为十六进制数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/SpringBoot学习笔记VIII-MybatisPlus教程/">SpringBoot学习笔记VIII-MybatisPlus教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/设计模式学习笔记V-策略模式/">设计模式学习笔记V-策略模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/1046. 最后一块石头的重量/">1046. 最后一块石头的重量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/Java学习笔记XIV/">Java学习笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/257.二叉树的所有路径/">257.二叉树的所有路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/22/24.两两交换链表中的节点/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/微信公众平台开发学习笔记I/">微信公众平台开发学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/">601.Human Traffic of Stadium体育馆的人流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/185.Department Top Three Salaries/">185.Department Top Three Salaries</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/数据库学习笔记IX/">数据库学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/184.Department Highest Salary/">184.Department Highest Salary</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/数据库学习笔记VIII/">数据库学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/1179. Reformat Department Table/">1179. Reformat Department Table</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II/">Git学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I/">数据库学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：320.1k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
