@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>Effective-Java阅读笔记XI | Yiye Li</title>
+  <title>131. 分割回文串 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第四章阅读：类和接口 21.为后代设计接口应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的。在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。22.接口仅用来定义类型接口只能用于定义类型。 它们不应该只是被用于导出常量。">
-<meta name="keywords" content="Java">
+  <meta name="description" content="分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案">
+<meta name="keywords" content="LeetCode,Backtracking">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective-Java阅读笔记XI">
-<meta property="og:url" content="http://yoursite.com/2020/01/16/Effective-Java阅读笔记XI/index.html">
+<meta property="og:title" content="131. 分割回文串">
+<meta property="og:url" content="http://yoursite.com/2020/05/28/131. 分割回文串/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="第四章阅读：类和接口 21.为后代设计接口应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的。在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。22.接口仅用来定义类型接口只能用于定义类型。 它们不应该只是被用于导出常量。">
+<meta property="og:description" content="分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-17T01:50:19.118Z">
+<meta property="og:updated_time" content="2020-05-28T11:46:20.618Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Effective-Java阅读笔记XI">
-<meta name="twitter:description" content="第四章阅读：类和接口 21.为后代设计接口应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的。在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。22.接口仅用来定义类型接口只能用于定义类型。 它们不应该只是被用于导出常量。">
+<meta name="twitter:title" content="131. 分割回文串">
+<meta name="twitter:description" content="分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Effective-Java阅读笔记XI" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-131. 分割回文串" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/01/16/Effective-Java阅读笔记XI/" class="article-date">
-      <time datetime="2020-01-16T08:23:12.000Z" itemprop="datePublished">2020-01-16</time>
+      <a href="/2020/05/28/131. 分割回文串/" class="article-date">
+      <time datetime="2020-05-27T16:12:12.000Z" itemprop="datePublished">2020-05-28</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Effective-Java阅读笔记XI
+      131. 分割回文串
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.6k字</span>
+        <span class="post-count">1.2k字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">9分</span>
+        <span class="post-count">5分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
+    <a class="article-category-link" href="/categories/2020年5月/">2020年5月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Backtracking/">Backtracking</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,70 +260,43 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>第四章阅读：类和接口</p>
-<p>21.为后代设计接口<br>应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的。在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。<br>22.接口仅用来定义类型<br>接口只能用于定义类型。 它们不应该只是被用于导出常量。</p>
+        <p>分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案</p>
 <a id="more"></a>
 
-<h1 id="为后代设计接口"><a href="#为后代设计接口" class="headerlink" title="为后代设计接口"></a>为后代设计接口</h1><p>　　在 Java 8 之前，不可能在不破坏现有实现的情况下为接口添加方法。 如果向接口添加了一个新方法，现有的实现通常会缺少该方法，从而导致编译时错误。 在 Java 8 中，添加了默认方法（default method）构造[JLS 9.4]，目的是允许将方法添加到现有的接口。 但是增加新的方法到现有的接口是充满风险的。</p>
-<p>　　默认方法的声明包含一个默认实现，该方法允许实现接口的类直接使用，而不必实现默认方法。 虽然在 Java 中添加默认方法可以将方法添加到现有接口，但不能保证这些方法可以在所有已有的实现中使用。 默认的方法被「注入（injected）」到现有的实现中，没有经过实现类的知道或同意。 在 Java 8 之前，这些实现是用默认的接口编写的，它们的接口永远不会获得任何新的方法。</p>
-<p>　　许多新的默认方法被添加到 Java 8 的核心集合接口中，主要是为了方便使用 lambda 表达式（第 6 章）。 Java 类库的默认方法是高质量的通用实现，在大多数情况下，它们工作正常。 但是，编写一个默认方法并不总是可能的，它保留了每个可能的实现的所有不变量。</p>
-<p>　　例如，考虑在 Java 8 中添加到 Collection 接口的 removeIf 方法。此方法删除给定布尔方法（或 Predicate 函数式接口）返回 true 的所有元素。默认实现被指定为使用迭代器遍历集合，调用每个元素的谓词，并使用迭代器的 remove 方法删除谓词返回 true 的元素。 据推测，这个声明看起来像这样：默认实现被指定为使用迭代器遍历集合，调用每个元素的 Predicate 函数式接口，并使用迭代器的 remove 方法删除 Predicate 函数式接口返回 true 的元素。 根据推测，这个声明看起来像这样：</p>
-<pre><code>// Default method added to the Collection interface in Java 8
-default boolean removeIf(Predicate&lt;? super E&gt; filter) {
-    Objects.requireNonNull(filter);
-    boolean result = false;
-    for (Iterator&lt;E&gt; it = iterator(); it.hasNext(); ) {
-        if (filter.test(it.next())) {
-            it.remove();
-            result = true;
-        }
-    }
-    return result;
-}</code></pre><p>　　这是可能为 removeIf 方法编写的最好的通用实现，但遗憾的是，它在一些实际的 Collection 实现中失败了。 例如，考虑 org.apache.commons.collections4.collection.SynchronizedCollection 方法。 这个类出自 Apache Commons 类库中，与 java.util 包中的静态工厂 Collections.synchronizedCollection 方法返回的类相似。 Apache 版本还提供了使用客户端提供的对象进行锁定的能力，以代替集合。 换句话说，它是一个包装类（条目 18），它们的所有方法在委托给包装集合类之前在一个锁定对象上进行同步。</p>
-<p>　　Apache 的 SynchronizedCollection 类仍然在积极维护，但在撰写本文时，并未重写 removeIf 方法。 如果这个类与 Java 8 一起使用，它将继承 removeIf 的默认实现，但实际上不能保持类的基本承诺：自动同步每个方法调用。 默认实现对同步一无所知，并且不能访问包含锁定对象的属性。 如果客户端在另一个线程同时修改集合的情况下调用 SynchronizedCollection 实例上的 removeIf 方法，则可能会导致 ConcurrentModificationException 异常或其他未指定的行为。</p>
-<p>　　为了防止在类似的 Java 平台类库实现中发生这种情况，比如 Collections.synchronizedCollection 返回的包级私有的类，JDK 维护者必须重写默认的 removeIf 实现和其他类似的方法来在调用默认实现之前执行必要的同步。 原来不属于 Java 平台的集合实现没有机会与接口更改进行类似的改变，有些还没有这样做。</p>
-<p>　　<strong><em>在默认方法的情况下，接口的现有实现类可以在没有错误或警告的情况下编译，但在运行时会失败。</em></strong> 虽然不是非常普遍，但这个问题也不是一个孤立的事件。 在 Java 8 中添加到集合接口的一些方法已知是易受影响的，并且已知一些现有的实现会受到影响。</p>
-<p>　　应该避免使用默认方法向现有的接口添加新的方法，除非这个需要是关键的，在这种情况下，你应该仔细考虑，以确定现有的接口实现是否会被默认的方法实现所破坏。然而，默认方法对于在创建接口时提供标准的方法实现非常有用，以减轻实现接口的任务（详见第 20 条）。</p>
-<p>　　还值得注意的是，默认方法不是被用来设计，来支持从接口中移除方法或者改变现有方法的签名的目的。在不破坏现有客户端的情况下，这些接口都不可能发生更改。</p>
-<p>　　准则是清楚的。 尽管默认方法现在是 Java 平台的一部分，<strong><em>但是非常悉心地设计接口仍然是非常重要的</em></strong>。 虽然默认方法可以将方法添加到现有的接口，但这样做有很大的风险。 如果一个接口包含一个小缺陷，可能会永远惹怒用户。 如果一个接口严重缺陷，可能会破坏包含它的 API。</p>
-<p>　　因此，在发布之前测试每个新接口是非常重要的。 多个程序员应该以不同的方式实现每个接口。 至少，你应该准备三种不同的实现。 编写多个使用每个新接口的实例来执行各种任务的客户端程序同样重要。 这将大大确保每个接口都能满足其所有的预期用途。 这些步骤将允许你在发布之前发现接口中的缺陷，但仍然可以轻松地修正它们。 虽然在接口被发布后可能会修正一些存在的缺陷，但不要太指望这一点。</p>
-<h1 id="接口仅用来定义类型"><a href="#接口仅用来定义类型" class="headerlink" title="接口仅用来定义类型"></a>接口仅用来定义类型</h1><p>　　当类实现接口时，该接口作为一种类型（type），可以用来引用类的实例。因此，一个类实现了一个接口，因此表明客户端可以如何处理类的实例。为其他目的定义接口是不合适的。</p>
-<p>　　一种失败的接口就是所谓的常量接口（constant interface）。 这样的接口不包含任何方法; 它只包含静态 final 属性，每个输出一个常量。 使用这些常量的类实现接口，以避免需要用类名限定常量名。 这里是一个例子：</p>
-<pre><code>// Constant interface antipattern - do not use!
-public interface PhysicalConstants {
-    // Avogadro&apos;s number (1/mol)
-    static final double AVOGADROS_NUMBER   = 6.022_140_857e23;
 
-    // Boltzmann constant (J/K)
-    static final double BOLTZMANN_CONSTANT = 1.380_648_52e-23;
+<h1 id="📖题目描述："><a href="#📖题目描述：" class="headerlink" title="📖题目描述："></a>📖题目描述：</h1><p>给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。</p>
+<p>返回 s 所有可能的分割方案。</p>
+<p>示例:</p>
+<pre><code>输入: &quot;aab&quot;
+输出:
+[
+  [&quot;aa&quot;,&quot;b&quot;],
+  [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]
+]</code></pre><h1 id="📖解题思路"><a href="#📖解题思路" class="headerlink" title="📖解题思路"></a>📖解题思路</h1><p>搜索问题主要使用回溯法。</p>
+<p>回溯法思考的步骤：</p>
+<p>1、画递归树；</p>
+<p>2、根据自己画的递归树编码。</p>
+<p> <a href="https://pic.leetcode-cn.com/298a80282ac3505fec3710abdc1e656c591cf7acaa3ba976151480729244b649-image.png" target="_blank" rel="noopener">递归树</a></p>
+<p>思考如何根据这棵递归树编码：</p>
+<p>1、每一个结点表示剩余没有扫描到的字符串，产生分支是截取了剩余字符串的前缀；</p>
+<p>2、产生前缀字符串的时候，判断前缀字符串是否是回文。</p>
+<ul>
+<li>如果前缀字符串是回文，则可以产生分支和结点；</li>
+<li>如果前缀字符串不是回文，则不产生分支和结点，这一步是剪枝操作。</li>
+</ul>
+<p>3、在叶子结点是空字符串的时候结算，此时<strong>从根结点到叶子结点的路径，就是结果集里的一个结果，使用深度优先遍历，记录下所有可能的结果</strong>。</p>
+<ul>
+<li>采用一个路径变量 <code>path</code> 搜索，<code>path</code> 全局使用一个（注意结算的时候，需要生成一个拷贝），因此在递归执行方法结束以后需要回溯，即将递归之前添加进来的元素拿出去；</li>
+<li><code>path</code> 的操作只在列表的末端，因此合适的数据结构是栈。</li>
+</ul>
+<h1 id="📖方法一：回溯"><a href="#📖方法一：回溯" class="headerlink" title="📖方法一：回溯"></a>📖方法一：回溯</h1><p><strong>参考代码 1</strong>：</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayDeque;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Deque;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Stack 这个类 Java 的文档里推荐写成 Deque&lt;Integer&gt; stack = new ArrayDeque&lt;Integer&gt;();</span></span><br><span class="line">        <span class="comment">// 注意：只使用 stack 相关的接口</span></span><br><span class="line">        Deque&lt;String&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">        backtracking(s, <span class="number">0</span>, len, stack, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> s</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> start 起始字符的索引</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> len   字符串 s 的长度，可以设置为全局变量</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> path  记录从根结点到叶子结点的路径</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> res   记录所有的结果</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(String s, <span class="keyword">int</span> start, <span class="keyword">int</span> len, Deque&lt;String&gt; path, List&lt;List&lt;String&gt;&gt; res)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start == len) &#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; len; i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 因为截取字符串是消耗性能的，因此，采用传子串索引的方式判断一个子串是否是回文子串</span></span><br><span class="line">            <span class="comment">// 不是的话，剪枝</span></span><br><span class="line">            <span class="keyword">if</span> (!checkPalindrome(s, start, i)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            path.addLast(s.substring(start, i + <span class="number">1</span>));</span><br><span class="line">            backtracking(s, i + <span class="number">1</span>, len, path, res);</span><br><span class="line">            path.removeLast();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这一步的时间复杂度是 O(N)，因此，可以采用动态规划先把回文子串的结果记录在一个表格里</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> str</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> left  子串的左边界，可以取到</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> right 子串的右边界，可以取到</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkPalindrome</span><span class="params">(String str, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 严格小于即可</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">if</span> (str.charAt(left) != str.charAt(right)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    // Mass of the electron (kg)
-    static final double ELECTRON_MASS      = 9.109_383_56e-31;
-}</code></pre><p>　　常量接口模式是对接口的糟糕使用。 类在内部使用一些常量，完全属于实现细节。实现一个常量接口会导致这个实现细节泄漏到类的导出 API 中。对类的用户来说，类实现一个常量接口是没有意义的。事实上，它甚至可能使他们感到困惑。更糟糕的是，它代表了一个承诺：如果在将来的版本中修改了类，不再需要使用常量，那么它仍然必须实现接口，以确保二进制兼容性。如果一个非 final 类实现了常量接口，那么它的所有子类的命名空间都会被接口中的常量所污染。</p>
-<p>　　Java 平台类库中有多个常量接口，如 java.io.ObjectStreamConstants。 这些接口应该被视为不规范的，不应该被效仿。</p>
-<p>　　如果你想导出常量，有几个合理的选择方案。 如果常量与现有的类或接口紧密相关，则应将其添加到该类或接口中。 例如，所有数字基本类型的包装类，如 Integer 和 Double，都会导出 MIN_VALUE 和 MAX_VALUE 常量。 如果常量最好被看作枚举类型的成员，则应该使用枚举类型（详见第 34 条）导出它们。 否则，你应该用一个不可实例化的工具类来导出常量（详见第 4 条）。 下是前面所示的 PhysicalConstants 示例的工具类的版本：</p>
-<pre><code>// Constant utility class
-package com.effectivejava.science;
+<h1 id="📖方法二：回溯的优化（加了动态规划）"><a href="#📖方法二：回溯的优化（加了动态规划）" class="headerlink" title="📖方法二：回溯的优化（加了动态规划）"></a>📖方法二：回溯的优化（加了动态规划）</h1><p>在上一步，验证回文串那里，每一次都得使用“两边夹”的方式验证子串是否是回文子串。于是“用空间换时间”，利用「力扣」第 5 题：<a href="https://leetcode-cn.com/problems/longest-palindromic-substring" target="_blank" rel="noopener">最长回文子串</a> 的思路，利用动态规划把结果先算出来，这样就可以以 <em>O(1)</em> 的时间复杂度直接得到一个子串是否是回文。</p>
+<p><strong>参考代码 2</strong>：</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayDeque;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Deque;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = s.length();</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 预处理</span></span><br><span class="line">        <span class="comment">// 状态：dp[i][j] 表示 s[i][j] 是否是回文</span></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[len][len];</span><br><span class="line">        <span class="comment">// 状态转移方程：在 s[i] == s[j] 的时候，dp[i][j] 参考 dp[i + 1][j - 1]</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> right = <span class="number">0</span>; right &lt; len; right++) &#123;</span><br><span class="line">            <span class="comment">// 注意：left &lt;= right 取等号表示 1 个字符的时候也需要判断</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> left = <span class="number">0</span>; left &lt;= right; left++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s.charAt(left) == s.charAt(right) &amp;&amp; (right - left &lt;= <span class="number">2</span> || dp[left + <span class="number">1</span>][right - <span class="number">1</span>])) &#123;</span><br><span class="line">                    dp[left][right] = <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Deque&lt;String&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">        backtracking(s, <span class="number">0</span>, len, dp, stack, res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(String s,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">int</span> start,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">int</span> len,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">boolean</span>[][] dp,</span></span></span><br><span class="line"><span class="function"><span class="params">                              Deque&lt;String&gt; path,</span></span></span><br><span class="line"><span class="function"><span class="params">                              List&lt;List&lt;String&gt;&gt; res)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start == len) &#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="comment">// 剪枝</span></span><br><span class="line">            <span class="keyword">if</span> (!dp[start][i]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            path.addLast(s.substring(start, i + <span class="number">1</span>));</span><br><span class="line">            backtracking(s, i + <span class="number">1</span>, len, dp, path, res);</span><br><span class="line">            path.removeLast();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class PhysicalConstants {
-  private PhysicalConstants() { }  // Prevents instantiation
-
-  public static final double AVOGADROS_NUMBER = 6.022_140_857e23;
-  public static final double BOLTZMANN_CONST  = 1.380_648_52e-23;
-  public static final double ELECTRON_MASS    = 9.109_383_56e-31;
-}</code></pre><p>　　顺便提一下，请注意在数字文字中使用下划线字符_ 。 从 Java 7 开始，合法的下划线对数字字面量的值没有影响，但是如果使用得当的话可以使它们更容易阅读。 无论是固定的浮点数，如果他们包含五个或更多的连续数字，考虑将下划线添加到数字字面量中。 对于底数为 10 的数字，无论是整型还是浮点型的，都应该用下划线将数字分成三个数字组，表示一千的正负幂。</p>
-<p>　　通常，实用工具类要求客户端使用类名来限定常量名，例如 PhysicalConstants.AVOGADROS_NUMBER。 如果大量使用实用工具类导出的常量，则通过使用静态导入来限定具有类名的常量：</p>
-<pre><code>// Use of static import to avoid qualifying constants
-import static com.effectivejava.science.PhysicalConstants.*;
-
-public class Test {
-    double  atoms(double mols) {
-        return AVOGADROS_NUMBER * mols;
-    }
-    ...
-    // Many more uses of PhysicalConstants justify static import
-}</code></pre><p>　　总之，接口只能用于定义类型。 它们不应该只是被用于导出常量。</p>
-<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/21.%20%E4%B8%BA%E5%90%8E%E4%BB%A3%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/21.%20%E4%B8%BA%E5%90%8E%E4%BB%A3%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3</a></p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-you-hua-jia-liao-dong-tai-gui-hua-by-liweiw/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-you-hua-jia-liao-dong-tai-gui-hua-by-liweiw/</a></p>
 
       
       
@@ -379,13 +352,13 @@ public class Test {
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></p>
+        <p><span>本文标题:</span><a href="/2020/05/28/131. 分割回文串/">131. 分割回文串</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2020年01月16日 - 16时23分</p>
-        <p><span>最后更新:</span>2020年01月17日 - 09时50分</p>
+        <p><span>发布时间:</span>2020年05月28日 - 00时12分</p>
+        <p><span>最后更新:</span>2020年05月28日 - 19时46分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/01/16/Effective-Java阅读笔记XI/" title="Effective-Java阅读笔记XI">http://yoursite.com/2020/01/16/Effective-Java阅读笔记XI/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/16/Effective-Java阅读笔记XI/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/05/28/131. 分割回文串/" title="131. 分割回文串">http://yoursite.com/2020/05/28/131. 分割回文串/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/05/28/131. 分割回文串/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -398,18 +371,9 @@ public class Test {
 
 <nav id="article-nav">
   
-    <a href="/2020/01/16/Effective-Java阅读笔记XII/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Effective-Java阅读笔记XII
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/01/16/Effective-Java阅读笔记X/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Effective-Java阅读笔记X</div>
+    <a href="/2020/05/28/887. 鸡蛋掉落/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">887. 鸡蛋掉落</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -420,7 +384,7 @@ public class Test {
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#为后代设计接口"><span class="toc-number">1.</span> <span class="toc-text">为后代设计接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接口仅用来定义类型"><span class="toc-number">2.</span> <span class="toc-text">接口仅用来定义类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">3.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#📖题目描述："><span class="toc-number">1.</span> <span class="toc-text">📖题目描述：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#📖解题思路"><span class="toc-number">2.</span> <span class="toc-text">📖解题思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#📖方法一：回溯"><span class="toc-number">3.</span> <span class="toc-text">📖方法一：回溯</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#📖方法二：回溯的优化（加了动态规划）"><span class="toc-number">4.</span> <span class="toc-text">📖方法二：回溯的优化（加了动态规划）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">5.</span> <span class="toc-text">参考资料：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -486,13 +450,11 @@ public class Test {
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/01/16/Effective-Java阅读笔记XII/" title="上一篇: Effective-Java阅读笔记XII">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/01/16/Effective-Java阅读笔记X/" title="下一篇: Effective-Java阅读笔记X">
+            <a href="/2020/05/28/887. 鸡蛋掉落/" title="下一篇: 887. 鸡蛋掉落">
                 <i class="fa fa-angle-right"></i>
             </a>
         
