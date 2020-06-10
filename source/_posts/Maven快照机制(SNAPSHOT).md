@@ -66,7 +66,7 @@ Maven会根据模块的版本号（pom.xml文件中的version）中是否带有-
     mvn clean package -U
 
 
-#  📖实际使用时遇到的问题
+#  📖实际使用时遇到的问题1
 
 例如引用快照的项目app-ui中无法导入data-service中的DTO，报错：
     
@@ -91,6 +91,47 @@ Maven会根据模块的版本号（pom.xml文件中的version）中是否带有-
 2. 修改仓库文件夹的权限为完全控制即可，打开IDEA-》Preference-》Maven，勾选Local repository
    
 
+# 📖实际使用时遇到问题2
+假设自己在external-services项目中使用了external-services-api项目中的快照，
+
+那么在external-services-api项目中不要轻易将自己的开发分支合并到master上，因为有可能其他人在同时开发，刚才部署测试环境时将自己的分支合并到了master上，改api版本号为0.2.3，但在使用external-services的时候发现出错了，因为某分支的代码已经合并到external-services里，但是没有合并到external-services-api的master中，所以在external-services使用的api里没有某分支目的相关DTO，而且某分支要先上线，所以api的master中版本暂时不能带有我这个分支的代码。
+
+## 解决方法1
+首先想在external-services-api的master中强行回滚代码 ，但是发现
+
+回滚到 master 的某一个 commit 版本：
+
+    git rest --hard xxxx
+这时候就将这个分支回滚到之前的某一个 commit 了。 但是这时候直接
+
+    git push origin
+是不行的。 会显示远端的版本比当前版本高，所以只能用 -f 来强制 push 上去。
+
+    git push -u origin master -f
+但是发现还是报错：
+
+
+    You are not allowed to force push code to a protected branch on this project
+信息提示我无法强制 push 代码到一个受保护的分支？？ 哪怕我已经是 master 了，还是强推不了
+
+去 gitlab 的该项目的配置项看了一下(在 Settings 的 Repository 设置项的 Protected Branches)， 原来这个项目中有对 master 分支做了 protected 保护， 不允许强制推送，这个好像是项目创建的时候就默认的设置：
+
+所以如果要强制推送到 master 的话，这边要先取消掉 protected 分支。所以点击 Unprotect 按钮
+
+这时候就没有保护分支了， 然后这时候强制推送就成功了。 然后为了安全，我们再重新设置为保护分支
+
+理论上可以改保护分支设置解决，但是我在external-services-api项目的gitlab网页中怎么也找不到Settings这个选项，所以此方法失败了。
+
+## 解决方法2
+切换到external-services-api的master中，打开Version Control-》log，选择相应的commit记录右键-》Revert Commit，即可退回提交记录，再push。
+
+然后再将某分支的api项目分支合并到master中，并将某分支的api分支也合并到我的开发分支中，暂时不用在master上操作了，在我的开发分支上feature-preloanContract把版本号改为0.2.3-SNAPSHOT，deploy一下就可以在external-services中使用了。
+
+## 又遇到问题
+external-services中的develop中合并了开发分支后仍然显示有错，在其他人电脑上就没错，这是因为本地仍有原来api包的缓存，可以重新导入一下maven就恢复正常了。
+
+
+
 # 参考资料：
 【1】https://www.cnblogs.com/EasonJim/p/6852840.html
 
@@ -99,3 +140,5 @@ Maven会根据模块的版本号（pom.xml文件中的version）中是否带有-
 【3】https://blog.csdn.net/w13342233769/article/details/103484005
 
 【4】https://blog.csdn.net/Vicky128/article/details/81285610
+
+【5】https://kebingzao.com/2019/04/18/git-protected/
