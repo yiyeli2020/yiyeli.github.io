@@ -1,4 +1,4 @@
-title: 数据库基础概念II-范式-关系代数
+title: 数据库基础概念II-范式-关系代数-三值逻辑
 
 date: 2020-6-10 12:12:12
 
@@ -8,7 +8,7 @@ tags: [Database，MySQL]
 
 ---
 
-范式(Normal Form),关系代数，超键、候选键、主键、外键。
+范式(Normal Form),关系代数，超键、候选键、主键、外键。三值逻辑。
 
 
 <!-- more -->
@@ -188,6 +188,28 @@ tags: [Database，MySQL]
 
 外键比较简单，学生表中的外键就是“教师编号”。外键主要是用来描述两个表的关系。
 
+# 三值逻辑
+　　
+这个三值逻辑不是三目运算，指的是三个逻辑值[^4]，有人可能有疑问了，逻辑值不是只有真(true)和假(false)吗，哪来的第三个？
+　　
+
+说这话时我们需要注意所处的环境，在主流的编程语言中（C、JAVA、Python、JS等）中，逻辑值确实只有 2 个，但在 SQL中却存在第三个逻辑值：unknown。这有点类似于我们平时所说的：对、错、不知道。
+
+　　逻辑值 unknown 和作为 NULL 的一种的 UNKNOWN （未知）是不同的东西。前者是明确的布尔型的逻辑值，后者既不是值也不是变量。为了便于区分，前者采用小写字母 unknown ，后者用大写字母 UNKNOWN 来表示。为了让大家理解两者的不同，我们来看一个 x=x 这样的简单等式。x 是逻辑值 unknown 时，x=x 被判断为 true ，而 x 是 UNKNOWN 时被判断为 unknown 
+    
+    -- 这个是明确的逻辑值的比较
+    unknown = unknown → true
+    
+    -- 这个相当于NULL = NULL
+    UNKNOWN = UNKNOWN → unknown
+
+## NULL 特殊值[^5]
+
+NULL 值将三值逻辑的概念引入 SQL。NULL 值通过任何比较运算符与任何值（包括 NULL 值）进行比较时都是"UNKNOWN"。
+
+返回 TRUE 的唯一搜索条件是 IS NULL 谓语。
+
+在 SQL 中，只有 WHERE 子句中搜索条件的值为 TRUE 时才选择行；不选择值为 UNKNOWN 或 FALSE 的行。
 
 [^1]:https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F
 
@@ -195,3 +217,7 @@ tags: [Database，MySQL]
 [^2]:https://blog.csdn.net/thor_w/article/details/70231604
 
 [^3]:https://blog.csdn.net/huo_yun/article/details/12904727
+
+[^4]:https://www.cnblogs.com/youzhibing/p/11337745.html
+
+[^5]:http://dcx.sybase.com/sa160/zh/dbreference/nulls.html
