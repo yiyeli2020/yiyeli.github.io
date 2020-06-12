@@ -1,12 +1,15 @@
 ---
-title: 数据库学习笔记I
+title: 数据库学习笔记I-查询
+
 date: 2019-7-31 11:12:12
+
 categories: 2019年7月
+
 tags: [Database，MySQL]
 
 ---
 
-SQL基本查询和分页查询
+SQL基本查询和分页查询，包括ALL，ANY，EXISTS，IN等关键字的用法
 
 <!-- more -->
 # SQL查询
@@ -22,13 +25,15 @@ AS 一般是重命名列名或者表名。
 
 上面的语句就可以解释为，选择 column_1  作为  列1,column_2 作为   列2  从 table  当成 表
 
-***SELECT * FROM Employee AS emp***
+**SELECT * FROM Employee AS emp**
 
 这句意思是查找所有Employee 表里面的数据，并把Employee表格命名为 emp。
 当你命名一个表之后，你可以在下面用 emp 代替 Employee.
-例如 SELECT * FROM emp.
+例如 
 
-***把查询对像起个别名的作用***
+    SELECT * FROM emp.
+
+**把查询对像起个别名的作用**
 
     select ID as 用户ID，Name as 用户名 from Table_user
 
@@ -82,6 +87,7 @@ OFFSET计算公式为pageSize*（pageIndex-1）。
 
 ## 扩展思考
 如果原本记录集只有10条记录，但我们将OFFSET设置为20，结果会怎样呢？
+
 答案是OFFSET超过查询的最大数量并不会报错，而是会得到一个空的结果集
 
 ## 注意
@@ -89,48 +95,7 @@ OFFSET是可选的，OFFSET缺省值为0.即LIMIT 3 相当于LIMIT 3 OFFSET 0
 在MySQL中，LIMIT 3 OFFSET 0也可简写为LIMIT 3，0
 使用LIMIT M OFFSET N进行分页查询时，N越大查询效率越低。
 
-# SQL连接查询
-连接查询是将两个或两个以上的表按某些条件连接起来，从中选取需要的数据。可以分为内连接查询(通过where实现)和外连接查询（join）。
 
-## 内连接查询
-只有不同表中有相同意义的字段时才能进行连接，而且内连接查询只查询出指定字段取值相同的记录。
-![https://img-blog.csdn.net/20171209135846780?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGxnMTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast](assets/markdown-img-paste-20190801165654826.png)
-
-    一般语法:
-    select a.* , b.*
-    from table_a as a, table_b as b
-    where a.id = b.id;
-## 外连接查询
-需要通过指定字段来进行连接。当该字段取值相等时，可以查询出该记录；而且当该字段不等时，也可以查询出来。包括左连接，右连接查询。
-
-    一般语法：
-    select 属性名列表
-    from 表1
-    left | right join 表2
-    on 表1.属性名 = 表2.属性名;
-
-### 左外连接
-left join 是left outer join的简写，它的全称是左外连接，是外连接中的一种。
-左(外)连接，左表(a_table)的记录将会全部表示出来，而右表(b_table)只会显示符合搜索条件的记录。右表记录不足的地方均为NULL。
-![https://img-blog.csdn.net/20171209142610819?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGxnMTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast](assets/markdown-img-paste-2019080116575036.png)
-
-### 右外连接
-右外连接与左外连接相对称，
-right join是right outer join的简写，它的全称是右外连接，是外连接中的一种。
-与左(外)连接相反，右(外)连接，左表(a_table)只会显示符合搜索条件的记录，而右表(b_table)的记录将会全部表示出来。左表记录不足的地方均为NULL。
-![https://img-blog.csdn.net/20171209144056668?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGxnMTc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast](assets/markdown-img-paste-20190801175330121.png)
-### 外连接查询加条件语句
-
-使用外连接查询时，可以加上各种条件进行筛选。
-
-    select table1.column1, table2.column1
-    from table1
-    join table2
-    on table1.column2 = table2.column3;
-
-    select table1.column1, table2.column1
-    from table1,table2
-    where table1.column2 = table2.column3;
 
 ## 子查询
 子查询时将一个查询语句嵌套在另一个查询语句中，内层查询语句的查询结果，可以为外层查询语句提供查询条件。在特定情况下：一个查询语句的条件需要另一个查询语句来获取。
@@ -143,10 +108,15 @@ right join是right outer join的简写，它的全称是右外连接，是外连
 ### 分类
 
 子查询分为如下几类：
+
 1）. 标量子查询：返回单一值的标量，最简单的形式。
+
 2）. 列子查询：返回的结果集是 N 行一列。
+
 3）. 行子查询：返回的结果集是一行 N 列。
+
 4）. 表子查询：返回的结果集是 N 行 N 列。
+
 可以使用的操作符：= > < >= <= <> ANY IN SOME ALL EXISTS
 
 释义：一个子查询会返回一个标量（就一个值）、一个行、一个列或一个表，这些子查询称之为标量、行、列和表子查询。
@@ -172,9 +142,9 @@ EXISTS关键字表示存在，内层查询语句不返回查询的记录，而�
     where exists (select d_name from department where d_id = 1003);
     //如果department存在d_id为1003，则查询employee表。
 还可以分为相关子查询，独立子查询。以上子查询与外层查询没有关联，称为独立子查询，如果子查询有用到外层查询的字段，则称相关子查询，相关子查询容易产生性能问题。
-
-EXISTS （sql 返回结果集为真）
-NOT EXISTS (sql 不返回结果集为真）
+    
+    EXISTS （sql 返回结果集为真）
+    NOT EXISTS (sql 不返回结果集为真）
 
 表A
 
@@ -202,6 +172,7 @@ NOT EXISTS (sql 不返回结果集为真）
     2 A2
 ## TOP关键字
 TOP关键字在SQL语言中用来限制返回结果集中的记录条数
+
 （1）返回确定数目的记录个数
 
 语法格式：
@@ -219,6 +190,7 @@ TOP关键字在SQL语言中用来限制返回结果集中的记录条数
 其中，n为所返回的记录数所占结果集中记录数目的百分比数
 
 使用例子：
+
 查询某个条件多条数据中创建时间最新的一条
 
       select top 1 * from tablename
@@ -226,6 +198,7 @@ TOP关键字在SQL语言中用来限制返回结果集中的记录条数
       order by 时间 desc      
 
 但是需要注意的是在MySQL中没有此语法，MySQL中使用limit来实现相关功能。
+
 同样的例子，MySQL中可以写为：
 
       select * from tablename
@@ -234,6 +207,7 @@ TOP关键字在SQL语言中用来限制返回结果集中的记录条数
 # NOT IN 关键字
 
 示例：
+
     select customers.name as 'Customers'
     from customers
     where customers.id not in
@@ -258,7 +232,9 @@ in是把外表和内表作hash连接，而exists是对外表作loop循环，每�
 
 ## not in和not exists
 
-如果查询语句使用了not in，那么对内外表都进行全表扫描，没有用到索引；而not exists的子查询依然能用到表上的索引。所以无论哪个表大，用not exists都比not in要快。
+如果查询语句使用了not in，那么对内外表都进行全表扫描，没有用到索引；
+
+而not exists的子查询依然能用到表上的索引。所以无论哪个表大，用not exists都比not in要快。
 
 ## in与=的区别
 
@@ -274,7 +250,9 @@ EXISTS用于检查子查询是否至少会返回一行数据，该子查询实�
 
 EXISTS 指定一个子查询，检测行的存在。
 
-语法： EXISTS subquery
+语法： 
+    
+    EXISTS subquery
 
 参数： subquery 是一个受限的 SELECT 语句 (不允许有 COMPUTE 子句和 INTO 关键字)。
 
@@ -283,7 +261,11 @@ EXISTS 指定一个子查询，检测行的存在。
 结论：
 
     select * from A where exists (select 1 from B where A.id=B.id)
-EXISTS(包括 NOT EXISTS )子句的返回值是一个boolean值。 EXISTS内部有一个子查询语句(SELECT ... FROM...),我将其称为EXIST的内查询语句。其内查询语句返回一个结果集, EXISTS子句根据其内查询语句的结果集空或者非空，返回一个布尔值。
+EXISTS(包括 NOT EXISTS )子句的返回值是一个boolean值。
+
+EXISTS内部有一个子查询语句(SELECT ... FROM...),我将其称为EXIST的内查询语句。其内查询语句返回一个结果集, 
+
+EXISTS子句根据其内查询语句的结果集空或者非空，返回一个布尔值。
 
 一种通俗的可以理解为：将外查询表的每一行，代入内查询作为检验，如果内查询返回的结果取非空值，则EXISTS子句返回TRUE，这一行行可作为外查询的结果行，否则不能作为结果。
 
@@ -298,6 +280,8 @@ WHERE关键字后面的是条件表达式。条件表达式计算完成后，会
 # 参考资料：
 
 【1】https://www.liaoxuefeng.com/wiki/1177760294764384/1217864791925600
-【2】https://blog.csdn.net/plg17/article/details/78758593
-【3】https://cloud.tencent.com/developer/article/1333120
-【4】https://www.jianshu.com/p/24e4e8437686
+
+【2】https://cloud.tencent.com/developer/article/1333120
+
+【3】https://www.jianshu.com/p/24e4e8437686
+
