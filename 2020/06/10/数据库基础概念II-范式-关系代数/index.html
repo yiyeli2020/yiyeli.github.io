@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>数据库基础概念II-范式-关系代数 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="范式(Normal Form),关系代数，超键、候选键、主键、外键。">
+<meta name="keywords" content="Database，MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库基础概念II-范式-关系代数">
+<meta property="og:url" content="http://yoursite.com/2020/06/10/数据库基础概念II-范式-关系代数/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="范式(Normal Form),关系代数，超键、候选键、主键、外键。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-06-12T15:32:42.955Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库基础概念II-范式-关系代数">
+<meta name="twitter:description" content="范式(Normal Form),关系代数，超键、候选键、主键、外键。">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 12.86px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 16.43px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 15px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 12.86px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10.71px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10.71px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 10.71px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 17.14px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 12.14px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/Concurrency/" style="font-size: 14.29px;">Concurrency</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 13.57px;">Database</a> <a href="/tags/Database，MySQL/" style="font-size: 18.57px;">Database，MySQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 12.86px;">Depth-first Search</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 12.86px;">Design Pattern，Java</a> <a href="/tags/Dynamic-Programming/" style="font-size: 17.86px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 12.86px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Graph/" style="font-size: 10.71px;">Graph</a> <a href="/tags/Greedy/" style="font-size: 10.71px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 12.14px;">Hash Table</a> <a href="/tags/Heap/" style="font-size: 11.43px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 12.14px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19.29px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/LinkList/" style="font-size: 10px;">LinkList</a> <a href="/tags/Linked-List/" style="font-size: 10px;">Linked List</a> <a href="/tags/Linux/" style="font-size: 10.71px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Operating-System/" style="font-size: 10.71px;">Operating System</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 12.86px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 11.43px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 10.71px;">Stack</a> <a href="/tags/String/" style="font-size: 10.71px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.71px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 15.71px;">Tree</a> <a href="/tags/Trie/" style="font-size: 11.43px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 10px;">Two Pointers</a> <a href="/tags/Union-Find/" style="font-size: 10.71px;">Union Find</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Wechat/" style="font-size: 10px;">Wechat</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-数据库基础概念II-范式-关系代数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/06/10/数据库基础概念II-范式-关系代数/" class="article-date">
+      <time datetime="2020-06-10T04:12:12.000Z" itemprop="datePublished">2020-06-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据库基础概念II-范式-关系代数
+    </h1>
+  
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.2k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">7分</span>
+      </span>
+    </span>
+</div>
+
+          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2020年6月/">2020年6月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database，MySQL/">Database，MySQL</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>范式(Normal Form),关系代数，超键、候选键、主键、外键。</p>
+<a id="more"></a>
+
+<p>这部分内容更偏向理论，本科时在孙甲松老师的数据库课上学过一遍，如今再拿出来回炉一下。</p>
+<h1 id="数据库DB、DBMS、DBA、DBS概念"><a href="#数据库DB、DBMS、DBA、DBS概念" class="headerlink" title="数据库DB、DBMS、DBA、DBS概念"></a>数据库DB、DBMS、DBA、DBS概念</h1><p>数据库（Data Base，DB)是按一定结构组织并长期存储在计算机内的、可共享的大量数据的有机集合。其实就是存放数据的仓库，只不过这些数据存在一定的关联、并按一定的格式存放在计算机上。例如，把一个学校的学生、课程、学生成绩等数据有序的组织并存放在计算机内，就可以构成一个数据库。</p>
+<p>数据库管理系统（Data Base Management System，DBMS）是管理和维护数据库的系统软件。常用的DBMS有：Oracle、DB2、SqlServer、MySql等</p>
+<p>数据库管理员（Date Base Administrator ,DBA)管理操作数据库人员。</p>
+<p>数据库系统（Data Base System，DBS）是实现有组织的、动态地存储大量关联数据、方便多用户访问的计算机软件、硬件和数据资源组成的系统，简化为：DBS=计算机系统（硬件、软件平台、人）+DBMS+DB</p>
+<h1 id="范式-Normal-Form"><a href="#范式-Normal-Form" class="headerlink" title="范式(Normal Form)"></a>范式(Normal Form)</h1><p>设计关系数据库时，遵从不同的规范要求，设计出合理的关系型数据库，这些不同的规范要求被称为不同的范式（Normal Form），各种范式呈递次规范，越高的范式数据库冗余越小。</p>
+<p>目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式(4NF）和第五范式（5NF，又称完美范式）<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F" target="_blank" rel="noopener">^1</a>。</p>
+<p>第一范式（1NF）：数据库表中的字段都是单一属性的，不可再分。这个单一属性由基本类型构成，包括整型、实数、字符型、逻辑型、日期型等。</p>
+<p>第二范式（2NF）：数据库表中不存在非关键字段对任一候选关键字段的部分函数依赖（部分函数依赖指的是存在组合关键字中的某些字段决定非关键字段的情况），也即所有非关键字段都完全依赖于任意一组候选关键字。</p>
+<p>第三范式（3NF）：在第二范式的基础上，数据表中如果不存在非关键字段对任一候选关键字段的传递函数依赖则符合第三范式。所谓传递函数依赖，指的是如 果存在”A → B → C”的决定关系，则C传递函数依赖于A。因此，满足第三范式的数据库表应该不存在如下依赖关系： 关键字段 → 非关键字段 x → 非关键字段y</p>
+<p>如果你对三个还不太了解，建议阅读：<a href="https://www.zhihu.com/question/24696366" target="_blank" rel="noopener">解释一下关系数据库的第一第二第三范式？</a></p>
+<h1 id="范式分解-2"><a href="#范式分解-2" class="headerlink" title="范式分解^2"></a>范式分解<a href="https://blog.csdn.net/thor_w/article/details/70231604" target="_blank" rel="noopener">^2</a></h1><ol>
+<li>函数依赖（FD）</li>
+</ol>
+<p>如果A-&gt;B，称为A决定B，即当A确定时，B的值唯一</p>
+<ol start="2">
+<li>闭包（Closure）</li>
+</ol>
+<p>求闭包的过程很简单，比如求A的闭包（A+），只需找到所有只有A在左边的函数依赖，将所有的右边的都加到A的闭包中来，遍历所有的函数依赖，最后不要忘记加上A自己<br>闭包可以用来求关系模式的key：对于R（A，B，C），若A+ = ABC , 那么可以判定A是R的key。</p>
+<ol start="3">
+<li>平凡依赖（trivial FD）</li>
+</ol>
+<p>称A-&gt;A这样的函数依赖为一个平凡的依赖，当然由此我们也知道了非平凡依赖是什么了。</p>
+<h1 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h1><p>关系代数是以关系为运算的一组高级运算的集合<a href="https://blog.csdn.net/huo_yun/article/details/12904727" target="_blank" rel="noopener">^3</a>。</p>
+<p>由于定义为属性个数 相同的元组的集合，因此集合代数的操作就可以引入到关系代数中。</p>
+<p>关系代数也可以看做是一种抽象的查询语言，是对关系的运算来表达查询的。任何一种运算都是将一定的运算符作用于一定的运算对象上，得到预期的运算结果。所以运算对象、运算符、运算结果是运算的三大要素。 </p>
+<p>关系代数的运算对象是关系，运算结果亦为关系。关系代数用到的运算符包括四类:集合运算符、专门的关系运算符、算术比较符和逻辑运算符。</p>
+<p>关系代数可分为两类：</p>
+<ol>
+<li>传统的集合操作：并、差、交、笛卡尔积（乘）、笛卡尔积的逆运算（除法）</li>
+<li>扩充的关系操作：对关系进行垂直分割（投影）、水平分割（选择)、关系的结合（连接、自然连接）</li>
+</ol>
+<h2 id="五个基本操作："><a href="#五个基本操作：" class="headerlink" title="五个基本操作："></a>五个基本操作：</h2><ol>
+<li>并（Union）：</li>
+</ol>
+<p>关系R和S具有相同的关系模式，R和S的并是由属性R和S的元组构成的集合。 形式定义如下：</p>
+<pre><code>R∪S={t|t∈R∨ t∈S} , t 是元组变量，R和S的元素相同</code></pre><p>其结果由R和S的元素组成 </p>
+<ol start="2">
+<li>差（Difference）: </li>
+</ol>
+<p>关系R和S具有相同的关系模式，R和S的差由属于R但不属于S的元组构成的集合。 形式定义如下：</p>
+<pre><code>R-S={t|t∈R ∧ t￠S)  t 是元组变量，R和S的元素相同</code></pre><p>其结果由属于R不属于S的所有元组构成</p>
+<ol start="3">
+<li>笛卡尔积（Cartesian Product) :</li>
+</ol>
+<p>广义笛卡尔积是一个(r+s)列的元组的集合</p>
+<ol start="4">
+<li>投影（Projection）：</li>
+</ol>
+<p>对一个关系进行垂直分割，消去某些列，并重新安排列的顺序。记作：</p>
+<pre><code>ΠA(R) = { t[A] | t∈R }</code></pre><p>其中A为R中的属性列。</p>
+<ol start="5">
+<li>选择（Selection）：</li>
+</ol>
+<p>根据某些条件对关系做水平分割，即选取符合条件的元组。 </p>
+<pre><code>σF(R) = {t|t∈R ∧ F(t)=true}</code></pre><p>σ为选择元算符，F表示选择条件，它是一个逻辑表达式，取逻辑值‘真’或‘假’。</p>
+<h2 id="四个组合操作"><a href="#四个组合操作" class="headerlink" title="四个组合操作"></a>四个组合操作</h2><ol>
+<li>交（Intersection）：</li>
+</ol>
+<p>由属于R和S的元组构成的集合。记作：</p>
+<pre><code>R∩S={t|t∈R∧t∈S}</code></pre><p>由于R∩S=R(R-S)，或R∩S=S-S(S-R) 得到的，因此交操作不是一个独立的操作。</p>
+<ol start="2">
+<li>连接（Join）:</li>
+</ol>
+<p>连接也称为θ连接，它是从两个关系的笛卡尔积中选取属性中满足一定条件的元组。</p>
+<p>其中A和B分别为R和S上度数相等且可比的属性组。θ是比较运算符。连接运算从R和S的广义笛卡尔积R×S中选取 (R关系)在A属性组上的值与(S关系)在B属性组上值满足比较关系θ的元组。</p>
+<p>连接操作中比较重要且常用的连接是等值连接和自然连接。</p>
+<p>等值连接：</p>
+<p>θ为“=”时的连接运算称为等值运算，它是从R和S中选取R中的A属性组上的元组等于S中B属性组上的元组。</p>
+<p>自然连接（Natural join）：</p>
+<p>自然连接用R连接R⋈S表示，是一种特殊的等值连接，一般使用在R和S中有公共属性的情况中。</p>
+<ol start="3">
+<li>除法（Division）：</li>
+</ol>
+<p>设关系R和S的元数分别为r和s(设r&gt;s&gt;0),那么R÷S是一个（r-s)元的元组集合。</p>
+<h1 id="超键、候选键、主键、外键"><a href="#超键、候选键、主键、外键" class="headerlink" title="超键、候选键、主键、外键"></a>超键、候选键、主键、外键</h1><h2 id="超键-super-key"><a href="#超键-super-key" class="headerlink" title="超键(super key):"></a>超键(super key):</h2><p>在关系中能唯一标识元组的属性集称为关系模式的超键</p>
+<h2 id="候选键-candidate-key"><a href="#候选键-candidate-key" class="headerlink" title="候选键(candidate key):"></a>候选键(candidate key):</h2><p>不含有多余属性的超键称为候选键</p>
+<h2 id="主键-primary-key"><a href="#主键-primary-key" class="headerlink" title="主键(primary key):"></a>主键(primary key):</h2><p>用户选作元组标识的一个候选键程序主键</p>
+<h2 id="外键-foreign-key-："><a href="#外键-foreign-key-：" class="headerlink" title="外键(foreign key)："></a>外键(foreign key)：</h2><p>如果关系模式R1中的某属性集不是R1的主键，而是另一个关系R2的主键则该属性集是关系模式R1的外键。</p>
+<p>结合实例的具体解释：</p>
+<p>假设有如下两个表：</p>
+<pre><code>学生（学号，姓名，性别，身份证号，教师编号）
+
+教师（教师编号，姓名，工资）</code></pre><h2 id="超键："><a href="#超键：" class="headerlink" title="超键："></a>超键：</h2><p>由超键的定义可知，学生表中含有学号或者身份证号的任意组合都为此表的超键。如：（学号）、（学号，姓名）、（身份证号，性别）等。</p>
+<h2 id="候选键："><a href="#候选键：" class="headerlink" title="候选键："></a>候选键：</h2><p>候选键属于超键，它是最小的超键，就是说如果再去掉候选键中的任何一个属性它就不再是超键了。学生表中的候选键为：（学号）、（身份证号）</p>
+<h2 id="主键："><a href="#主键：" class="headerlink" title="主键："></a>主键：</h2><p>主键就是候选键里面的一个，是人为规定的，例如学生表中，我们通常会让“学号”做主键，教师表中让“教师编号”做主键。</p>
+<h2 id="外键："><a href="#外键：" class="headerlink" title="外键："></a>外键：</h2><p>外键比较简单，学生表中的外键就是“教师编号”。外键主要是用来描述两个表的关系。</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/06/10/数据库基础概念II-范式-关系代数/">数据库基础概念II-范式-关系代数</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2020年06月10日 - 12时12分</p>
+        <p><span>最后更新:</span>2020年06月12日 - 23时32分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/10/数据库基础概念II-范式-关系代数/" title="数据库基础概念II-范式-关系代数">http://yoursite.com/2020/06/10/数据库基础概念II-范式-关系代数/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/10/数据库基础概念II-范式-关系代数/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2020/06/10/数据库学习笔记-MySQL安装/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          数据库学习笔记-MySQL安装
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/09/数据库学习笔记-SQL约束(Constraints)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据库学习笔记-SQL约束(Constraints)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库DB、DBMS、DBA、DBS概念"><span class="toc-number">1.</span> <span class="toc-text">数据库DB、DBMS、DBA、DBS概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#范式-Normal-Form"><span class="toc-number">2.</span> <span class="toc-text">范式(Normal Form)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#范式分解-2"><span class="toc-number">3.</span> <span class="toc-text">范式分解^2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关系代数"><span class="toc-number">4.</span> <span class="toc-text">关系代数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#五个基本操作："><span class="toc-number">4.1.</span> <span class="toc-text">五个基本操作：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四个组合操作"><span class="toc-number">4.2.</span> <span class="toc-text">四个组合操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#超键、候选键、主键、外键"><span class="toc-number">5.</span> <span class="toc-text">超键、候选键、主键、外键</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#超键-super-key"><span class="toc-number">5.1.</span> <span class="toc-text">超键(super key):</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#候选键-candidate-key"><span class="toc-number">5.2.</span> <span class="toc-text">候选键(candidate key):</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主键-primary-key"><span class="toc-number">5.3.</span> <span class="toc-text">主键(primary key):</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外键-foreign-key-："><span class="toc-number">5.4.</span> <span class="toc-text">外键(foreign key)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超键："><span class="toc-number">5.5.</span> <span class="toc-text">超键：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#候选键："><span class="toc-number">5.6.</span> <span class="toc-text">候选键：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主键："><span class="toc-number">5.7.</span> <span class="toc-text">主键：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外键："><span class="toc-number">5.8.</span> <span class="toc-text">外键：</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/06/10/数据库学习笔记-MySQL安装/" title="上一篇: 数据库学习笔记-MySQL安装">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/06/09/数据库学习笔记-SQL约束(Constraints)/" title="下一篇: 数据库学习笔记-SQL约束(Constraints)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念III-事务并发控制/">数据库基础概念III-事务并发控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-聚合函数/">数据库学习笔记-聚合函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念-索引/">数据库基础概念-索引</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-INTERSECT/">数据库学习笔记-INTERSECT</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-UNION/">数据库学习笔记-UNION</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-连接/">数据库学习笔记-连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库学习笔记-MySQL安装/">数据库学习笔记-MySQL安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库基础概念II-范式-关系代数/">数据库基础概念II-范式-关系代数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/09/数据库学习笔记-SQL约束(Constraints)/">数据库学习笔记-SQL约束(Constraints)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第九章 多态阅读笔记/">Java编程思想-第九章 多态阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第二十四章 并发编程阅读笔记/">Java编程思想-第二十四章 并发编程阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/05/Maven快照机制(SNAPSHOT)/">Maven快照机制（SNAPSHOT）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/29/140. 单词拆分II/">140. 单词拆分II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/139. 单词拆分/">139. 单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/5. 最长回文子串/">5. 最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/131. 分割回文串/">131. 分割回文串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/887. 鸡蛋掉落/">887. 鸡蛋掉落</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/27/21. 合并两个有序链表/">21. 合并两个有序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/685.冗余链接II/">685.冗余链接II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/1226. 哲学家进餐/">1226. 哲学家进餐</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1195. 交替打印字符串/">1195. 交替打印字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1117. H2O 生成/">1117. H2O 生成</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1116. 打印零与奇偶数/">1116. 打印零与奇偶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/1115. 交替打印FooBar/">1115. 交替打印FooBar</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/Java并发编程/">Java并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/1114.按序打印/">1114.按序打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/19/684.冗余链接/">684.冗余链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Lombok的基本注解使用/">Lombok的基本注解使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/后端开发常用调试技巧集锦/">后端开发常用调试技巧集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/405. 数字转化为十六进制数/">405. 数字转化为十六进制数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/SpringBoot学习笔记VIII-MybatisPlus教程/">SpringBoot学习笔记VIII-MybatisPlus教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/设计模式学习笔记V-策略模式/">设计模式学习笔记V-策略模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/1046. 最后一块石头的重量/">1046. 最后一块石头的重量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/Java学习笔记XIV/">Java学习笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/257.二叉树的所有路径/">257.二叉树的所有路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/22/24.两两交换链表中的节点/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/微信公众平台开发学习笔记I/">微信公众平台开发学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/">601.Human Traffic of Stadium体育馆的人流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/185.Department Top Three Salaries/">185.Department Top Three Salaries</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/数据库学习笔记IX/">数据库学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/184.Department Highest Salary/">184.Department Highest Salary</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/数据库学习笔记VIII/">数据库学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/1179. Reformat Department Table/">1179. Reformat Department Table</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II-Git版本回滚/">Git学习笔记II-Git版本回滚</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I-查询/">数据库学习笔记I-查询</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：389.9k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
