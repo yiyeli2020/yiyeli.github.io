@@ -3,26 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>1114.按序打印 | Yiye Li</title>
+  <title>Java之Queue、Deque、ArrayDeque | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="请设计修改程序，以确保三个线程中的 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。">
-<meta name="keywords" content="LeetCode,Concurrency">
+  <meta name="description" content="对Java集合中的Queue、Deque、ArrayDeque源码进行分析。">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1114.按序打印">
-<meta property="og:url" content="http://yoursite.com/2020/05/21/1114.按序打印/index.html">
+<meta property="og:title" content="Java之Queue、Deque、ArrayDeque">
+<meta property="og:url" content="http://yoursite.com/2020/06/15/Java之Queue、Deque、ArrayDeque/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="请设计修改程序，以确保三个线程中的 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。">
+<meta property="og:description" content="对Java集合中的Queue、Deque、ArrayDeque源码进行分析。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://pic.leetcode-cn.com/Figures/1114/1114_race_condition.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/Figures/1114/1114_lock.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/Figures/1114/1114_partial_order.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/Figures/1114/1114_flow.png">
-<meta property="og:image" content="https://pic.leetcode-cn.com/879c5abd22c2dbc2618a1433dfbeb02a34b9586a10425986fafdc90eef978cc1-image.png">
-<meta property="og:updated_time" content="2020-05-23T04:30:38.629Z">
+<meta property="og:updated_time" content="2020-06-17T06:45:14.867Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1114.按序打印">
-<meta name="twitter:description" content="请设计修改程序，以确保三个线程中的 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。">
-<meta name="twitter:image" content="https://pic.leetcode-cn.com/Figures/1114/1114_race_condition.png">
+<meta name="twitter:title" content="Java之Queue、Deque、ArrayDeque">
+<meta name="twitter:description" content="对Java集合中的Queue、Deque、ArrayDeque源码进行分析。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -204,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-1114.按序打印" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java之Queue、Deque、ArrayDeque" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/05/21/1114.按序打印/" class="article-date">
-      <time datetime="2020-05-21T12:56:12.000Z" itemprop="datePublished">2020-05-21</time>
+      <a href="/2020/06/15/Java之Queue、Deque、ArrayDeque/" class="article-date">
+      <time datetime="2020-06-15T12:16:12.000Z" itemprop="datePublished">2020-06-15</time>
 </a>
     </div>
   
@@ -221,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      1114.按序打印
+      Java之Queue、Deque、ArrayDeque
     </h1>
   
 
@@ -231,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.3k字</span>
+        <span class="post-count">2.2k字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -250,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2020年5月/">2020年5月</a>
+    <a class="article-category-link" href="/categories/2020年6月/">2020年6月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Concurrency/">Concurrency</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -266,100 +260,108 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>请设计修改程序，以确保三个线程中的 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。</p>
+        <p>对Java集合中的Queue、Deque、ArrayDeque源码进行分析。</p>
 <a id="more"></a>
-<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>我们提供了一个类：</p>
-<pre><code>public class Foo {
-  public void one() { print(&quot;one&quot;); }
-  public void two() { print(&quot;two&quot;); }
-  public void three() { print(&quot;three&quot;); }
-}</code></pre><p>三个不同的线程将会共用一个 Foo 实例。</p>
-<pre><code>线程 A 将会调用 one() 方法
-线程 B 将会调用 two() 方法
-线程 C 将会调用 three() 方法</code></pre><p>请设计修改程序，以确保 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。</p>
-<p>示例 1:</p>
-<pre><code>输入: [1,2,3]
-输出: &quot;onetwothree&quot;</code></pre><p>解释: </p>
-<p>有三个线程会被异步启动。<br>输入 [1,2,3] 表示线程 A 将会调用 one() 方法，线程 B 将会调用 two() 方法，线程 C 将会调用 three() 方法。<br>正确的输出是 “onetwothree”。<br>示例 2:</p>
-<pre><code>输入: [1,3,2]
-输出: &quot;onetwothree&quot;</code></pre><p>解释: </p>
-<p>输入 [1,3,2] 表示线程 A 将会调用 one() 方法，线程 B 将会调用 three() 方法，线程 C 将会调用 two() 方法。<br>正确的输出是 “onetwothree”。</p>
-<p>注意:</p>
-<p>尽管输入中的数字似乎暗示了顺序，但是我们并不保证线程在操作系统中的调度顺序。</p>
-<p>你看到的输入格式主要是为了确保测试的全面性。</p>
-<h1 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h1><p>来自<a href="https://baike.baidu.com/item/%E5%B9%B6%E5%8F%91%E8%AE%A1%E7%AE%97/9939802?fr=aladdin" target="_blank" rel="noopener">并发计算</a>的场景，该场景下，程序在多线程（或多进程）中 <em>同时</em> 执行。</p>
-<p>同时进行并不是完全指进程或线程在不同的物理 CPU 上独立运行，更多情况下，是在一个物理 CPU 上交替执行多个线程或进程。<em>并发既可在线程中，也可在进程中。</em></p>
-<p>并发主要为多任务情况设计。但如果应用不当，可能会引发一些漏洞。按照情况不同，可以分为三种：</p>
+
+<p>Java里有一个叫做Stack的类，却没有叫做Queue的类（它是个接口名字）。</p>
+<p>当需要使用栈时，Java已不推荐使用Stack，而是推荐使用更高效的ArrayDeque；既然Queue只是一个接口，当需要使用队列时也就首选ArrayDeque了（次选是LinkedList）<a href="https://www.cnblogs.com/CarpenterLee/p/5468803.html" target="_blank" rel="noopener">^1</a>。</p>
+<h1 id="队列Queue"><a href="#队列Queue" class="headerlink" title="队列Queue"></a>队列Queue</h1><p>Queue是具有队列特性的接口<a href="https://blog.csdn.net/qq_30379689/article/details/80558771" target="_blank" rel="noopener">^2</a></p>
+<p>Queue具有先进先出的特点</p>
+<p>Queue所有新元素都插入队列的末尾，移除元素都移除队列的头部</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public interface Queue&lt;E&gt; extends Collection&lt;E&gt; &#123;</span><br><span class="line">    //往队列插入元素，如果出现异常会抛出异常</span><br><span class="line">    boolean add(E e);</span><br><span class="line">    //往队列插入元素，如果出现异常则返回false</span><br><span class="line">    boolean offer(E e);</span><br><span class="line">    //移除队列元素，如果出现异常会抛出异常</span><br><span class="line">    E remove();</span><br><span class="line">    //移除队列元素，如果出现异常则返回null</span><br><span class="line">    E poll();</span><br><span class="line">    //获取队列头部元素，如果出现异常会抛出异常</span><br><span class="line">    E element();</span><br><span class="line">    //获取队列头部元素，如果出现异常则返回null</span><br><span class="line">    E peek();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用表格形式来表现：</p>
+<pre><code>操作        抛出异常        返回特殊值
+插入        add()            offer()
+删除        remove()        poll()
+查询        element()        peek()</code></pre><h1 id="双端队列Deque-Double-Ended-Queue"><a href="#双端队列Deque-Double-Ended-Queue" class="headerlink" title="双端队列Deque(Double Ended Queue)"></a>双端队列Deque(Double Ended Queue)</h1><p>Deque是一个双端队列</p>
+<p>Deque继承自Queue,Deque也是Queue，Deque也能当Queue用，没有太多额外开销。所以jdk没有单独实现Queue。</p>
+<p>Deque具有先进先出或后进先出的特点</p>
+<p>Deque支持所有元素在头部和尾部进行插入、删除、获取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public interface Deque&lt;E&gt; extends Queue&lt;E&gt; &#123;</span><br><span class="line">    void addFirst(E e);//插入头部，异常会报错</span><br><span class="line">    boolean offerFirst(E e);//插入头部，异常返回false</span><br><span class="line">    E getFirst();//获取头部，异常会报错</span><br><span class="line">    E peekFirst();//获取头部，异常不报错</span><br><span class="line">    E removeFirst();//移除头部，异常会报错</span><br><span class="line">    E pollFirst();//移除头部，异常不报错</span><br><span class="line">    </span><br><span class="line">    void addLast(E e);//插入尾部，异常会报错</span><br><span class="line">    boolean offerLast(E e);//插入尾部，异常返回false</span><br><span class="line">    E getLast();//获取尾部，异常会报错</span><br><span class="line">    E peekLast();//获取尾部，异常不报错</span><br><span class="line">    E removeLast();//移除尾部，异常会报错</span><br><span class="line">    E pollLast();//移除尾部，异常不报错</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="ArrayDeque"><a href="#ArrayDeque" class="headerlink" title="ArrayDeque"></a>ArrayDeque</h1><p>实现于Deque，拥有队列或者栈特性的接口</p>
+<p>实现于Cloneable，拥有克隆对象的特性</p>
+<p>实现于Serializable，拥有序列化的能力</p>
+<p>Deque有两种实现类：</p>
+<ol>
+<li><p>LinkedList。也就是链表，java的链表同时实现了Deque。</p>
+</li>
+<li><p>ArrayDeque。Deque的数组实现,官方更推荐使用AarryDeque用作栈和队列。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayDeque&lt;E&gt; extends AbstractCollection&lt;E&gt;</span><br><span class="line">                       implements Deque&lt;E&gt;, Cloneable, Serializable&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从名字可以看出ArrayDeque底层通过数组实现，为了满足可以同时在数组两端插入或删除元素的需求，该数组还必须是循环的，即循环数组（circular array），也就是说数组的任何一点都可能被看作起点或者终点。ArrayDeque是非线程安全的（not thread-safe），当多个线程同时使用的时候，需要程序员手动同步；另外，该容器不允许放入null元素。</p>
+<p>先来总结下ArrayDeque的实现思路。<a href="https://segmentfault.com/a/1190000016330001" target="_blank" rel="noopener">^3</a></p>
+<p>首先，ArrayDeque内部是拥有一个内部数组用于存储数据。</p>
+<p>其次，假设采用简单的方案，即队列数组按顺序在数组里排开，那么：</p>
+<p>由于ArrayDeque的两端都能增删数据，那么把数据插入到队列头部也就是数组头部，会造成O(N)的时间复杂度。</p>
+<p>假设只在队尾加入而只从队头删除，队头就会空出越来越多的空间。</p>
+<p>那么该怎么实现？也很简单。将物理上的连续数组回绕，形成逻辑上的一个 环形结构。即a[size - 1]的下一个位置是a[0].</p>
+<p>之后，使用头尾指针标识队列头尾，在队列头尾增删元素，反映在头尾指针上就是这两个指针绕着环赛跑。</p>
+<p>这个是大体思路，具体的还有一些细节，后面代码里分析：</p>
 <ul>
-<li><p><strong>竞态条件</strong>：由于多进程之间的竞争执行，导致程序未按照期望的顺序输出。</p>
-</li>
-<li><p><strong>死锁</strong>：并发程序等待一些必要资源，导致没有程序可以执行。</p>
-</li>
-<li><p><strong>资源不足</strong>：进程被永久剥夺了运行所需的资源。</p>
-</li>
+<li>head和tail的具体概念是如何界定？</li>
+<li>如果判断队满和队空？</li>
+<li>数组满了怎么办？</li>
 </ul>
-<p>此题中存在竞态条件。下面展示一个竞态条件的例子。</p>
-<p>假设有一个方法 <code>withdraw(amount)</code>，如果请求量小于当前余额，则从当前余额中减去请求量，然后返回余额。方法定义如下：</p>
-<figure class="highlight python"><figcaption><span>[snippet1-Python]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">balance = <span class="number">500</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">withdraw</span><span class="params">(amount)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> (amount &lt; balance):</span><br><span class="line">        balance -= amount</span><br><span class="line">    <span class="keyword">return</span> balance</span><br></pre></td></tr></table></figure>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>先来看内部属性。elements域就是存储数据的原生数组。</p>
+<p>head和tail分别分别为头尾指针。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">transient Object[] elements; // non-private to simplify nested class access</span><br><span class="line"></span><br><span class="line">transient int head;</span><br><span class="line"></span><br><span class="line">transient int tail;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><figcaption><span>[snippet1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> balance = <span class="number">500</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">withdraw</span><span class="params">(<span class="keyword">int</span> amount)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (amount &lt; balance) &#123;</span><br><span class="line">    balance -= amount;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> balance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public ArrayDeque() &#123;</span><br><span class="line">    elements = new Object[16];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public ArrayDeque(int numElements) &#123;</span><br><span class="line">    allocateElements(numElements);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void allocateElements(int numElements) &#123;</span><br><span class="line">    elements = new Object[calculateSize(numElements)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>我们 <em>期望</em> 该方法执行后余额永远不会为负。</p>
-<p>但是有可能出现竞态条件，使得余额变为负数。假设两个线程同时使用不同的参数执行该方法。例如：线程 1 执行 <code>withdraw(amount=400)</code>，线程 2 执行 <code>withdraw(amount=200)</code>。这两个线程的执行顺序如下图所示。在每个时刻只执行一条语句。</p>
-<p><img src="https://pic.leetcode-cn.com/Figures/1114/1114_race_condition.png" alt="image"></p>
-<p>上述流程执行结束后，余额变成负数，这并不是期望的输出。</p>
-<h1 id="无竞争并发"><a href="#无竞争并发" class="headerlink" title="无竞争并发"></a>无竞争并发</h1><p>并发问题有一个共同特征：多个线程/进程之间共享一些资源（例如：余额）。由于无法消除资源共享的约束，防止并发问题就变成了 <strong>资源共享的协调</strong> 问题。</p>
-<p>根据这个思路，如果可以确保程序中 <strong>关键部分代码的独占性</strong>（例如：检查和减少余额），就可以防止程序进入不一致的状态。</p>
-<blockquote>
-<p>竞争条件的解决方案为：需要某些关键部分代码具有排他性，即在给定的时间内，只有一个线程可以进入关键部分代码。</p>
-</blockquote>
-<p>可以将这种机制看做限制关键部分代码访问的锁。在前面示例的关键部分代码加锁，即检查余额和减少余额的语句。然后重新运行两个线程，会有下图的执行顺序：</p>
-<p><img src="https://pic.leetcode-cn.com/Figures/1114/1114_lock.png" alt="image"></p>
-<p>在该机制下，一旦一个线程进入关键部分，它就可以阻止其他线程进入该关键部分。例如，在时间点 3，<code>线程 2</code> 进入关键部分，那么在时间点 4，如果没有锁保护，<code>线程 1</code> 就可能进入关键部分。最后两个线程同时运行，保证系统的一致性，并确保余额正确。</p>
-<p>如果该线程未被授权进入关键代码，可以认为该线程被阻塞或进入睡眠状态。例如，<code>线程 1</code> 在时间点 4 被阻塞，之后关键部分被释放，可以通知其他等待线程。<code>线程 2</code> 在时间点 5 释放了关键部分，就可以通知 <code>线程 1</code> 进入。</p>
-<blockquote>
-<p>这种机制还具有唤醒其他等待线程的功能。</p>
-</blockquote>
-<p>总之，为了防止出现并发竞争状态，需要一种具有两种功能的机制：1）关键部分的访问控制；2）通知阻塞线程。</p>
-<h1 id="方法一：使用-synchronization"><a href="#方法一：使用-synchronization" class="headerlink" title="方法一：使用 synchronization"></a>方法一：使用 synchronization</h1><p><strong>思路</strong></p>
-<p>题目要求按顺序依次执行三个方法，且每个方法都在单独的线程中运行。为了保证线程的执行顺序，可以在方法之间创建一些依赖关系，即第二个方法必须在第一个方法之后执行，第三个方法必须在第二个方法之后执行。</p>
-<blockquote>
-<p>方法对之间的依赖关系形成了所有方法的特定的执行顺序。例如 <code>A &lt; B</code>, <code>B &lt; C</code>，则所有方法的执行顺序为 <code>A &lt; B &lt; C</code>。</p>
-</blockquote>
-<p><img src="https://pic.leetcode-cn.com/Figures/1114/1114_partial_order.png" alt="image"></p>
-<p>依赖关系可以通过并发机制实现。使用一个共享变量 <code>firstJobDone</code> 协调第一个方法与第二个方法的执行顺序，使用另一个共享变量 <code>secondJobDone</code> 协调第二个方法与第三个方法的执行顺序。</p>
-<p><strong>算法</strong></p>
+<ol>
+<li><p>如果没有指定内部数组的初始大小，默认为16.</p>
+</li>
+<li><p>如果指定了内部数组的初始大小，则通过calculateSize函数二次计算出大小。</p>
+</li>
+</ol>
+<p>来看calculateSize函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">private static final int MIN_INITIAL_CAPACITY = 8;</span><br><span class="line"></span><br><span class="line">   private static int calculateSize(int numElements) &#123;</span><br><span class="line">       int initialCapacity = MIN_INITIAL_CAPACITY;</span><br><span class="line">       // Find the best power of two to hold elements.</span><br><span class="line">       // Tests &quot;&lt;=&quot; because arrays aren&apos;t kept full.</span><br><span class="line">       if (numElements &gt;= initialCapacity) &#123;</span><br><span class="line">           initialCapacity = numElements;</span><br><span class="line">           initialCapacity |= (initialCapacity &gt;&gt;&gt;  1);</span><br><span class="line">           initialCapacity |= (initialCapacity &gt;&gt;&gt;  2);</span><br><span class="line">           initialCapacity |= (initialCapacity &gt;&gt;&gt;  4);</span><br><span class="line">           initialCapacity |= (initialCapacity &gt;&gt;&gt;  8);</span><br><span class="line">           initialCapacity |= (initialCapacity &gt;&gt;&gt; 16);</span><br><span class="line">           initialCapacity++;</span><br><span class="line"></span><br><span class="line">           if (initialCapacity &lt; 0)   // Too many elements, must back off</span><br><span class="line">               initialCapacity &gt;&gt;&gt;= 1;// Good luck allocating 2 ^ 30 elements</span><br><span class="line">       &#125;</span><br><span class="line">       return initialCapacity;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>首先初始化共享变量 <code>firstJobDone</code> 和 <code>secondJobDone</code>，初始值表示所有方法未执行。</p>
-</li>
-<li><p>方法 <code>first()</code> 没有依赖关系，可以直接执行。在方法最后更新变量 <code>firstJobDone</code> 表示该方法执行完成。</p>
-</li>
-<li><p>方法 <code>second()</code> 中，检查 <code>firstJobDone</code> 的状态。如果未更新则进入等待状态，否则执行方法 <code>second()</code>。在方法末尾，更新变量 <code>secondJobDone</code> 表示方法 <code>second()</code> 执行完成。</p>
-</li>
-<li><p>方法 <code>third()</code> 中，检查 <code>secondJobDone</code> 的状态。与方法 <code>second()</code> 类似，执行 <code>third()</code> 之前，需要先等待 <code>secondJobDone</code> 的状态。</p>
-</li>
+<li>如果小于8，那么大小就为8.</li>
+<li>如果大于等于8，则按照2的幂对齐。</li>
 </ul>
-<p><img src="https://pic.leetcode-cn.com/Figures/1114/1114_flow.png" alt="image"></p>
-<p><strong>实现</strong></p>
-<p>上述算法的实现在很大程度上取决于选择的编程语言。尽管在 Java，C++ 和 Python 中都存在<a href="https://baike.baidu.com/item/%E4%BA%92%E6%96%A5%E4%BA%8B%E4%BB%B6/9980508?fr=aladdin" target="_blank" rel="noopener">互斥</a>与<a href="https://baike.baidu.com/item/%E4%BF%A1%E5%8F%B7%E9%87%8F/9807501?fr=aladdin" target="_blank" rel="noopener">信号量</a>，但不同语言对并发机制有不同实现。</p>
-<figure class="highlight python"><figcaption><span>[solution1-Python]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Lock</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.firstJobDone = Lock()</span><br><span class="line">        self.secondJobDone = Lock()</span><br><span class="line">        self.firstJobDone.acquire()</span><br><span class="line">        self.secondJobDone.acquire()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">first</span><span class="params">(self, printFirst: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="comment"># printFirst() outputs "first".</span></span><br><span class="line">        printFirst()</span><br><span class="line">        <span class="comment"># Notify the thread that is waiting for the first job to be done.</span></span><br><span class="line">        self.firstJobDone.release()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">second</span><span class="params">(self, printSecond: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="comment"># Wait for the first job to be done</span></span><br><span class="line">        <span class="keyword">with</span> self.firstJobDone:</span><br><span class="line">            <span class="comment"># printSecond() outputs "second".</span></span><br><span class="line">            printSecond()</span><br><span class="line">            <span class="comment"># Notify the thread that is waiting for the second job to be done.</span></span><br><span class="line">            self.secondJobDone.release()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">third</span><span class="params">(self, printThird: <span class="string">'Callable[[], None]'</span>)</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Wait for the second job to be done.</span></span><br><span class="line">        <span class="keyword">with</span> self.secondJobDone:</span><br><span class="line">            <span class="comment"># printThird() outputs "third".</span></span><br><span class="line">            printThird()</span><br></pre></td></tr></table></figure>
+<p>在初始化中，数组要求的大小必须为2^n，所以有这么一个算法，如果当前的大小大于默认规定的大小时，就会去计算出新的大小，那么这个计算过程是怎么样的呢？我们举一个例子进行分析:</p>
+<p>如果initialCapacity为10的时候，那么二进制为 1010</p>
+<p>经过initialCapacity |= (initialCapacity &gt;&gt;&gt;  1)时，那么二进制为 1010 | 0101 = 1111</p>
+<p>经过initialCapacity |= (initialCapacity &gt;&gt;&gt;  2)时，那么二进制为 1111 | 0011 = 1111</p>
+<p>后面计算的结果都是1111，可以理解为将二进制的低位数都补上1，这样出来的结果都是2^n-1</p>
+<p>最后initialCapacity++，2^n-1+1出来的结果就是2^n</p>
+<h2 id="入队"><a href="#入队" class="headerlink" title="入队"></a>入队</h2><p>看两个入队方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public void addFirst(E e) &#123;</span><br><span class="line">    if (e == null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    elements[head = (head - 1) &amp; (elements.length - 1)] = e;</span><br><span class="line">    if (head == tail)</span><br><span class="line">        doubleCapacity();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void addLast(E e) &#123;</span><br><span class="line">    if (e == null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    elements[tail] = e;</span><br><span class="line">    if ( (tail = (tail + 1) &amp; (elements.length - 1)) == head)</span><br><span class="line">        doubleCapacity();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight cpp"><figcaption><span>[solution1-Cpp]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;semaphore.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">sem_t</span> firstJobDone;</span><br><span class="line">    <span class="keyword">sem_t</span> secondJobDone;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    Foo() &#123;</span><br><span class="line">        sem_init(&amp;firstJobDone, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        sem_init(&amp;secondJobDone, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void first(function&lt;void()&gt; printFirst) &#123;</span><br><span class="line">        <span class="comment">// printFirst() outputs "first".</span></span><br><span class="line">        printFirst();</span><br><span class="line">        sem_post(&amp;firstJobDone);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void second(function&lt;void()&gt; printSecond) &#123;</span><br><span class="line">        sem_wait(&amp;firstJobDone);</span><br><span class="line">        <span class="comment">// printSecond() outputs "second".</span></span><br><span class="line">        printSecond();</span><br><span class="line">        sem_post(&amp;secondJobDone);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void third(function&lt;void()&gt; printThird) &#123;</span><br><span class="line">        sem_wait(&amp;secondJobDone);</span><br><span class="line">        <span class="comment">// printThird() outputs "third".</span></span><br><span class="line">        printThird();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>addFirst是从队头插入，addLast是从队尾插入。</p>
+<p>从该代码能够分析出head和tail指针的含义：</p>
+<p>head指针指向的是队头元素的位置，除非队列为空。<br>tail指针指向的是队尾元素后一格的位置，即尾后指针。<br>因此：</p>
+<p>如果队列没有满，tail指向的是空位置，head指向的是队头元素，永远不可能一样。</p>
+<p>但是当队列满时，tail回绕会追上head，当tail等于head时，表示队列满了。</p>
+<p>理清楚了这一点，上面的代码也就十分容易理解了：</p>
+<p>对应位置插入位置，移动指针。</p>
+<p>当tail和head相等时，扩容。</p>
+<p>最后，这句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(head - 1) &amp; (elements.length - 1)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><figcaption><span>[solution1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> AtomicInteger firstJobDone = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">private</span> AtomicInteger secondJobDone = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Foo</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">first</span><span class="params">(Runnable printFirst)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// printFirst.run() outputs "first".</span></span><br><span class="line">    printFirst.run();</span><br><span class="line">    <span class="comment">// mark the first job as done, by increasing its count.</span></span><br><span class="line">    firstJobDone.incrementAndGet();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">second</span><span class="params">(Runnable printSecond)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (firstJobDone.get() != <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">// waiting for the first job to be done.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// printSecond.run() outputs "second".</span></span><br><span class="line">    printSecond.run();</span><br><span class="line">    <span class="comment">// mark the second as done, by increasing its count.</span></span><br><span class="line">    secondJobDone.incrementAndGet();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">third</span><span class="params">(Runnable printThird)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (secondJobDone.get() != <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">// waiting for the second job to be done.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// printThird.run() outputs "third".</span></span><br><span class="line">    printThird.run();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假如被余数是2的幂次方，那么模运算就能够优化成按位与运算。</p>
+<p>也即相当于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(head - 1) % elements.length</span><br></pre></td></tr></table></figure>
 
-<h1 id="扩展思考"><a href="#扩展思考" class="headerlink" title="扩展思考"></a>扩展思考</h1><p>按序打印中只使用一个AtomicInteger做共享变量会增加耗时，可以深入探究其中的原因。</p>
-<h1 id="方法二：通过synchronized构造屏障"><a href="#方法二：通过synchronized构造屏障" class="headerlink" title="方法二：通过synchronized构造屏障"></a>方法二：通过synchronized构造屏障</h1><p>这是一个典型的执行屏障的问题，可以通过构造屏障来实现。</p>
-<p>如下图，我们需要构造 <em>2</em> 道屏障，<code>second</code> 线程等待 <code>first</code> 屏障，<code>third</code> 线程等待 <code>second</code> 屏障。：</p>
-<p><img src="https://pic.leetcode-cn.com/879c5abd22c2dbc2618a1433dfbeb02a34b9586a10425986fafdc90eef978cc1-image.png" alt="image"></p>
-<p><code>first</code> 线程会释放 <code>first</code> 屏障，而 <code>second</code> 线程会释放 <code>second</code> 屏障。</p>
-<p>Java 中，我们使用线程等待的方式实现执行屏障，使用释放线程等待的方式实现屏障消除。具体代码如下：</p>
-<figure class="highlight java"><figcaption><span>[-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> firstFinished;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> secondFinished;</span><br><span class="line">    <span class="keyword">private</span> Object lock = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">first</span><span class="params">(Runnable printFirst)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">            <span class="comment">// printFirst.run() outputs "first". Do not change or remove this line.</span></span><br><span class="line">            printFirst.run();</span><br><span class="line">            firstFinished = <span class="keyword">true</span>;</span><br><span class="line">            lock.notifyAll(); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">second</span><span class="params">(Runnable printSecond)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!firstFinished) &#123;</span><br><span class="line">                lock.wait();</span><br><span class="line">            &#125;</span><br><span class="line">        </span><br><span class="line">            <span class="comment">// printSecond.run() outputs "second". Do not change or remove this line.</span></span><br><span class="line">            printSecond.run();</span><br><span class="line">            secondFinished = <span class="keyword">true</span>;</span><br><span class="line">            lock.notifyAll();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">third</span><span class="params">(Runnable printThird)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">           <span class="keyword">while</span> (!secondFinished) &#123;</span><br><span class="line">                lock.wait();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// printThird.run() outputs "third". Do not change or remove this line.</span></span><br><span class="line">            printThird.run();</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="出队"><a href="#出队" class="headerlink" title="出队"></a>出队</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public E pollFirst() &#123;</span><br><span class="line">    int h = head;</span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    E result = (E) elements[h];</span><br><span class="line">    // Element is null if deque empty</span><br><span class="line">    if (result == null)</span><br><span class="line">        return null;</span><br><span class="line">    elements[h] = null;     // Must null out slot</span><br><span class="line">    head = (h + 1) &amp; (elements.length - 1);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public E pollLast() &#123;</span><br><span class="line">    int t = (tail - 1) &amp; (elements.length - 1);</span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    E result = (E) elements[t];</span><br><span class="line">    if (result == null)</span><br><span class="line">        return null;</span><br><span class="line">    elements[t] = null;</span><br><span class="line">    tail = t;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="https://leetcode-cn.com/problems/print-in-order/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/print-in-order/</a></p>
-<p>【2】<a href="https://baike.baidu.com/item/%E5%B9%B6%E5%8F%91%E8%AE%A1%E7%AE%97/9939802?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%B9%B6%E5%8F%91%E8%AE%A1%E7%AE%97/9939802?fr=aladdin</a></p>
-<p>【3】<a href="https://leetcode-cn.com/problems/print-in-order/solution/an-xu-da-yin-by-leetcode/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/print-in-order/solution/an-xu-da-yin-by-leetcode/</a></p>
-<p>【4】<a href="https://www.jianshu.com/p/509aca840f6d" target="_blank" rel="noopener">https://www.jianshu.com/p/509aca840f6d</a></p>
+<p>出队的代码很显然，不多解释。</p>
+<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private void doubleCapacity() &#123;</span><br><span class="line">    assert head == tail;</span><br><span class="line">    int p = head;</span><br><span class="line">    int n = elements.length;</span><br><span class="line">    int r = n - p; // number of elements to the right of p</span><br><span class="line">    int newCapacity = n &lt;&lt; 1;</span><br><span class="line">    // 扩容后的大小小于0（溢出），也即队列最大应该是2的30次方</span><br><span class="line">    if (newCapacity &lt; 0)</span><br><span class="line">        throw new IllegalStateException(&quot;Sorry, deque too big&quot;);</span><br><span class="line">    Object[] a = new Object[newCapacity];</span><br><span class="line">    System.arraycopy(elements, p, a, 0, r);</span><br><span class="line">    System.arraycopy(elements, 0, a, r, p);</span><br><span class="line">    elements = a;</span><br><span class="line">    head = 0;</span><br><span class="line">    tail = n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>扩容的实现为按 两倍 扩容原数组，将原数倍拷贝过去。</p>
+<p>其中值得注意的是对数组大小溢出的处理。</p>
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>容器的实现中，所有修改过容器结构的操作都需要修改modCount字段。</p>
+<p>这样迭代器迭代过程中，通过前后比对该字段来判断容器是否被动过，及时抛出异常终止迭代以免造成不可预测的问题。</p>
+<p>不过，在ArrayDeque的插入方法中并没有修改modeCount字段。从ArrayDeque的迭代器的实现中可以看出来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private class DeqIterator implements Iterator&lt;E&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Index of element to be returned by subsequent call to next.</span><br><span class="line">     */</span><br><span class="line">    private int cursor = head;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Tail recorded at construction (also in remove), to stop</span><br><span class="line">     * iterator and also to check for comodification.</span><br><span class="line">     */</span><br><span class="line">    private int fence = tail;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原来，ArrayDeque直接使用了head和tail头尾指针，就能判断出迭代过程中是否发生了变化。</p>
 
       
       
@@ -415,13 +417,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/05/21/1114.按序打印/">1114.按序打印</a></p>
+        <p><span>本文标题:</span><a href="/2020/06/15/Java之Queue、Deque、ArrayDeque/">Java之Queue、Deque、ArrayDeque</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2020年05月21日 - 20时56分</p>
-        <p><span>最后更新:</span>2020年05月23日 - 12时30分</p>
+        <p><span>发布时间:</span>2020年06月15日 - 20时16分</p>
+        <p><span>最后更新:</span>2020年06月17日 - 14时45分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/05/21/1114.按序打印/" title="1114.按序打印">http://yoursite.com/2020/05/21/1114.按序打印/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/05/21/1114.按序打印/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/15/Java之Queue、Deque、ArrayDeque/" title="Java之Queue、Deque、ArrayDeque">http://yoursite.com/2020/06/15/Java之Queue、Deque、ArrayDeque/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/15/Java之Queue、Deque、ArrayDeque/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -434,18 +436,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/05/21/Java并发编程/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Java并发编程
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/05/19/684.冗余链接/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">684.冗余链接</div>
+    <a href="/2020/06/15/Java之instanceof关键字/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java之instanceof关键字</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -456,7 +449,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发问题"><span class="toc-number">2.</span> <span class="toc-text">并发问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#无竞争并发"><span class="toc-number">3.</span> <span class="toc-text">无竞争并发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法一：使用-synchronization"><span class="toc-number">4.</span> <span class="toc-text">方法一：使用 synchronization</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展思考"><span class="toc-number">5.</span> <span class="toc-text">扩展思考</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法二：通过synchronized构造屏障"><span class="toc-number">6.</span> <span class="toc-text">方法二：通过synchronized构造屏障</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">7.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#队列Queue"><span class="toc-number">1.</span> <span class="toc-text">队列Queue</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#双端队列Deque-Double-Ended-Queue"><span class="toc-number">2.</span> <span class="toc-text">双端队列Deque(Double Ended Queue)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ArrayDeque"><span class="toc-number">3.</span> <span class="toc-text">ArrayDeque</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#属性"><span class="toc-number">3.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数"><span class="toc-number">3.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入队"><span class="toc-number">3.3.</span> <span class="toc-text">入队</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#出队"><span class="toc-number">3.4.</span> <span class="toc-text">出队</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩容"><span class="toc-number">3.5.</span> <span class="toc-text">扩容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代器"><span class="toc-number">3.6.</span> <span class="toc-text">迭代器</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -522,13 +515,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/05/21/Java并发编程/" title="上一篇: Java并发编程">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/05/19/684.冗余链接/" title="下一篇: 684.冗余链接">
+            <a href="/2020/06/15/Java之instanceof关键字/" title="下一篇: Java之instanceof关键字">
                 <i class="fa fa-angle-right"></i>
             </a>
         
