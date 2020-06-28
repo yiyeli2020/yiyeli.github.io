@@ -57,6 +57,37 @@ public class Test {
     返回值 :runoob.com
     返回值 :runoob
 
+
+## Java toCharArray() 方法[^3]
+
+toCharArray() 方法将字符串转换为字符数组。
+
+### 语法
+public char[] toCharArray()
+### 参数
+无
+
+### 返回值
+字符数组。
+
+### 实例
+```
+public class Test {
+    public static void main(String args[]) {
+        String Str = new String("www.runoob.com");
+
+        System.out.print("返回值 :" );
+        System.out.println( Str.toCharArray() );
+    }
+}
+```
+以上程序执行结果为：
+
+    返回值 :www.runoob.com
+
+
 [^1]:https://www.runoob.com/java/java-string.html
 
 [^2]:https://www.runoob.com/java/java-string-substring.html
+
+[^3]:https://www.runoob.com/java/java-string-tochararray.html
