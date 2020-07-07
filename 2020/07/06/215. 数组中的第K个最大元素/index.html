@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>215. 数组中的第K个最大元素 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。此题比较经典，对于两种解法我还有些没吃透，需要再次认真温习。">
+<meta name="keywords" content="Leetcode,Heap,Divide and Conquer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="215. 数组中的第K个最大元素">
+<meta property="og:url" content="http://yoursite.com/2020/07/06/215. 数组中的第K个最大元素/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。此题比较经典，对于两种解法我还有些没吃透，需要再次认真温习。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-07T09:35:40.395Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="215. 数组中的第K个最大元素">
+<meta name="twitter:description" content="在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。此题比较经典，对于两种解法我还有些没吃透，需要再次认真温习。">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 12.5px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 18.75px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 16.25px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 15px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10.63px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10.63px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 10.63px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 16.88px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 11.88px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/Concurrency/" style="font-size: 13.75px;">Concurrency</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 17.5px;">Database</a> <a href="/tags/Database，MySQL/" style="font-size: 15px;">Database，MySQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 13.13px;">Depth-first Search</a> <a href="/tags/Design/" style="font-size: 10.63px;">Design</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 12.5px;">Design Pattern，Java</a> <a href="/tags/Divide-and-Conquer/" style="font-size: 10.63px;">Divide and Conquer</a> <a href="/tags/Dynamic-Programming/" style="font-size: 17.5px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Graph/" style="font-size: 10.63px;">Graph</a> <a href="/tags/Greedy/" style="font-size: 10.63px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 14.38px;">Hash Table</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/Heap/" style="font-size: 11.88px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 11.88px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19.38px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Leetcode/" style="font-size: 18.13px;">Leetcode</a> <a href="/tags/LinkList/" style="font-size: 10px;">LinkList</a> <a href="/tags/Linked-List/" style="font-size: 10px;">Linked List</a> <a href="/tags/Linux/" style="font-size: 10.63px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/MySQL/" style="font-size: 15.63px;">MySQL</a> <a href="/tags/Operating-System/" style="font-size: 10.63px;">Operating System</a> <a href="/tags/Ordered-Map/" style="font-size: 10px;">Ordered Map</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 12.5px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 11.88px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 13.13px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 11.25px;">Stack</a> <a href="/tags/String/" style="font-size: 10.63px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.63px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 15.63px;">Tree</a> <a href="/tags/TreeSet/" style="font-size: 10px;">TreeSet</a> <a href="/tags/Trie/" style="font-size: 12.5px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 11.88px;">Two Pointers</a> <a href="/tags/Union-Find/" style="font-size: 10.63px;">Union Find</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Wechat/" style="font-size: 10px;">Wechat</a> <a href="/tags/blog/" style="font-size: 10.63px;">blog</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-215. 数组中的第K个最大元素" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/06/215. 数组中的第K个最大元素/" class="article-date">
+      <time datetime="2020-07-06T01:36:12.000Z" itemprop="datePublished">2020-07-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      215. 数组中的第K个最大元素
+    </h1>
+  
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.6k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">12分</span>
+      </span>
+    </span>
+</div>
+
+          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2020年7月/">2020年7月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Divide-and-Conquer/">Divide and Conquer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Heap/">Heap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。此题比较经典，对于两种解法我还有些没吃透，需要再次认真温习。</p>
+<a id="more"></a>
+
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>示例 1:</p>
+<pre><code>输入: [3,2,1,5,6,4] 和 k = 2
+输出: 5</code></pre><p>示例 2:</p>
+<pre><code>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
+输出: 4</code></pre><p>说明:</p>
+<pre><code>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</code></pre><h1 id="📖文字题解"><a href="#📖文字题解" class="headerlink" title="📖文字题解"></a>📖文字题解</h1><ul>
+<li><p>约定：假设这里数组的长度为 <em>n</em>。</p>
+</li>
+<li><p>题目分析：本题希望我们返回数组排序之后的倒数第 <em>k</em> 个位置。</p>
+</li>
+</ul>
+<h4 id="方法一：基于快速排序的选择方法"><a href="#方法一：基于快速排序的选择方法" class="headerlink" title="方法一：基于快速排序的选择方法"></a>方法一：基于快速排序的选择方法</h4><p><strong>思路和算法</strong></p>
+<p>我们可以用快速排序来解决这个问题，先对原数组排序，再返回倒数第 <em>k</em> 个位置，这样平均时间复杂度是 O(nlogn)  ，但其实我们可以做的更快。</p>
+<p>首先我们来回顾一下快速排序，这是一个典型的分治算法。我们对数组 a[l…r]做快速排序的过程是（参考《算法导论》）：</p>
+<ul>
+<li><strong>分解：</strong> 将数组 a[l…r] 「划分」成两个子数组 a[l…q-1]<br>、a[q+1…r]，使得 a[l…q-1]中的每个元素小于等于 <em>a[q]*，且 *a[q]</em> 小于等于a[q+1…r]中的每个元素。其中，计算下标 <em>q</em> 也是「划分」过程的一部分。</li>
+<li><strong>解决：</strong> 通过递归调用快速排序，对子数组 a[l…q-1]<br>、a[q+1…r] 进行排序。</li>
+<li><strong>合并：</strong> 因为子数组都是原址排序的，所以不需要进行合并操作，a[l…r]  已经有序。</li>
+<li>上文中提到的 <strong>「划分」</strong> 过程是：从子数组 a[l…r]   中选择任意一个元素 <em>x</em> 作为主元，<strong>调整子数组的元素使得左边的元素都小于等于它，右边的元素都大于等于它，</strong> <em>x</em> 的最终位置就是 <em>q</em>。</li>
+</ul>
+<p>由此可以发现每次经过「划分」操作后，我们一定可以确定一个元素的最终位置，即 <em>x</em> 的最终位置为 <em>q</em>，并且保证 a[l…q-1] 中的每个元素小于等于 <em>a[q]*，且 *a[q]</em> 小于等于 a[q+1…r]中的每个元素。<strong>所以只要某次划分的 <em>q</em> 为倒数第 <em>k</em> 个下标的时候，我们就已经找到了答案。</strong> 我们只关心这一点，至于 a[l…q-1] 和a[q+1…r]  是否是有序的，我们不关心。</p>
+<p>因此我们可以改进快速排序算法来解决这个问题：在分解的过程当中，我们会对子数组进行划分，如果划分得到的 <em>q</em> 正好就是我们需要的下标，就直接返回 <em>a[q]*；否则，如果 *q</em> 比目标下标小，就递归右子区间，否则递归左子区间。这样就可以把原来递归两个区间变成只递归一个区间，提高了时间效率。这就是「快速选择」算法。</p>
+<p>我们知道快速排序的性能和「划分」出的子数组的长度密切相关。直观地理解如果每次规模为 <em>n</em> 的问题我们都划分成 <em>1</em> 和 <em>n - 1*，每次递归的时候又向 *n - 1</em> 的集合中递归，这种情况是最坏的，时间代价是 <em>O(n ^ 2)</em>。我们可以引入随机化来加速这个过程，它的时间代价的期望是 <em>O(n)</em>，证明过程可以参考「《算法导论》9.2：期望为线性的选择算法」。</p>
+<p>我试了一下<code>Arrays.sort(nums);</code>居然也过了，因为题目并没有要求不能用库函数所以其实两行代码就能解决问题</p>
+<p><strong>代码</strong></p>
+<figure class="highlight cpp"><figcaption><span>[sol1-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">quickSelect</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> q = randomPartition(a, l, r);</span><br><span class="line">        <span class="keyword">if</span> (q == index) &#123;</span><br><span class="line">            <span class="keyword">return</span> a[q];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> q &lt; index ? quickSelect(a, q + <span class="number">1</span>, r, index) : quickSelect(a, l, q - <span class="number">1</span>, index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">randomPartition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = rand() % (r - l + <span class="number">1</span>) + l;</span><br><span class="line">        swap(a[i], a[r]);</span><br><span class="line">        <span class="keyword">return</span> partition(a, l, r);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = a[r], i = l - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = l; j &lt; r; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[j] &lt;= x) &#123;</span><br><span class="line">                swap(a[++i], a[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(a[i + <span class="number">1</span>], a[r]);</span><br><span class="line">        <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        srand(time(<span class="number">0</span>));</span><br><span class="line">        <span class="keyword">return</span> quickSelect(nums, <span class="number">0</span>, nums.size() - <span class="number">1</span>, nums.size() - k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>[sol1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    Random random = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> quickSelect(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>, nums.length - k);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">quickSelect</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> q = randomPartition(a, l, r);</span><br><span class="line">        <span class="keyword">if</span> (q == index) &#123;</span><br><span class="line">            <span class="keyword">return</span> a[q];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> q &lt; index ? quickSelect(a, q + <span class="number">1</span>, r, index) : quickSelect(a, l, q - <span class="number">1</span>, index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">randomPartition</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = random.nextInt(r - l + <span class="number">1</span>) + l;</span><br><span class="line">        swap(a, i, r);</span><br><span class="line">        <span class="keyword">return</span> partition(a, l, r);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = a[r], i = l - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = l; j &lt; r; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[j] &lt;= x) &#123;</span><br><span class="line">                swap(a, ++i, j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(a, i + <span class="number">1</span>, r);</span><br><span class="line">        <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><figcaption><span>[sol1-C]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>* a, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = a[r], i = l - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = l; j &lt; r; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[j] &lt;= x) &#123;</span><br><span class="line">            <span class="keyword">int</span> t = a[++i];</span><br><span class="line">            a[i] = a[j], a[j] = t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> t = a[i + <span class="number">1</span>];</span><br><span class="line">    a[i + <span class="number">1</span>] = a[r], a[r] = t;</span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">randomPartition</span><span class="params">(<span class="keyword">int</span>* a, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = rand() % (r - l + <span class="number">1</span>) + l;</span><br><span class="line">    <span class="keyword">int</span> t = a[i];</span><br><span class="line">    a[i] = a[r], a[r] = t;</span><br><span class="line">    <span class="keyword">return</span> partition(a, l, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">quickSelect</span><span class="params">(<span class="keyword">int</span>* a, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> q = randomPartition(a, l, r);</span><br><span class="line">    <span class="keyword">if</span> (q == index) &#123;</span><br><span class="line">        <span class="keyword">return</span> a[q];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> q &lt; index ? quickSelect(a, q + <span class="number">1</span>, r, index)</span><br><span class="line">                         : quickSelect(a, l, q - <span class="number">1</span>, index);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="keyword">return</span> quickSelect(nums, <span class="number">0</span>, numsSize - <span class="number">1</span>, numsSize - k);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight golang"><figcaption><span>[sol1-Golang]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findKthLargest</span><span class="params">(nums []<span class="keyword">int</span>, k <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    rand.Seed(time.Now().UnixNano())</span><br><span class="line">    <span class="keyword">return</span> quickSelect(nums, <span class="number">0</span>, <span class="built_in">len</span>(nums)<span class="number">-1</span>, <span class="built_in">len</span>(nums)-k)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">quickSelect</span><span class="params">(a []<span class="keyword">int</span>, l, r, index <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    q := randomPartition(a, l, r)</span><br><span class="line">    <span class="keyword">if</span> q == index &#123;</span><br><span class="line">        <span class="keyword">return</span> a[q]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> q &lt; index &#123;</span><br><span class="line">        <span class="keyword">return</span> quickSelect(a, q + <span class="number">1</span>, r, index)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> quickSelect(a, l, q - <span class="number">1</span>, index)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">randomPartition</span><span class="params">(a []<span class="keyword">int</span>, l, r <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    i := rand.Int() % (r - l + <span class="number">1</span>) + l</span><br><span class="line">    a[i], a[r] = a[r], a[i]</span><br><span class="line">    <span class="keyword">return</span> partition(a, l, r)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">partition</span><span class="params">(a []<span class="keyword">int</span>, l, r <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    x := a[r]</span><br><span class="line">    i := l - <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> j := l; j &lt; r; j++ &#123;</span><br><span class="line">        <span class="keyword">if</span> a[j] &lt;= x &#123;</span><br><span class="line">            i++</span><br><span class="line">            a[i], a[j] = a[j], a[i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    a[i+<span class="number">1</span>], a[r] = a[r], a[i+<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：<em>O(n)</em>，如上文所述，证明过程可以参考「《算法导论》9.2：期望为线性的选择算法」。</li>
+<li>空间复杂度：O(logn)，递归使用栈空间的空间代价的期望为O(logn)。</li>
+</ul>
+<h4 id="方法二：基于堆排序的选择方法"><a href="#方法二：基于堆排序的选择方法" class="headerlink" title="方法二：基于堆排序的选择方法"></a>方法二：基于堆排序的选择方法</h4><p><strong>思路和算法</strong></p>
+<p>我们也可以使用堆排序来解决这个问题——建立一个大根堆，做 <em>k - 1</em> 次删除操作后堆顶元素就是我们要找的答案。在很多语言中，都有优先队列或者堆的的容器可以直接使用，但是在面试中，面试官更倾向于让更面试者自己实现一个堆。所以建议读者掌握这里大根堆的实现方法，在这道题中尤其要搞懂「建堆」、「调整」和「删除」的过程。</p>
+<p><strong>友情提醒：「堆排」在很多大公司的面试中都很常见，不了解的同学建议参考《算法导论》或者大家的数据结构教材，一定要学会这个知识点哦! ^_^</strong></p>
+<p>  <a href="https://assets.leetcode-cn.com/solution-static/215/1.png" target="_blank" rel="noopener">fig1</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/2.png" target="_blank" rel="noopener">fig2</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/3.png" target="_blank" rel="noopener">fig3</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/4.png" target="_blank" rel="noopener">fig4</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/5.png" target="_blank" rel="noopener">fig5</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/6.png" target="_blank" rel="noopener">fig6</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/7.png" target="_blank" rel="noopener">fig7</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/8.png" target="_blank" rel="noopener">fig8</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/9.png" target="_blank" rel="noopener">fig9</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/10.png" target="_blank" rel="noopener">fig10</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/11.png" target="_blank" rel="noopener">fig11</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/12.png" target="_blank" rel="noopener">fig12</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/13.png" target="_blank" rel="noopener">fig13</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/14.png" target="_blank" rel="noopener">fig14</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/15.png" target="_blank" rel="noopener">fig15</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/16.png" target="_blank" rel="noopener">fig16</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/17.png" target="_blank" rel="noopener">fig17</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/18.png" target="_blank" rel="noopener">fig18</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/19.png" target="_blank" rel="noopener">fig19</a>  <a href="https://assets.leetcode-cn.com/solution-static/215/20.png" target="_blank" rel="noopener">fig20</a> </p>
+<p><strong>代码</strong></p>
+<figure class="highlight cpp"><figcaption><span>[sol2-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">maxHeapify</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">int</span> i, <span class="keyword">int</span> heapSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = i * <span class="number">2</span> + <span class="number">1</span>, r = i * <span class="number">2</span> + <span class="number">2</span>, largest = i;</span><br><span class="line">        <span class="keyword">if</span> (l &lt; heapSize &amp;&amp; a[l] &gt; a[largest]) &#123;</span><br><span class="line">            largest = l;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span> (r &lt; heapSize &amp;&amp; a[r] &gt; a[largest]) &#123;</span><br><span class="line">            largest = r;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (largest != i) &#123;</span><br><span class="line">            swap(a[i], a[largest]);</span><br><span class="line">            maxHeapify(a, largest, heapSize);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">int</span> heapSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = heapSize / <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            maxHeapify(a, i, heapSize);</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> heapSize = nums.size();</span><br><span class="line">        buildMaxHeap(nums, heapSize);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.size() - <span class="number">1</span>; i &gt;= nums.size() - k + <span class="number">1</span>; --i) &#123;</span><br><span class="line">            swap(nums[<span class="number">0</span>], nums[i]);</span><br><span class="line">            --heapSize;</span><br><span class="line">            maxHeapify(nums, <span class="number">0</span>, heapSize);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><figcaption><span>[sol2-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> heapSize = nums.length;</span><br><span class="line">        buildMaxHeap(nums, heapSize);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.length - <span class="number">1</span>; i &gt;= nums.length - k + <span class="number">1</span>; --i) &#123;</span><br><span class="line">            swap(nums, <span class="number">0</span>, i);</span><br><span class="line">            --heapSize;</span><br><span class="line">            maxHeapify(nums, <span class="number">0</span>, heapSize);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> heapSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = heapSize / <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            maxHeapify(a, i, heapSize);</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">maxHeapify</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> heapSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = i * <span class="number">2</span> + <span class="number">1</span>, r = i * <span class="number">2</span> + <span class="number">2</span>, largest = i;</span><br><span class="line">        <span class="keyword">if</span> (l &lt; heapSize &amp;&amp; a[l] &gt; a[largest]) &#123;</span><br><span class="line">            largest = l;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span> (r &lt; heapSize &amp;&amp; a[r] &gt; a[largest]) &#123;</span><br><span class="line">            largest = r;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (largest != i) &#123;</span><br><span class="line">            swap(a, i, largest);</span><br><span class="line">            maxHeapify(a, largest, heapSize);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = a[i];</span><br><span class="line">        a[i] = a[j];</span><br><span class="line">        a[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><figcaption><span>[sol2-C]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">maxHeapify</span><span class="params">(<span class="keyword">int</span>* a, <span class="keyword">int</span> i, <span class="keyword">int</span> heapSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = i * <span class="number">2</span> + <span class="number">1</span>, r = i * <span class="number">2</span> + <span class="number">2</span>, largest = i;</span><br><span class="line">    <span class="keyword">if</span> (l &lt; heapSize &amp;&amp; a[l] &gt; a[largest]) &#123;</span><br><span class="line">        largest = l;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (r &lt; heapSize &amp;&amp; a[r] &gt; a[largest]) &#123;</span><br><span class="line">        largest = r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (largest != i) &#123;</span><br><span class="line">        <span class="keyword">int</span> t = a[i];</span><br><span class="line">        a[i] = a[largest], a[largest] = t;</span><br><span class="line">        maxHeapify(a, largest, heapSize);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(<span class="keyword">int</span>* a, <span class="keyword">int</span> heapSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = heapSize / <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        maxHeapify(a, i, heapSize);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> heapSize = numsSize;</span><br><span class="line">    buildMaxHeap(nums, heapSize);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = numsSize - <span class="number">1</span>; i &gt;= numsSize - k + <span class="number">1</span>; --i) &#123;</span><br><span class="line">        <span class="keyword">int</span> t = nums[<span class="number">0</span>];</span><br><span class="line">        nums[<span class="number">0</span>] = nums[i], nums[i] = t;</span><br><span class="line">        --heapSize;</span><br><span class="line">        maxHeapify(nums, <span class="number">0</span>, heapSize);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight golang"><figcaption><span>[sol2-Golang]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findKthLargest</span><span class="params">(nums []<span class="keyword">int</span>, k <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    heapSize := <span class="built_in">len</span>(nums)</span><br><span class="line">    buildMaxHeap(nums, heapSize)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="built_in">len</span>(nums) - <span class="number">1</span>; i &gt;= <span class="built_in">len</span>(nums) - k + <span class="number">1</span>; i-- &#123;</span><br><span class="line">        nums[<span class="number">0</span>], nums[i] = nums[i], nums[<span class="number">0</span>]</span><br><span class="line">        heapSize--</span><br><span class="line">        maxHeapify(nums, <span class="number">0</span>, heapSize)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums[<span class="number">0</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">buildMaxHeap</span><span class="params">(a []<span class="keyword">int</span>, heapSize <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := heapSize/<span class="number">2</span>; i &gt;= <span class="number">0</span>; i-- &#123;</span><br><span class="line">        maxHeapify(a, i, heapSize)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">maxHeapify</span><span class="params">(a []<span class="keyword">int</span>, i, heapSize <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    l, r, largest := i * <span class="number">2</span> + <span class="number">1</span>, i * <span class="number">2</span> + <span class="number">2</span>, i</span><br><span class="line">    <span class="keyword">if</span> l &lt; heapSize &amp;&amp; a[l] &gt; a[largest] &#123;</span><br><span class="line">        largest = l</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> r &lt; heapSize &amp;&amp; a[r] &gt; a[largest] &#123;</span><br><span class="line">        largest = r</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> largest != i &#123;</span><br><span class="line">        a[i], a[largest] = a[largest], a[i]</span><br><span class="line">        maxHeapify(a, largest, heapSize)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：O(nlogn) ，建堆的时间代价是 <em>O(n)</em>，删除的总代价是 O(klogn) ，因为 <em>k &lt; n</em>，故渐进时间复杂为 O(n+klogn) 。</li>
+<li>空间复杂度：O(nlogn)，即递归使用栈空间的空间代价。</li>
+</ul>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/07/06/215. 数组中的第K个最大元素/">215. 数组中的第K个最大元素</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2020年07月06日 - 09时36分</p>
+        <p><span>最后更新:</span>2020年07月07日 - 17时35分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/07/06/215. 数组中的第K个最大元素/" title="215. 数组中的第K个最大元素">http://yoursite.com/2020/07/06/215. 数组中的第K个最大元素/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/06/215. 数组中的第K个最大元素/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/02/238. 除自身以外数组的乘积/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">238. 除自身以外数组的乘积</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#📖文字题解"><span class="toc-number">2.</span> <span class="toc-text">📖文字题解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一：基于快速排序的选择方法"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">方法一：基于快速排序的选择方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二：基于堆排序的选择方法"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">方法二：基于堆排序的选择方法</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/07/02/238. 除自身以外数组的乘积/" title="下一篇: 238. 除自身以外数组的乘积">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/06/215. 数组中的第K个最大元素/">215. 数组中的第K个最大元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/238. 除自身以外数组的乘积/">238. 除自身以外数组的乘积</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/155.  最小栈/">155. 最小栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/240. 搜索二维矩阵II/">240. 搜索二维矩阵II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/74. 搜索二维矩阵/">74. 搜索二维矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/334.递增的三元子序列/">334. 递增的三元子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/350. 两个数组的交集II/">350. 两个数组的交集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/349. 两个数组的交集/">349. 两个数组的交集</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/384. 打乱数组/">384. 打乱数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/283. 移动零/">283. 移动零</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/Java之TreeSet类/">Java之TreeSet类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/220. 存在重复元素III/">220. 存在重复元素III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/217. 存在重复元素/">217. 存在重复元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/219. 存在重复元素II/">219. 存在重复元素II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/152. 乘积最大子数组/">152. 乘积最大子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/189. 旋转数组/">189. 旋转数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/63. 不同路径II/">63. 不同路径II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/980. 不同路径 III/">980. 不同路径 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/62. 不同路径/">62. 不同路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/212. 单词搜索II/">212. 单词搜索II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java编程思想-第二十三章 注解阅读笔记/">Java编程思想-第二十三章 注解阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java编程思想-第二十章 泛型阅读笔记/">Java编程思想-第二十章 泛型阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/27/79. 单词搜索/">79. 单词搜索</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/Java之数组/">Java之数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/《生事之屋：白宫回忆录》节选/">《生事之屋：白宫回忆录》节选</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/24/208. 实现 Trie (前缀树)/">208. 实现 Trie (前缀树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/23/数据库学习笔记-Sql_Mode/">数据库学习笔记-Sql_Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/ Java之String类/">Java之String类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/Java之可变参数/">Java之可变参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java之Queue、Deque、ArrayDeque/">Java之Queue、Deque、ArrayDeque</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java之instanceof关键字/">Java之instanceof关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/14/Java之transient关键字/">Java之transient关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java编程思想-第十章 接口阅读笔记/">Java编程思想-第十章 接口阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java集合之HashMap/">Java集合之HashMap</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念III-事务并发控制/">数据库基础概念III-事务并发控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-聚合函数/">数据库学习笔记-聚合函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念-索引/">数据库基础概念-索引</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-INTERSECT/">数据库学习笔记-INTERSECT</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-UNION/">数据库学习笔记-UNION</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-连接/">数据库学习笔记-连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库学习笔记-MySQL安装/">数据库学习笔记-MySQL安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库基础概念II-范式-关系代数-三值逻辑/">数据库基础概念II-范式-关系代数-三值逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/09/数据库学习笔记-SQL约束(Constraints)/">数据库学习笔记-SQL约束(Constraints)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第九章 多态阅读笔记/">Java编程思想-第九章 多态阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第二十四章 并发编程阅读笔记/">Java编程思想-第二十四章 并发编程阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/05/Maven快照机制(SNAPSHOT)/">Maven快照机制（SNAPSHOT）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/29/140. 单词拆分II/">140. 单词拆分II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/139. 单词拆分/">139. 单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/5. 最长回文子串/">5. 最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/131. 分割回文串/">131. 分割回文串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/887. 鸡蛋掉落/">887. 鸡蛋掉落</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/27/21. 合并两个有序链表/">21. 合并两个有序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/685.冗余链接II/">685.冗余链接II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/1226. 哲学家进餐/">1226. 哲学家进餐</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1195. 交替打印字符串/">1195. 交替打印字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1117. H2O 生成/">1117. H2O 生成</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1116. 打印零与奇偶数/">1116. 打印零与奇偶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/1115. 交替打印FooBar/">1115. 交替打印FooBar</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/Java并发编程/">Java并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/1114.按序打印/">1114.按序打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/19/684.冗余链接/">684.冗余链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Lombok的基本注解使用/">Lombok的基本注解使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/后端开发常用调试技巧集锦/">后端开发常用调试技巧集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/405. 数字转化为十六进制数/">405. 数字转化为十六进制数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/SpringBoot学习笔记VIII-MybatisPlus教程/">SpringBoot学习笔记VIII-MybatisPlus教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/设计模式学习笔记V-策略模式/">设计模式学习笔记V-策略模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/1046. 最后一块石头的重量/">1046. 最后一块石头的重量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/Java学习笔记XIV/">Java学习笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/257.二叉树的所有路径/">257.二叉树的所有路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/22/24.两两交换链表中的节点/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/微信公众平台开发学习笔记I/">微信公众平台开发学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/">601.Human Traffic of Stadium体育馆的人流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/185.Department Top Three Salaries/">185.Department Top Three Salaries</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/数据库学习笔记IX/">数据库学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/184.Department Highest Salary/">184.Department Highest Salary</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/数据库学习笔记VIII/">数据库学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/1179. Reformat Department Table/">1179. Reformat Department Table</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II-Git版本回滚/">Git学习笔记II-Git版本回滚</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I-查询/">数据库学习笔记I-查询</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：506.6k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
