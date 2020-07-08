@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>295. 数据流的中位数 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。">
+<meta name="keywords" content="Leetcode,Design,Heap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="295. 数据流的中位数">
+<meta property="og:url" content="http://yoursite.com/2020/07/06/295. 数据流的中位数/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-08T06:46:42.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="295. 数据流的中位数">
+<meta name="twitter:description" content="中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 12.5px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 18.75px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 16.25px;">Backtracking</a> <a href="/tags/Binary-Search/" style="font-size: 15px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10.63px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 10.63px;">Bit Manipulation</a> <a href="/tags/Breadth-first-Search/" style="font-size: 10.63px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 16.88px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 11.88px;">Coding Interviews</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/Concurrency/" style="font-size: 13.75px;">Concurrency</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 17.5px;">Database</a> <a href="/tags/Database，MySQL/" style="font-size: 15px;">Database，MySQL</a> <a href="/tags/Depth-first-Search/" style="font-size: 13.13px;">Depth-first Search</a> <a href="/tags/Design/" style="font-size: 11.25px;">Design</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 12.5px;">Design Pattern，Java</a> <a href="/tags/Divide-and-Conquer/" style="font-size: 10.63px;">Divide and Conquer</a> <a href="/tags/Dynamic-Programming/" style="font-size: 17.5px;">Dynamic Programming</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Graph/" style="font-size: 10.63px;">Graph</a> <a href="/tags/Greedy/" style="font-size: 10.63px;">Greedy</a> <a href="/tags/Hash-Table/" style="font-size: 14.38px;">Hash Table</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/Heap/" style="font-size: 12.5px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 11.88px;">Hexo</a> <a href="/tags/Java/" style="font-size: 19.38px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Leetcode/" style="font-size: 18.13px;">Leetcode</a> <a href="/tags/LinkList/" style="font-size: 10px;">LinkList</a> <a href="/tags/Linked-List/" style="font-size: 10px;">Linked List</a> <a href="/tags/Linux/" style="font-size: 10.63px;">Linux</a> <a href="/tags/Math/" style="font-size: 10px;">Math</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/MySQL/" style="font-size: 15.63px;">MySQL</a> <a href="/tags/Operating-System/" style="font-size: 10.63px;">Operating System</a> <a href="/tags/Ordered-Map/" style="font-size: 10px;">Ordered Map</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 12.5px;">Scala</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sort/" style="font-size: 11.88px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 13.13px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 11.25px;">Stack</a> <a href="/tags/String/" style="font-size: 10.63px;">String</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.63px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Tree/" style="font-size: 15.63px;">Tree</a> <a href="/tags/TreeSet/" style="font-size: 10px;">TreeSet</a> <a href="/tags/Trie/" style="font-size: 12.5px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 11.88px;">Two Pointers</a> <a href="/tags/Union-Find/" style="font-size: 10.63px;">Union Find</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Wechat/" style="font-size: 10px;">Wechat</a> <a href="/tags/blog/" style="font-size: 10.63px;">blog</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-295. 数据流的中位数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/06/295. 数据流的中位数/" class="article-date">
+      <time datetime="2020-07-06T07:41:12.000Z" itemprop="datePublished">2020-07-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      295. 数据流的中位数
+    </h1>
+  
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">4.3k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">18分</span>
+      </span>
+    </span>
+</div>
+
+          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2020年7月/">2020年7月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Heap/">Heap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。</p>
+<a id="more"></a>
+
+<h1 id="题目描述（困难难度）"><a href="#题目描述（困难难度）" class="headerlink" title="题目描述（困难难度）"></a>题目描述（困难难度）</h1><p>例如，</p>
+<p>[2,3,4] 的中位数是 3</p>
+<p>[2,3] 的中位数是 (2 + 3) / 2 = 2.5</p>
+<p>设计一个支持以下两种操作的数据结构：</p>
+<pre><code>void addNum(int num) - 从数据流中添加一个整数到数据结构中。
+double findMedian() - 返回目前所有元素的中位数。</code></pre><p>示例：</p>
+<pre><code>addNum(1)
+addNum(2)
+findMedian() -&gt; 1.5
+addNum(3) 
+findMedian() -&gt; 2</code></pre><p>进阶:</p>
+<ul>
+<li>如果数据流中所有整数都在 0 到 100 范围内，你将如何优化你的算法？</li>
+<li>如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？</li>
+</ul>
+<h1 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h1><p>先分享 <a href="https://leetcode.com/problems/find-median-from-data-stream/solution/" target="_blank" rel="noopener">官方</a> 给我们提供的两个最容易的解法。<a href="https://leetcode.com/problems/find-median-from-data-stream/solution/" target="_blank" rel="noopener">^1</a></p>
+<p>把添加的数字放到 <code>list</code> 中，如果需要返回中位数，把 <code>list</code> 排序即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MedianFinder</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        list.add(num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Collections.sort(list);</span><br><span class="line">        <span class="keyword">int</span> n = list.size();</span><br><span class="line">        <span class="keyword">if</span> ((n &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> list.get(n / <span class="number">2</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> ((<span class="keyword">double</span>) list.get(n / <span class="number">2</span>) + list.get(n / <span class="number">2</span> - <span class="number">1</span>)) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单明了。但是时间复杂度有点儿高，对于 <code>findMedian</code> 函数，因为每次都需要排序。如果是快速排序，那时间复杂度也是 <code>O(nlog(n))</code>。</p>
+<p>这里可以做一个简单的优化。我们不需要每次返回中位数都去排序。我们可以将排序融入到 <code>addNum</code> 中，假设之前已经有序了，然后将添加的数字插入到相应的位置即可。也就是插入排序的思想。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> </span>&#123;</span><br><span class="line">	List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MedianFinder</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">// 寻找第一个大于 num 的数的下标</span></span><br><span class="line">		<span class="keyword">for</span> (; i &lt; list.size(); i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (num &lt; list.get(i)) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 将当前数插入</span></span><br><span class="line">		list.add(i, num);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n = list.size();</span><br><span class="line">		<span class="keyword">if</span> ((n &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> list.get(n / <span class="number">2</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> ((<span class="keyword">double</span>) list.get(n / <span class="number">2</span>) + list.get(n / <span class="number">2</span> - <span class="number">1</span>)) / <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上边的话 <code>findMedian()</code> 就不需要排序了，时间复杂度就是 <code>O(1)</code>了。对于 <code>addNum()</code> 函数的话时间复杂度就是 <code>O(n)</code> 了。</p>
+<p><code>addNum()</code> 还可以做一点优化。因为我们要在有序数组中寻找第一个大于 <code>num</code> 的下标，提到有序数组找某个值，可以想到二分的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> insert = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> high = list.size() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (low + high) &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (num &lt;= list.get(mid)) &#123;</span><br><span class="line">            <span class="comment">//判断 num 是否大于等于前边的数</span></span><br><span class="line">            <span class="keyword">int</span> pre = mid &gt; <span class="number">0</span> ? list.get(mid - <span class="number">1</span>) : Integer.MIN_VALUE;</span><br><span class="line">            <span class="keyword">if</span> (num &gt;= pre) &#123;</span><br><span class="line">                insert = mid;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                high = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (insert == -<span class="number">1</span>) &#123;</span><br><span class="line">        insert = list.size();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将当前数插入</span></span><br><span class="line">    list.add(insert, num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二分法还需要好好练习，我写的时候有两个小细节没注意就犯错了，一个是<br><code>while (low &lt;= high)</code>另一个是Integer.MIN_VALUE写成了Integer.MAX_VALUE。</p>
+<p>虽然我们使用了二分去查找要插入的位置，对应的时间复杂度是 <code>O(log(n))</code>，但是 <code>list.add(insert, num)</code> 的时间复杂度是 <code>O(n)</code>。所以整体上依旧是 <code>O(n)</code>。</p>
+<p>参考 <a href="https://leetcode.com/problems/find-median-from-data-stream/discuss/74057/Tired-of-TWO-HEAPSET-solutions-See-this-segment-dividing-solution-(c%2B%2B)" target="_blank" rel="noopener">这里</a>，还能继续优化，这个思想也比较常见，分享一下。</p>
+<p>我们每次添加数字的时候，都需要从所有数字中寻找要插入的位置，如果数字太多的话，速度会很慢。</p>
+<p>我们可以将数字分成若干个子序列，类似于下图。</p>
+<p> <a href="https://pic.leetcode-cn.com/5f1bc07eab0823d670c741ae432c6e6728564a90495f01596321c6c6fe66881b.jpg" target="_blank" rel="noopener">将数字分成若干个子序列</a></p>
+<p>上边每一个长方形内数字都是有序的。添加数字的时候，分成两步。先找到数字应该加入的长方形，然后将数字添加到该长方形内。这样做的好处很明显，我们只需要将数字加入长方形内的有序数列中，长方形内的数字个数相对于整个序列会小很多。</p>
+<p>我们可以设置每个长方形内最多存多少数字，如果超过了限制，就将长方形平均分成两个。</p>
+<p>举个简单的例子，接着上图，假设每个长方形内最多存 <code>3</code> 个数字，现在添加数字 <code>9</code>。</p>
+<p>我们首先找到 <code>9</code> 应该属于第 <code>2</code> 个长方形，然后将 <code>9</code> 插入。然后发现此时的数量超过了 <code>3</code> 个，此时我们就把该长方形平均分成两个，如下图。</p>
+<p> <a href="https://pic.leetcode-cn.com/11236f39867ae59fc81e3d46aaa778b11d9c1333b74a413adea1800fed1df15a.jpg" target="_blank" rel="noopener">把该长方形平均分成两个</a></p>
+<p>至于最多存多少，我们可以根据总共有多少个数字来自己设定。但不是很好控制，太小了的话，寻找长方形的时候比较耗时间，太大的话，加入到长方形里的时候比较耗时间。事先不知道数字有多少的话，就更麻烦了。</p>
+<p><a href="https://leetcode.com/stefanpochmann" target="_blank" rel="noopener">StefanPochmann</a>  提出了一个建议。我们可以将大小设置成一个动态的，每个长方形最多存多少根据当前数字的总个数实时改变。假设当前数字总量是 <code>n</code>。长方形里数字个数是 <code>len</code> ，如果 <code>len * len &gt; n</code> ，那么当前长方形就分割为两个。也就是每个长方形最多存 <code>sqrt(n)</code> 个数字。</p>
+<p>这里就偷个懒直接分享下 <a href="https://leetcode.com/mission4success" target="_blank" rel="noopener">@mission4success</a> 的代码。主要就是找长方形以及找中位数那里判断的情况会多一些。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> LinkedList&lt;LinkedList&lt;Integer&gt;&gt; buckets; <span class="comment">// store all ranges</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> total_size;</span><br><span class="line"></span><br><span class="line">    MedianFinder() &#123;</span><br><span class="line">        total_size = <span class="number">0</span>;</span><br><span class="line">        buckets = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        buckets.add(<span class="keyword">new</span> LinkedList&lt;&gt;());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; correctRange = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> targetIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// find the correct range to insert given num</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; buckets.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (buckets.size() == <span class="number">1</span> ||</span><br><span class="line">                    (i == <span class="number">0</span> &amp;&amp; num &lt;= buckets.get(i).getLast()) ||</span><br><span class="line">                    (i == buckets.size() - <span class="number">1</span> &amp;&amp; num &gt;= buckets.get(i).getFirst()) ||</span><br><span class="line">                    (buckets.get(i).getFirst() &lt;= num &amp;&amp; num &lt;= buckets.get(i).getLast()) ||</span><br><span class="line">                    (num &gt; buckets.get(i).getLast() &amp;&amp; num &lt; buckets.get(i+<span class="number">1</span>).getFirst())) &#123;</span><br><span class="line">                        correctRange = buckets.get(i);</span><br><span class="line">                        targetIndex = i;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// put num at back of correct range, and sort it to keep increasing sequence</span></span><br><span class="line">        total_size++;</span><br><span class="line">        correctRange.add(num);</span><br><span class="line">        Collections.sort(correctRange);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if currentRange's size &gt; threshold, split it into two halves and add them back to buckets</span></span><br><span class="line">        <span class="keyword">int</span> len = correctRange.size();</span><br><span class="line">        <span class="comment">//if (len &gt; 10) &#123;</span></span><br><span class="line">        <span class="keyword">if</span> (len * len &gt; total_size) &#123;</span><br><span class="line">            LinkedList&lt;Integer&gt; half1 = <span class="keyword">new</span> LinkedList&lt;&gt;(correctRange.subList(<span class="number">0</span>, (len) / <span class="number">2</span>));</span><br><span class="line">            LinkedList&lt;Integer&gt; half2 = <span class="keyword">new</span> LinkedList&lt;&gt;(correctRange.subList((len) / <span class="number">2</span>, len));</span><br><span class="line"></span><br><span class="line">            buckets.set(targetIndex, half1); <span class="comment">//replaces</span></span><br><span class="line">            buckets.add(targetIndex + <span class="number">1</span>, half2); <span class="comment">//inserts</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// iterate thru all ranges in buckets to find median value</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (total_size==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid1 = total_size/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> mid2 = mid1 + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> leftCount=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">double</span> first = <span class="number">0.0</span>, second = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span> (List&lt;Integer&gt; bucket : buckets) &#123;</span><br><span class="line">            <span class="keyword">if</span> (leftCount&lt;mid1 &amp;&amp; mid1&lt;=leftCount+bucket.size())</span><br><span class="line">                first = bucket.get(mid1 - leftCount - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (leftCount&lt;mid2 &amp;&amp; mid2&lt;=leftCount+bucket.size()) &#123;</span><br><span class="line">                second = bucket.get(mid2 - leftCount - <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            leftCount += bucket.size();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (total_size % <span class="number">2</span> != <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> second;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> (first + second)/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h1><p>分享 <a href="https://leetcode.com/problems/find-median-from-data-stream/discuss/74166/Solution-using-Binary-Search-Tree" target="_blank" rel="noopener">这里</a> 的解法。</p>
+<p>可以借助二分查找树，二分查找树的性质。</p>
+<blockquote>
+<ol>
+<li>若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值；</li>
+<li>若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值；</li>
+<li>任意节点的左、右子树也分别为二叉查找树；</li>
+<li>没有键值相等的节点。</li>
+</ol>
+</blockquote>
+<p>如果我们将数字存到二分查找树中，当找中位数的时候有一个明显的好处。如果我们知道了左子树的数量 <code>leftNum</code> ，找假设把数据排序后的第 <code>k</code> 个数，<code>k</code> 从 <code>0</code> 计数。</p>
+<p>如果 <code>leftNum == k</code> ，那么根节点就是我们要找的。</p>
+<p>如果 <code>leftNum &gt; k</code>，我们只需要再从左子树中找第 <code>k</code> 个数。</p>
+<p>如果 <code>leftNum &lt; k</code>，我们只需要从右子树中找第 <code>k - leftNum - 1</code> 个数。</p>
+<p>代码的话，我们首先定义一个二分查找树。和普通的二分查找树不同的地方在于，节点多了一个成员变量，记录以当前节点为根节点的二叉树的总节点数量。</p>
+<p>此外实现了 <code>find</code> 函数，来返回有序情况下第 <code>k</code> 个节点的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BST</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> val;</span><br><span class="line">        <span class="keyword">int</span> size;</span><br><span class="line">        Node left, right;</span><br><span class="line"></span><br><span class="line">        Node(<span class="keyword">int</span> v) &#123;</span><br><span class="line">            val = v;</span><br><span class="line">            size = <span class="number">1</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Node root;</span><br><span class="line"></span><br><span class="line">    BST() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 新增节点</span></span><br><span class="line">        Node newNode = <span class="keyword">new</span> Node(val);</span><br><span class="line">        <span class="comment">// 当前节点</span></span><br><span class="line">        Node current = root;</span><br><span class="line">        <span class="comment">// 上个节点</span></span><br><span class="line">        Node parent = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 如果根节点为空</span></span><br><span class="line">        <span class="keyword">if</span> (current == <span class="keyword">null</span>) &#123;</span><br><span class="line">            root = newNode;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            parent = current;</span><br><span class="line">            <span class="comment">//向左子树添加节点</span></span><br><span class="line">            <span class="keyword">if</span> (val &lt; current.val) &#123;</span><br><span class="line">                current = current.left;</span><br><span class="line">                parent.size++;</span><br><span class="line">                <span class="keyword">if</span> (current == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    parent.left = newNode;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="comment">//向右子树添加节点    </span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                current = current.right;</span><br><span class="line">                parent.size++;</span><br><span class="line">                <span class="keyword">if</span> (current == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    parent.right = newNode;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        Node t = root;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> leftSize = t.left != <span class="keyword">null</span> ? t.left.size : <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (leftSize == k)</span><br><span class="line">                <span class="keyword">return</span> t.val;</span><br><span class="line">            <span class="keyword">if</span> (leftSize &gt; k) &#123;</span><br><span class="line">                t = t.left;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                k = k - leftSize - <span class="number">1</span>;</span><br><span class="line">                t = t.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> root.size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> </span>&#123;</span><br><span class="line">    BST bst;</span><br><span class="line"></span><br><span class="line">    MedianFinder() &#123;</span><br><span class="line">        bst = <span class="keyword">new</span> BST();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Adds a number into the data structure.</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        bst.add(num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = bst.size();</span><br><span class="line">        <span class="keyword">if</span> (num % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> ((<span class="keyword">double</span>)bst.find(num / <span class="number">2</span>) + bst.find(num / <span class="number">2</span> - <span class="number">1</span>)) / <span class="number">2</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> bst.find(num / <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度的话，最好的情况 <code>addNum</code> 和 <code>findMedian</code> 都是 <code>O(log(n))</code>。但如果二叉树分布不均，类似于下边这种，那么时间复杂度就都是 <code>O(n)</code> 了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span><br><span class="line"> \</span><br><span class="line">  <span class="number">2</span></span><br><span class="line">   \</span><br><span class="line">    <span class="number">3</span></span><br><span class="line">     \</span><br><span class="line">      <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h1><p>什么是中位数？如果是偶数个数字，我们把它分成两个集合。左边的集合的所有数字小于右边集合的所有数字。中位数就是左边集合最大数和右边集合最小的数取一个平均数。</p>
+<p>想到上边这个点，会发现我们只关心集合的最大数和最小数，立马就会想到优先队列。</p>
+<p>添加数字的时候，我们把数字放到两个优先队列中。始终保证两个优先队列的大小相等。如果总数是奇数，我们就让左边集合多一个数。</p>
+<p>有了上边的想法可以写代码了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> </span>&#123;</span><br><span class="line">    <span class="comment">//左边的队列，每次取最大值</span></span><br><span class="line">    Queue&lt;Integer&gt; leftQueue = <span class="keyword">new</span> PriorityQueue&lt;&gt;(<span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer i1, Integer i2)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> i2 - i1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//右边的队列，每次取最小值</span></span><br><span class="line">    Queue&lt;Integer&gt; rightQueue = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> median = <span class="number">0</span>; <span class="comment">//保存当前的中位数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MedianFinder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> leftSize = leftQueue.size();</span><br><span class="line">        <span class="keyword">int</span> rightSize = rightQueue.size();</span><br><span class="line">        <span class="comment">//如果当前数量相等</span></span><br><span class="line">        <span class="keyword">if</span> (leftSize == rightSize) &#123;</span><br><span class="line">            <span class="comment">//当前没有数字，将将数字加到左半部分</span></span><br><span class="line">            <span class="keyword">if</span> (leftSize == <span class="number">0</span>) &#123;</span><br><span class="line">                leftQueue.add(num);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//当前数字小于等于右半部分最小的数字, num 属于左边</span></span><br><span class="line">            <span class="keyword">if</span> (num &lt;= rightQueue.peek()) &#123;</span><br><span class="line">                leftQueue.add(num);</span><br><span class="line">            <span class="comment">//当前数字大于右半部分最小的数字, num 应该属于右边    </span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//维持两边平衡. 将右边拿出一个放到左边</span></span><br><span class="line">                leftQueue.add(rightQueue.poll());</span><br><span class="line">                <span class="comment">//将 num 放到右边</span></span><br><span class="line">                rightQueue.add(num);</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="comment">//如果当前数量不等</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//num 大于等于左边最大的数字, num 属于右边</span></span><br><span class="line">            <span class="keyword">if</span> (num &gt;= leftQueue.peek()) &#123;</span><br><span class="line">                rightQueue.add(num);</span><br><span class="line">            <span class="comment">//num 小于左边最大的数字, num 应该属于左边  </span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//维持两边平衡, 左边拿出一个放到右边</span></span><br><span class="line">                rightQueue.add(leftQueue.poll());</span><br><span class="line">                <span class="comment">//左边将 num 放入</span></span><br><span class="line">                leftQueue.add(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (leftQueue.size() &gt; rightQueue.size())&#123;</span><br><span class="line">            <span class="keyword">return</span> leftQueue.peek();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> ((<span class="keyword">double</span>)leftQueue.peek() + rightQueue.peek()) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上边代码由于使用了优先队列，<code>addNum()</code> 的时间复杂度就是 <code>O(log(n))</code>。<code>findMedian()</code>的时间复杂度是 <code>O(1)</code>。上边为了保持两边集合的数量关系，写的代码比较多。再看一下 <a href="https://leetcode.com/problems/find-median-from-data-stream/discuss/74062/Short-simple-JavaC%2B%2BPython-O(log-n)-%2B-O(1)" target="_blank" rel="noopener">stefanpochmann </a> 同样思路下的代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Queue&lt;Long&gt; left = <span class="keyword">new</span> PriorityQueue(),</span><br><span class="line">    right = <span class="keyword">new</span> PriorityQueue();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        left.add((<span class="keyword">long</span>) num);</span><br><span class="line">        right.add(-left.poll());</span><br><span class="line">        <span class="keyword">if</span> (left.size() &lt; right.size())</span><br><span class="line">            left.add(-right.poll());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> left.size() &gt; right.size()</span><br><span class="line">            ? left.peek()</span><br><span class="line">            : (left.peek() - right.peek()) / <span class="number">2.0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>简洁而优雅，这大概就是艺术吧。</p>
+<p>他首先将数字加入到左边，然后再拿一个数字加到右边。然后判断一下左边数量是否小于右边，如果是的话将从右边拿回一个放到左边。</p>
+<p>当加入新的数字之前，不管两边集合数字的数量相等，还是左边比右边多一个。通过上边的代码，依旧可以保证添加完数字以后两边的数量相等或者左边比右边多一个。</p>
+<p>还使用了一个技巧，会发现它是用了两个默认的优先队列。对于右边的优先队列添加元素的时候将原来的数字取了相反数。这样做的好处就是，不管默认的优先队列是取最大数，还是取最小数。由于其中一个添加元素使用的是相反数，最终实现的效果就是两个优先队列一定是相反的效果。如果其中一个是取最小数，另外一个就是取最大数。</p>
+<p>因为使用了相反数，对于 <code>-Integer.MIN_VALUE</code> 会溢出，所以我们添加元素的时候强转成了 <code>long</code>。</p>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>If all integer numbers from the stream are between 0 and 100, how would you optimize it?</p>
+<p>分享 <a href="https://leetcode.com/problems/find-median-from-data-stream/discuss/286238/Java-Simple-Code-Follow-Up" target="_blank" rel="noopener">这里</a> 的思路。</p>
+<p>这样的话，我们可以用一个数组，<code>num[i]</code>记录数字 <code>i</code> 的数量。此外用一个变量 <code>n</code> 统计当前数字的总数量。这样求中位数的时候，我们只需要找到第 <code>n/2+1</code>个数或者 <code>n/2,n/2+1</code>个数即可。注意因为这里计数是从<code>1</code> 开始的，所以和解法一看起来找到数字不一样，解法一找的是下标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] backets = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">101</span>];</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MedianFinder</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        backets[num]++;</span><br><span class="line">        n++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//如果是 5 个数，就寻找第 5 / 2 + 1 = 3 个数</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            count += backets[right];</span><br><span class="line">            <span class="keyword">if</span> (count &gt;= n / <span class="number">2</span> + <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            right++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//奇数的情况直接返回</span></span><br><span class="line">        <span class="keyword">if</span> ((n &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果是 4 个数, 之前找到了第 4/2+1=3 个数, 还需要前一个数</span></span><br><span class="line">        <span class="keyword">int</span> left;</span><br><span class="line">        <span class="comment">//如果之前找的数只占一个, 向前寻找上一个数</span></span><br><span class="line">       	<span class="keyword">if</span> (backets[right] == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">int</span> temp = right - <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">while</span> (backets[temp] == <span class="number">0</span>) &#123;</span><br><span class="line">				temp--;</span><br><span class="line">			&#125;</span><br><span class="line">			left = temp;</span><br><span class="line">        <span class="comment">//如果之前找的数占多个, 前一个数等于当前数</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			left = right;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="keyword">return</span> (left + right) / <span class="number">2.0</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>If 99% of all integer numbers from the stream are between 0 and 100, how would you optimize it?</p>
+<p>这个也没有说清楚，我们假设一种简单的情况。当调用 <code>findMedian</code> 的时候，解一定落在 <code>0 - 100</code> 之中。那么接着上边的代码，我们只需要增加一个变量 <code>less</code>，记录小于 <code>0</code> 的个数。原来找第 <code>n / 2 + 1</code> 个数，现在找第<code>n/2 - less + 1</code>就可以了。</p>
+<p>如果调用 <code>findMedian</code> 的时候解落在哪里不一定，那么我们就增加两个 <code>list</code> 分别来保存小于 <code>0</code> 和大于 <code>100</code> 的数即可。</p>
+<h1 id="再扩展"><a href="#再扩展" class="headerlink" title="再扩展"></a>再扩展</h1><p>题目说的是从数据流中找到中位数。如果这个数据流很大，很大，无法全部加载到内存呢？</p>
+<p>分享 <a href="https://stackoverflow.com/questions/10657503/find-running-median-from-a-stream-of-integers/10693752#10693752" target="_blank" rel="noopener">这里</a> 的想法。</p>
+<p>如果数据整体呈某种概率分布，比如正态分布。我们可以通过 <strong>蓄水池抽样</strong><a href="https://www.jianshu.com/p/7a9ea6ece2af" target="_blank" rel="noopener">^2</a><code>reservoir sampling</code> 的方法。我们保存固定数量的数字，当存满的时候，就随机替代掉某个数字。伪代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">0</span>;  <span class="comment">// Running count of elements observed so far  </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 10000</span></span><br><span class="line"><span class="keyword">int</span> reservoir[SIZE];  </span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(streamHasData())</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">int</span> x = readNumberFromStream();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (n &lt; SIZE)</span><br><span class="line">  &#123;</span><br><span class="line">       reservoir[n++] = x;</span><br><span class="line">  &#125;         </span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">int</span> p = random(++n); <span class="comment">// Choose a random number 0 &gt;= p &lt; n</span></span><br><span class="line">      <span class="keyword">if</span> (p &lt; SIZE)</span><br><span class="line">      &#123;</span><br><span class="line">           reservoir[p] = x;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相当于从一个大的数据集下进行了取样，然后找中位数的时候，把我们保存的数组排个序去找就可以了。</p>
+<p>算法思路大致如下：</p>
+<ol>
+<li>如果接收的数据量小于m，则依次放入蓄水池。</li>
+<li>当接收到第i个数据时，i &gt;= m，在[0, i]范围内取以随机数d，若d的落在[0, m-1]范围内，则用接收到的第i个数据替换蓄水池中的第d个数据。</li>
+<li>重复步骤2。</li>
+</ol>
+<p>算法的精妙之处在于：当处理完所有的数据时，蓄水池中的每个数据都是以m/N的概率获得的。</p>
+<h1 id="字节AML后端开发终面：变形题"><a href="#字节AML后端开发终面：变形题" class="headerlink" title="字节AML后端开发终面：变形题"></a>字节AML后端开发终面：变形题</h1><p>在本题基础上增加erase功能，需要把堆改成BST（即set），保证删除性能</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总结了好多，但 <a href="https://leetcode.com/problems/find-median-from-data-stream/solution/" target="_blank" rel="noopener">Solution</a> 里提到的还有一些没有介绍，主要就是涉及到一些新的数据结构，比如 <code>Multiset</code> 、<code>Segment Trees</code> 和 <code>Order Statistic Trees</code>。</p>
+<p>针对这道题最优的话还是优先队列比较好，既简单，又容易想到。其他的解法可以当扩展思路了，其中用到的一些思想都很有意思。</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/07/06/295. 数据流的中位数/">295. 数据流的中位数</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2020年07月06日 - 15时41分</p>
+        <p><span>最后更新:</span>2020年07月08日 - 14时46分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/07/06/295. 数据流的中位数/" title="295. 数据流的中位数">http://yoursite.com/2020/07/06/295. 数据流的中位数/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/06/295. 数据流的中位数/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/06/215. 数组中的第K个最大元素/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">215. 数组中的第K个最大元素</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目描述（困难难度）"><span class="toc-number">1.</span> <span class="toc-text">题目描述（困难难度）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解法一"><span class="toc-number">2.</span> <span class="toc-text">解法一</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解法二"><span class="toc-number">3.</span> <span class="toc-text">解法二</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解法三"><span class="toc-number">4.</span> <span class="toc-text">解法三</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展"><span class="toc-number">5.</span> <span class="toc-text">扩展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#再扩展"><span class="toc-number">6.</span> <span class="toc-text">再扩展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#字节AML后端开发终面：变形题"><span class="toc-number">7.</span> <span class="toc-text">字节AML后端开发终面：变形题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/07/06/215. 数组中的第K个最大元素/" title="下一篇: 215. 数组中的第K个最大元素">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/07/06/295. 数据流的中位数/">295. 数据流的中位数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/06/215. 数组中的第K个最大元素/">215. 数组中的第K个最大元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/238. 除自身以外数组的乘积/">238. 除自身以外数组的乘积</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/155.  最小栈/">155. 最小栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/240. 搜索二维矩阵II/">240. 搜索二维矩阵II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/74. 搜索二维矩阵/">74. 搜索二维矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/334.递增的三元子序列/">334. 递增的三元子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/350. 两个数组的交集II/">350. 两个数组的交集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/349. 两个数组的交集/">349. 两个数组的交集</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/384. 打乱数组/">384. 打乱数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/283. 移动零/">283. 移动零</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/Java之TreeSet类/">Java之TreeSet类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/220. 存在重复元素III/">220. 存在重复元素III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/217. 存在重复元素/">217. 存在重复元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/219. 存在重复元素II/">219. 存在重复元素II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/152. 乘积最大子数组/">152. 乘积最大子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/189. 旋转数组/">189. 旋转数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/63. 不同路径II/">63. 不同路径II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/980. 不同路径 III/">980. 不同路径 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/62. 不同路径/">62. 不同路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/212. 单词搜索II/">212. 单词搜索II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java编程思想-第二十三章 注解阅读笔记/">Java编程思想-第二十三章 注解阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java编程思想-第二十章 泛型阅读笔记/">Java编程思想-第二十章 泛型阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/27/79. 单词搜索/">79. 单词搜索</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/Java之数组/">Java之数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/《生事之屋：白宫回忆录》节选/">《生事之屋：白宫回忆录》节选</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/24/208. 实现 Trie (前缀树)/">208. 实现 Trie (前缀树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/23/数据库学习笔记-Sql_Mode/">数据库学习笔记-Sql_Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/ Java之String类/">Java之String类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/Java之可变参数/">Java之可变参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java之Queue、Deque、ArrayDeque/">Java之Queue、Deque、ArrayDeque</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java之instanceof关键字/">Java之instanceof关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/14/Java之transient关键字/">Java之transient关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java编程思想-第十章 接口阅读笔记/">Java编程思想-第十章 接口阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java集合之HashMap/">Java集合之HashMap</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念III-事务并发控制/">数据库基础概念III-事务并发控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-聚合函数/">数据库学习笔记-聚合函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念-索引/">数据库基础概念-索引</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-INTERSECT/">数据库学习笔记-INTERSECT</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-UNION/">数据库学习笔记-UNION</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-连接/">数据库学习笔记-连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库学习笔记-MySQL安装/">数据库学习笔记-MySQL安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库基础概念II-范式-关系代数-三值逻辑/">数据库基础概念II-范式-关系代数-三值逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/09/数据库学习笔记-SQL约束(Constraints)/">数据库学习笔记-SQL约束(Constraints)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第九章 多态阅读笔记/">Java编程思想-第九章 多态阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第二十四章 并发编程阅读笔记/">Java编程思想-第二十四章 并发编程阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/05/Maven快照机制(SNAPSHOT)/">Maven快照机制（SNAPSHOT）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/29/140. 单词拆分II/">140. 单词拆分II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/139. 单词拆分/">139. 单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/5. 最长回文子串/">5. 最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/131. 分割回文串/">131. 分割回文串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/887. 鸡蛋掉落/">887. 鸡蛋掉落</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/27/21. 合并两个有序链表/">21. 合并两个有序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/685.冗余链接II/">685.冗余链接II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/1226. 哲学家进餐/">1226. 哲学家进餐</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1195. 交替打印字符串/">1195. 交替打印字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1117. H2O 生成/">1117. H2O 生成</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1116. 打印零与奇偶数/">1116. 打印零与奇偶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/1115. 交替打印FooBar/">1115. 交替打印FooBar</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/Java并发编程/">Java并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/1114.按序打印/">1114.按序打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/19/684.冗余链接/">684.冗余链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Lombok的基本注解使用/">Lombok的基本注解使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/后端开发常用调试技巧集锦/">后端开发常用调试技巧集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/405. 数字转化为十六进制数/">405. 数字转化为十六进制数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/SpringBoot学习笔记VIII-MybatisPlus教程/">SpringBoot学习笔记VIII-MybatisPlus教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/设计模式学习笔记V-策略模式/">设计模式学习笔记V-策略模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/1046. 最后一块石头的重量/">1046. 最后一块石头的重量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/Java学习笔记XIV/">Java学习笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/257.二叉树的所有路径/">257.二叉树的所有路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/22/24.两两交换链表中的节点/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/微信公众平台开发学习笔记I/">微信公众平台开发学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/">601.Human Traffic of Stadium体育馆的人流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/185.Department Top Three Salaries/">185.Department Top Three Salaries</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/数据库学习笔记IX/">数据库学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/184.Department Highest Salary/">184.Department Highest Salary</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/数据库学习笔记VIII/">数据库学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/1179. Reformat Department Table/">1179. Reformat Department Table</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II-Git版本回滚/">Git学习笔记II-Git版本回滚</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I-查询/">数据库学习笔记I-查询</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/102.Binary Tree Level Order Traversal二叉树的层次遍历 /">102.Binary Tree Level Order Traversal二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/C++基础概念V/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/354. Russian Doll Envelopes俄罗斯套娃信封/">354. Russian Doll Envelopes俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：510.9k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
