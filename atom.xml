@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-23T06:15:33.763Z</updated>
+  <updated>2020-07-23T07:34:33.200Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>341. 扁平化嵌套列表迭代器</title>
+    <link href="http://yoursite.com/2020/07/23/341.%20%E6%89%81%E5%B9%B3%E5%8C%96%E5%B5%8C%E5%A5%97%E5%88%97%E8%A1%A8%E8%BF%AD%E4%BB%A3%E5%99%A8/"/>
+    <id>http://yoursite.com/2020/07/23/341. 扁平化嵌套列表迭代器/</id>
+    <published>2020-07-23T06:21:12.000Z</published>
+    <updated>2020-07-23T07:34:33.200Z</updated>
+    
+    <content type="html"><![CDATA[<p>给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。</p><p>列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。</p><a id="more"></a><p>示例 1:</p><pre><code>输入: [[1,1],2,[1,1]]输出: [1,1,2,1,1]解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,1,2,1,1]。</code></pre><p>示例 2:</p><pre><code>输入: [1,[4,[6]]]输出: [1,4,6]解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,4,6]。</code></pre><h1 id="递归："><a href="#递归：" class="headerlink" title="递归："></a>递归：</h1><p>简单粗暴，在初始化迭代器的时候就直接把结果遍历出来，递归遍历列表中的数据，是整数就放入List，不是则再递归遍历，代码结构简单。但这种解法很奇怪，因为题目没给数据结构的具体结构，不知道哪来的isInteger()这种库函数的</p><details>    <summary>递归</summary><pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NestedIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">Integer</span>&gt; </span>{    <span class="keyword">private</span> List&lt;Integer&gt; list;    <span class="keyword">private</span> <span class="keyword">int</span> index;    <span class="function"><span class="keyword">public</span> <span class="title">NestedIterator</span><span class="params">(List&lt;NestedInteger&gt; nestedList)</span> </span>{        list = integerIterator(nestedList);        index = -<span class="number">1</span>;    }    <span class="meta">@Override</span>    <span class="function"><span class="keyword">public</span> Integer <span class="title">next</span><span class="params">()</span> </span>{        <span class="keyword">if</span> (<span class="keyword">this</span>.hasNext())  <span class="keyword">return</span> list.get(++index);        <span class="keyword">return</span> <span class="keyword">null</span>;    }    <span class="meta">@Override</span>    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>{        <span class="keyword">if</span> (index + <span class="number">1</span> &lt; list.size()) <span class="keyword">return</span> <span class="keyword">true</span>;        <span class="keyword">return</span> <span class="keyword">false</span>;    }    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;Integer&gt; <span class="title">integerIterator</span><span class="params">(List&lt;NestedInteger&gt; nestedIntegerList)</span> </span>{        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;(nestedIntegerList.size());        <span class="keyword">for</span> (NestedInteger tmp : nestedIntegerList) {            <span class="keyword">if</span> (tmp.isInteger())                 list.add(tmp.getInteger());            <span class="keyword">else</span>                 list.addAll(integerIterator(tmp.getList()));        }        <span class="keyword">return</span> list;    }}</code></pre></details>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。&lt;/p&gt;
+&lt;p&gt;列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2020年7月" scheme="http://yoursite.com/categories/2020%E5%B9%B47%E6%9C%88/"/>
+    
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Design" scheme="http://yoursite.com/tags/Design/"/>
+    
+      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
+    
+  </entry>
   
   <entry>
     <title>基本计算器 II</title>
@@ -60,9 +87,9 @@
       <category term="2020年7月" scheme="http://yoursite.com/categories/2020%E5%B9%B47%E6%9C%88/"/>
     
     
-      <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
     
       <category term="Sliding Window" scheme="http://yoursite.com/tags/Sliding-Window/"/>
     
@@ -86,11 +113,11 @@
       <category term="2020年7月" scheme="http://yoursite.com/categories/2020%E5%B9%B47%E6%9C%88/"/>
     
     
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
       <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
   </entry>
   
@@ -156,9 +183,9 @@
       <category term="2020年7月" scheme="http://yoursite.com/categories/2020%E5%B9%B47%E6%9C%88/"/>
     
     
-      <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
     
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
@@ -182,9 +209,9 @@
       <category term="2020年7月" scheme="http://yoursite.com/categories/2020%E5%B9%B47%E6%9C%88/"/>
     
     
-      <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
     
       <category term="Design" scheme="http://yoursite.com/tags/Design/"/>
     
@@ -208,9 +235,9 @@
       <category term="2020年7月" scheme="http://yoursite.com/categories/2020%E5%B9%B47%E6%9C%88/"/>
     
     
-      <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
     
       <category term="Divide and Conquer" scheme="http://yoursite.com/tags/Divide-and-Conquer/"/>
     
@@ -260,9 +287,9 @@
     
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
-      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
       <category term="Design" scheme="http://yoursite.com/tags/Design/"/>
+    
+      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
     
   </entry>
   
@@ -362,11 +389,11 @@
       <category term="2020年6月" scheme="http://yoursite.com/categories/2020%E5%B9%B46%E6%9C%88/"/>
     
     
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
@@ -392,11 +419,11 @@
       <category term="2020年6月" scheme="http://yoursite.com/categories/2020%E5%B9%B46%E6%9C%88/"/>
     
     
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
@@ -501,32 +528,6 @@
       <category term="Sort" scheme="http://yoursite.com/tags/Sort/"/>
     
       <category term="Ordered Map" scheme="http://yoursite.com/tags/Ordered-Map/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>217. 存在重复元素</title>
-    <link href="http://yoursite.com/2020/06/29/217.%20%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/"/>
-    <id>http://yoursite.com/2020/06/29/217. 存在重复元素/</id>
-    <published>2020-06-29T06:33:12.000Z</published>
-    <updated>2020-06-29T06:41:10.110Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定一个整数数组，判断是否存在重复元素。如果任意一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。</p><a id="more"></a><h1 id="哈希表解决"><a href="#哈希表解决" class="headerlink" title="哈希表解决"></a>哈希表解决</h1><p>可以用Set或HashMap来解决</p><figure class="highlight java"><figcaption><span>[solution 3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">containsDuplicate</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;(nums.length);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> x: nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> (set.contains(x)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        set.add(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>更多详细分析见<a href="https://leetcode-cn.com/problems/contains-duplicate/solution/cun-zai-zhong-fu-yuan-su-by-leetcode/" target="_blank" rel="noopener">^1</a></p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul><li><a href="https://leetcode-cn.com/problems/contains-duplicate-ii/" target="_blank" rel="noopener">219 存在重复元素 II</a></li><li><a href="https://leetcode-cn.com/problems/contains-duplicate-iii/" target="_blank" rel="noopener">220 存在重复元素 III</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;给定一个整数数组，判断是否存在重复元素。如果任意一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2020年6月" scheme="http://yoursite.com/categories/2020%E5%B9%B46%E6%9C%88/"/>
-    
-    
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
   </entry>
   
