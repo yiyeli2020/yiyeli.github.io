@@ -17,7 +17,7 @@ Mac上安装MySQL遇到的问题及解决方法
 
 # 登录到MySQL数据库服务器
 
-安装完毕后，终端输入`myqsl -u root -p`启动MySQL
+安装完毕后，终端输入`mysql -u root -p`启动MySQL
 
 ## 遇到问题
 
