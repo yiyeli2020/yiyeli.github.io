@@ -3,32 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>189. 旋转数组 | Yiye Li</title>
+  <title>148. 排序链表 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。">
-<meta name="keywords" content="Leetcode,Array">
+  <meta name="description" content="在O(nlogn) 时间复杂度和常数级空间复杂度下，对链表进行排序。">
+<meta name="keywords" content="Leetcode,Linked List,Sort">
 <meta property="og:type" content="article">
-<meta property="og:title" content="189. 旋转数组">
-<meta property="og:url" content="http://yoursite.com/2020/06/29/189. 旋转数组/index.html">
+<meta property="og:title" content="148. 排序链表">
+<meta property="og:url" content="http://yoursite.com/2020/07/25/148. 排序链表/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。">
+<meta property="og:description" content="在O(nlogn) 时间复杂度和常数级空间复杂度下，对链表进行排序。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p___i+k_%%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__n%k==0_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__k=k%n_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__k%n_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__n%k=0_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__i%k==0_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__frac%7Bn%7D%7Bk%7D_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__i%k==1_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__i%k==0_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__k_times_frac%7Bn%7D%7Bk%7D=n_.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p__k%n_.png">
-<meta property="og:updated_time" content="2020-06-29T06:23:14.982Z">
+<meta property="og:image" content="https://pic.leetcode-cn.com/8c47e58b6247676f3ef14e617a4686bc258cc573e36fcf67c1b0712fa7ed1699-Picture2.png">
+<meta property="og:image" content="https://pic.leetcode-cn.com/c1d5347aa56648afdec22372ee0ed13cf4c25347bd2bb9727b09327ce04360c2-Picture1.png">
+<meta property="og:updated_time" content="2020-08-18T08:48:04.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="189. 旋转数组">
-<meta name="twitter:description" content="给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。">
-<meta name="twitter:image" content="http://yoursite.com/2020/06/29/189.%20旋转数组/p___i+k_%%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6_.png">
+<meta name="twitter:title" content="148. 排序链表">
+<meta name="twitter:description" content="在O(nlogn) 时间复杂度和常数级空间复杂度下，对链表进行排序。">
+<meta name="twitter:image" content="https://pic.leetcode-cn.com/8c47e58b6247676f3ef14e617a4686bc258cc573e36fcf67c1b0712fa7ed1699-Picture2.png">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -210,11 +201,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-189. 旋转数组" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-148. 排序链表" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/06/29/189. 旋转数组/" class="article-date">
-      <time datetime="2020-06-29T06:06:12.000Z" itemprop="datePublished">2020-06-29</time>
+      <a href="/2020/07/25/148. 排序链表/" class="article-date">
+      <time datetime="2020-07-25T10:22:12.000Z" itemprop="datePublished">2020-07-25</time>
 </a>
     </div>
   
@@ -227,7 +218,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      189. 旋转数组
+      148. 排序链表
     </h1>
   
 
@@ -237,7 +228,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.3k字</span>
+        <span class="post-count">2.9k字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -245,7 +236,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
+        <span class="post-count">11分</span>
       </span>
     </span>
 </div>
@@ -256,13 +247,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2020年6月/">2020年6月</a>
+    <a class="article-category-link" href="/categories/2020年7月/">2020年7月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linked-List/">Linked List</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sort/">Sort</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -272,67 +263,138 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
+        <p>在O(nlogn) 时间复杂度和常数级空间复杂度下，对链表进行排序。</p>
 <a id="more"></a>
 
 
 <p>示例 1:</p>
-<pre><code>输入: [1,2,3,4,5,6,7] 和 k = 3
-输出: [5,6,7,1,2,3,4]
-解释:
-向右旋转 1 步: [7,1,2,3,4,5,6]
-向右旋转 2 步: [6,7,1,2,3,4,5]
-向右旋转 3 步: [5,6,7,1,2,3,4]</code></pre><p>示例 2:</p>
-<pre><code>输入: [-1,-100,3,99] 和 k = 2
-输出: [3,99,-1,-100]
-解释: 
-向右旋转 1 步: [99,-1,-100,3]
-向右旋转 2 步: [3,99,-1,-100]</code></pre><p>说明:</p>
-<pre><code>尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。
-要求使用空间复杂度为 O(1) 的 原地 算法。</code></pre><h2 id="方法-1：暴力"><a href="#方法-1：暴力" class="headerlink" title="方法 1：暴力"></a>方法 1：暴力</h2><p>最简单的方法是旋转 k 次，每次将数组旋转 1 个元素。</p>
-<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp, previous;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">            previous = nums[nums.length - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums.length; j++) &#123;</span><br><span class="line">                temp = nums[j];</span><br><span class="line">                nums[j] = previous;</span><br><span class="line">                previous = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂度分析</strong></p>
+<pre><code>输入: 4-&gt;2-&gt;1-&gt;3
+输出: 1-&gt;2-&gt;3-&gt;4</code></pre><p>示例 2:</p>
+<pre><code>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0
+输出: -1-&gt;0-&gt;3-&gt;4-&gt;5</code></pre><p>这道题拖的时间比较长，从写博客到做完持续了半个多月，创纪录了，第二种解法还没太吃透，有待深究。</p>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>归并排序（Merge sort）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。</p>
+<p>作为一种典型的分而治之思想的算法应用，归并排序的实现由两种方法：</p>
+<ol>
+<li><p>自上而下的递归（所有递归的方法都可以用迭代重写，所以就有了第 2 种方法）；</p>
+</li>
+<li><p>自下而上的迭代；</p>
+</li>
+</ol>
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
+<li><p>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列；</p>
+</li>
+<li><p>设定两个指针，最初位置分别为两个已经排序序列的起始位置；</p>
+</li>
+<li><p>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；</p>
+</li>
+<li><p>重复步骤 3 直到某一指针达到序列尾；</p>
+</li>
+<li><p>将另一序列剩下的所有元素直接复制到合并序列尾。</p>
+</li>
+</ol>
+<h1 id="解答一：归并排序（递归法）"><a href="#解答一：归并排序（递归法）" class="headerlink" title="解答一：归并排序（递归法）"></a>解答一：归并排序（递归法）</h1><ul>
+<li><p>题目要求时间空间复杂度分别为<em>O(nlogn)</em>和<em>O(1)</em>，根据时间复杂度我们自然想到二分法，从而联想到归并排序；</p>
+</li>
+<li><p>对数组做归并排序的空间复杂度为 <em>O(n)</em>，分别由新开辟数组<em>O(n)</em>和递归函数调用<em>O(logn)</em>组成，而根据链表特性：</p>
 <ul>
-<li>时间复杂度：<em>O(n*k)</em> 。每个元素都被移动 1 步（<em>O(n)</em>） k次（<em>O(k)</em>） 。</li>
-<li>空间复杂度：<em>O(1)</em> 。没有额外空间被使用。</li>
+<li>数组额外空间：链表可以通过修改引用来更改节点顺序，无需像数组一样开辟额外空间；</li>
+<li>递归额外空间：递归调用函数将带来<em>O(logn)</em>的空间复杂度，因此若希望达到<em>O(1)</em>空间复杂度，则不能使用递归。</li>
 </ul>
-<h2 id="方法-2：使用额外的数组"><a href="#方法-2：使用额外的数组" class="headerlink" title="方法 2：使用额外的数组"></a>方法 2：使用额外的数组</h2><p><strong>算法</strong></p>
-<p>我们可以用一个额外的数组来将每个元素放到正确的位置上，也就是原本数组里下标为 <em>i</em> 的我们把它放到 <img src="./p___i+k_%%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6_.png" alt="(i+k)\%数组长度 ">  的位置。然后把新的数组拷贝到原数组中。</p>
-<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            a[(i + k) % nums.length] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            nums[i] = a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂度分析</strong></p>
+</li>
+<li><p>通过递归实现链表归并排序，有以下两个环节：</p>
 <ul>
-<li>时间复杂度： <em>O(n)</em> 。将数字放到新的数组中需要一遍遍历，另一边来把新数组的元素拷贝回原数组。</li>
-<li>空间复杂度： <em>O(n)</em>。另一个数组需要原数组长度的空间。</li>
+<li><strong>分割 cut 环节：</strong> 找到当前链表<code>中点</code>，并从<code>中点</code>将链表断开（以便在下次递归 <code>cut</code> 时，链表片段拥有正确边界）；<ul>
+<li>我们使用 <code>fast,slow</code> 快慢双指针法，奇数个节点找到中点，偶数个节点找到中心左边的节点。</li>
+<li>找到中点 <code>slow</code> 后，执行 <code>slow.next = None</code> 将链表切断。</li>
+<li>递归分割时，输入当前链表左端点 <code>head</code> 和中心节点 <code>slow</code> 的下一个节点 <code>tmp</code>(因为链表是从 <code>slow</code> 切断的)。</li>
+<li><strong>cut 递归终止条件：</strong> 当<code>head.next == None</code>时，说明只有一个节点了，直接返回此节点。</li>
 </ul>
-<h2 id="方法-3：使用环状替换"><a href="#方法-3：使用环状替换" class="headerlink" title="方法 3：使用环状替换"></a>方法 3：使用环状替换</h2><p><strong>算法</strong></p>
-<p>如果我们直接把每一个数字放到它最后的位置，但这样的后果是遗失原来的元素。因此，我们需要把被替换的数字保存在变量 <em>temp</em> 里面。然后，我们将被替换数字（<em>temp*）放到它正确的位置，并继续这个过程 *n</em> 次， <em>n</em> 是数组的长度。这是因为我们需要将数组里所有的元素都移动。但是，这种方法可能会有个问题，如果 <img src="./p__n%k==0_.png" alt="n\%k==0 "> ，其中 <img src="./p__k=k%n_.png" alt="k=k\%n ">  （因为如果 <em>k</em> 大于 <em>n</em> ，移动 <em>k</em> 次实际上相当于移动 <img src="./p__k%n_.png" alt="k\%n ">  次）。这种情况下，我们会发现在没有遍历所有数字的情况下回到出发数字。此时，我们应该从下一个数字开始再重复相同的过程。</p>
-<p>现在，我们看看上面方法的证明。假设，数组里我们有 <em>n</em> 个元素并且 <em>k</em> 是要求移动的次数。更进一步，假设 <img src="./p__n%k=0_.png" alt="n\%k=0 ">  。第一轮中，所有移动数字的下标 <em>i</em> 满足 <img src="./p__i%k==0_.png" alt="i\%k==0 ">  。这是因为我们每跳 <em>k</em> 步，我们只会到达相距为 <em>k</em> 个位置下标的数。每一轮，我们都会移动 <img src="./p__frac%7Bn%7D%7Bk%7D_.png" alt="\frac{n}{k} ">  个元素。下一轮中，我们会移动满足 <img src="./p__i%k==1_.png" alt="i\%k==1 ">  的位置的数。这样的轮次会一直持续到我们再次遇到 <img src="./p__i%k==0_.png" alt="i\%k==0 ">  的地方为止，此时 <em>i=k</em> 。此时在正确位置上的数字共有 <img src="./p__k_times_frac%7Bn%7D%7Bk%7D=n_.png" alt="k\times\frac{n}{k}=n ">  个。因此所有数字都在正确位置上。</p>
-<p>让我们看一下接下来的例子，以更好地说明这个过程：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nums: [1, 2, 3, 4, 5, 6]</span><br><span class="line">k: 2</span><br></pre></td></tr></table></figure></p>
-<p> <a href="https://pic.leetcode-cn.com/f0493a97cdb7bc46b37306ca14e555451496f9f9c21effcad8517a81a26f30d6-image.png" target="_blank" rel="noopener">例子</a></p>
-<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        k = k % nums.length;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> start = <span class="number">0</span>; count &lt; nums.length; start++) &#123;</span><br><span class="line">            <span class="keyword">int</span> current = start;</span><br><span class="line">            <span class="keyword">int</span> prev = nums[start];</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> next = (current + k) % nums.length;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[next];</span><br><span class="line">                nums[next] = prev;</span><br><span class="line">                prev = temp;</span><br><span class="line">                current = next;</span><br><span class="line">                count++;</span><br><span class="line">            &#125; <span class="keyword">while</span> (start != current);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><strong>合并 merge 环节：</strong> 将两个排序链表合并，转化为一个排序链表。<ul>
+<li>双指针法合并，建立辅助ListNode <code>h</code> 作为头部。</li>
+<li>设置两指针 <code>left</code>, <code>right</code> 分别指向两链表头部，比较两指针处节点值大小，由小到大加入合并链表头部，指针交替前进，直至添加完两个链表。</li>
+<li>返回辅助ListNode <code>h</code> 作为头部的下个节点 <code>h.next</code>。</li>
+<li>时间复杂度 <code>O(l + r)</code>，<code>l, r</code> 分别代表两个链表长度。 </li>
+</ul>
+</li>
+<li>当题目输入的 <code>head == None</code> 时，直接返回None。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.leetcode-cn.com/8c47e58b6247676f3ef14e617a4686bc258cc573e36fcf67c1b0712fa7ed1699-Picture2.png" alt="Picture2.png"></p>
+<details>
+    <summary>归并排序（递归法）python</summary>
 
-<p><strong>复杂度分析</strong></p>
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sortList</span><span class="params">(self, head: ListNode)</span> -&gt; ListNode:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.next: <span class="keyword">return</span> head <span class="comment"># termination.</span></span><br><span class="line">        <span class="comment"># cut the LinkedList at the mid index.</span></span><br><span class="line">        slow, fast = head, head.next</span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</span><br><span class="line">            fast, slow = fast.next.next, slow.next</span><br><span class="line">        mid, slow.next = slow.next, <span class="keyword">None</span> <span class="comment"># save and cut.</span></span><br><span class="line">        <span class="comment"># recursive for cutting.</span></span><br><span class="line">        left, right = self.sortList(head), self.sortList(mid)</span><br><span class="line">        <span class="comment"># merge `left` and `right` linked list and return it.</span></span><br><span class="line">        h = res = ListNode(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">while</span> left <span class="keyword">and</span> right:</span><br><span class="line">            <span class="keyword">if</span> left.val &lt; right.val: h.next, left = left, left.next</span><br><span class="line">            <span class="keyword">else</span>: h.next, right = right, right.next</span><br><span class="line">            h = h.next</span><br><span class="line">        h.next = left <span class="keyword">if</span> left <span class="keyword">else</span> right</span><br><span class="line">        <span class="keyword">return</span> res.next</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+    <summary>归并排序（递归法）java</summary>
+
+
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">sortList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//分割 cut 环节： 找到当前链表中点，并从中点将链表断开（以便在下次递归 cut 时，链表片段拥有正确边界）；</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//cut 递归终止条件： 当head.next == None时，说明只有一个节点了，直接返回此节点</span></span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用 fast,slow 快慢双指针法，奇数个节点找到中点，偶数个节点找到中心左边的节点</span></span><br><span class="line">        ListNode fast=head.next,slow=head;</span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//找到中点 slow 后，执行 slow.next = None 将链表切断</span></span><br><span class="line">        ListNode tmp=slow.next;</span><br><span class="line">        slow.next=<span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//递归分割时，输入当前链表左端点 head 和中心节点 slow 的下一个节点 tmp</span></span><br><span class="line">        ListNode left = sortList(head);</span><br><span class="line">        ListNode right = sortList(tmp);</span><br><span class="line">        <span class="comment">//合并 merge 环节： 将两个排序链表合并，转化为一个排序链表。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//双指针法合并，建立辅助ListNode h 作为头部。</span></span><br><span class="line">        ListNode h = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode res=h;</span><br><span class="line">        <span class="comment">//设置两指针 left, right 分别指向两链表头部，比较两指针处节点值大小，由小到大加入合并链表头部，指针交替前进，直至添加完两个链表。</span></span><br><span class="line">        <span class="keyword">while</span> (left != <span class="keyword">null</span> &amp;&amp; right != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (left.val &lt; right.val) &#123;</span><br><span class="line">                h.next = left;</span><br><span class="line">                left = left.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                h.next=right;</span><br><span class="line">                right=right.next;</span><br><span class="line">            &#125;</span><br><span class="line">            h = h.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//返回辅助ListNode h 作为头部的下个节点 h.next。</span></span><br><span class="line">        h.next=(left !=<span class="keyword">null</span>) ? left:right;</span><br><span class="line">        <span class="keyword">return</span> res.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="解答二：归并排序（从底至顶直接合并）"><a href="#解答二：归并排序（从底至顶直接合并）" class="headerlink" title="解答二：归并排序（从底至顶直接合并）"></a>解答二：归并排序（从底至顶直接合并）</h1><ul>
+<li>对于非递归的归并排序，需要使用迭代的方式替换<code>cut</code>环节：<ul>
+<li>我们知道，<code>cut</code>环节本质上是通过二分法得到链表最小节点单元，再通过多轮合并得到排序结果。</li>
+<li>每一轮合并<code>merge</code>操作针对的单元都有固定长度<code>intv</code>，例如：<ul>
+<li>第一轮合并时<code>intv = 1</code>，即将整个链表切分为多个长度为1的单元，并按顺序两两排序合并，合并完成的已排序单元长度为2。</li>
+<li>第二轮合并时<code>intv = 2</code>，即将整个链表切分为多个长度为2的单元，并按顺序两两排序合并，合并完成已排序单元长度为4。</li>
+<li>以此类推，直到单元长度<code>intv &gt;= 链表长度</code>，代表已经排序完成。</li>
+</ul>
+</li>
+<li>根据以上推论，我们可以仅根据<code>intv</code>计算每个单元边界，并完成链表的每轮排序合并，例如:<ul>
+<li>当<code>intv = 1</code>时，将链表第<code>1</code>和第<code>2</code>节点排序合并，第<code>3</code>和第<code>4</code>节点排序合并，……。</li>
+<li>当<code>intv = 2</code>时，将链表第<code>1-2</code>和第<code>3-4</code>节点排序合并，第<code>5-6</code>和第<code>7-8</code>节点排序合并，……。</li>
+<li>当<code>intv = 4</code>时，将链表第<code>1-4</code>和第<code>5-8</code>节点排序合并，第<code>9-12</code>和第<code>13-16</code>节点排序合并，……。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>此方法时间复杂度<em>O(nlogn)</em>，空间复杂度<em>O(1)</em>。</li>
+</ul>
+<p><img src="https://pic.leetcode-cn.com/c1d5347aa56648afdec22372ee0ed13cf4c25347bd2bb9727b09327ce04360c2-Picture1.png" alt="Picture1.png"></p>
 <ul>
-<li>时间复杂度：<em>O(n)</em> 。只遍历了每个元素一次。</li>
-<li>空间复杂度：<em>O(1)</em> 。使用了常数个额外空间。</li>
+<li>模拟上述的多轮排序合并：<ul>
+<li>统计链表长度<code>length</code>，用于通过判断<code>intv &lt; length</code>判定是否完成排序；</li>
+<li>额外声明一个节点<code>res</code>，作为头部后面接整个链表，用于：<ul>
+<li><code>intv *= 2</code>即切换到下一轮合并时，可通过<code>res.next</code>找到链表头部<code>h</code>；</li>
+<li>执行排序合并时，需要一个辅助节点作为头部，而<code>res</code>则作为链表头部排序合并时的辅助头部<code>pre</code>；后面的合并排序可以将上次合并排序的尾部<code>tail</code>用做辅助节点。</li>
 </ul>
-<h2 id="方法-4：使用反转"><a href="#方法-4：使用反转" class="headerlink" title="方法 4：使用反转"></a>方法 4：使用反转</h2><p><strong>算法</strong></p>
-<p>这个方法基于这个事实：当我们旋转数组 k 次， <img src="./p__k%n_.png" alt="k\%n ">  个尾部元素会被移动到头部，剩下的元素会被向后移动。</p>
-<p>在这个方法中，我们首先将所有元素反转。然后反转前 k 个元素，再反转后面 <em>n-k</em> 个元素，就能得到想要的结果。</p>
-<p>我用这种方法来解决时遇到数组越界错误，是因为没有把k取模，因为有些情况下k可能大于数组长度。这个易错点需要注意。</p>
-<p>假设 <em>n=7</em> 且 <em>k=3</em> 。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">原始数组                  : 1 2 3 4 5 6 7</span><br><span class="line">反转所有数字后             : 7 6 5 4 3 2 1</span><br><span class="line">反转前 k 个数字后          : 5 6 7 4 3 2 1</span><br><span class="line">反转后 n-k 个数字后        : 5 6 7 1 2 3 4 --&gt; 结果</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        k %= nums.length;</span><br><span class="line">        reverse(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">        reverse(nums, <span class="number">0</span>, k - <span class="number">1</span>);</span><br><span class="line">        reverse(nums, k, nums.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = nums[start];</span><br><span class="line">            nums[start] = nums[end];</span><br><span class="line">            nums[end] = temp;</span><br><span class="line">            start++;</span><br><span class="line">            end--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>复杂度分析</strong></p>
-<ul>
-<li>时间复杂度：<em>O(n)</em> 。 <em>n</em> 个元素被反转了总共 3 次。</li>
-<li>空间复杂度：<em>O(1)</em> 。 没有使用额外的空间。</li>
+</li>
+<li>在每轮<code>intv</code>下的合并流程：<ol>
+<li>根据<code>intv</code>找到合并单元1和单元2的头部<code>h1</code>, <code>h2</code>。由于链表长度可能不是<code>2^n</code>，需要考虑边界条件：<ul>
+<li>在找<code>h2</code>过程中，如果链表剩余元素个数少于<code>intv</code>，则无需合并环节，直接<code>break</code>，执行下一轮合并；</li>
+<li>若<code>h2</code>存在，但以<code>h2</code>为头部的剩余元素个数少于<code>intv</code>，也执行合并环节，<code>h2</code>单元的长度为<code>c2 = intv - i</code>。</li>
 </ul>
+</li>
+<li>合并长度为<code>c1, c2</code>的<code>h1, h2</code>链表，其中：<ul>
+<li>合并完后，需要修改新的合并单元的尾部<code>pre</code>指针指向下一个合并单元头部<code>h</code>。（在寻找<code>h1, h2</code>环节中，h指针已经被移动到下一个单元头部）</li>
+<li>合并单元尾部同时也作为下次合并的辅助头部<code>pre</code>。</li>
+</ul>
+</li>
+<li>当<code>h == None</code>，代表此轮<code>intv</code>合并完成，跳出。</li>
+</ol>
+</li>
+<li>每轮合并完成后将单元长度×2，切换到下轮合并：<code>intv *= 2</code>。<details>
+<summary>归并排序（从底至顶直接合并) python</summary>
 
+</details></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sortList</span><span class="params">(self, head: ListNode)</span> -&gt; ListNode:</span></span><br><span class="line">        h, length, intv = head, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> h: h, length = h.next, length + <span class="number">1</span></span><br><span class="line">        res = ListNode(<span class="number">0</span>)</span><br><span class="line">        res.next = head</span><br><span class="line">        <span class="comment"># merge the list in different intv.</span></span><br><span class="line">        <span class="keyword">while</span> intv &lt; length:</span><br><span class="line">            pre, h = res, res.next</span><br><span class="line">            <span class="keyword">while</span> h:</span><br><span class="line">                <span class="comment"># get the two merge head `h1`, `h2`</span></span><br><span class="line">                h1, i = h, intv</span><br><span class="line">                <span class="keyword">while</span> i <span class="keyword">and</span> h: h, i = h.next, i - <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> i: <span class="keyword">break</span> <span class="comment"># no need to merge because the `h2` is None.</span></span><br><span class="line">                h2, i = h, intv</span><br><span class="line">                <span class="keyword">while</span> i <span class="keyword">and</span> h: h, i = h.next, i - <span class="number">1</span></span><br><span class="line">                c1, c2 = intv, intv - i <span class="comment"># the `c2`: length of `h2` can be small than the `intv`.</span></span><br><span class="line">                <span class="comment"># merge the `h1` and `h2`.</span></span><br><span class="line">                <span class="keyword">while</span> c1 <span class="keyword">and</span> c2:</span><br><span class="line">                    <span class="keyword">if</span> h1.val &lt; h2.val: pre.next, h1, c1 = h1, h1.next, c1 - <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>: pre.next, h2, c2 = h2, h2.next, c2 - <span class="number">1</span></span><br><span class="line">                    pre = pre.next</span><br><span class="line">                pre.next = h1 <span class="keyword">if</span> c1 <span class="keyword">else</span> h2</span><br><span class="line">                <span class="keyword">while</span> c1 &gt; <span class="number">0</span> <span class="keyword">or</span> c2 &gt; <span class="number">0</span>: pre, c1, c2 = pre.next, c1 - <span class="number">1</span>, c2 - <span class="number">1</span></span><br><span class="line">                pre.next = h </span><br><span class="line">            intv *= <span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> res.next</span><br></pre></td></tr></table></figure>
+
+
+<details>
+    <summary>归并排序（从底至顶直接合并）java</summary>
+
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">sortList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line"><span class="comment">//        模拟上述的多轮排序合并：</span></span><br><span class="line"><span class="comment">//        统计链表长度length，用于通过判断intv &lt; length判定是否完成排序；</span></span><br><span class="line">        ListNode h,h1,h2,pre,res;</span><br><span class="line">        h=head;</span><br><span class="line">        <span class="keyword">int</span> length=<span class="number">0</span>,intv=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (h != <span class="keyword">null</span>) &#123;</span><br><span class="line">            h=h.next;</span><br><span class="line">            length++;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        额外声明一个节点res，作为头部后面接整个链表，用于：</span></span><br><span class="line">        res = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        res.next=head;</span><br><span class="line"><span class="comment">//        intv *= 2即切换到下一轮合并时，可通过res.next找到链表头部h；</span></span><br><span class="line"><span class="comment">//        执行排序合并时，需要一个辅助节点作为头部，而res则作为链表头部排序合并时的辅助头部pre；后面的合并排序可以将上次合并排序的尾部tail用做辅助节点。</span></span><br><span class="line">        <span class="keyword">while</span> (intv &lt; length) &#123;</span><br><span class="line">            pre = res;</span><br><span class="line">            h = res.next;</span><br><span class="line"><span class="comment">//        在每轮intv下的合并流程：</span></span><br><span class="line"><span class="comment">//        a. 根据intv找到合并单元1和单元2的头部h1, h2。由于链表长度可能不是2^n，需要考虑边界条件：</span></span><br><span class="line">            <span class="keyword">while</span> (h != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">int</span> i = intv;</span><br><span class="line">                h1 = h;</span><br><span class="line">                <span class="keyword">while</span> (i &gt; <span class="number">0</span> &amp;&amp; h != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    h = h.next;</span><br><span class="line">                    i--;</span><br><span class="line">                &#125;</span><br><span class="line"><span class="comment">//              在找h2过程中，如果链表剩余元素个数少于intv，则无需合并环节，直接break，执行下一轮合并；</span></span><br><span class="line">                <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">                i = intv;</span><br><span class="line">                h2 = h;</span><br><span class="line">                <span class="keyword">while</span> (i &gt; <span class="number">0</span> &amp;&amp; h != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    h = h.next;</span><br><span class="line">                    i--;</span><br><span class="line">                &#125;</span><br><span class="line"><span class="comment">//        若h2存在，但以h2为头部的剩余元素个数少于intv，也执行合并环节，h2单元的长度为c2 = intv - i。</span></span><br><span class="line">                <span class="keyword">int</span> c1 = intv, c2 = intv - i;</span><br><span class="line"><span class="comment">//        b. 合并长度为c1, c2的h1, h2链表，其中：</span></span><br><span class="line">                <span class="keyword">while</span> (c1 &gt; <span class="number">0</span> &amp;&amp; c2 &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (h1.val &lt; h2.val) &#123;</span><br><span class="line">                        pre.next = h1;</span><br><span class="line">                        h1 = h1.next;</span><br><span class="line">                        c1--;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        pre.next = h2;</span><br><span class="line">                        h2 = h2.next;</span><br><span class="line">                        c2--;</span><br><span class="line">                    &#125;</span><br><span class="line">                    pre = pre.next;</span><br><span class="line">                &#125;</span><br><span class="line">                pre.next = c1 == <span class="number">0</span> ? h2 : h1;</span><br><span class="line">                <span class="keyword">while</span> (c1 &gt; <span class="number">0</span> || c2 &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    pre = pre.next;</span><br><span class="line">                    c1--;</span><br><span class="line">                    c2--;</span><br><span class="line">                &#125;</span><br><span class="line"><span class="comment">//        合并完后，需要修改新的合并单元的尾部pre指针指向下一个合并单元头部h。（在寻找h1, h2环节中，h指针已经被移动到下一个单元头部）</span></span><br><span class="line"><span class="comment">//        合并单元尾部同时也作为下次合并的辅助头部pre。</span></span><br><span class="line">                pre.next = h;</span><br><span class="line"><span class="comment">//        c. 当h == None，代表此轮intv合并完成，跳出。</span></span><br><span class="line">            &#125;</span><br><span class="line"><span class="comment">//        每轮合并完成后将单元长度×2，切换到下轮合并：intv *= 2。</span></span><br><span class="line">            intv *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
       
       
         <div class="page-reward">
@@ -387,13 +449,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/06/29/189. 旋转数组/">189. 旋转数组</a></p>
+        <p><span>本文标题:</span><a href="/2020/07/25/148. 排序链表/">148. 排序链表</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2020年06月29日 - 14时06分</p>
-        <p><span>最后更新:</span>2020年06月29日 - 14时23分</p>
+        <p><span>发布时间:</span>2020年07月25日 - 18时22分</p>
+        <p><span>最后更新:</span>2020年08月18日 - 16时48分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/06/29/189. 旋转数组/" title="189. 旋转数组">http://yoursite.com/2020/06/29/189. 旋转数组/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/29/189. 旋转数组/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/07/25/148. 排序链表/" title="148. 排序链表">http://yoursite.com/2020/07/25/148. 排序链表/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/07/25/148. 排序链表/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -406,18 +468,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/06/29/152. 乘积最大子数组/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          152. 乘积最大子数组
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/06/28/63. 不同路径II/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">63. 不同路径II</div>
+    <a href="/2020/07/25/142. 环形链表II/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">142. 环形链表II</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -428,7 +481,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法-1：暴力"><span class="toc-number">1.</span> <span class="toc-text">方法 1：暴力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法-2：使用额外的数组"><span class="toc-number">2.</span> <span class="toc-text">方法 2：使用额外的数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法-3：使用环状替换"><span class="toc-number">3.</span> <span class="toc-text">方法 3：使用环状替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法-4：使用反转"><span class="toc-number">4.</span> <span class="toc-text">方法 4：使用反转</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#归并排序"><span class="toc-number">1.</span> <span class="toc-text">归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法步骤"><span class="toc-number">1.1.</span> <span class="toc-text">算法步骤</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解答一：归并排序（递归法）"><span class="toc-number">2.</span> <span class="toc-text">解答一：归并排序（递归法）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解答二：归并排序（从底至顶直接合并）"><span class="toc-number">3.</span> <span class="toc-text">解答二：归并排序（从底至顶直接合并）</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -494,13 +547,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/06/29/152. 乘积最大子数组/" title="上一篇: 152. 乘积最大子数组">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/06/28/63. 不同路径II/" title="下一篇: 63. 不同路径II">
+            <a href="/2020/07/25/142. 环形链表II/" title="下一篇: 142. 环形链表II">
                 <i class="fa fa-angle-right"></i>
             </a>
         
