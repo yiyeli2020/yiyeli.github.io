@@ -315,9 +315,9 @@
     
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
-      <category term="Design" scheme="http://yoursite.com/tags/Design/"/>
-    
       <category term="Heap" scheme="http://yoursite.com/tags/Heap/"/>
+    
+      <category term="Design" scheme="http://yoursite.com/tags/Design/"/>
     
   </entry>
   

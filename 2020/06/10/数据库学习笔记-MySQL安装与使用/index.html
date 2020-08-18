@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>Git学习笔记II-Git版本回滚 | Yiye Li</title>
+  <title>数据库学习笔记-MySQL安装 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git版本回滚">
-<meta name="keywords" content="Git">
+  <meta name="description" content="Mac上安装MySQL遇到的问题及解决方法">
+<meta name="keywords" content="Database,MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git学习笔记II-Git版本回滚">
-<meta property="og:url" content="http://yoursite.com/2019/09/05/Git学习笔记II-Git版本回滚/index.html">
+<meta property="og:title" content="数据库学习笔记-MySQL安装">
+<meta property="og:url" content="http://yoursite.com/2020/06/10/数据库学习笔记-MySQL安装与使用/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="Git版本回滚">
+<meta property="og:description" content="Mac上安装MySQL遇到的问题及解决方法">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-06-10T08:31:30.318Z">
+<meta property="og:updated_time" content="2020-08-18T05:57:51.762Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git学习笔记II-Git版本回滚">
-<meta name="twitter:description" content="Git版本回滚">
+<meta name="twitter:title" content="数据库学习笔记-MySQL安装">
+<meta name="twitter:description" content="Mac上安装MySQL遇到的问题及解决方法">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Git学习笔记II-Git版本回滚" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据库学习笔记-MySQL安装与使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/09/05/Git学习笔记II-Git版本回滚/" class="article-date">
-      <time datetime="2019-09-05T06:51:12.000Z" itemprop="datePublished">2019-09-05</time>
+      <a href="/2020/06/10/数据库学习笔记-MySQL安装与使用/" class="article-date">
+      <time datetime="2020-06-10T10:12:12.000Z" itemprop="datePublished">2020-06-10</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Git学习笔记II-Git版本回滚
+      数据库学习笔记-MySQL安装
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">758字</span>
+        <span class="post-count">754字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2019年9月/">2019年9月</a>
+    <a class="article-category-link" href="/categories/2020年6月/">2020年6月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Database/">Database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,39 +260,43 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Git版本回滚</p>
+        <p>Mac上安装MySQL遇到的问题及解决方法</p>
 <a id="more"></a>
-<p>在当前branch上多次commit代码并且push后，发现不符合要求，需要回滚到特定的版本。</p>
-<h2 id="回滚方法一"><a href="#回滚方法一" class="headerlink" title="回滚方法一"></a>回滚方法一</h2><p>在IDEA中打开Version Control-》log，选择相应的commit记录右键-》Revert Commit，即可退回提交记录，再push。</p>
-<h2 id="回滚方法二"><a href="#回滚方法二" class="headerlink" title="回滚方法二"></a>回滚方法二</h2><p>步骤如下<a href="https://blog.csdn.net/weixin_38569499/article/details/83017699" target="_blank" rel="noopener">^1</a>：</p>
-<p>1、查找commitId</p>
-<p>首先用命令行打开git项目路径，输入git log命令查看commit记录，如下：</p>
-<pre><code>$ git log</code></pre><p>找到commitId是9a0d02d1578ea064479296ad7efa70c5cb1a3717记录，这是执行上面命令后打印出来的信息：</p>
-<pre><code>commit 9a0d02d1578ea064479296ad7efa70c5cb1a3717</code></pre><p>2、找到需要回滚的commit，输入git reset –hard {commitId}，将本地文件回滚：</p>
-<pre><code>$ git reset --hard c503cffa099332911d4fce2fc1399cb4bc3ba9d6
-HEAD is now at c503cffa0 add a constellation test case</code></pre><p>3、此时本地文件已经回滚到刚刚commit 9a0d02d1578ea064479296ad7efa70c5cb1a3717之后的状态，但是服务器仍然没有改变，需要继续远程回滚：</p>
-<pre><code>$ git push -f</code></pre><p>执行，最终提示一系列内容，远程回滚成功</p>
-<h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>但是有时候发现还是报错<a href="https://kebingzao.com/2019/04/18/git-protected/" target="_blank" rel="noopener">^2</a>：</p>
-<pre><code>You are not allowed to force push code to a protected branch on this project</code></pre><p>信息提示我无法强制 push 代码到一个受保护的分支？？ 哪怕我已经是 master 了，还是强推不了</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>去 gitlab 的该项目的配置项看了一下(在 Settings 的 Repository 设置项的 Protected Branches)， 原来这个项目中有对 master 分支做了 protected 保护， 不允许强制推送，这个好像是项目创建的时候就默认的设置：</p>
-<p>所以如果要强制推送到 master 的话，这边要先取消掉 protected 分支。所以点击 Unprotect 按钮</p>
-<p>这时候就没有保护分支了， 然后这时候强制推送就成功了。 </p>
-<p>然后为了安全，我们再重新设置为保护分支</p>
-<p>这样就恢复成原来的样子了。</p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>虽然在我的 pc 上已经将这个 master 分支回滚了。 但是后面发现在我的另一个同事的 IDE 上，master 分支 git pull 之后，竟然还是旧的代码，而不是之前回滚之后的那个版本？？</p>
-<pre><code>F:\airdroid_code\go\src\auto_pack&gt;git pull
-Already up to date.</code></pre><p>而且已经没办法再 pull 任何东西了，看了一下 gitlab ，发现 master 分支的代码确实是回滚之后的代码了。所以我怀疑有可能是 master 分支的 commit 版本太新了， 比当前线上的 master 的 commit 版本还新，所以才会 pull 不到任何东西。<br>所以解决方法，就是先把这个分支回滚到某一个更旧的 commit ，然后再 git pull ，这样才有东西：</p>
-<pre><code>F:\airdroid_code\go\src\auto_pack&gt;git reset --hard 3dfc6e8d
-HEAD is now at 3dfc6e8 readme
 
-F:\airdroid_code\go\src\auto_pack&gt;git pull
-Updating 3dfc6e8..ad9e3f2
-Fast-forward
-main.go   | 18 +++++++++++++++---
-model.go  |  9 ++++++++-
-upload.go |  5 ++++-
-3 files changed, 27 insertions(+), 5 deletions(-)</code></pre><p>果然这样就可以了。<br>所以结论就是，本地的分支 commit 如果比线上回滚后的分支 commit 还要新的话，那么 git pull 是拉不到任何东西的，所以就要先回滚到比线上的分支还旧的 commit ，然后再 git pull。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装步骤参见<a href="https://juejin.im/post/5cc2a52ce51d456e7079f27f" target="_blank" rel="noopener">^1</a></p>
+<h1 id="登录到MySQL数据库服务器"><a href="#登录到MySQL数据库服务器" class="headerlink" title="登录到MySQL数据库服务器"></a>登录到MySQL数据库服务器</h1><p>安装完毕后，终端输入<code>mysql -u root -p</code>启动MySQL</p>
+<h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>登录遇到错误</p>
+<pre><code>ERROR 1045 (28000): Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)</code></pre><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>参见<a href="https://blog.csdn.net/qq_32786873/article/details/79225039" target="_blank" rel="noopener">^2</a><br>但是输入命令重启MySQL服务器：</p>
+<pre><code>systemctl restart mysqld</code></pre><p>发现报错：</p>
+<pre><code>bash: systemctl: command not found</code></pre><p>因为systemctl命令是用于Linux的，在MacOS上替代命令是launchctl，Apache的HTTP控制接口是apachectl。</p>
+<p>先停止MySQL数据库：</p>
+<pre><code>launchctl stop mysqlId</code></pre><p>然后再重置密码</p>
+<p>因为我是用<a href="https://juejin.im/post/5cc2a52ce51d456e7079f27f" target="_blank" rel="noopener">^1</a>中的下载dmg包安装MySQL的，所以可以直接去系统偏好设置中找到MySQL服务，然后重置密码。</p>
+<p>这样就可以登录了。</p>
+<h1 id="列出所有的数据库"><a href="#列出所有的数据库" class="headerlink" title="列出所有的数据库"></a>列出所有的数据库</h1><pre><code>show databases;</code></pre><h1 id="建立数据库"><a href="#建立数据库" class="headerlink" title="建立数据库"></a>建立数据库</h1><p>首先建立数据库，再在其中建立数据表即可：</p>
+<pre><code>create database （database name）;</code></pre><h1 id="使用USE语句切换到特定的数据库"><a href="#使用USE语句切换到特定的数据库" class="headerlink" title="使用USE语句切换到特定的数据库"></a>使用USE语句切换到特定的数据库</h1><pre><code>use （database name）;</code></pre><p>别忘记每句后加分号,我们建立数据库mysql_practice：</p>
+<pre><code>mysql&gt; create database mysql_practice;
+Query OK, 1 row affected (0.00 sec)
 
+mysql&gt; use mysql_practice
+Database changed</code></pre><h1 id="列出数据库中的所有表"><a href="#列出数据库中的所有表" class="headerlink" title="列出数据库中的所有表"></a>列出数据库中的所有表</h1><pre><code>show tables;</code></pre><p>SHOW TABLES命令可显示表是基表还是视图<a href="https://www.yiibai.com/mysql/show-tables.html" target="_blank" rel="noopener">^4</a>。 要在结果中包含表类型，请使用SHOW TABLES语句，如下所示 </p>
+<pre><code>SHOW FULL TABLES;</code></pre><p>对于具有很多表的数据库，一次显示所有表可能不免直观。</p>
+<p>幸运的是，SHOW TABLES命令提供了一个选项，允许使用LIKE运算符或WHERE子句中的表达式对返回的表进行过滤，如下所示：</p>
+<pre><code>SHOW TABLES LIKE pattern;
+
+SHOW TABLES WHERE expression;</code></pre><p>例如，要显示数据库中以字母p开头的所有表，请使用以下语句:</p>
+<pre><code>SHOW TABLES LIKE &apos;p%&apos;;</code></pre><p>或者显示以’es‘字符串结尾的表，可使用以下语句：</p>
+<pre><code>SHOW TABLES LIKE &apos;%es&apos;;</code></pre><p>更多使用方法详见：<a href="https://www.yiibai.com/mysql/show-tables.html" target="_blank" rel="noopener">^4</a></p>
+<h1 id="执行-sql文件"><a href="#执行-sql文件" class="headerlink" title="执行.sql文件"></a>执行.sql文件</h1><p>方法一，在 Windows 下使用 cmd 命令执行（或 Unix 或 Linux 控制台下）</p>
+<pre><code>【Mysql的bin目录】\mysql –u 用户名 –p 密码 –D 数据库&lt;【sql脚本文件路径全名】</code></pre><p>示例：</p>
+<pre><code>C:\MySQL\bin\mysql –u root –p 123456 -D test&lt;C:\test.sql</code></pre><p>注意：</p>
+<p>A、如果在 sql 脚本文件中使用了 use 数据库，则 -D数据库 选项可以忽略</p>
+<p>B、如果【Mysql的bin目录】中包含空格，则需要使用“”包含，如：“C:\Program Files\MySQL\bin\mysql” –u用户名 –p密码 –D数据库&lt;【sql脚本文件路径全名】</p>
+<p>C、如果 sql 没有创建数据库的语句，而且数据库管理中也没有该数据库，那么必须先用命令创建一个空的数据库。</p>
+<p>方法二，进入 MySQL 控制台（如：MySQL 5.5 Command Line Client），使用 source 命令执行</p>
+<pre><code>Mysql&gt;source 【sql脚本文件的路径全名】 或 Mysql&gt;\. 【sql脚本文件的路径全名】</code></pre><p>示例：</p>
+<pre><code>source C:\test.sql 或者 \. C:\test.sql</code></pre><p>打开 MySQL Command Line Client，输入数据库密码进行登录，然后使用 source 命令或者 .</p>
+<h1 id="退出MySQL"><a href="#退出MySQL" class="headerlink" title="退出MySQL"></a>退出MySQL</h1><pre><code>exit</code></pre>
       
       
         <div class="page-reward">
@@ -347,13 +351,13 @@ upload.go |  5 ++++-
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/09/05/Git学习笔记II-Git版本回滚/">Git学习笔记II-Git版本回滚</a></p>
+        <p><span>本文标题:</span><a href="/2020/06/10/数据库学习笔记-MySQL安装与使用/">数据库学习笔记-MySQL安装</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2019年09月05日 - 14时51分</p>
-        <p><span>最后更新:</span>2020年06月10日 - 16时31分</p>
+        <p><span>发布时间:</span>2020年06月10日 - 18时12分</p>
+        <p><span>最后更新:</span>2020年08月18日 - 13时57分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/09/05/Git学习笔记II-Git版本回滚/" title="Git学习笔记II-Git版本回滚">http://yoursite.com/2019/09/05/Git学习笔记II-Git版本回滚/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/09/05/Git学习笔记II-Git版本回滚/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/06/10/数据库学习笔记-MySQL安装与使用/" title="数据库学习笔记-MySQL安装">http://yoursite.com/2020/06/10/数据库学习笔记-MySQL安装与使用/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/06/10/数据库学习笔记-MySQL安装与使用/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -366,18 +370,18 @@ upload.go |  5 ++++-
 
 <nav id="article-nav">
   
-    <a href="/2019/09/05/Java学习笔记VI/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/06/11/数据库学习笔记-连接/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Java学习笔记VI
+          数据库学习笔记-连接
         
       </div>
     </a>
   
   
-    <a href="/2019/09/05/数据库学习笔记V/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据库学习笔记V</div>
+    <a href="/2020/06/10/数据库基础概念II-范式-关系代数-三值逻辑/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据库基础概念II-范式-关系代数-三值逻辑</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -388,7 +392,7 @@ upload.go |  5 ++++-
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#回滚方法一"><span class="toc-number">1.</span> <span class="toc-text">回滚方法一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回滚方法二"><span class="toc-number">2.</span> <span class="toc-text">回滚方法二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到问题"><span class="toc-number">3.</span> <span class="toc-text">遇到问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-number">4.</span> <span class="toc-text">解决方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后记"><span class="toc-number"></span> <span class="toc-text">后记</span></a>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#登录到MySQL数据库服务器"><span class="toc-number">2.</span> <span class="toc-text">登录到MySQL数据库服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到问题"><span class="toc-number">2.1.</span> <span class="toc-text">遇到问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-number">2.2.</span> <span class="toc-text">解决方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#列出所有的数据库"><span class="toc-number">3.</span> <span class="toc-text">列出所有的数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#建立数据库"><span class="toc-number">4.</span> <span class="toc-text">建立数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用USE语句切换到特定的数据库"><span class="toc-number">5.</span> <span class="toc-text">使用USE语句切换到特定的数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#列出数据库中的所有表"><span class="toc-number">6.</span> <span class="toc-text">列出数据库中的所有表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#执行-sql文件"><span class="toc-number">7.</span> <span class="toc-text">执行.sql文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#退出MySQL"><span class="toc-number">8.</span> <span class="toc-text">退出MySQL</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -454,13 +458,13 @@ upload.go |  5 ++++-
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/09/05/Java学习笔记VI/" title="上一篇: Java学习笔记VI">
+            <a href="/2020/06/11/数据库学习笔记-连接/" title="上一篇: 数据库学习笔记-连接">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/09/05/数据库学习笔记V/" title="下一篇: 数据库学习笔记V">
+            <a href="/2020/06/10/数据库基础概念II-范式-关系代数-三值逻辑/" title="下一篇: 数据库基础概念II-范式-关系代数-三值逻辑">
                 <i class="fa fa-angle-right"></i>
             </a>
         
