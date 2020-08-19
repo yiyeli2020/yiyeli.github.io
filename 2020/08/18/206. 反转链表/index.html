@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>24.两两交换链表中的节点 | Yiye Li</title>
+  <title>206. 反转链表 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给定一个链表，两两交换其中相邻的节点，并返回交换后的链表">
-<meta name="keywords" content="LeetCode,LinkList">
+  <meta name="description" content="反转一个单链表。">
+<meta name="keywords" content="Leetcode,Linked List">
 <meta property="og:type" content="article">
-<meta property="og:title" content="24.两两交换链表中的节点">
-<meta property="og:url" content="http://yoursite.com/2020/01/22/24.两两交换链表中的节点/index.html">
+<meta property="og:title" content="206. 反转链表">
+<meta property="og:url" content="http://yoursite.com/2020/08/18/206. 反转链表/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="给定一个链表，两两交换其中相邻的节点，并返回交换后的链表">
+<meta property="og:description" content="反转一个单链表。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-22T06:38:13.500Z">
+<meta property="og:updated_time" content="2020-08-19T09:11:27.649Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="24.两两交换链表中的节点">
-<meta name="twitter:description" content="给定一个链表，两两交换其中相邻的节点，并返回交换后的链表">
+<meta name="twitter:title" content="206. 反转链表">
+<meta name="twitter:description" content="反转一个单链表。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-24.两两交换链表中的节点" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-206. 反转链表" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/01/22/24.两两交换链表中的节点/" class="article-date">
-      <time datetime="2020-01-22T06:32:12.000Z" itemprop="datePublished">2020-01-22</time>
+      <a href="/2020/08/18/206. 反转链表/" class="article-date">
+      <time datetime="2020-08-18T09:51:12.000Z" itemprop="datePublished">2020-08-18</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      24.两两交换链表中的节点
+      206. 反转链表
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">258字</span>
+        <span class="post-count">526字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
+    <a class="article-category-link" href="/categories/2020年8月/">2020年8月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LinkList/">LinkList</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linked-List/">Linked List</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,13 +260,43 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表</p>
+        <p>反转一个单链表。</p>
 <a id="more"></a>
 
 
-<p>此题有递归和迭代两种方法，我在做的时候首先想到的是用迭代的方法。但是在返回哪个结点时出了问题。调试了很久。看官方题解<br><a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/liang-liang-jiao-huan-lian-biao-zhong-de-jie-di-19/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/liang-liang-jiao-huan-lian-biao-zhong-de-jie-di-19/</a><br>也没有弄清楚dummy结点下个结点为什么会准确的指向交换后的链表头而不是跟着交换移动。<br>看了<br><a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/bi-jiao-zhi-jie-gao-xiao-de-zuo-fa-han-tu-jie-by-w/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/bi-jiao-zhi-jie-gao-xiao-de-zuo-fa-han-tu-jie-by-w/</a><br>这个题解中的图解才算搞清楚了，建议再做的时候还是在不看题解的情况下写一次。</p>
-<p>顺便推荐IDEA中的leetcode-editor插件，这个插件现在已经可以在中文版leetcode上无缝对接使用了。适合在一些场景下做leetcode。</p>
-<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/</a></p>
+<p>示例:</p>
+<pre><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</code></pre><p>进阶:</p>
+<pre><code>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</code></pre><h1 id="方法一：迭代"><a href="#方法一：迭代" class="headerlink" title="方法一：迭代"></a>方法一：迭代</h1><p>假设存在链表 <code>1 → 2 → 3 → Ø</code>，我们想要把它改成 <code>Ø ← 1 ← 2 ← 3</code>。</p>
+<p>在遍历列表时，将当前节点的 <code>next</code> 指针改为指向前一个元素。由于节点没有引用其上一个节点，因此必须事先存储其前一个元素。在更改引用之前，还需要另一个指针来存储下一个节点。不要忘记在最后返回新的头引用！</p>
+<details>
+    <summary>迭代</summary>
+
+<figure class="highlight java"><figcaption><span>[Tww6MiPp-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">    ListNode curr = head;</span><br><span class="line">    <span class="keyword">while</span> (curr != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ListNode nextTemp = curr.next;</span><br><span class="line">        curr.next = prev;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = nextTemp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：<em>O(n)*，假设 *n</em> 是列表的长度，时间复杂度是 <em>O(n)</em>。</li>
+<li>空间复杂度：<em>O(1)</em>。</li>
+</ul>
+<hr>
+<h1 id="方法二：递归"><a href="#方法二：递归" class="headerlink" title="方法二：递归"></a>方法二：递归</h1><p>递归版本稍微复杂一些，其关键在于反向工作。假设列表的其余部分已经被反转，现在我该如何反转它前面的部分？</p>
+<p>假设列表为：</p>
+<p>n1→…→nk−1    →n k→n k+1→…→nm→∅</p>
+<p>若从节点 <em>n_{k+1}</em> 到 <em>n_{m}</em> 已经被反转，而我们正处于 <em>n_{k}</em>。</p>
+<p>n1→…→nk−1→n k→n k+1←…←nm</p>
+<p>我们希望 <em>n_{k+1}</em> 的下一个节点指向 <em>n_{k}</em>。</p>
+<p>所以，<em>n_{k}</em>.next.next = <em>n_{k}</em>。</p>
+<p>要小心的是 <em>n_{1}</em> 的下一个必须指向 Ø 。如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。</p>
+<figure class="highlight java"><figcaption><span>[ESkYHVXb-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">    ListNode p = reverseList(head.next);</span><br><span class="line">    head.next.next = head;</span><br><span class="line">    head.next = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：<em>O(n)*，假设 *n</em> 是列表的长度，那么时间复杂度为 <em>O(n)</em>。</li>
+<li>空间复杂度：<em>O(n)*，由于使用递归，将会使用隐式栈空间。递归深度可能会达到 *n</em> 层。</li>
+</ul>
 
       
       
@@ -322,13 +352,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/01/22/24.两两交换链表中的节点/">24.两两交换链表中的节点</a></p>
+        <p><span>本文标题:</span><a href="/2020/08/18/206. 反转链表/">206. 反转链表</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2020年01月22日 - 14时32分</p>
-        <p><span>最后更新:</span>2020年01月22日 - 14时38分</p>
+        <p><span>发布时间:</span>2020年08月18日 - 17时51分</p>
+        <p><span>最后更新:</span>2020年08月19日 - 17时11分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/01/22/24.两两交换链表中的节点/" title="24.两两交换链表中的节点">http://yoursite.com/2020/01/22/24.两两交换链表中的节点/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/22/24.两两交换链表中的节点/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/08/18/206. 反转链表/" title="206. 反转链表">http://yoursite.com/2020/08/18/206. 反转链表/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/08/18/206. 反转链表/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -341,18 +371,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/01/24/257.二叉树的所有路径/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          257.二叉树的所有路径
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/01/20/微信公众平台开发学习笔记I/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">微信公众平台开发学习笔记I</div>
+    <a href="/2020/08/18/160. 相交链表/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">160. 相交链表</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -363,7 +384,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">1.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#方法一：迭代"><span class="toc-number">1.</span> <span class="toc-text">方法一：迭代</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法二：递归"><span class="toc-number">2.</span> <span class="toc-text">方法二：递归</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -429,13 +450,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/01/24/257.二叉树的所有路径/" title="上一篇: 257.二叉树的所有路径">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/01/20/微信公众平台开发学习笔记I/" title="下一篇: 微信公众平台开发学习笔记I">
+            <a href="/2020/08/18/160. 相交链表/" title="下一篇: 160. 相交链表">
                 <i class="fa fa-angle-right"></i>
             </a>
         

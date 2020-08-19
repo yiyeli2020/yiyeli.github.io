@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-18T09:50:02.811Z</updated>
+  <updated>2020-08-19T09:11:27.649Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>206. 反转链表</title>
+    <link href="http://yoursite.com/2020/08/18/206.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/"/>
+    <id>http://yoursite.com/2020/08/18/206. 反转链表/</id>
+    <published>2020-08-18T09:51:12.000Z</published>
+    <updated>2020-08-19T09:11:27.649Z</updated>
+    
+    <content type="html"><![CDATA[<p>反转一个单链表。</p><a id="more"></a><p>示例:</p><pre><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</code></pre><p>进阶:</p><pre><code>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</code></pre><h1 id="方法一：迭代"><a href="#方法一：迭代" class="headerlink" title="方法一：迭代"></a>方法一：迭代</h1><p>假设存在链表 <code>1 → 2 → 3 → Ø</code>，我们想要把它改成 <code>Ø ← 1 ← 2 ← 3</code>。</p><p>在遍历列表时，将当前节点的 <code>next</code> 指针改为指向前一个元素。由于节点没有引用其上一个节点，因此必须事先存储其前一个元素。在更改引用之前，还需要另一个指针来存储下一个节点。不要忘记在最后返回新的头引用！</p><details>    <summary>迭代</summary><figure class="highlight java"><figcaption><span>[Tww6MiPp-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">    ListNode curr = head;</span><br><span class="line">    <span class="keyword">while</span> (curr != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ListNode nextTemp = curr.next;</span><br><span class="line">        curr.next = prev;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = nextTemp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><p><strong>复杂度分析</strong></p><ul><li>时间复杂度：<em>O(n)*，假设 *n</em> 是列表的长度，时间复杂度是 <em>O(n)</em>。</li><li>空间复杂度：<em>O(1)</em>。</li></ul><hr><h1 id="方法二：递归"><a href="#方法二：递归" class="headerlink" title="方法二：递归"></a>方法二：递归</h1><p>递归版本稍微复杂一些，其关键在于反向工作。假设列表的其余部分已经被反转，现在我该如何反转它前面的部分？</p><p>假设列表为：</p><p>n1→…→nk−1    →n k→n k+1→…→nm→∅</p><p>若从节点 <em>n_{k+1}</em> 到 <em>n_{m}</em> 已经被反转，而我们正处于 <em>n_{k}</em>。</p><p>n1→…→nk−1→n k→n k+1←…←nm</p><p>我们希望 <em>n_{k+1}</em> 的下一个节点指向 <em>n_{k}</em>。</p><p>所以，<em>n_{k}</em>.next.next = <em>n_{k}</em>。</p><p>要小心的是 <em>n_{1}</em> 的下一个必须指向 Ø 。如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。</p><figure class="highlight java"><figcaption><span>[ESkYHVXb-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">    ListNode p = reverseList(head.next);</span><br><span class="line">    head.next.next = head;</span><br><span class="line">    head.next = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>复杂度分析</strong></p><ul><li>时间复杂度：<em>O(n)*，假设 *n</em> 是列表的长度，那么时间复杂度为 <em>O(n)</em>。</li><li>空间复杂度：<em>O(n)*，由于使用递归，将会使用隐式栈空间。递归深度可能会达到 *n</em> 层。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;反转一个单链表。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2020年8月" scheme="http://yoursite.com/categories/2020%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Linked List" scheme="http://yoursite.com/tags/Linked-List/"/>
+    
+  </entry>
   
   <entry>
     <title>160. 相交链表</title>
@@ -498,30 +522,6 @@
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>334. 递增的三元子序列</title>
-    <link href="http://yoursite.com/2020/06/30/334.%E9%80%92%E5%A2%9E%E7%9A%84%E4%B8%89%E5%85%83%E5%AD%90%E5%BA%8F%E5%88%97/"/>
-    <id>http://yoursite.com/2020/06/30/334.递增的三元子序列/</id>
-    <published>2020-06-30T12:52:12.000Z</published>
-    <updated>2020-06-30T13:09:57.486Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。</p><a id="more"></a><p>数学表达式如下:</p><p>如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，<br>使得 arr[i] &lt; arr[j] &lt; arr[k] ，返回 true ; 否则返回 false 。<br>说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。</p><p>示例 1:</p><pre><code>输入: [1,2,3,4,5]输出: true</code></pre><p>示例 2:</p><pre><code>输入: [5,4,3,2,1]输出: false</code></pre><h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><ol><li>第一种方法采用了双指针的思想，针对这个题的三元子序列，如果是四元或更高元则不通用。主要思路是维护当前访问数组的最小值和最小值右侧大于最小值的最小的一个。具体步骤顺序遍历数组，首先确定当前已访问的数组的最小值，即如果小于等于min值的话更新min值，如果大于min，判断是否小于等于max值，如果是，更新max值。如果大于max值，则说明有三元子序列。</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">increasingTriplet</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums == <span class="keyword">null</span> || nums.length == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> min = Integer.MAX_VALUE, max = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num: nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num &lt;= min)&#123;</span><br><span class="line">                min = num;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(num &lt;= max)&#123;</span><br><span class="line">                max = num;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="2"><li>第二种方法是动态规划的思想，主要思路是维护和更新以i为结尾的三元子序列的最长递增长度。转移方程为dp[i] = max{dp[i], dp[j] + 1} (0&lt;=j&lt;i).</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">increasingTriplet</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums == <span class="keyword">null</span> || nums.length == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] &gt; nums[j])&#123;</span><br><span class="line">                    dp[i] = Math.max(dp[i], dp[j] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(dp[i] &gt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2020年6月" scheme="http://yoursite.com/categories/2020%E5%B9%B46%E6%9C%88/"/>
-    
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
   </entry>
   
