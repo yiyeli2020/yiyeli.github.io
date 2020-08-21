@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-20T09:50:00.006Z</updated>
+  <updated>2020-08-21T03:06:08.248Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>234. 回文链表</title>
+    <link href="http://yoursite.com/2020/08/20/234.%20%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/"/>
+    <id>http://yoursite.com/2020/08/20/234. 回文链表/</id>
+    <published>2020-08-20T09:53:12.000Z</published>
+    <updated>2020-08-21T03:06:08.248Z</updated>
+    
+    <content type="html"><![CDATA[<p>请判断一个链表是否为回文链表。</p><a id="more"></a><p>示例 1:</p><pre><code>输入: 1-&gt;2输出: false</code></pre><p>示例 2:</p><pre><code>输入: 1-&gt;2-&gt;2-&gt;1输出: true</code></pre><p>进阶：</p><p>你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？</p><h1 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h1><ol><li>采用快慢两个指针去寻找链表的中间节点；</li><li>根据链表的中间节点反转后一半的链表；</li><li>迭代比较链表前一半的元素和后一半的元素，判断节点的值是否相等，得出是否为回文。</li></ol><h1 id="图解："><a href="#图解：" class="headerlink" title="图解："></a>图解：</h1><p><a href="https://pic.leetcode-cn.com/cb25ad29e4c902e12bfe088a79b491dc8e6ff890786f15ce6b176d5419bcbf71-%E9%93%BE%E8%A1%A8%E5%9B%9E%E6%96%87%E5%A5%87%E6%95%B0.jpeg" target="_blank" rel="noopener">链表回文奇数.jpeg</a></p><p><a href="https://pic.leetcode-cn.com/79a887a172f927142b591a28f2d4638223ee992279f6925ec418e1ce1cbc5c1a-%E9%93%BE%E8%A1%A8%E5%9B%9E%E6%96%87%E5%81%B6%E6%95%B0.jpeg" target="_blank" rel="noopener">链表回文偶数.jpeg</a></p><h1 id="解题代码："><a href="#解题代码：" class="headerlink" title="解题代码："></a>解题代码：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean isPalindrome(ListNode head) &#123;</span><br><span class="line">        if(head == null) return true;</span><br><span class="line"></span><br><span class="line">        ListNode midNode = findMidNode(head);</span><br><span class="line">        ListNode secondHalfHead = reverseLinked(midNode.next);</span><br><span class="line">        ListNode curr1 = head;</span><br><span class="line">        ListNode curr2 = secondHalfHead;</span><br><span class="line"></span><br><span class="line">        boolean palindrome = true;</span><br><span class="line">        while(palindrome &amp;&amp; curr2 != null)&#123;</span><br><span class="line">            if(curr1.val != curr2.val) palindrome = false;</span><br><span class="line">            curr1 = curr1.next;</span><br><span class="line">            curr2 = curr2.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return palindrome;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 反转链表 */</span><br><span class="line">    private ListNode reverseLinked(ListNode head)&#123;</span><br><span class="line">        ListNode cur = head;</span><br><span class="line">        ListNode prev = null;</span><br><span class="line">        while(cur != null)&#123;</span><br><span class="line">            ListNode nextTemp = cur.next;</span><br><span class="line">            cur.next = prev;</span><br><span class="line">            prev = cur;</span><br><span class="line">            cur = nextTemp;</span><br><span class="line">        &#125;</span><br><span class="line">        return prev;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 快慢指针寻找中间节点 */</span><br><span class="line">    private ListNode findMidNode(ListNode head)&#123;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        ListNode low = head;</span><br><span class="line">        while(fast.next != null &amp;&amp; fast.next.next != null)&#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            low = low.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return low;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;请判断一个链表是否为回文链表。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2020年8月" scheme="http://yoursite.com/categories/2020%E5%B9%B48%E6%9C%88/"/>
+    
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Linked List" scheme="http://yoursite.com/tags/Linked-List/"/>
+    
+  </entry>
   
   <entry>
     <title>92. 反转链表II</title>
@@ -492,34 +516,6 @@
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
     
       <category term="Design" scheme="http://yoursite.com/tags/Design/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>240. 搜索二维矩阵II</title>
-    <link href="http://yoursite.com/2020/06/30/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5II/"/>
-    <id>http://yoursite.com/2020/06/30/240. 搜索二维矩阵II/</id>
-    <published>2020-06-30T14:52:12.000Z</published>
-    <updated>2020-06-30T16:10:49.197Z</updated>
-    
-    <content type="html"><![CDATA[<p>编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。</p><a id="more"></a><p>编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：</p><p>每行的元素从左到右升序排列。<br>每列的元素从上到下升序排列。<br>示例:</p><pre><code>现有矩阵 matrix 如下：[  [1,   4,  7, 11, 15],  [2,   5,  8, 12, 19],  [3,   6,  9, 16, 22],  [10, 13, 14, 17, 24],  [18, 21, 23, 26, 30]]给定 target = 5，返回 true。给定 target = 20，返回 false。</code></pre><p>这道题出的不好，因为可以用74.搜索二维矩阵题一样的方法从左下角搜索来解决。</p><h1 id="从左下角开始搜索"><a href="#从左下角开始搜索" class="headerlink" title="从左下角开始搜索"></a>从左下角开始搜索</h1><p>因为矩阵的行和列是排序的（分别从左到右和从上到下），所以在查看任何特定值时，我们可以修剪O(m)或O(n)元素。</p><p>算法：</p><p>首先，我们初始化一个指向矩阵左下角的 (row，col) 指针。然后，直到找到目标并返回 true（或者指针指向矩阵维度之外的 (row，col) 为止，我们执行以下操作：</p><p>如果当前指向的值大于目标值，则可以 “向上” 移动一行。 </p><p>否则，如果当前指向的值小于目标值，则可以移动一列。不难理解为什么这样做永远不会删减正确的答案；因为行是从左到右排序的，所以我们知道当前值右侧的每个值都较大。 </p><p>因此，如果当前值已经大于目标值，我们知道它右边的每个值会比较大。也可以对列进行非常类似的论证，因此这种搜索方式将始终在矩阵中找到目标（如果存在）。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean searchMatrix(int[][] matrix, int target) &#123;</span><br><span class="line">//        二维数组为空，要检查三个部分:</span><br><span class="line">//        一是数组首地址是否为空</span><br><span class="line">//        二是是否为&#123;&#125;，也就是array.length==0的情况</span><br><span class="line">//        三是&#123;&#123;&#125;&#125;，这时array.length=1，但是array[0].length==0。满足任意一个条件就可以返回false了。</span><br><span class="line">        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return false;</span><br><span class="line">        int row = matrix.length;</span><br><span class="line">        int col = matrix[0].length;</span><br><span class="line">        int rowindex = row - 1;</span><br><span class="line">        int colindex = 0;</span><br><span class="line"></span><br><span class="line">        while (colindex &lt; col &amp;&amp; rowindex &gt;= 0) &#123;</span><br><span class="line">            if (target == matrix[rowindex][colindex]) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125; else if (target &gt; matrix[rowindex][colindex]) &#123;</span><br><span class="line">                colindex++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                rowindex--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>其它方法见<a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/solution/sou-suo-er-wei-ju-zhen-ii-by-leetcode-2/" target="_blank" rel="noopener">^1</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2020年6月" scheme="http://yoursite.com/categories/2020%E5%B9%B46%E6%9C%88/"/>
-    
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Divide and Conquer" scheme="http://yoursite.com/tags/Divide-and-Conquer/"/>
-    
-      <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
   </entry>
   
