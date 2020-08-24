@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>Effective-Java阅读笔记XV | Yiye Li</title>
+  <title>324. 摆动排序 II | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第五章阅读： 泛型 29.优先考虑泛型泛型类型比需要在客户端代码中强制转换的类型更安全，更易于使用。30.优先使用泛型方法像泛型类型一样，泛型方法比需要客户端对输入参数和返回值进行显式强制转换的方法更安全，更易于使用。">
-<meta name="keywords" content="Java">
+  <meta name="description" content="给定一个无序的数组 nums，将它重新排列成 nums[0] &amp;lt; nums[1] &amp;gt; nums[2] &amp;lt; nums[3]… 的顺序。">
+<meta name="keywords" content="Leetcode,Sort">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Effective-Java阅读笔记XV">
-<meta property="og:url" content="http://yoursite.com/2020/01/17/Effective-Java阅读笔记XV/index.html">
+<meta property="og:title" content="324. 摆动排序 II">
+<meta property="og:url" content="http://yoursite.com/2020/08/24/324. 摆动排序 II/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="第五章阅读： 泛型 29.优先考虑泛型泛型类型比需要在客户端代码中强制转换的类型更安全，更易于使用。30.优先使用泛型方法像泛型类型一样，泛型方法比需要客户端对输入参数和返回值进行显式强制转换的方法更安全，更易于使用。">
+<meta property="og:description" content="给定一个无序的数组 nums，将它重新排列成 nums[0] &amp;lt; nums[1] &amp;gt; nums[2] &amp;lt; nums[3]… 的顺序。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-17T01:50:19.117Z">
+<meta property="og:updated_time" content="2020-08-24T09:54:43.599Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Effective-Java阅读笔记XV">
-<meta name="twitter:description" content="第五章阅读： 泛型 29.优先考虑泛型泛型类型比需要在客户端代码中强制转换的类型更安全，更易于使用。30.优先使用泛型方法像泛型类型一样，泛型方法比需要客户端对输入参数和返回值进行显式强制转换的方法更安全，更易于使用。">
+<meta name="twitter:title" content="324. 摆动排序 II">
+<meta name="twitter:description" content="给定一个无序的数组 nums，将它重新排列成 nums[0] &amp;lt; nums[1] &amp;gt; nums[2] &amp;lt; nums[3]… 的顺序。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Effective-Java阅读笔记XV" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-324. 摆动排序 II" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/01/17/Effective-Java阅读笔记XV/" class="article-date">
-      <time datetime="2020-01-16T16:33:12.000Z" itemprop="datePublished">2020-01-17</time>
+      <a href="/2020/08/24/324. 摆动排序 II/" class="article-date">
+      <time datetime="2020-08-24T08:40:12.000Z" itemprop="datePublished">2020-08-24</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Effective-Java阅读笔记XV
+      324. 摆动排序 II
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">4.1k字</span>
+        <span class="post-count">1k字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">16分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
+    <a class="article-category-link" href="/categories/2020年8月/">2020年8月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sort/">Sort</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,189 +260,49 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>第五章阅读： 泛型</p>
-<p>29.优先考虑泛型<br>泛型类型比需要在客户端代码中强制转换的类型更安全，更易于使用。<br>30.优先使用泛型方法<br>像泛型类型一样，泛型方法比需要客户端对输入参数和返回值进行显式强制转换的方法更安全，更易于使用。</p>
+        <p>给定一个无序的数组 nums，将它重新排列成 nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]… 的顺序。</p>
 <a id="more"></a>
 
-<h1 id="优先考虑泛型"><a href="#优先考虑泛型" class="headerlink" title="优先考虑泛型"></a>优先考虑泛型</h1><p>　　参数化声明并使用 JDK 提供的泛型类型和方法通常不会太困难。 但编写自己的泛型类型有点困难，但值得努力学习。</p>
-<p>　　考虑条目 7 中的简单堆栈实现：</p>
-<pre><code>// Object-based collection - a prime candidate for generics
-public class Stack {
-    private Object[] elements;
-    private int size = 0;
-    private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-    public Stack() {
-        elements = new Object[DEFAULT_INITIAL_CAPACITY];
-    }
+<p>示例 1:</p>
+<pre><code>输入: nums = [1, 5, 1, 1, 6, 4]
+输出: 一个可能的答案是 [1, 4, 1, 5, 1, 6]</code></pre><p>示例 2:</p>
+<pre><code>输入: nums = [1, 3, 2, 2, 3, 1]
+输出: 一个可能的答案是 [2, 3, 1, 3, 1, 2]</code></pre><p>说明:<br>你可以假设所有输入都会得到有效的结果。</p>
+<p>进阶:<br>你能用 O(n) 时间复杂度和 / 或原地 O(1) 额外空间来实现吗？</p>
+<p>这道题比较简单,主要说一下思想:         </p>
+<h2 id="有一个数组-a1-a2-…-an-，我们怎么把它排成摇摆序列呢？"><a href="#有一个数组-a1-a2-…-an-，我们怎么把它排成摇摆序列呢？" class="headerlink" title="有一个数组[a1,a2,…,an]，我们怎么把它排成摇摆序列呢？"></a>有一个数组[a1,a2,…,an]，我们怎么把它排成摇摆序列呢？</h2><p>由摇摆序列的定义:<code>nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]...</code>，我们知道了可以分成较大一部分的数和较小一部分数，然后互相穿插即可。比如一个数组排序后为：<code>A=[a1,a2,...,an]</code> <code>(a1&lt;=a2&lt;=....&lt;=an)</code>，然后分成较小和较大的两部分<code>[a1,a2,...,a(n/2)]</code>，<code>[a(n/2+1),...,an]</code>（数组长度为奇数时不影响），再进行穿插操作。</p>
+<h2 id="那是不是穿插成-a1-a-n-2-1-a2-a-n-2-2-…-an-就行了呢？"><a href="#那是不是穿插成-a1-a-n-2-1-a2-a-n-2-2-…-an-就行了呢？" class="headerlink" title="那是不是穿插成[a1,a(n/2+1),a2,a(n/2+2),…,an]就行了呢？"></a>那是不是穿插成[a1,a(n/2+1),a2,a(n/2+2),…,an]就行了呢？</h2><p>其实不对，可以验证特殊情况：n比较小时且为偶数时，穿插后的序列需要满足<code>a(n/2+1)&gt;a2</code>，如果<code>a1&lt;a2&lt;=a(n/2+1)&lt;an</code>，<code>a(n/2+1)</code>正好是<code>a2</code>的后一项且与<code>a2</code>相等呢？即如果是<code>[4,5,5,6]</code>的情况呢？<br>那就分成了<code>[4,5]</code>，<code>[5,6]</code>两部分，之后穿插成的是<code>[4,5,5,6]</code>并不是摇摆序列。</p>
+<h2 id="应该怎样排列呢？"><a href="#应该怎样排列呢？" class="headerlink" title="应该怎样排列呢？"></a>应该怎样排列呢？</h2><ol>
+<li>把较小和较大的两部分<code>[a1,a2,...,a(n/2)]</code>，<code>[a(n/2+1),...,an]</code>翻转成<code>[a(n/2),...,a1]</code>，<code>[an,...,a(n/2+1)]</code></li>
+<li>排列成<code>B=[a(n/2),a(n),a(n/2-1),a(n-1),...,a1,a(n/2+1)]</code>即可。</li>
+</ol>
+<p>这样相邻两个数一定不存在相等的情况，而且满足摇摆序列的要求。</p>
+<ul>
+<li><p><code>n=1</code>时显然正确</p>
+</li>
+<li><p><code>n=2或n=3</code>时也显然正确。</p>
+</li>
+<li><p><code>n&gt;=4时</code>：</p>
+<ol>
+<li><p>首先，判断相邻的情况，如果B中现在相邻两数在原来的有序序列A也相邻，此时令<code>n-n/2=1， (n-1)-(n/2-1)=1，...</code>都解得<code>n=2</code>，意思是<code>n=2</code>是他们的公共解，而<code>n&gt;=4</code>时，<code>n-n/2， (n-1)-(n/2-1)</code>等于<code>n/2&gt;=2</code>，说明B中相邻两数一定在原来的有序序列A中不相邻；</p>
+</li>
+<li><p>有人会说也存在原本(在A中)不相邻但是相等的情况，即几个数连续相等，但其中两个相等的数并不相邻，比如<code>aq=a(q+1)=a(q+2)</code>，<code>aq=a(q+2)</code>相等但是不相邻，但是我们知道如果<code>a(n/2-k)=a(n-k)</code>即不相邻相等，那么由于他们中间的所有数都要相等，而且与这两个数相等才能保证不相邻相等：即<code>a(n/2-k)=a(n/2-k+1)=a(n/2-k+2)=...=a(n-k-2)=a(n-k-1)=a(n-k)</code>，一共<code>n/2+1</code>个数相等。</p>
+</li>
+<li><p>而不相邻相等这种情况是不行的：虽然只有<code>a(n/2-k),a(n-k)</code>（在B中相邻）在原序列A中不相邻相等，但也违背了摇摆序列的定义，所以这道题有一个隐藏的条件：输入序列在排序后最多只有序列长度一半(<code>n/2</code>)的相邻的数连续相等。</p>
+</li>
+</ol>
+</li>
+<li><p>在这个条件下：这道题按此排列就没问题。大家可以用🖊验证一下。</p>
+</li>
+</ul>
+<p>代码如下:</p>
+<details>
+    <summary>Java</summary>
 
-    public void push(Object e) {
-        ensureCapacity();
-        elements[size++] = e;
-    }
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 先排序再穿插</span></span><br><span class="line"><span class="comment">     * O(nlogn)+O(n)=O(nlogn)</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> nums</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="keyword">int</span> len = nums.length;</span><br><span class="line">    <span class="keyword">int</span> smalllen = (len % <span class="number">2</span> == <span class="number">0</span>) ? len / <span class="number">2</span> : (len / <span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span>[] smaller = <span class="keyword">new</span> <span class="keyword">int</span>[smalllen], bigger = <span class="keyword">new</span> <span class="keyword">int</span>[len / <span class="number">2</span>];</span><br><span class="line">    System.arraycopy(nums, <span class="number">0</span>, smaller, <span class="number">0</span>, smaller.length);</span><br><span class="line">    System.arraycopy(nums,smaller.length,bigger,<span class="number">0</span>,bigger.length);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len/<span class="number">2</span>; i++) &#123;</span><br><span class="line">        nums[<span class="number">2</span> * i] = smaller[smaller.length - <span class="number">1</span> - i];</span><br><span class="line">        nums[<span class="number">2</span> * i + <span class="number">1</span>] = bigger[bigger.length-i-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (len % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        nums[len - <span class="number">1</span>] = smaller[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    public Object pop() {
-        if (size == 0)
-            throw new EmptyStackException();
-        Object result = elements[--size];
-        elements[size] = null; // Eliminate obsolete reference
-        return result;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    private void ensureCapacity() {
-        if (elements.length == size)
-            elements = Arrays.copyOf(elements, 2 * size + 1);
-    }
-}</code></pre><p>　　这个类应该已经被参数化了，但是由于事实并非如此，我们可以对它进行泛型化。 换句话说，我们可以参数化它，而不会损害原始非参数化版本的客户端。 就目前而言，客户端必须强制转换从堆栈中弹出的对象，而这些强制转换可能会在运行时失败。 泛型化类的第一步是在其声明中添加一个或多个类型参数。 在这种情况下，有一个类型参数，表示堆栈的元素类型，这个类型参数的常规名称是 E（详见第 68 条）。</p>
-<p>　　下一步是用相应的类型参数替换所有使用的 Object 类型，然后尝试编译生成的程序：</p>
-<pre><code>// Initial attempt to generify Stack - won&apos;t compile!
-public class Stack&lt;E&gt; {
-    private E[] elements;
-    private int size = 0;
-    private static final int DEFAULT_INITIAL_CAPACITY = 16;
-
-    public Stack() {
-        elements = new E[DEFAULT_INITIAL_CAPACITY];
-    }
-
-    public void push(E e) {
-        ensureCapacity();
-        elements[size++] = e;
-    }
-
-    public E pop() {
-        if (size == 0)
-            throw new EmptyStackException();
-        E result = elements[--size];
-        elements[size] = null; // Eliminate obsolete reference
-        return result;
-    }
-    ... // no changes in isEmpty or ensureCapacity
-}</code></pre><p>　　你通常会得到至少一个错误或警告，这个类也不例外。 幸运的是，这个类只产生一个错误：</p>
-<pre><code>Stack.java:8: generic array creation
-        elements = new E[DEFAULT_INITIAL_CAPACITY];
-                   ^</code></pre><p>　　如条目 28 所述，你不能创建一个不可具体化类型的数组，例如类型 E。每当编写一个由数组支持的泛型时，就会出现此问题。 有两种合理的方法来解决它。 第一种解决方案直接规避了对泛型数组创建的禁用：创建一个 Object 数组并将其转换为泛型数组类型。 现在没有了错误，编译器会发出警告。 这种用法是合法的，但不是（一般）类型安全的：</p>
-<pre><code>Stack.java:8: warning: [unchecked] unchecked cast
-found: Object[], required: E[]
-        elements = (E[]) new Object[DEFAULT_INITIAL_CAPACITY];
-                       ^</code></pre><p>　　编译器可能无法证明你的程序是类型安全的，但你可以。 你必须说服自己，不加限制的类型强制转换不会损害程序的类型安全。 有问题的数组（元素）保存在一个私有属性中，永远不会返回给客户端或传递给任何其他方法。 保存在数组中的唯一元素是那些传递给 push 方法的元素，它们是 E 类型的，所以未经检查的强制转换不会造成任何伤害。</p>
-<p>　　一旦证明未经检查的强制转换是安全的，请尽可能缩小范围（条目 27）。 在这种情况下，构造方法只包含未经检查的数组创建，所以在整个构造方法中抑制警告是合适的。 通过添加一个注解来执行此操作，Stack 可以干净地编译，并且可以在没有显式强制转换或担心 ClassCastException 异常的情况下使用它：</p>
-<pre><code>// The elements array will contain only E instances from push(E).
-// This is sufficient to ensure type safety, but the runtime
-// type of the array won&apos;t be E[]; it will always be Object[]!
-@SuppressWarnings(&quot;unchecked&quot;)
-public Stack() {
-    elements = (E[]) new Object[DEFAULT_INITIAL_CAPACITY];
-}</code></pre><p>　消除 Stack 中的泛型数组创建错误的第二种方法是将属性元素的类型从 E[] 更改为 Object[]。 如果这样做，会得到一个不同的错误：</p>
-<pre><code>Stack.java:19: incompatible types
-found: Object, required: E
-        E result = elements[--size];
-                           ^</code></pre><p>　　可以通过将从数组中检索到的元素转换为 E 来将此错误更改为警告：</p>
-<pre><code>Stack.java:19: warning: [unchecked] unchecked cast
-found: Object, required: E
-        E result = (E) elements[--size];
-                               ^</code></pre><p>　　因为 E 是不可具体化的类型，编译器无法在运行时检查强制转换。 再一次，你可以很容易地向自己证明，不加限制的转换是安全的，所以可以适当地抑制警告。 根据条目 27 的建议，我们只在包含未经检查的强制转换的分配上抑制警告，而不是在整个 pop 方法上：</p>
-<pre><code>// Appropriate suppression of unchecked warning
-public E pop() {
-    if (size == 0)
-        throw new EmptyStackException();
-
-    // push requires elements to be of type E, so cast is correct
-    @SuppressWarnings(&quot;unchecked&quot;) E result =
-        (E) elements[--size];
-
-    elements[size] = null; // Eliminate obsolete reference
-    return result;
-}</code></pre><p>　　两种消除泛型数组创建的技术都有其追随者。 第一个更可读：数组被声明为 E[] 类型，清楚地表明它只包含 E 实例。 它也更简洁：在一个典型的泛型类中，你从代码中的许多点读取数组; 第一种技术只需要一次转换（创建数组的地方），而第二种技术每次读取数组元素都需要单独转换。 因此，第一种技术是优选的并且在实践中更常用。 但是，它确实会造成堆污染（heap pollution）（详见第 32 条）：数组的运行时类型与编译时类型不匹配（除非 E 碰巧是 Object）。 这使得一些程序员非常不安，他们选择了第二种技术，尽管在这种情况下堆的污染是无害的。<br>　　下面的程序演示了泛型 Stack 类的使用。 该程序以相反的顺序打印其命令行参数，并将其转换为大写。 对从堆栈弹出的元素调用 String 的 toUpperCase 方法不需要显式强制转换，而自动生成的强制转换将保证成功：</p>
-<pre><code>// Little program to exercise our generic Stack
-public static void main(String[] args) {
-    Stack&lt;String&gt; stack = new Stack&lt;&gt;();
-    for (String arg : args)
-        stack.push(arg);
-    while (!stack.isEmpty())
-        System.out.println(stack.pop().toUpperCase());
-}</code></pre><p>　　上面的例子似乎与条目 28 相矛盾，条目 28 中鼓励使用列表优先于数组。 在泛型类型中使用列表并不总是可行或可取的。 Java 本身生来并不支持列表，所以一些泛型类型（如 ArrayList）必须在数组上实现。 其他的泛型类型，比如 HashMap，是为了提高性能而实现的。</p>
-<p>　　绝大多数泛型类型就像我们的 Stack 示例一样，它们的类型参数没有限制：可以创建一个 Stack<object>，Stack&lt;int[]&gt;，Stack&lt;List<string>&gt; 或者其他任何对象的 Stack 引用类型。 请注意，不能创建基本类型的堆栈：尝试创建 Stack<int> 或 Stack<double> 将导致编译时错误。 这是 Java 泛型类型系统的一个基本限制。 可以使用基本类型的包装类（详见第 61 条）来解决这个限制。</double></int></string></object></p>
-<p>　　有一些泛型类型限制了它们类型参数的允许值。 例如，考虑 java.util.concurrent.DelayQueue，它的声明如下所示：</p>
-<pre><code>class DelayQueue&lt;E extends Delayed&gt; implements BlockingQueue&lt;E&gt;</code></pre><p>　　类型参数列表（<e extends delayed>）要求实际的类型参数 E 是 java.util.concurrent.Delayed 的子类型。 这使得 DelayQueue 实现及其客户端可以利用 DelayQueue 元素上的 Delayed 方法，而不需要显式的转换或 ClassCastException 异常的风险。 类型参数 E 被称为限定类型参数。 请注意，子类型关系被定义为每个类型都是自己的子类型，因此创建 DelayQueue<delayed> 是合法的。</delayed></e></p>
-<p>　　总之，泛型类型比需要在客户端代码中强制转换的类型更安全，更易于使用。 当你设计新的类型时，确保它们可以在没有这种强制转换的情况下使用。 这通常意味着使类型泛型化。 如果你有任何现有的类型，应该是泛型的但实际上却不是，那么把它们泛型化。 这使这些类型的新用户的使用更容易，而不会破坏现有的客户端（条目 26）。</p>
-<h1 id="优先使用泛型方法"><a href="#优先使用泛型方法" class="headerlink" title="优先使用泛型方法"></a>优先使用泛型方法</h1><p>　　正如类可以是泛型的，方法也可以是泛型的。 对参数化类型进行操作的静态工具方法通常都是泛型的。 集合中的所有“算法”方法（如 binarySearch 和 sort）都是泛型的。<br>　　编写泛型方法类似于编写泛型类型。 考虑这个方法，它返回两个集合的并集：</p>
-<pre><code>// Uses raw types - unacceptable! [Item 26]
-public static Set union(Set s1, Set s2) {
-    Set result = new HashSet(s1);
-    result.addAll(s2);
-    return result;
-}</code></pre><p>　　此方法可以编译但有两个警告：</p>
-<pre><code>Union.java:5: warning: [unchecked] unchecked call to
-HashSet(Collection&lt;? extends E&gt;) as a member of raw type HashSet
-        Set result = new HashSet(s1);
-                     ^
-Union.java:6: warning: [unchecked] unchecked call to
-addAll(Collection&lt;? extends E&gt;) as a member of raw type Set
-        result.addAll(s2);
-                     ^</code></pre><p>　　要修复这些警告并使方法类型安全，请修改其声明以声明表示三个集合（两个参数和返回值）的元素类型的类型参数，并在整个方法中使用此类型参数。 声明类型参数的类型参数列表位于方法的修饰符和返回类型之间。 在这个例子中，类型参数列表是 <e>，返回类型是 Set<e>。 类型参数的命名约定对于泛型方法和泛型类型是相同的（详见第 29 和 68 条）：</e></e></p>
-<pre><code>// Generic method
-public static &lt;E&gt; Set&lt;E&gt; union(Set&lt;E&gt; s1, Set&lt;E&gt; s2) {
-    Set&lt;E&gt; result = new HashSet&lt;&gt;(s1);
-    result.addAll(s2);
-    return result;
-
-}</code></pre><p>　　至少对于简单的泛型方法来说，就是这样。 此方法编译时不会生成任何警告，并提供类型安全性和易用性。 这是一个简单的程序来运行该方法。 这个程序不包含强制转换和编译时没有错误或警告：至少对于简单的泛型方法来说，就是这样。 此方法编译时不会生成任何警告，并提供类型安全性和易用性。 这是一个简单的程序来运行该方法。 这个程序不包含强制转换和编译时没有错误或警告：</p>
-<pre><code>// Simple program to exercise generic method
-public static void main(String[] args) {
-    Set&lt;String&gt; guys = Set.of(&quot;Tom&quot;, &quot;Dick&quot;, &quot;Harry&quot;);
-    Set&lt;String&gt; stooges = Set.of(&quot;Larry&quot;, &quot;Moe&quot;, &quot;Curly&quot;);
-    Set&lt;String&gt; aflCio = union(guys, stooges);
-    System.out.println(aflCio);
-}</code></pre><p>　　当运行这个程序时，它会打印[Moe, Tom, Harry, Larry, Curly, Dick]（输出中元素的顺序依赖于具体实现。）</p>
-<p>　　union 方法的一个限制是所有三个集合（输入参数和返回值）的类型必须完全相同。 通过使用限定通配符类型（ bounded wildcard types）（详见第 31 条），可以使该方法更加灵活。</p>
-<p>　　有时，需要创建一个不可改变但适用于许多不同类型的对象。 因为泛型是通过擦除来实现的（详见第 28 条），所以可以使用单个对象进行所有必需的类型参数化，但是需要编写一个静态工厂方法来重复地为每个请求的类型参数化分配对象。 这种称为泛型单例工厂（generic singleton factory）的模式用于方法对象（function objects）（详见第 42 条），比如 Collections.reverseOrder 方法，偶尔也用于 Collections.emptySet 之类的集合。</p>
-<p>　　假设你想写一个恒等方法分配器（ identity function dispenser）。 类库提供了 Function.identity 方法，所以没有理由编写你自己的实现（详见第 59 条），但它是有启发性的。 如果每次要求的时候都去创建一个新的恒等方法对象是浪费的，因为它是无状态的。 如果 Java 的泛型被具体化，那么每个类型都需要一个恒等方法，但是由于它们被擦除以后，所以泛型的单例就足够了。 以下是它的实例：</p>
-<pre><code>// Generic singleton factory pattern
-private static UnaryOperator&lt;Object&gt; IDENTITY_FN = (t) -&gt; t;
-
-@SuppressWarnings(&quot;unchecked&quot;)
-public static &lt;T&gt; UnaryOperator&lt;T&gt; identityFunction() {
-    return (UnaryOperator&lt;T&gt;) IDENTITY_FN;
-}</code></pre><p>　　将 IDENTITY_FN 转换为 (UnaryFunction<t>) 会生成一个未经检查的强制转换警告，因为 UnaryOperator<object> 对于每个 T 都不是一个 UnaryOperator<t>。但是恒等方法是特殊的：它返回未修改的参数，所以我们知道，使用它作为一个 UnaryFunction<t> 是类型安全的，无论 T 的值是多少。因此，我们可以放心地抑制由这个强制生成的未经检查的强制转换警告。 一旦我们完成了这些，代码编译没有错误或警告。<br>　　下面是一个示例程序，它使用我们的泛型单例作为 UnaryOperator<string> 和 UnaryOperator<number>。 像往常一样，它不包含强制转化，编译时也没有错误和警告：</number></string></t></t></object></t></p>
-<pre><code>// Sample program to exercise generic singleton
-public static void main(String[] args) {
-    String[] strings = { &quot;jute&quot;, &quot;hemp&quot;, &quot;nylon&quot; };
-    UnaryOperator&lt;String&gt; sameString = identityFunction();
-
-    for (String s : strings)
-        System.out.println(sameString.apply(s));
-
-    Number[] numbers = { 1, 2.0, 3L };
-
-    UnaryOperator&lt;Number&gt; sameNumber = identityFunction();
-
-    for (Number n : numbers)
-        System.out.println(sameNumber.apply(n));
-}</code></pre><p>　　虽然相对较少，类型参数受涉及该类型参数本身的某种表达式限制是允许的。 这就是所谓的 <strong><em>递归类型限制（recursive type bound）</em></strong> 。 递归类型限制的常见用法与 Comparable 接口有关，它定义了一个类型的自然顺序（详见第 14 条）。 这个接口如下所示：</p>
-<pre><code>public interface Comparable&lt;T&gt; {
-    int compareTo(T o);
-}</code></pre><p>　　类型参数 T 定义了实现 Comparable<t> 的类型的元素可以比较的类型。 在实际中，几乎所有类型都只能与自己类型的元素进行比较。 所以，例如，String 类实现了 Comparable<string>，Integer 类实现了 Comparable<integer> 等等。<br>　　许多方法采用实现 Comparable 的元素的集合来对其进行排序，在其中进行搜索，计算其最小值或最大值等。 要做到这一点，要求集合中的每一个元素都可以与其中的每一个元素相比，换言之，这个元素是可以相互比较的。 以下是如何表达这一约束：</integer></string></t></p>
-<pre><code>// Using a recursive type bound to express mutual comparability
-public static &lt;E extends Comparable&lt;E&gt;&gt; E max(Collection&lt;E&gt; c);</code></pre><p>　　限定的类型 &lt;E extends Comparable <e>&gt; 可以理解为「任何可以与自己比较的类型 E」，这或多或少精确地对应于相互可比性的概念。<br>　　这里有一个与前面的声明相匹配的方法。它根据其元素的自然顺序来计算集合中的最大值，并编译没有错误或警告：</e></p>
-<pre><code>// Returns max value in a collection - uses recursive type bound
-public static &lt;E extends Comparable&lt;E&gt;&gt; E max(Collection&lt;E&gt; c) {
-  if (c.isEmpty())
-    throw new IllegalArgumentException(&quot;Empty collection&quot;);
-  E result = null;
-  for (E e : c)
-    if (result == null || e.compareTo(result) &gt; 0)
-      result = Objects.requireNonNull(e);
-  return result;
-}</code></pre><p>　　请注意，如果列表为空，则此方法将引发 IllegalArgumentException 异常。 更好的选择是返回一个 Optional<e>（详见第 55 条）。</e></p>
-<p>　　递归类型限制可能变得复杂得多，但幸运的是他们很少这样做。 如果你理解了这个习惯用法，它的通配符变体（详见第 31 条）和模拟的自我类型用法（详见第 2 条），你将能够处理在实践中遇到的大多数递归类型限制。</p>
-<p>　　总之，像泛型类型一样，泛型方法比需要客户端对输入参数和返回值进行显式强制转换的方法更安全，更易于使用。 像类型一样，你应该确保你的方法可以不用强制转换，这通常意味着它们是泛型的。 应该泛型化现有的方法，其使用需要强制转换。 这使得新用户的使用更容易，而不会破坏现有的客户端（详见第 26 条）。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>【1】<a href="http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/29.%20%E4%BC%98%E5%85%88%E8%80%83%E8%99%91%E6%B3%9B%E5%9E%8B" target="_blank" rel="noopener">http://sjsdfg.gitee.io/effective-java-3rd-chinese/#/notes/29.%20%E4%BC%98%E5%85%88%E8%80%83%E8%99%91%E6%B3%9B%E5%9E%8B</a></p>
-
+</details>
       
       
         <div class="page-reward">
@@ -497,13 +357,13 @@ public static &lt;E extends Comparable&lt;E&gt;&gt; E max(Collection&lt;E&gt; c)
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></p>
+        <p><span>本文标题:</span><a href="/2020/08/24/324. 摆动排序 II/">324. 摆动排序 II</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2020年01月17日 - 00时33分</p>
-        <p><span>最后更新:</span>2020年01月17日 - 09时50分</p>
+        <p><span>发布时间:</span>2020年08月24日 - 16时40分</p>
+        <p><span>最后更新:</span>2020年08月24日 - 17时54分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/01/17/Effective-Java阅读笔记XV/" title="Effective-Java阅读笔记XV">http://yoursite.com/2020/01/17/Effective-Java阅读笔记XV/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/01/17/Effective-Java阅读笔记XV/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/08/24/324. 摆动排序 II/" title="324. 摆动排序 II">http://yoursite.com/2020/08/24/324. 摆动排序 II/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/08/24/324. 摆动排序 II/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -516,18 +376,9 @@ public static &lt;E extends Comparable&lt;E&gt;&gt; E max(Collection&lt;E&gt; c)
 
 <nav id="article-nav">
   
-    <a href="/2020/01/17/Effective-Java阅读笔记XVI/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Effective-Java阅读笔记XVI
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/01/16/Effective-Java阅读笔记XIV/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Effective-Java阅读笔记XIV</div>
+    <a href="/2020/08/24/179. 最大数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">179. 最大数</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -538,7 +389,7 @@ public static &lt;E extends Comparable&lt;E&gt;&gt; E max(Collection&lt;E&gt; c)
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#优先考虑泛型"><span class="toc-number">1.</span> <span class="toc-text">优先考虑泛型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#优先使用泛型方法"><span class="toc-number">2.</span> <span class="toc-text">优先使用泛型方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#有一个数组-a1-a2-…-an-，我们怎么把它排成摇摆序列呢？"><span class="toc-number">1.</span> <span class="toc-text">有一个数组[a1,a2,…,an]，我们怎么把它排成摇摆序列呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#那是不是穿插成-a1-a-n-2-1-a2-a-n-2-2-…-an-就行了呢？"><span class="toc-number">2.</span> <span class="toc-text">那是不是穿插成[a1,a(n/2+1),a2,a(n/2+2),…,an]就行了呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应该怎样排列呢？"><span class="toc-number">3.</span> <span class="toc-text">应该怎样排列呢？</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -604,13 +455,11 @@ public static &lt;E extends Comparable&lt;E&gt;&gt; E max(Collection&lt;E&gt; c)
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/01/17/Effective-Java阅读笔记XVI/" title="上一篇: Effective-Java阅读笔记XVI">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/01/16/Effective-Java阅读笔记XIV/" title="下一篇: Effective-Java阅读笔记XIV">
+            <a href="/2020/08/24/179. 最大数/" title="下一篇: 179. 最大数">
                 <i class="fa fa-angle-right"></i>
             </a>
         
