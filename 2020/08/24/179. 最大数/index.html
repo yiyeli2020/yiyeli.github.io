@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点 | Yiye Li</title>
+  <title>179. 最大数 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="填充同一层的兄弟节点">
-<meta name="keywords" content="LeetCode,Tree,Depth-first Search">
+  <meta name="description" content="给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。">
+<meta name="keywords" content="Leetcode,Sort">
 <meta property="og:type" content="article">
-<meta property="og:title" content="116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点">
-<meta property="og:url" content="http://yoursite.com/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/index.html">
+<meta property="og:title" content="179. 最大数">
+<meta property="og:url" content="http://yoursite.com/2020/08/24/179. 最大数/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="填充同一层的兄弟节点">
+<meta property="og:description" content="给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T06:38:13.960Z">
+<meta property="og:updated_time" content="2020-08-24T08:39:23.127Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点">
-<meta name="twitter:description" content="填充同一层的兄弟节点">
+<meta name="twitter:title" content="179. 最大数">
+<meta name="twitter:description" content="给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-179. 最大数" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/" class="article-date">
-      <time datetime="2018-10-04T11:13:54.000Z" itemprop="datePublished">2018-10-04</time>
+      <a href="/2020/08/24/179. 最大数/" class="article-date">
+      <time datetime="2020-08-24T08:00:12.000Z" itemprop="datePublished">2020-08-24</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点
+      179. 最大数
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">331字</span>
+        <span class="post-count">741字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年10月/">2018年10月</a>
+    <a class="article-category-link" href="/categories/2020年8月/">2020年8月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Depth-first-Search/">Depth-first Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tree/">Tree</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sort/">Sort</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,60 +260,45 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>填充同一层的兄弟节点</p>
+        <p>给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。</p>
 <a id="more"></a>
 
 
+<p>示例 1:</p>
+<pre><code>输入: [10,2]
+输出: 210</code></pre><p>示例 2:</p>
+<pre><code>输入: [3,30,34,5,9]
+输出: 9534330</code></pre><p>说明: 输出结果可能非常大，所以你需要返回一个字符串而不是整数。</p>
+<h1 id="自定义排序："><a href="#自定义排序：" class="headerlink" title="自定义排序："></a>自定义排序：</h1><p><strong>想法</strong></p>
+<p>为了构建最大数字，我们希望越高位的数字越大越好。</p>
+<p><strong>算法</strong></p>
+<p>首先，我们将每个整数变成字符串。然后进行排序。</p>
+<p>如果仅按降序排序，有相同的开头数字的时候会出现问题。比方说，样例 2 按降序排序得到的数字是 <em>95343303</em> ，然而交换 <em>3</em> 和 <em>30</em> 的位置可以得到正确答案 <em>9534330</em> 。因此，每一对数在排序的比较过程中，我们比较两种连接顺序哪一种更好。我们可以证明这样的做法是正确的：</p>
+<p>假设（不是一般性），某一对整数 <em>a</em> 和 <em>b</em> ，我们的比较结果是 <em>a</em> 应该在 <em>b</em> 前面，这意味着 a ^ b&gt;b ^ a ，其中 ^  表示连接。如果排序结果是错的，说明存在一个 <em>c</em> ， <em>b</em> 在 <em>c</em> 前面且 <em>c</em> 在 <em>a</em> 的前面。这产生了矛盾，因为a ^ b&gt;b ^ a  和b ^c &gt;c ^ b 意味着 a ^ c &gt;c ^ a  。换言之，我们的自定义比较方法保证了传递性，所以这样子排序是对的。</p>
+<p>一旦数组排好了序，最“重要”的数字会在最前面。有一个需要注意的情况是如果数组只包含 0 ，我们直接返回结果 <em>0</em> 即可。否则，我们用排好序的数组形成一个字符串并返回。</p>
+<details>
+    <summary>Java</summary>
 
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">LargerNumberComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">            String order1 = a + b;</span><br><span class="line">            String order2 = b + a;</span><br><span class="line">           <span class="keyword">return</span> order2.compareTo(order1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">largestNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Get input integers as strings.</span></span><br><span class="line">        String[] asStrs = <span class="keyword">new</span> String[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            asStrs[i] = String.valueOf(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Sort strings according to custom comparator.</span></span><br><span class="line">        Arrays.sort(asStrs, <span class="keyword">new</span> LargerNumberComparator());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// If, after being sorted, the largest number is `0`, the entire number</span></span><br><span class="line">        <span class="comment">// is zero.</span></span><br><span class="line">        <span class="keyword">if</span> (asStrs[<span class="number">0</span>].equals(<span class="string">"0"</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Build largest number from sorted array.</span></span><br><span class="line">        String largestNumberStr = <span class="keyword">new</span> String();</span><br><span class="line">        <span class="keyword">for</span> (String numAsStr : asStrs) &#123;</span><br><span class="line">            largestNumberStr += numAsStr;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> largestNumberStr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>给定一个二叉树</p>
-<pre><code>struct TreeLinkNode {
-  TreeLinkNode *left;
-  TreeLinkNode *right;
-  TreeLinkNode *next;
-}</code></pre><p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。</p>
-<p>初始状态下，所有 next 指针都被设置为 NULL。</p>
-<!-- more -->
+</details>
+<details>
+    <summary>Python</summary>
 
-<p>说明:</p>
-<p>你只能使用额外常数空间。<br>使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。<br>你可以假设它是一个完美二叉树（即所有叶子节点都在同一层，每个父节点都有两个子节点）。<br>示例:</p>
-<pre><code>给定完美二叉树，
+<figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LargerNumKey</span><span class="params">(str)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span><span class="params">(x, y)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x+y &gt; y+x</span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">largestNumber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        largest_num = <span class="string">''</span>.join(sorted(map(str, nums), key=LargerNumKey))</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'0'</span> <span class="keyword">if</span> largest_num[<span class="number">0</span>] == <span class="string">'0'</span> <span class="keyword">else</span> largest_num</span><br></pre></td></tr></table></figure>
 
-     1
-   /  \
-  2    3
- / \  / \
-4  5  6  7</code></pre><p>调用你的函数后，该完美二叉树变为：</p>
-<pre><code>     1 -&gt; NULL
-   /  \
-  2 -&gt; 3 -&gt; NULL
- / \  / \
-4-&gt;5-&gt;6-&gt;7 -&gt; NULL</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>用两个指针pre和cur，其中pre标记每一层的起始节点，cur用来遍历该层的节点</p>
-<pre><code>/**
- * Definition for binary tree with next pointer.
- * struct TreeLinkNode {
- *  int val;
- *  TreeLinkNode *left, *right, *next;
- *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
- * };
- */
-class Solution {
-public:
-    void connect(TreeLinkNode *root) {
-        if(!root) return;
-        TreeLinkNode *pre=root;
-        TreeLinkNode *cur=NULL;
-        while(pre-&gt;left){
-            cur=pre;
-            while(cur){
-                cur-&gt;left-&gt;next=cur-&gt;right;
-                if(cur-&gt;next) cur-&gt;right-&gt;next=cur-&gt;next-&gt;left;
-                cur=cur-&gt;next;
-            }
-            pre=pre-&gt;left;
-        }
-    }
-};</code></pre>
+</details>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：<em>O(nlgn)</em></p>
+<p>  尽管我们在比较函数中做了一些额外的工作，但是这只是一个常数因子。所以总的时间复杂度是由排序决定的，在 Python 和 Java 中都是 <em>O(nlgn)</em> 。</p>
+</li>
+<li><p>空间复杂度：<em>O(n)</em></p>
+<p>  这里，我们使用了 <em>O(n)</em> 的额外空间去保存 <code>nums</code> 的副本。尽管我们就地进行了一些额外的工作，但最后返回的数组需要 <em>O(n)</em> 的空间。因此，需要的额外空间与 <code>nums</code> 大小成线性关系。</p>
+</li>
+</ul>
+
       
       
         <div class="page-reward">
@@ -368,13 +353,13 @@ public:
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></p>
+        <p><span>本文标题:</span><a href="/2020/08/24/179. 最大数/">179. 最大数</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年10月04日 - 19时13分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 14时38分</p>
+        <p><span>发布时间:</span>2020年08月24日 - 16时00分</p>
+        <p><span>最后更新:</span>2020年08月24日 - 16时39分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/" title="116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点">http://yoursite.com/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/08/24/179. 最大数/" title="179. 最大数">http://yoursite.com/2020/08/24/179. 最大数/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/08/24/179. 最大数/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -387,18 +372,9 @@ public:
 
 <nav id="article-nav">
   
-    <a href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          545.Boundary of Binary Tree 二叉树的边界
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/09/21/操作系统面试高频题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">操作系统面试高频题</div>
+    <a href="/2020/08/24/297. 二叉树的序列化与反序列化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">297. 二叉树的序列化与反序列化</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -409,7 +385,7 @@ public:
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自定义排序："><span class="toc-number">1.</span> <span class="toc-text">自定义排序：</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -475,13 +451,11 @@ public:
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/" title="上一篇: 545.Boundary of Binary Tree 二叉树的边界">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/09/21/操作系统面试高频题/" title="下一篇: 操作系统面试高频题">
+            <a href="/2020/08/24/297. 二叉树的序列化与反序列化/" title="下一篇: 297. 二叉树的序列化与反序列化">
                 <i class="fa fa-angle-right"></i>
             </a>
         
