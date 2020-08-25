@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>1115. 交替打印FooBar | Yiye Li</title>
+  <title>162. 寻找峰值 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="两个不同的线程将会共用一个 FooBar 实例。其中一个线程将会调用 foo() 方法，另一个线程将会调用 bar() 方法.设计修改程序交替调用这两个方法。">
-<meta name="keywords" content="LeetCode,Concurrency">
+  <meta name="description" content="峰值元素是指其值大于左右相邻值的元素。 给定一个输入数组 nums，其中 nums[i] ≠ nums[i+1]，找到峰值元素并返回其索引。">
+<meta name="keywords" content="Leetcode,Array,Binary Search">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1115. 交替打印FooBar">
-<meta property="og:url" content="http://yoursite.com/2020/05/22/1115. 交替打印FooBar/index.html">
+<meta property="og:title" content="162. 寻找峰值">
+<meta property="og:url" content="http://yoursite.com/2020/08/24/162. 寻找峰值/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="两个不同的线程将会共用一个 FooBar 实例。其中一个线程将会调用 foo() 方法，另一个线程将会调用 bar() 方法.设计修改程序交替调用这两个方法。">
+<meta property="og:description" content="峰值元素是指其值大于左右相邻值的元素。 给定一个输入数组 nums，其中 nums[i] ≠ nums[i+1]，找到峰值元素并返回其索引。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-05-23T04:30:31.185Z">
+<meta property="og:updated_time" content="2020-08-25T08:00:48.057Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1115. 交替打印FooBar">
-<meta name="twitter:description" content="两个不同的线程将会共用一个 FooBar 实例。其中一个线程将会调用 foo() 方法，另一个线程将会调用 bar() 方法.设计修改程序交替调用这两个方法。">
+<meta name="twitter:title" content="162. 寻找峰值">
+<meta name="twitter:description" content="峰值元素是指其值大于左右相邻值的元素。 给定一个输入数组 nums，其中 nums[i] ≠ nums[i+1]，找到峰值元素并返回其索引。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-1115. 交替打印FooBar" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-162. 寻找峰值" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/05/22/1115. 交替打印FooBar/" class="article-date">
-      <time datetime="2020-05-22T14:32:12.000Z" itemprop="datePublished">2020-05-22</time>
+      <a href="/2020/08/24/162. 寻找峰值/" class="article-date">
+      <time datetime="2020-08-24T09:55:12.000Z" itemprop="datePublished">2020-08-24</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      1115. 交替打印FooBar
+      162. 寻找峰值
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.6k字</span>
+        <span class="post-count">1.8k字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">10分</span>
+        <span class="post-count">7分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2020年5月/">2020年5月</a>
+    <a class="article-category-link" href="/categories/2020年8月/">2020年8月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Concurrency/">Concurrency</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search/">Binary Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,91 +260,87 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>两个不同的线程将会共用一个 FooBar 实例。其中一个线程将会调用 foo() 方法，另一个线程将会调用 bar() 方法.设计修改程序交替调用这两个方法。</p>
+        <p>峰值元素是指其值大于左右相邻值的元素。</p>
+<p>给定一个输入数组 nums，其中 nums[i] ≠ nums[i+1]，找到峰值元素并返回其索引。</p>
 <a id="more"></a>
 
-<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>我们提供一个类：</p>
-<pre><code>class FooBar {
-  public void foo() {
-    for (int i = 0; i &lt; n; i++) {
-      print(&quot;foo&quot;);
-    }
-  }
 
-  public void bar() {
-    for (int i = 0; i &lt; n; i++) {
-      print(&quot;bar&quot;);
-    }
-  }
-}</code></pre><p>两个不同的线程将会共用一个 FooBar 实例。其中一个线程将会调用 foo() 方法，另一个线程将会调用 bar() 方法。</p>
-<p>请设计修改程序，以确保 “foobar” 被输出 n 次。</p>
+<p>数组可能包含多个峰值，在这种情况下，返回任何一个峰值所在位置即可。</p>
+<p>你可以假设 nums[-1] = nums[n] = -∞。</p>
 <p>示例 1:</p>
-<pre><code>输入: n = 1
-输出: &quot;foobar&quot;
-解释: 这里有两个线程被异步启动。其中一个调用 foo() 方法, 另一个调用 bar() 方法，&quot;foobar&quot; 将被输出一次。</code></pre><p>示例 2:</p>
-<pre><code>输入: n = 2
-输出: &quot;foobarfoobar&quot;
-解释: &quot;foobar&quot; 将被输出两次。</code></pre><h1 id="方案一：Semaphore"><a href="#方案一：Semaphore" class="headerlink" title="方案一：Semaphore"></a>方案一：Semaphore</h1><p>很容易想到这种类似红绿灯交替变换的情境，一开始尝试用两个AtomicBoolean值来控制两个方法轮流调用，但发现难以在循环情况下运行，因此考虑使用信号量：</p>
-<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>为了防止出现因多个程序同时访问一个共享资源而引发的一系列问题，我们需要一种方法，它可以通过生成并使用令牌来授权，在任一时刻只能有一个执行线程访问代码的临界区域。临界区域是指执行数据更新的代码需要独占式地执行。而信号量就可以提供这样的一种访问机制，让一个临界区同一时间只有一个线程在访问它，也就是说信号量是用来调协进程对共享资源的访问的。</p>
-<p>信号量是一个特殊的变量，程序对其访问都是原子操作，且只允许对它进行等待（即P(信号变量))和发送（即V(信号变量))信息操作。</p>
-<p>最简单的信号量是只能取0和1的变量，这也是信号量最常见的一种形式，叫做二进制信号量。而可以取多个正整数的信号量被称为通用信号量。这里主要讨论二进制信号量。</p>
-<h2 id="信号量的工作原理"><a href="#信号量的工作原理" class="headerlink" title="信号量的工作原理"></a>信号量的工作原理</h2><p>由于信号量只能进行两种操作等待和发送信号，即P(sv)和V(sv),他们的行为是这样的：</p>
-<p>P(sv)：如果sv的值大于零，就给它减1；如果它的值为零，就挂起该进程的执行</p>
-<p>V(sv)：如果有其他进程因等待sv而被挂起，就让它恢复运行，如果没有进程因等待sv而挂起，就给它加1.</p>
-<p>举个例子，就是两个进程共享信号量sv，一旦其中一个进程执行了P(sv)操作，它将得到信号量，并可以进入临界区，使sv减1。</p>
-<p>而第二个进程将被阻止进入临界区，因为当它试图执行P(sv)时，sv为0，它会被挂起以等待第一个进程离开临界区域并执行V(sv)释放信号量，这时第二个进程就可以恢复执行。</p>
-<h2 id="Semaphore使用初探："><a href="#Semaphore使用初探：" class="headerlink" title="Semaphore使用初探："></a>Semaphore使用初探：</h2><p>Semaphore是用来保护一个或者多个共享资源的访问，Semaphore内部维护了一个计数器，其值为可以访问的共享资源的个数。一个线程要访问共享资源，先获得信号量，如果信号量的计数器值大于1，意味着有共享资源可以访问，则使其计数器值减去1，再访问共享资源。</p>
-<p>如果计数器值为0,线程进入休眠。当某个线程使用完共享资源后，释放信号量，并将信号量内部的计数器加1，之前进入休眠的线程将被唤醒并再次试图获得信号量。</p>
-<p>就好比一个图书馆管理员，站在门口，只有图书馆有空位，就开门允许与空位数量等量的人进入图书馆。多个人进入图书馆后，相当于N个人来分配使用N个空位。为避免多个人来同时竞争同一个空位，在内部仍然使用锁来控制资源的同步访问。</p>
-<h3 id="Semaphore的使用："><a href="#Semaphore的使用：" class="headerlink" title="Semaphore的使用："></a>Semaphore的使用：</h3><p>Semaphore使用时需要先构建一个参数来指定共享资源的数量，Semaphore构造完成后即是获取Semaphore、共享资源使用完毕后释放Semaphore。</p>
-<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooBar</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FooBar</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Semaphore foo = <span class="keyword">new</span> Semaphore(<span class="number">1</span>);<span class="comment">//foo方法可以访问的共享资源为1</span></span><br><span class="line">    Semaphore bar = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);<span class="comment">//bar方法可以访问的共享资源为0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Runnable printFoo)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            foo.acquire();<span class="comment">//foo方法获得信号量，并将信号量内部的计数器减1，计数器值为0后,线程进入休眠。</span></span><br><span class="line">            printFoo.run();</span><br><span class="line">            bar.release();<span class="comment">//bar方法释放信号量，并将信号量内部的计数器加1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bar</span><span class="params">(Runnable printBar)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            bar.acquire();<span class="comment">//bar方法获得信号量，并将信号量内部的计数器减1，计数器值为0后,线程进入休眠。</span></span><br><span class="line">            printBar.run();</span><br><span class="line">            foo.release();<span class="comment">//foo方法释放信号量，并将信号量内部的计数器加1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>输入: nums = [1,2,3,1]
+输出: 2
+解释: 3 是峰值元素，你的函数应该返回其索引 2。</code></pre><p>示例 2:</p>
+<pre><code>输入: nums = [1,2,1,3,5,6,4]
+输出: 1 或 5 
+解释: 你的函数可以返回索引 1，其峰值元素为 2；或者返回索引 5， 其峰值元素为 6。</code></pre><p>说明:</p>
+<p>你的解法应该是 O(logN) 时间复杂度的。</p>
+<h1 id="方法一-线性扫描"><a href="#方法一-线性扫描" class="headerlink" title="方法一: 线性扫描"></a>方法一: 线性扫描</h1><p>本方法利用了连续的两个元素 <em>nums[j]</em> 和 <em>nums[j + 1]</em> 不会相等这一事实。于是，我们可以从头开始遍历 <em>nums</em> 数组。每当我们遇到数字 <em>nums[i]*，只需要检查它是否大于下一个元素 *nums[i+1]</em> 即可判断 <em>nums[i]</em> 是否是峰值。可以通过分别讨论问题的全部三种可能情况来理解本方法的思路。</p>
+<p>情况 1. </p>
+<p>所有的数字以降序排列。这种情况下，第一个元素即为峰值。我们首先检查当前元素是否大于下个元素。第一个元素满足这一条件，因此被正确判断为峰值。此时，我们不需要继续向下判断，也就不会有需要判断 <em>nums[i]</em> 和上一个元素 <em>nums[i-1]</em> 的大小的情况。</p>
+<p><a href="https://pic.leetcode-cn.com/fafef6e2070c9c444541d03e5d24c6c06f2f50f94026a22a9a86903e9d5ffcb1-image.png" target="_blank" rel="noopener">image.png</a></p>
+<p>情况 2. </p>
+<p>所有的数字以升序排列。这种情况下，我们会一直比较 <em>nums[i]</em> 与 <em>nums[i+1]</em> 以判断 <em>nums[i]</em> 是否是峰值元素。没有元素符合这一条件，说明处于上坡而非峰值。于是，在结尾，我们返回末尾元素作为峰值元素，得到正确结果。在这种情况下，我们同样不需要比较 <em>nums[i]</em> 和上一个元素 <em>nums[i-1]*，因为处于上坡是 *nums[i]</em> 不是峰值的充分条件。</p>
+<p><a href="https://pic.leetcode-cn.com/06cbc777aee1d0d0a906aefd408e539014f783727e401f136b66581d0856aa6d-image.png" target="_blank" rel="noopener">image.png</a></p>
+<p>情况 3. </p>
+<p>峰值出现在中间某处。这种情况下，当遍历上升部分时，与情况 2 相同，没有元素满足 <em>nums[i] &gt; nums[i + 1]*。我们不需要比较 *nums[i]</em> 和上一个元素 <em>nums[i-1]<em>。当到达峰值元素时，</em>nums[i] &gt; nums[i + 1]</em> 条件满足。此时，我们同样不需要比较 <em>nums[i]</em> 和上一个元素 <em>nums[i-1]*。这是由于“遍历会到达第i个元素”本身就说明上一个元素（第i- 1个）不满足 *nums[i] &gt; nums[i + 1]</em> 这一条件，也就说明 <em>nums[i-1] &lt; nums[i]</em>。于是，我们同样可以得到正确结果。</p>
+<p><a href="https://pic.leetcode-cn.com/802bad70c4444bf708f4c63e30e054a33c27ace43b3c7b4fa64a0ffb8201fb7d-image.png" target="_blank" rel="noopener">image.png</a></p>
+<details>
+    <summary>线性扫描</summary>
 
-<h1 id="方案二：Lock（公平锁）"><a href="#方案二：Lock（公平锁）" class="headerlink" title="方案二：Lock（公平锁）"></a>方案二：Lock（公平锁）</h1><h2 id="公平锁："><a href="#公平锁：" class="headerlink" title="公平锁："></a>公平锁：</h2><p>每个线程抢占锁的顺序为先后调用lock方法的顺序依次获取锁，类似于排队吃饭。</p>
-<h2 id="非公平锁："><a href="#非公平锁：" class="headerlink" title="非公平锁："></a>非公平锁：</h2><p>每个线程抢占锁的顺序不定，谁运气好，谁就获取到锁，和调用lock方法的先后顺序无关</p>
-<h2 id="ReentrantLock（可重入锁）及其优点"><a href="#ReentrantLock（可重入锁）及其优点" class="headerlink" title="ReentrantLock（可重入锁）及其优点"></a>ReentrantLock（可重入锁）及其优点</h2><p>java中已经有了内置锁：synchronized,synchronized的特点是使用简单，一切交给JVM去处理,不需要显示释放。</p>
-<p>从用法上可以看出，与synchronized相比， ReentrantLock就稍微复杂一点。因为必须在finally中进行解锁操作，<br>如果不在 finally解锁，有可能代码出现异常锁没被释放，那么为什么要引入ReentrantLock呢？</p>
-<p>在jdk1.5里面，ReentrantLock的性能是明显优于synchronized的，但是在jdk1.6里面，synchronized做了优化，他们之间的性能差别已经不明显了。</p>
-<p>ReentrantLock并不是一种替代内置加锁的方法，而是作为一种可选择的高级功能。<br>相比于synchronized，ReentrantLock在功能上更加丰富，它具有可重入、可中断、可限时、公平锁等特点。</p>
-<h3 id="可重入（其实synchronized-也是可重入的）"><a href="#可重入（其实synchronized-也是可重入的）" class="headerlink" title="可重入（其实synchronized 也是可重入的）"></a>可重入（其实synchronized 也是可重入的）</h3><pre><code>lock.lock();
-lock.lock();
-try
-{
-    i++;
+<figure class="highlight java"><figcaption><span>[solution 1]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findPeakElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &gt; nums[i + <span class="number">1</span>])</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums.length - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-}           
-finally
-{
-    lock.unlock();
-    lock.unlock();
-}</code></pre><p>由于ReentrantLock是重入锁，所以可以反复得到相同的一把锁，它有一个与锁相关的获取计数器，如果拥有锁的某个线程再次得到锁，那么获取计数器就加1，然后锁需要被释放两次才能获得真正释放(重入锁)。</p>
-<h3 id="可中断"><a href="#可中断" class="headerlink" title="可中断"></a>可中断</h3><p>与synchronized不同的是，ReentrantLock对中断是有响应的.synchronized一旦尝试获取锁就会一直等待直到获取到锁。<br>构造一个死锁的例子，然后用中断来处理死锁</p>
-<p>此处示例见<a href="https://www.jianshu.com/p/155260c8af6c" target="_blank" rel="noopener">ReentrantLock的使用</a></p>
-<h3 id="可限时"><a href="#可限时" class="headerlink" title="可限时"></a>可限时</h3><p>超时不能获得锁，就返回false，不会永久等待构成死锁</p>
-<p>使用lock.tryLock(long timeout, TimeUnit unit)来实现可限时锁，参数为时间和单位。</p>
-<h3 id="公平锁的使用方法"><a href="#公平锁的使用方法" class="headerlink" title="公平锁的使用方法"></a>公平锁的使用方法</h3><p>一般意义上的锁是不公平的，不一定先来的线程能先得到锁，后来的线程就后得到锁。不公平的锁可能会产生饥饿现象。</p>
-<p>公平锁的意思就是，这个锁能保证线程是先来的先得到锁。虽然公平锁不会产生饥饿现象，但是公平锁的性能会比非公平锁差很多。</p>
-<pre><code>public ReentrantLock(boolean fair) 
+</details>
 
-public static ReentrantLock fairLock = new ReentrantLock(true);</code></pre><h2 id="Volatile关键字"><a href="#Volatile关键字" class="headerlink" title="Volatile关键字"></a>Volatile关键字</h2><p>Java的volatile关键字用于标记一个变量“应当存储在主存”。更确切地说，每次读取volatile变量，都应该从主存读取，而不是从CPU缓存读取。每次写入一个volatile变量，应该写到主存中，而不是仅仅写到CPU缓存。</p>
-<p>Java的volatile关键字能保证变量修改后，对各个线程是可见的。更多详细内容参见<a href="http://ifeve.com/java-volatile%e5%85%b3%e9%94%ae%e5%ad%97/" target="_blank" rel="noopener">Java Volatile关键字</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooBar</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FooBar</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Lock lock = <span class="keyword">new</span> ReentrantLock(<span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">boolean</span> permitFoo = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Runnable printFoo)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ) &#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">            	<span class="keyword">if</span>(permitFoo) &#123;</span><br><span class="line">            	    printFoo.run();</span><br><span class="line">                    i++;</span><br><span class="line">                    permitFoo = <span class="keyword">false</span>;</span><br><span class="line">            	&#125;</span><br><span class="line">            &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            	lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bar</span><span class="params">(Runnable printBar)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ) &#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">            	<span class="keyword">if</span>(!permitFoo) &#123;</span><br><span class="line">            	    printBar.run();</span><br><span class="line">            	    i++;</span><br><span class="line">            	    permitFoo = <span class="keyword">true</span>;</span><br><span class="line">            	&#125;</span><br><span class="line">            &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            	lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度 : <em>O(n)*。 我们对长度为 *n</em> 的数组 <em>nums</em> 只进行一次遍历。</li>
+<li>空间复杂度 : <em>O(1)</em>。 只使用了常数空间。<br>
+<br>
+</li>
+</ul>
+<hr>
+<h1 id="方法二：递归二分查找"><a href="#方法二：递归二分查找" class="headerlink" title="方法二：递归二分查找"></a>方法二：递归二分查找</h1><p><strong>算法</strong></p>
+<p>我们可以将 <em>nums</em> 数组中的任何给定序列视为交替的升序和降序序列。通过利用这一点，以及“可以返回任何一个峰作为结果”的要求，我们可以利用二分查找来找到所需的峰值元素。</p>
+<p>在简单的二分查找中，我们处理的是一个有序数列，并通过在每一步减少搜索空间来找到所需要的数字。在本例中，我们对二分查找进行一点修改。首先从数组 <em>nums</em> 中找到中间的元素 <em>mid*。若该元素恰好位于降序序列或者一个局部下降坡度中（通过将 *nums[i]</em> 与右侧比较判断)，则说明峰值会在本元素的左边。于是，我们将搜索空间缩小为 <em>mid</em> 的左边(包括其本身)，并在左侧子数组上重复上述过程。</p>
+<p>若该元素恰好位于升序序列或者一个局部上升坡度中（通过将 <em>nums[i]</em> 与右侧比较判断)，则说明峰值会在本元素的右边。于是，我们将搜索空间缩小为 <em>mid</em> 的右边，并在右侧子数组上重复上述过程。</p>
+<p>就这样，我们不断地缩小搜索空间，直到搜索空间中只有一个元素，该元素即为峰值元素。</p>
+<p>为了理解本方法的原理，让我们再次讨论前文提到的全部三种情况。</p>
+<p>情况 1. 这种情况下，首先找到中间元素 <em>3</em>。由于它处于下降坡度，将搜索空间缩小到 <code>[1, 2, 3]</code>。对于此子数组，<em>2</em> 为中间元素，也处于下降坡度中，于是将搜索空间缩小到 <code>[1, 2]</code>。现在 <em>1</em> 是中间元素并同样处于下降坡度，于是将搜索空间缩小到 <code>[1]</code>。 最终 <em>1</em> 作为答案被正确返回。</p>
+<p> <a href="https://pic.leetcode-cn.com/63177d2c44aab77a657c0eb4589f7b7f45e754cf3408d9872bc3371e680c5908-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/317e900368f211d02e3f107e288824a0e351d39963aae9a210b1fe3730ef1eec-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/1a26071c6f370ccd84a417a4edbfcf7178b1daf78ed3270285861af4f77c6496-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/8a511427f1c0c1b7c58776fa238124f44c300fc632d13658e1f381f6fd23fa03-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/17974218262fc0e235fac8bfe9252058015de312546ce35ac217ab428360b780-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/7d34f6f13915860f01f1e18409534a06db73504ffa3ab7dc66422801697a8a39-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/e2edf7bcc45863a10d438dd92b8c4c6b6b63ff834aa11f05e4a104b5cbf859fc-image.png" target="_blank" rel="noopener">image.png</a> </p>
+<p>情况 2. 这种情况下，首先找到中间元素 <em>3</em>。由于它处于上升坡度，将搜索空间缩小到 <code>[4, 5]</code>。对于此子数组，<em>4</em> 为中间元素，也处于上升坡度中，于是将搜索空间缩小到 <code>[5]</code>。 最终 <em>5</em> 作为答案被正确返回。</p>
+<p> <a href="https://pic.leetcode-cn.com/935aeb721c5901d8f70a64aafc0bff14be030db7cf44605c051e5c87de2890c0-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/fb6d1262315867c62d818b0606b2628b6537d4b1b9c337bbaf3708fad257391c-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/6de90b2f77920d015f7a45191090b9265a49dae0c4585e8d514b1aaa39afd2b9-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/d359a685a16480ac4d6ad3d7e5df1f3b00524a74580982920bc01de72a9dd837-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/a976733e8b2e4817b2d88616b519bc58ca471ca15e9ee3f77fcc377a329e0d46-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/b0c6a62e9a0ebdc7a92995a1d633da7176cc82f9f3fe5e9e8f4b921b3d8fc4cc-image.png" target="_blank" rel="noopener">image.png</a> </p>
+<p>情况 3. 这种情况下， 峰值位于中间某处。第一个中间元素是 <em>4</em>。它位于上升坡度，表明峰值在其右侧。于是，搜索空间缩小为 <code>[5, 1]</code>。 现在，<em>5</em> 位于下降坡度（相对其右侧相邻元素）, 搜索空间下降为 <code>[5]</code>。于是，<em>5</em> 被正确识别。</p>
+<p> <a href="https://pic.leetcode-cn.com/3e49bacacecbf67aed75bcee9387dab5ccb7e7160dcc7c33be1be9e7a3acc563-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/8ee64c7b12c6b64b282324be43ecb89d29ac70d15dc3a35f2c62113cea7c23d8-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/78f6084e3bdfe12c05f2304d6a8b8c15e224f1b7f01f254bc04c0832c24c53b2-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/94cae61b8d045a3682d6a479417069776cabf13cc8bed930d07e088bcc2df575-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/03d56e48600ff839e6a6c8819d859d488e8bafd4c052fc61b7bdba09ed78ff8c-image.png" target="_blank" rel="noopener">image.png</a> <a href="https://pic.leetcode-cn.com/95f33e0a46ed380e3e5c2db5cb5a93479bb65463e7fcf6a7c953e3a039fe0461-image.png" target="_blank" rel="noopener">image.png</a> </p>
+<details>
+    <summary>递归二分查找</summary>
 
-<p>此种方法可以跑通但是超时了。</p>
-<h1 id="方案三：无锁"><a href="#方案三：无锁" class="headerlink" title="方案三：无锁"></a>方案三：无锁</h1><p>以上的公平锁方案完全可以改造成无锁方案：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooBar</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FooBar</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">boolean</span> permitFoo = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Runnable printFoo)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;     </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ) &#123;</span><br><span class="line">            <span class="keyword">if</span>(permitFoo) &#123;</span><br><span class="line">        	printFoo.run();</span><br><span class="line">            	i++;</span><br><span class="line">            	permitFoo = <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bar</span><span class="params">(Runnable printBar)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;       </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!permitFoo) &#123;</span><br><span class="line">        	printBar.run();</span><br><span class="line">        	i++;</span><br><span class="line">        	permitFoo = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><figcaption><span>[solution 2]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findPeakElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> search(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l == r)</span><br><span class="line">            <span class="keyword">return</span> l;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &gt; nums[mid + <span class="number">1</span>])</span><br><span class="line">            <span class="keyword">return</span> search(nums, l, mid);</span><br><span class="line">        <span class="keyword">return</span> search(nums, mid + <span class="number">1</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>此种方法可以跑通但是也超时了。</p>
-<h1 id="方案四：CyclicBarrier"><a href="#方案四：CyclicBarrier" class="headerlink" title="方案四：CyclicBarrier"></a>方案四：CyclicBarrier</h1><p>字面意思回环栅栏，通过它可以实现让一组线程等待至某个状态之后再全部同时执行。叫做回环是因为当所有等待线程都被释放以后，CyclicBarrier可以被重用。我们暂且把这个状态就叫做barrier，当调用await()方法之后，线程就处于barrier了。</p>
-<p>CyclicBarrier更适合用在循环场景中，那么我们来试一下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooBar</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line">    CyclicBarrier cyclicBarrier= <span class="keyword">new</span> CyclicBarrier(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">boolean</span> fin = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FooBar</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Runnable printFoo)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!fin);</span><br><span class="line">            <span class="comment">// printFoo.run() outputs "foo". Do not change or remove this line.</span></span><br><span class="line">            printFoo.run();</span><br><span class="line">            fin = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                cyclicBarrier.await();</span><br><span class="line">            &#125;<span class="keyword">catch</span> (BrokenBarrierException e)&#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bar</span><span class="params">(Runnable printBar)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    cyclicBarrier.await();</span><br><span class="line">                &#125;<span class="keyword">catch</span> (BrokenBarrierException e)&#123;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// printBar.run() outputs "bar". Do not change or remove this line.</span></span><br><span class="line">                printBar.run();</span><br><span class="line">                fin = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
 
-<p>这种方法可以提交成功。</p>
-<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p>【1】<a href="https://leetcode-cn.com/problems/print-foobar-alternately/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/print-foobar-alternately/</a></p>
-<p>【2】<a href="https://zhuanlan.zhihu.com/p/81626432" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/81626432</a></p>
-<p>【3】<a href="https://blog.csdn.net/ljianhui/java/article/details/10243617" target="_blank" rel="noopener">https://blog.csdn.net/ljianhui/java/article/details/10243617</a></p>
-<p>【4】<a href="https://blog.csdn.net/zbc1090549839/java/article/details/53389602" target="_blank" rel="noopener">https://blog.csdn.net/zbc1090549839/java/article/details/53389602</a></p>
-<p>【5】<a href="https://www.jianshu.com/p/155260c8af6c" target="_blank" rel="noopener">https://www.jianshu.com/p/155260c8af6c</a></p>
-<p>【6】<a href="http://ifeve.com/java-volatile%e5%85%b3%e9%94%ae%e5%ad%97/" target="_blank" rel="noopener">http://ifeve.com/java-volatile%e5%85%b3%e9%94%ae%e5%ad%97/</a></p>
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度 :  O(log_2(n)) 。每一步都将搜索空间减半。因此，总的搜索空间只需要 <em>log_2(n)</em> 步。其中 <em>n</em> 为 <em>nums</em> 数组的长度。</li>
+<li>空间复杂度: O(log_2(n))  。每一步都将搜索空间减半。因此，总的搜索空间只需要 <em>log_2(n)</em> 步。于是，递归树的深度为 <em>log_2(n)</em>。<br>
+<br>
+</li>
+</ul>
+<hr>
+<h1 id="方法三：迭代二分查找"><a href="#方法三：迭代二分查找" class="headerlink" title="方法三：迭代二分查找"></a>方法三：迭代二分查找</h1><p><strong>算法</strong></p>
+<p>上述二分查找方法使用了递归。我们可以通过迭代达到同样的效果。本方法即为迭代实现二分查找。</p>
+<details>
+    <summary>迭代二分查找</summary>
+
+<figure class="highlight java"><figcaption><span>[solution 3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findPeakElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &gt; nums[mid + <span class="number">1</span>])</span><br><span class="line">                r = mid;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+**复杂度分析**
+
+<ul>
+<li>时间复杂度 : O(log_2(n))。 每一步都将搜索空间减半。因此，总的搜索空间只需要 <em>log_2(n)</em> 步。其中 <em>n</em> 为 <em>nums</em> 数组的长度。</li>
+<li>空间复杂度 : <em>O(1)</em>。 只使用了常数空间。</li>
+</ul>
 
       
       
@@ -400,13 +396,13 @@ public static ReentrantLock fairLock = new ReentrantLock(true);</code></pre><h2 
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/05/22/1115. 交替打印FooBar/">1115. 交替打印FooBar</a></p>
+        <p><span>本文标题:</span><a href="/2020/08/24/162. 寻找峰值/">162. 寻找峰值</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2020年05月22日 - 22时32分</p>
-        <p><span>最后更新:</span>2020年05月23日 - 12时30分</p>
+        <p><span>发布时间:</span>2020年08月24日 - 17时55分</p>
+        <p><span>最后更新:</span>2020年08月25日 - 16时00分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/05/22/1115. 交替打印FooBar/" title="1115. 交替打印FooBar">http://yoursite.com/2020/05/22/1115. 交替打印FooBar/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/05/22/1115. 交替打印FooBar/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/08/24/162. 寻找峰值/" title="162. 寻找峰值">http://yoursite.com/2020/08/24/162. 寻找峰值/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/08/24/162. 寻找峰值/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -419,18 +415,9 @@ public static ReentrantLock fairLock = new ReentrantLock(true);</code></pre><h2 
 
 <nav id="article-nav">
   
-    <a href="/2020/05/24/1116. 打印零与奇偶数/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          1116. 打印零与奇偶数
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/05/21/Java并发编程/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java并发编程</div>
+    <a href="/2020/08/24/324. 摆动排序 II/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">324. 摆动排序 II</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -441,7 +428,7 @@ public static ReentrantLock fairLock = new ReentrantLock(true);</code></pre><h2 
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方案一：Semaphore"><span class="toc-number">2.</span> <span class="toc-text">方案一：Semaphore</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#信号量"><span class="toc-number">2.1.</span> <span class="toc-text">信号量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号量的工作原理"><span class="toc-number">2.2.</span> <span class="toc-text">信号量的工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Semaphore使用初探："><span class="toc-number">2.3.</span> <span class="toc-text">Semaphore使用初探：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Semaphore的使用："><span class="toc-number">2.3.1.</span> <span class="toc-text">Semaphore的使用：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方案二：Lock（公平锁）"><span class="toc-number">3.</span> <span class="toc-text">方案二：Lock（公平锁）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#公平锁："><span class="toc-number">3.1.</span> <span class="toc-text">公平锁：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非公平锁："><span class="toc-number">3.2.</span> <span class="toc-text">非公平锁：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ReentrantLock（可重入锁）及其优点"><span class="toc-number">3.3.</span> <span class="toc-text">ReentrantLock（可重入锁）及其优点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可重入（其实synchronized-也是可重入的）"><span class="toc-number">3.3.1.</span> <span class="toc-text">可重入（其实synchronized 也是可重入的）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可中断"><span class="toc-number">3.3.2.</span> <span class="toc-text">可中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可限时"><span class="toc-number">3.3.3.</span> <span class="toc-text">可限时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公平锁的使用方法"><span class="toc-number">3.3.4.</span> <span class="toc-text">公平锁的使用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Volatile关键字"><span class="toc-number">3.4.</span> <span class="toc-text">Volatile关键字</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方案三：无锁"><span class="toc-number">4.</span> <span class="toc-text">方案三：无锁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方案四：CyclicBarrier"><span class="toc-number">5.</span> <span class="toc-text">方案四：CyclicBarrier</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料："><span class="toc-number">6.</span> <span class="toc-text">参考资料：</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#方法一-线性扫描"><span class="toc-number">1.</span> <span class="toc-text">方法一: 线性扫描</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法二：递归二分查找"><span class="toc-number">2.</span> <span class="toc-text">方法二：递归二分查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法三：迭代二分查找"><span class="toc-number">3.</span> <span class="toc-text">方法三：迭代二分查找</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -507,13 +494,11 @@ public static ReentrantLock fairLock = new ReentrantLock(true);</code></pre><h2 
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/05/24/1116. 打印零与奇偶数/" title="上一篇: 1116. 打印零与奇偶数">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/05/21/Java并发编程/" title="下一篇: Java并发编程">
+            <a href="/2020/08/24/324. 摆动排序 II/" title="下一篇: 324. 摆动排序 II">
                 <i class="fa fa-angle-right"></i>
             </a>
         
