@@ -1,7 +1,10 @@
 ---
 title: 59.SymmetricalBinaryTree对称的二叉树(CodingInterview)
+
 date: 2018-08-23 08:45:12
+
 categories: 2018年8月
+
 tags: [Coding Interviews,BinaryTree]
 
 
