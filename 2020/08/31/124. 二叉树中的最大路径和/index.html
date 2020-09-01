@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>C++基础概念IV | Yiye Li</title>
+  <title>124. 二叉树中的最大路径和 | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="重点探讨类的大小，使用sizeof 1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。 2.普通成员函数与sizeof无关。 3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。 4.类的总大小也遵守类似class字节对齐的，调整规则。">
-<meta name="keywords" content="C++,sizeof">
+  <meta name="description" content="给定一个非空二叉树，返回其最大路径和。">
+<meta name="keywords" content="Tree,Depth-first Search,Leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++基础概念IV">
-<meta property="og:url" content="http://yoursite.com/2018/08/31/C++基础概念IV/index.html">
+<meta property="og:title" content="124. 二叉树中的最大路径和">
+<meta property="og:url" content="http://yoursite.com/2020/08/31/124. 二叉树中的最大路径和/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="重点探讨类的大小，使用sizeof 1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。 2.普通成员函数与sizeof无关。 3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。 4.类的总大小也遵守类似class字节对齐的，调整规则。">
+<meta property="og:description" content="给定一个非空二叉树，返回其最大路径和。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-18T04:07:12.717Z">
+<meta property="og:updated_time" content="2020-08-31T08:28:38.431Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++基础概念IV">
-<meta name="twitter:description" content="重点探讨类的大小，使用sizeof 1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。 2.普通成员函数与sizeof无关。 3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。 4.类的总大小也遵守类似class字节对齐的，调整规则。">
+<meta name="twitter:title" content="124. 二叉树中的最大路径和">
+<meta name="twitter:description" content="给定一个非空二叉树，返回其最大路径和。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-C++基础概念IV" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-124. 二叉树中的最大路径和" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/08/31/C++基础概念IV/" class="article-date">
-      <time datetime="2018-08-31T02:01:30.000Z" itemprop="datePublished">2018-08-31</time>
+      <a href="/2020/08/31/124. 二叉树中的最大路径和/" class="article-date">
+      <time datetime="2020-08-31T07:20:12.000Z" itemprop="datePublished">2020-08-31</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      C++基础概念IV
+      124. 二叉树中的最大路径和
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.8k字</span>
+        <span class="post-count">1.8k字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">11分</span>
+        <span class="post-count">7分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2018年8月/">2018年8月</a>
+    <a class="article-category-link" href="/categories/2020年8月/">2020年8月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sizeof/">sizeof</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Depth-first-Search/">Depth-first Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tree/">Tree</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,236 +260,106 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>重点探讨类的大小，使用sizeof</p>
-<p>1.类的大小为类的非静态成员数据的类型大小之和，也就是说静态成员数据不作考虑。</p>
-<p>2.普通成员函数与sizeof无关。</p>
-<p>3.虚函数由于要维护在虚函数表，所以要占据一个指针大小，也就是4字节。</p>
-<p>4.类的总大小也遵守类似class字节对齐的，调整规则。</p>
+        <p>给定一个非空二叉树，返回其最大路径和。</p>
 <a id="more"></a>
 
 
-<h2 id="1-空类"><a href="#1-空类" class="headerlink" title="1.空类"></a>1.空类</h2><pre><code>#include&lt;iostream&gt;
-using namespace std;
-class A {
+<p>本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。</p>
+<p>示例 1:</p>
+<pre><code>输入: [1,2,3]
 
-};
-class B {
-public:
-    B() { };
-    ~B() {};
-};
+       1
+      / \
+     2   3
 
-int main() {
-    cout &lt;&lt; &quot;sizeof A=&quot; &lt;&lt; sizeof(A) &lt;&lt; endl;
-    cout &lt;&lt; &quot;sizeof B=&quot; &lt;&lt; sizeof(B) &lt;&lt; endl;
-}</code></pre><p>空类的大小都为1<br>   因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址，每个实例在内存中都有独一无二的地址。同样空类也会被实例化，所以编译器会给空类隐含的添加一个字节，这样空类实例化之后就有了独一无二的地址了。所以空类的sizeof为1。</p>
-<p>   而析构函数，跟构造函数这些成员函数，是跟sizeof无关的，也不难理解因为我们的sizeof是针对实例，而普通成员函数，是针对类体的，一个类的成员函数，多个实例也共用相同的函数指针，所以自然不能归为实例的大小</p>
-<h2 id="2-含有静态变量和虚析构函数的类"><a href="#2-含有静态变量和虚析构函数的类" class="headerlink" title="2.含有静态变量和虚析构函数的类"></a>2.含有静态变量和虚析构函数的类</h2><pre><code>class Base  
-{  
-public:  
-    Base();                  
-    virtual ~Base();         //每个实例都有虚函数表  
-    void set_num(int num)    //普通成员函数，为各实例公有，不归入sizeof统计  
-    {  
-        a=num;  
-    }  
-private:  
-    int  a;                  //占4字节  
-    char *p;                 //4字节指针  
-};  
+输出: 6</code></pre><p>示例 2:</p>
+<pre><code>输入: [-10,9,20,null,null,15,7]
 
-class Derive:public Base  
-{  
-public:  
-    Derive():Base(){};       
-    ~Derive(){};  
-private:  
-    static int st;         //非实例独占  
-    int  d;                     //占4字节  
-    char *p;                    //4字节指针  
+   -10
+   / \
+  9  20
+    /  \
+   15   7
 
-};  
+输出: 42</code></pre><h1 id="📺-视频题解"><a href="#📺-视频题解" class="headerlink" title="📺 视频题解"></a>📺 视频题解</h1><p><a href="0fc716bb-576b-482f-8ec4-a1659b427b4f">124. 二叉树中的最大路径.mp4</a></p>
+<h1 id="📖-文字题解"><a href="#📖-文字题解" class="headerlink" title="📖 文字题解"></a>📖 文字题解</h1><h2 id="方法一：递归"><a href="#方法一：递归" class="headerlink" title="方法一：递归"></a>方法一：递归</h2><p>首先，考虑实现一个简化的函数 <code>maxGain(node)</code>，该函数计算二叉树中的一个节点的最大贡献值，具体而言，就是在以该节点为根节点的子树中寻找以该节点为起点的一条路径，使得该路径上的节点值之和最大。</p>
+<p>具体而言，该函数的计算如下。</p>
+<ul>
+<li><p>空节点的最大贡献值等于 <em>0</em>。</p>
+</li>
+<li><p>非空节点的最大贡献值等于节点值与其子节点中的最大贡献值之和（对于叶节点而言，最大贡献值等于节点值）。</p>
+</li>
+</ul>
+<p>例如，考虑如下二叉树。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> -10</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
 
-int main()   
-{   
-    cout&lt;&lt;sizeof(Base)&lt;&lt;endl;  
-    cout&lt;&lt;sizeof(Derive)&lt;&lt;endl;  
-    return 0;  
-}</code></pre><p>Base类里的int  a;char *p;占8个字节。</p>
-<p>而虚析构函数virtual ~Base();的指针占4子字节。</p>
-<p>其他成员函数不归入sizeof统计。</p>
-<p>Derive类首先要具有Base类的部分，也就是占12字节。</p>
-<p>int  d;char *p;占8字节</p>
-<p>static int st;不归入sizeof统计</p>
-<p>所以一共是20字节。</p>
-<h2 id="3-字节对齐原则"><a href="#3-字节对齐原则" class="headerlink" title="3. 字节对齐原则"></a>3. 字节对齐原则</h2><pre><code>class Derive:public Base  
-{  
-public:  
-    Derive():Base(){};  
-    ~Derive(){};  
-private:  
-    static int st;  
-    int  d;  
-    char *p;  
-    char c;  
+<p>叶节点 <em>9</em>、<em>15<em>、</em>7</em> 的最大贡献值分别为 <em>9</em>、<em>15</em>、<em>7</em>。</p>
+<p>得到叶节点的最大贡献值之后，再计算非叶节点的最大贡献值。节点 <em>20</em> 的最大贡献值等于 20+max(15,7)=35，节点 <em>-10</em> 的最大贡献值等于-10+max(9,35)=25  。</p>
+<p>上述计算过程是递归的过程，因此，对根节点调用函数 <code>maxGain</code>，即可得到每个节点的最大贡献值。</p>
+<p>根据函数 <code>maxGain</code> 得到每个节点的最大贡献值之后，如何得到二叉树的最大路径和？对于二叉树中的一个节点，该节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值，如果子节点的最大贡献值为正，则计入该节点的最大路径和，否则不计入该节点的最大路径和。维护一个全局变量 <code>maxSum</code> 存储最大路径和，在递归过程中更新 <code>maxSum</code> 的值，最后得到的 <code>maxSum</code> 的值即为二叉树中的最大路径和。</p>
+<p> <a href="https://assets.leetcode-cn.com/solution-static/124/1.PNG" target="_blank" rel="noopener">fig1</a> <a href="https://assets.leetcode-cn.com/solution-static/124/2.PNG" target="_blank" rel="noopener">fig2</a> <a href="https://assets.leetcode-cn.com/solution-static/124/3.PNG" target="_blank" rel="noopener">fig3</a> <a href="https://assets.leetcode-cn.com/solution-static/124/4.PNG" target="_blank" rel="noopener">fig4</a> <a href="https://assets.leetcode-cn.com/solution-static/124/5.PNG" target="_blank" rel="noopener">fig5</a> <a href="https://assets.leetcode-cn.com/solution-static/124/6.PNG" target="_blank" rel="noopener">fig6</a> <a href="https://assets.leetcode-cn.com/solution-static/124/7.PNG" target="_blank" rel="noopener">fig7</a> </p>
+<p>这题目的难点在于理解题意和转化题意。<br>我们可以结合 数组的最大子数组和 的思路去解题。</p>
+<ol>
+<li><p>「可以从任意节点出发, 到达任意节点」 的路径,<br>一定是先上升（ 0 ～ n 个）节点, 到达顶点, 后下降（ 0 ～ n 个）节点。<br>我们可以通过枚举顶点的方式来枚举路径。</p>
+</li>
+<li><p>我们枚举顶点时, 可以把路径分拆成3部分： 左侧路径、右侧路径和顶点。</p>
+<pre><code> 如下面的路径, 顶点为 20, 左侧路径为 6 -&gt; 15, 右侧为 6 -&gt; 7。
 
-};  </code></pre><p>一个char c;增加了4字节（char本身占1个字节），说明类的大小也遵守类似class字节对齐的补齐规则。<br>一般来说，普通继承的空间计算结果应当是sizeof(基类)+sizeof(派生类)，然后考虑对齐，内存空间必须是类中数据成员所占用最大空间的整数倍。不过这是一般情况，具体怎么算要看编译器，比如将上述代码中的两个数据成员交换位置，结果则可能不同。</p>
-<h2 id="4-含虚函数的子类普通继承含虚函数的父类"><a href="#4-含虚函数的子类普通继承含虚函数的父类" class="headerlink" title="4.含虚函数的子类普通继承含虚函数的父类"></a>4.含虚函数的子类普通继承含虚函数的父类</h2><pre><code>class Test
-{
-public:
-    int a;
-    virtual void get(){}
-};
-class Test2 : public Test
-{
-public:
-    int a;
-    virtual void set(){}
-};</code></pre><p>虽然子类和父类都包含虚函数， 但它们存放于同一个虚表中，因此只需要一个指针，在普通继承下，不管是子类还是父类包含虚函数，子类的<strong>sizeof=sizeof(基类非静态数据成员)+sizeof(派生类非静态数据成员)+sizeof(指针)</strong>。</p>
-<h2 id="5-子类虚继承父类-C-中虚拟继承的概念"><a href="#5-子类虚继承父类-C-中虚拟继承的概念" class="headerlink" title="5.子类虚继承父类(C++中虚拟继承的概念)"></a>5.子类虚继承父类(C++中虚拟继承的概念)</h2><h3 id="5-1-C-中虚拟继承的概念"><a href="#5-1-C-中虚拟继承的概念" class="headerlink" title="5.1.C++中虚拟继承的概念"></a>5.1.C++中虚拟继承的概念</h3><p>为了解决从不同途径继承来的同名的数据成员在内存中有不同的拷贝造成数据不一致问题，将共同基类设置为虚基类。这时从不同的路径继承过来的同名数据成员在内存中就只有一个拷贝，同一个函数名也只有一个映射。这样不仅就解决了二义性问题，也节省了内存，避免了数据不一致的问题。</p>
-<pre><code>class 派生类名：virtual 继承方式  基类名</code></pre><p>virtual是关键字，声明该基类为派生类的虚基类。<br>在多继承情况下，虚基类关键字的作用范围和继承方式关键字相同，只对紧跟其后的基类起作用。<br>声明了虚基类之后，虚基类在进一步派生过程中始终和派生类一起，维护同一个基类子对象的拷贝。</p>
-<p>执行顺序</p>
-<pre><code>首先执行虚基类的构造函数，多个虚基类的构造函数按照被继承的顺序构造；
+   -10
+   / \
+  9 [20]
+    /  \
+  [15] [7]
+  /    / \
+[6]   4  [6]   </code></pre><p>以当前节点为顶点的路径中, 最大和为 两侧路径的最大和 + 节点的值。<br>需要注意的是, 两侧路径也可能不选, 此时取 0。</p>
+</li>
+<li><p>如何求两侧路径最大和？ 看一个类似问题：求数组的最大子数组和。<br>动态规划： dp[i] 代表以 nums[i] 为结尾的子数组的最大和。<br>转移方程： dp[i] = max(dp[i-1], 0) + nums[i]。</p>
+</li>
+<li><p>在树上, 设 dp[C] 代表以当前节点为结尾的最大上升路径和,<br>则我们需要对节点的左右子树做一个选择, 有<br>dp[C] = max(max(dp[L], 0), max(dp[R], 0)) + C.val<br>式中, C,L,R 分别代指 当前节点、左子节点、右子节点。</p>
+</li>
+<li><p>最后, 以当前节点为顶点的路径中, 最大的和为<br>max(dp[L], 0) + max(dp[R], 0) + C.val。<br>我们枚举顶点, 并记录最大答案。</p>
+</li>
+</ol>
+<details>
+    <summary>递归Java</summary>
 
-执行基类的构造函数，多个基类的构造函数按照被继承的顺序构造；
+<figure class="highlight java"><figcaption><span>[sol1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxSum = Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        maxGain(root);</span><br><span class="line">        <span class="keyword">return</span> maxSum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxGain</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 递归计算左右子节点的最大贡献值</span></span><br><span class="line">        <span class="comment">// 只有在最大贡献值大于 0 时，才会选取对应子节点</span></span><br><span class="line">        <span class="keyword">int</span> leftGain = Math.max(maxGain(node.left), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> rightGain = Math.max(maxGain(node.right), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">int</span> priceNewpath = node.val + leftGain + rightGain;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新答案</span></span><br><span class="line">        maxSum = Math.max(maxSum, priceNewpath);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">return</span> node.val + Math.max(leftGain, rightGain);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-执行成员对象的构造函数，多个成员对象的构造函数按照申明的顺序构造；
+</details>
+<details>
+    <summary>递归Python</summary>
 
-执行派生类自己的构造函数；
 
-析构以与构造相反的顺序执行；</code></pre><h3 id="5-2-子类虚继承父类"><a href="#5-2-子类虚继承父类" class="headerlink" title="5.2.子类虚继承父类"></a>5.2.子类虚继承父类</h3><p>虚继承比较特别，一般的计算公式应当是*<em>sizeof(子类)=sizeof(基类)+sizeof(虚表指针)+sizeof(子类非静态数据成员)<br>*</em></p>
-<pre><code>class A
-{
-public:
-    int a;
-};
-class B : virtual public A
-{
-public:
-    int b;
-};</code></pre><p>sizeof结果都是12，基类A大小为4，子类B数据成员为4，因为是虚继承，可能需要一个指向虚基类的指针，再占用4字节，得到12。</p>
-<p>然而，对于包含虚函数的子类虚继承不含虚函数的父类时，结果发生了变化</p>
-<pre><code>class A
-{
-public:
-    int a;
-};
-class B : virtual public A
-{
-public:
-    int a;
-    virtual void set(){}
-};</code></pre><p>在Codeblocks下结果仍为12，VS2010下却为16。子类增加了一个虚函数，Codeblocks下结果不变，在VS下结果却发生了变化。</p>
-<p>可以这样认为，在VS下，计算公式可能如下：<strong>sizeof(子类)=sizeof(基类)+sizeof(指示虚基类的指针)+sizeof(子类非静态数据成员)+sizeof(虚表指针)</strong>。在CB下可能对内存进行了优化（个人推测）</p>
-<p>对于子类和父类中都含虚函数的虚继承，结果如下：</p>
-<pre><code>class Test
-{
-public:
-    int a;
-    virtual void get(){}
-};
-class Test2 : virtual Test
-{
-public:
-    int a;
-    virtual void set(){}
-};</code></pre><p>在Codeblocks下结果为16，VS2010下为20。<br>这是因为，使用了虚继承，子类和父类的虚函数存放在不同的虚表中，因此子类和父类都需要一个指向虚表的指针。</p>
-<h2 id="6-多重继承"><a href="#6-多重继承" class="headerlink" title="6.多重继承"></a>6.多重继承</h2><pre><code>#include&lt;iostream&gt;
-using namespace std;
-class A
-{
-public:
-    int a;
-};
-class B : public A
-{
-public:
-    int b;
-};
-class C : public A
-{
-public:
-    int c;
-};
-class D : public B, public C
-{
-public:
-    int d;
-};
+<figure class="highlight python"><figcaption><span>[sol1-Python]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.maxSum = float(<span class="string">"-inf"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxPathSum</span><span class="params">(self, root: TreeNode)</span> -&gt; int:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">maxGain</span><span class="params">(node)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 递归计算左右子节点的最大贡献值</span></span><br><span class="line">            <span class="comment"># 只有在最大贡献值大于 0 时，才会选取对应子节点</span></span><br><span class="line">            leftGain = max(maxGain(node.left), <span class="number">0</span>)</span><br><span class="line">            rightGain = max(maxGain(node.right), <span class="number">0</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值</span></span><br><span class="line">            priceNewpath = node.val + leftGain + rightGain</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 更新答案</span></span><br><span class="line">            self.maxSum = max(self.maxSum, priceNewpath)</span><br><span class="line">        </span><br><span class="line">            <span class="comment"># 返回节点的最大贡献值</span></span><br><span class="line">            <span class="keyword">return</span> node.val + max(leftGain, rightGain)</span><br><span class="line">   </span><br><span class="line">        maxGain(root)</span><br><span class="line">        <span class="keyword">return</span> self.maxSum</span><br></pre></td></tr></table></figure>
 
-int main() {
-    cout &lt;&lt; &quot;sizeof A=&quot; &lt;&lt; sizeof(A) &lt;&lt; endl;
-    cout &lt;&lt; &quot;sizeof B=&quot; &lt;&lt; sizeof(B) &lt;&lt; endl;
-    cout &lt;&lt; &quot;sizeof C=&quot; &lt;&lt; sizeof(C) &lt;&lt; endl;
-    cout &lt;&lt; &quot;sizeof D=&quot; &lt;&lt; sizeof(D) &lt;&lt; endl;
-}</code></pre><p>就是基类的相加。<strong>sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)</strong></p>
-<pre><code>sizeof A=4
-sizeof B=8
-sizeof C=8
-sizeof D=20
-请按任意键继续. . .</code></pre><h2 id="7-多重虚继承"><a href="#7-多重虚继承" class="headerlink" title="7.多重虚继承"></a>7.多重虚继承</h2><p>虚继承存在的意义就是为了减少内存开销和二义性，实现对象共享。</p>
-<pre><code>class A
-{
-public:
-    int a;
-};
-class B :  virtual public A
-{
-public:
-    int b;
-};
-class C : virtual public A
-{
-public:
-    int c;
-};
-class D : public B, public C
-{
-public:
-    int d;
-};</code></pre><p>sizeof(D)在CB和VS下都是24。D中包含a,b,c,d四个数据成员，还包含两个指向虚基类A的指针，这种情况下，VS和CB都没有将两个指针合为一个。这种情况也可以这样考虑，sizeof(D)=sizeof(B)+sizeof(C)+sizeof(子类非静态数据成员)，但由于是虚继承，虚基类A中数据成员a只需要保留一份，而我们算了两次，所以还需要减去A的数据成员，所以公式应当是sizeof(D)=sizeof(B)+sizeof(C)-sizeof(A的非静态数据成员)+sizeof(子类非静态数据成员)。</p>
-<h2 id="8-字节对齐"><a href="#8-字节对齐" class="headerlink" title="8.字节对齐"></a>8.字节对齐</h2><p>１:数据成员对齐规则：结构(struct)(或联合(union))的数据成员，第一个数据成员放在offset为0的地方，以后每个数据成员存储的起始位置要从该成员大小或者成员的子成员大小（只要该成员有子成员，比如说是数组，结构体等）的整数倍开始(比如int在32位机为４字节,则要从４的整数倍地址开始存储。</p>
-<p>２:结构体作为成员:如果一个结构里有某些结构体成员,则结构体成员要从其内部最大元素大小的整数倍地址开始存储.(struct a里存有struct b,b里有char,int ,double等元素,那b应该从8的整数倍开始存储.)</p>
-<p>３:收尾工作:结构体的总大小,也就是sizeof的结果,.必须是其内部最大成员的整数倍.不足的要补齐.</p>
-<p>4:在代码前加一句#pragma pack(1),告诉编译器,所有的对齐都按照1的整数倍对齐,换句话说就是没有对齐规则.如果#pragma pack (n)中指定的n大于结构体中最大成员的size，则其不起作用，结构体仍然按照size最大的成员进行对界</p>
-<h2 id="9-struct结构体变量，union共用体变量，enum枚举变量的大小"><a href="#9-struct结构体变量，union共用体变量，enum枚举变量的大小" class="headerlink" title="9.struct结构体变量，union共用体变量，enum枚举变量的大小"></a>9.struct结构体变量，union共用体变量，enum枚举变量的大小</h2><p>struct结构体变量大小等于结构体中的各个成员变量所占内存大小总和，union共用体变量大小等于共用体结构中占用内存最大的成员的内存大小。</p>
-<p>首先先明白概念：<br>数据类型，指固定内存大小的别名，如int类型为4个字节内存。<br>变量，一段连续存储空间的别名。这段连续存储空间的大小，即变量的大小，由定义该变量的数据类型决定，即该数据类型代表的固定内存大小。数据类型，是变量的模板。</p>
-<p>应用到枚举上：<br>枚举类型，指一个被命名的整型常数的集合。即枚举类型，本质上是一组常数的集合体，只是这些常数有各自的命名。枚举类型，是一种用户自定义数据类型。<br>枚举变量，由枚举类型定义的变量。枚举变量的大小，即枚举类型所占内存的大小。由于枚举变量的赋值，一次只能存放枚举结构中的某个常数。所以枚举变量的大小，实质是常数所占内存空间的大小（常数为int类型，当前主流的编译器中一般是32位机器和64位机器中int型都是4个字节），枚举类型所占内存大小也是这样。<br>另外，可以用编译器内置的指示符sizeof，计算出枚举变量（或枚举类型）的大小进行验证。</p>
-<pre><code>#include &lt;iostream&gt;
-using namespace std;
-typedef enum
-{
-    Char,
-    Short,
-    Int,
-    Double,
-    Float,
-}TEST_TYPE;
-int main() {
-    TEST_TYPE val;
-    cout &lt;&lt; sizeof(val) &lt;&lt; endl;
+</details>
+<details>
+    <summary>递归C++</summary>
 
-    //验证例程
-    enum number {
-        one = 1,
-        two = 2,
-        three = 3,
-        four = 4
-    };
-    enum number num1;
-    cout &lt;&lt; &quot;sizeof 枚举结构 enum number =&quot; &lt;&lt; sizeof(enum number) &lt;&lt; endl;
-    cout &lt;&lt; &quot;sizeof 定义后的枚举变量 variable num1=&quot; &lt;&lt; sizeof(num1) &lt;&lt; endl;
-    num1 = three;
-    cout &lt;&lt; &quot;size of  赋值后的枚举变量 =&quot; &lt;&lt; sizeof(num1) &lt;&lt; endl;
-    return 0;
-}
+<figure class="highlight c++"><figcaption><span>[sol1-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> maxSum = INT_MIN;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxGain</span><span class="params">(TreeNode* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 递归计算左右子节点的最大贡献值</span></span><br><span class="line">        <span class="comment">// 只有在最大贡献值大于 0 时，才会选取对应子节点</span></span><br><span class="line">        <span class="keyword">int</span> leftGain = max(maxGain(node-&gt;left), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> rightGain = max(maxGain(node-&gt;right), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">int</span> priceNewpath = node-&gt;val + leftGain + rightGain;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新答案</span></span><br><span class="line">        maxSum = max(maxSum, priceNewpath);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">return</span> node-&gt;val + max(leftGain, rightGain);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        maxGain(root);</span><br><span class="line">        <span class="keyword">return</span> maxSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-输出为
-4
-sizeof 枚举结构 enum number =4
-sizeof 定义后的枚举变量 variable num1=4
-size of  赋值后的枚举变量 =4
-请按任意键继续. . .</code></pre>
+</details>
+<details>
+    <summary>递归Golang</summary>
+
+<figure class="highlight golang"><figcaption><span>[sol1-Golang]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">maxPathSum</span><span class="params">(root *TreeNode)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    maxSum := math.MinInt32</span><br><span class="line">    <span class="keyword">var</span> maxGain <span class="function"><span class="keyword">func</span><span class="params">(*TreeNode)</span> <span class="title">int</span></span></span><br><span class="line"><span class="function">    <span class="title">maxGain</span> = <span class="title">func</span><span class="params">(node *TreeNode)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> node == <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 递归计算左右子节点的最大贡献值</span></span><br><span class="line">        <span class="comment">// 只有在最大贡献值大于 0 时，才会选取对应子节点</span></span><br><span class="line">        leftGain := max(maxGain(node.Left), <span class="number">0</span>)</span><br><span class="line">        rightGain := max(maxGain(node.Right), <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值</span></span><br><span class="line">        priceNewPath := node.Val + leftGain + rightGain</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新答案</span></span><br><span class="line">        maxSum = max(maxSum, priceNewPath)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">return</span> node.Val + max(leftGain, rightGain)</span><br><span class="line">    &#125;</span><br><span class="line">    maxGain(root)</span><br><span class="line">    <span class="keyword">return</span> maxSum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(x, y <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> x &gt; y &#123;</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+<details>
+    <summary>递归C#</summary>
+
+<figure class="highlight csharp"><figcaption><span>[sol1-C#]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> maxSum = <span class="keyword">int</span>.MinValue;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">MaxPathSum</span>(<span class="params">TreeNode root</span>) </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        MaxGain(root);</span><br><span class="line">        <span class="keyword">return</span> maxSum;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">MaxGain</span>(<span class="params">TreeNode node</span>) </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">null</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 递归计算左右子节点的最大贡献值</span></span><br><span class="line">        <span class="comment">// 只有在最大贡献值大于 0 时，才会选取对应子节点</span></span><br><span class="line">        <span class="keyword">int</span> leftGain = Math.Max(MaxGain(node.left), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> rightGain = Math.Max(MaxGain(node.right), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">int</span> priceNewpath = node.val + leftGain + rightGain;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新答案</span></span><br><span class="line">        maxSum = Math.Max(maxSum, priceNewpath);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">return</span> node.val + Math.Max(leftGain, rightGain);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：<em>O(N)*，其中 *N</em> 是二叉树中的节点个数。对每个节点访问不超过 <em>2</em> 次。</p>
+</li>
+<li><p>空间复杂度：<em>O(N)*，其中 *N</em> 是二叉树中的节点个数。空间复杂度主要取决于递归调用层数，最大层数等于二叉树的高度，最坏情况下，二叉树的高度等于二叉树中的节点个数。</p>
+</li>
+</ul>
+
       
       
         <div class="page-reward">
@@ -544,13 +414,13 @@ size of  赋值后的枚举变量 =4
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></p>
+        <p><span>本文标题:</span><a href="/2020/08/31/124. 二叉树中的最大路径和/">124. 二叉树中的最大路径和</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2018年08月31日 - 10时01分</p>
-        <p><span>最后更新:</span>2019年07月18日 - 12时07分</p>
+        <p><span>发布时间:</span>2020年08月31日 - 15时20分</p>
+        <p><span>最后更新:</span>2020年08月31日 - 16时28分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/08/31/C++基础概念IV/" title="C++基础概念IV">http://yoursite.com/2018/08/31/C++基础概念IV/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/08/31/C++基础概念IV/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/08/31/124. 二叉树中的最大路径和/" title="124. 二叉树中的最大路径和">http://yoursite.com/2020/08/31/124. 二叉树中的最大路径和/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/08/31/124. 二叉树中的最大路径和/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -563,18 +433,9 @@ size of  赋值后的枚举变量 =4
 
 <nav id="article-nav">
   
-    <a href="/2018/09/01/快速排序及其优化/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          快速排序及其优化
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/30/682. Baseball Game棒球比赛/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">682. Baseball Game棒球比赛</div>
+    <a href="/2020/08/31/395. 至少有K个重复字符的最长子串/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">395. 至少有K个重复字符的最长子串</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -585,7 +446,7 @@ size of  赋值后的枚举变量 =4
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-空类"><span class="toc-number">1.</span> <span class="toc-text">1.空类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-含有静态变量和虚析构函数的类"><span class="toc-number">2.</span> <span class="toc-text">2.含有静态变量和虚析构函数的类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-字节对齐原则"><span class="toc-number">3.</span> <span class="toc-text">3. 字节对齐原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-含虚函数的子类普通继承含虚函数的父类"><span class="toc-number">4.</span> <span class="toc-text">4.含虚函数的子类普通继承含虚函数的父类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-子类虚继承父类-C-中虚拟继承的概念"><span class="toc-number">5.</span> <span class="toc-text">5.子类虚继承父类(C++中虚拟继承的概念)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-C-中虚拟继承的概念"><span class="toc-number">5.1.</span> <span class="toc-text">5.1.C++中虚拟继承的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-子类虚继承父类"><span class="toc-number">5.2.</span> <span class="toc-text">5.2.子类虚继承父类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-多重继承"><span class="toc-number">6.</span> <span class="toc-text">6.多重继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-多重虚继承"><span class="toc-number">7.</span> <span class="toc-text">7.多重虚继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-字节对齐"><span class="toc-number">8.</span> <span class="toc-text">8.字节对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-struct结构体变量，union共用体变量，enum枚举变量的大小"><span class="toc-number">9.</span> <span class="toc-text">9.struct结构体变量，union共用体变量，enum枚举变量的大小</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#📺-视频题解"><span class="toc-number">1.</span> <span class="toc-text">📺 视频题解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#📖-文字题解"><span class="toc-number">2.</span> <span class="toc-text">📖 文字题解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法一：递归"><span class="toc-number">2.1.</span> <span class="toc-text">方法一：递归</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -651,13 +512,11 @@ size of  赋值后的枚举变量 =4
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/09/01/快速排序及其优化/" title="上一篇: 快速排序及其优化">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2018/08/30/682. Baseball Game棒球比赛/" title="下一篇: 682. Baseball Game棒球比赛">
+            <a href="/2020/08/31/395. 至少有K个重复字符的最长子串/" title="下一篇: 395. 至少有K个重复字符的最长子串">
                 <i class="fa fa-angle-right"></i>
             </a>
         
