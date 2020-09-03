@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>SpringBoot学习笔记III | Yiye Li</title>
+  <title>337. 打家劫舍III | Yiye Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="阐述Spring，Spring MVC，Spring Boot 三者的原理和区别。学习笔记II中涉及到对@Resource和@Autowired的区别做了解释。对用命令查询网络端口占用情况，查找/杀死进程做了回顾性的复习。">
-<meta name="keywords" content="SpringBoot">
+  <meta name="description" content="计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。">
+<meta name="keywords" content="Leetcode,Dynamic Programming">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot学习笔记III">
-<meta property="og:url" content="http://yoursite.com/2019/07/25/SpringBoot学习笔记III/index.html">
+<meta property="og:title" content="337. 打家劫舍III">
+<meta property="og:url" content="http://yoursite.com/2020/09/03/337. 打家劫舍III/index.html">
 <meta property="og:site_name" content="Yiye Li">
-<meta property="og:description" content="阐述Spring，Spring MVC，Spring Boot 三者的原理和区别。学习笔记II中涉及到对@Resource和@Autowired的区别做了解释。对用命令查询网络端口占用情况，查找/杀死进程做了回顾性的复习。">
+<meta property="og:description" content="计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-23T08:29:30.134Z">
+<meta property="og:updated_time" content="2020-09-03T10:29:43.500Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringBoot学习笔记III">
-<meta name="twitter:description" content="阐述Spring，Spring MVC，Spring Boot 三者的原理和区别。学习笔记II中涉及到对@Resource和@Autowired的区别做了解释。对用命令查询网络端口占用情况，查找/杀死进程做了回顾性的复习。">
+<meta name="twitter:title" content="337. 打家劫舍III">
+<meta name="twitter:description" content="计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。">
   
     <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
   
@@ -198,11 +198,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-SpringBoot学习笔记III" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-337. 打家劫舍III" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/07/25/SpringBoot学习笔记III/" class="article-date">
-      <time datetime="2019-07-25T01:36:12.000Z" itemprop="datePublished">2019-07-25</time>
+      <a href="/2020/09/03/337. 打家劫舍III/" class="article-date">
+      <time datetime="2020-09-03T09:08:12.000Z" itemprop="datePublished">2020-09-03</time>
 </a>
     </div>
   
@@ -215,7 +215,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      SpringBoot学习笔记III
+      337. 打家劫舍III
     </h1>
   
 
@@ -225,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">4.2k字</span>
+        <span class="post-count">1.7k字</span>
       </span>
     </span>
     &nbsp; | &nbsp;
@@ -233,7 +233,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">17分</span>
+        <span class="post-count">7分</span>
       </span>
     </span>
 </div>
@@ -244,13 +244,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2019年7月/">2019年7月</a>
+    <a class="article-category-link" href="/categories/2020年9月/">2020年9月</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dynamic-Programming/">Dynamic Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -260,186 +260,98 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>阐述Spring，Spring MVC，Spring Boot 三者的原理和区别。学习笔记II中涉及到对@Resource和@Autowired的区别做了解释。<br>对用命令查询网络端口占用情况，查找/杀死进程做了回顾性的复习。</p>
+        <p>计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。</p>
 <a id="more"></a>
-<h1 id="三省吾身："><a href="#三省吾身：" class="headerlink" title="三省吾身："></a>三省吾身：</h1><h2 id="什么是Spring？它解决了什么问题？"><a href="#什么是Spring？它解决了什么问题？" class="headerlink" title="什么是Spring？它解决了什么问题？"></a>什么是Spring？它解决了什么问题？</h2><p>Spring是一个开源的轻量级Java SE（Java 标准版本）/Java EE（Java 企业版本）开发应用框架，其目的是用于简化企业级应用程序开发。应用程序是由一组相互协作的对象组成。而在传统应用程序开发中，一个完整的应用是由一组相互协作的对象组成。所以开发一个应用除了要开发业务逻辑之外，最多的是关注如何使这些对象协作来完成所需功能，而且要低耦合、高内聚。业务逻辑开发是不可避免的，那如果有个框架出来帮我们来创建对象及管理这些对象之间的依赖关系。可能有人说了，比如“抽象工厂、工厂方法设计模式”不也可以帮我们创建对象，“生成器模式”帮我们处理对象间的依赖关系，不也能完成这些功能吗？可是这些又需要我们创建另一些工厂类、生成器类，我们又要而外管理这些类，增加了我们的负担，如果能有种通过配置方式来创建对象，管理对象之间依赖关系，我们不需要通过工厂和生成器来创建及管理对象之间的依赖关系，这样我们是不是减少了许多工作，加速了开发，能节省出很多时间来干其他事。Spring框架刚出来时主要就是来完成这个功能。</p>
-<p>Spring框架除了帮我们<strong><em>管理对象及其依赖关系</em></strong>，还提供像通用日志记录、性能统计、安全控制、异常处理等面向切面的能力，还能帮我管理最头疼的数据库事务，本身提供了一套简单的JDBC访问实现，提供与第三方数据访问框架集成（如Hibernate、JPA），与各种Java EE技术整合（如Java Mail、任务调度等等），提供一套自己的web层框架Spring MVC、而且还能非常简单的与第三方web框架集成。从这里我们可以认为Spring是一个超级粘合平台，除了自己提供功能外，还提供粘合其他技术和框架的能力，从而使我们可以更自由的选择到底使用什么技术进行开发。而且不管是JAVA SE（C/S架构）应用程序还是JAVA EE（B/S架构）应用程序都可以使用这个平台进行开发。</p>
-<p>Spring，一般指代的是Spring Framework，它是一个开源的应用程序框架，提供了一个简易的开发方式，通过这种开发方式，将避免那些可能致使代码变得繁杂混乱的大量的业务/工具对象，说的更通俗一点就是由框架来帮你管理这些对象，包括它的创建，销毁等，比如基于Spring的项目里经常能看到的Bean，它代表的就是由Spring管辖的对象。<br>而在被管理对象与业务逻辑之间，Spring通过IOC（控制反转）架起使用的桥梁，IOC也可以看做Spring最核心最重要的思想，通过IOC能带来什么好处呢？首先来看一个实际开发中的典型应用场景，假设我们有一个基于MVC分层结构的应用，通过controller层对外提供接口，而通过service层提供具体的实现，在service层中有一个WelcomeService服务接口，一般情况下都是通过WelcomeService service = new WelcomeServiceImpl();创建实例并进行调用：</p>
-<pre><code>public class WelcomeController {
-    private WelcomeService service = new WelcomeServiceImpl();
 
-    @RequestMapping(&quot;/welcome&quot;)
-    public String welcome() {
-    return service.retrieveWelcomeMessage();
-    }
-}</code></pre><p>调用后发现一切正常，此时，功能提交，需要进行测试，而由于实际应用环境与测试环境有所区别，需要替换WelcomeServiceImpl为一个MockWelcomeServiceImpl，以方便测试，怎么办？没有其他办法，只有改代码：</p>
-<pre><code>public class WelcomeController {
-    private WelcomeService service = new MockWelcomeServiceImpl();
+<p>在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。</p>
+<p>计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。</p>
+<p>示例 1:</p>
+<pre><code>输入: [3,2,3,null,3,null,1]
 
-    ...
-}
+     3
+    / \
+   2   3
+    \   \ 
+     3   1
 
-测试OK后再将代码改回去，这种方式太过于繁琐，且对代码的侵入性很强；
-下面看通过Spring的IOC如何实现，首先将WelcomeService交由Spring管理：
+输出: 7 
+解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.</code></pre><p>示例 2:</p>
+<pre><code>输入: [3,4,5,1,3,null,1]
 
-&lt;bean name=&quot;WelcomeService&quot; class=&quot;XXX.XXX.XXX.service.impl.WelcomeServiceImpl&quot;/&gt;</code></pre><p>然后在业务代码处通过Spring IOC拿到具体对象：</p>
-<pre><code>public class WelcomeController {
-    @Autowired
-    private WelcomeService service;
+     3
+    / \
+   4   5
+  / \   \ 
+ 1   3   1
 
-    @RequestMapping(&quot;/welcome&quot;)
-    public String welcome() {
-        return service.retrieveWelcomeMessage();
-    }
-}</code></pre><p>测试的时候，只需要更改配置文件，将WelcomeService对应的实现改为MockWelcomeServiceImpl即可：</p>
-<pre><code>&lt;bean name=&quot;WelcomeService&quot; class=&quot;XXX.XXX.XXX.service.impl.MockWelcomeServiceImpl&quot;/&gt;</code></pre><p>这种方式对业务代码没有任何侵入，它有效的实现松耦合，大家都知道紧耦合的代码是业务发展的噩梦；同时，Spring IOC提供的远不止这些，如通过单例减少创建无用的对象，通过延迟加载优化初始化成本等<br>当然，Spring 的核心功能远不知这些，如：</p>
-<pre><code>Spring AOP
-Spring JDBC
-Spring MVC
-Spring ORM
-Spring JMS
-Spring Test</code></pre><p>其实不通过Spring框架依然可以实现这些功能特定，但是Spring 提供了更优雅的抽象接口以方便对这些功能的组装，同时又给予每个具体实现以灵活的配置；另外，基于Spring，你可以方便的与其他框架进行集成，如hibernate，ibatis等，Spring官方的原则是绝不重复造轮子，有好的解决方案只需要通过Spring进行集成即可。纵览Spring的结构，你会发现Spring Framework 本身并未提供太多具体的功能，它主要专注于让你的项目代码组织更加优雅，使其具有极好的灵活性和扩展性，同时又能通过Spring集成业界优秀的解决方案，想了解Spring的核心实现机制可参考tiny spring 项目</p>
-<h2 id="什么是Spring-MVC？它解决了什么问题？"><a href="#什么是Spring-MVC？它解决了什么问题？" class="headerlink" title="什么是Spring MVC？它解决了什么问题？"></a>什么是Spring MVC？它解决了什么问题？</h2><p>Spring MVC是Spring的一部分，Spring 出来以后，大家觉得很好用，于是按照这种模式设计了一个 MVC框架（一些用Spring 解耦的组件），主要用于开发WEB应用和网络接口，它是Spring的一个模块，通过Dispatcher Servlet, ModelAndView 和 View Resolver，让应用开发变得很容易，一个典型的Spring MVC应用开发分为下面几步：<br>首先通过配置文件声明Dispatcher Servlet：</p>
-<pre><code>&lt;servlet&gt;
-    &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
-    &lt;servlet-class&gt;com.qgd.oms.web.common.mvc.OmsDispatcherServlet&lt;/servlet-class&gt;
-    &lt;init-param&gt;
-        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-        &lt;param-value&gt;/WEB-INF/applicationContext.xml&lt;/param-value&gt;
-    &lt;/init-param&gt;
-    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-&lt;/servlet&gt;
+输出: 9
+解释: 小偷一晚能够盗取的最高金额 = 4 + 5 = 9.</code></pre><h1 id="方法一：动态规划"><a href="#方法一：动态规划" class="headerlink" title="方法一：动态规划"></a>方法一：动态规划</h1><p><strong>思路与算法</strong></p>
+<p>简化一下这个问题：一棵二叉树，树上的每个点都有对应的权值，每个点有两种状态（选中和不选中），问在不能同时选中有父子关系的点的情况下，能选中的点的最大权值和是多少。</p>
+<p>我们可以用 <em>f(o)</em> 表示选择 <em>o</em> 节点的情况下，<em>o</em> 节点的子树上被选择的节点的最大权值和；<em>g(o)</em> 表示不选择 <em>o</em> 节点的情况下，<em>o</em> 节点的子树上被选择的节点的最大权值和；<em>l</em> 和 <em>r</em> 代表 <em>o</em> 的左右孩子。</p>
+<ul>
+<li>当 <em>o</em> 被选中时，<em>o</em> 的左右孩子都不能被选中，故 <em>o</em> 被选中情况下子树上被选中点的最大权值和为 <em>l</em> 和 <em>r</em> 不被选中的最大权值和相加，即 <em>f(o) = g(l) + g(r)</em>。</li>
+<li>当 <em>o</em> 不被选中时，<em>o</em> 的左右孩子可以被选中，也可以不被选中。对于 <em>o</em> 的某个具体的孩子 <em>x</em>，它对 <em>o</em> 的贡献是 <em>x</em> 被选中和不被选中情况下权值和的较大值。故<code>g(o)=max{f(l),g(l)}+max{f(r),g(r)}</code>。</li>
+</ul>
+<p>至此，我们可以用哈希映射来存 <em>f</em> 和 <em>g</em> 的函数值，用深度优先搜索的办法后序遍历这棵二叉树，我们就可以得到每一个节点的 <em>f</em> 和 <em>g</em>。根节点的 <em>f</em> 和 <em>g</em> 的最大值就是我们要找的答案。</p>
+<p>我们不难给出这样的实现：</p>
+<details>
+    <summary>动态规划C++</summary>
 
-&lt;servlet-mapping&gt;
-    &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
-    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;</code></pre><p>通过配置文件声明servlet详情，如MVC resource，data source，bean等</p>
-<pre><code>&lt;mvc:resources mapping=&quot;/css/**/*&quot; location=&quot;/static/css/&quot; cache-period=&quot;21600&quot;/&gt;
-&lt;mvc:resources mapping=&quot;/js/**/*&quot; location=&quot;/static/js/&quot; cache-period=&quot;21600&quot;/&gt;
-&lt;mvc:resources mapping=&quot;/views/**/*.html&quot; location=&quot;/static/views/&quot; cache-period=&quot;21600&quot;/&gt;
-&lt;mvc:resources mapping=&quot;/fonts/**/*&quot; location=&quot;/static/fonts/&quot;/&gt;
-&lt;mvc:resources mapping=&quot;/ueditor/**/*&quot; location=&quot;/static/js/lib/ueditor/&quot;/&gt;
-&lt;mvc:resources mapping=&quot;/img/**/*&quot; location=&quot;/static/img/&quot;/&gt;
+<figure class="highlight cpp"><figcaption><span>[sol0-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">unordered_map</span> &lt;TreeNode*, <span class="keyword">int</span>&gt; f, g;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!o) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(o-&gt;left);</span><br><span class="line">        dfs(o-&gt;right);</span><br><span class="line">        f[o] = o-&gt;val + g[o-&gt;left] + g[o-&gt;right];</span><br><span class="line">        g[o] = max(f[o-&gt;left], g[o-&gt;left]) + max(f[o-&gt;right], g[o-&gt;right]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode* o)</span> </span>&#123;</span><br><span class="line">        dfs(o);</span><br><span class="line">        <span class="keyword">return</span> max(f[o], g[o]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp2.BasicDataSource&quot; destroy-method=&quot;close&quot;&gt;
-    &lt;property name=&quot;driverClassName&quot; value=&quot;${jdbc.driver}&quot;/&gt;
-    &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot;/&gt;
-    &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot;/&gt;
-    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
-    &lt;property name=&quot;validationQuery&quot; value=&quot;${jdbc.validationQuery}&quot;/&gt;
-    &lt;property name=&quot;maxTotal&quot; value=&quot;10&quot;/&gt;
-    &lt;property name=&quot;minIdle&quot; value=&quot;5&quot;/&gt;
-    &lt;property name=&quot;maxIdle&quot; value=&quot;10&quot;/&gt;
-    &lt;property name=&quot;defaultAutoCommit&quot; value=&quot;true&quot;/&gt;
-    &lt;property name=&quot;testWhileIdle&quot; value=&quot;true&quot;/&gt;
-    &lt;property name=&quot;testOnBorrow&quot; value=&quot;true&quot;/&gt;
-    &lt;property name=&quot;poolPreparedStatements&quot; value=&quot;true&quot;/&gt;
-    &lt;property name=&quot;maxOpenPreparedStatements&quot; value=&quot;50&quot;/&gt;
-&lt;/bean&gt;
+</details>
+<details>
+    <summary>动态规划Java</summary>
 
-&lt;bean id=&quot;configService&quot; class=&quot;com.qgd.oms.web.common.service.ConfigService&quot;&gt;
-    &lt;property name=&quot;configStore&quot;&gt;
-        &lt;bean class=&quot;com.qgd.oms.web.common.service.impl.DbConfigStore&quot;&gt;
-            &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
-                &lt;property name=&quot;taskScheduler&quot; ref=&quot;defaultScheduler&quot;/&gt;
-            &lt;property name=&quot;refreshInterval&quot; value=&quot;30000&quot;/&gt;
-        &lt;/bean&gt;
-    &lt;/property&gt;
-&lt;/bean&gt;</code></pre><p>若需添加其它功能，如security，则需添加对应配置：<br>    <http pattern="/css/**/*" security="none"><br>    <http pattern="/js/**/*" security="none"><br>    <http pattern="/views/**/*.html" security="none"><br>    <http pattern="/fonts/**/*" security="none"><br>    <http pattern="/ueditor/**/*" security="none"><br>    <http pattern="/img/**/*" security="none"></http></http></http></http></http></http></p>
-<pre><code>&lt;http use-expressions=&quot;true&quot; entry-point-ref=&quot;omsAuthenticationEntryPoint&quot;&gt;
-    &lt;logout logout-url=&quot;/omsmc/authentication/logout/*&quot; success-handler-ref=&quot;omsLogoutSuccessHandler&quot;&gt;&lt;/logout&gt;
-    &lt;intercept-url pattern=&apos;/omsmc/authentication/login*&apos; access=&quot;permitAll&quot; /&gt;
-    &lt;intercept-url pattern=&apos;/ms/**/*&apos; access=&quot;permitAll&quot; /&gt;
-    &lt;intercept-url pattern=&apos;/**&apos; access=&quot;authenticated&quot; /&gt;
-    &lt;!--&lt;security:form-login /&gt;--&gt;
-    &lt;custom-filter ref=&quot;omsUsernamePasswordAuthenticationFilter&quot; position=&quot;FORM_LOGIN_FILTER&quot; /&gt;
-    &lt;remember-me services-ref=&quot;omsRememberMeServices&quot; key=&quot;yfboms&quot;/&gt;
-    &lt;csrf disabled=&quot;true&quot;/&gt;
-&lt;/http&gt;</code></pre><p>增加业务代码，如controller，service，model等，最后生成war包，通过容器进行启动</p>
-<h2 id="什么是Spring-Boot？它解决了什么问题？"><a href="#什么是Spring-Boot？它解决了什么问题？" class="headerlink" title="什么是Spring Boot？它解决了什么问题？"></a>什么是Spring Boot？它解决了什么问题？</h2><p>初期的Spring通过代码加配置的形式为项目提供了良好的灵活性和扩展性，但随着Spring越来越庞大，其配置文件也越来越繁琐，太多复杂的xml文件也一直是Spring被人诟病的地方，特别是近些年其他简洁的WEB方案层出不穷，如基于Python或Node.Js，几行代码就能实现一个WEB服务器，对比起来，大家渐渐觉得Spring那一套太过繁琐，此时，Spring社区推出了Spring Boot，它的目的在于实现自动配置，降低项目搭建的复杂度，如需要搭建一个接口服务，通过Spring Boot，几行代码即可实现，请看代码示例：</p>
-<pre><code>//引入spring-boot-starter-web依赖
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-&lt;/dependency&gt;
+<figure class="highlight java"><figcaption><span>[sol0-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    Map&lt;TreeNode, Integer&gt; f = <span class="keyword">new</span> HashMap&lt;TreeNode, Integer&gt;();</span><br><span class="line">    Map&lt;TreeNode, Integer&gt; g = <span class="keyword">new</span> HashMap&lt;TreeNode, Integer&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        dfs(root);</span><br><span class="line">        <span class="keyword">return</span> Math.max(f.getOrDefault(root, <span class="number">0</span>), g.getOrDefault(root, <span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(node.left);</span><br><span class="line">        dfs(node.right);</span><br><span class="line">        f.put(node, node.val + g.getOrDefault(node.left, <span class="number">0</span>) + g.getOrDefault(node.right, <span class="number">0</span>));</span><br><span class="line">        g.put(node, Math.max(f.getOrDefault(node.left, <span class="number">0</span>), g.getOrDefault(node.left, <span class="number">0</span>)) + Math.max(f.getOrDefault(node.right, <span class="number">0</span>), g.getOrDefault(node.right, <span class="number">0</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-//声明Spring Boot应用，直接写业务逻辑即可
-@Controller
-@SpringBootApplication
-public class MockServerApplication {
-    @RequestMapping(&quot;/hi&quot;)
-    @ResponseBody
-    String home() {
-        return &quot;how are you!&quot;;
-    }
+</details>
+<details>
+    <summary>动态规划JavaScript</summary>
 
-    public static void main(String[] args) {
-        SpringApplication.run(MockServerApplication.class, args);
-    }
-}</code></pre><p>你甚至都不用额外的WEB容器，直接生成jar包执行即可，因为spring-boot-starter-web模块中包含有一个内置tomcat，可以直接提供容器使用；基于Spring Boot，不是说原来的配置没有了，而是Spring Boot有一套默认配置，我们可以把它看做比较通用的约定，而Spring Boot遵循的也是约定优于配置原则，同时，如果你需要使用到Spring以往提供的各种复杂但功能强大的配置功能，Spring Boot一样支持<br>在Spring Boot中，你会发现你引入的所有包都是starter形式，如：</p>
-<p>spring-boot-starter-web-services，针对SOAP Web Services</p>
-<p>spring-boot-starter-web，针对Web应用与网络接口</p>
-<p>spring-boot-starter-jdbc，针对JDBC</p>
-<p>spring-boot-starter-data-jpa，基于hibernate的持久层框架</p>
-<p>spring-boot-starter-cache，针对缓存支持<br>等等</p>
-<p>Spring Boot对starter的解释如下：</p>
-<p><strong><em>Starters are a set of convenient dependency descriptors that you can include in your application. You get a one-stop-shop for all the Spring and related technology that you need, without having to hunt through sample code and copy paste loads of dependency descriptors. For example, if you want to get started using Spring and JPA for database access, just include the spring-boot-starter-data-jpa dependency in your project, and you are good to go</em></strong></p>
-<p>这句话的译意为：</p>
-<p><strong><em>Starters是一系列极其方便的依赖描述，通过在你的项目中包含这些starter，你可以一站式获得你所需要的服务，而无需像以往那样copy各种示例配置及代码，然后调试，真正做到开箱即用；比如你想使用Spring JPA进行数据操作，只需要在你的项目依赖中引入spring-boot-starter-data-jpa即可</em></strong></p>
-<h2 id="Spring，Spring-MVC，Spring-Boot-三者比较"><a href="#Spring，Spring-MVC，Spring-Boot-三者比较" class="headerlink" title="Spring，Spring MVC，Spring Boot 三者比较"></a>Spring，Spring MVC，Spring Boot 三者比较</h2><p>三者专注的领域不同，解决的问题也不一样；总的来说，Spring 就像一个大家族，有众多衍生产品例如 Boot，Security，JPA等等。但他们的基础都是Spring 的 IOC 和 AOP，IOC提供了依赖注入的容器，而AOP解决了面向切面的编程，然后在此两者的基础上实现了其他衍生产品的高级功能；Spring MVC是基于 Servlet 的一个 MVC 框架，主要解决 WEB 开发的问题，因为 Spring 的配置非常复杂，各种xml，properties处理起来比较繁琐。于是为了简化开发者的使用，Spring社区创造性地推出了Spring Boot，它遵循约定优于配置，极大降低了Spring使用门槛，但又不失Spring原本灵活强大的功能</p>
-<p><a href="https://upload-images.jianshu.io/upload_images/4185175-a0a50bf022178e1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/667" target="_blank" rel="noopener">https://upload-images.jianshu.io/upload_images/4185175-a0a50bf022178e1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/667</a></p>
-<h2 id="Resource和-Autowired的区别？"><a href="#Resource和-Autowired的区别？" class="headerlink" title="@Resource和@Autowired的区别？"></a>@Resource和@Autowired的区别？</h2><p>@Resource和@Autowired都是做bean的注入时使用，其实@Resource并不是Spring的注解，它的包是javax.annotation.Resource，需要导入，但是Spring支持该注解的注入。</p>
-<h3 id="共同点"><a href="#共同点" class="headerlink" title="共同点"></a>共同点</h3><p>两者都可以写在字段和setter方法上。两者如果都写在字段上，那么就不需要再写setter方法。</p>
-<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><h4 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h4><p>@Autowired为Spring提供的注解，需要导入包org.springframework.beans.factory.annotation.Autowired;只按照byType注入。</p>
-<pre><code>public class TestServiceImpl {
-    // 下面两种@Autowired只要使用一种即可
-    @Autowired
-    private UserDao userDao; // 用于字段上
+<figure class="highlight javascript"><figcaption><span>[sol0-JavaScript]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rob = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> f = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">const</span> g = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">node</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (node === <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(node.left);</span><br><span class="line">        dfs(node.right);</span><br><span class="line">        f.set(node, node.val + (g.get(node.left) || <span class="number">0</span>) + (g.get(node.right) || <span class="number">0</span>));</span><br><span class="line">        g.set(node, <span class="built_in">Math</span>.max(f.get(node.left) || <span class="number">0</span>, g.get(node.left) || <span class="number">0</span>) + <span class="built_in">Math</span>.max(f.get(node.right) || <span class="number">0</span>, g.get(node.right) || <span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    dfs(root);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(f.get(root) || <span class="number">0</span>, g.get(root) || <span class="number">0</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-    @Autowired
-    public void setUserDao(UserDao userDao) { // 用于属性的方法上
-        this.userDao = userDao;
-    }
-}</code></pre><p>  @Autowired注解是<strong>按照类型（byType）装配</strong>依赖对象，默认情况下它要求依赖对象必须存在，如果允许null值，可以设置它的required属性为false。如果我们想使用按照名称（byName）来装配，可以结合@Qualifier注解一起使用。如下：</p>
-<pre><code>public class TestServiceImpl {
-    @Autowired
-    @Qualifier(&quot;userDao&quot;)
-    private UserDao userDao;
-}</code></pre><h4 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h4><p>@Resource默认按照ByName自动注入，<strong>* 是JDK1.6支持的注解，按照名称进行装配，*</strong><br>由J2EE提供，需要导入包javax.annotation.Resource。@Resource有两个重要的属性：name和type，而Spring将@Resource注解的name属性解析为bean的名字，而type属性则解析为bean的类型。所以，如果使用name属性，则使用byName的自动注入策略，而使用type属性时则使用byType自动注入策略。如果既不制定name也不制定type属性，这时将通过反射机制使用byName自动注入策略。</p>
-<pre><code>public class TestServiceImpl {
-    // 下面两种@Resource只要使用一种即可
-    @Resource(name=&quot;userDao&quot;)
-    private UserDao userDao; // 用于字段上
+</details>
 
-    @Resource(name=&quot;userDao&quot;)
-    public void setUserDao(UserDao userDao) { // 用于属性的setter方法上
-        this.userDao = userDao;
-    }
-}</code></pre><p>  注：最好是将@Resource放在setter方法上，因为这样更符合面向对象的思想，通过set、get去操作属性，而不是直接去操作属性。</p>
-<h5 id="Resource装配顺序："><a href="#Resource装配顺序：" class="headerlink" title="@Resource装配顺序："></a>@Resource装配顺序：</h5><p><strong>* ①如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常。*</strong></p>
-<p><strong>* ②如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常。*</strong></p>
-<p><strong>* ③如果指定了type，则从上下文中找到类似匹配的唯一bean进行装配，找不到或是找到多个，都会抛出异常。*</strong></p>
-<p><strong>* ④如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配。*</strong></p>
-<pre><code>@Resource的作用相当于@Autowired，只不过@Autowired按照byType自动注入。</code></pre><h1 id="Mac-OS-Linux命令查询网络端口占用情况，查找-杀死进程"><a href="#Mac-OS-Linux命令查询网络端口占用情况，查找-杀死进程" class="headerlink" title="Mac OS/Linux命令查询网络端口占用情况，查找/杀死进程"></a>Mac OS/Linux命令查询网络端口占用情况，查找/杀死进程</h1><h2 id="netstat命令"><a href="#netstat命令" class="headerlink" title="netstat命令"></a>netstat命令</h2><pre><code>netstat -an | grep 3306</code></pre><p>3306替换成需要grep的端口号</p>
-<h2 id="lsof命令"><a href="#lsof命令" class="headerlink" title="lsof命令"></a>lsof命令</h2><p>通过list open file命令可以查看到当前打开文件，在linux中所有事物都是以文件形式存在，包括网络连接及硬件设备。</p>
-<pre><code>lsof -i:80</code></pre><p>-i参数表示网络链接，:80指明端口号，该命令会同时列出PID，方便kill</p>
-<p>查看所有进程监听的端口</p>
-<pre><code>sudo lsof -i -P | grep -i &quot;listen&quot;</code></pre><h2 id="lsof命令参数"><a href="#lsof命令参数" class="headerlink" title="lsof命令参数"></a>lsof命令参数</h2><p>-a 列出打开文件存在的进程</p>
-<p>-c&lt;进程名&gt; 列出指定进程所打开的文件</p>
-<p>-g  列出GID号进程详情</p>
-<p>-d&lt;文件号&gt; 列出占用该文件号的进程</p>
-<p>+d&lt;目录&gt;  列出目录下被打开的文件</p>
-<p>+D&lt;目录&gt;  递归列出目录下被打开的文件</p>
-<p>-n&lt;目录&gt;  列出使用NFS的文件</p>
-<p>-i&lt;条件&gt;  列出符合条件的进程。（4、6、协议、:端口、 @ip ）</p>
-<p>-p&lt;进程号&gt; 列出指定进程号所打开的文件</p>
-<p>-u  列出UID号进程详情</p>
-<p>-h 显示帮助信息</p>
-<p>-v 显示版本信息</p>
-<h2 id="ps-A-grep-进程名"><a href="#ps-A-grep-进程名" class="headerlink" title="ps -A | grep [进程名]"></a>ps -A | grep [进程名]</h2><p>找PID： ps -A | grep [进程名]</p>
-<h2 id="kill-PID"><a href="#kill-PID" class="headerlink" title="kill [PID]"></a>kill [PID]</h2><p>杀进程：kill [PID]<br>参考资料：</p>
-<p>【1】<a href="https://www.jianshu.com/p/42620a0a2c33" target="_blank" rel="noopener">https://www.jianshu.com/p/42620a0a2c33</a></p>
-<p>【2】<a href="https://www.cnblogs.com/think-in-java/p/5474740.html" target="_blank" rel="noopener">https://www.cnblogs.com/think-in-java/p/5474740.html</a></p>
+<p>假设二叉树的节点个数为 <em>n</em>。</p>
+<p>我们可以看出，以上的算法对二叉树做了一次后序遍历，时间复杂度是 <em>O(n)</em>；由于递归会使用到栈空间，空间代价是 <em>O(n)</em>，哈希映射的空间代价也是 <em>O(n)</em>，故空间复杂度也是 <em>O(n)</em>。</p>
+<p>我们可以做一个小小的优化，我们发现无论是 <em>f(o)</em> 还是 <em>g(o)<em>，他们最终的值只和 *f(l)</em>、<em>g(l)</em>、<em>f(r)</em>、*g(r)</em> 有关，所以对于每个节点，我们只关心它的孩子节点们的 <em>f</em> 和 <em>g</em> 是多少。我们可以设计一个结构，表示某个节点的 <em>f</em> 和 <em>g</em> 值，在每次递归返回的时候，都把这个点对应的 <em>f</em> 和 <em>g</em> 返回给上一级调用，这样可以省去哈希映射的空间。</p>
+<p>代码如下。</p>
+<p><strong>代码</strong></p>
+<details>
+    <summary>动态规划C++</summary>
+<figure class="highlight cpp"><figcaption><span>[sol1-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SubtreeStatus</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> selected;</span><br><span class="line">    <span class="keyword">int</span> notSelected;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">SubtreeStatus <span class="title">dfs</span><span class="params">(TreeNode* o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!o) &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">auto</span> l = dfs(o-&gt;left);</span><br><span class="line">        <span class="keyword">auto</span> r = dfs(o-&gt;right);</span><br><span class="line">        <span class="keyword">int</span> selected = o-&gt;val + l.notSelected + r.notSelected;</span><br><span class="line">        <span class="keyword">int</span> notSelected = max(l.selected, l.notSelected) + max(r.selected, r.notSelected);</span><br><span class="line">        <span class="keyword">return</span> &#123;selected, notSelected&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode* o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> rootStatus = dfs(o);</span><br><span class="line">        <span class="keyword">return</span> max(rootStatus.selected, rootStatus.notSelected);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</details>
+<details>
+    <summary>动态规划Java</summary>
+
+<figure class="highlight java"><figcaption><span>[sol1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] rootStatus = dfs(root);</span><br><span class="line">        <span class="keyword">return</span> Math.max(rootStatus[<span class="number">0</span>], rootStatus[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] dfs(TreeNode node) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] l = dfs(node.left);</span><br><span class="line">        <span class="keyword">int</span>[] r = dfs(node.right);</span><br><span class="line">        <span class="keyword">int</span> selected = node.val + l[<span class="number">1</span>] + r[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> notSelected = Math.max(l[<span class="number">0</span>], l[<span class="number">1</span>]) + Math.max(r[<span class="number">0</span>], r[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;selected, notSelected&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+<details>
+    <summary>动态规划JavaScript</summary>
+
+<figure class="highlight javascript"><figcaption><span>[sol1-JavaScript]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rob = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">node</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (node === <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> [<span class="number">0</span>, <span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> l = dfs(node.left);</span><br><span class="line">        <span class="keyword">const</span> r = dfs(node.right);</span><br><span class="line">        <span class="keyword">const</span> selected = node.val + l[<span class="number">1</span>] + r[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">const</span> notSelected = <span class="built_in">Math</span>.max(l[<span class="number">0</span>], l[<span class="number">1</span>]) + <span class="built_in">Math</span>.max(r[<span class="number">0</span>], r[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> [selected, notSelected];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> rootStatus = dfs(root);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(rootStatus[<span class="number">0</span>], rootStatus[<span class="number">1</span>]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</details>
+<details>
+    <summary>动态规划Golang</summary>
+
+<figure class="highlight golang"><figcaption><span>[sol1-Golang]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rob</span><span class="params">(root *TreeNode)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    val := dfs(root)</span><br><span class="line">    <span class="keyword">return</span> max(val[<span class="number">0</span>], val[<span class="number">1</span>])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">dfs</span><span class="params">(node *TreeNode)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> node == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> []<span class="keyword">int</span>&#123;<span class="number">0</span>, <span class="number">0</span>&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    l, r := dfs(node.Left), dfs(node.Right)</span><br><span class="line">    selected := node.Val + l[<span class="number">1</span>] + r[<span class="number">1</span>]</span><br><span class="line">    notSelected := max(l[<span class="number">0</span>], l[<span class="number">1</span>]) + max(r[<span class="number">0</span>], r[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">return</span> []<span class="keyword">int</span>&#123;selected, notSelected&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(x, y <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> x &gt; y &#123;</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+<details>
+    <summary>动态规划C</summary>
+<figure class="highlight c"><figcaption><span>[sol1-C]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SubtreeStatus</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> selected;</span><br><span class="line">    <span class="keyword">int</span> notSelected;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">struct SubtreeStatus <span class="title">dfs</span><span class="params">(struct TreeNode *root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> (struct SubtreeStatus)&#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SubtreeStatus</span> <span class="title">l</span> = <span class="title">dfs</span>(<span class="title">root</span>-&gt;<span class="title">left</span>);</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SubtreeStatus</span> <span class="title">r</span> = <span class="title">dfs</span>(<span class="title">root</span>-&gt;<span class="title">right</span>);</span></span><br><span class="line">    <span class="keyword">int</span> selected = root-&gt;val + l.notSelected + r.notSelected;</span><br><span class="line">    <span class="keyword">int</span> notSelected = fmax(l.selected, l.notSelected) + fmax(r.selected, r.notSelected);</span><br><span class="line">    <span class="keyword">return</span> (struct SubtreeStatus)&#123;selected, notSelected&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(struct TreeNode *root)</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SubtreeStatus</span> <span class="title">rootStatus</span> = <span class="title">dfs</span>(<span class="title">root</span>);</span></span><br><span class="line">    <span class="keyword">return</span> fmax(rootStatus.selected, rootStatus.notSelected);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：<em>O(n)</em>。上文中已分析。</li>
+<li>空间复杂度：<em>O(n)</em>。虽然优化过的版本省去了哈希映射的空间，但是栈空间的使用代价依旧是 <em>O(n)</em>，故空间复杂度不变。</li>
+</ul>
 
       
       
@@ -495,13 +407,13 @@ public class MockServerApplication {
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></p>
+        <p><span>本文标题:</span><a href="/2020/09/03/337. 打家劫舍III/">337. 打家劫舍III</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
-        <p><span>发布时间:</span>2019年07月25日 - 09时36分</p>
-        <p><span>最后更新:</span>2019年08月23日 - 16时29分</p>
+        <p><span>发布时间:</span>2020年09月03日 - 17时08分</p>
+        <p><span>最后更新:</span>2020年09月03日 - 18时29分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/25/SpringBoot学习笔记III/" title="SpringBoot学习笔记III">http://yoursite.com/2019/07/25/SpringBoot学习笔记III/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/07/25/SpringBoot学习笔记III/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/09/03/337. 打家劫舍III/" title="337. 打家劫舍III">http://yoursite.com/2020/09/03/337. 打家劫舍III/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/09/03/337. 打家劫舍III/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -514,18 +426,9 @@ public class MockServerApplication {
 
 <nav id="article-nav">
   
-    <a href="/2019/07/26/SpringBoot学习笔记IV/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          SpringBoot学习笔记IV
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/17/SpringBoot学习笔记I/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SpringBoot学习笔记I</div>
+    <a href="/2020/09/03/213. 打家劫舍II/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">213. 打家劫舍II</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -536,7 +439,7 @@ public class MockServerApplication {
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#三省吾身："><span class="toc-number">1.</span> <span class="toc-text">三省吾身：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Spring？它解决了什么问题？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Spring？它解决了什么问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Spring-MVC？它解决了什么问题？"><span class="toc-number">1.2.</span> <span class="toc-text">什么是Spring MVC？它解决了什么问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Spring-Boot？它解决了什么问题？"><span class="toc-number">1.3.</span> <span class="toc-text">什么是Spring Boot？它解决了什么问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring，Spring-MVC，Spring-Boot-三者比较"><span class="toc-number">1.4.</span> <span class="toc-text">Spring，Spring MVC，Spring Boot 三者比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resource和-Autowired的区别？"><span class="toc-number">1.5.</span> <span class="toc-text">@Resource和@Autowired的区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#共同点"><span class="toc-number">1.5.1.</span> <span class="toc-text">共同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不同点"><span class="toc-number">1.5.2.</span> <span class="toc-text">不同点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Resource"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">@Resource</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Resource装配顺序："><span class="toc-number">1.5.2.2.1.</span> <span class="toc-text">@Resource装配顺序：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mac-OS-Linux命令查询网络端口占用情况，查找-杀死进程"><span class="toc-number">2.</span> <span class="toc-text">Mac OS/Linux命令查询网络端口占用情况，查找/杀死进程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#netstat命令"><span class="toc-number">2.1.</span> <span class="toc-text">netstat命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lsof命令"><span class="toc-number">2.2.</span> <span class="toc-text">lsof命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lsof命令参数"><span class="toc-number">2.3.</span> <span class="toc-text">lsof命令参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ps-A-grep-进程名"><span class="toc-number">2.4.</span> <span class="toc-text">ps -A | grep [进程名]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kill-PID"><span class="toc-number">2.5.</span> <span class="toc-text">kill [PID]</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#方法一：动态规划"><span class="toc-number">1.</span> <span class="toc-text">方法一：动态规划</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -602,13 +505,11 @@ public class MockServerApplication {
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/07/26/SpringBoot学习笔记IV/" title="上一篇: SpringBoot学习笔记IV">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/07/17/SpringBoot学习笔记I/" title="下一篇: SpringBoot学习笔记I">
+            <a href="/2020/09/03/213. 打家劫舍II/" title="下一篇: 213. 打家劫舍II">
                 <i class="fa fa-angle-right"></i>
             </a>
         
