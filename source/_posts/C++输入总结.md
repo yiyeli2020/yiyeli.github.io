@@ -1,7 +1,10 @@
 ---
 title: C++输入总结
+
 date: 2018-08-29 10:33:12
+
 categories: 2018年8月
+
 tags: [C++,stdin]
 
 ---
@@ -17,7 +20,8 @@ tags: [C++,stdin]
 ### 1.while里面用cin >> val如何结束
 ### 2.如何在while（cin >> val）跳出循环后能继续执行程序中其他的输入操作
 ### 3.getline和cin.getline()的区别及使用方法
-	#include<iostream>
+```
+    #include<iostream>
 	#include<vector>
 	#include<map>
 	#include<cctype>
@@ -99,11 +103,12 @@ tags: [C++,stdin]
 	    return 0;
 
 	}
+```
 ## 4.将一组未指定个数的输入数字转换为数组
 输入样例：
 5 24 39 60 15 28 27 40 50 90
 需要#include< string >和#include< vector >
-
+```
     int val=0;
     freopen("in.txt", "r", stdin);
     vector<int> nums;
@@ -126,3 +131,4 @@ tags: [C++,stdin]
             nums.push_back(val);
         //cout << "i=" << i << "   val=" << val << endl;
     }
+```
