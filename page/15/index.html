@@ -198,6 +198,95 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Effective-Java阅读笔记XVI" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/01/17/Effective-Java阅读笔记XVI/" class="article-date">
+      <time datetime="2020-01-16T17:33:12.000Z" itemprop="datePublished">2020-01-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a>
+    </h1>
+  
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">6.4k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">24分</span>
+      </span>
+    </span>
+</div>
+
+          
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>第五章阅读： 泛型</p>
+<p>31.使用限定通配符来增加 API 的灵活性<br>记住基本规则： producer-extends, consumer-super（PECS）。 还要记住，所有 Comparable 和 Comparator 都是消费者。如果一个参数化类型代表一个 T 生产者，使用 &lt;? extends T&gt;；如果它代表 T 消费者，则使用 &lt;? super T&gt;。<br>32.合理地结合泛型和可变参数<br>可变参数和泛型不能很好地交互，因为可变参数机制是在数组上面构建的脆弱的抽象，并且数组具有与泛型不同的类型规则。 虽然泛型可变参数不是类型安全的，但它们是合法的。 如果选择使用泛型（或参数化）可变参数编写方法，请首先确保该方法是类型安全的，然后使用 @SafeVarargs 注解对其进行标注</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2020/01/17/Effective-Java阅读笔记XVI/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Effective-Java阅读笔记XV" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1001,94 +1090,6 @@
 
 
   
-    <article id="post-Effective-Java阅读笔记VII" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/01/15/Effective-Java阅读笔记VII/" class="article-date">
-      <time datetime="2020-01-15T02:48:12.000Z" itemprop="datePublished">2020-01-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a>
-    </h1>
-  
-
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">7.7k字</span>
-      </span>
-    </span>
-    &nbsp; | &nbsp;
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">28分</span>
-      </span>
-    </span>
-</div>
-
-          
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>第三章阅读：Methods Common to All Objects<br>13.谨慎地重写 clone 方法<br>14.考虑实现 Comparable 接口<br>总而言之，无论何时实现具有合理排序的值类，你都应该让该类实现 Comparable 接口，以便在基于比较的集合中轻松对其实例进行排序，搜索和使用。 比较<br>compareTo 方法的实现中的字段值时，请避免使用「&lt;」和「&gt;」运算符。 相反，使用包装类中的静态 compare 方法或 Comparator 接口中的构建方法</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2020年1月/">2020年1月</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2020/01/15/Effective-Java阅读笔记VII/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
@@ -1102,7 +1103,7 @@
                 &copy; 2020 Yiye Li
             </div>
                 <i class="fas fa-chart-area"></i>
-                    <span class="post-count">总字数：634.5k</span>
+                    <span class="post-count">总字数：634.8k</span>
                 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
                     <script>
                         var now = new Date();
