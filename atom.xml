@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-08T07:34:12.449Z</updated>
+  <updated>2021-12-08T07:05:05.128Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
+    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20II.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%20II/"/>
+    <id>http://yoursite.com/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/</id>
+    <published>2021-12-08T07:12:12.000Z</published>
+    <updated>2021-12-08T07:05:05.128Z</updated>
+    
+    <content type="html"><![CDATA[<p>在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><a id="more"></a><p>[TOC]</p><p>示例 1：</p><pre><code>输入：nums = [3,4,3,3]输出：4</code></pre><p>示例 2：</p><pre><code>输入：nums = [9,1,7,9,7,9,7]输出：1</code></pre><p>限制：</p><pre><code>1 &lt;= nums.length &lt;= 100001 &lt;= nums[i] &lt; 2^31</code></pre><p>参见137. 只出现一次的数字II<a href="https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetc-23t6/" target="_blank" rel="noopener">^1</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
+    
+  </entry>
   
   <entry>
     <title>剑指 Offer 53 - II. 0～n-1中缺失的数字</title>
@@ -43,32 +69,6 @@
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
-    
-      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
-    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20II.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%20II/"/>
-    <id>http://yoursite.com/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/</id>
-    <published>2021-12-08T07:12:12.000Z</published>
-    <updated>2021-12-08T07:05:05.128Z</updated>
-    
-    <content type="html"><![CDATA[<p>在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><a id="more"></a><p>[TOC]</p><p>示例 1：</p><pre><code>输入：nums = [3,4,3,3]输出：4</code></pre><p>示例 2：</p><pre><code>输入：nums = [9,1,7,9,7,9,7]输出：1</code></pre><p>限制：</p><pre><code>1 &lt;= nums.length &lt;= 100001 &lt;= nums[i] &lt; 2^31</code></pre><p>参见137. 只出现一次的数字II<a href="https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetc-23t6/" target="_blank" rel="noopener">^1</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
-    
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
