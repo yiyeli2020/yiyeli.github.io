@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-08T07:05:05.128Z</updated>
+  <updated>2021-12-08T07:34:12.449Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>剑指 Offer 53 - II. 0～n-1中缺失的数字</title>
+    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2053%20-%20II.%200%EF%BD%9En-1%E4%B8%AD%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/"/>
+    <id>http://yoursite.com/2021/12/08/剑指 Offer 53 - II. 0～n-1中缺失的数字/</id>
+    <published>2021-12-08T07:12:12.000Z</published>
+    <updated>2021-12-08T07:34:12.449Z</updated>
+    
+    <content type="html"><![CDATA[<p>一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。</p><a id="more"></a><p>[TOC]</p><p>示例 1:</p><pre><code>输入: [0,1,3]输出: 2</code></pre><p>示例 2:</p><pre><code>输入: [0,1,2,3,4,5,6,7,9]输出: 8</code></pre><p>限制：</p><pre><code>1 &lt;= 数组长度 &lt;= 10000</code></pre><p>此题由<a href="https://leetcode-cn.com/problems/missing-number/solution/diu-shi-de-shu-zi-by-leetcode-solution-naow/" target="_blank" rel="noopener">268. 丢失的数字</a>改编而来，但题干部分描述的不太清楚，多出来的数字应该是n</p><p>解法可参见<a href="https://leetcode-cn.com/problems/missing-number/solution/diu-shi-de-shu-zi-by-leetcode-solution-naow/" target="_blank" rel="noopener">268. 丢失的数字</a></p><p>由于该题不同之处在于是有序的，所以还可以使用二分法</p><h1 id="二分法解题思路-1："><a href="#二分法解题思路-1：" class="headerlink" title="二分法解题思路^1："></a>二分法解题思路<a href="https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/solution/mian-shi-ti-53-ii-0n-1zhong-que-shi-de-shu-zi-er-f/" target="_blank" rel="noopener">^1</a>：</h1><ul><li>排序数组中的搜索问题，首先想到 <strong>二分法</strong> 解决。</li><li>根据题意，数组可以按照以下规则划分为两部分。<ul><li><strong>左子数组：</strong> <em>nums[i] = i</em> ；</li><li><strong>右子数组：</strong> <em>nums[i] != i</em>  ；</li></ul></li><li>缺失的数字等于 <strong>“右子数组的首位元素”</strong> 对应的索引；因此考虑使用二分法查找 “右子数组的首位元素” 。</li></ul><h1 id="复杂度分析："><a href="#复杂度分析：" class="headerlink" title="复杂度分析："></a>复杂度分析：</h1><ul><li><strong>时间复杂度 <em>O(log N)</em>：</strong> 二分法为对数级别复杂度。</li><li><strong>空间复杂度 <em>O(1)</em>：</strong> 几个变量使用常数大小的额外空间。</li></ul><h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><details>    <summary>Python</summary><figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">missingNumber</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        i, j = <span class="number">0</span>, len(nums) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> i &lt;= j:</span><br><span class="line">            m = (i + j) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> nums[m] == m: i = m + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>: j = m - <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> i</span><br></pre></td></tr></table></figure></details><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">missingNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt;= j) &#123;</span><br><span class="line">            <span class="keyword">int</span> m = (i + j) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[m] == m) i = m + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> j = m - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
+    
+      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
+    
+      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
+    
+  </entry>
   
   <entry>
     <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
@@ -34,9 +66,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -60,9 +92,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -87,9 +119,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
@@ -185,11 +217,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -242,13 +274,13 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -272,11 +304,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -326,11 +358,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Prefix Sum" scheme="http://yoursite.com/tags/Prefix-Sum/"/>
     
@@ -410,9 +442,9 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
@@ -438,9 +470,9 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
@@ -466,9 +498,9 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Prefix Sum" scheme="http://yoursite.com/tags/Prefix-Sum/"/>
     
@@ -492,9 +524,9 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Sliding Window" scheme="http://yoursite.com/tags/Sliding-Window/"/>
     
@@ -519,30 +551,6 @@
     
     
       <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>795. 区间子数组个数</title>
-    <link href="http://yoursite.com/2021/11/12/795.%20%E5%8C%BA%E9%97%B4%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0/"/>
-    <id>http://yoursite.com/2021/11/12/795. 区间子数组个数/</id>
-    <published>2021-11-12T12:12:12.000Z</published>
-    <updated>2021-11-14T01:16:35.388Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定一个元素都是正整数的数组A，正整数 L以及R(L&lt;= R)。</p><a id="more"></a><p>[TOC]</p><p>求连续、非空且其中最大元素满足大于等于L 小于等于R的子数组个数。</p><p>例如 :</p><pre><code>输入: A = [2, 1, 4, 3]L = 2R = 3输出: 3解释: 满足条件的子数组: [2], [2, 1], [3].注意:L, R  和 A[i] 都是整数，范围在 [0, 10^9]。数组 A 的长度范围在[1, 50000]。</code></pre><h1 id="方法一：计数"><a href="#方法一：计数" class="headerlink" title="方法一：计数"></a>方法一：计数</h1><p><strong>思想</strong></p><p>根据以下步骤推导出解决方案：</p><p>其实我们只关心数组中的元素是否小于 <code>L</code>，大于 <code>R</code>，或者位于 <code>[L, R]</code> 之间。假设一个元素小于 <code>L</code> 标记为 <code>0</code>，位于 <code>[L, R]</code> 之间标记为 <code>1</code>，大于 <code>R</code> 标记为 <code>2</code>。</p><p>我们希望找出不包含 <code>2</code> 且至少包含一个 <code>1</code> 的子数组数量。因此可以看作是所有的 <code>2</code> 将数组拆分为仅包含 <code>0</code> 或 <code>1</code> 的子数组。例如在数组 <code>[0, 0, 1, 2, 2, 1, 0, 2, 0]</code>，<code>2</code> 将数组拆分为 <code>[0, 0, 1]</code>、<code>[1, 0]</code> 和 <code>[0]</code> 三个子数组。 </p><p>接下来，需要计算每个只包含 <code>0</code> 或 <code>1</code> 的数组中，至少包含一个 <code>1</code> 的子数组数量。那么问题可以转换为先找出所有的子数组，再从中减去只包含 <code>0</code> 的子数组。</p><p>例如，<code>[0, 0, 1]</code> 有 6 个子数组，其中 3 个子数组只包含 <code>0</code>，3 个子数组至少包含一个 <code>1</code>；<code>[1, 0]</code> 有 3 个子数组，其中 1 个子数组只包含 <code>0</code>，2 个子数组至少包含一个 <code>1</code>；<code>[0]</code> 只有 1 个子数组，且这个子数组只包含 <code>0</code>。因此数组 <code>A = [0, 0, 1, 2, 2, 1, 0, 2, 0]</code> 中不包含 <code>2</code>，且至少包含一个 <code>1</code> 的子数组的数量是 <code>3 + 2 + 0 = 5</code>。</p><p><strong>算法</strong></p><p>假设 <code>count(B)</code> 用于计算所有元素都小于等于 <code>B</code> 的子数组数量。根据上面分析，本题答案为 <code>count(R) - count(L-1)</code>。</p><p>那么如何计算 <code>count(B)</code>？使用 <code>cur</code> 记录在 <code>B</code> 的左边，小于等于 <code>B</code> 的连续元素数量。当找到一个这样的元素时，在此位置上结束的有效子数组的数量为 <code>cur + 1</code>。当遇到一个元素大于 <code>B</code> 时，则在此位置结束的有效子数组的数量为 0。</p><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[solution1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numSubarrayBoundedMax</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> count(A, R) - count(A, L-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> bound)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>, cur = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x: A) &#123;</span><br><span class="line">            cur = x &lt;= bound ? cur + <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">            ans += cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>Python</summary><figure class="highlight python"><figcaption><span>[solution1-Python]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numSubarrayBoundedMax</span><span class="params">(self, A, L, R)</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(bound)</span>:</span></span><br><span class="line">            ans = cur = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> A :</span><br><span class="line">                cur = cur + <span class="number">1</span> <span class="keyword">if</span> x &lt;= bound <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">                ans += cur</span><br><span class="line">            <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> count(R) - count(L - <span class="number">1</span>)</span><br></pre></td></tr></table></figure></details><p><strong>复杂度分析</strong></p><ul><li><p>时间复杂度：<em>O(N)</em>，其中 <code>N</code> 是 <code>A</code> 的长度。</p></li><li><p>空间复杂度：<em>O(1)</em>。</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;给定一个元素都是正整数的数组A，正整数 L以及R(L&amp;lt;= R)。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
-    
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
   </entry>
   
