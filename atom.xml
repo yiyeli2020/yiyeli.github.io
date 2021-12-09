@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-08T07:05:05.128Z</updated>
+  <updated>2021-12-09T06:35:01.980Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,28 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
-    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20II.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%20II/"/>
-    <id>http://yoursite.com/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/</id>
-    <published>2021-12-08T07:12:12.000Z</published>
-    <updated>2021-12-08T07:05:05.128Z</updated>
+    <title>1863. 找出所有子集的异或总和再求和</title>
+    <link href="http://yoursite.com/2021/12/08/1863.%20%E6%89%BE%E5%87%BA%E6%89%80%E6%9C%89%E5%AD%90%E9%9B%86%E7%9A%84%E5%BC%82%E6%88%96%E6%80%BB%E5%92%8C%E5%86%8D%E6%B1%82%E5%92%8C/"/>
+    <id>http://yoursite.com/2021/12/08/1863. 找出所有子集的异或总和再求和/</id>
+    <published>2021-12-08T14:12:12.000Z</published>
+    <updated>2021-12-09T06:35:01.980Z</updated>
     
-    <content type="html"><![CDATA[<p>在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><a id="more"></a><p>[TOC]</p><p>示例 1：</p><pre><code>输入：nums = [3,4,3,3]输出：4</code></pre><p>示例 2：</p><pre><code>输入：nums = [9,1,7,9,7,9,7]输出：1</code></pre><p>限制：</p><pre><code>1 &lt;= nums.length &lt;= 100001 &lt;= nums[i] &lt; 2^31</code></pre><p>参见137. 只出现一次的数字II<a href="https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetc-23t6/" target="_blank" rel="noopener">^1</a></p>]]></content>
+    <content type="html"><![CDATA[<p>给你一个数组 nums ，请你求出 nums 中每个 子集 的 异或总和 ，计算并返回这些值相加之 和 。</p><a id="more"></a><p>[TOC]</p><p>一个数组的 异或总和 定义为数组中所有元素按位 XOR 的结果；如果数组为 空 ，则异或总和为 0 。</p><p>例如，数组 [2,5,6] 的 异或总和 为 2 XOR 5 XOR 6 = 1 。<br>给你一个数组 nums ，请你求出 nums 中每个 子集 的 异或总和 ，计算并返回这些值相加之 和 。</p><p>注意：在本题中，元素 相同 的不同子集应 多次 计数。</p><p>数组 a 是数组 b 的一个 子集 的前提条件是：从 b 删除几个（也可能不删除）元素能够得到 a 。</p><p>示例 1：</p><pre><code>输入：nums = [1,3]输出：6解释：[1,3] 共有 4 个子集：- 空子集的异或总和是 0 。- [1] 的异或总和为 1 。- [3] 的异或总和为 3 。- [1,3] 的异或总和为 1 XOR 3 = 2 。0 + 1 + 3 + 2 = 6</code></pre><p>示例 2：</p><pre><code>输入：nums = [5,1,6]输出：28解释：[5,1,6] 共有 8 个子集：- 空子集的异或总和是 0 。- [5] 的异或总和为 5 。- [1] 的异或总和为 1 。- [6] 的异或总和为 6 。- [5,1] 的异或总和为 5 XOR 1 = 4 。- [5,6] 的异或总和为 5 XOR 6 = 3 。- [1,6] 的异或总和为 1 XOR 6 = 7 。- [5,1,6] 的异或总和为 5 XOR 1 XOR 6 = 2 。0 + 5 + 1 + 6 + 4 + 3 + 7 + 2 = 28</code></pre><p>示例 3：</p><pre><code>输入：nums = [3,4,5,6,7,8]输出：480解释：每个子集的全部异或总和值之和为 480 。</code></pre><p>提示：</p><pre><code>1 &lt;= nums.length &lt;= 121 &lt;= nums[i] &lt;= 20</code></pre><h1 id="方法一：递归法枚举子集-1"><a href="#方法一：递归法枚举子集-1" class="headerlink" title="方法一：递归法枚举子集^1"></a>方法一：递归法枚举子集<a href="https://leetcode-cn.com/problems/sum-of-all-subset-xor-totals/solution/sum-of-all-subset-xor-totals-by-leetcode-o5aa/" target="_blank" rel="noopener">^1</a></h1><p><strong>思路与算法</strong></p><p><strong>代码</strong></p><details>    <summary>C++</summary><figure class="highlight c++"><figcaption><span>[sol1-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> res;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> val, <span class="keyword">int</span> idx, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (idx == n)&#123;</span><br><span class="line">            <span class="comment">// 终止递归</span></span><br><span class="line">            res += val;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 考虑选择当前数字</span></span><br><span class="line">        dfs(val ^ nums[idx], idx + <span class="number">1</span>, nums);</span><br><span class="line">        <span class="comment">// 考虑不选择当前数字</span></span><br><span class="line">        dfs(val, idx + <span class="number">1</span>, nums);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">subsetXORSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        res = <span class="number">0</span>;</span><br><span class="line">        n = nums.size();</span><br><span class="line">        dfs(<span class="number">0</span>, <span class="number">0</span>, nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Python3</summary><figure class="highlight python"><figcaption><span>[sol1-Python3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">subsetXORSum</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(val, idx)</span>:</span></span><br><span class="line">            <span class="keyword">nonlocal</span> res</span><br><span class="line">            <span class="keyword">if</span> idx == n:</span><br><span class="line">                <span class="comment"># 终止递归</span></span><br><span class="line">                res += val</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="comment"># 考虑选择当前数字</span></span><br><span class="line">            dfs(val ^ nums[idx], idx + <span class="number">1</span>)</span><br><span class="line">            <span class="comment"># 考虑不选择当前数字</span></span><br><span class="line">            dfs(val, idx + <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        dfs(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></details><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[sol1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> val, <span class="keyword">int</span> idx, <span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (idx == n) &#123;</span><br><span class="line">            res += val;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(val ^ nums[idx], idx + <span class="number">1</span>, nums);</span><br><span class="line">        dfs(val, idx + <span class="number">1</span>, nums);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">subsetXORSum</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        res = <span class="number">0</span>;</span><br><span class="line">        n = nums.length;</span><br><span class="line">        dfs(<span class="number">0</span>, <span class="number">0</span>, nums);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><h1 id="方法二：迭代法枚举子集"><a href="#方法二：迭代法枚举子集" class="headerlink" title="方法二：迭代法枚举子集"></a>方法二：迭代法枚举子集</h1><p><strong>提示 <em>1</em></strong></p><p>一个长度为 <em>n</em> 的数组 nums  有 <em>2^n</em> 个子集（包括空集与自身）。我们可以将这些子集一一映射到 <em>[0, 2^n-1]</em> 中的整数。</p><p><strong>提示 <em>2</em></strong></p><p>数组中的每个元素都有「选取」与「未选取」两个状态，可以对应一个二进制位的 <em>1</em> 与 <em>0</em>。那么对于一个长度为 <em>n</em> 的数组nums ，我们也可以用 <em>n</em> 个二进制位的整数来唯一表示每个元素的选取情况。此时该整数第 <em>j</em> 位的取值表示数组第 <em>j</em> 个元素是否包含在对应的子集中。</p><p><strong>思路与算法</strong></p><p>我们也可以用迭代来实现子集枚举。</p><p>根据 <strong>提示 <em>1</em></strong> 与 <strong>提示 <em>2</em></strong>，我们枚举 <em>[0, 2^n-1]</em> 中的整数 <em>i</em>，其第 <em>j</em> 位的取值表示nums 的第 <em>j</em> 个元素是否包含在对应的子集中。</p><p>对于每个整数 <em>i</em>，我们遍历它的每一位计算对应子集的异或总和，并维护这些值之和。</p><p><strong>代码</strong></p><details>    <summary>C++</summary><figure class="highlight c++"><figcaption><span>[sol2-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">subsetXORSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); ++i)&#123;   <span class="comment">// 遍历所有子集</span></span><br><span class="line">            <span class="keyword">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++j)&#123;   <span class="comment">// 遍历每个元素</span></span><br><span class="line">                <span class="keyword">if</span> (i &amp; (<span class="number">1</span> &lt;&lt; j))&#123;</span><br><span class="line">                    tmp ^= nums[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            res += tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Python3</summary><figure class="highlight python"><figcaption><span>[sol2-Python3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">subsetXORSum</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span> &lt;&lt; n):   <span class="comment"># 遍历所有子集</span></span><br><span class="line">            tmp = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(n):   <span class="comment"># 遍历每个元素</span></span><br><span class="line">                <span class="keyword">if</span> i &amp; (<span class="number">1</span> &lt;&lt; j):</span><br><span class="line">                    tmp ^= nums[j]</span><br><span class="line">            res += tmp</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></details><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[sol1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">subsetXORSum</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; nums.length); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (((i &gt;&gt; j) &amp; <span class="number">1</span> )!= <span class="number">0</span>) &#123;</span><br><span class="line">                    val ^= nums[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            res += val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><p><strong>复杂度分析</strong></p><ul><li><p>时间复杂度：<em>O(n2^n)*，其中 *n</em> 为nums 的长度。我们遍历了 nums 的 <em>2^n</em> 个子集，每个子集需要 <em>O(n)</em> 的时间计算异或总和。</p></li><li><p>空间复杂度：<em>O(1)</em>。</p></li></ul><h1 id="方法三：按位考虑-二项式展开-1"><a href="#方法三：按位考虑-二项式展开-1" class="headerlink" title="方法三：按位考虑 + 二项式展开^1"></a>方法三：按位考虑 + 二项式展开<a href="https://leetcode-cn.com/problems/sum-of-all-subset-xor-totals/solution/sum-of-all-subset-xor-totals-by-leetcode-o5aa/" target="_blank" rel="noopener">^1</a></h1><p><strong>提示 <em>1</em></strong></p><p>由于异或运算本质上是按位操作，因此我们可以按位考虑取值情况。</p><p><strong>提示 <em>2</em></strong></p><p>对于数组中所有元素的某一位，存在两种可能：</p><ul><li><p>第一种，所有元素该位都为 <em>0</em>；</p></li><li><p>第二种，至少有一个元素该位为 <em>1</em>。</p></li></ul><p>假设数组元素个数为 <em>n</em>，那么第一种情况下，所有子集异或总和中该位均为 <em>0</em>；第二种情况下，所有子集异或总和中该位为 <em>0</em> 的个数与为 <em>1</em> 的个数相等，均为 <em>2^{n-1}</em>。</p><p><strong>代码</strong></p><details>    <summary>C++</summary><figure class="highlight c++"><figcaption><span>[sol3-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">subsetXORSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            res |= num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res &lt;&lt; (n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Python3</summary><figure class="highlight python"><figcaption><span>[sol3-Python3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">subsetXORSum</span><span class="params">(self, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            res |= num</span><br><span class="line">        <span class="keyword">return</span> res &lt;&lt; (n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure></details><p><strong>复杂度分析</strong></p><ul><li><p>时间复杂度：<em>O(n)*，其中 *n</em> 为 nums 的长度，即为一遍遍历数组的时间复杂度。</p></li><li><p>空间复杂度：<em>O(1)</em>。</p></li></ul>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;/p&gt;
+      &lt;p&gt;给你一个数组 nums ，请你求出 nums 中每个 子集 的 异或总和 ，计算并返回这些值相加之 和 。&lt;/p&gt;
     
     </summary>
     
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
+    
+      <category term="Backtracking" scheme="http://yoursite.com/tags/Backtracking/"/>
+    
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
+    
+      <category term="Combinatorics" scheme="http://yoursite.com/tags/Combinatorics/"/>
     
   </entry>
   
@@ -60,15 +66,41 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
+    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20II.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%20II/"/>
+    <id>http://yoursite.com/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/</id>
+    <published>2021-12-08T07:12:12.000Z</published>
+    <updated>2021-12-08T07:05:05.128Z</updated>
+    
+    <content type="html"><![CDATA[<p>在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><a id="more"></a><p>[TOC]</p><p>示例 1：</p><pre><code>输入：nums = [3,4,3,3]输出：4</code></pre><p>示例 2：</p><pre><code>输入：nums = [9,1,7,9,7,9,7]输出：1</code></pre><p>限制：</p><pre><code>1 &lt;= nums.length &lt;= 100001 &lt;= nums[i] &lt; 2^31</code></pre><p>参见137. 只出现一次的数字II<a href="https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetc-23t6/" target="_blank" rel="noopener">^1</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -92,9 +124,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -119,9 +151,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
@@ -217,11 +249,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -274,13 +306,13 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -304,11 +336,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -358,13 +390,13 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
       <category term="Prefix Sum" scheme="http://yoursite.com/tags/Prefix-Sum/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
   </entry>
   
@@ -442,13 +474,13 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
       <category term="Sliding Window" scheme="http://yoursite.com/tags/Sliding-Window/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
   </entry>
   
@@ -470,13 +502,13 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
       <category term="Sliding Window" scheme="http://yoursite.com/tags/Sliding-Window/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
   </entry>
   
@@ -498,9 +530,9 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Prefix Sum" scheme="http://yoursite.com/tags/Prefix-Sum/"/>
     
@@ -524,33 +556,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Sliding Window" scheme="http://yoursite.com/tags/Sliding-Window/"/>
     
-  </entry>
-  
-  <entry>
-    <title>《天龙八部》读书笔记</title>
-    <link href="http://yoursite.com/2021/11/12/%E3%80%8A%E5%A4%A9%E9%BE%99%E5%85%AB%E9%83%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2021/11/12/《天龙八部》读书笔记/</id>
-    <published>2021-11-12T15:12:12.000Z</published>
-    <updated>2021-11-17T07:49:25.532Z</updated>
-    
-    <content type="html"><![CDATA[<p>重读有感</p><a id="more"></a><p>[TOC]</p><p>近来睡前听天龙八部有声小说，所谓重读大半是重听，耳中所闻尽可归为四字:众生皆苦。</p><p>整部书更像是一本大型的武侠版神话寓言故事集。写尽了人性中的贪嗔痴。正如希腊神话故事中诸神虽不食人间烟火却仍摆脱不了喜怒哀乐情妒贪嗔一样，天龙八部中众生无分国别门派，不论武功修为，人人都有解不脱的名利缰锁，断不去的痴心欲念。但有我执，有所求就免不了堕入娑婆世界中的三类苦中。</p><p>佛经中有苦苦、坏苦、行苦三类之说。</p><p>人生来即能感受到的痛苦为苦苦：即生、老、病、死、爱别离、求不得、怨憎会、五蕴炽盛。</p><p>书中大多数人物都溺于此八苦无法自拔，有萧峰阿朱塞上牛羊空许约的爱别离苦，有慕容氏执着复国却成空梦一场的求不得苦，有童姥李秋水七十余载情怨纠葛的怨憎会苦。世事无常，造化弄人。玲珑棋局非要无心方可解，名带坦之偏却一生坎坷难平。欲求情爱而不得的段誉最后出家为僧，只愿参诵经礼佛的虚竹却破戒终落尘网。只要未勘破我执的，任凭武功如何超凡入圣，得遇再多机缘巧合也难免五蕴炽盛，被人世间种种苦恼日日煎熬。</p><p>此一类苦苦，初读天龙八部便已有所感悟，然而对众生所历坏苦和行苦却是此次重读才初有理解。以下算是一些读书摘要。虽然是从佛家观点出发，但也足以从另一个角度开启心智。</p><p>何谓坏苦，是指我们通常快乐的感受。从佛家观点出发，我们所谓的快乐受并非真正的快乐，其实质也是痛苦的。饥饿时想吃，吃饱了感到快乐，但继续吃下去却还会觉得快乐吗？无聊了想刷手机觉得快乐，但没日没夜的看下去觉得快乐吗？由此可见我们的所谓快乐，是因为我们有了某种欲望之后，通过外境的刺激得到满足心理上出现暂时的平衡，于是我们觉得快乐，然而这种欲望满足后的实质并非快乐，倘若实质是快乐的话，无论外境刺激多少次都应该觉得快乐，然而事实不然，当我们带着强烈的欲望寻求满足时，初始感到快乐，但到后来会发现此时已由原来的快乐转变为痛苦了。就像自我刺激奖赏中枢实验中不休不止按动开关的小鼠一样沦为了多巴胺的奴隶，世间上一切通过欲望得到的快乐莫不如此，因为这种乐受能变坏，因此称为坏苦。</p><p>行苦：行，是迁流变化义。世间一切都是无常变化，这是宇宙人生之规律。但世人不识这种规律，追求永恒：希望身体永恒、家庭永恒、事业永恒、爱情永恒，然而世事无常，美好的事物往往是昙花一现，转瞬即逝。由于我们的认识与世间的事实——行，相违背，因而就有了行苦。</p><p>往昔身经求不得之苦时往往想象求得后心情该如何舒畅，人生自当圆满无憾矣，却不知月满则亏，水满则溢。求得之时即是坏苦之始，更引行苦而来。婆娑苦乐杂，若是身处苦苦之中便能以此自省，想必苦楚自能顿减三分。孔夫子七十而从心所欲不逾矩，并非圣人无欲无求或无所不能，而是能使一己所欲不超出人和社会的规则之外，如此自然少了诸多烦恼。这些道理知易行难，有时身在局中执迷难悟。而立之年将至，需时时以此自省。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;重读有感&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
-    
-    
-      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
   </entry>
   
