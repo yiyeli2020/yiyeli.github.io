@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-09T07:22:10.018Z</updated>
+  <updated>2021-12-10T03:52:57.268Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>剑指 Offer 65. 不用加减乘除做加法</title>
+    <link href="http://yoursite.com/2021/12/10/%E5%89%91%E6%8C%87%20Offer%2065.%20%E4%B8%8D%E7%94%A8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E5%81%9A%E5%8A%A0%E6%B3%95/"/>
+    <id>http://yoursite.com/2021/12/10/剑指 Offer 65. 不用加减乘除做加法/</id>
+    <published>2021-12-10T04:12:12.000Z</published>
+    <updated>2021-12-10T03:52:57.268Z</updated>
+    
+    <content type="html"><![CDATA[<p>写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。</p><a id="more"></a><p>[TOC]</p><p>示例:</p><pre><code>输入: a = 1, b = 1输出: 2</code></pre><p>提示：</p><pre><code>a, b 均可能是负数或 0结果不会溢出 32 位整数</code></pre><h1 id="解题思路-1："><a href="#解题思路-1：" class="headerlink" title="解题思路^1："></a>解题思路<a href="https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/solution/mian-shi-ti-65-bu-yong-jia-jian-cheng-chu-zuo-ji-7/" target="_blank" rel="noopener">^1</a>：</h1><p>本题考察对位运算的灵活使用，即使用位运算实现加法。<br>设两数字的二进制形式 <em>a, b</em> ，其求和 <em>s = a + b</em> ，<em>a(i)</em> 代表 <em>a</em> 的二进制第 <em>i</em> 位，则分为以下四种情况：</p><table><thead><tr><th align="center"><em>a(i)</em></th><th align="center"><em>b(i)</em></th><th align="center">无进位和 <em>n(i)</em></th><th align="center">进位 <em>c(i+1)</em></th></tr></thead><tbody><tr><td align="center"><em>0</em></td><td align="center"><em>0</em></td><td align="center"><em>0</em></td><td align="center"><em>0</em></td></tr><tr><td align="center"><em>0</em></td><td align="center"><em>1</em></td><td align="center"><em>1</em></td><td align="center"><em>0</em></td></tr><tr><td align="center"><em>1</em></td><td align="center"><em>0</em></td><td align="center"><em>1</em></td><td align="center"><em>0</em></td></tr><tr><td align="center"><em>1</em></td><td align="center"><em>1</em></td><td align="center"><em>0</em></td><td align="center"><em>1</em></td></tr></tbody></table><p>观察发现，<strong>无进位和</strong> 与 <strong>异或运算</strong> 规律相同，<strong>进位</strong> 和 <strong>与运算</strong> 规律相同（并需左移一位）。因此，无进位和 <em>n</em> 与进位 <em>c</em> 的计算公式如下；</p><p>（和 <em>s</em> ）<em>=</em>（非进位和 <em>n</em> ）<em>+</em>（进位 <em>c</em> ）。即可将 <em>s = a + b</em> 转化为：</p><p>循环求 <em>n</em> 和 <em>c</em> ，直至进位 <em>c = 0</em> ；此时 <em>s = n</em> ，返回 <em>n</em> 即可。</p><blockquote><p><strong>Q ：</strong> 若数字 <em>a</em> 和 <em>b</em> 中有负数，则变成了减法，如何处理？<br><strong>A ：</strong> 在计算机系统中，数值一律用 <strong>补码</strong> 来表示和存储。<strong>补码的优势：</strong> 加法、减法可以统一处理（CPU只有加法器）。因此，以上方法 <strong>同时适用于正数和负数的加法</strong> 。</p></blockquote><h2 id="复杂度分析："><a href="#复杂度分析：" class="headerlink" title="复杂度分析："></a>复杂度分析：</h2><ul><li><strong>时间复杂度 <em>O(1)</em> ：</strong> 最差情况下（例如 <em>a =</em> 0x7fffffff , <em>b = 1</em> 时），需循环 32 次，使用 <em>O(1)</em> 时间；每轮中的常数次位操作使用 <em>O(1)</em> 时间。</li><li><strong>空间复杂度 <em>O(1)</em> ：</strong> 使用常数大小的额外空间。</li></ul><h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><details>    <summary>java</summary><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(b != <span class="number">0</span>) &#123; <span class="comment">// 当进位为 0 时跳出</span></span><br><span class="line">            <span class="keyword">int</span> c = (a &amp; b) &lt;&lt; <span class="number">1</span>;  <span class="comment">// c = 进位</span></span><br><span class="line">            a ^= b; <span class="comment">// a = 非进位和</span></span><br><span class="line">            b = c; <span class="comment">// b = 进位</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>python</summary><figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, a: int, b: int)</span> -&gt; int:</span></span><br><span class="line">        x = <span class="number">0xffffffff</span></span><br><span class="line">        a, b = a &amp; x, b &amp; x</span><br><span class="line">        <span class="keyword">while</span> b != <span class="number">0</span>:</span><br><span class="line">            a, b = (a ^ b), (a &amp; b) &lt;&lt; <span class="number">1</span> &amp; x</span><br><span class="line">        <span class="keyword">return</span> a <span class="keyword">if</span> a &lt;= <span class="number">0x7fffffff</span> <span class="keyword">else</span> ~(a ^ x)</span><br></pre></td></tr></table></figure></details><h2 id="递归写法"><a href="#递归写法" class="headerlink" title="递归写法"></a>递归写法</h2><details>    <summary>递归写法java</summary><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(b != <span class="number">0</span>) &#123; <span class="comment">// 当进位为 0 时跳出</span></span><br><span class="line">            <span class="keyword">int</span> c = (a &amp; b) &lt;&lt; <span class="number">1</span>;  <span class="comment">// c = 进位</span></span><br><span class="line">            a ^= b; <span class="comment">// a = 非进位和</span></span><br><span class="line">            b = c; <span class="comment">// b = 进位</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><blockquote><p>由于 Python 的数字存储特点，需要做特殊考虑，以下详细介绍。</p></blockquote><h2 id="Python-负数的存储："><a href="#Python-负数的存储：" class="headerlink" title="Python 负数的存储："></a>Python 负数的存储：</h2><p>Python，Java 等语言中的数字都是以 <strong>补码</strong> 形式存储的。但 Python 没有 <code>int</code> , <code>long</code> 等不同长度变量，即在编程时无变量位数的概念。<br><strong>获取负数的补码：</strong> 需要将数字与十六进制数 <code>0xffffffff</code> 相与。可理解为舍去此数字 32 位以上的数字（将 32 位以上都变为 <em>0</em> ），从无限长度变为一个 32 位整数。<br><strong>返回前数字还原：</strong> 若补码 <em>a</em> 为负数（ <code>0x7fffffff</code> 是最大的正数的补码 ），需执行 <code>~(a ^ x)</code> 操作，将补码还原至 Python 的存储格式。 <code>a ^ x</code> 运算将 1 至 32 位按位取反； <code>~</code> 运算是将整个数字取反；因此， <code>~(a ^ x)</code> 是将 32 位以上的位取反，1 至 32 位不变。</p><details>    <summary>python</summary><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">print(hex(<span class="number">1</span>)) <span class="comment"># = 0x1 补码</span></span><br><span class="line">print(hex(<span class="number">-1</span>)) <span class="comment"># = -0x1 负号 + 原码 （ Python 特色，Java 会直接输出补码）</span></span><br><span class="line"></span><br><span class="line">print(hex(<span class="number">1</span> &amp; <span class="number">0xffffffff</span>)) <span class="comment"># = 0x1 正数补码</span></span><br><span class="line">print(hex(<span class="number">-1</span> &amp; <span class="number">0xffffffff</span>)) <span class="comment"># = 0xffffffff 负数补码</span></span><br><span class="line"></span><br><span class="line">print(<span class="number">-1</span> &amp; <span class="number">0xffffffff</span>) <span class="comment"># = 4294967295 （ Python 将其认为正数）</span></span><br></pre></td></tr></table></figure></details>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
+    
+      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
+    
+  </entry>
   
   <entry>
     <title>剑指 Offer 64. 求1+2+…+n</title>
@@ -62,9 +88,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
@@ -73,32 +99,6 @@
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
       <category term="Combinatorics" scheme="http://yoursite.com/tags/Combinatorics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
-    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20II.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%20II/"/>
-    <id>http://yoursite.com/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/</id>
-    <published>2021-12-08T07:12:12.000Z</published>
-    <updated>2021-12-08T07:05:05.128Z</updated>
-    
-    <content type="html"><![CDATA[<p>在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><a id="more"></a><p>[TOC]</p><p>示例 1：</p><pre><code>输入：nums = [3,4,3,3]输出：4</code></pre><p>示例 2：</p><pre><code>输入：nums = [9,1,7,9,7,9,7]输出：1</code></pre><p>限制：</p><pre><code>1 &lt;= nums.length &lt;= 100001 &lt;= nums[i] &lt; 2^31</code></pre><p>参见137. 只出现一次的数字II<a href="https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetc-23t6/" target="_blank" rel="noopener">^1</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
-    
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
   </entry>
   
@@ -120,15 +120,41 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
+    
+      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
+    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20II.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%20II/"/>
+    <id>http://yoursite.com/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/</id>
+    <published>2021-12-08T07:12:12.000Z</published>
+    <updated>2021-12-08T07:05:05.128Z</updated>
+    
+    <content type="html"><![CDATA[<p>在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><a id="more"></a><p>[TOC]</p><p>示例 1：</p><pre><code>输入：nums = [3,4,3,3]输出：4</code></pre><p>示例 2：</p><pre><code>输入：nums = [9,1,7,9,7,9,7]输出：1</code></pre><p>限制：</p><pre><code>1 &lt;= nums.length &lt;= 100001 &lt;= nums[i] &lt; 2^31</code></pre><p>参见137. 只出现一次的数字II<a href="https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetc-23t6/" target="_blank" rel="noopener">^1</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -152,9 +178,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -179,9 +205,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
@@ -277,11 +303,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -334,13 +360,13 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -364,11 +390,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -418,11 +444,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Prefix Sum" scheme="http://yoursite.com/tags/Prefix-Sum/"/>
     
@@ -502,9 +528,9 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
@@ -530,39 +556,13 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
       <category term="Sliding Window" scheme="http://yoursite.com/tags/Sliding-Window/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>1109. 航班预订统计</title>
-    <link href="http://yoursite.com/2021/11/15/1109.%20%E8%88%AA%E7%8F%AD%E9%A2%84%E8%AE%A2%E7%BB%9F%E8%AE%A1/"/>
-    <id>http://yoursite.com/2021/11/15/1109. 航班预订统计/</id>
-    <published>2021-11-15T09:12:12.000Z</published>
-    <updated>2021-11-16T10:48:19.465Z</updated>
-    
-    <content type="html"><![CDATA[<p>请你返回一个长度为 n 的数组answer，里面的元素是每个航班预定的座位总数。</p><a id="more"></a><p>[TOC]</p><p>这里有 n 个航班，它们分别从 1 到 n 进行编号。</p><p>有一份航班预订表 bookings ，表中第 i 条预订记录 bookings[i] = [firsti, lasti, seatsi] 意味着在从 firsti 到 lasti （包含 firsti 和 lasti ）的 每个航班 上预订了 seatsi 个座位。</p><p>请你返回一个长度为 n 的数组answer，里面的元素是每个航班预定的座位总数。</p><p>示例 1：</p><pre><code>输入：bookings = [[1,2,10],[2,3,20],[2,5,25]], n = 5输出：[10,55,45,25,25]解释：航班编号        1   2   3   4   5预订记录 1 ：   10  10预订记录 2 ：       20  20预订记录 3 ：       25  25  25  25总座位数：      10  55  45  25  25因此，answer = [10,55,45,25,25]</code></pre><p>示例 2：</p><pre><code>输入：bookings = [[1,2,10],[2,2,15]], n = 2输出：[10,25]解释：航班编号        1   2预订记录 1 ：   10  10预订记录 2 ：       15总座位数：      10  25因此，answer = [10,25]</code></pre><p>提示：</p><pre><code>1 &lt;= n &lt;= 2 * 1041 &lt;= bookings.length &lt;= 2 * 104bookings[i].length == 31 &lt;= firsti &lt;= lasti &lt;= n1 &lt;= seatsi &lt;= 104</code></pre><h1 id="方法一：差分"><a href="#方法一：差分" class="headerlink" title="方法一：差分"></a>方法一：差分</h1><p>注意到一个预订记录实际上代表了一个区间的增量。我们的任务是将这些增量叠加得到答案。因此，我们可以使用差分解决本题。</p><p>差分数组对应的概念是前缀和数组，对于数组 <em>[1,2,2,4]<em>，其差分数组为 *[1,1,0,2]</em>，差分数组的第 *i</em> 个数即为原数组的第 <em>i-1</em> 个元素和第 <em>i</em> 个元素的差值，也就是说我们对差分数组求前缀和即可得到原数组。</p><p>差分数组的性质是，当我们希望对原数组的某一个区间 <em>[l,r]</em> 施加一个增量inc 时，差分数组 <em>d</em> 对应的改变是：<em>d[l]</em> 增加 inc ，<em>d[r+1]</em> 减少inc 。这样对于区间的修改就变为了对于两个位置的修改。并且这种修改是可以叠加的，即当我们多次对原数组的不同区间施加不同的增量，我们只要按规则修改差分数组即可。</p><p>在本题中，我们可以遍历给定的预定记录数组，每次 <em>O(1)</em> 地完成对差分数组的修改即可。当我们完成了差分数组的修改，只需要最后求出差分数组的前缀和即可得到目标数组。</p><p>注意本题中日期从 <em>1</em> 开始，因此我们需要相应的调整数组下标对应关系，对于预定记录booking=[l,r,inc] ，我们需要让 <em>d[l-1]</em> 增加 inc ，<em>d[r]</em> 减少inc 。特别地，当 <em>r</em> 为 <em>n</em> 时，我们无需修改 <em>d[r]</em>，因为这个位置溢出了下标范围。如果求前缀和时考虑该位置，那么该位置对应的前缀和值必定为 <em>0</em>。读者们可以自行思考原因，以加深对差分数组的理解。</p><p><strong>代码</strong></p><details>    <summary>cpp</summary><figure class="highlight c++"><figcaption><span>[sol1-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; corpFlightBookings(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; bookings, <span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums(n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; booking : bookings) &#123;</span><br><span class="line">            nums[booking[<span class="number">0</span>] - <span class="number">1</span>] += booking[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">if</span> (booking[<span class="number">1</span>] &lt; n) &#123;</span><br><span class="line">                nums[booking[<span class="number">1</span>]] -= booking[<span class="number">2</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            nums[i] += nums[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[sol1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] corpFlightBookings(<span class="keyword">int</span>[][] bookings, <span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] booking : bookings) &#123;</span><br><span class="line">            nums[booking[<span class="number">0</span>] - <span class="number">1</span>] += booking[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">if</span> (booking[<span class="number">1</span>] &lt; n) &#123;</span><br><span class="line">                nums[booking[<span class="number">1</span>]] -= booking[<span class="number">2</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            nums[i] += nums[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>C#</summary><figure class="highlight plain"><figcaption><span>[sol1-C#]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int[] CorpFlightBookings(int[][] bookings, int n) &#123;</span><br><span class="line">        int[] nums = new int[n];</span><br><span class="line">        foreach (int[] booking in bookings) &#123;</span><br><span class="line">            nums[booking[0] - 1] += booking[2];</span><br><span class="line">            if (booking[1] &lt; n) &#123;</span><br><span class="line">                nums[booking[1]] -= booking[2];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 1; i &lt; n; i++) &#123;</span><br><span class="line">            nums[i] += nums[i - 1];</span><br><span class="line">        &#125;</span><br><span class="line">        return nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>C</summary><figure class="highlight c"><figcaption><span>[sol1-C]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">corpFlightBookings</span><span class="params">(<span class="keyword">int</span>** bookings, <span class="keyword">int</span> bookingsSize, <span class="keyword">int</span>* bookingsColSize, <span class="keyword">int</span> n, <span class="keyword">int</span>* returnSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* nums = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * n);</span><br><span class="line">    <span class="built_in">memset</span>(nums, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>) * n);</span><br><span class="line">    *returnSize = n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bookingsSize; i++) &#123;</span><br><span class="line">        nums[bookings[i][<span class="number">0</span>] - <span class="number">1</span>] += bookings[i][<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">if</span> (bookings[i][<span class="number">1</span>] &lt; n) &#123;</span><br><span class="line">            nums[bookings[i][<span class="number">1</span>]] -= bookings[i][<span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        nums[i] += nums[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>JavaScript</summary><figure class="highlight javascript"><figcaption><span>[sol1-JavaScript]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> corpFlightBookings = <span class="function"><span class="keyword">function</span>(<span class="params">bookings, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> nums = <span class="keyword">new</span> <span class="built_in">Array</span>(n).fill(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> booking <span class="keyword">of</span> bookings) &#123;</span><br><span class="line">        nums[booking[<span class="number">0</span>] - <span class="number">1</span>] += booking[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">if</span> (booking[<span class="number">1</span>] &lt; n) &#123;</span><br><span class="line">            nums[booking[<span class="number">1</span>]] -= booking[<span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        nums[i] += nums[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Python3</summary><figure class="highlight python"><figcaption><span>[sol1-Python3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">corpFlightBookings</span><span class="params">(self, bookings: List[List[int]], n: int)</span> -&gt; List[int]:</span></span><br><span class="line">        nums = [<span class="number">0</span>] * n</span><br><span class="line">        <span class="keyword">for</span> left, right, inc <span class="keyword">in</span> bookings:</span><br><span class="line">            nums[left - <span class="number">1</span>] += inc</span><br><span class="line">            <span class="keyword">if</span> right &lt; n:</span><br><span class="line">                nums[right] -= inc</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            nums[i] += nums[i - <span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure></details><details>    <summary>Golang</summary><figure class="highlight go"><figcaption><span>[sol1-Golang]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">corpFlightBookings</span><span class="params">(bookings [][]<span class="keyword">int</span>, n <span class="keyword">int</span>)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">    nums := <span class="built_in">make</span>([]<span class="keyword">int</span>, n)</span><br><span class="line">    <span class="keyword">for</span> _, booking := <span class="keyword">range</span> bookings &#123;</span><br><span class="line">        nums[booking[<span class="number">0</span>]<span class="number">-1</span>] += booking[<span class="number">2</span>]</span><br><span class="line">        <span class="keyword">if</span> booking[<span class="number">1</span>] &lt; n &#123;</span><br><span class="line">            nums[booking[<span class="number">1</span>]] -= booking[<span class="number">2</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt; n; i++ &#123;</span><br><span class="line">        nums[i] += nums[i<span class="number">-1</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><p><strong>复杂度分析</strong></p><ul><li><p>时间复杂度：<em>O(n+m)*，其中 *n</em> 为要求的数组长度，<em>m</em> 为预定记录的数量。我们需要对于每一条预定记录处理一次差分数组，并最后对差分数组求前缀和。</p></li><li><p>空间复杂度：<em>O(1)</em>。我们只需要常数的空间保存若干变量，注意返回值不计入空间复杂度。</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;请你返回一个长度为 n 的数组answer，里面的元素是每个航班预定的座位总数。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
-    
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Prefix Sum" scheme="http://yoursite.com/tags/Prefix-Sum/"/>
     
   </entry>
   
