@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-12T03:45:52.725Z</updated>
+  <updated>2021-12-12T04:20:48.078Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面试题 16.07. 最大数值</title>
+    <link href="http://yoursite.com/2021/12/12/%E9%9D%A2%E8%AF%95%E9%A2%98%2016.07.%20%E6%9C%80%E5%A4%A7%E6%95%B0%E5%80%BC/"/>
+    <id>http://yoursite.com/2021/12/12/面试题 16.07. 最大数值/</id>
+    <published>2021-12-12T04:12:12.000Z</published>
+    <updated>2021-12-12T04:20:48.078Z</updated>
+    
+    <content type="html"><![CDATA[<p>编写一个方法，找出两个数字a和b中最大的那一个。不得使用if-else或其他比较运算符。</p><a id="more"></a><p>[TOC]</p><p>示例：</p><pre><code>输入： a = 1, b = 2输出： 2</code></pre><h1 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h1><ol><li><p>首先 a - b 得到差值x</p></li><li><p>由于是long型，右移63位得到符号位，注意负号不变，那么正数右移63位就是0，负数右移63位就是-1</p></li><li><p>那么得出我们的计算公式  (1 + k) * a - b * k</p><p> 当 x &gt;= 0 的时候，k = 0, 即 a &gt; b<br> 那么我们的计算公式为  1 * a - b * 0 = a</p><p> 当 x &lt; 0的时候，k = -1, 即 b &gt; a<br> 那么我们的计算公式为  0 * a - b * ( -1 ) = b</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maximum(int a, int b) &#123;</span><br><span class="line">        long x = (long) a - (long) b;</span><br><span class="line">        int k = (int) (x &gt;&gt; 63);</span><br><span class="line"></span><br><span class="line">        return (1 + k) * a - b * k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><h1 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h1><p>关于这道题已有很多解法，大概有以下几种：</p><ol><li>使用 <code>max</code>，<code>abs</code> 之类的库函数。这种真的不要骗自己，就是作弊方法；</li><li>使用位运算，但申请了更大的类型避免溢出。这种没有作弊，但是我觉得还可以改进，因为如果入参就已经是系统支持的最大类型，那么这类解法就无效了；</li><li>使用位运算，同时没有申请更大的类型。这种已经很完美了，但是我没有看到 C/C++ 的 Solution，可能 C/C++ 面对溢出问题会报错（Java 不会），处理起来更困难一些。</li></ol><p>回到问题中，我们现在来一步一步思考。首先，如果没有限制条件，那么非常简单：</p><details>    <summary>c++</summary><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (a &lt; b)</span><br><span class="line">            <span class="keyword">return</span> b;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> a;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 或者使用三目运算符</span></span><br><span class="line">        <span class="keyword">return</span> a &lt; b ? b : a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><p>但是，我们不能使用 if-else 或者比较运算符，所以我们需要构思如何去返回结果，这里不妨构造一个计算公式：</p><details>    <summary>c++</summary><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a * k + b * (k ^ <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><p>这里 k 的值应该为 1 或 0，且我们应使其：</p><ul><li>当 a &lt; b 时，k = 0，则 k ^ 1 = 1。此时计算结果等于 b；</li><li>当 a &gt; b 是，k = 1，则 k ^ 1 = 0。此时计算结果等于 a。</li></ul><p>那么如何让 k 满足我们的要求的呢？这里可以用算术运算+位运算操作：判断 a - b 的最高位（符号位），即：</p><ul><li>当 a - b &lt; 0 时，a - b 的最高位为 1，此时，k 应该为 0；</li><li>当 a - b &gt; 0 时，a - b 的最高位为 0，此时，k 应该为 1；</li></ul><p>发现了吗？k 的值和 a - b 的最高位恰好相反，这里很自然的再引入异或运算，可以得到代码：</p><details>    <summary>c++</summary><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> bitlen = <span class="keyword">sizeof</span>(a) * <span class="number">8</span>;</span><br><span class="line">        <span class="comment">// C/C++ 中负数右移最高位会补 1，因此需要转成无符号类型后再右移</span></span><br><span class="line">        <span class="comment">// 将 a-b 的符号位移动到最左边，再与 1 异或取反，得到 k 的值</span></span><br><span class="line">        <span class="keyword">int</span> k = <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span>&gt;(a - b) &gt;&gt; (bitlen - <span class="number">1</span>) ^ <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> a * k + b * (k ^ <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><p>这样我们就返回了正确结果。但是需要注意 a - b 可能会导致溢出问题，一种简单的解决方式是用更大的类型（例如 long long）保存中间结果，但如果入参已经是系统支持的最大类型，那这种解法就失效了，所以并不完美。因此，我们来思考一下如何在给定的类型范围内解决这个问题。这里，我们需要分情况考虑：</p><ul><li>当 a 和 b 同号时，a - b 不会溢出，使用上面的代码即可；</li><li>当 a 和 b 异号时，a - b 可能溢出，需要额外处理；</li></ul><p>第一种情况我们已经解决了，现在来考虑第二种情况。我们可以使用 a 的符号位异或 b 的符号位，当结果为 1 时，说明异号；结果为 0 时，说明同号。当异号时，我们应该直接返回正数，避免 a - b 的运算。那么当两数异号时，我们如何确定 k 的值呢？当 a 为负数时，a 的符号位为 1，此时 k 应该为 0；当 a 为正数时，a 的符号位为 0，k 应该为 1。总结规律可以发现，k 的值应该等于 a 的符号位异或 1。现在来实现第二种情况的代码：</p><details>    <summary>c++</summary><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> bitlen = <span class="keyword">sizeof</span>(a) * <span class="number">8</span>;</span><br><span class="line">        <span class="keyword">int</span> asign = <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span>&gt;(a) &gt;&gt; (bitlen - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> k = asign ^ <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> a * k + b * (k ^ <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><p>现在我们已经实现了两种不同情况下的代码，针对两数同号或异号的场景分别处理，以避免溢出问题，最后我们只需要将其组合起来。由于不能使用 if-else 语句，需要我们用一点 trick，见下：</p><details>    <summary>c++</summary><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 计算 int 类型的位数，避免不同系统下长度不同</span></span><br><span class="line">        <span class="keyword">int</span> bitlen = <span class="keyword">sizeof</span>(a) * <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 计算 a 的符号位，b 的符号位</span></span><br><span class="line">        <span class="comment">// C/C++ 中负数右移最高位会补 1，因此需要转成无符号类型后再右移</span></span><br><span class="line">        <span class="keyword">int</span> asign = <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span>&gt;(a) &gt;&gt; (bitlen - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> bsign = <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span>&gt;(b) &gt;&gt; (bitlen - <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 假设 a 与 b 异号，计算 k 的值</span></span><br><span class="line">        <span class="keyword">int</span> k = asign ^ <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 当 a 和 b 异号时，asign ^ bsign ^ 1 为 0，由于 逻辑与运算 的短路性，将不再计算后半行代码，避免溢出</span></span><br><span class="line">        <span class="comment">// 当 a 和 b 同号时，asign ^ bsign ^ 1 为 1，此时会执行后半行代码，重新对 k 赋值</span></span><br><span class="line">        <span class="keyword">int</span> temp_cond = (asign ^ bsign ^ <span class="number">1</span>) &amp;&amp; (k = <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span>&gt;(a - b) &gt;&gt; (bitlen - <span class="number">1</span>) ^ <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> a * k + b * (k ^ <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><p>至此，我们就完成了这道题。</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;编写一个方法，找出两个数字a和b中最大的那一个。不得使用if-else或其他比较运算符。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
+    
+      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
+    
+      <category term="Brainteaser" scheme="http://yoursite.com/tags/Brainteaser/"/>
+    
+  </entry>
   
   <entry>
     <title>剑指 Offer II 079. 所有子集</title>
@@ -63,11 +91,11 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -93,11 +121,11 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -203,9 +231,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
@@ -235,15 +263,15 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
-      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
+    
+      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -267,9 +295,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -293,9 +321,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -320,9 +348,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
@@ -418,11 +446,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -448,9 +476,9 @@
     
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
-      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
-    
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
+    
+      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
       <category term="Two Pointers" scheme="http://yoursite.com/tags/Two-Pointers/"/>
     
@@ -475,13 +503,13 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
+      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -505,11 +533,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -538,34 +566,6 @@
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>525. 连续数组</title>
-    <link href="http://yoursite.com/2021/11/21/525.%20%E8%BF%9E%E7%BB%AD%E6%95%B0%E7%BB%84/"/>
-    <id>http://yoursite.com/2021/11/21/525. 连续数组/</id>
-    <published>2021-11-21T10:12:12.000Z</published>
-    <updated>2021-11-23T14:22:16.698Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定一个二进制数组 nums , 找到含有相同数量的 0 和 1 的最长连续子数组，并返回该子数组的长度。</p><a id="more"></a><p>[TOC]</p><p>示例 1:</p><pre><code>输入: nums = [0,1]输出: 2说明: [0, 1] 是具有相同数量 0 和 1 的最长连续子数组。</code></pre><p>示例 2:</p><pre><code>输入: nums = [0,1,0]输出: 2说明: [0, 1] (或 [1, 0]) 是具有相同数量0和1的最长连续子数组。</code></pre><p>提示：</p><pre><code>1 &lt;= nums.length &lt;= 105nums[i] 不是 0 就是 1</code></pre><h1 id="方法一：前缀和-哈希表-1"><a href="#方法一：前缀和-哈希表-1" class="headerlink" title="方法一：前缀和 + 哈希表^1"></a>方法一：前缀和 + 哈希表<a href="https://leetcode-cn.com/problems/contiguous-array/solution/lian-xu-shu-zu-by-leetcode-solution-mvnm/" target="_blank" rel="noopener">^1</a></h1><p>由于「<em>0</em> 和 <em>1</em> 的数量相同」等价于「<em>1</em> 的数量减去 <em>0</em> 的数量等于 <em>0</em>」，我们可以将数组中的 <em>0</em> 视作 <em>-1</em>，则原问题转换成「求最长的连续子数组，其元素和为 <em>0</em>」。</p><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[sol1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxLength</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> maxLength = <span class="number">0</span>;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;Integer, Integer&gt;();</span><br><span class="line">        <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">        map.put(counter, -<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> n = nums.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> num = nums[i];</span><br><span class="line">            <span class="keyword">if</span> (num == <span class="number">1</span>) &#123;</span><br><span class="line">                counter++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                counter--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(counter)) &#123;</span><br><span class="line">                <span class="keyword">int</span> prevIndex = map.get(counter);</span><br><span class="line">                maxLength = Math.max(maxLength, i - prevIndex);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                map.put(counter, i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>C#</summary><figure class="highlight plain"><figcaption><span>[sol1-C#]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int FindMaxLength(int[] nums) &#123;</span><br><span class="line">        int maxLength = 0;</span><br><span class="line">        Dictionary&lt;int, int&gt; dictionary = new Dictionary&lt;int, int&gt;();</span><br><span class="line">        int counter = 0;</span><br><span class="line">        dictionary.Add(counter, -1);</span><br><span class="line">        int n = nums.Length;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            int num = nums[i];</span><br><span class="line">            if (num == 1) &#123;</span><br><span class="line">                counter++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                counter--;</span><br><span class="line">            &#125;</span><br><span class="line">            if (dictionary.ContainsKey(counter)) &#123;</span><br><span class="line">                int prevIndex = dictionary[counter];</span><br><span class="line">                maxLength = Math.Max(maxLength, i - prevIndex);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dictionary.Add(counter, i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return maxLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>JavaScript</summary><figure class="highlight javascript"><figcaption><span>[sol1-JavaScript]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> findMaxLength = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> maxLength = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">let</span> counter = <span class="number">0</span>;</span><br><span class="line">    map.set(counter, <span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">const</span> n = nums.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> num = nums[i];</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">1</span>) &#123;</span><br><span class="line">            counter++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            counter--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (map.has(counter)) &#123;</span><br><span class="line">            <span class="keyword">const</span> prevIndex = map.get(counter);</span><br><span class="line">            maxLength = <span class="built_in">Math</span>.max(maxLength, i - prevIndex);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(counter, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLength;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Golang</summary><figure class="highlight go"><figcaption><span>[sol1-Golang]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMaxLength</span><span class="params">(nums []<span class="keyword">int</span>)</span> <span class="params">(maxLength <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    mp := <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">int</span>&#123;<span class="number">0</span>: <span class="number">-1</span>&#125;</span><br><span class="line">    counter := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i, num := <span class="keyword">range</span> nums &#123;</span><br><span class="line">        <span class="keyword">if</span> num == <span class="number">1</span> &#123;</span><br><span class="line">            counter++</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            counter--</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> prevIndex, has := mp[counter]; has &#123;</span><br><span class="line">            maxLength = max(maxLength, i-prevIndex)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            mp[counter] = i</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> a &gt; b &#123;</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>C++</summary><figure class="highlight c++"><figcaption><span>[sol1-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findMaxLength</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> maxLength = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line">        <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">        mp[counter] = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> num = nums[i];</span><br><span class="line">            <span class="keyword">if</span> (num == <span class="number">1</span>) &#123;</span><br><span class="line">                counter++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                counter--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (mp.count(counter)) &#123;</span><br><span class="line">                <span class="keyword">int</span> prevIndex = mp[counter];</span><br><span class="line">                maxLength = max(maxLength, i - prevIndex);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                mp[counter] = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>C</summary><figure class="highlight c"><figcaption><span>[sol1-C]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HashTable</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> key, val;</span><br><span class="line">    UT_hash_handle hh;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findMaxLength</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxLength = <span class="number">0</span>;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">HashTable</span>* <span class="title">hashTable</span> = <span class="title">NULL</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">HashTable</span>* <span class="title">tmp</span> = <span class="title">malloc</span>(<span class="title">sizeof</span>(<span class="title">struct</span> <span class="title">HashTable</span>));</span></span><br><span class="line">    tmp-&gt;key = <span class="number">0</span>, tmp-&gt;val = <span class="number">-1</span>;</span><br><span class="line">    HASH_ADD_INT(hashTable, key, tmp);</span><br><span class="line">    <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> n = numsSize;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> num = nums[i];</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">1</span>) &#123;</span><br><span class="line">            counter++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            counter--;</span><br><span class="line">        &#125;</span><br><span class="line">        HASH_FIND_INT(hashTable, &amp;counter, tmp);</span><br><span class="line">        <span class="keyword">if</span> (tmp != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> prevIndex = tmp-&gt;val;</span><br><span class="line">            maxLength = fmax(maxLength, i - prevIndex);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            tmp = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct HashTable));</span><br><span class="line">            tmp-&gt;key = counter, tmp-&gt;val = i;</span><br><span class="line">            HASH_ADD_INT(hashTable, key, tmp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLength;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;给定一个二进制数组 nums , 找到含有相同数量的 0 和 1 的最长连续子数组，并返回该子数组的长度。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
-    
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
-      <category term="Prefix Sum" scheme="http://yoursite.com/tags/Prefix-Sum/"/>
     
   </entry>
   
