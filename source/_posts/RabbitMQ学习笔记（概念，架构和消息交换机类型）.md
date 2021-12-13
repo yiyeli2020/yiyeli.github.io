@@ -1,5 +1,5 @@
 ---
-title: RabbitMQ学习笔记
+title: RabbitMQ学习笔记（概念，架构和消息交换机类型）
 
 date: 2021-12-12 20:12:12
 
