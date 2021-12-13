@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-13T01:56:48.612Z</updated>
+  <updated>2021-12-13T02:23:43.428Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面试题 08.06. 汉诺塔问题</title>
+    <link href="http://yoursite.com/2021/12/13/%E9%9D%A2%E8%AF%95%E9%A2%98%2008.06.%20%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2021/12/13/面试题 08.06. 汉诺塔问题/</id>
+    <published>2021-12-13T02:12:12.000Z</published>
+    <updated>2021-12-13T02:23:43.428Z</updated>
+    
+    <content type="html"><![CDATA[<p> 请编写程序，用栈将所有盘子从第一根柱子移到最后一根柱子。</p><a id="more"></a><p>[TOC]</p><p>在经典汉诺塔问题中，有 3 根柱子及 N 个不同大小的穿孔圆盘，盘子可以滑入任意一根柱子。一开始，所有盘子自上而下按升序依次套在第一根柱子上(即每一个盘子只能放在更大的盘子上面)。移动圆盘时受到以下限制:<br>(1) 每次只能移动一个盘子;<br>(2) 盘子只能从柱子顶端滑出移到下一根柱子;<br>(3) 盘子只能叠在比它大的盘子上。</p><p>请编写程序，用栈将所有盘子从第一根柱子移到最后一根柱子。</p><p>你需要原地修改栈。</p><p>示例1:</p><pre><code>输入：A = [2, 1, 0], B = [], C = []输出：C = [2, 1, 0]</code></pre><p>示例2:</p><pre><code>输入：A = [1, 0], B = [], C = []输出：C = [1, 0]</code></pre><p>提示:</p><pre><code>A中盘子的数目不大于14个。</code></pre><h2 id="Tower-of-Hanoi"><a href="#Tower-of-Hanoi" class="headerlink" title="Tower of Hanoi"></a>Tower of Hanoi</h2><blockquote><p>相传在很久以前，有个寺庙里的几个和尚整天不停地移动着 64 个盘子，日复一日，年复一年。据说，当 64 个盘子全部移完的那一天就是世界末日…</p></blockquote><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>有 A,B,C 三根柱子，A 上面有 n 个盘子，我们想把 A 上面的盘子移动到 C 上，但是要满足以下三个条件：</p><ol><li>每次只能移动一个盘子;</li><li>盘子只能从柱子顶端滑出移到下一根柱子;</li><li>盘子只能叠在比它大的盘子上。</li></ol><p><a href="https://pic.leetcode-cn.com/7043dec266338d396d186805072660d5f9517e2c1008af80d461b553c5b32470-p1.png" target="_blank" rel="noopener">p1.png</a></p><h3 id="解题思路：递归与分治"><a href="#解题思路：递归与分治" class="headerlink" title="解题思路：递归与分治"></a>解题思路：递归与分治</h3><p>这是一道递归方法的经典题目，乍一想还挺难理清头绪的，我们不妨先从简单的入手。</p><p>假设 <code>n = 1</code>,只有一个盘子，很简单，直接把它从 A 中拿出来，移到 C 上；</p><p>如果 <code>n = 2</code> 呢？这时候我们就要借助 B 了，因为小盘子必须时刻都在大盘子上面，共需要 4 步。</p><p> <a href="https://pic.leetcode-cn.com/f6f3b97651247c9ff846f115e1866ab364b1c0e265fd51689ddd6a8ca1758482-0806.gif" target="_blank" rel="noopener">0806.gif</a></p><p>如果  <code>n &gt; 2</code> 呢？思路和上面是一样的，我们把 n 个盘子也看成两个部分，一部分有 1 个盘子，另一部分有 n - 1 个盘子。</p><p> <a href="https://pic.leetcode-cn.com/3bffd1a1faf4323a92b659e37d7e2cd6c79fe074602b2977f4a7931fe82bbb13-08061.gif" target="_blank" rel="noopener">08061.gif</a></p><p>观察上图，你可能会问：“那 n - 1 个盘子是怎么从 A 移到 C 的呢？”</p><p>注意，<strong>当你在思考这个问题的时候，就将最初的 n 个盘子从 A 移到 C 的问题，转化成了将 n - 1 个盘子从 A 移到 C 的问题，</strong> 依次类推，直至转化成 1 个盘子的问题时，问题也就解决了。这就是分治的思想。 </p><p>而实现分治思想的常用方法就是递归。不难发现，如果原问题可以分解成若干个与原问题结构相同但规模较小的子问题时，往往可以用递归的方法解决。具体解决办法如下：</p><ul><li><code>n = 1</code> 时，直接把盘子从 A 移到 C；</li><li><code>n &gt; 1</code> 时，<ul><li>先把上面 n - 1 个盘子从 A 移到 B（子问题，递归）；</li><li>再将最大的盘子从 A 移到 C；</li><li>再将 B 上 n - 1 个盘子从 B 移到 C（子问题，递归）。</li></ul></li></ul><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><details>    <summary>python</summary><figure class="highlight python"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hanota</span><span class="params">(self, A: List[int], B: List[int], C: List[int])</span> -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        n = len(A)</span><br><span class="line">        self.move(n, A, B, C)</span><br><span class="line">    <span class="comment"># 定义move 函数移动汉诺塔</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">move</span><span class="params">(self,n, A, B, C)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            C.append(A[<span class="number">-1</span>])</span><br><span class="line">            A.pop()</span><br><span class="line">            <span class="keyword">return</span> </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.move(n<span class="number">-1</span>, A, C, B)  <span class="comment"># 将A上面n-1个通过C移到B</span></span><br><span class="line">            C.append(A[<span class="number">-1</span>])          <span class="comment"># 将A最后一个移到C</span></span><br><span class="line">            A.pop()                  <span class="comment"># 这时，A空了</span></span><br><span class="line">            self.move(n<span class="number">-1</span>,B, A, C)   <span class="comment"># 将B上面n-1个通过空的A移到C</span></span><br></pre></td></tr></table></figure></details><details>    <summary>C++</summary><figure class="highlight cpp"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hanota</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; B, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; C)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = A.size();</span><br><span class="line">        move(n, A, B, C);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; B, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; C)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>)&#123;</span><br><span class="line">            C.push_back(A.back());</span><br><span class="line">            A.pop_back();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        move(n<span class="number">-1</span>, A, C, B);    <span class="comment">// 将A上面n-1个通过C移到B</span></span><br><span class="line">        C.push_back(A.back());  <span class="comment">// 将A最后一个移到C</span></span><br><span class="line">        A.pop_back();          <span class="comment">// 这时，A空了</span></span><br><span class="line">        move(n<span class="number">-1</span>, B, A, C);     <span class="comment">// 将B上面n-1个通过空的A移到C</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hanota</span><span class="params">(List&lt;Integer&gt; A, List&lt;Integer&gt; B, List&lt;Integer&gt; C)</span> </span>&#123;</span><br><span class="line">        move(A.size(), A, B, C);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> n, List&lt;Integer&gt; A, List&lt;Integer&gt; B, List&lt;Integer&gt; C)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">            C.add(A.get(A.size() - <span class="number">1</span>));</span><br><span class="line">            A.remove(A.size() - <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        move(n - <span class="number">1</span>, A, C, B);</span><br><span class="line">        C.add(A.get(A.size() - <span class="number">1</span>));</span><br><span class="line">        A.remove(A.size() - <span class="number">1</span>);</span><br><span class="line">        move(n - <span class="number">1</span>, B, A, C);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><h2 id="复杂度分析：世界会毁灭吗"><a href="#复杂度分析：世界会毁灭吗" class="headerlink" title="复杂度分析：世界会毁灭吗"></a>复杂度分析：世界会毁灭吗</h2><ul><li>时间复杂度：<em>O(2^n-1)</em>。一共需要移动的次数。</li><li>空间复杂度：<em>O(1)</em>。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 请编写程序，用栈将所有盘子从第一根柱子移到最后一根柱子。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Recursion" scheme="http://yoursite.com/tags/Recursion/"/>
+    
+  </entry>
   
   <entry>
     <title>RabbitMQ学习笔记（概念，架构和消息交换机类型）</title>
@@ -115,11 +141,11 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -145,11 +171,11 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -255,9 +281,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
@@ -266,32 +292,6 @@
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
       <category term="Combinatorics" scheme="http://yoursite.com/tags/Combinatorics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
-    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20II.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%20II/"/>
-    <id>http://yoursite.com/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/</id>
-    <published>2021-12-08T07:12:12.000Z</published>
-    <updated>2021-12-08T07:05:05.128Z</updated>
-    
-    <content type="html"><![CDATA[<p>在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><a id="more"></a><p>[TOC]</p><p>示例 1：</p><pre><code>输入：nums = [3,4,3,3]输出：4</code></pre><p>示例 2：</p><pre><code>输入：nums = [9,1,7,9,7,9,7]输出：1</code></pre><p>限制：</p><pre><code>1 &lt;= nums.length &lt;= 100001 &lt;= nums[i] &lt; 2^31</code></pre><p>参见137. 只出现一次的数字II<a href="https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetc-23t6/" target="_blank" rel="noopener">^1</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
-    
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
   </entry>
   
@@ -313,15 +313,41 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
+    
+      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
+    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20II.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%20II/"/>
+    <id>http://yoursite.com/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/</id>
+    <published>2021-12-08T07:12:12.000Z</published>
+    <updated>2021-12-08T07:05:05.128Z</updated>
+    
+    <content type="html"><![CDATA[<p>在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><a id="more"></a><p>[TOC]</p><p>示例 1：</p><pre><code>输入：nums = [3,4,3,3]输出：4</code></pre><p>示例 2：</p><pre><code>输入：nums = [9,1,7,9,7,9,7]输出：1</code></pre><p>限制：</p><pre><code>1 &lt;= nums.length &lt;= 100001 &lt;= nums[i] &lt; 2^31</code></pre><p>参见137. 只出现一次的数字II<a href="https://leetcode-cn.com/problems/single-number-ii/solution/zhi-chu-xian-yi-ci-de-shu-zi-ii-by-leetc-23t6/" target="_blank" rel="noopener">^1</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在一个数组 nums中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -345,9 +371,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -372,9 +398,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
@@ -470,11 +496,11 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -527,41 +553,13 @@
       <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
-      <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>739. 每日温度</title>
-    <link href="http://yoursite.com/2021/11/26/739.%20%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/"/>
-    <id>http://yoursite.com/2021/11/26/739. 每日温度/</id>
-    <published>2021-11-26T11:12:12.000Z</published>
-    <updated>2021-11-28T12:05:13.304Z</updated>
-    
-    <content type="html"><![CDATA[<p>请根据每日 气温 列表 temperatures ，请计算在每一天需要等几天才会有更高的温度。如果气温在这之后都不会升高，请在该位置用 0 来代替。</p><a id="more"></a><p>[TOC]</p><p>示例 1:</p><pre><code>输入: temperatures = [73,74,75,71,69,72,76,73]输出: [1,1,4,2,1,1,0,0]</code></pre><p>示例 2:</p><pre><code>输入: temperatures = [30,40,50,60]输出: [1,1,1,0]</code></pre><p>示例 3:</p><pre><code>输入: temperatures = [30,60,90]输出: [1,1,0]</code></pre><p>提示：</p><pre><code>1 &lt;= temperatures.length &lt;= 10530 &lt;= temperatures[i] &lt;= 100</code></pre><h1 id="📖-文字题解"><a href="#📖-文字题解" class="headerlink" title="📖 文字题解"></a>📖 文字题解</h1><h2 id="方法一：暴力"><a href="#方法一：暴力" class="headerlink" title="方法一：暴力"></a>方法一：暴力</h2><p>对于温度列表中的每个元素 <code>temperatures[i]</code>，需要找到最小的下标 <code>j</code>，使得 <code>i &lt; j</code> 且 <code>temperatures[i] &lt; temperatures[j]</code>。</p><p>由于温度范围在 <code>[30, 100]</code> 之内，因此可以维护一个数组 <code>next</code> 记录每个温度第一次出现的下标。数组 <code>next</code> 中的元素初始化为无穷大，在遍历温度列表的过程中更新 <code>next</code> 的值。</p><p>反向遍历温度列表。对于每个元素 <code>temperatures[i]</code>，在数组 <code>next</code> 中找到从 <code>temperatures[i] + 1</code> 到 <code>100</code> 中每个温度第一次出现的下标，将其中的最小下标记为 <code>warmerIndex</code>，则 <code>warmerIndex</code> 为下一次温度比当天高的下标。如果 <code>warmerIndex</code> 不为无穷大，则 <code>warmerIndex - i</code> 即为下一次温度比当天高的等待天数，最后令 <code>next[temperatures[i]] = i</code>。</p><p>为什么上述做法可以保证正确呢？因为遍历温度列表的方向是反向，当遍历到元素 <code>temperatures[i]</code> 时，只有 <code>temperatures[i]</code> 后面的元素被访问过，即对于任意 <code>t</code>，当 <code>next[t]</code> 不为无穷大时，一定存在 <code>j</code> 使得 <code>temperatures[j] == t</code> 且 <code>i &lt; j</code>。又由于遍历到温度列表中的每个元素时都会更新数组 <code>next</code> 中的对应温度的元素值，因此对于任意 <code>t</code>，当 <code>next[t]</code> 不为无穷大时，令 <code>j = next[t]</code>，则 <code>j</code> 是满足 <code>temperatures[j] == t</code> 且 <code>i &lt; j</code> 的最小下标。</p><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[sol1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] dailyTemperatures(<span class="keyword">int</span>[] temperatures) &#123;</span><br><span class="line">        <span class="keyword">int</span> length = temperatures.length;</span><br><span class="line">        <span class="keyword">int</span>[] ans = <span class="keyword">new</span> <span class="keyword">int</span>[length];</span><br><span class="line">        <span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">101</span>];</span><br><span class="line">        Arrays.fill(next, Integer.MAX_VALUE);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            <span class="keyword">int</span> warmerIndex = Integer.MAX_VALUE;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> t = temperatures[i] + <span class="number">1</span>; t &lt;= <span class="number">100</span>; ++t) &#123;</span><br><span class="line">                <span class="keyword">if</span> (next[t] &lt; warmerIndex) &#123;</span><br><span class="line">                    warmerIndex = next[t];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (warmerIndex &lt; Integer.MAX_VALUE) &#123;</span><br><span class="line">                ans[i] = warmerIndex - i;</span><br><span class="line">            &#125;</span><br><span class="line">            next[temperatures[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>Python</summary><figure class="highlight python"><figcaption><span>[sol1-Python3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dailyTemperatures</span><span class="params">(self, temperatures: List[int])</span> -&gt; List[int]:</span></span><br><span class="line">        n = len(temperatures)</span><br><span class="line">        ans, nxt, big = [<span class="number">0</span>] * n, dict(), <span class="number">10</span>**<span class="number">9</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">            warmer_index = min(nxt.get(t, big) <span class="keyword">for</span> t <span class="keyword">in</span> range(temperatures[i] + <span class="number">1</span>, <span class="number">102</span>))</span><br><span class="line">            <span class="keyword">if</span> warmer_index != big:</span><br><span class="line">                ans[i] = warmer_index - i</span><br><span class="line">            nxt[temperatures[i]] = i</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure></details><details>    <summary>C++</summary><figure class="highlight c++"><figcaption><span>[sol1-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dailyTemperatures(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; temperatures) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = temperatures.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans(n), next(<span class="number">101</span>, INT_MAX);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            <span class="keyword">int</span> warmerIndex = INT_MAX;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> t = temperatures[i] + <span class="number">1</span>; t &lt;= <span class="number">100</span>; ++t) &#123;</span><br><span class="line">                warmerIndex = min(warmerIndex, next[t]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (warmerIndex != INT_MAX) &#123;</span><br><span class="line">                ans[i] = warmerIndex - i;</span><br><span class="line">            &#125;</span><br><span class="line">            next[temperatures[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Golang</summary><figure class="highlight golang"><figcaption><span>[sol1-Golang]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">dailyTemperatures</span><span class="params">(temperatures []<span class="keyword">int</span>)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">    length := <span class="built_in">len</span>(temperatures)</span><br><span class="line">    ans := <span class="built_in">make</span>([]<span class="keyword">int</span>, length)</span><br><span class="line">    next := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">101</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">101</span>; i++ &#123;</span><br><span class="line">        next[i] = math.MaxInt32</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> i := length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i-- &#123;</span><br><span class="line">        warmerIndex := math.MaxInt32</span><br><span class="line">        <span class="keyword">for</span> t := temperatures[i] + <span class="number">1</span>; t &lt;= <span class="number">100</span>; t++ &#123;</span><br><span class="line">            <span class="keyword">if</span> next[t] &lt; warmerIndex &#123;</span><br><span class="line">                warmerIndex = next[t]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> warmerIndex &lt; math.MaxInt32 &#123;</span><br><span class="line">            ans[i] = warmerIndex - i</span><br><span class="line">        &#125;</span><br><span class="line">        next[temperatures[i]] = i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><p><strong>复杂度分析</strong></p><ul><li><p>时间复杂度：<em>O(nm)*，其中 *n</em> 是温度列表的长度，<em>m</em> 是数组 <code>next</code> 的长度，在本题中温度不超过 <em>100*，所以 *m</em> 的值为 <em>100</em>。反向遍历温度列表一遍，对于温度列表中的每个值，都要遍历数组 <code>next</code> 一遍。</p></li><li><p>空间复杂度：<em>O(m)*，其中 *m</em> 是数组 <code>next</code> 的长度。除了返回值以外，需要维护长度为 <em>m</em> 的数组 <code>next</code> 记录每个温度第一次出现的下标位置。</p></li></ul><h2 id="方法二：单调栈"><a href="#方法二：单调栈" class="headerlink" title="方法二：单调栈"></a>方法二：单调栈</h2><p>可以维护一个存储下标的单调栈，从栈底到栈顶的下标对应的温度列表中的温度依次递减。如果一个下标在单调栈里，则表示尚未找到下一次温度更高的下标。</p><p>正向遍历温度列表。对于温度列表中的每个元素 <code>temperatures[i]</code>，如果栈为空，则直接将 <code>i</code> 进栈，如果栈不为空，则比较栈顶元素 <code>prevIndex</code> 对应的温度 <code>temperatures[prevIndex]</code> 和当前温度 <code>temperatures[i]</code>，如果 <code>temperatures[i] &gt; temperatures[prevIndex]</code>，则将 <code>prevIndex</code> 移除，并将 <code>prevIndex</code> 对应的等待天数赋为 <code>i - prevIndex</code>，重复上述操作直到栈为空或者栈顶元素对应的温度小于等于当前温度，然后将 <code>i</code> 进栈。</p><p>为什么可以在弹栈的时候更新 <code>ans[prevIndex]</code> 呢？因为在这种情况下，即将进栈的 <code>i</code> 对应的 <code>temperatures[i]</code> 一定是 <code>temperatures[prevIndex]</code> 右边第一个比它大的元素，试想如果 <code>prevIndex</code> 和 <code>i</code> 有比它大的元素，假设下标为 <code>j</code>，那么 <code>prevIndex</code> 一定会在下标 <code>j</code> 的那一轮被弹掉。</p><p>由于单调栈满足从栈底到栈顶元素对应的温度递减，因此每次有元素进栈时，会将温度更低的元素全部移除，并更新出栈元素对应的等待天数，这样可以确保等待天数一定是最小的。</p><p>以下用一个具体的例子帮助读者理解单调栈。对于温度列表 *[73,74,75,71,69,72,76,73]<em>，单调栈stack  的初始状态为空，答案 ans 的初始状态是 *[0,0,0,0,0,0,0,0]</em>，按照以下步骤更新单调栈和答案，其中单调栈内的元素都是下标，括号内的数字表示下标在温度列表中对应的温度。</p><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[sol2-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] dailyTemperatures(<span class="keyword">int</span>[] temperatures) &#123;</span><br><span class="line">        <span class="keyword">int</span> length = temperatures.length;</span><br><span class="line">        <span class="keyword">int</span>[] ans = <span class="keyword">new</span> <span class="keyword">int</span>[length];</span><br><span class="line">        Deque&lt;Integer&gt; stack = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> temperature = temperatures[i];</span><br><span class="line">            <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; temperature &gt; temperatures[stack.peek()]) &#123;</span><br><span class="line">                <span class="keyword">int</span> prevIndex = stack.pop();</span><br><span class="line">                ans[prevIndex] = i - prevIndex;</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>Python</summary><figure class="highlight python"><figcaption><span>[sol2-Python3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dailyTemperatures</span><span class="params">(self, temperatures: List[int])</span> -&gt; List[int]:</span></span><br><span class="line">        length = len(temperatures)</span><br><span class="line">        ans = [<span class="number">0</span>] * length</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">            temperature = temperatures[i]</span><br><span class="line">            <span class="keyword">while</span> stack <span class="keyword">and</span> temperature &gt; temperatures[stack[<span class="number">-1</span>]]:</span><br><span class="line">                prev_index = stack.pop()</span><br><span class="line">                ans[prev_index] = i - prev_index</span><br><span class="line">            stack.append(i)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure></details><details>    <summary>C++</summary><figure class="highlight c++"><figcaption><span>[sol2-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dailyTemperatures(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; temperatures) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = temperatures.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans(n);</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!s.empty() &amp;&amp; temperatures[i] &gt; temperatures[s.top()]) &#123;</span><br><span class="line">                <span class="keyword">int</span> previousIndex = s.top();</span><br><span class="line">                ans[previousIndex] = i - previousIndex;</span><br><span class="line">                s.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            s.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Golang</summary><figure class="highlight golang"><figcaption><span>[sol2-Golang]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">dailyTemperatures</span><span class="params">(temperatures []<span class="keyword">int</span>)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">    length := <span class="built_in">len</span>(temperatures)</span><br><span class="line">    ans := <span class="built_in">make</span>([]<span class="keyword">int</span>, length)</span><br><span class="line">    stack := []<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; length; i++ &#123;</span><br><span class="line">        temperature := temperatures[i]</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> &amp;&amp; temperature &gt; temperatures[stack[<span class="built_in">len</span>(stack)<span class="number">-1</span>]] &#123;</span><br><span class="line">            prevIndex := stack[<span class="built_in">len</span>(stack)<span class="number">-1</span>]</span><br><span class="line">            stack = stack[:<span class="built_in">len</span>(stack)<span class="number">-1</span>]</span><br><span class="line">            ans[prevIndex] = i - prevIndex</span><br><span class="line">        &#125;</span><br><span class="line">        stack = <span class="built_in">append</span>(stack, i)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><p><strong>复杂度分析</strong></p><ul><li><p>时间复杂度：<em>O(n)*，其中 *n</em> 是温度列表的长度。正向遍历温度列表一遍，对于温度列表中的每个下标，最多有一次进栈和出栈的操作。</p></li><li><p>空间复杂度：<em>O(n)*，其中 *n</em> 是温度列表的长度。需要维护一个单调栈存储温度列表中的下标。</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;请根据每日 气温 列表 temperatures ，请计算在每一天需要等几天才会有更高的温度。如果气温在这之后都不会升高，请在该位置用 0 来代替。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年11月" scheme="http://yoursite.com/categories/2021%E5%B9%B411%E6%9C%88/"/>
-    
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
