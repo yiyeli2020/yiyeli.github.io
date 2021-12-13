@@ -1,6 +1,6 @@
 ---
 
-title:剑指 Offer II 072.(二分法模板题及经典解释）
+title: 剑指 Offer II072
 
 date: 2021-12-13 15:23:12
 
