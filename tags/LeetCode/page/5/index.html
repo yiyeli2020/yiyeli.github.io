@@ -572,7 +572,7 @@
                 &copy; 2021 Yiye Li
             </div>
                 <i class="fas fa-chart-area"></i>
-                    <span class="post-count">总字数：865.8k</span>
+                    <span class="post-count">总字数：869.6k</span>
                 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
                     <script>
                         var now = new Date();
@@ -675,6 +675,24 @@
                 $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
                     top: offset.top - a.outerHeight() - 15,
                     left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>eft: offset.left + a.outerWidth()/2 + 1
                 }).fadeIn(function() {
                     var pop = $(this);
                     setTimeout(function() {
