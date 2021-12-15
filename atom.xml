@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-14T15:34:37.497Z</updated>
+  <updated>2021-12-15T13:11:39.981Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>1414. 和为 K 的最少斐波那契数字数目</title>
+    <link href="http://yoursite.com/2021/12/15/1414.%20%E5%92%8C%E4%B8%BA%20K%20%E7%9A%84%E6%9C%80%E5%B0%91%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%AD%97%E6%95%B0%E7%9B%AE/"/>
+    <id>http://yoursite.com/2021/12/15/1414. 和为 K 的最少斐波那契数字数目/</id>
+    <published>2021-12-15T12:02:12.000Z</published>
+    <updated>2021-12-15T13:11:39.981Z</updated>
+    
+    <content type="html"><![CDATA[<p>给你数字 k ，请你返回和为 k 的斐波那契数字的最少数目，其中，每个斐波那契数字都可以被使用多次。</p><a id="more"></a><p>[TOC]</p><p>斐波那契数字定义为：</p><pre><code>F1 = 1F2 = 1Fn = Fn-1 + Fn-2 ， 其中 n &gt; 2 。</code></pre><p>数据保证对于给定的 k ，一定能找到可行解。</p><p>示例 1：</p><pre><code>输入：k = 7输出：2 解释：斐波那契数字为：1，1，2，3，5，8，13，……对于 k = 7 ，我们可以得到 2 + 5 = 7 。</code></pre><p>示例 2：</p><pre><code>输入：k = 10输出：2 解释：对于 k = 10 ，我们可以得到 2 + 8 = 10 。</code></pre><p>示例 3：</p><pre><code>输入：k = 19输出：3 解释：对于 k = 19 ，我们可以得到 1 + 5 + 13 = 19 。</code></pre><p>提示：</p><pre><code>1 &lt;= k &lt;= 10^9</code></pre><h1 id="贪心-栈"><a href="#贪心-栈" class="headerlink" title="贪心+栈"></a>贪心+栈</h1><p>证明参见<a href="https://leetcode-cn.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/solution/he-wei-k-de-zui-shao-fei-bo-na-qi-shu-zi-shu-mu-by/" target="_blank" rel="noopener">^1</a>，自己觉得用栈的写法比官方题解更易于理解</p><details>    <summary>Java</summary><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findMinFibonacciNumbers(int k) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        int a = 1, b = 1;</span><br><span class="line">        stack.push(a);</span><br><span class="line">        stack.push(b);</span><br><span class="line">        while (stack.peek() &lt;= k) &#123;</span><br><span class="line">            int c = a + b;</span><br><span class="line">            stack.push(c);</span><br><span class="line">            a = b;</span><br><span class="line">            b = c;</span><br><span class="line">        &#125;</span><br><span class="line">        int len = 0;</span><br><span class="line">        while (!stack.isEmpty() &amp;&amp; k &gt; 0) &#123;</span><br><span class="line">            int temp = stack.pop();</span><br><span class="line">            if (temp &lt;= k) &#123;</span><br><span class="line">                len++;</span><br><span class="line">                k = k - temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给你数字 k ，请你返回和为 k 的斐波那契数字的最少数目，其中，每个斐波那契数字都可以被使用多次。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Greedy" scheme="http://yoursite.com/tags/Greedy/"/>
+    
+  </entry>
   
   <entry>
     <title>873. 最长的斐波那契子序列的长度</title>
@@ -336,11 +360,11 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -366,11 +390,11 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -476,9 +500,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
@@ -508,9 +532,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
@@ -534,41 +558,15 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
+    
       <category term="Binary Search" scheme="http://yoursite.com/tags/Binary-Search/"/>
     
       <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
-    
-      <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>剑指 Offer 56 - I. 数组中数字出现的次数</title>
-    <link href="http://yoursite.com/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20I.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0/"/>
-    <id>http://yoursite.com/2021/12/08/剑指 Offer 56 - I. 数组中数字出现的次数/</id>
-    <published>2021-12-08T06:12:12.000Z</published>
-    <updated>2021-12-08T06:40:04.185Z</updated>
-    
-    <content type="html"><![CDATA[<p>一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。</p><a id="more"></a><p>[TOC]</p><p>示例 1：</p><pre><code>输入：nums = [4,1,4,6]输出：[1,6] 或 [6,1]</code></pre><p>示例 2：</p><pre><code>输入：nums = [1,2,10,4,1,4,3,3]输出：[2,10] 或 [10,2]</code></pre><p>限制：</p><pre><code>2 &lt;= nums.length &lt;= 10000</code></pre><h1 id="📖文字题解"><a href="#📖文字题解" class="headerlink" title="📖文字题解"></a>📖文字题解</h1><h2 id="方法一：分组异或"><a href="#方法一：分组异或" class="headerlink" title="方法一：分组异或"></a>方法一：分组异或</h2><p><strong>思路</strong></p><p>让我们先来考虑一个比较简单的问题：</p><blockquote><p>如果除了<strong>一个</strong>数字以外，其他数字都出现了两次，那么如何找到出现一次的数字？</p></blockquote><p>答案很简单：全员进行异或操作即可。考虑异或操作的性质：对于两个操作数的每一位，相同结果为 <em>0</em>，不同结果为 <em>1</em>。那么在计算过程中，成对出现的数字的所有位会两两抵消为 <em>0</em>，最终得到的结果就是那个出现了一次的数字。</p><p>那么这一方法如何扩展到找出<strong>两个</strong>出现一次的数字呢？</p><p>如果我们可以把所有数字分成两组，使得：</p><ol><li><p>两个只出现一次的数字在不同的组中；</p></li><li><p>相同的数字会被分到相同的组中。</p></li></ol><p>那么对两个组分别进行异或操作，即可得到答案的两个数字。<strong>这是解决这个问题的关键。</strong></p><p>那么如何实现这样的分组呢？</p><p>记这两个只出现了一次的数字为 <em>a</em> 和 <em>b</em>，那么所有数字异或的结果就等于 <em>a</em> 和 <em>b</em> 异或的结果，我们记为 <em>x</em>。如果我们把 <em>x</em> 写成二进制的形式 X_kX_k-1…X0 ，其中x_i in {0,1} ，我们考虑一下 <em>x_i = 0</em> 和 <em>x_i = 1</em> 的含义是什么？它意味着如果我们把 <em>a</em> 和 <em>b</em> 写成二进制的形式，<em>a_i</em> 和 <em>b_i</em> 的关系——<em>x_i = 1</em> 表示 <em>a_i</em> 和 <em>b_i</em> 不等，<em>x_i = 0</em> 表示 <em>a_i</em> 和 <em>b_i</em> 相等。假如我们任选一个不为 <em>0</em> 的 <em>x_i*，按照第 *i</em> 位给原来的序列分组，如果该位为 <em>0</em> 就分到第一组，否则就分到第二组，这样就能满足以上两个条件，为什么呢？ </p><ul><li><p>首先，两个相同的数字的对应位都是相同的，所以一个被分到了某一组，另一个必然被分到这一组，所以满足了条件 2。</p></li><li><p>这个方法在 <em>x_i = 1</em> 的时候 <em>a</em> 和 <em>b</em> 不被分在同一组，因为 <em>x_i = 1</em> 表示 <em>a_i</em> 和 <em>b_i</em> 不等，根据这个方法的定义「如果该位为 <em>0</em> 就分到第一组，否则就分到第二组」可以知道它们被分进了两组，所以满足了条件 1。</p></li></ul><p>在实际操作的过程中，我们拿到序列的异或和 <em>x</em> 之后，对于这个「位」是可以任取的，只要它满足 <em>x_i = 1*。但是为了方便，这里的代码选取的是「不为 *0</em> 的最低位」，当然你也可以选择其他不为 <em>0</em> 的位置。</p><p>至此，答案已经呼之欲出了。</p><p><strong>算法</strong></p><p>先对所有数字进行一次异或，得到两个出现一次的数字的异或值。</p><p>在异或结果中找到任意为 <em>1</em> 的位。</p><p>根据这一位对所有的数字进行分组。</p><p>在每个组内进行异或操作，得到两个数字。</p><details>    <summary>C++</summary><figure class="highlight c++"><figcaption><span>[sol1-C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; singleNumbers(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> n : nums)</span><br><span class="line">            ret ^= n;</span><br><span class="line">        <span class="keyword">int</span> div = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> ((div &amp; ret) == <span class="number">0</span>)</span><br><span class="line">            div &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> n : nums)</span><br><span class="line">            <span class="keyword">if</span> (div &amp; n)</span><br><span class="line">                a ^= n;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                b ^= n;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&#123;a, b&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details><details>    <summary>Java</summary><figure class="highlight java"><figcaption><span>[sol1-Java]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] singleNumbers(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> n : nums) &#123;</span><br><span class="line">            ret ^= n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> div = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> ((div &amp; ret) == <span class="number">0</span>) &#123;</span><br><span class="line">            div &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> n : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((div &amp; n) != <span class="number">0</span>) &#123;</span><br><span class="line">                a ^= n;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                b ^= n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;a, b&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><details>    <summary>Python3</summary><figure class="highlight python"><figcaption><span>[sol1-Python3]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">singleNumbers</span><span class="params">(self, nums: List[int])</span> -&gt; List[int]:</span></span><br><span class="line">        ret = functools.reduce(<span class="keyword">lambda</span> x, y: x ^ y, nums)</span><br><span class="line">        div = <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> div &amp; ret == <span class="number">0</span>:</span><br><span class="line">            div &lt;&lt;= <span class="number">1</span></span><br><span class="line">        a, b = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> n &amp; div:</span><br><span class="line">                a ^= n</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                b ^= n</span><br><span class="line">        <span class="keyword">return</span> [a, b]</span><br></pre></td></tr></table></figure></details><details>    <summary>C#</summary><figure class="highlight csharp"><figcaption><span>[sol1-C#]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span>[] <span class="title">SingleNumbers</span>(<span class="params"><span class="keyword">int</span>[] nums</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> xorSum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[] ret = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>] &#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">int</span> x <span class="keyword">in</span> nums) xorSum ^= x;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> lowbit = xorSum &amp; (-xorSum);</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">int</span> x <span class="keyword">in</span> nums) &#123;</span><br><span class="line">            ret[(x &amp; lowbit) &gt; <span class="number">0</span> ? <span class="number">0</span> : <span class="number">1</span>] ^= x;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></details><p><strong>复杂度分析</strong></p><ul><li><p>时间复杂度：<em>O(n)</em>，我们只需要遍历数组两次。</p></li><li><p>空间复杂度：<em>O(1)</em>，只需要常数的空间存放若干变量。</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
-    
-    
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Bit Manipulation" scheme="http://yoursite.com/tags/Bit-Manipulation/"/>
     
