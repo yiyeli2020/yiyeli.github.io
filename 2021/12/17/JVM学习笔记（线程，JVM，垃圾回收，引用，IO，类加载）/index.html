@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载） | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JVM 是可运行 Java 代码的假想计算机 ，包括一套字节码指令集、一组寄存器、一个栈、一个垃圾回收，堆 和 一个存储方法域。JVM 是运行在操作系统之上的，它与硬件没有直接的交互。">
+<meta name="keywords" content="Java,JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）">
+<meta property="og:url" content="http://yoursite.com/2021/12/17/JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="JVM 是可运行 Java 代码的假想计算机 ，包括一套字节码指令集、一组寄存器、一个栈、一个垃圾回收，堆 和 一个存储方法域。JVM 是运行在操作系统之上的，它与硬件没有直接的交互。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-12-19T13:14:00.787Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）">
+<meta name="twitter:description" content="JVM 是可运行 Java 代码的假想计算机 ，包括一套字节码指令集、一组寄存器、一个栈、一个垃圾回收，堆 和 一个存储方法域。JVM 是运行在操作系统之上的，它与硬件没有直接的交互。">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 11.67px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 19.17px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 16.25px;">Backtracking</a> <a href="/tags/Binary-Indexed-Tree/" style="font-size: 10px;">Binary Indexed Tree</a> <a href="/tags/Binary-Search/" style="font-size: 16.67px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10.42px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 16.67px;">Bit Manipulation</a> <a href="/tags/Brainteaser/" style="font-size: 10.42px;">Brainteaser</a> <a href="/tags/Bread-first-Search/" style="font-size: 10.42px;">Bread-first Search</a> <a href="/tags/Breadth-First-Search/" style="font-size: 10px;">Breadth-First Search</a> <a href="/tags/Breadth-first-Search/" style="font-size: 14.58px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 14.17px;">C++</a> <a href="/tags/Coding-Interviews/" style="font-size: 12.08px;">Coding Interviews</a> <a href="/tags/Combinatorics/" style="font-size: 10px;">Combinatorics</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/Concurrency/" style="font-size: 13.75px;">Concurrency</a> <a href="/tags/Counting/" style="font-size: 10.42px;">Counting</a> <a href="/tags/Cracking-the-Coding-Interview/" style="font-size: 10.42px;">Cracking the Coding Interview</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 15.83px;">Database</a> <a href="/tags/Database，MySQL/" style="font-size: 13.33px;">Database，MySQL</a> <a href="/tags/Depth-First-Search/" style="font-size: 10px;">Depth-First Search</a> <a href="/tags/Depth-first-Search/" style="font-size: 15px;">Depth-first Search</a> <a href="/tags/Depth-first-search/" style="font-size: 10px;">Depth-first search</a> <a href="/tags/Design/" style="font-size: 13.75px;">Design</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 11.67px;">Design Pattern，Java</a> <a href="/tags/Divide-and-Conque/" style="font-size: 10px;">Divide and Conque</a> <a href="/tags/Divide-and-Conquer/" style="font-size: 11.67px;">Divide and Conquer</a> <a href="/tags/Division/" style="font-size: 10px;">Division</a> <a href="/tags/Dynamic-Programming/" style="font-size: 18.33px;">Dynamic Programming</a> <a href="/tags/Dynammic-Programming/" style="font-size: 10px;">Dynammic Programming</a> <a href="/tags/Git/" style="font-size: 11.67px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Graph/" style="font-size: 11.67px;">Graph</a> <a href="/tags/Greedy/" style="font-size: 12.92px;">Greedy</a> <a href="/tags/Hash-Function/" style="font-size: 10px;">Hash Function</a> <a href="/tags/Hash-Table/" style="font-size: 17.92px;">Hash Table</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/Heap/" style="font-size: 13.75px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 18.75px;">Java</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/Latex/" style="font-size: 10px;">Latex</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Leetcode/" style="font-size: 19.58px;">Leetcode</a> <a href="/tags/LinkList/" style="font-size: 10px;">LinkList</a> <a href="/tags/Linked-List/" style="font-size: 15.42px;">Linked List</a> <a href="/tags/Linux/" style="font-size: 11.67px;">Linux</a> <a href="/tags/Math/" style="font-size: 17.5px;">Math</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Memoization/" style="font-size: 11.25px;">Memoization</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/Monotonic-Stack/" style="font-size: 11.25px;">Monotonic Stack</a> <a href="/tags/MySQL/" style="font-size: 14.17px;">MySQL</a> <a href="/tags/Note/" style="font-size: 10px;">Note</a> <a href="/tags/Operating-System/" style="font-size: 10.42px;">Operating System</a> <a href="/tags/Ordered-Map/" style="font-size: 10px;">Ordered Map</a> <a href="/tags/Prefix-Sum/" style="font-size: 11.25px;">Prefix Sum</a> <a href="/tags/Recursion/" style="font-size: 12.5px;">Recursion</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 11.67px;">Scala</a> <a href="/tags/Segment-Tree/" style="font-size: 10px;">Segment Tree</a> <a href="/tags/Shell/" style="font-size: 10.42px;">Shell</a> <a href="/tags/Simulation/" style="font-size: 10.42px;">Simulation</a> <a href="/tags/Sliding-Window/" style="font-size: 14.58px;">Sliding Window</a> <a href="/tags/Sort/" style="font-size: 13.33px;">Sort</a> <a href="/tags/SpringBoot/" style="font-size: 12.08px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 14.58px;">Stack</a> <a href="/tags/String/" style="font-size: 17.08px;">String</a> <a href="/tags/Suffix-Array/" style="font-size: 10px;">Suffix Array</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.42px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Topological-Sort/" style="font-size: 10px;">Topological Sort</a> <a href="/tags/Topological-sort/" style="font-size: 10.83px;">Topological sort</a> <a href="/tags/Tree/" style="font-size: 15.42px;">Tree</a> <a href="/tags/TreeSet/" style="font-size: 10px;">TreeSet</a> <a href="/tags/Trie/" style="font-size: 12.5px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 15.42px;">Two Pointers</a> <a href="/tags/Two-pointers/" style="font-size: 10px;">Two pointers</a> <a href="/tags/Union-Find/" style="font-size: 12.08px;">Union Find</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Wechat/" style="font-size: 10px;">Wechat</a> <a href="/tags/Zookeeper/" style="font-size: 10.42px;">Zookeeper</a> <a href="/tags/blog/" style="font-size: 11.25px;">blog</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/12/17/JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）/" class="article-date">
+      <time datetime="2021-12-17T12:30:12.000Z" itemprop="datePublished">2021-12-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）
+    </h1>
+  
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">10.7k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">37分</span>
+      </span>
+    </span>
+</div>
+
+          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2021年12月/">2021年12月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>JVM 是可运行 Java 代码的假想计算机 ，包括一套字节码指令集、一组寄存器、一个栈、<br>一个垃圾回收，堆 和 一个存储方法域。JVM 是运行在操作系统之上的，它与硬件没有直接<br>的交互。</p>
+<a id="more"></a>
+
+<p>[TOC]</p>
+<h1 id="基本概念：-1"><a href="#基本概念：-1" class="headerlink" title="基本概念：^1"></a>基本概念：<a href="[深入理解Java虚拟机：JVM高级特性与最佳实践](https://weread.qq.com/web/reader/9b832f305933f09b86bd2a9kecc32f3013eccbc87e4b62e)">^1</a></h1><p>JVM 是可运行 Java 代码的假想计算机 ，包括一套字节码指令集、一组寄存器、一个栈、<br>一个垃圾回收，堆 和 一个存储方法域。JVM 是运行在操作系统之上的，它与硬件没有直接<br>的交互。</p>
+<p>我们都知道 Java 源文件，通过编译器，能够生产相应的.Class 文件，也就是字节码文件，<br>而字节码文件又通过 Java 虚拟机中的解释器，编译成特定机器上的机器码 。<br>也就是如下：</p>
+<p>① Java 源文件—-&gt;编译器—-&gt;字节码文件</p>
+<p>② 字节码文件—-&gt;JVM—-&gt;机器码</p>
+<p>每一种平台的解释器是不同的，但是实现的虚拟机是相同的，这也就是 Java 为什么能够<br>跨平台的原因了 ，当一个程序从开始运行，这时虚拟机就开始实例化了，多个程序启动就会<br>存在多个虚拟机实例。程序退出或者关闭，则虚拟机实例消亡，多个虚拟机实例之间数据不<br>能共享。</p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>这里所说的线程指程序执行过程中的一个线程实体。JVM 允许一个应用并发执行多个线程。<br>Hotspot JVM 中的 Java 线程与原生操作系统线程有直接的映射关系。当线程本地存储、缓<br>冲区分配、同步对象、栈、程序计数器等准备好以后，就会创建一个操作系统原生线程。<br>Java 线程结束，原生线程随之被回收。操作系统负责调度所有线程，并把它们分配到任何可<br>用的 CPU 上。当原生线程初始化完毕，就会调用 Java 线程的 run() 方法。当线程结束时会释放原生线程和 Java 线程的所有资源。</p>
+<p>Hotspot JVM 后台运行的系统线程主要有下面几个：</p>
+<table>
+<thead>
+<tr>
+<th>线程</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>虚拟机线程（VM thread）</td>
+<td>这个线程等待 JVM 到达安全点操作出现。这些操作必须要在独立的线程里执行，因为当堆修改无法进行时，线程都需要 JVM 位于安全点。这些操作的类型有：stop-theworld 垃圾回收、线程栈dump、线程暂停、线程偏向锁（biased locking）解除。</td>
+</tr>
+<tr>
+<td>周期性任务线程</td>
+<td>这线程负责定时器事件（也就是中断），用来调度周期性操作的执行。</td>
+</tr>
+<tr>
+<td>GC 线程</td>
+<td>这些线程支持JVM中不同的垃圾回收活动</td>
+</tr>
+<tr>
+<td>编译器线程</td>
+<td>这些线程在运行时将字节码动态编译成本地平台相关的机器码。</td>
+</tr>
+<tr>
+<td>信号分发线程</td>
+<td>这个线程接收发送到 JVM 的信号并调用适当的 JVM 方法处理</td>
+</tr>
+</tbody></table>
+<h2 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM 内存区域"></a>JVM 内存区域</h2><p>JVM 内存区域主要分为线程私有区域【程序计数器、虚拟机栈、本地方法区】、线程共享区域【JAVA 堆、方法区】、直接内存。</p>
+<p>线程私有数据区域生命周期与线程相同, 依赖用户线程的启动/结束 而 创建/销毁(在 Hotspot VM 内,每个线程都与操作系统的本地线程直接映射, 因此这部分内存区域的存/否跟随本地线程的生/死对应)。</p>
+<p>线程共享区域随虚拟机的启动/关闭而创建/销毁。<br>直接内存并不是 JVM 运行时数据区的一部分, 但也会被频繁的使用: 在 JDK 1.4 引入的 NIO 提<br>供了基于 Channel 与 Buffer 的 IO 方式, 它可以使用 Native 函数库直接分配堆外内存, 然后使用DirectByteBuffer对象作为这块内存的引用进行操作(详见: Java I/O 扩展), 这样就避免了在Java堆和Native堆中来回复制数据, 因此在一些场景中可以显著提高性能。</p>
+<h3 id="程序计数器-线程私有"><a href="#程序计数器-线程私有" class="headerlink" title="程序计数器(线程私有)"></a>程序计数器(线程私有)</h3><p>一块较小的内存空间, 是当前线程所执行的字节码的行号指示器，每条线程都要有一个独立的<br>程序计数器，这类内存也称为“线程私有”的内存。<br>正在执行 java 方法的话，计数器记录的是虚拟机字节码指令的地址（当前指令的地址）。如<br>果还是 Native 方法，则为空。<br>这个内存区域是唯一一个在虚拟机中没有规定任何 OutOfMemoryError 情况的区域。</p>
+<h3 id="虚拟机栈-线程私有"><a href="#虚拟机栈-线程私有" class="headerlink" title="虚拟机栈(线程私有)"></a>虚拟机栈(线程私有)</h3><p>是描述java方法执行的内存模型，每个方法在执行的同时都会创建一个栈帧（Stack Frame）<br>用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用直至执行完成<br>的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。<br>栈帧（ Frame）是用来存储数据和部分过程结果的数据结构，同时也被用来处理动态链接<br>(Dynamic Linking)、 方法返回值和异常分派（ Dispatch Exception）。栈帧随着方法调用而创建，随着方法结束而销毁——无论方法是正常完成还是异常完成（抛出了在方法内未被捕获的异<br>常）都算作方法结束。</p>
+<h3 id="本地方法区-线程私有"><a href="#本地方法区-线程私有" class="headerlink" title="本地方法区(线程私有)"></a>本地方法区(线程私有)</h3><p>本地方法区和 Java Stack 作用类似, 区别是虚拟机栈为执行 Java 方法服务, 而本地方法栈则为<br>Native 方法服务, 如果一个 VM 实现使用 C-linkage 模型来支持 Native 调用, 那么该栈将会是一个<br>C 栈，但 HotSpot VM 直接就把本地方法栈和虚拟机栈合二为一。</p>
+<h3 id="堆（Heap-线程共享）-运行时数据区"><a href="#堆（Heap-线程共享）-运行时数据区" class="headerlink" title="堆（Heap-线程共享）-运行时数据区"></a>堆（Heap-线程共享）-运行时数据区</h3><p>是被线程共享的一块内存区域，创建的对象和数组都保存在 Java 堆内存中，也是垃圾收集器进行<br>垃圾收集的最重要的内存区域。由于现代 VM 采用分代收集算法, 因此 Java 堆从 GC 的角度还可以<br>细分为: 新生代(Eden 区、From Survivor 区和 To Survivor 区)和老年代。</p>
+<h3 id="方法区-永久代（线程共享）"><a href="#方法区-永久代（线程共享）" class="headerlink" title="方法区/永久代（线程共享）"></a>方法区/永久代（线程共享）</h3><p>即我们常说的永久代(Permanent Generation), 用于存储被 JVM 加载的类信息、常量、静<br>态变量、即时编译器编译后的代码等数据. HotSpot VM把GC分代收集扩展至方法区, 即使用Java<br>堆的永久代来实现方法区, 这样 HotSpot 的垃圾收集器就可以像管理 Java 堆一样管理这部分内存,<br>而不必为方法区开发专门的内存管理器(永久带的内存回收的主要目标是针对常量池的回收和类型<br>的卸载, 因此收益一般很小)。<br>运行时常量池（Runtime Constant Pool）是方法区的一部分。Class 文件中除了有类的版<br>本、字段、方法、接口等描述等信息外，还有一项信息是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加<br>载后存放到方法区的运行时常量池中。 Java 虚拟机对 Class 文件的每一部分（自然也包括常量<br>池）的格式都有严格的规定，每一个字节用于存储哪种数据都必须符合规范上的要求，这样才会<br>被虚拟机认可、装载和执行。</p>
+<h2 id="JVM-运行时内存"><a href="#JVM-运行时内存" class="headerlink" title="JVM 运行时内存"></a>JVM 运行时内存</h2><p>Java 堆从 GC 的角度还可以细分为: 新生代(Eden 区、From Survivor 区和 To Survivor 区)和老年<br>代。</p>
+<h3 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h3><p>是用来存放新生的对象。一般占据堆的 1/3 空间。由于频繁创建对象，所以新生代会频繁触发<br>MinorGC 进行垃圾回收。新生代又分为 Eden 区、SurvivorFrom、SurvivorTo 三个区。</p>
+<h4 id="Eden-区"><a href="#Eden-区" class="headerlink" title="Eden 区"></a>Eden 区</h4><p>Java 新对象的出生地（如果新创建的对象占用内存很大，则直接分配到老<br>年代）。当 Eden 区内存不够的时候就会触发 MinorGC，对新生代区进行<br>一次垃圾回收。</p>
+<h4 id="From-Survivor"><a href="#From-Survivor" class="headerlink" title="From Survivor"></a>From Survivor</h4><p>上一次 GC 的幸存者，作为这一次 GC 的被扫描者。</p>
+<h4 id="To-Survivor"><a href="#To-Survivor" class="headerlink" title="To Survivor"></a>To Survivor</h4><p>保留了一次 MinorGC 过程中的幸存者。</p>
+<h4 id="MinorGC-的过程（复制-gt-清空-gt-互换）"><a href="#MinorGC-的过程（复制-gt-清空-gt-互换）" class="headerlink" title="MinorGC 的过程（复制-&gt;清空-&gt;互换）"></a>MinorGC 的过程（复制-&gt;清空-&gt;互换）</h4><p>MinorGC 采用复制算法。</p>
+<p>1：eden、From Survivor 复制到 To Survivor，年龄+1</p>
+<p>首先，把 Eden 和 From Survivor 区域中存活的对象复制到 To Survivor 区域（如果有对象的年<br>龄以及达到了老年的标准，则赋值到老年代区），同时把这些对象的年龄+1（如果 To Survivor 不<br>够位置了就放到老年区）；</p>
+<p>2：清空 eden、From Survivor</p>
+<p>然后，清空 Eden 和 From Survivor 中的对象；</p>
+<p>3：To Survivor 和 From Survivor 互换</p>
+<p>最后，To Survivor 和 From Survivor 互换，原 To Survivor 成为下一次 GC 时的 From Survivor<br>区。</p>
+<h3 id="老年代"><a href="#老年代" class="headerlink" title="老年代"></a>老年代</h3><p>主要存放应用程序中生命周期长的内存对象。</p>
+<p> 老年代的对象比较稳定，所以 MajorGC 不会频繁执行。在进行 MajorGC 前一般都先进行<br>了一次 MinorGC，使得有新生代的对象晋身入老年代，导致空间不够用时才触发。当无法找到足<br>够大的连续空间分配给新创建的较大对象时也会提前触发一次 MajorGC 进行垃圾回收腾出空间。</p>
+<p> MajorGC 采用标记清除算法：首先扫描一次所有老年代，标记出存活的对象，然后回收没<br>有标记的对象。MajorGC 的耗时比较长，因为要扫描再回收。MajorGC 会产生内存碎片，为了减<br>少内存损耗，我们一般需要进行合并或者标记出来方便下次直接分配。当老年代也满了装不下的<br>时候，就会抛出 OOM（Out of Memory）异常。</p>
+<h3 id="永久代"><a href="#永久代" class="headerlink" title="永久代"></a>永久代</h3><p>指内存的永久保存区域，主要存放 Class 和 Meta（元数据）的信息,Class 在被加载的时候被<br>放入永久区域，它和和存放实例的区域不同,GC 不会在主程序运行期对永久区域进行清理。所以这<br>也导致了永久代的区域会随着加载的 Class 的增多而胀满，最终抛出 OOM 异常。</p>
+<h4 id="JAVA8-与元数据"><a href="#JAVA8-与元数据" class="headerlink" title="JAVA8 与元数据"></a>JAVA8 与元数据</h4><p>在 Java8 中，永久代已经被移除，被一个称为“元数据区”（元空间）的区域所取代。元空间<br>的本质和永久代类似，元空间与永久代之间最大的区别在于：元空间并不在虚拟机中，而是使用<br>本地内存。因此，默认情况下，元空间的大小仅受本地内存限制。类的元数据放入 native<br>memory, 字符串池和类的静态变量放入 java 堆中，这样可以加载多少类的元数据就不再由<br>MaxPermSize 控制, 而由系统的实际可用空间来控制。</p>
+<h2 id="垃圾回收与算法"><a href="#垃圾回收与算法" class="headerlink" title="垃圾回收与算法"></a>垃圾回收与算法</h2><h3 id="如何确定垃圾"><a href="#如何确定垃圾" class="headerlink" title="如何确定垃圾"></a>如何确定垃圾</h3><h4 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h4><p>在 Java 中，引用和对象是有关联的。如果要操作对象则必须用引用进行。因此，很显然一个简单<br>的办法是通过引用计数来判断一个对象是否可以回收。简单说，即一个对象如果没有任何与之关联的引用，即他们的引用计数都为0，则说明对象不太可能再被用到，那么这个对象就是可回收<br>对象。</p>
+<h4 id="可达性分析"><a href="#可达性分析" class="headerlink" title="可达性分析"></a>可达性分析</h4><p>为了解决引用计数法的循环引用问题，Java 使用了可达性分析的方法。通过一系列的“GC roots”对象作为起点搜索。如果在“GC roots”和一个对象之间没有可达路径，则称该对象是不可达的。要注意的是，不可达对象不等价于可回收对象，不可达对象变为可回收对象至少要经过两次标记过程。两次标记后仍然是可回收对象，则将面临回收。</p>
+<h3 id="标记清除算法（Mark-Sweep）"><a href="#标记清除算法（Mark-Sweep）" class="headerlink" title="标记清除算法（Mark-Sweep）"></a>标记清除算法（Mark-Sweep）</h3><p>最基础的垃圾回收算法，分为两个阶段，标注和清除。标记阶段标记出所有需要回收的对象，清<br>除阶段回收被标记的对象所占用的空间。如</p>
+<p>该算法最大的问题是内存碎片化严重，后续可能发生大对象不能找到可利用空间的问题。</p>
+<h3 id="复制算法（copying）"><a href="#复制算法（copying）" class="headerlink" title="复制算法（copying）"></a>复制算法（copying）</h3><p>为了解决 Mark-Sweep算法内存碎片化的缺陷而被提出的算法。按内存容量将内存划分为等大小的两块。每次只使用其中一块，当这一块内存满后将尚存活的对象复制到另一块上去，把已使用的内存清掉<br>这种算法虽然实现简单，内存效率高，不易产生碎片，但是最大的问题是可用内存被压缩到了原<br>本的一半。且存活对象增多的话，Copying 算法的效率会大大降低。</p>
+<h3 id="标记整理算法-Mark-Compact"><a href="#标记整理算法-Mark-Compact" class="headerlink" title="标记整理算法(Mark-Compact)"></a>标记整理算法(Mark-Compact)</h3><p>结合了以上两个算法，为了避免缺陷而提出。标记阶段和 Mark-Sweep 算法相同，标记后不是清<br>理对象，而是将存活对象移向内存的一端。然后清除端边界外的对象。</p>
+<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>分代收集法是目前大部分JVM所采用的方法，其核心思想是根据对象存活的不同生命周期将内存划分为不同的域，一般情况下将 GC 堆划分为老生代(Tenured/Old Generation)和新生代(Young Generation)。老生代的特点是每次垃圾回收时只有少量对象需要被回收，新生代的特点是每次垃圾回收时都有大量垃圾需要被回收，因此可以根据不同区域选择不同的算法。</p>
+<h4 id="新生代与复制算法"><a href="#新生代与复制算法" class="headerlink" title="新生代与复制算法"></a>新生代与复制算法</h4><p>目前大部分 JVM 的 GC 对于新生代都采取 Copying 算法，因为新生代中每次垃圾回收都要回收大部分对象，即要复制的操作比较少，但通常并不是按照 1：1 来划分新生代。一般将新生代划分为一块较大的 Eden 空间和两个较小的 Survivor 空间(From Space, To Space)，每次使用Eden 空间和其中的一块 Survivor 空间，当进行回收时，将该两块空间中还存活的对象复制到另一块 Survivor 空间中。</p>
+<h4 id="老年代与标记复制算法"><a href="#老年代与标记复制算法" class="headerlink" title="老年代与标记复制算法"></a>老年代与标记复制算法</h4><p>而老年代因为每次只回收少量对象，因而采用 Mark-Compact 算法。</p>
+<ol>
+<li>JAVA 虚拟机提到过的处于方法区的永生代(Permanet Generation)，它用来存储 class 类，<br>常量，方法描述等。对永生代的回收主要包括废弃常量和无用的类。</li>
+<li>对象的内存分配主要在新生代的 Eden Space 和 Survivor Space 的 From Space(Survivor目前存放对象的那一块)，少数情况会直接分配到老生代。</li>
+<li>当新生代的 Eden Space 和 From Space空间不足时就会发生一次 GC，进行 GC 后，Eden<br>Space 和 From Space 区的存活对象会被挪到 To Space，然后将 Eden Space 和 From Space进行清理。</li>
+<li>如果 To Space无法足够存储某个对象，则将这个对象存储到老生代。</li>
+<li>在进行 GC 后，使用的便是 Eden Space 和 To Space 了，如此反复循环。</li>
+<li>当对象在 Survivor区躲过一次GC后，其年龄就会+1。默认情况下年龄到达 15 的对象会被移到老生代中。</li>
+<li></li>
+</ol>
+<h2 id="JAVA-四种引用类型"><a href="#JAVA-四种引用类型" class="headerlink" title="JAVA 四种引用类型"></a>JAVA 四种引用类型</h2><h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h3><p>在 Java 中最常见的就是强引用，把一个对象赋给一个引用变量，这个引用变量就是一个强引<br>用。当一个对象被强引用变量引用时，它处于可达状态，它是不可能被垃圾回收机制回收的，即<br>使该对象以后永远都不会被用到 JVM 也不会回收。因此强引用是造成 Java 内存泄漏的主要原因之<br>一。</p>
+<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h3><p>软引用需要用 SoftReference类来实现，对于只有软引用的对象来说，当系统内存足够时它不会被回收，当系统内存空间不足时它会被回收。软引用通常用在对内存敏感的程序中。</p>
+<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h3><p>弱引用需要用 WeakReference类来实现，它比软引用的生存期更短，对于只有弱引用的对象来说，只要垃圾回收机制一运行，不管JVM的内存空间是否足够，总会回收该对象占用的内存。</p>
+<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h3><p>虚引用需要 PhantomReference类来实现，它不能单独使用，必须和引用队列联合使用。虚引用的主要作用是跟踪对象被垃圾回收的状态。</p>
+<h2 id="GC-分代收集算法-VS-分区收集算法"><a href="#GC-分代收集算法-VS-分区收集算法" class="headerlink" title="GC 分代收集算法 VS 分区收集算法"></a>GC 分代收集算法 VS 分区收集算法</h2><h3 id="分代收集算法-1"><a href="#分代收集算法-1" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>当前主流 VM 垃圾收集都采用”分代收集”(Generational Collection)算法,这种算法会根据对象存活周期的不同将内存划分为几块,如JVM中的新生代、老年代、永久代，这样就可以根据各年代特点分别采用最适当的 GC 算法</p>
+<h4 id="在新生代-复制算法"><a href="#在新生代-复制算法" class="headerlink" title="在新生代-复制算法"></a>在新生代-复制算法</h4><p>每次垃圾收集都能发现大批对象已死, 只有少量存活. 因此选用复制算法,只需要付出少量存活对象的复制成本就可以完成收集.</p>
+<h4 id="在老年代-标记整理算法"><a href="#在老年代-标记整理算法" class="headerlink" title="在老年代-标记整理算法"></a>在老年代-标记整理算法</h4><p>因为对象存活率高、没有额外空间对它进行分配担保, 就必须采用“标记—清理”或“标记—整理”算法来进行回收, 不必进行内存复制, 且直接腾出空闲内存.</p>
+<h3 id="分区收集算法"><a href="#分区收集算法" class="headerlink" title="分区收集算法"></a>分区收集算法</h3><p>分区算法则将整个堆空间划分为连续的不同小区间, 每个小区间独立使用, 独立回收. 这样做的<br>好处是可以控制一次回收多少个小区间 , 根据目标停顿时间, 每次合理地回收若干个小区间(而不是<br>整个堆), 从而减少一次 GC 所产生的停顿。</p>
+<h2 id="GC-垃圾收集器"><a href="#GC-垃圾收集器" class="headerlink" title="GC 垃圾收集器"></a>GC 垃圾收集器</h2><p>Java 堆内存被划分为新生代和老年代两部分，新生代主要使用复制和标记-清除垃圾回收算法；<br>老年代主要使用标记-整理垃圾回收算法，因此 java 虚拟中针对新生代和老年代分别提供了多种不<br>同的垃圾收集器，JDK1.6 中 Sun HotSpot 虚拟机的垃圾收集器如下</p>
+<h3 id="Serial-垃圾收集器（单线程、复制算法）"><a href="#Serial-垃圾收集器（单线程、复制算法）" class="headerlink" title="Serial 垃圾收集器（单线程、复制算法）"></a>Serial 垃圾收集器（单线程、复制算法）</h3><p>Serial（英文连续）是最基本垃圾收集器，使用复制算法，曾经是JDK1.3.1 之前新生代唯一的垃圾<br>收集器。Serial是一个单线程的收集器，它不但只会使用一个CPU或一条线程去完成垃圾收集工作，并且在进行垃圾收集的同时，必须暂停其他所有的工作线程，直到垃圾收集结束。<br>Serial 垃圾收集器虽然在收集垃圾过程中需要暂停所有其他的工作线程，但是它简单高效，对于限<br>定单个 CPU 环境来说，没有线程交互的开销，可以获得最高的单线程垃圾收集效率，因此 Serial<br>垃圾收集器依然是 java 虚拟机运行在 Client 模式下默认的新生代垃圾收集器。</p>
+<h3 id="ParNew-垃圾收集器（Serial-多线程）"><a href="#ParNew-垃圾收集器（Serial-多线程）" class="headerlink" title="ParNew 垃圾收集器（Serial+多线程）"></a>ParNew 垃圾收集器（Serial+多线程）</h3><p>ParNew 垃圾收集器其实是 Serial 收集器的多线程版本，也使用复制算法，除了使用多线程进行垃圾收集之外，其余的行为和 Serial 收集器完全一样，ParNew垃圾收集器在垃圾收集过程中同样也要暂停所有其他的工作线程。ParNew收集器默认开启和CPU数目相同的线程数，可以通过-XX:ParallelGCThreads参数来限制垃圾收集器的线程数。【Parallel：平行的】ParNew虽然是除了多线程外和Serial收集器几乎完全一样，但是ParNew垃圾收集器是很多java虚拟机运行在Server模式下新生代的默认垃圾收集器。</p>
+<h3 id="Parallel-Scavenge收集器（多线程复制算法、高效）"><a href="#Parallel-Scavenge收集器（多线程复制算法、高效）" class="headerlink" title="Parallel Scavenge收集器（多线程复制算法、高效）"></a>Parallel Scavenge收集器（多线程复制算法、高效）</h3><p>Parallel Scavenge 收集器也是一个新生代垃圾收集器，同样使用复制算法，也是一个多线程的垃<br>圾收集器，它重点关注的是程序达到一个可控制的吞吐量（Thoughput，CPU 用于运行用户代码<br>的时间/CPU 总消耗时间，即吞吐量=运行用户代码时间/(运行用户代码时间+垃圾收集时间)），<br>高吞吐量可以最高效率地利用 CPU 时间，尽快地完成程序的运算任务，主要适用于在后台运算而<br>不需要太多交互的任务。自适应调节策略也是 ParallelScavenge 收集器与 ParNew 收集器的一个<br>重要区别。</p>
+<h3 id="Serial-Old-收集器（单线程标记整理算法-）"><a href="#Serial-Old-收集器（单线程标记整理算法-）" class="headerlink" title="Serial Old 收集器（单线程标记整理算法 ）"></a>Serial Old 收集器（单线程标记整理算法 ）</h3><p>Serial Old 是 Serial 垃圾收集器年老代版本，它同样是个单线程的收集器，使用标记-整理算法，<br>这个收集器也主要是运行在 Client 默认的 java 虚拟机默认的年老代垃圾收集器。<br>在 Server 模式下，主要有两个用途：</p>
+<ol>
+<li>在 JDK1.5 之前版本中与新生代的 Parallel Scavenge 收集器搭配使用。</li>
+<li>作为年老代中使用 CMS 收集器的后备垃圾收集方案。<br>新生代 Serial 与年老代 Serial Old 搭配垃圾收集过程图：</li>
+</ol>
+<p>新生代 Parallel Scavenge 收集器与 ParNew 收集器工作原理类似，都是多线程的收集器，都使<br>用的是复制算法，在垃圾收集过程中都需要暂停所有的工作线程。新生代 Parallel<br>Scavenge/ParNew 与年老代 Serial Old 搭配垃圾收集过程图</p>
+<h3 id="Parallel-Old-收集器（多线程标记整理算法）"><a href="#Parallel-Old-收集器（多线程标记整理算法）" class="headerlink" title="Parallel Old 收集器（多线程标记整理算法）"></a>Parallel Old 收集器（多线程标记整理算法）</h3><p>Parallel Old 收集器是Parallel Scavenge的年老代版本，使用多线程的标记-整理算法，在 JDK1.6<br>才开始提供。<br>在 JDK1.6 之前，新生代使用 ParallelScavenge 收集器只能搭配年老代的 Serial Old 收集器，只<br>能保证新生代的吞吐量优先，无法保证整体的吞吐量，Parallel Old 正是为了在年老代同样提供吞<br>吐量优先的垃圾收集器，如果系统对吞吐量要求比较高，可以优先考虑新生代 Parallel Scavenge<br>和年老代 Parallel Old 收集器的搭配策略。<br>新生代 Parallel Scavenge 和年老代 Parallel Old 收集器搭配运行过程图：</p>
+<h3 id="CMS-收集器（多线程标记清除算法）"><a href="#CMS-收集器（多线程标记清除算法）" class="headerlink" title="CMS 收集器（多线程标记清除算法）"></a>CMS 收集器（多线程标记清除算法）</h3><p>Concurrent mark sweep(CMS)收集器是一种年老代垃圾收集器，其最主要目标是获取最短垃圾<br>回收停顿时间，和其他年老代使用标记-整理算法不同，它使用多线程的标记-清除算法。<br>最短的垃圾收集停顿时间可以为交互比较高的程序提高用户体验。<br>CMS 工作机制相比其他的垃圾收集器来说更复杂，整个过程分为以下 4 个阶段：</p>
+<h4 id="初始标记"><a href="#初始标记" class="headerlink" title="初始标记"></a>初始标记</h4><p>只是标记一下 GC Roots 能直接关联的对象，速度很快，仍然需要暂停所有的工作线程。</p>
+<h4 id="并发标记"><a href="#并发标记" class="headerlink" title="并发标记"></a>并发标记</h4><p>进行 GC Roots 跟踪的过程，和用户线程一起工作，不需要暂停工作线程。</p>
+<h4 id="重新标记"><a href="#重新标记" class="headerlink" title="重新标记"></a>重新标记</h4><p>为了修正在并发标记期间，因用户程序继续运行而导致标记产生变动的那一部分对象的标记<br>记录，仍然需要暂停所有的工作线程。</p>
+<h4 id="并发清除"><a href="#并发清除" class="headerlink" title="并发清除"></a>并发清除</h4><p>清除 GC Roots 不可达对象，和用户线程一起工作，不需要暂停工作线程。由于耗时最长的并<br>发标记和并发清除过程中，垃圾收集线程可以和用户现在一起并发工作，所以总体上来看<br>CMS 收集器的内存回收和用户线程是一起并发地执行。<br>CMS 收集器工作过程：</p>
+<h3 id="G1-收集器"><a href="#G1-收集器" class="headerlink" title="G1 收集器"></a>G1 收集器</h3><p>Garbage first 垃圾收集器是目前垃圾收集器理论发展的最前沿成果，相比与 CMS 收集器，G1 收<br>集器两个最突出的改进是：</p>
+<ol>
+<li>基于标记-整理算法，不产生内存碎片。</li>
+<li>可以非常精确控制停顿时间，在不牺牲吞吐量前提下，实现低停顿垃圾回收。<br>G1 收集器避免全区域垃圾收集，它把堆内存划分为大小固定的几个独立区域，并且跟踪这些区域<br>的垃圾收集进度，同时在后台维护一个优先级列表，每次根据所允许的收集时间，优先回收垃圾<br>最多的区域。区域划分和优先级区域回收机制，确保 G1 收集器可以在有限时间获得最高的垃圾收<br>集效率。</li>
+</ol>
+<h2 id="JAVA-IO-NIO"><a href="#JAVA-IO-NIO" class="headerlink" title="JAVA IO/NIO"></a>JAVA IO/NIO</h2><h3 id="阻塞-IO-模型"><a href="#阻塞-IO-模型" class="headerlink" title="阻塞 IO 模型"></a>阻塞 IO 模型</h3><p>最传统的一种 IO模型，即在读写数据过程中会发生阻塞现象。当用户线程发出 IO 请求之后，内<br>核会去查看数据是否就绪，如果没有就绪就会等待数据就绪，而用户线程就会处于阻塞状态，用<br>户线程交出 CPU。当数据就绪之后，内核会将数据拷贝到用户线程，并返回结果给用户线程，用户线程才解除 block 状态。典型的阻塞 IO 模型的例子为：data = socket.read();如果数据没有就<br>绪，就会一直阻塞在 read 方法。</p>
+<h3 id="非阻塞-IO-模型"><a href="#非阻塞-IO-模型" class="headerlink" title="非阻塞 IO 模型"></a>非阻塞 IO 模型</h3><p>当用户线程发起一个 read 操作后，并不需要等待，而是马上就得到了一个结果。如果结果是一个<br>error 时，它就知道数据还没有准备好，于是它可以再次发送 read 操作。一旦内核中的数据准备<br>好了，并且又再次收到了用户线程的请求，那么它马上就将数据拷贝到了用户线程，然后返回。<br>所以事实上，在非阻塞 IO 模型中，用户线程需要不断地询问内核数据是否就绪，也就说非阻塞 IO<br>不会交出 CPU，而会一直占用 CPU。典型的非阻塞 IO 模型一般如下：</p>
+<pre><code>while(true){
+    data = socket.read();
+    if(data!= error){
+    处理数据
+    break;
+    }
+}</code></pre><p>但是对于非阻塞 IO 就有一个非常严重的问题，在 while 循环中需要不断地去询问内核数据是否就<br>绪，这样会导致 CPU 占用率非常高，因此一般情况下很少使用 while 循环这种方式来读取数据。但是对于非阻塞 IO 就有一个非常严重的问题，在 while 循环中需要不断地去询问内核数据是否就<br>绪，这样会导致 CPU 占用率非常高，因此一般情况下很少使用 while 循环这种方式来读取数据。</p>
+<h3 id="多路复用-IO-模型"><a href="#多路复用-IO-模型" class="headerlink" title="多路复用 IO 模型"></a>多路复用 IO 模型</h3><p>多路复用 IO 模型是目前使用得比较多的模型。Java NIO 实际上就是多路复用 IO。在多路复用 IO<br>模型中，会有一个线程不断去轮询多个 socket 的状态，只有当 socket 真正有读写事件时，才真<br>正调用实际的 IO 读写操作。因为在多路复用 IO 模型中，只需要使用一个线程就可以管理多个<br>socket，系统不需要建立新的进程或者线程，也不必维护这些线程和进程，并且只有在真正有<br>socket 读写事件进行时，才会使用 IO 资源，所以它大大减少了资源占用。在 Java NIO 中，是通<br>过 selector.select()去查询每个通道是否有到达事件，如果没有事件，则一直阻塞在那里，因此这<br>种方式会导致用户线程的阻塞。多路复用 IO 模式，通过一个线程就可以管理多个 socket，只有当<br>socket 真正有读写事件发生才会占用资源来进行实际的读写操作。因此，多路复用 IO 比较适合连<br>接数比较多的情况。</p>
+<p>另外多路复用 IO 为何比非阻塞 IO 模型的效率高是因为在非阻塞 IO 中，不断地询问 socket 状态<br>时通过用户线程去进行的，而在多路复用 IO 中，轮询每个 socket 状态是内核在进行的，这个效<br>率要比用户线程要高的多。</p>
+<p>不过要注意的是，多路复用 IO 模型是通过轮询的方式来检测是否有事件到达，并且对到达的事件<br>逐一进行响应。因此对于多路复用 IO 模型来说，一旦事件响应体很大，那么就会导致后续的事件<br>迟迟得不到处理，并且会影响新的事件轮询。</p>
+<h3 id="信号驱动-IO-模型"><a href="#信号驱动-IO-模型" class="headerlink" title="信号驱动 IO 模型"></a>信号驱动 IO 模型</h3><p>在信号驱动 IO 模型中，当用户线程发起一个 IO 请求操作，会给对应的 socket 注册一个信号函<br>数，然后用户线程会继续执行，当内核数据就绪时会发送一个信号给用户线程，用户线程接收到<br>信号之后，便在信号函数中调用 IO 读写操作来进行实际的 IO 请求操作。</p>
+<h3 id="异步-IO-模型"><a href="#异步-IO-模型" class="headerlink" title="异步 IO 模型"></a>异步 IO 模型</h3><p>异步 IO 模型才是最理想的 IO 模型，在异步 IO 模型中，当用户线程发起 read 操作之后，立刻就<br>可以开始去做其它的事。而另一方面，从内核的角度，当它受到一个 asynchronous read 之后，<br>它会立刻返回，说明 read 请求已经成功发起了，因此不会对用户线程产生任何 block。然后，内<br>核会等待数据准备完成，然后将数据拷贝到用户线程，当这一切都完成之后，内核会给用户线程<br>发送一个信号，告诉它 read 操作完成了。也就说用户线程完全不需要实际的整个 IO 操作是如何<br>进行的，只需要先发起一个请求，当接收内核返回的成功信号时表示 IO 操作已经完成，可以直接<br>去使用数据了。<br>也就说在异步 IO 模型中，IO 操作的两个阶段都不会阻塞用户线程，这两个阶段都是由内核自动完<br>成，然后发送一个信号告知用户线程操作已完成。用户线程中不需要再次调用 IO 函数进行具体的<br>读写。这点是和信号驱动模型有所不同的，在信号驱动模型中，当用户线程接收到信号表示数据<br>已经就绪，然后需要用户线程调用 IO 函数进行实际的读写操作；而在异步 IO 模型中，收到信号<br>表示 IO 操作已经完成，不需要再在用户线程中调用 IO 函数进行实际的读写操作。<br>注意，异步 IO 是需要操作系统的底层支持，在 Java 7 中，提供了 Asynchronous IO。</p>
+<h3 id="JAVA-IO-包"><a href="#JAVA-IO-包" class="headerlink" title="JAVA IO 包"></a>JAVA IO 包</h3><h3 id="JAVA-NIO"><a href="#JAVA-NIO" class="headerlink" title="JAVA NIO"></a>JAVA NIO</h3><p>NIO 主要有三大核心部分：Channel(通道)，Buffer(缓冲区), Selector。传统 IO 基于字节流和字<br>符流进行操作，而 NIO 基于 Channel 和 Buffer(缓冲区)进行操作，数据总是从通道读取到缓冲区<br>中，或者从缓冲区写入到通道中。Selector(选择区)用于监听多个通道的事件（比如：连接打开，<br>数据到达）。因此，单个线程可以监听多个数据通道。<br>NIO 和传统 IO之间第一个最大的区别是，IO是面向流的，NIO 是面向缓冲区的。</p>
+<h4 id="NIO-的缓冲区"><a href="#NIO-的缓冲区" class="headerlink" title="NIO 的缓冲区"></a>NIO 的缓冲区</h4><p>Java IO 面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。NIO的缓冲导向方法不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。</p>
+<h4 id="NIO-的非阻塞"><a href="#NIO-的非阻塞" class="headerlink" title="NIO 的非阻塞"></a>NIO 的非阻塞</h4><p>IO 的各种流是阻塞的。这意味着，当一个线程调用 read() 或 write()时，该线程被阻塞，直到有<br>一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 NIO 的非阻塞模式，<br>使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可<br>用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞 IO 的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p>
+<h3 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h3><p>首先说一下 Channel，国内大多翻译成“通道”。Channel 和 IO 中的 Stream(流)是差不多一个<br>等级的。只不过 Stream 是单向的，譬如：InputStream, OutputStream，而 Channel 是双向<br>的，既可以用来进行读操作，又可以用来进行写操作。<br>NIO 中的 Channel 的主要实现有：</p>
+<ol>
+<li>FileChannel</li>
+<li>DatagramChannel</li>
+<li>SocketChannel</li>
+<li>ServerSocketChannel<br>这里看名字就可以猜出个所以然来：分别可以对应文件 IO、UDP 和 TCP（Server 和 Client）。<br>下面演示的案例基本上就是围绕这 4 个类型的 Channel 进行陈述的。</li>
+</ol>
+<h3 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h3><p>Buffer，故名思意，缓冲区，实际上是一个容器，是一个连续数组。Channel提供从文件、网络读取数据的渠道，但是读取或写入的数据都必须经由 Buffer。</p>
+<p>上面的图描述了从一个客户端向服务端发送数据，然后服务端接收数据的过程。客户端发送<br>数据时，必须先将数据存入 Buffer 中，然后将 Buffer 中的内容写入通道。服务端这边接收数据必<br>须通过 Channel 将数据读入到 Buffer 中，然后再从 Buffer 中取出数据来处理。<br>在 NIO 中，Buffer 是一个顶层父类，它是一个抽象类，常用的 Buffer 的子类有：<br>ByteBuffer、IntBuffer、 CharBuffer、 LongBuffer、 DoubleBuffer、FloatBuffer、<br>ShortBuffer</p>
+<h3 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h3><p>Selector 类是 NIO 的核心类，Selector 能够检测多个注册的通道上是否有事件发生，如果有事<br>件发生，便获取事件然后针对每个事件进行相应的响应处理。这样一来，只是用一个单线程就可<br>以管理多个通道，也就是管理多个连接。这样使得只有在连接真正有读写事件发生时，才会调用<br>函数来进行读写，就大大地减少了系统开销，并且不必为每个连接都创建一个线程，不用去维护<br>多个线程，并且避免了多线程之间的上下文切换导致的开销。</p>
+<h2 id="JVM-类加载机制"><a href="#JVM-类加载机制" class="headerlink" title="JVM 类加载机制"></a>JVM 类加载机制</h2><p>JVM 类加载机制分为五个部分：加载，验证，准备，解析，初始化，下面我们就分别来看一下这<br>五个过程。</p>
+<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>加载是类加载过程中的一个阶段，这个阶段会在内存中生成一个代表这个类的 java.lang.Class 对<br>象，作为方法区这个类的各种数据的入口。注意这里不一定非得要从一个 Class 文件获取，这里既<br>可以从 ZIP 包中读取（比如从 jar 包和 war 包中读取），也可以在运行时计算生成（动态代理），<br>也可以由其它文件生成（比如将 JSP 文件转换成对应的 Class 类）。</p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>这一阶段的主要目的是为了确保 Class 文件的字节流中包含的信息是否符合当前虚拟机的要求，并<br>且不会危害虚拟机自身的安全。</p>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>准备阶段是正式为类变量分配内存并设置类变量的初始值阶段，即在方法区中分配这些变量所使<br>用的内存空间。注意这里所说的初始值概念，比如一个类变量定义为：<br>public static int v = 8080;<br>实际上变量 v 在准备阶段过后的初始值为 0 而不是 8080，将 v 赋值为 8080 的 put static 指令是<br>程序被编译后，存放于类构造器<client>方法之中。<br>但是注意如果声明为：</client></p>
+<pre><code>public static final int v = 8080;</code></pre><p>在编译阶段会为 v 生成 ConstantValue 属性，在准备阶段虚拟机会根据 ConstantValue 属性将 v<br>赋值为 8080。</p>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>解析阶段是指虚拟机将常量池中的符号引用替换为直接引用的过程。符号引用就是 class 文件中的：</p>
+<ol>
+<li>CONSTANT_Class_info</li>
+<li>CONSTANT_Field_info</li>
+<li>CONSTANT_Method_info</li>
+</ol>
+<p>等类型的常量。</p>
+<h4 id="符号引用"><a href="#符号引用" class="headerlink" title="符号引用"></a>符号引用</h4><p> 符号引用与虚拟机实现的布局无关，引用的目标并不一定要已经加载到内存中。各种虚拟<br>机实现的内存布局可以各不相同，但是它们能接受的符号引用必须是一致的，因为符号引<br>用的字面量形式明确定义在 Java 虚拟机规范的 Class 文件格式中。</p>
+<h4 id="直接引用"><a href="#直接引用" class="headerlink" title="直接引用"></a>直接引用</h4><p> 直接引用可以是指向目标的指针，相对偏移量或是一个能间接定位到目标的句柄。如果有<br>了直接引用，那引用的目标必定已经在内存中存在。</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>初始化阶段是类加载最后一个阶段，前面的类加载阶段之后，除了在加载阶段可以自定义类加载<br>器以外，其它操作都由 JVM 主导。到了初始阶段，才开始真正执行类中定义的 Java 程序代码。</p>
+<h4 id="类构造器"><a href="#类构造器" class="headerlink" title="类构造器"></a>类构造器<client></client></h4><p>初始化阶段是执行类构造器<client>方法的过程。<client>方法是由编译器自动收集类中的类变<br>量的赋值操作和静态语句块中的语句合并而成的。虚拟机会保证子<client>方法执行之前，父类<br>的<client>方法已经执行完毕，如果一个类中没有对静态变量赋值也没有静态语句块，那么编译<br>器可以不为这个类生成<client>()方法。<br>注意以下几种情况不会执行类初始化：</client></client></client></client></client></p>
+<ol>
+<li>通过子类引用父类的静态字段，只会触发父类的初始化，而不会触发子类的初始化。</li>
+<li>定义对象数组，不会触发该类的初始化。</li>
+<li>常量在编译期间会存入调用类的常量池中，本质上并没有直接引用定义常量的类，不会触<br>发定义常量所在的类。</li>
+<li>通过类名获取 Class 对象，不会触发类的初始化。</li>
+<li>通过 Class.forName 加载指定类时，如果指定参数 initialize 为 false 时，也不会触发类初<br>始化，其实这个参数是告诉虚拟机，是否要对类进行初始化。</li>
+<li>通过 ClassLoader 默认的 loadClass 方法，也不会触发初始化动作。</li>
+</ol>
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>虚拟机设计团队把加载动作放到 JVM 外部实现，以便让应用程序决定如何获取所需的类，JVM 提供了 3 种类加载器：</p>
+<h4 id="启动类加载器-Bootstrap-ClassLoader"><a href="#启动类加载器-Bootstrap-ClassLoader" class="headerlink" title="启动类加载器(Bootstrap ClassLoader)"></a>启动类加载器(Bootstrap ClassLoader)</h4><ol>
+<li>负责加载 JAVA_HOME\lib 目录中的，或通过-Xbootclasspath 参数指定路径中的，且被<br>虚拟机认可（按文件名识别，如 rt.jar）的类。</li>
+</ol>
+<h4 id="扩展类加载器-Extension-ClassLoader"><a href="#扩展类加载器-Extension-ClassLoader" class="headerlink" title="扩展类加载器(Extension ClassLoader)"></a>扩展类加载器(Extension ClassLoader)</h4><ol start="2">
+<li>负责加载 JAVA_HOME\lib\ext 目录中的，或通过 java.ext.dirs 系统变量指定路径中的类<br>库。</li>
+</ol>
+<h4 id="应用程序类加载器-Application-ClassLoader-："><a href="#应用程序类加载器-Application-ClassLoader-：" class="headerlink" title="应用程序类加载器(Application ClassLoader)："></a>应用程序类加载器(Application ClassLoader)：</h4><ol start="3">
+<li>负责加载用户路径（classpath）上的类库。<br>JVM 通过双亲委派模型进行类的加载，当然我们也可以通过继承 java.lang.ClassLoader<br>实现自定义的类加载器。</li>
+</ol>
+<h3 id="双亲委派"><a href="#双亲委派" class="headerlink" title="双亲委派"></a>双亲委派</h3><p>当一个类收到了类加载请求，他首先不会尝试自己去加载这个类，而是把这个请求委派给父类去完成，每一个层次类加载器都是如此，因此所有的加载请求都应该传送到启动类加载其中，只有当父类加载器反馈自己无法完成这个请求的时候（在它的加载路径下没有找到所需加载的Class），子类加载器才会尝试自己去加载。采用双亲委派的一个好处是比如加载位于rt.jar包中的类 java.lang.Object，不管是哪个加载器加载这个类，最终都是委托给顶层的启动类加载器进行加载，这样就保证了使用不同的类加载器最终得到的都是同样一个 Object 对象。</p>
+<h3 id="OSGI（动态模型系统）"><a href="#OSGI（动态模型系统）" class="headerlink" title="OSGI（动态模型系统）"></a>OSGI（动态模型系统）</h3><p>OSGi(Open Service Gateway Initiative)，是面向 Java 的动态模型系统，是 Java 动态化模块化系<br>统的一系列规范。</p>
+<h4 id="动态改变构造"><a href="#动态改变构造" class="headerlink" title="动态改变构造"></a>动态改变构造</h4><p>OSGi 服务平台提供在多种网络设备上无需重启的动态改变构造的功能。为了最小化耦合度和促使<br>这些耦合度可管理，OSGi 技术提供一种面向服务的架构，它能使这些组件动态地发现对方。</p>
+<h4 id="模块化编程与热插拔"><a href="#模块化编程与热插拔" class="headerlink" title="模块化编程与热插拔"></a>模块化编程与热插拔</h4><p>OSGi 旨在为实现 Java 程序的模块化编程提供基础条件，基于 OSGi 的程序很可能可以实现模块级<br>的热插拔功能，当程序升级更新时，可以只停用、重新安装然后启动程序的其中一部分，这对企<br>业级程序开发来说是非常具有诱惑力的特性。<br>OSGi 描绘了一个很美好的模块化开发目标，而且定义了实现这个目标的所需要服务与架构，同时<br>也有成熟的框架进行实现支持。但并非所有的应用都适合采用 OSGi 作为基础架构，它在提供强大<br>功能同时，也引入了额外的复杂度，因为它不遵守了类加载的双亲委托模型。</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2021/12/17/JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）/">JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2021年12月17日 - 20时30分</p>
+        <p><span>最后更新:</span>2021年12月19日 - 21时14分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/12/17/JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）/" title="JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）">http://yoursite.com/2021/12/17/JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/12/17/JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2021/12/19/2104. 子数组范围和/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          2104. 子数组范围和
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/12/17/875. 爱吃香蕉的珂珂/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">875. 爱吃香蕉的珂珂</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念：-1"><span class="toc-number">1.</span> <span class="toc-text">基本概念：^1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程"><span class="toc-number">1.1.</span> <span class="toc-text">线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM-内存区域"><span class="toc-number">1.2.</span> <span class="toc-text">JVM 内存区域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#程序计数器-线程私有"><span class="toc-number">1.2.1.</span> <span class="toc-text">程序计数器(线程私有)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟机栈-线程私有"><span class="toc-number">1.2.2.</span> <span class="toc-text">虚拟机栈(线程私有)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地方法区-线程私有"><span class="toc-number">1.2.3.</span> <span class="toc-text">本地方法区(线程私有)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆（Heap-线程共享）-运行时数据区"><span class="toc-number">1.2.4.</span> <span class="toc-text">堆（Heap-线程共享）-运行时数据区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法区-永久代（线程共享）"><span class="toc-number">1.2.5.</span> <span class="toc-text">方法区/永久代（线程共享）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM-运行时内存"><span class="toc-number">1.3.</span> <span class="toc-text">JVM 运行时内存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新生代"><span class="toc-number">1.3.1.</span> <span class="toc-text">新生代</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Eden-区"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Eden 区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#From-Survivor"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">From Survivor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#To-Survivor"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">To Survivor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MinorGC-的过程（复制-gt-清空-gt-互换）"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">MinorGC 的过程（复制-&gt;清空-&gt;互换）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#老年代"><span class="toc-number">1.3.2.</span> <span class="toc-text">老年代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#永久代"><span class="toc-number">1.3.3.</span> <span class="toc-text">永久代</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JAVA8-与元数据"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">JAVA8 与元数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收与算法"><span class="toc-number">1.4.</span> <span class="toc-text">垃圾回收与算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何确定垃圾"><span class="toc-number">1.4.1.</span> <span class="toc-text">如何确定垃圾</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引用计数法"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">引用计数法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可达性分析"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">可达性分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标记清除算法（Mark-Sweep）"><span class="toc-number">1.4.2.</span> <span class="toc-text">标记清除算法（Mark-Sweep）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制算法（copying）"><span class="toc-number">1.4.3.</span> <span class="toc-text">复制算法（copying）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标记整理算法-Mark-Compact"><span class="toc-number">1.4.4.</span> <span class="toc-text">标记整理算法(Mark-Compact)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代收集算法"><span class="toc-number">1.4.5.</span> <span class="toc-text">分代收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#新生代与复制算法"><span class="toc-number">1.4.5.1.</span> <span class="toc-text">新生代与复制算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#老年代与标记复制算法"><span class="toc-number">1.4.5.2.</span> <span class="toc-text">老年代与标记复制算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA-四种引用类型"><span class="toc-number">1.5.</span> <span class="toc-text">JAVA 四种引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#强引用"><span class="toc-number">1.5.1.</span> <span class="toc-text">强引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#软引用"><span class="toc-number">1.5.2.</span> <span class="toc-text">软引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弱引用"><span class="toc-number">1.5.3.</span> <span class="toc-text">弱引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚引用"><span class="toc-number">1.5.4.</span> <span class="toc-text">虚引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC-分代收集算法-VS-分区收集算法"><span class="toc-number">1.6.</span> <span class="toc-text">GC 分代收集算法 VS 分区收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分代收集算法-1"><span class="toc-number">1.6.1.</span> <span class="toc-text">分代收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在新生代-复制算法"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">在新生代-复制算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在老年代-标记整理算法"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">在老年代-标记整理算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分区收集算法"><span class="toc-number">1.6.2.</span> <span class="toc-text">分区收集算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GC-垃圾收集器"><span class="toc-number">1.7.</span> <span class="toc-text">GC 垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial-垃圾收集器（单线程、复制算法）"><span class="toc-number">1.7.1.</span> <span class="toc-text">Serial 垃圾收集器（单线程、复制算法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ParNew-垃圾收集器（Serial-多线程）"><span class="toc-number">1.7.2.</span> <span class="toc-text">ParNew 垃圾收集器（Serial+多线程）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parallel-Scavenge收集器（多线程复制算法、高效）"><span class="toc-number">1.7.3.</span> <span class="toc-text">Parallel Scavenge收集器（多线程复制算法、高效）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial-Old-收集器（单线程标记整理算法-）"><span class="toc-number">1.7.4.</span> <span class="toc-text">Serial Old 收集器（单线程标记整理算法 ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parallel-Old-收集器（多线程标记整理算法）"><span class="toc-number">1.7.5.</span> <span class="toc-text">Parallel Old 收集器（多线程标记整理算法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMS-收集器（多线程标记清除算法）"><span class="toc-number">1.7.6.</span> <span class="toc-text">CMS 收集器（多线程标记清除算法）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始标记"><span class="toc-number">1.7.6.1.</span> <span class="toc-text">初始标记</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#并发标记"><span class="toc-number">1.7.6.2.</span> <span class="toc-text">并发标记</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重新标记"><span class="toc-number">1.7.6.3.</span> <span class="toc-text">重新标记</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#并发清除"><span class="toc-number">1.7.6.4.</span> <span class="toc-text">并发清除</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#G1-收集器"><span class="toc-number">1.7.7.</span> <span class="toc-text">G1 收集器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA-IO-NIO"><span class="toc-number">1.8.</span> <span class="toc-text">JAVA IO/NIO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#阻塞-IO-模型"><span class="toc-number">1.8.1.</span> <span class="toc-text">阻塞 IO 模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非阻塞-IO-模型"><span class="toc-number">1.8.2.</span> <span class="toc-text">非阻塞 IO 模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多路复用-IO-模型"><span class="toc-number">1.8.3.</span> <span class="toc-text">多路复用 IO 模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信号驱动-IO-模型"><span class="toc-number">1.8.4.</span> <span class="toc-text">信号驱动 IO 模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步-IO-模型"><span class="toc-number">1.8.5.</span> <span class="toc-text">异步 IO 模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA-IO-包"><span class="toc-number">1.8.6.</span> <span class="toc-text">JAVA IO 包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA-NIO"><span class="toc-number">1.8.7.</span> <span class="toc-text">JAVA NIO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO-的缓冲区"><span class="toc-number">1.8.7.1.</span> <span class="toc-text">NIO 的缓冲区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO-的非阻塞"><span class="toc-number">1.8.7.2.</span> <span class="toc-text">NIO 的非阻塞</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Channel"><span class="toc-number">1.8.8.</span> <span class="toc-text">Channel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer"><span class="toc-number">1.8.9.</span> <span class="toc-text">Buffer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selector"><span class="toc-number">1.8.10.</span> <span class="toc-text">Selector</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM-类加载机制"><span class="toc-number">1.9.</span> <span class="toc-text">JVM 类加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#加载"><span class="toc-number">1.9.0.1.</span> <span class="toc-text">加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#验证"><span class="toc-number">1.9.0.2.</span> <span class="toc-text">验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#准备"><span class="toc-number">1.9.0.3.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解析"><span class="toc-number">1.9.0.4.</span> <span class="toc-text">解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#符号引用"><span class="toc-number">1.9.0.5.</span> <span class="toc-text">符号引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#直接引用"><span class="toc-number">1.9.0.6.</span> <span class="toc-text">直接引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化"><span class="toc-number">1.9.0.7.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类构造器"><span class="toc-number">1.9.0.8.</span> <span class="toc-text">类构造器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类加载器"><span class="toc-number">1.9.1.</span> <span class="toc-text">类加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#启动类加载器-Bootstrap-ClassLoader"><span class="toc-number">1.9.1.1.</span> <span class="toc-text">启动类加载器(Bootstrap ClassLoader)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展类加载器-Extension-ClassLoader"><span class="toc-number">1.9.1.2.</span> <span class="toc-text">扩展类加载器(Extension ClassLoader)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#应用程序类加载器-Application-ClassLoader-："><span class="toc-number">1.9.1.3.</span> <span class="toc-text">应用程序类加载器(Application ClassLoader)：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双亲委派"><span class="toc-number">1.9.2.</span> <span class="toc-text">双亲委派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSGI（动态模型系统）"><span class="toc-number">1.9.3.</span> <span class="toc-text">OSGI（动态模型系统）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#动态改变构造"><span class="toc-number">1.9.3.1.</span> <span class="toc-text">动态改变构造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块化编程与热插拔"><span class="toc-number">1.9.3.2.</span> <span class="toc-text">模块化编程与热插拔</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2021/12/19/2104. 子数组范围和/" title="上一篇: 2104. 子数组范围和">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2021/12/17/875. 爱吃香蕉的珂珂/" title="下一篇: 875. 爱吃香蕉的珂珂">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/12/19/2103. 环和杆/">2103. 环和杆</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/19/2104. 子数组范围和/">2104. 子数组范围和</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）/">JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/875. 爱吃香蕉的珂珂/">875. 爱吃香蕉的珂珂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/剑指 Offer II 073. 狒狒吃香蕉/">剑指 Offer II 073. 狒狒吃香蕉</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/403. 青蛙过河/">403. 青蛙过河</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1884. 鸡蛋掉落-两枚鸡蛋/">1884. 鸡蛋掉落-两枚鸡蛋</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1377. T 秒后青蛙的位置/">1377. T 秒后青蛙的位置</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1419. 数青蛙/">1419. 数青蛙</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1936. 新增的最少台阶数/">1936. 新增的最少台阶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/746. 使用最小花费爬楼梯/">746. 使用最小花费爬楼梯</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/剑指 Offer II 088. 爬楼梯的最少成本/">剑指 Offer II 088. 爬楼梯的最少成本</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/70. 爬楼梯/">70. 爬楼梯</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/剑指 Offer 10- II. 青蛙跳台阶问题/">剑指 Offer 10- II. 青蛙跳台阶问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/15/842. 将数组拆分成斐波那契序列/">1414. 和为 K 的最少斐波那契数字数目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/15/1414. 和为 K 的最少斐波那契数字数目/">1414. 和为 K 的最少斐波那契数字数目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/873. 最长的斐波那契子序列的长度/">873. 最长的斐波那契子序列的长度</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/剑指 Offer II 093. 最长斐波那契数列/">剑指 Offer II 093. 最长斐波那契数列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/372. 超级次方/">372. 超级次方</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/69. x 的平方根(二分法模板题及经典解释）/">69. x 的平方根(二分法模板题及经典解释）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/剑指 Offer II 072. 求平方根(二分法模板题及经典解释）/">剑指 Offer II072</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/50. Pow(x, n)快速幂算法/">50. Pow(x, n)快速幂算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/509. 斐波那契数/">509. 斐波那契数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/面试题 08.06. 汉诺塔问题/">面试题 08.06. 汉诺塔问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/RabbitMQ学习笔记（概念，架构和消息交换机类型）/">RabbitMQ学习笔记（概念，架构和消息交换机类型）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/面试题 16.07. 最大数值/">面试题 16.07. 最大数值</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/剑指 Offer II 079. 所有子集/">剑指 Offer II 079. 所有子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/剑指 Offer II 067. 最大的异或/">剑指 Offer II 067. 最大的异或</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/10/421. 数组中两个数的最大异或值/">421. 数组中两个数的最大异或值</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/10/面试题 05.03. 翻转数位/">面试题 05.03. 翻转数位</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/10/剑指 Offer 65. 不用加减乘除做加法/">剑指 Offer 65. 不用加减乘除做加法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/09/剑指 Offer 64. 求1+2+…+n/">剑指 Offer 64. 求1+2+…+n</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/1863. 找出所有子集的异或总和再求和/">1863. 找出所有子集的异或总和再求和</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/剑指 Offer 53 - II. 0～n-1中缺失的数字/">剑指 Offer 53 - II. 0～n-1中缺失的数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/">剑指 Offer 56 - II. 数组中数字出现的次数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/剑指 Offer 56 - I. 数组中数字出现的次数/">剑指 Offer 56 - I. 数组中数字出现的次数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/07/477. 汉明距离总和/">477. 汉明距离总和</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/05/Zookeeper学习笔记（概念，协议，投票机制）/">Zookeeper学习笔记（概念，协议，投票机制）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/01/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/30/Linux文本三剑客，awk、grep、sed/">Linux文本三剑客，awk、grep、sed</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/29/503. 下一个更大元素 II/">503. 下一个更大元素 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/29/556. 下一个更大元素 III/">556. 下一个更大元素 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/28/496. 下一个更大元素 I/">496. 下一个更大元素 I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/26/739. 每日温度/">739. 每日温度</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/396. 旋转函数/">396. 旋转函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/525. 连续数组/">525. 连续数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/18/如何写出一份优秀的工作周报/">如何写出一份优秀的工作周报？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/17/1044. 最长重复子串/">1044. 最长重复子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/16/1358. 包含所有三种字符的子字符串数目/">1358. 包含所有三种字符的子字符串数目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/16/1297. 子串的最大出现次数/">1297. 子串的最大出现次数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/15/1109. 航班预订统计/">1109. 航班预订统计</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/15/904. 水果成篮/">904. 水果成篮</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/12/《天龙八部》读书笔记/">《天龙八部》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/12/795. 区间子数组个数/">795. 区间子数组个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/10/467. 环绕字符串中唯一的子字符串/">467. 环绕字符串中唯一的子字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/992. K 个不同整数的子数组/">992. K 个不同整数的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/340. 至多包含 K 个不同字符的最长子串/">340. 至多包含 K 个不同字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/159. 至多包含两个不同字符的最长子串/">159. 至多包含两个不同字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/05/3. 无重复字符的最长子串/">3. 无重复字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/03/991. 坏了的计算器/">991. 坏了的计算器</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/02/224. 基本计算器/">224. 基本计算器</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/02/772. 基本计算器III/">772. 基本计算器III</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/02/227. 基本计算器 II/">227.基本计算器 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/31/560. 和为 K 的子数组/">560. 和为 K 的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/31/MySQL面试高频20问/">MySQL面试高频20问</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/28/713. 乘积小于K的子数组/">713. 乘积小于K的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/28/209. 长度最小的子数组/">209. 长度最小的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/27/318. 最大单词长度乘积/">318. 最大单词长度乘积</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/25/1531. 压缩字符串 II/">1531. 压缩字符串 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/25/443. 压缩字符串/">443. 压缩字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/24/338. 比特位计数/">338. 比特位计数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/21/262. 行程和用户/">262. 行程和用户</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/18/29. 两数相除/">29. 两数相除</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/04/1071. 字符串的最大公因子/">1071. 字符串的最大公因子</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/05/07/1206. 设计跳表/">1206. 设计跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/26/707. 设计链表/">707. 设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/09/706. 设计哈希映射/">706. 设计哈希映射</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/09/705. 设计哈希集合/">705. 设计哈希集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/07/LCP 29. 乐团站位/">LCP 29. 乐团站位</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/05/LCP 28. 采购方案/">LCP 28. 采购方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/294 · 简化链表/">294 · 简化链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/711. 不同岛屿的数量II/">711. 不同岛屿的数量II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/694. 不同岛屿的数量/">694. 不同岛屿的数量</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/30/305. 岛屿数量 II/">305. 岛屿数量 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/29/572. 另一个树的子树/">572. 另一个树的子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/27/491. 递增子序列/">304. 二维区域和检索 - 矩阵不可变</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/27/304. 二维区域和检索 - 矩阵不可变/">304. 二维区域和检索 - 矩阵不可变</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/25/456. 132 模式/">456. 132 模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/18/1188 设计有限阻塞队列/">1188 设计有限阻塞队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/18/1242.多线程网页爬虫/">1242.多线程网页爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/17/1279. 红绿灯路口/">1279. 红绿灯路口</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/04/953. 验证外星语词典/">953. 验证外星语词典</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/27/269.火星词典/">269.火星词典</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/Java基础知识-装箱和拆箱/">Java基础知识-装箱和拆箱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/Java基础知识-重写 `equals` 时为何必须重写 `hashCode` 方法/">Java基础知识-重写 `equals` 时为何必须重写 `hashCode` 方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/20/JAVA 强软弱虚四种引用类型/">JAVA 强软弱虚四种引用类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/03/77. 组合/">77. 组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/02/57. 插入区间/">57. 插入区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/02/17. 电话号码的字母组合/">17. 电话号码的字母组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/28/909. 蛇梯棋/">909. 蛇梯棋</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/688. “马”在棋盘上的概率/">688. “马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/782. 变为棋盘/">782. 变为棋盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/25/1275. 找出井字棋的获胜者/">1275. 找出井字棋的获胜者</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/29/312. 戳气球/">312. 戳气球</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/23/406. 根据身高重建队列/">406. 根据身高重建队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/23/301. 删除无效的括号/">301. 删除无效的括号</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/17/76. 最小覆盖子串/">76. 最小覆盖子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/16/41. 缺失的第一个正数/">41. 缺失的第一个正数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/16/89. 格雷编码/">89. 格雷编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/15/61. 旋转链表/">61. 旋转链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/09/8. 字符串转换整数 (atoi)/">8. 字符串转换整数 (atoi)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/02/1. 两数之和/">1. 两数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/30/176. 第二高的薪水/">176. 第二高的薪水</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/30/393. UTF-8 编码验证/">393. UTF-8 编码验证</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/26/69. x 的平方根/">69. x 的平方根</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/25/432. 全 O(1) 的数据结构/">432. 全 O(1) 的数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/354. 俄罗斯套娃/">354. 俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/120. 三角形最小路径和/">120. 三角形最小路径和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/1277. 统计全为 1 的正方形子矩阵/">1277. 统计全为 1 的正方形子矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/53. 最大子序和/">53. 最大子序和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/221.最大正方形/">221.最大正方形</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/122.买卖股票的最佳时机II/">122.买卖股票的最佳时机II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/121.买卖股票的最佳时机/">121.买卖股票的最佳时机</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/102.二叉树的层次遍历/">102.二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/103. 二叉树的锯齿形层次遍历/">103. 二叉树的锯齿形层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/107. 二叉树的层次遍历 II/">107. 二叉树的层次遍历 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/20/23. 合并K个升序链表/">23. 合并K个升序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/20/445. 两数相加II/">445. 两数相加II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/20/2. 两数相加/">2. 两数相加</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/407. 接雨水II/">407. 接雨水II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/42. 接雨水/">42. 接雨水</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/56. 合并区间/">56. 合并区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/547. 朋友圈/">547. 朋友圈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/128. 最长连续序列/">128. 最长连续序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/13/60. 排列序列/">60. 排列序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/13/674. 最长连续递增序列/">674. 最长连续递增序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/13/81. 搜索旋转排序数组 II/">81. 搜索旋转排序数组 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/11/33. 搜索旋转排序数组/">33. 搜索旋转排序数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/11/695. 岛屿的最大面积/">695. 岛屿的最大面积</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/16. 最接近的三数之和/">16. 最接近的三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/923. 三数之和的多种可能/">923. 三数之和的多种可能</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/15. 三数之和/">15. 三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/93. 复原IP地址/">93. 复原IP地址</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/71. 简化路径/">71. 简化路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/12/151. 翻转字符串里的单词/">151. 翻转字符串里的单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/12/415. 字符串相加/">415. 字符串相加</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/12/43. 字符串相乘/">43. 字符串相乘</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/程序员面试金典.面试题08.08.有重复字符串的排列组合/">程序员面试金典.面试题08.08.有重复字符串的排列组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/程序员面试金典.面试题08.07.无重复字符串的排列组合/">程序员面试金典.面试题08.07.无重复字符串的排列组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/剑指 offer38.字符串的排列/">剑指 offer38.字符串的排列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/09/14. 最长公共前缀/">14. 最长公共前缀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/09/567. 字符串的排列/">567. 字符串的排列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/09/784. 字母大小写全排列/">784. 字母大小写全排列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/06/146. LRU缓存机制/">146. LRU缓存机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/134. 加油站/">134. 加油站</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/412. Fizz Buzz/">412. Fizz Buzz</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/371. 两整数之和/">371. 两整数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/202. 快乐数/">202. 快乐数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/30/326. 3的幂/">326. 3的幂</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/30/268. 缺失数字/">268. 缺失数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/29/204. 计数质数/">204. 计数质数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/28/191. 位1的个数/">191. 位1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/27/172. 阶乘后的零/">172. 阶乘后的零</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/27/190. 颠倒二进制位/">190. 颠倒二进制位</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/18/166. 分数到小数/">166. 分数到小数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/18/149. 直线上最多的点数/">149. 直线上最多的点数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/17/260. 只出现一次的数字III/">260. 只出现一次的数字III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/16/137. 只出现一次的数字II/">137. 只出现一次的数字II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/16/136. 只出现一次的数字/">136. 只出现一次的数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/210. 课程表II/">210. 课程表II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/14/207. 课程表/">207. 课程表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/14/200. 岛屿数量/">200. 岛屿数量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/09/127. 单词接龙/">127. 单词接龙</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/08/322. 零钱兑换/">322. 零钱兑换</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/08/329. 矩阵中的最长递增路径/">329. 矩阵中的最长递增路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/08/300. 最长上升子序列/">300. 最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/279. 完全平方数/">279. 完全平方数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/337. 打家劫舍III/">337. 打家劫舍III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/213. 打家劫舍II/">213. 打家劫舍II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/198. 打家劫舍/">198. 打家劫舍</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/31/124. 二叉树中的最大路径和/">124. 二叉树中的最大路径和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/31/395. 至少有K个重复字符的最长子串/">395. 至少有K个重复字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/剑指 offer51.数组中的逆序对/">剑指 offer51.数组中的逆序对</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/315. 计算右侧小于当前元素的个数/">315. 计算右侧小于当前元素的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/25/287. 寻找重复数/">287. 寻找重复数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/162. 寻找峰值/">162. 寻找峰值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/324. 摆动排序 II/">324. 摆动排序 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/179. 最大数/">179. 最大数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/297. 二叉树的序列化与反序列化/">297. 二叉树的序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/236. 二叉树的最近公共祖先/">236. 二叉树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/22/230. 二叉搜索树中第K小的元素/">230. 二叉搜索树中第K小的元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/380. 常数时间插入、删除和获取随机元素/">380. 常数时间插入、删除和获取随机元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/454. 四数相加 II/">454. 四数相加 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/Excel表列序号/">171. Excel表列序号</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/328. 奇偶链表/">328. 奇偶链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/237. 删除链表中的节点/">237. 删除链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/20/234. 回文链表/">234. 回文链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/19/92. 反转链表II/">92. 反转链表II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/18/206. 反转链表/">206. 反转链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/18/160. 相交链表/">160. 相交链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/17/Java 练手项目/">Java 练手项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/148. 排序链表/">148. 排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/142. 环形链表II/">142. 环形链表II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/24/141. 环形链表/">141. 环形链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/138. 复制带随机指针的链表/">138. 复制带随机指针的链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/150. 逆波兰表达式求值/">150. 逆波兰表达式求值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/341. 扁平化嵌套列表迭代器/">341. 扁平化嵌套列表迭代器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/19/239. 滑动窗口最大值/">239. 滑动窗口最大值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/18/347. 前 K 个高频元素/">347. 前 K 个高频元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/12/Java编程思想-第二十二章 枚举阅读笔记/">Java编程思想-第二十二章 枚举阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/10/Latex极简教程/">Latex极简教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/09/378. 有序矩阵中第K小的元素/">378. 有序矩阵中第K小的元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/06/295. 数据流的中位数/">295. 数据流的中位数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/06/215. 数组中的第K个最大元素/">215. 数组中的第K个最大元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/238. 除自身以外数组的乘积/">238. 除自身以外数组的乘积</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/155.  最小栈/">155. 最小栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/240. 搜索二维矩阵II/">240. 搜索二维矩阵II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/74. 搜索二维矩阵/">74. 搜索二维矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/334.递增的三元子序列/">334. 递增的三元子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/350. 两个数组的交集II/">350. 两个数组的交集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/349. 两个数组的交集/">349. 两个数组的交集</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/384. 打乱数组/">384. 打乱数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/283. 移动零/">283. 移动零</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/Java之TreeSet类/">Java之TreeSet类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/220. 存在重复元素III/">220. 存在重复元素III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/217. 存在重复元素/">217. 存在重复元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/219. 存在重复元素II/">219. 存在重复元素II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/152. 乘积最大子数组/">152. 乘积最大子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/189. 旋转数组/">189. 旋转数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/63. 不同路径II/">63. 不同路径II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/980. 不同路径 III/">980. 不同路径 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/62. 不同路径/">62. 不同路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/212. 单词搜索II/">212. 单词搜索II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java编程思想-第二十三章 注解阅读笔记/">Java编程思想-第二十三章 注解阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java编程思想-第二十章 泛型阅读笔记/">Java编程思想-第二十章 泛型阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/27/79. 单词搜索/">79. 单词搜索</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/Java之数组/">Java之数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/《生事之屋：白宫回忆录》节选/">《生事之屋：白宫回忆录》节选</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/24/208. 实现 Trie (前缀树)/">208. 实现 Trie (前缀树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/23/数据库学习笔记-Sql_Mode/">数据库学习笔记-Sql_Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/ Java之String类/">Java之String类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/Java之可变参数/">Java之可变参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java之Queue、Deque、ArrayDeque/">Java之Queue、Deque、ArrayDeque</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java之instanceof关键字/">Java之instanceof关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/14/Java之transient关键字/">Java之transient关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java编程思想-第十章 接口阅读笔记/">Java编程思想-第十章 接口阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java集合之HashMap/">Java集合之HashMap</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念III-事务并发控制/">数据库基础概念III-事务并发控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-聚合函数/">数据库学习笔记-聚合函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念-索引/">数据库基础概念-索引</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-INTERSECT/">数据库学习笔记-INTERSECT</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-UNION/">数据库学习笔记-UNION</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-连接/">数据库学习笔记-连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库学习笔记-MySQL安装与使用/">数据库学习笔记-MySQL安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库基础概念II-范式-关系代数-三值逻辑/">数据库基础概念II-范式-关系代数-三值逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/09/数据库学习笔记-SQL约束(Constraints)/">数据库学习笔记-SQL约束(Constraints)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第九章 多态阅读笔记/">Java编程思想-第九章 多态阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第二十四章 并发编程阅读笔记/">Java编程思想-第二十四章 并发编程阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/05/Maven快照机制(SNAPSHOT)/">Maven快照机制（SNAPSHOT）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/29/140. 单词拆分II/">140. 单词拆分II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/139. 单词拆分/">139. 单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/5. 最长回文子串/">5. 最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/131. 分割回文串/">131. 分割回文串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/887. 鸡蛋掉落/">887. 鸡蛋掉落</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/27/21. 合并两个有序链表/">21. 合并两个有序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/685.冗余链接II/">685.冗余链接II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/1226. 哲学家进餐/">1226. 哲学家进餐</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1195. 交替打印字符串/">1195. 交替打印字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1117. H2O 生成/">1117. H2O 生成</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1116. 打印零与奇偶数/">1116. 打印零与奇偶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/1115. 交替打印FooBar/">1115. 交替打印FooBar</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/Java并发编程/">Java并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/1114.按序打印/">1114.按序打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/19/684.冗余链接/">684.冗余链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Lombok的基本注解使用/">Lombok的基本注解使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/后端开发常用调试技巧集锦/">后端开发常用调试技巧集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/405. 数字转化为十六进制数/">405. 数字转化为十六进制数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/SpringBoot学习笔记VIII-MybatisPlus教程/">SpringBoot学习笔记VIII-MybatisPlus教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/设计模式学习笔记V-策略模式/">设计模式学习笔记V-策略模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/1046. 最后一块石头的重量/">1046. 最后一块石头的重量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/Java学习笔记XIV/">Java学习笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/257.二叉树的所有路径/">257.二叉树的所有路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/22/24.两两交换链表中的节点/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/微信公众平台开发学习笔记I/">微信公众平台开发学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/">601.Human Traffic of Stadium体育馆的人流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/185.Department Top Three Salaries/">185.Department Top Three Salaries</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/数据库学习笔记IX/">数据库学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/184.Department Highest Salary/">184.Department Highest Salary</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/数据库学习笔记VIII/">数据库学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/1179. Reformat Department Table/">1179. Reformat Department Table</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II-Git版本回滚/">Git学习笔记II-Git版本回滚</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I-查询/">数据库学习笔记I-查询</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/STL源码剖析之vector/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入总结/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：898.6k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
