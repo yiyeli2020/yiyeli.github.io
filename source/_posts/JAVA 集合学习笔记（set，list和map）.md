@@ -1,5 +1,5 @@
 ---
-title: JAVA 集合
+title: JAVA 集合学习笔记（set，list和map）
 
 date: 2021-12-22 19:30:12  
 
