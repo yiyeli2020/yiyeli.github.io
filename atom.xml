@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-12-30T02:12:32.097Z</updated>
+  <updated>2021-12-31T02:37:17.190Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JAVA 学习笔记（IoC控制反转）</title>
+    <link href="http://yoursite.com/2021/12/30/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88IoC%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%EF%BC%89/"/>
+    <id>http://yoursite.com/2021/12/30/JAVA 学习笔记（IoC控制反转）/</id>
+    <published>2021-12-30T10:12:12.000Z</published>
+    <updated>2021-12-31T02:37:17.190Z</updated>
+    
+    <content type="html"><![CDATA[<p>Spring提供的容器又称为IoC容器，什么是IoC？</p><p>IoC全称Inversion of Control，直译为控制反转。IoC又称为依赖注入（DI：Dependency Injection）</p><a id="more"></a><p>[TOC]</p><h1 id="控制反转-1"><a href="#控制反转-1" class="headerlink" title="控制反转^1"></a>控制反转<a href="https://www.liaoxuefeng.com/wiki/1252599548343744/1282381977747489" target="_blank" rel="noopener">^1</a></h1><p>那么何谓IoC？在理解IoC之前，我们先看看通常的Java组件是如何协作的。</p><p>我们假定一个在线书店，通过BookService获取书籍：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class BookService &#123;</span><br><span class="line">    private HikariConfig config = new HikariConfig();</span><br><span class="line">    private DataSource dataSource = new HikariDataSource(config);</span><br><span class="line"></span><br><span class="line">    public Book getBook(long bookId) &#123;</span><br><span class="line">        try (Connection conn = dataSource.getConnection()) &#123;</span><br><span class="line">            ...</span><br><span class="line">            return book;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>为了从数据库查询书籍，BookService持有一个DataSource。为了实例化一个HikariDataSource，又不得不实例化一个HikariConfig。</p><p>现在，我们继续编写UserService获取用户：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class UserService &#123;</span><br><span class="line">    private HikariConfig config = new HikariConfig();</span><br><span class="line">    private DataSource dataSource = new HikariDataSource(config);</span><br><span class="line"></span><br><span class="line">    public User getUser(long userId) &#123;</span><br><span class="line">        try (Connection conn = dataSource.getConnection()) &#123;</span><br><span class="line">            ...</span><br><span class="line">            return user;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>因为UserService也需要访问数据库，因此，我们不得不也实例化一个HikariDataSource。</p><p>在处理用户购买的CartServlet中，我们需要实例化UserService和BookService：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class CartServlet extends HttpServlet &#123;</span><br><span class="line">    private BookService bookService = new BookService();</span><br><span class="line">    private UserService userService = new UserService();</span><br><span class="line"></span><br><span class="line">    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        long currentUserId = getFromCookie(req);</span><br><span class="line">        User currentUser = userService.getUser(currentUserId);</span><br><span class="line">        Book book = bookService.getBook(req.getParameter(&quot;bookId&quot;));</span><br><span class="line">        cartService.addToCart(currentUser, book);</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>类似的，在购买历史HistoryServlet中，也需要实例化UserService和BookService：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class HistoryServlet extends HttpServlet &#123;</span><br><span class="line">    private BookService bookService = new BookService();</span><br><span class="line">    private UserService userService = new UserService();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上述每个组件都采用了一种简单的通过new创建实例并持有的方式。仔细观察，会发现以下缺点：</p><p>实例化一个组件其实很难，例如，BookService和UserService要创建HikariDataSource，实际上需要读取配置，才能先实例化HikariConfig，再实例化HikariDataSource。</p><p>没有必要让BookService和UserService分别创建DataSource实例，完全可以共享同一个DataSource，但谁负责创建DataSource，谁负责获取其他组件已经创建的DataSource，不好处理。类似的，CartServlet和HistoryServlet也应当共享BookService实例和UserService实例，但也不好处理。</p><p>很多组件需要销毁以便释放资源，例如DataSource，但如果该组件被多个组件共享，如何确保它的使用方都已经全部被销毁？</p><p>随着更多的组件被引入，例如，书籍评论，需要共享的组件写起来会更困难，这些组件的依赖关系会越来越复杂。</p><p>测试某个组件，例如BookService，是复杂的，因为必须要在真实的数据库环境下执行。</p><p>从上面的例子可以看出，如果一个系统有大量的组件，其生命周期和相互之间的依赖关系如果由组件自身来维护，不但大大增加了系统的复杂度，而且会导致组件之间极为紧密的耦合，继而给测试和维护带来了极大的困难。</p><p>因此，核心问题是：</p><ul><li>谁负责创建组件？</li><li>谁负责根据依赖关系组装组件？</li><li>销毁时，如何按依赖顺序正确销毁？<br>解决这一问题的核心方案就是IoC。</li></ul><p>传统的应用程序中，控制权在程序本身，程序的控制流程完全由开发者控制，例如：</p><p>CartServlet创建了BookService，在创建BookService的过程中，又创建了DataSource组件。这种模式的缺点是，一个组件如果要使用另一个组件，必须先知道如何正确地创建它。</p><p>在IoC模式下，控制权发生了反转，即从应用程序转移到了IoC容器，所有组件不再由应用程序自己创建和配置，而是由IoC容器负责，这样，应用程序只需要直接使用已经创建好并且配置好的组件。为了能让组件在IoC容器中被“装配”出来，需要某种“注入”机制，例如，BookService自己并不会创建DataSource，而是等待外部通过setDataSource()方法来注入一个DataSource：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class BookService &#123;</span><br><span class="line">    private DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    public void setDataSource(DataSource dataSource) &#123;</span><br><span class="line">        this.dataSource = dataSource;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>不直接new一个DataSource，而是注入一个DataSource，这个小小的改动虽然简单，却带来了一系列好处：</p><ul><li>BookService不再关心如何创建DataSource，因此，不必编写读取数据库配置之类的代码；</li><li>DataSource实例被注入到BookService，同样也可以注入到UserService，因此，共享一个组件非常简单；</li><li>测试BookService更容易，因为注入的是DataSource，可以使用内存数据库，而不是真实的MySQL配置。</li></ul><p>因此，IoC又称为依赖注入（DI：Dependency Injection），它解决了一个最主要的问题：将组件的创建+配置与组件的使用相分离，并且，由IoC容器负责管理组件的生命周期。</p><p>因为IoC容器要负责实例化所有的组件，因此，有必要告诉容器如何创建组件，以及各组件的依赖关系。一种最简单的配置是通过XML文件来实现，例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;beans&gt;</span><br><span class="line">    &lt;bean id=&quot;dataSource&quot; class=&quot;HikariDataSource&quot; /&gt;</span><br><span class="line">    &lt;bean id=&quot;bookService&quot; class=&quot;BookService&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    &lt;bean id=&quot;userService&quot; class=&quot;UserService&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure><p>上述XML配置文件指示IoC容器创建3个JavaBean组件，并把id为dataSource的组件通过属性dataSource（即调用setDataSource()方法）注入到另外两个组件中。</p><p>在Spring的IoC容器中，我们把所有组件统称为JavaBean，即配置一个组件就是配置一个Bean。</p><h1 id="依赖注入方式"><a href="#依赖注入方式" class="headerlink" title="依赖注入方式"></a>依赖注入方式</h1><p>我们从上面的代码可以看到，依赖注入可以通过set()方法实现。但依赖注入也可以通过构造方法实现。</p><p>很多Java类都具有带参数的构造方法，如果我们把BookService改造为通过构造方法注入，那么实现代码如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class BookService &#123;</span><br><span class="line">    private DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    public BookService(DataSource dataSource) &#123;</span><br><span class="line">        this.dataSource = dataSource;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Spring的IoC容器同时支持属性注入和构造方法注入，并允许混合使用。</p><h1 id="无侵入容器"><a href="#无侵入容器" class="headerlink" title="无侵入容器"></a>无侵入容器</h1><p>在设计上，Spring的IoC容器是一个高度可扩展的无侵入容器。所谓无侵入，是指应用程序的组件无需实现Spring的特定接口，或者说，组件根本不知道自己在Spring的容器中运行。这种无侵入的设计有以下好处：</p><ul><li>应用程序组件既可以在Spring的IoC容器中运行，也可以自己编写代码自行组装配置；</li><li>测试的时候并不依赖Spring容器，可单独进行测试，大大提高了开发效率。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Spring提供的容器又称为IoC容器，什么是IoC？&lt;/p&gt;
+&lt;p&gt;IoC全称Inversion of Control，直译为控制反转。IoC又称为依赖注入（DI：Dependency Injection）&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JAVA 学习笔记（Bean）</title>
+    <link href="http://yoursite.com/2021/12/30/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Bean%EF%BC%89/"/>
+    <id>http://yoursite.com/2021/12/30/JAVA 学习笔记（Bean）/</id>
+    <published>2021-12-30T07:12:12.000Z</published>
+    <updated>2021-12-30T09:26:14.302Z</updated>
+    
+    <content type="html"><![CDATA[<p>Bean的概念</p><a id="more"></a><p>[TOC]</p><h1 id="什么是Bean-1-3"><a href="#什么是Bean-1-3" class="headerlink" title="什么是Bean^1^3"></a>什么是Bean<a href="https://www.runoob.com/jsp/jsp-javabean." target="_blank" rel="noopener">^1</a><a href="https://www.liaoxuefeng.com/wiki/1252599548343744/1260474416351680" target="_blank" rel="noopener">^3</a></h1><p>你<br>一种规范，表达实体和信息的规范，便于封装重用。</p><p>Bean的中文含义是“豆子”，顾名思义JavaBean是一段Java小程序。JavaBean实际上是指一种特殊的Java类，它通常用来实现一些比较常用的简单功能，并可以很容易的被重用或者是插入其他应用程序中去。所有遵循一定编程原则的Java类都可以被称作JavaBean。</p><h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>1、若干private实例字段；</p><p>2、提供一个默认的无参构造函数；</p><p>3、可能有一系列的 getter 或 setter 方法；</p><p>4、需要被序列化并且实现serializable接口；</p><h1 id="JavaBean的作用"><a href="#JavaBean的作用" class="headerlink" title="JavaBean的作用"></a>JavaBean的作用</h1><p>JavaBean主要用来传递数据，即把一组数据组合成一个JavaBean便于传输。此外，JavaBean可以方便地被IDE工具分析，生成读写属性的代码，主要用在图形界面的可视化设计中。</p><p>保持向后兼容性</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Bean的概念&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>JAVA 学习笔记（异常，反射，注解，内部类，泛型，序列化，复制）</title>
@@ -56,9 +105,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
@@ -166,6 +215,35 @@
   </entry>
   
   <entry>
+    <title>2104. 子数组范围和</title>
+    <link href="http://yoursite.com/2021/12/19/2104.%20%E5%AD%90%E6%95%B0%E7%BB%84%E8%8C%83%E5%9B%B4%E5%92%8C/"/>
+    <id>http://yoursite.com/2021/12/19/2104. 子数组范围和/</id>
+    <published>2021-12-19T02:30:12.000Z</published>
+    <updated>2021-12-19T02:51:25.617Z</updated>
+    
+    <content type="html"><![CDATA[<p>给你一个整数数组 nums 。nums 中，子数组的 范围 是子数组中最大元素和最小元素的差值。</p><p>返回 nums 中 所有 子数组范围的 和 。</p><a id="more"></a><p>[TOC]</p><p><strong>子数组是数组中一个连续 非空 的元素序列。</strong></p><p>示例 1：</p><pre><code>输入：nums = [1,2,3]输出：4解释：nums 的 6 个子数组如下所示：[1]，范围 = 最大 - 最小 = 1 - 1 = 0 [2]，范围 = 2 - 2 = 0[3]，范围 = 3 - 3 = 0[1,2]，范围 = 2 - 1 = 1[2,3]，范围 = 3 - 2 = 1[1,2,3]，范围 = 3 - 1 = 2所有范围的和是 0 + 0 + 0 + 1 + 1 + 2 = 4</code></pre><p>示例 2：</p><pre><code>输入：nums = [1,3,3]输出：4解释：nums 的 6 个子数组如下所示：[1]，范围 = 最大 - 最小 = 1 - 1 = 0[3]，范围 = 3 - 3 = 0[3]，范围 = 3 - 3 = 0[1,3]，范围 = 3 - 1 = 2[3,3]，范围 = 3 - 3 = 0[1,3,3]，范围 = 3 - 1 = 2所有范围的和是 0 + 0 + 0 + 2 + 0 + 2 = 4</code></pre><p>示例 3：</p><pre><code>输入：nums = [4,-2,-3,4,1]输出：59解释：nums 中所有子数组范围的和是 59</code></pre><p>提示：</p><p>1 &lt;= nums.length &lt;= 1000<br>-109 &lt;= nums[i] &lt;= 109</p><p>进阶：你可以设计一种时间复杂度为 O(n) 的解决方案吗？</p><h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>1、一个很自然的思路就是枚举每一个子数组，找到子数组的最小值、最大值，然后求范围之和。这样做复杂度至少是O(n^2)。  </p><p>2、要找到一个O(n)复杂度的方法，只能依次考虑每一个数字。当出现数字nums[j]时，它对范围之和有什么影响呢？这样问题就变为了nums[j]可能是哪些子数组的最大值、最小值呢？沿着这个思路，我们发现，假设nums[i]…nums[j]…nums[k]，nums[i]是nums[j]左边第一个大于nums[j]的数，nums[k]是nums[j]右边第一个大于nums[j]的数，那么显然区间nums(i,k)之间的最大值是nums[j]，这就意味着该区间内所有包含nums[j]的子数组的最大值都是nums[j]；而任何一个包含nums[i]或者nums[k]的子数组的最大值都不可能是nums[j]。这样nums[j]作为最大值，贡献的范围之和就是区间nums(i,k)包含nums[j]的子数组个数 * nums[j]，而这个子数组个数 = (j - i) * (k - j)。  </p><p>3、同样的思路，我们可以找到nums[j]作为最小值，对范围之和的贡献。我们遍历所有的nums[j]，加上它作为最大值的贡献，减去它作为最小值的贡献，这样就可以求出范围之和了。  </p><p>4、那么如何求得nums[j]左右两边第一个大于它的数呢？这是一个典型的单调栈问题，我们正向遍历数组，维护一个单调递增栈和一个单调递减栈，单调递增栈的栈顶元素就是左边第一个小于nums[j]的元素，单调递减栈的栈顶元素就是左边第一个大于nums[j]的元素。同样的方法，反向遍历数组，即可求得nums[j]右边第一个大于、小于它的元素。  </p><p>5、注意一个细节问题，当有相同num出现时，如果是正向遍历，那么不应该继续弹出栈顶元素，因为在一个子数组中相同的两个数只有第一个会被认为是最大值、最小值，所以后来的第二个没有办法取代第一个。而反向遍历时恰恰相反，后来的第二个数在原数组的前面位置，它应该取代第一个数，所以需要继续弹出栈顶元素。  </p><h2 id="复杂度问题"><a href="#复杂度问题" class="headerlink" title="复杂度问题"></a>复杂度问题</h2><p>时间复杂度：O(n)，单调栈和后续的求范围之和，都只需要遍历一次数组。  </p><p>空间复杂度：O(n)，需要保存每个数左右两边第一个大于、小于自己的数的位置。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><details>    <summary>cpp</summary><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">subArrayRanges</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i, size = nums.size();</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; leftLess(size), leftGreater(size), rightLess(size), rightGreater(size);</span><br><span class="line"></span><br><span class="line">        getLeft(nums, leftLess, leftGreater);</span><br><span class="line">        getRight(nums, rightLess, rightGreater);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">            sum += (nums[i] * ((<span class="keyword">long</span> <span class="keyword">long</span>)i - leftGreater[i]) * ((<span class="keyword">long</span> <span class="keyword">long</span>)rightGreater[i] - i));</span><br><span class="line">            sum -= (nums[i] * ((<span class="keyword">long</span> <span class="keyword">long</span>)i - leftLess[i]) * ((<span class="keyword">long</span> <span class="keyword">long</span>)rightLess[i] - i));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getLeft</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; leftLess, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; leftGreater)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i, size = nums.size();</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; increasing, decreasing;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!increasing.empty() &amp;&amp; nums[increasing.top()] &gt; nums[i]) &#123;</span><br><span class="line">                increasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            leftLess[i] = increasing.empty() ? <span class="number">-1</span> : increasing.top();</span><br><span class="line">            increasing.push(i);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (!decreasing.empty() &amp;&amp; nums[decreasing.top()] &lt; nums[i]) &#123;</span><br><span class="line">                decreasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            leftGreater[i] = decreasing.empty() ? <span class="number">-1</span> : decreasing.top();</span><br><span class="line">            decreasing.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getRight</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; rightLess, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; rightGreater)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i, size = nums.size();</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; increasing, decreasing;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = size - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!increasing.empty() &amp;&amp; nums[increasing.top()] &gt;= nums[i]) &#123;</span><br><span class="line">                increasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            rightLess[i] = increasing.empty() ? size : increasing.top();</span><br><span class="line">            increasing.push(i);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (!decreasing.empty() &amp;&amp; nums[decreasing.top()] &lt;= nums[i]) &#123;</span><br><span class="line">                decreasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            rightGreater[i] = decreasing.empty() ? size : decreasing.top();</span><br><span class="line">            decreasing.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给你一个整数数组 nums 。nums 中，子数组的 范围 是子数组中最大元素和最小元素的差值。&lt;/p&gt;
+&lt;p&gt;返回 nums 中 所有 子数组范围的 和 。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
+    
+    
+      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
+    
+      <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2103. 环和杆</title>
     <link href="http://yoursite.com/2021/12/19/2103.%20%E7%8E%AF%E5%92%8C%E6%9D%86/"/>
     <id>http://yoursite.com/2021/12/19/2103. 环和杆/</id>
@@ -188,35 +266,6 @@
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2104. 子数组范围和</title>
-    <link href="http://yoursite.com/2021/12/19/2104.%20%E5%AD%90%E6%95%B0%E7%BB%84%E8%8C%83%E5%9B%B4%E5%92%8C/"/>
-    <id>http://yoursite.com/2021/12/19/2104. 子数组范围和/</id>
-    <published>2021-12-19T02:30:12.000Z</published>
-    <updated>2021-12-19T02:51:25.617Z</updated>
-    
-    <content type="html"><![CDATA[<p>给你一个整数数组 nums 。nums 中，子数组的 范围 是子数组中最大元素和最小元素的差值。</p><p>返回 nums 中 所有 子数组范围的 和 。</p><a id="more"></a><p>[TOC]</p><p><strong>子数组是数组中一个连续 非空 的元素序列。</strong></p><p>示例 1：</p><pre><code>输入：nums = [1,2,3]输出：4解释：nums 的 6 个子数组如下所示：[1]，范围 = 最大 - 最小 = 1 - 1 = 0 [2]，范围 = 2 - 2 = 0[3]，范围 = 3 - 3 = 0[1,2]，范围 = 2 - 1 = 1[2,3]，范围 = 3 - 2 = 1[1,2,3]，范围 = 3 - 1 = 2所有范围的和是 0 + 0 + 0 + 1 + 1 + 2 = 4</code></pre><p>示例 2：</p><pre><code>输入：nums = [1,3,3]输出：4解释：nums 的 6 个子数组如下所示：[1]，范围 = 最大 - 最小 = 1 - 1 = 0[3]，范围 = 3 - 3 = 0[3]，范围 = 3 - 3 = 0[1,3]，范围 = 3 - 1 = 2[3,3]，范围 = 3 - 3 = 0[1,3,3]，范围 = 3 - 1 = 2所有范围的和是 0 + 0 + 0 + 2 + 0 + 2 = 4</code></pre><p>示例 3：</p><pre><code>输入：nums = [4,-2,-3,4,1]输出：59解释：nums 中所有子数组范围的和是 59</code></pre><p>提示：</p><p>1 &lt;= nums.length &lt;= 1000<br>-109 &lt;= nums[i] &lt;= 109</p><p>进阶：你可以设计一种时间复杂度为 O(n) 的解决方案吗？</p><h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>1、一个很自然的思路就是枚举每一个子数组，找到子数组的最小值、最大值，然后求范围之和。这样做复杂度至少是O(n^2)。  </p><p>2、要找到一个O(n)复杂度的方法，只能依次考虑每一个数字。当出现数字nums[j]时，它对范围之和有什么影响呢？这样问题就变为了nums[j]可能是哪些子数组的最大值、最小值呢？沿着这个思路，我们发现，假设nums[i]…nums[j]…nums[k]，nums[i]是nums[j]左边第一个大于nums[j]的数，nums[k]是nums[j]右边第一个大于nums[j]的数，那么显然区间nums(i,k)之间的最大值是nums[j]，这就意味着该区间内所有包含nums[j]的子数组的最大值都是nums[j]；而任何一个包含nums[i]或者nums[k]的子数组的最大值都不可能是nums[j]。这样nums[j]作为最大值，贡献的范围之和就是区间nums(i,k)包含nums[j]的子数组个数 * nums[j]，而这个子数组个数 = (j - i) * (k - j)。  </p><p>3、同样的思路，我们可以找到nums[j]作为最小值，对范围之和的贡献。我们遍历所有的nums[j]，加上它作为最大值的贡献，减去它作为最小值的贡献，这样就可以求出范围之和了。  </p><p>4、那么如何求得nums[j]左右两边第一个大于它的数呢？这是一个典型的单调栈问题，我们正向遍历数组，维护一个单调递增栈和一个单调递减栈，单调递增栈的栈顶元素就是左边第一个小于nums[j]的元素，单调递减栈的栈顶元素就是左边第一个大于nums[j]的元素。同样的方法，反向遍历数组，即可求得nums[j]右边第一个大于、小于它的元素。  </p><p>5、注意一个细节问题，当有相同num出现时，如果是正向遍历，那么不应该继续弹出栈顶元素，因为在一个子数组中相同的两个数只有第一个会被认为是最大值、最小值，所以后来的第二个没有办法取代第一个。而反向遍历时恰恰相反，后来的第二个数在原数组的前面位置，它应该取代第一个数，所以需要继续弹出栈顶元素。  </p><h2 id="复杂度问题"><a href="#复杂度问题" class="headerlink" title="复杂度问题"></a>复杂度问题</h2><p>时间复杂度：O(n)，单调栈和后续的求范围之和，都只需要遍历一次数组。  </p><p>空间复杂度：O(n)，需要保存每个数左右两边第一个大于、小于自己的数的位置。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><details>    <summary>cpp</summary><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">subArrayRanges</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i, size = nums.size();</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; leftLess(size), leftGreater(size), rightLess(size), rightGreater(size);</span><br><span class="line"></span><br><span class="line">        getLeft(nums, leftLess, leftGreater);</span><br><span class="line">        getRight(nums, rightLess, rightGreater);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">            sum += (nums[i] * ((<span class="keyword">long</span> <span class="keyword">long</span>)i - leftGreater[i]) * ((<span class="keyword">long</span> <span class="keyword">long</span>)rightGreater[i] - i));</span><br><span class="line">            sum -= (nums[i] * ((<span class="keyword">long</span> <span class="keyword">long</span>)i - leftLess[i]) * ((<span class="keyword">long</span> <span class="keyword">long</span>)rightLess[i] - i));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getLeft</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; leftLess, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; leftGreater)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i, size = nums.size();</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; increasing, decreasing;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!increasing.empty() &amp;&amp; nums[increasing.top()] &gt; nums[i]) &#123;</span><br><span class="line">                increasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            leftLess[i] = increasing.empty() ? <span class="number">-1</span> : increasing.top();</span><br><span class="line">            increasing.push(i);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (!decreasing.empty() &amp;&amp; nums[decreasing.top()] &lt; nums[i]) &#123;</span><br><span class="line">                decreasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            leftGreater[i] = decreasing.empty() ? <span class="number">-1</span> : decreasing.top();</span><br><span class="line">            decreasing.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getRight</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; rightLess, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; rightGreater)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i, size = nums.size();</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; increasing, decreasing;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = size - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!increasing.empty() &amp;&amp; nums[increasing.top()] &gt;= nums[i]) &#123;</span><br><span class="line">                increasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            rightLess[i] = increasing.empty() ? size : increasing.top();</span><br><span class="line">            increasing.push(i);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (!decreasing.empty() &amp;&amp; nums[decreasing.top()] &lt;= nums[i]) &#123;</span><br><span class="line">                decreasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            rightGreater[i] = decreasing.empty() ? size : decreasing.top();</span><br><span class="line">            decreasing.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;给你一个整数数组 nums 。nums 中，子数组的 范围 是子数组中最大元素和最小元素的差值。&lt;/p&gt;
-&lt;p&gt;返回 nums 中 所有 子数组范围的 和 。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
-    
-    
-      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
   </entry>
   
@@ -367,9 +416,9 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Tree" scheme="http://yoursite.com/tags/Tree/"/>
-    
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
+    
+      <category term="Tree" scheme="http://yoursite.com/tags/Tree/"/>
     
       <category term="Depth-First Search" scheme="http://yoursite.com/tags/Depth-First-Search/"/>
     
@@ -484,67 +533,6 @@
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>70. 爬楼梯</title>
-    <link href="http://yoursite.com/2021/12/16/70.%20%E7%88%AC%E6%A5%BC%E6%A2%AF/"/>
-    <id>http://yoursite.com/2021/12/16/70. 爬楼梯/</id>
-    <published>2021-12-16T07:12:12.000Z</published>
-    <updated>2021-12-16T07:30:09.737Z</updated>
-    
-    <content type="html"><![CDATA[<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p><p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p><a id="more"></a><p>[TOC]</p><p>注意：给定 n 是一个正整数。</p><p>示例 1：</p><pre><code>输入： 2输出： 2解释： 有两种方法可以爬到楼顶。1.  1 阶 + 1 阶2.  2 阶</code></pre><p>示例 2：</p><pre><code>输入： 3输出： 3解释： 有三种方法可以爬到楼顶。1.  1 阶 + 1 阶 + 1 阶2.  1 阶 + 2 阶3.  2 阶 + 1 阶</code></pre><p>具体解法和斐波那契数列一样，动态规划，矩阵快速幂和齐次线性递推方程取通解。本来已经这样就玩到极致了<a href="https://leetcode-cn.com/problems/climbing-stairs/solution/pa-lou-ti-by-leetcode-solution/" target="_blank" rel="noopener">^1</a>，没想到还有卷中卷，评论里有人提到字节面试还会修改条件，这样就又为之一变。</p><h1 id="加入新的限制条件：不能连续跳两个台阶。"><a href="#加入新的限制条件：不能连续跳两个台阶。" class="headerlink" title="加入新的限制条件：不能连续跳两个台阶。"></a>加入新的限制条件：不能连续跳两个台阶。</h1><p> 1、每次你可以爬 1 或 2 个台阶。</p><p> 2、不能连续跳两个台阶。（个人理解为这次跳了两个台阶，下次不能再跳两个台阶）</p><p> 假设：</p><pre><code>f(x) 表示爬到第 x 级台阶的方案数， g(x, 1) 表示爬到第 x 级台阶并且最后一步只跨越一个台阶的方案数， g(x, 2) 表示爬到第 x 级台阶并且最后一步跨越了两个台阶的方案数。由 ：f(x) = g(x, 1)+g(x,2)， g(x, 1) = f(x-1)， g(x, 2) = g(x-2, 1) // 最后一步跨越了两步，那么上一步只能跨越一步得：f(x) = g(x, 1) + g(x, 2)       = f(x-1) + g(x-2, 1)       = f(x-1) + f((x-2)-1)      = f(x-1) + f(x-3)</code></pre><p>题目里“不能连续跳两个台阶”，即一旦跳了两个台阶，则下一步只能跳一步（2-&gt;1），把它们连在一起就一共跳了三个台阶，所以问题可以转化为要么跳一个台阶，要么跳三个台阶（当然还是有点区别的，只不过因为结果是一样的，所以可以这么转化），于是就有了 f(x) = f(x-1) + f(x-3)</p><pre><code>public int climbStarts2(int n) {        if(n == 1) return 1; // 防止数组溢出（f[2]）        int[] f = new int[n+1];        f[0] = 1;        f[1] = 1;        f[2] = 2;        for(int i = 3; i &lt;= n; i++) {            f[i] = f[i-1] + f[i-3];        }        return f[n];    }</code></pre><p>结合执行树会更快理解：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">                         6</span><br><span class="line">                   /            \</span><br><span class="line">                  5              4</span><br><span class="line">             /        \         /</span><br><span class="line">            4          3       3</span><br><span class="line">        /       \     /      /   \</span><br><span class="line">       3         2   2      2     1</span><br><span class="line">     /  \       /   / \    / \   /</span><br><span class="line">    2    1     1   1   0  1   0 0</span><br><span class="line">   / \   /    /   /      /</span><br><span class="line">  1   0 0    0   0      0</span><br><span class="line"> /</span><br><span class="line">0</span><br></pre></td></tr></table></figure><p>这是一个 n = 6 时绘制的一个带权二叉树，其中左节点为权 1，右节点为权 2，很明显，问题的解为树的非空叶节点个数。</p><p>根节点为 f(x)<br>根节点的左节点为 g(x, 1)，又为 f(x - 1)，因为它是一个同类型的子问题<br>根节点的右节点为 g(x, 2)<br>而看节点 g(x, 2)，其不包含非空右节点，即它的解等同于它的左节点的解，再将其相对于根节点，可以明显看出其为 f(x - 3)</p><p>最终结果便为：f(x) = f(x - 1) + f(x - 3)</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;假设你正在爬楼梯。需要 n 阶你才能到达楼顶。&lt;/p&gt;
-&lt;p&gt;每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-      <category term="Recursion" scheme="http://yoursite.com/tags/Recursion/"/>
-    
-      <category term="Memoization" scheme="http://yoursite.com/tags/Memoization/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>剑指 Offer 10- II. 青蛙跳台阶问题</title>
-    <link href="http://yoursite.com/2021/12/16/%E5%89%91%E6%8C%87%20Offer%2010-%20II.%20%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2021/12/16/剑指 Offer 10- II. 青蛙跳台阶问题/</id>
-    <published>2021-12-16T07:12:12.000Z</published>
-    <updated>2021-12-16T07:30:03.599Z</updated>
-    
-    <content type="html"><![CDATA[<p>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。</p><a id="more"></a><p>[TOC]</p><p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p><p>示例 1：</p><pre><code>输入：n = 2输出：2</code></pre><p>示例 2：</p><pre><code>输入：n = 7输出：21</code></pre><p>示例 3：</p><pre><code>输入：n = 0输出：1</code></pre><p>提示：</p><p>0 &lt;= n &lt;= 100</p><p>注意：本题与<a href="https://leetcode-cn.com/problems/climbing-stairs/" target="_blank" rel="noopener">70. 爬楼梯</a>相同</p><p>具体解法和斐波那契数列一样，动态规划，矩阵快速幂和齐次线性递推方程取通解。本来已经这样就玩到极致了<a href="https://leetcode-cn.com/problems/climbing-stairs/solution/pa-lou-ti-by-leetcode-solution/" target="_blank" rel="noopener">^1</a>，没想到还有卷中卷，评论里有人提到字节面试还会修改条件，这样就又为之一变。</p><h1 id="加入新的限制条件：不能连续跳两个台阶。"><a href="#加入新的限制条件：不能连续跳两个台阶。" class="headerlink" title="加入新的限制条件：不能连续跳两个台阶。"></a>加入新的限制条件：不能连续跳两个台阶。</h1><p> 1、每次你可以爬 1 或 2 个台阶。</p><p> 2、不能连续跳两个台阶。（个人理解为这次跳了两个台阶，下次不能再跳两个台阶）</p><p> 假设：</p><pre><code>f(x) 表示爬到第 x 级台阶的方案数， g(x, 1) 表示爬到第 x 级台阶并且最后一步只跨越一个台阶的方案数， g(x, 2) 表示爬到第 x 级台阶并且最后一步跨越了两个台阶的方案数。由 ：f(x) = g(x, 1)+g(x,2)， g(x, 1) = f(x-1)， g(x, 2) = g(x-2, 1) // 最后一步跨越了两步，那么上一步只能跨越一步得：f(x) = g(x, 1) + g(x, 2)       = f(x-1) + g(x-2, 1)       = f(x-1) + f((x-2)-1)      = f(x-1) + f(x-3)</code></pre><p>题目里“不能连续跳两个台阶”，即一旦跳了两个台阶，则下一步只能跳一步（2-&gt;1），把它们连在一起就一共跳了三个台阶，所以问题可以转化为要么跳一个台阶，要么跳三个台阶（当然还是有点区别的，只不过因为结果是一样的，所以可以这么转化），于是就有了 f(x) = f(x-1) + f(x-3)</p><pre><code>public int climbStarts2(int n) {        if(n == 1) return 1; // 防止数组溢出（f[2]）        int[] f = new int[n+1];        f[0] = 1;        f[1] = 1;        f[2] = 2;        for(int i = 3; i &lt;= n; i++) {            f[i] = f[i-1] + f[i-3];        }        return f[n];    }</code></pre><p>结合执行树会更快理解：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">                         6</span><br><span class="line">                   /            \</span><br><span class="line">                  5              4</span><br><span class="line">             /        \         /</span><br><span class="line">            4          3       3</span><br><span class="line">        /       \     /      /   \</span><br><span class="line">       3         2   2      2     1</span><br><span class="line">     /  \       /   / \    / \   /</span><br><span class="line">    2    1     1   1   0  1   0 0</span><br><span class="line">   / \   /    /   /      /</span><br><span class="line">  1   0 0    0   0      0</span><br><span class="line"> /</span><br><span class="line">0</span><br></pre></td></tr></table></figure><p>这是一个 n = 6 时绘制的一个带权二叉树，其中左节点为权 1，右节点为权 2，很明显，问题的解为树的非空叶节点个数。</p><p>根节点为 f(x)<br>根节点的左节点为 g(x, 1)，又为 f(x - 1)，因为它是一个同类型的子问题<br>根节点的右节点为 g(x, 2)<br>而看节点 g(x, 2)，其不包含非空右节点，即它的解等同于它的左节点的解，再将其相对于根节点，可以明显看出其为 f(x - 3)</p><p>最终结果便为：f(x) = f(x - 1) + f(x - 3)</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
-    
-      <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
-    
-      <category term="Recursion" scheme="http://yoursite.com/tags/Recursion/"/>
-    
-      <category term="Memoization" scheme="http://yoursite.com/tags/Memoization/"/>
     
   </entry>
   
