@@ -45,6 +45,30 @@
   </entry>
   
   <entry>
+    <title>JAVA 学习笔记（Kafka）</title>
+    <link href="http://yoursite.com/2022/01/04/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Kafka%EF%BC%89/"/>
+    <id>http://yoursite.com/2022/01/04/JAVA 学习笔记（Kafka）/</id>
+    <published>2022-01-04T07:12:12.000Z</published>
+    <updated>2022-01-04T15:12:41.749Z</updated>
+    
+    <content type="html"><![CDATA[<p>Kafka 是一种高吞吐量、分布式、基于发布/订阅的消息系统，最初由 LinkedIn 公司开发，使用Scala 语言编写，目前是 Apache 的开源项目。</p><a id="more"></a><p>[TOC]</p><ol><li>broker：Kafka 服务器，负责消息存储和转发</li><li>topic：消息类别，Kafka 按照 topic 来分类消息</li><li>partition：topic 的分区，一个 topic 可以包含多个 partition，topic 消息保存在各个partition 上</li><li>offset：消息在日志中的位置，可以理解是消息在 partition 上的偏移量，也是代表该消息的唯一序号</li><li>Producer：消息生产者</li><li>Consumer：消息消费者</li><li>Consumer Group：消费者分组，每个 Consumer 必须属于一个 group</li><li>Zookeeper：保存着集群 broker、topic、partition 等 meta 数据；另外，还负责 broker 故障发现，partition leader 选举，负载均衡等功能</li></ol><h1 id="Kafka-数据存储设计"><a href="#Kafka-数据存储设计" class="headerlink" title="Kafka 数据存储设计"></a>Kafka 数据存储设计</h1><h2 id="partition-的数据文件（offset，MessageSize，data）"><a href="#partition-的数据文件（offset，MessageSize，data）" class="headerlink" title="partition 的数据文件（offset，MessageSize，data）"></a>partition 的数据文件（offset，MessageSize，data）</h2><p>partition 中的每条 Message 包含了以下三个属性：offset，MessageSize，data，其中 offset 表示 Message 在这个 partition 中的偏移量，offset 不是该 Message 在 partition 数据文件中的实际存储位置，而是逻辑上一个值，它唯一确定了 partition 中的一条 Message，可以认为 offset 是partition 中 Message 的 id；MessageSize 表示消息内容 data 的大小；data 为 Message 的具体内容。</p><h2 id="数据文件分段-segment（顺序读写、分段命令、二分查找）"><a href="#数据文件分段-segment（顺序读写、分段命令、二分查找）" class="headerlink" title="数据文件分段 segment（顺序读写、分段命令、二分查找）"></a>数据文件分段 segment（顺序读写、分段命令、二分查找）</h2><p>partition 物理上由多个 segment 文件组成，每个segment大小相等，顺序读写。每个segment数据文件以该段中最小的offset命名，文件扩展名为.log。这样在查找指定 offset 的 Message 的时候，用二分查找就可以定位到该 Message 在哪个 segment 数据文件中。</p><h2 id="数据文件索引（分段索引、稀疏存储）"><a href="#数据文件索引（分段索引、稀疏存储）" class="headerlink" title="数据文件索引（分段索引、稀疏存储）"></a>数据文件索引（分段索引、稀疏存储）</h2><p>Kafka 为每个分段后的数据文件建立了索引文件，文件名与数据文件的名字是一样的，只是文件扩展名为.index。index 文件中并没有为数据文件中的每条 Message 建立索引，而是采用了稀疏存储的方式，每隔一定字节的数据建立一条索引。这样避免了索引文件占用过多的空间，从而可以将索引文件保留在内存中。</p><h1 id="生产者设计"><a href="#生产者设计" class="headerlink" title="生产者设计"></a>生产者设计</h1><h2 id="负载均衡（partition-会均衡分布到不同-broker-上）"><a href="#负载均衡（partition-会均衡分布到不同-broker-上）" class="headerlink" title="负载均衡（partition 会均衡分布到不同 broker 上）"></a>负载均衡（partition 会均衡分布到不同 broker 上）</h2><p>由于消息 topic 由多个 partition 组成，且 partition 会均衡分布到不同 broker 上，因此，为了有效利用 broker 集群的性能，提高消息的吞吐量，producer 可以通过随机或者 hash 等方式，将消息平均发送到多个 partition 上，以实现负载均衡。</p><h2 id="批量发送"><a href="#批量发送" class="headerlink" title="批量发送"></a>批量发送</h2><p>是提高消息吞吐量重要的方式，Producer 端可以在内存中合并多条消息后，以一次请求的方式发送了批量的消息给 broker，从而大大减少 broker 存储消息的 IO 操作次数。但也一定程度上影响了消息的实时性，相当于以时延代价，换取更好的吞吐量。</p><h2 id="压缩（GZIP-或-Snappy）"><a href="#压缩（GZIP-或-Snappy）" class="headerlink" title="压缩（GZIP 或 Snappy）"></a>压缩（GZIP 或 Snappy）</h2><p>Producer 端可以通过 GZIP 或 Snappy 格式对消息集合进行压缩。Producer端进行压缩之后，在Consumer端需进行解压。压缩的好处就是减少传输的数据量，减轻对网络传输的压力，在对大数据处理上，瓶颈往往体现在网络上而不是 CPU（压缩和解压会耗掉部分 CPU 资源）。</p><h1 id="消费者设计"><a href="#消费者设计" class="headerlink" title="消费者设计"></a>消费者设计</h1><h2 id="Consumer-Group"><a href="#Consumer-Group" class="headerlink" title="Consumer Group"></a>Consumer Group</h2><p>同一 Consumer Group 中的多个 Consumer 实例，不同时消费同一个 partition，等效于队列模式。partition 内消息是有序的，Consumer 通过 pull 方式消费消息。Kafka 不删除已消费的消息对于 partition，顺序读写磁盘数据，以时间复杂度 O(1)方式提供消息持久化能力。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Kafka 是一种高吞吐量、分布式、基于发布/订阅的消息系统，最初由 LinkedIn 公司开发，使用Scala 语言编写，目前是 Apache 的开源项目。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="2022年1月" scheme="http://yoursite.com/categories/2022%E5%B9%B41%E6%9C%88/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="Kafka" scheme="http://yoursite.com/tags/Kafka/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JAVA 学习笔记（日志）</title>
     <link href="http://yoursite.com/2022/01/04/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E6%97%A5%E5%BF%97%EF%BC%89/"/>
     <id>http://yoursite.com/2022/01/04/JAVA 学习笔记（日志）/</id>
@@ -169,11 +193,11 @@
       <category term="2022年1月" scheme="http://yoursite.com/categories/2022%E5%B9%B41%E6%9C%88/"/>
     
     
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
       <category term="Breadth-first Search" scheme="http://yoursite.com/tags/Breadth-first-Search/"/>
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
       <category term="Depth-first Search" scheme="http://yoursite.com/tags/Depth-first-Search/"/>
     
@@ -368,13 +392,13 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
-      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
       <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
-      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
-    
       <category term="String" scheme="http://yoursite.com/tags/String/"/>
+    
+      <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
+      <category term="Math" scheme="http://yoursite.com/tags/Math/"/>
     
   </entry>
   
@@ -478,35 +502,6 @@
   </entry>
   
   <entry>
-    <title>2104. 子数组范围和</title>
-    <link href="http://yoursite.com/2021/12/19/2104.%20%E5%AD%90%E6%95%B0%E7%BB%84%E8%8C%83%E5%9B%B4%E5%92%8C/"/>
-    <id>http://yoursite.com/2021/12/19/2104. 子数组范围和/</id>
-    <published>2021-12-19T02:30:12.000Z</published>
-    <updated>2021-12-19T02:51:25.617Z</updated>
-    
-    <content type="html"><![CDATA[<p>给你一个整数数组 nums 。nums 中，子数组的 范围 是子数组中最大元素和最小元素的差值。</p><p>返回 nums 中 所有 子数组范围的 和 。</p><a id="more"></a><p>[TOC]</p><p><strong>子数组是数组中一个连续 非空 的元素序列。</strong></p><p>示例 1：</p><pre><code>输入：nums = [1,2,3]输出：4解释：nums 的 6 个子数组如下所示：[1]，范围 = 最大 - 最小 = 1 - 1 = 0 [2]，范围 = 2 - 2 = 0[3]，范围 = 3 - 3 = 0[1,2]，范围 = 2 - 1 = 1[2,3]，范围 = 3 - 2 = 1[1,2,3]，范围 = 3 - 1 = 2所有范围的和是 0 + 0 + 0 + 1 + 1 + 2 = 4</code></pre><p>示例 2：</p><pre><code>输入：nums = [1,3,3]输出：4解释：nums 的 6 个子数组如下所示：[1]，范围 = 最大 - 最小 = 1 - 1 = 0[3]，范围 = 3 - 3 = 0[3]，范围 = 3 - 3 = 0[1,3]，范围 = 3 - 1 = 2[3,3]，范围 = 3 - 3 = 0[1,3,3]，范围 = 3 - 1 = 2所有范围的和是 0 + 0 + 0 + 2 + 0 + 2 = 4</code></pre><p>示例 3：</p><pre><code>输入：nums = [4,-2,-3,4,1]输出：59解释：nums 中所有子数组范围的和是 59</code></pre><p>提示：</p><p>1 &lt;= nums.length &lt;= 1000<br>-109 &lt;= nums[i] &lt;= 109</p><p>进阶：你可以设计一种时间复杂度为 O(n) 的解决方案吗？</p><h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>1、一个很自然的思路就是枚举每一个子数组，找到子数组的最小值、最大值，然后求范围之和。这样做复杂度至少是O(n^2)。  </p><p>2、要找到一个O(n)复杂度的方法，只能依次考虑每一个数字。当出现数字nums[j]时，它对范围之和有什么影响呢？这样问题就变为了nums[j]可能是哪些子数组的最大值、最小值呢？沿着这个思路，我们发现，假设nums[i]…nums[j]…nums[k]，nums[i]是nums[j]左边第一个大于nums[j]的数，nums[k]是nums[j]右边第一个大于nums[j]的数，那么显然区间nums(i,k)之间的最大值是nums[j]，这就意味着该区间内所有包含nums[j]的子数组的最大值都是nums[j]；而任何一个包含nums[i]或者nums[k]的子数组的最大值都不可能是nums[j]。这样nums[j]作为最大值，贡献的范围之和就是区间nums(i,k)包含nums[j]的子数组个数 * nums[j]，而这个子数组个数 = (j - i) * (k - j)。  </p><p>3、同样的思路，我们可以找到nums[j]作为最小值，对范围之和的贡献。我们遍历所有的nums[j]，加上它作为最大值的贡献，减去它作为最小值的贡献，这样就可以求出范围之和了。  </p><p>4、那么如何求得nums[j]左右两边第一个大于它的数呢？这是一个典型的单调栈问题，我们正向遍历数组，维护一个单调递增栈和一个单调递减栈，单调递增栈的栈顶元素就是左边第一个小于nums[j]的元素，单调递减栈的栈顶元素就是左边第一个大于nums[j]的元素。同样的方法，反向遍历数组，即可求得nums[j]右边第一个大于、小于它的元素。  </p><p>5、注意一个细节问题，当有相同num出现时，如果是正向遍历，那么不应该继续弹出栈顶元素，因为在一个子数组中相同的两个数只有第一个会被认为是最大值、最小值，所以后来的第二个没有办法取代第一个。而反向遍历时恰恰相反，后来的第二个数在原数组的前面位置，它应该取代第一个数，所以需要继续弹出栈顶元素。  </p><h2 id="复杂度问题"><a href="#复杂度问题" class="headerlink" title="复杂度问题"></a>复杂度问题</h2><p>时间复杂度：O(n)，单调栈和后续的求范围之和，都只需要遍历一次数组。  </p><p>空间复杂度：O(n)，需要保存每个数左右两边第一个大于、小于自己的数的位置。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><details>    <summary>cpp</summary><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">subArrayRanges</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i, size = nums.size();</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; leftLess(size), leftGreater(size), rightLess(size), rightGreater(size);</span><br><span class="line"></span><br><span class="line">        getLeft(nums, leftLess, leftGreater);</span><br><span class="line">        getRight(nums, rightLess, rightGreater);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">            sum += (nums[i] * ((<span class="keyword">long</span> <span class="keyword">long</span>)i - leftGreater[i]) * ((<span class="keyword">long</span> <span class="keyword">long</span>)rightGreater[i] - i));</span><br><span class="line">            sum -= (nums[i] * ((<span class="keyword">long</span> <span class="keyword">long</span>)i - leftLess[i]) * ((<span class="keyword">long</span> <span class="keyword">long</span>)rightLess[i] - i));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getLeft</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; leftLess, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; leftGreater)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i, size = nums.size();</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; increasing, decreasing;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!increasing.empty() &amp;&amp; nums[increasing.top()] &gt; nums[i]) &#123;</span><br><span class="line">                increasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            leftLess[i] = increasing.empty() ? <span class="number">-1</span> : increasing.top();</span><br><span class="line">            increasing.push(i);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (!decreasing.empty() &amp;&amp; nums[decreasing.top()] &lt; nums[i]) &#123;</span><br><span class="line">                decreasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            leftGreater[i] = decreasing.empty() ? <span class="number">-1</span> : decreasing.top();</span><br><span class="line">            decreasing.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getRight</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; rightLess, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; rightGreater)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i, size = nums.size();</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; increasing, decreasing;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = size - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!increasing.empty() &amp;&amp; nums[increasing.top()] &gt;= nums[i]) &#123;</span><br><span class="line">                increasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            rightLess[i] = increasing.empty() ? size : increasing.top();</span><br><span class="line">            increasing.push(i);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (!decreasing.empty() &amp;&amp; nums[decreasing.top()] &lt;= nums[i]) &#123;</span><br><span class="line">                decreasing.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            rightGreater[i] = decreasing.empty() ? size : decreasing.top();</span><br><span class="line">            decreasing.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></details>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;给你一个整数数组 nums 。nums 中，子数组的 范围 是子数组中最大元素和最小元素的差值。&lt;/p&gt;
-&lt;p&gt;返回 nums 中 所有 子数组范围的 和 。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
-    
-    
-      <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-      <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-      <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
-    
-  </entry>
-  
-  <entry>
     <title>2103. 环和杆</title>
     <link href="http://yoursite.com/2021/12/19/2103.%20%E7%8E%AF%E5%92%8C%E6%9D%86/"/>
     <id>http://yoursite.com/2021/12/19/2103. 环和杆/</id>
@@ -524,11 +519,11 @@
       <category term="2021年12月" scheme="http://yoursite.com/categories/2021%E5%B9%B412%E6%9C%88/"/>
     
     
+      <category term="String" scheme="http://yoursite.com/tags/String/"/>
+    
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
       <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
-    
-      <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
   </entry>
   
