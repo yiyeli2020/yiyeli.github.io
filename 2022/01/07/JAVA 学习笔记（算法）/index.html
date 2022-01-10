@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>JAVA 学习笔记（算法） | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="查找，排序，回溯等算法">
+<meta name="keywords" content="Java,Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA 学习笔记（算法）">
+<meta property="og:url" content="http://yoursite.com/2022/01/07/JAVA 学习笔记（算法）/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="查找，排序，回溯等算法">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2022-01-10T07:57:14.032Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA 学习笔记（算法）">
+<meta name="twitter:description" content="查找，排序，回溯等算法">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Yiye Li</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 12px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 19.2px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 16.8px;">Backtracking</a> <a href="/tags/Binary-Indexed-Tree/" style="font-size: 10px;">Binary Indexed Tree</a> <a href="/tags/Binary-Search/" style="font-size: 17.2px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10.4px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 17.2px;">Bit Manipulation</a> <a href="/tags/Brainteaser/" style="font-size: 10.4px;">Brainteaser</a> <a href="/tags/Bread-first-Search/" style="font-size: 10.4px;">Bread-first Search</a> <a href="/tags/Breadth-First-Search/" style="font-size: 10px;">Breadth-First Search</a> <a href="/tags/Breadth-first-Search/" style="font-size: 15.2px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 14.4px;">C++</a> <a href="/tags/Cache/" style="font-size: 10px;">Cache</a> <a href="/tags/Cassandra/" style="font-size: 10px;">Cassandra</a> <a href="/tags/Coding-Interviews/" style="font-size: 12px;">Coding Interviews</a> <a href="/tags/Collection/" style="font-size: 10px;">Collection</a> <a href="/tags/Combinatorics/" style="font-size: 10px;">Combinatorics</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/Concurrency/" style="font-size: 14px;">Concurrency</a> <a href="/tags/Consistency/" style="font-size: 10px;">Consistency</a> <a href="/tags/Counting/" style="font-size: 10.4px;">Counting</a> <a href="/tags/Cracking-the-Coding-Interview/" style="font-size: 10.4px;">Cracking the Coding Interview</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Database/" style="font-size: 16.4px;">Database</a> <a href="/tags/Database，MySQL/" style="font-size: 13.2px;">Database，MySQL</a> <a href="/tags/Depth-First-Search/" style="font-size: 10px;">Depth-First Search</a> <a href="/tags/Depth-first-Search/" style="font-size: 15.6px;">Depth-first Search</a> <a href="/tags/Depth-first-search/" style="font-size: 10px;">Depth-first search</a> <a href="/tags/Design/" style="font-size: 13.6px;">Design</a> <a href="/tags/Design-Pattern，Java/" style="font-size: 11.6px;">Design Pattern，Java</a> <a href="/tags/Divide-and-Conque/" style="font-size: 10px;">Divide and Conque</a> <a href="/tags/Divide-and-Conquer/" style="font-size: 11.6px;">Divide and Conquer</a> <a href="/tags/Division/" style="font-size: 10px;">Division</a> <a href="/tags/Dynamic-Programming/" style="font-size: 18.8px;">Dynamic Programming</a> <a href="/tags/Dynammic-Programming/" style="font-size: 10px;">Dynammic Programming</a> <a href="/tags/Encryption/" style="font-size: 10px;">Encryption</a> <a href="/tags/Git/" style="font-size: 11.6px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Grafana/" style="font-size: 10px;">Grafana</a> <a href="/tags/Graph/" style="font-size: 11.6px;">Graph</a> <a href="/tags/Greedy/" style="font-size: 12.8px;">Greedy</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Hash-Function/" style="font-size: 10px;">Hash Function</a> <a href="/tags/Hash-Table/" style="font-size: 18.4px;">Hash Table</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/Hbase/" style="font-size: 10px;">Hbase</a> <a href="/tags/Heap/" style="font-size: 13.6px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 11.6px;">Hexo</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 19.2px;">Java</a> <a href="/tags/KMP-Algorithm/" style="font-size: 10.8px;">KMP Algorithm</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/Latex/" style="font-size: 10px;">Latex</a> <a href="/tags/LeetCode/" style="font-size: 20px;">LeetCode</a> <a href="/tags/Leetcode/" style="font-size: 19.6px;">Leetcode</a> <a href="/tags/LinkList/" style="font-size: 10px;">LinkList</a> <a href="/tags/Linked-List/" style="font-size: 15.6px;">Linked List</a> <a href="/tags/Linux/" style="font-size: 11.6px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Math/" style="font-size: 18px;">Math</a> <a href="/tags/Matrix/" style="font-size: 10px;">Matrix</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Memoization/" style="font-size: 11.2px;">Memoization</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Monotonic-Stack/" style="font-size: 11.2px;">Monotonic Stack</a> <a href="/tags/MySQL/" style="font-size: 14.4px;">MySQL</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Note/" style="font-size: 10px;">Note</a> <a href="/tags/Operating-System/" style="font-size: 10.4px;">Operating System</a> <a href="/tags/Ordered-Map/" style="font-size: 10px;">Ordered Map</a> <a href="/tags/Prefix-Sum/" style="font-size: 11.2px;">Prefix Sum</a> <a href="/tags/RPC/" style="font-size: 10px;">RPC</a> <a href="/tags/Recursion/" style="font-size: 12.4px;">Recursion</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 11.6px;">Scala</a> <a href="/tags/Segment-Tree/" style="font-size: 10px;">Segment Tree</a> <a href="/tags/Shell/" style="font-size: 10.4px;">Shell</a> <a href="/tags/Simulation/" style="font-size: 10.4px;">Simulation</a> <a href="/tags/Sliding-Window/" style="font-size: 14.8px;">Sliding Window</a> <a href="/tags/Sort/" style="font-size: 13.2px;">Sort</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Spring/" style="font-size: 10.8px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 12px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 14.8px;">Stack</a> <a href="/tags/Storm/" style="font-size: 10px;">Storm</a> <a href="/tags/String/" style="font-size: 17.6px;">String</a> <a href="/tags/String-Matching/" style="font-size: 11.2px;">String Matching</a> <a href="/tags/Suffix-Array/" style="font-size: 10px;">Suffix Array</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.4px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Topological-Sort/" style="font-size: 10px;">Topological Sort</a> <a href="/tags/Topological-sort/" style="font-size: 10.8px;">Topological sort</a> <a href="/tags/Tree/" style="font-size: 15.6px;">Tree</a> <a href="/tags/TreeSet/" style="font-size: 10px;">TreeSet</a> <a href="/tags/Trie/" style="font-size: 12.4px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 16px;">Two Pointers</a> <a href="/tags/Two-pointers/" style="font-size: 10px;">Two pointers</a> <a href="/tags/Union-Find/" style="font-size: 12px;">Union Find</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Wechat/" style="font-size: 10px;">Wechat</a> <a href="/tags/YARN/" style="font-size: 10px;">YARN</a> <a href="/tags/Zookeeper/" style="font-size: 10.4px;">Zookeeper</a> <a href="/tags/blog/" style="font-size: 11.2px;">blog</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Yiye Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Yiye Li</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-JAVA 学习笔记（算法）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/01/07/JAVA 学习笔记（算法）/" class="article-date">
+      <time datetime="2022-01-07T10:12:12.000Z" itemprop="datePublished">2022-01-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JAVA 学习笔记（算法）
+    </h1>
+  
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">6.1k字</span>
+      </span>
+    </span>
+    &nbsp; | &nbsp;
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">24分</span>
+      </span>
+    </span>
+</div>
+
+          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2022年1月/">2022年1月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>查找，排序，回溯等算法</p>
+<a id="more"></a>
+
+<p>[TOC]</p>
+<h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><p>又叫折半查找，要求待查找的序列有序。每次取中间位置的值与待查关键字比较，如果中间位置的值比待查关键字大，则在前半部分循环这个查找的过程，如果中间位置的值比待查关键字小，则在后半部分循环这个查找的过程。直到查找到了为止，否则序列中没有待查的关键字。</p>
+<p>二分法模板参见笔记：</p>
+<ol start="69">
+<li>x 的平方根(二分法模板题及经典解释）</li>
+</ol>
+<h1 id="冒泡排序算法"><a href="#冒泡排序算法" class="headerlink" title="冒泡排序算法"></a>冒泡排序算法</h1><p>（1）比较前后相邻的二个数据，如果前面数据大于后面的数据，就将这二个数据交换。</p>
+<p>（2）这样对数组的第 0 个数据到 N-1 个数据进行一次遍历后，最大的一个数据就“沉”到数组第N-1 个位置。</p>
+<p>（3）N=N-1，如果 N 不为 0 就重复前面二步，否则排序完成</p>
+<h1 id="选择排序算法-1"><a href="#选择排序算法-1" class="headerlink" title="选择排序算法^1"></a>选择排序算法<a href="https://www.runoob.com/w3cnote/ten-sorting-algorithm.html" target="_blank" rel="noopener">^1</a></h1><p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置。</p>
+<p>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</p>
+<p>重复第二步，直到所有元素均排序完毕。</p>
+<details>
+    <summary>选择排序算法</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class SelectionSort implements IArraySort &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int[] sort(int[] sourceArray) throws Exception &#123;</span><br><span class="line">        int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);</span><br><span class="line"></span><br><span class="line">        // 总共要经过 N-1 轮比较</span><br><span class="line">        for (int i = 0; i &lt; arr.length - 1; i++) &#123;</span><br><span class="line">            int min = i;</span><br><span class="line"></span><br><span class="line">            // 每轮需要比较的次数 N-i</span><br><span class="line">            for (int j = i + 1; j &lt; arr.length; j++) &#123;</span><br><span class="line">                if (arr[j] &lt; arr[min]) &#123;</span><br><span class="line">                    // 记录目前能找到的最小值元素的下标</span><br><span class="line">                    min = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 将找到的最小值和i位置所在的值进行交换</span><br><span class="line">            if (i != min) &#123;</span><br><span class="line">                int tmp = arr[i];</span><br><span class="line">                arr[i] = arr[min];</span><br><span class="line">                arr[min] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        return arr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="插入排序算法"><a href="#插入排序算法" class="headerlink" title="插入排序算法"></a>插入排序算法</h1><p>通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应的位置并插入。插入排序非常类似于整扑克牌。在开始摸牌时，左手是空的，牌面朝下放在桌上。接着，一次从桌上摸起一张牌，并将它插入到左手一把牌中的正确位置上。为了找到这张牌的正确位置，要将它与手中已有的牌从右到左地进行比较。无论什么时候，左手中的牌都是排好序的。</p>
+<p>如果输入数组已经是排好序的话，插入排序出现最佳情况，其运行时间是输入规模的一个线性函数。如果输入数组是逆序排列的，将出现最坏情况。平均情况与最坏情况一样，其时间代价是(n2)。</p>
+<details>
+    <summary>插入排序算法</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public void sort(int arr[])&#123;</span><br><span class="line">    for (int i = 1; i &lt; arr.length; i++)&#123;</span><br><span class="line">        //插入的数</span><br><span class="line">        int insertVal = arr[i];</span><br><span class="line">        //被插入的位置(准备和前一个数比较)</span><br><span class="line">        int index = i - 1;</span><br><span class="line">        //如果插入的数比被插入的数小</span><br><span class="line">        while (index &gt;= 0 &amp;&amp; insertVal &lt; arr[index]) &#123;</span><br><span class="line">            //将把 arr[index] 向后移动</span><br><span class="line">            arr[index + 1] = arr[index];</span><br><span class="line">            //让 index 向前移动</span><br><span class="line">            index--;</span><br><span class="line">        &#125;</span><br><span class="line">        //把插入的数放入合适位置</span><br><span class="line">        arr[index + 1] = insertVal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="快速排序算法"><a href="#快速排序算法" class="headerlink" title="快速排序算法"></a>快速排序算法</h1><p>快速排序的原理：</p>
+<p>选择一个关键值作为基准值。比基准值小的都在左边序列（一般是无序的），比基准值大的都在右边（一般是无序的）。一般选择序列的第一个元素。</p>
+<p>一次循环：从后往前比较，用基准值和最后一个值比较，如果比基准值小的交换位置，如果没有继续比较下一个，直到找到第一个比基准值小的值才交换。找到这个值之后，又从前往后开始比较，如果有比基准值大的，交换位置，如果没有继续比较下一个，直到找到第一个比基准值大的值才交换。直到从前往后的比较索引&gt;从后往前比较的索引，结束第一次循环，此时，对于基准值来说，左右两边就是有序的了。</p>
+<p>此代码仅是快排的一种写法，更多需要搜索</p>
+<details>
+    <summary>快速排序算法</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public void sort(int[] a, int low, int high) &#123;</span><br><span class="line">       int start = low;</span><br><span class="line">       int end = high;</span><br><span class="line">       int key = a[low];</span><br><span class="line">       while (end &gt; start) &#123;</span><br><span class="line">           //从后往前比较</span><br><span class="line">           while (end &gt; start &amp;&amp; a[end] &gt;= key) &#123;</span><br><span class="line">               //如果没有比关键值小的，比较下一个，直到有比关键值小的交换位置，然后又从前往后比较</span><br><span class="line">               end--;</span><br><span class="line">           &#125;</span><br><span class="line">           if (a[end] &lt;= key) &#123;</span><br><span class="line">               int temp = a[end];</span><br><span class="line">               a[end] = a[start];</span><br><span class="line">               a[start] = temp;</span><br><span class="line">           &#125;</span><br><span class="line">           //从前往后比较</span><br><span class="line">           while (end &gt; start &amp;&amp; a[start] &lt;= key) &#123;</span><br><span class="line">               //如果没有比关键值大的，比较下一个，直到有比关键值大的交换位置</span><br><span class="line">               start++;</span><br><span class="line">           &#125;</span><br><span class="line">           if (a[start] &gt;= key) &#123;</span><br><span class="line">               int temp = a[start];</span><br><span class="line">               a[start] = a[end];</span><br><span class="line">               a[end] = temp;</span><br><span class="line">           &#125;</span><br><span class="line">           //此时第一次循环比较结束，关键值的位置已经确定了。左边的值都比关键值小，</span><br><span class="line">           // 右边的值都比关键值大，但是两边的顺序还有可能是不一样的，进行下面的递归调用</span><br><span class="line">       &#125;</span><br><span class="line">       //递归</span><br><span class="line">       if (start &gt; low) sort(a, low, start - 1);//左边序列。第一个索引位置到关键值索引-1</span><br><span class="line">       if (end &lt; high) sort(a, end + 1, high);//右边序列。从关键值索引+1 到最后一个</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<h1 id="希尔排序算法"><a href="#希尔排序算法" class="headerlink" title="希尔排序算法"></a>希尔排序算法</h1><p>基本思想：希尔排序，通过增量(gap)将元素分成n组，对每组使用直接插入排序算法排序。增量(gap)逐渐减少，当增量(gap)减至1时，整个数据恰被分成一组，最后进行一次插入排序。先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行依次直接插入排序。</p>
+<ol>
+<li>操作方法：<br>选择一个增量序列 t1，t2，…，tk，其中 ti&gt;tj，tk=1；</li>
+<li>按增量序列个数 k，对序列进行 k 趟排序；</li>
+<li>每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为1时，整个序列作为一个表来处理，表长度即为整个序列的长度。</li>
+</ol>
+<details>
+    <summary>希尔排序算法</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">private void shellSort(int[] a) &#123;</span><br><span class="line">    int dk = a.length/2;</span><br><span class="line">    while( dk &gt;= 1 )&#123;</span><br><span class="line">        ShellInsertSort(a, dk);</span><br><span class="line">        dk = dk/2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">private void ShellInsertSort(int[] a, int dk) &#123;</span><br><span class="line">    //类似插入排序，只是插入排序增量是 1，这里增量是 dk,把 1 换成 dk 就可以了</span><br><span class="line">    for(int i=dk;i&lt;a.length;i++)&#123;</span><br><span class="line">        if(a[i]&lt;a[i-dk])&#123;</span><br><span class="line">            int j;</span><br><span class="line">            int x=a[i];//x 为待插入元素</span><br><span class="line">            a[i]=a[i-dk];</span><br><span class="line">            for(j=i-dk; j&gt;=0 &amp;&amp; x&lt;a[j];j=j-dk)&#123;</span><br><span class="line">                //通过循环，逐个后移一位找到要插入的位置。</span><br><span class="line">                a[j+dk]=a[j];</span><br><span class="line">            &#125;</span><br><span class="line">            a[j+dk]=x;//插入</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="归并排序算法"><a href="#归并排序算法" class="headerlink" title="归并排序算法"></a>归并排序算法</h1><p>归并（Merge）排序法是将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的。然后再把有序子序列合并为整体有序序列。</p>
+<details>
+    <summary>归并排序算法</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class MergeSortTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] data = new int[]&#123;5, 3, 6, 2, 1, 9, 4, 8, 7&#125;;</span><br><span class="line">        print(data);</span><br><span class="line">        mergeSort(data);</span><br><span class="line">        System.out.println(&quot;排序后的数组：&quot;);</span><br><span class="line">        print(data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void mergeSort(int[] data) &#123;</span><br><span class="line">        sort(data, 0, data.length - 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void sort(int[] data, int left, int right) &#123;</span><br><span class="line">        if (left &gt;= right)</span><br><span class="line">            return;</span><br><span class="line">        // 找出中间索引</span><br><span class="line">        int center = (left + right) / 2;</span><br><span class="line">        // 对左边数组进行递归</span><br><span class="line">        sort(data, left, center);</span><br><span class="line">        // 对右边数组进行递归</span><br><span class="line">        sort(data, center + 1, right);</span><br><span class="line">        // 合并</span><br><span class="line">        merge(data, left, center, right);</span><br><span class="line">        print(data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 将两个数组进行归并，归并前面 2 个数组已有序，归并后依然有序</span><br><span class="line">     *</span><br><span class="line">     * @param data   数组对象</span><br><span class="line">     * @param left   左数组的第一个元素的索引</span><br><span class="line">     * @param center 左数组的最后一个元素的索引，center+1 是右数组第一个元素的索引</span><br><span class="line">     * @param right  右数组最后一个元素的索引</span><br><span class="line">     */</span><br><span class="line">    public static void merge(int[] data, int left, int center, int right) &#123;</span><br><span class="line">        // 临时数组</span><br><span class="line">        int[] tmpArr = new int[data.length];</span><br><span class="line">        // 右数组第一个元素索引</span><br><span class="line">        int mid = center + 1;</span><br><span class="line">        // third 记录临时数组的索引</span><br><span class="line">        int third = left;</span><br><span class="line">        // 缓存左数组第一个元素的索引</span><br><span class="line">        int tmp = left;</span><br><span class="line">        while (left &lt;= center &amp;&amp; mid &lt;= right) &#123;</span><br><span class="line">            // 从两个数组中取出最小的放入临时数组</span><br><span class="line">            if (data[left] &lt;= data[mid]) &#123;</span><br><span class="line">                tmpArr[third++] = data[left++];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                tmpArr[third++] = data[mid++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 剩余部分依次放入临时数组（实际上两个 while 只会执行其中一个）</span><br><span class="line">        while (mid &lt;= right) &#123;</span><br><span class="line">            tmpArr[third++] = data[mid++];</span><br><span class="line">        &#125;</span><br><span class="line">        while (left &lt;= center) &#123;</span><br><span class="line">            tmpArr[third++] = data[left++];</span><br><span class="line">        &#125;</span><br><span class="line">        // 将临时数组中的内容拷贝回原数组中</span><br><span class="line">        // （原 left-right 范围的内容被复制回原数组）</span><br><span class="line">        while (tmp &lt;= right) &#123;</span><br><span class="line">            data[tmp] = tmpArr[tmp++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void print(int[] data) &#123;</span><br><span class="line">        for (int i = 0; i &lt; data.length; i++) &#123;</span><br><span class="line">            System.out.print(data[i] + &quot;\t&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<h1 id="桶排序算法"><a href="#桶排序算法" class="headerlink" title="桶排序算法"></a>桶排序算法</h1><p>桶排序的基本思想是： 把数组 arr 划分为 n 个大小相同子区间（桶），每个子区间各自排序，最后合并。计数排序是桶排序的一种特殊情况，可以把计数排序当成每个桶里只有一个元素的情况。</p>
+<p>1.找出待排序数组中的最大值 max、最小值 min</p>
+<p>2.我们使用 动态数组 ArrayList 作为桶，桶里放的元素也用 ArrayList 存储。桶的数量为(max-min)/arr.length+1</p>
+<p>3.遍历数组 arr，计算每个元素 arr[i] 放的桶</p>
+<p>4.每个桶各自排序</p>
+<details>
+    <summary>桶排序算法</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static void bucketSort(int[] arr)&#123;</span><br><span class="line">    int max = Integer.MIN_VALUE;</span><br><span class="line">    int min = Integer.MAX_VALUE;</span><br><span class="line">    for(int i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">        max = Math.max(max, arr[i]);</span><br><span class="line">        min = Math.min(min, arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    //创建桶</span><br><span class="line">    int bucketNum = (max - min) / arr.length + 1;</span><br><span class="line">    ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucketArr = new ArrayList&lt;&gt;(bucketNum);</span><br><span class="line">    for(int i = 0; i &lt; bucketNum; i++)&#123;</span><br><span class="line">        bucketArr.add(new ArrayList&lt;Integer&gt;());</span><br><span class="line">    &#125;</span><br><span class="line">    //将每个元素放入桶</span><br><span class="line">    for(int i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">        int num = (arr[i] - min) / (arr.length);</span><br><span class="line">        bucketArr.get(num).add(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    //对每个桶进行排序</span><br><span class="line">    for(int i = 0; i &lt; bucketArr.size(); i++)&#123;</span><br><span class="line">        Collections.sort(bucketArr.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><p>堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。堆排序可以说是一种利用堆的概念来排序的选择排序。分为两种方法：</p>
+<p>大顶堆：每个节点的值都大于或等于其子节点的值，在堆排序算法中用于升序排列；</p>
+<p>大顶堆：arr[i] &gt;= arr[2i+1] &amp;&amp; arr[i] &gt;= arr[2i+2]  </p>
+<p>小顶堆：每个节点的值都小于或等于其子节点的值，在堆排序算法中用于降序排列；</p>
+<p>小顶堆：arr[i] &lt;= arr[2i+1] &amp;&amp; arr[i] &lt;= arr[2i+2]</p>
+<p>堆排序的平均时间复杂度为 Ο(nlogn)。</p>
+<p>堆排序的基本思想是：将待排序序列构造成一个大顶堆，此时，整个序列的最大值就是堆顶的根节点。将其与末尾元素进行交换，此时末尾就为最大值。然后将剩余n-1个元素重新构造成一个堆，这样会得到n个元素的次小值。如此反复执行，便能得到一个有序序列了</p>
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><p>步骤一 构造初始堆。将给定无序序列构造成一个大顶堆（一般升序采用大顶堆，降序采用小顶堆)</p>
+<p>步骤二 将堆顶元素与末尾元素进行交换，使末尾元素最大。然后继续调整堆，再将堆顶元素与末尾元素交换，得到第二大元素。如此反复进行交换、重建、交换。</p>
+<p>简单总结下堆排序的基本思路：</p>
+<p>　　a.将无序序列构建成一个堆，根据升序降序需求选择大顶堆或小顶堆;</p>
+<p>　　b.将堆顶元素与末尾元素交换，将最大元素”沉”到数组末端;</p>
+<p>　　c.重新调整结构，使其满足堆定义，然后继续交换堆顶元素与当前末尾元素，反复执行调整+交换步骤，直到整个序列有序。</p>
+<details>
+    <summary>堆排序</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">public class HeapSort &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] arr = &#123;7, 6, 7, 11, 5, 12, 3, 0, 1&#125;;</span><br><span class="line">        System.out.println(&quot;排序前：&quot; + Arrays.toString(arr));</span><br><span class="line">        sort(arr);</span><br><span class="line">        System.out.println(&quot;排序前：&quot; + Arrays.toString(arr));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void sort(int[] arr) &#123;</span><br><span class="line">        //1.构建大顶堆</span><br><span class="line">        for (int i = arr.length / 2 - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">            //从第一个非叶子结点从下至上，从右至左调整结构</span><br><span class="line">            adjustHeap(arr, i, arr.length);</span><br><span class="line">        &#125;</span><br><span class="line">        //2.调整堆结构+交换堆顶元素与末尾元素</span><br><span class="line">        for (int j = arr.length - 1; j &gt; 0; j--) &#123;</span><br><span class="line">            swap(arr, 0, j);//将堆顶元素与末尾元素进行交换</span><br><span class="line">            adjustHeap(arr, 0, j);//重新对堆进行调整</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）</span><br><span class="line">     */</span><br><span class="line">    public static void adjustHeap(int[] arr, int i, int length) &#123;</span><br><span class="line">        int temp = arr[i];//先取出当前元素i</span><br><span class="line">        for (int k = i * 2 + 1; k &lt; length; k = k * 2 + 1) &#123;//从i结点的左子结点开始，也就是2i+1处开始</span><br><span class="line">            if (k + 1 &lt; length &amp;&amp; arr[k] &lt; arr[k + 1]) &#123;//如果左子结点小于右子结点，k指向右子结点</span><br><span class="line">                k++;</span><br><span class="line">            &#125;</span><br><span class="line">            if (arr[k] &gt; temp) &#123;//如果子节点大于父节点，将子节点值赋给父节点（不用进行交换）</span><br><span class="line">                arr[i] = arr[k];</span><br><span class="line">                i = k;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        arr[i] = temp;//将temp值放到最终的位置</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 交换元素</span><br><span class="line">     */</span><br><span class="line">    public static void swap(int[] arr, int a, int b) &#123;</span><br><span class="line">        int temp = arr[a];</span><br><span class="line">        arr[a] = arr[b];</span><br><span class="line">        arr[b] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h1><p>计数排序的核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。作为一种线性时间复杂度的排序，计数排序要求输入的数据必须是有确定范围的整数。</p>
+<h2 id="计数排序的特征"><a href="#计数排序的特征" class="headerlink" title="计数排序的特征"></a>计数排序的特征</h2><p>当输入的元素是 n 个 0 到 k 之间的整数时，它的运行时间是 Θ(n + k)。计数排序不是比较排序，排序的速度快于任何比较排序算法。</p>
+<p>由于用来计数的数组C的长度取决于待排序数组中数据的范围（等于待排序数组的最大值与最小值的差加上1），这使得计数排序对于数据范围很大的数组，需要大量时间和内存。例如：计数排序是用来排序0到100之间的数字的最好的算法，但是它不适合按字母顺序排序人名。但是，计数排序可以用在基数排序中的算法来排序数据范围很大的数组。</p>
+<p>通俗地理解，例如有 10 个年龄不同的人，统计出有 8 个人的年龄比 A 小，那 A 的年龄就排在第 9 位,用这个方法可以得到其他每个人的位置,也就排好了序。当然，年龄有重复时需要特殊处理（保证稳定性），这就是为什么最后要反向填充目标数组，以及将每个数字的统计减去 1 的原因。</p>
+<p> 算法的步骤如下：</p>
+<p>（1）找出待排序的数组中最大和最小的元素</p>
+<p>（2）统计数组中每个值为i的元素出现的次数，存入数组C的第i项</p>
+<p>（3）对所有的计数累加（从C中的第一个元素开始，每一项和前一项相加）</p>
+<p>（4）反向填充目标数组：将每个元素i放在新数组的第C(i)项，每放一个元素就将C(i)减去1</p>
+<details>
+    <summary>计数排序算法</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class CountingSort implements IArraySort &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int[] sort(int[] sourceArray) throws Exception &#123;</span><br><span class="line">        // 对 arr 进行拷贝，不改变参数内容</span><br><span class="line">        int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);</span><br><span class="line"></span><br><span class="line">        int maxValue = getMaxValue(arr);</span><br><span class="line"></span><br><span class="line">        return countingSort(arr, maxValue);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private int[] countingSort(int[] arr, int maxValue) &#123;</span><br><span class="line">        int bucketLen = maxValue + 1;</span><br><span class="line">        int[] bucket = new int[bucketLen];</span><br><span class="line"></span><br><span class="line">        for (int value : arr) &#123;</span><br><span class="line">            bucket[value]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int sortedIndex = 0;</span><br><span class="line">        for (int j = 0; j &lt; bucketLen; j++) &#123;</span><br><span class="line">            while (bucket[j] &gt; 0) &#123;</span><br><span class="line">                arr[sortedIndex++] = j;</span><br><span class="line">                bucket[j]--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private int getMaxValue(int[] arr) &#123;</span><br><span class="line">        int maxValue = arr[0];</span><br><span class="line">        for (int value : arr) &#123;</span><br><span class="line">            if (maxValue &lt; value) &#123;</span><br><span class="line">                maxValue = value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return maxValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+
+
+<h1 id="基数排序算法"><a href="#基数排序算法" class="headerlink" title="基数排序算法"></a>基数排序算法</h1><p>将所有待比较数值（正整数）统一为同样的数位长度，数位较短的数前面补零。然后，从最低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后,数列就变成一个有序序列。</p>
+<details>
+    <summary>基数排序算法</summary>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static int[] RadixSort(int[] array) &#123;</span><br><span class="line">    if (array == null || array.length &lt; 2)</span><br><span class="line">        return array;</span><br><span class="line">    // 1.先算出最大数的位数；</span><br><span class="line">    int max = array[0];</span><br><span class="line">    for (int i = 1; i &lt; array.length; i++) &#123;</span><br><span class="line">        max = Math.max(max, array[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    //最大数的位数</span><br><span class="line">    int maxDigit = 0;</span><br><span class="line">    while (max != 0) &#123;</span><br><span class="line">        max /= 10;</span><br><span class="line">        maxDigit++;</span><br><span class="line">    &#125;</span><br><span class="line">    int mod = 10, div = 1;</span><br><span class="line">    ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucketList = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</span><br><span class="line">    for (int i = 0; i &lt; 10; i++)</span><br><span class="line">        bucketList.add(new ArrayList&lt;Integer&gt;());</span><br><span class="line">    for (int i = 0; i &lt; maxDigit; i++, mod *= 10, div *= 10) &#123;</span><br><span class="line">        for (int j = 0; j &lt; array.length; j++) &#123;</span><br><span class="line">            int num = (array[j] % mod) / div;</span><br><span class="line">            bucketList.get(num).add(array[j]);</span><br><span class="line">        &#125;</span><br><span class="line">        int index = 0;</span><br><span class="line">        for (int j = 0; j &lt; bucketList.size(); j++) &#123;</span><br><span class="line">            for (int k = 0; k &lt; bucketList.get(j).size(); k++)</span><br><span class="line">                array[index++] = bucketList.get(j).get(k);</span><br><span class="line">            bucketList.get(j).clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><p>*<em>最佳情况：T(n) = O(n * k) *</em></p>
+<p>*<em>最差情况：T(n) = O(n * k) *</em></p>
+<p>平均情况：T(n) = O(n * k)</p>
+<p>基数排序有两种方法：</p>
+<p>MSD 从高位开始进行排序</p>
+<p>LSD 从低位开始进行排序</p>
+<h2 id="与人们的直觉相反，基数排序是首先按最低位有效数字进行排序，以解决卡片排序的问题"><a href="#与人们的直觉相反，基数排序是首先按最低位有效数字进行排序，以解决卡片排序的问题" class="headerlink" title="与人们的直觉相反，基数排序是首先按最低位有效数字进行排序，以解决卡片排序的问题"></a>与人们的直觉相反，基数排序是首先按最低位有效数字进行排序，以解决卡片排序的问题</h2><p>从高位可以，但是麻烦</p>
+<p>道理是基数排序每次都调用一个稳定排序，也就是说这一轮比不出大小的数据，保持原来的相对位置顺序不变。(这是稳定排序的定义，是性质，不是某种随意的文字描述) 而数字比较大小就是从高位开始，比不出大小去看低位，当然应该让低位先排出“原来的相对顺序”了。</p>
+<p>从高位开始排，就要分段了，每排完一位，把分不出大小的几个当成一段，一段段的排，不要让排完的数据跨段移动，保证这一段的数都比下一段小，排到最后每段就只有一个数了。这样就完全没有利用到每次调用的都是稳定排序这一点</p>
+<p>以 [111, 22, 3] 三个数从小排到大为例如果完全按照从低位开始排的写法，简单换成从高位开始排的话，每轮结果分别为：<br>第一轮：比较百位</p>
+<p>百位为 0 的有 [22, 3]百位为 1 的有 [111]合并一下，本轮结果为 [22, 3, 111]</p>
+<p>第二轮：比较十位 </p>
+<p>十位为 0 的有 [3]十位为 1 的有 [111]十位为 2 的有 [22]合并一下，本轮结果为 [3, 111, 22]</p>
+<p>第三轮：比较个位</p>
+<p>个位为 1 的有 [111]个位为 2 的有 [22]个位为 3 的有 [3]合并一下，本轮结果为 [111, 22, 3]最终结果为 [111, 22, 3]，结果是完全错的错在哪儿了呢？</p>
+<p>错在 个位的排序结果完全覆盖了百位的排序结果从例子里可以看到，排序轮数越靠后，相当于其权重越高，会覆盖之前的在从低位到高位的模式下，这个逻辑完全没问题，我们先按个位排序，再按十位排序，十位的排序结果会覆盖个位的排序结果，只有在两个数字十位相同的情况下，才会使用上一轮的个位排序而在从高位到低位的模式下，这个逻辑就完全行不通了，低位的排序结果覆盖高位的排序结果，这是不正确的为了解决这个问题，从高位排序的话，每轮要额外用一个数组，或是递归，来继承高位排序的结果，避免被低位覆盖</p>
+<p>仍然以 [111, 22, 3] 为例</p>
+<p>第一轮：比较百位</p>
+<p>百位为 0 的有 [22, 3]百位为 1 的有 [111]合并一下，本轮结果为</p>
+<pre><code>[
+   [22, 3],
+   [111]
+]</code></pre><p>注意，这一步不是把结果合并成一维数组 [22, 3, 111] 了，而是变成了二维数组，用来保证百位上的排序不被下一轮覆盖</p>
+<p>第二轮：比较十位</p>
+<p>由于数组变成了二维数组，这一轮要分别对数组里的子数组进行遍历对 [22, 3] 来说十位为 0 的有 [3]十位为 2 的有 [22]合并一下，结果为</p>
+<pre><code>[
+   [3],
+   [22],
+]</code></pre><p>对 [111] 来说，本轮结果为</p>
+<pre><code>[
+   [111]
+]</code></pre><p>合并一下，本轮结果总共为</p>
+<pre><code>[
+   [
+      [3],
+      [22],
+   ],
+   [
+      [111]
+   ]
+]</code></pre><p>可以看到，现在又变成了三维数组，下一轮判断个位，又将变成四维所以说为什么高位麻烦，就是麻烦在递归这里。回到题目本身，从例子里可以看到，每轮遍历结果数组都是从前往后遍历，因此原始数据里 相同数据的相对顺序 是会被保留的，所以从高位排序其实也是稳定的。</p>
+<h1 id="剪枝算法"><a href="#剪枝算法" class="headerlink" title="剪枝算法"></a>剪枝算法</h1><p>在搜索算法中优化中，剪枝，就是通过某种判断，避免一些不必要的遍历过程，形象的说，就是剪去了搜索树中的某些“枝条”，故称剪枝。应用剪枝优化的核心问题是设计剪枝判断方法，即确定哪些枝条应当舍弃，哪些枝条应当保留的方法。</p>
+<h1 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h1><p>回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就“回溯”返回，尝试别的路径。</p>
+<h1 id="最短路径算法"><a href="#最短路径算法" class="headerlink" title="最短路径算法"></a>最短路径算法</h1><p>从某顶点出发，沿图的边到达另一顶点所经过的路径中，各边上权值之和最小的一条路径叫做最短路径。解决最短路的问题有以下算法，Dijkstra 算法，Bellman-Ford 算法，Floyd 算法和 SPFA算法等。</p>
+<h1 id="最大子数组算法"><a href="#最大子数组算法" class="headerlink" title="最大子数组算法"></a>最大子数组算法</h1><h1 id="最长公共子序算法"><a href="#最长公共子序算法" class="headerlink" title="最长公共子序算法"></a>最长公共子序算法</h1><h1 id="最小生成树算法"><a href="#最小生成树算法" class="headerlink" title="最小生成树算法"></a>最小生成树算法</h1><p>现在假设有一个很实际的问题：我们要在 n 个城市中建立一个通信网络，则连通这 n 个城市需要布置 n-1 一条通信线路，这个时候我们需要考虑如何在成本最低的情况下建立这个通信网？</p>
+<p>于是我们就可以引入连通图来解决我们遇到的问题，n 个城市就是图上的 n 个顶点，然后，边表示两个城市的通信线路，每条边上的权重就是我们搭建这条线路所需要的成本，所以现在我们有 n 个顶点的连通网可以建立不同的生成树，每一颗生成树都可以作为一个通信网，当我们构造这个连通网所花的成本最小时，搭建该连通网的生成树，就称为最小生成树。</p>
+<p>构造最小生成树有很多算法，但是他们都是利用了最小生成树的同一种性质：MST 性质（假设N=(V,{E})是一个连通网，U 是顶点集 V 的一个非空子集，如果（u，v）是一条具有最小权值的边，其中 u 属于 U，v 属于 V-U，则必定存在一颗包含边（u，v）的最小生成树），下面就介绍两种使<br>用 MST 性质生成最小生成树的算法：普里姆算法和克鲁斯卡尔算法。</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2022/01/07/JAVA 学习笔记（算法）/">JAVA 学习笔记（算法）</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Yiye Li 的个人博客">Yiye Li</a></p>
+        <p><span>发布时间:</span>2022年01月07日 - 18时12分</p>
+        <p><span>最后更新:</span>2022年01月10日 - 15时57分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2022/01/07/JAVA 学习笔记（算法）/" title="JAVA 学习笔记（算法）">http://yoursite.com/2022/01/07/JAVA 学习笔记（算法）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2022/01/07/JAVA 学习笔记（算法）/　　作者: Yiye Li" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2022/01/10/Hexo与Nodejs版本不匹配问题解决方案/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Hexo与Nodejs版本不匹配问题解决方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/01/07/JAVA 学习笔记（YARN）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JAVA 学习笔记（YARN）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#二分查找"><span class="toc-number">1.</span> <span class="toc-text">二分查找</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#冒泡排序算法"><span class="toc-number">2.</span> <span class="toc-text">冒泡排序算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#选择排序算法-1"><span class="toc-number">3.</span> <span class="toc-text">选择排序算法^1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#插入排序算法"><span class="toc-number">4.</span> <span class="toc-text">插入排序算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#快速排序算法"><span class="toc-number">5.</span> <span class="toc-text">快速排序算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#希尔排序算法"><span class="toc-number">6.</span> <span class="toc-text">希尔排序算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#归并排序算法"><span class="toc-number">7.</span> <span class="toc-text">归并排序算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#桶排序算法"><span class="toc-number">8.</span> <span class="toc-text">桶排序算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#堆排序"><span class="toc-number">9.</span> <span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法步骤"><span class="toc-number">9.1.</span> <span class="toc-text">算法步骤</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#计数排序"><span class="toc-number">10.</span> <span class="toc-text">计数排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#计数排序的特征"><span class="toc-number">10.1.</span> <span class="toc-text">计数排序的特征</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基数排序算法"><span class="toc-number">11.</span> <span class="toc-text">基数排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析"><span class="toc-number">11.1.</span> <span class="toc-text">算法分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#与人们的直觉相反，基数排序是首先按最低位有效数字进行排序，以解决卡片排序的问题"><span class="toc-number">11.2.</span> <span class="toc-text">与人们的直觉相反，基数排序是首先按最低位有效数字进行排序，以解决卡片排序的问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#剪枝算法"><span class="toc-number">12.</span> <span class="toc-text">剪枝算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#回溯算法"><span class="toc-number">13.</span> <span class="toc-text">回溯算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#最短路径算法"><span class="toc-number">14.</span> <span class="toc-text">最短路径算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#最大子数组算法"><span class="toc-number">15.</span> <span class="toc-text">最大子数组算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#最长公共子序算法"><span class="toc-number">16.</span> <span class="toc-text">最长公共子序算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#最小生成树算法"><span class="toc-number">17.</span> <span class="toc-text">最小生成树算法</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2022/01/10/Hexo与Nodejs版本不匹配问题解决方案/" title="上一篇: Hexo与Nodejs版本不匹配问题解决方案">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2022/01/07/JAVA 学习笔记（YARN）/" title="下一篇: JAVA 学习笔记（YARN）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/10/Hexo与Nodejs版本不匹配问题解决方案/">Hexo与Nodejs版本不匹配问题解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA 学习笔记（算法）/">JAVA 学习笔记（算法）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA 学习笔记（YARN）/">JAVA 学习笔记（YARN）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA 学习笔记（云计算）/">JAVA 学习笔记（云计算）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA 学习笔记（Spark）/">JAVA 学习笔记（Spark）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA 学习笔记（Storm）/">JAVA 学习笔记（Storm）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/JAVA 学习笔记（Hadoop）/">JAVA 学习笔记（Hadoop）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/ JAVA 学习笔记（加密算法）/">JAVA 学习笔记（加密算法）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/ JAVA 学习笔记（分布式缓存）/">JAVA 学习笔记（分布式缓存）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/Grafana汉化指南/">Grafana汉化指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/JAVA 学习笔记（一致性算法）/">JAVA 学习笔记（一致性算法）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/JAVA 学习笔记（数据库）/">JAVA 学习笔记（数据库）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/JAVA 学习笔记（负载均衡）/">JAVA 学习笔记（负载均衡）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/686. 重复叠加字符串匹配/">686. 重复叠加字符串匹配</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/JAVA 学习笔记（Cassandra）/">JAVA 学习笔记（Cassandra）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/JAVA 学习笔记（MongoDB）/">JAVA 学习笔记（MongoDB）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/JAVA 学习笔记（Hbase）/">JAVA 学习笔记（Hbase）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/459. 重复的子字符串/">459. 重复的子字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/JAVA 学习笔记（Kafka）/">JAVA 学习笔记（Kafka）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/JAVA 学习笔记（日志）/">JAVA 学习笔记（日志）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/28. 实现 strStr()/">28. 实现 strStr()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/JAVA 学习笔记（网络7层架构，TCP，HTTP和CDN原理）/">JAVA 学习笔记（网络7层架构，TCP，HTTP和CDN原理）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/796. 旋转字符串/">796. 旋转字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/417. 太平洋大西洋水流问题/">417. 太平洋大西洋水流问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/JAVA 学习笔记（NIO）/">JAVA 学习笔记（NIO）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/02/JAVA 学习笔记（Netty 与 RPC）/">JAVA 学习笔记（Netty 与 RPC）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/31/JAVA 学习笔记（微服务）/">JAVA 学习笔记（微服务）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/30/JAVA 学习笔记（IoC控制反转）/">JAVA 学习笔记（IoC控制反转）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/30/JAVA 学习笔记（Bean）/">JAVA 学习笔记（Bean）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/30/JAVA 学习笔记（Spring 原理）/">JAVA 学习笔记（Spring 原理）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/29/JAVA 学习笔记（异常，反射，注解，内部类，泛型，序列化，复制）/">JAVA 学习笔记（异常，反射，注解，内部类，泛型，序列化，复制）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/24/423. 从英文中重建数字/">423. 从英文中重建数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/22/JAVA 多线程并发学习笔记（线程，锁，进程调度）/">JAVA 多线程并发学习笔记（线程，锁，进程调度）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/22/JAVA 集合学习笔记（set，list和map）/">JAVA 集合学习笔记（set，list和map）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/21/518. 零钱兑换 II/">518. 零钱兑换 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/21/剑指 Offer 17. 打印从1到最大的n位数/">剑指 Offer 17. 打印从1到最大的n位数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/19/2104. 子数组范围和/">2104. 子数组范围和</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/19/2103. 环和杆/">2103. 环和杆</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）/">JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/875. 爱吃香蕉的珂珂/">875. 爱吃香蕉的珂珂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/剑指 Offer II 073. 狒狒吃香蕉/">剑指 Offer II 073. 狒狒吃香蕉</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/403. 青蛙过河/">403. 青蛙过河</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1884. 鸡蛋掉落-两枚鸡蛋/">1884. 鸡蛋掉落-两枚鸡蛋</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1377. T 秒后青蛙的位置/">1377. T 秒后青蛙的位置</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1419. 数青蛙/">1419. 数青蛙</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1936. 新增的最少台阶数/">1936. 新增的最少台阶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/746. 使用最小花费爬楼梯/">746. 使用最小花费爬楼梯</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/剑指 Offer II 088. 爬楼梯的最少成本/">剑指 Offer II 088. 爬楼梯的最少成本</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/70. 爬楼梯/">70. 爬楼梯</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/剑指 Offer 10- II. 青蛙跳台阶问题/">剑指 Offer 10- II. 青蛙跳台阶问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/15/842. 将数组拆分成斐波那契序列/">1414. 和为 K 的最少斐波那契数字数目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/15/1414. 和为 K 的最少斐波那契数字数目/">1414. 和为 K 的最少斐波那契数字数目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/873. 最长的斐波那契子序列的长度/">873. 最长的斐波那契子序列的长度</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/剑指 Offer II 093. 最长斐波那契数列/">剑指 Offer II 093. 最长斐波那契数列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/372. 超级次方/">372. 超级次方</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/69. x 的平方根(二分法模板题及经典解释）/">69. x 的平方根(二分法模板题及经典解释）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/剑指 Offer II 072. 求平方根(二分法模板题及经典解释）/">剑指 Offer II072</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/50. Pow(x, n)快速幂算法/">50. Pow(x, n)快速幂算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/509. 斐波那契数/">509. 斐波那契数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/面试题 08.06. 汉诺塔问题/">面试题 08.06. 汉诺塔问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/RabbitMQ学习笔记（概念，架构和消息交换机类型）/">RabbitMQ学习笔记（概念，架构和消息交换机类型）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/面试题 16.07. 最大数值/">面试题 16.07. 最大数值</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/剑指 Offer II 079. 所有子集/">剑指 Offer II 079. 所有子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/剑指 Offer II 067. 最大的异或/">剑指 Offer II 067. 最大的异或</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/10/421. 数组中两个数的最大异或值/">421. 数组中两个数的最大异或值</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/10/面试题 05.03. 翻转数位/">面试题 05.03. 翻转数位</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/10/剑指 Offer 65. 不用加减乘除做加法/">剑指 Offer 65. 不用加减乘除做加法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/09/剑指 Offer 64. 求1+2+…+n/">剑指 Offer 64. 求1+2+…+n</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/1863. 找出所有子集的异或总和再求和/">1863. 找出所有子集的异或总和再求和</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/剑指 Offer 53 - II. 0～n-1中缺失的数字/">剑指 Offer 53 - II. 0～n-1中缺失的数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/剑指 Offer 56 - II. 数组中数字出现的次数 II/">剑指 Offer 56 - II. 数组中数字出现的次数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/剑指 Offer 56 - I. 数组中数字出现的次数/">剑指 Offer 56 - I. 数组中数字出现的次数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/07/477. 汉明距离总和/">477. 汉明距离总和</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/05/Zookeeper学习笔记（概念，协议，投票机制）/">Zookeeper学习笔记（概念，协议，投票机制）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/01/计算机网络概念I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/30/Linux文本三剑客，awk、grep、sed/">Linux文本三剑客，awk、grep、sed</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/29/503. 下一个更大元素 II/">503. 下一个更大元素 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/29/556. 下一个更大元素 III/">556. 下一个更大元素 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/28/496. 下一个更大元素 I/">496. 下一个更大元素 I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/26/739. 每日温度/">739. 每日温度</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/396. 旋转函数/">396. 旋转函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/525. 连续数组/">525. 连续数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/18/如何写出一份优秀的工作周报/">如何写出一份优秀的工作周报？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/17/1044. 最长重复子串/">1044. 最长重复子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/16/1358. 包含所有三种字符的子字符串数目/">1358. 包含所有三种字符的子字符串数目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/16/1297. 子串的最大出现次数/">1297. 子串的最大出现次数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/15/1109. 航班预订统计/">1109. 航班预订统计</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/15/904. 水果成篮/">904. 水果成篮</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/12/《天龙八部》读书笔记/">《天龙八部》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/12/795. 区间子数组个数/">795. 区间子数组个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/10/467. 环绕字符串中唯一的子字符串/">467. 环绕字符串中唯一的子字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/992. K 个不同整数的子数组/">992. K 个不同整数的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/340. 至多包含 K 个不同字符的最长子串/">340. 至多包含 K 个不同字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/159. 至多包含两个不同字符的最长子串/">159. 至多包含两个不同字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/05/3. 无重复字符的最长子串/">3. 无重复字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/03/991. 坏了的计算器/">991. 坏了的计算器</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/02/224. 基本计算器/">224. 基本计算器</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/02/772. 基本计算器III/">772. 基本计算器III</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/02/227. 基本计算器 II/">227.基本计算器 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/31/560. 和为 K 的子数组/">560. 和为 K 的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/31/MySQL面试高频20问/">MySQL面试高频20问</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/28/713. 乘积小于K的子数组/">713. 乘积小于K的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/28/209. 长度最小的子数组/">209. 长度最小的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/27/318. 最大单词长度乘积/">318. 最大单词长度乘积</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/25/1531. 压缩字符串 II/">1531. 压缩字符串 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/25/443. 压缩字符串/">443. 压缩字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/24/338. 比特位计数/">338. 比特位计数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/21/262. 行程和用户/">262. 行程和用户</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/18/29. 两数相除/">29. 两数相除</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/04/1071. 字符串的最大公因子/">1071. 字符串的最大公因子</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/05/07/1206. 设计跳表/">1206. 设计跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/26/707. 设计链表/">707. 设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/09/706. 设计哈希映射/">706. 设计哈希映射</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/09/705. 设计哈希集合/">705. 设计哈希集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/07/LCP 29. 乐团站位/">LCP 29. 乐团站位</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/05/LCP 28. 采购方案/">LCP 28. 采购方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/294 · 简化链表/">294 · 简化链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/711. 不同岛屿的数量II/">711. 不同岛屿的数量II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/694. 不同岛屿的数量/">694. 不同岛屿的数量</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/30/305. 岛屿数量 II/">305. 岛屿数量 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/29/572. 另一个树的子树/">572. 另一个树的子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/27/491. 递增子序列/">304. 二维区域和检索 - 矩阵不可变</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/27/304. 二维区域和检索 - 矩阵不可变/">304. 二维区域和检索 - 矩阵不可变</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/25/456. 132 模式/">456. 132 模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/18/1188 设计有限阻塞队列/">1188 设计有限阻塞队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/18/1242.多线程网页爬虫/">1242.多线程网页爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/17/1279. 红绿灯路口/">1279. 红绿灯路口</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/04/953. 验证外星语词典/">953. 验证外星语词典</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/27/269.火星词典/">269.火星词典</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/Java基础知识-装箱和拆箱/">Java基础知识-装箱和拆箱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/Java基础知识-重写 `equals` 时为何必须重写 `hashCode` 方法/">Java基础知识-重写 `equals` 时为何必须重写 `hashCode` 方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/20/JAVA 强软弱虚四种引用类型/">JAVA 强软弱虚四种引用类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/03/77. 组合/">77. 组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/02/57. 插入区间/">57. 插入区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/02/17. 电话号码的字母组合/">17. 电话号码的字母组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/28/909. 蛇梯棋/">909. 蛇梯棋</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/688. “马”在棋盘上的概率/">688. “马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/782. 变为棋盘/">782. 变为棋盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/25/1275. 找出井字棋的获胜者/">1275. 找出井字棋的获胜者</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/29/312. 戳气球/">312. 戳气球</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/23/406. 根据身高重建队列/">406. 根据身高重建队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/23/301. 删除无效的括号/">301. 删除无效的括号</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/17/76. 最小覆盖子串/">76. 最小覆盖子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/16/41. 缺失的第一个正数/">41. 缺失的第一个正数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/16/89. 格雷编码/">89. 格雷编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/15/61. 旋转链表/">61. 旋转链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/09/8. 字符串转换整数 (atoi)/">8. 字符串转换整数 (atoi)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/02/1. 两数之和/">1. 两数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/30/176. 第二高的薪水/">176. 第二高的薪水</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/30/393. UTF-8 编码验证/">393. UTF-8 编码验证</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/26/69. x 的平方根/">69. x 的平方根</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/25/432. 全 O(1) 的数据结构/">432. 全 O(1) 的数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/354. 俄罗斯套娃/">354. 俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/120. 三角形最小路径和/">120. 三角形最小路径和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/1277. 统计全为 1 的正方形子矩阵/">1277. 统计全为 1 的正方形子矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/53. 最大子序和/">53. 最大子序和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/221.最大正方形/">221.最大正方形</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/122.买卖股票的最佳时机II/">122.买卖股票的最佳时机II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/121.买卖股票的最佳时机/">121.买卖股票的最佳时机</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/102.二叉树的层次遍历/">102.二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/103. 二叉树的锯齿形层次遍历/">103. 二叉树的锯齿形层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/107. 二叉树的层次遍历 II/">107. 二叉树的层次遍历 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/20/23. 合并K个升序链表/">23. 合并K个升序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/20/445. 两数相加II/">445. 两数相加II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/20/2. 两数相加/">2. 两数相加</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/407. 接雨水II/">407. 接雨水II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/42. 接雨水/">42. 接雨水</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/56. 合并区间/">56. 合并区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/547. 朋友圈/">547. 朋友圈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/128. 最长连续序列/">128. 最长连续序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/13/60. 排列序列/">60. 排列序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/13/674. 最长连续递增序列/">674. 最长连续递增序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/13/81. 搜索旋转排序数组 II/">81. 搜索旋转排序数组 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/11/33. 搜索旋转排序数组/">33. 搜索旋转排序数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/11/695. 岛屿的最大面积/">695. 岛屿的最大面积</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/16. 最接近的三数之和/">16. 最接近的三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/923. 三数之和的多种可能/">923. 三数之和的多种可能</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/15. 三数之和/">15. 三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/93. 复原IP地址/">93. 复原IP地址</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/71. 简化路径/">71. 简化路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/12/151. 翻转字符串里的单词/">151. 翻转字符串里的单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/12/415. 字符串相加/">415. 字符串相加</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/12/43. 字符串相乘/">43. 字符串相乘</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/程序员面试金典.面试题08.08.有重复字符串的排列组合/">程序员面试金典.面试题08.08.有重复字符串的排列组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/程序员面试金典.面试题08.07.无重复字符串的排列组合/">程序员面试金典.面试题08.07.无重复字符串的排列组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/剑指 offer38.字符串的排列/">剑指 offer38.字符串的排列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/09/14. 最长公共前缀/">14. 最长公共前缀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/09/567. 字符串的排列/">567. 字符串的排列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/09/784. 字母大小写全排列/">784. 字母大小写全排列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/06/146. LRU缓存机制/">146. LRU缓存机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/134. 加油站/">134. 加油站</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/412. Fizz Buzz/">412. Fizz Buzz</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/371. 两整数之和/">371. 两整数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/202. 快乐数/">202. 快乐数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/30/326. 3的幂/">326. 3的幂</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/30/268. 缺失数字/">268. 缺失数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/29/204. 计数质数/">204. 计数质数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/28/191. 位1的个数/">191. 位1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/27/172. 阶乘后的零/">172. 阶乘后的零</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/27/190. 颠倒二进制位/">190. 颠倒二进制位</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/18/166. 分数到小数/">166. 分数到小数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/18/149. 直线上最多的点数/">149. 直线上最多的点数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/17/260. 只出现一次的数字III/">260. 只出现一次的数字III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/16/137. 只出现一次的数字II/">137. 只出现一次的数字II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/16/136. 只出现一次的数字/">136. 只出现一次的数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/210. 课程表II/">210. 课程表II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/14/207. 课程表/">207. 课程表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/14/200. 岛屿数量/">200. 岛屿数量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/09/127. 单词接龙/">127. 单词接龙</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/08/322. 零钱兑换/">322. 零钱兑换</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/08/329. 矩阵中的最长递增路径/">329. 矩阵中的最长递增路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/08/300. 最长上升子序列/">300. 最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/279. 完全平方数/">279. 完全平方数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/337. 打家劫舍III/">337. 打家劫舍III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/213. 打家劫舍II/">213. 打家劫舍II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/198. 打家劫舍/">198. 打家劫舍</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/31/124. 二叉树中的最大路径和/">124. 二叉树中的最大路径和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/31/395. 至少有K个重复字符的最长子串/">395. 至少有K个重复字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/剑指 offer51.数组中的逆序对/">剑指 offer51.数组中的逆序对</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/315. 计算右侧小于当前元素的个数/">315. 计算右侧小于当前元素的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/25/287. 寻找重复数/">287. 寻找重复数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/162. 寻找峰值/">162. 寻找峰值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/324. 摆动排序 II/">324. 摆动排序 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/179. 最大数/">179. 最大数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/297. 二叉树的序列化与反序列化/">297. 二叉树的序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/236. 二叉树的最近公共祖先/">236. 二叉树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/22/230. 二叉搜索树中第K小的元素/">230. 二叉搜索树中第K小的元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/380. 常数时间插入、删除和获取随机元素/">380. 常数时间插入、删除和获取随机元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/454. 四数相加 II/">454. 四数相加 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/Excel表列序号/">171. Excel表列序号</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/328. 奇偶链表/">328. 奇偶链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/237. 删除链表中的节点/">237. 删除链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/20/234. 回文链表/">234. 回文链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/19/92. 反转链表II/">92. 反转链表II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/18/206. 反转链表/">206. 反转链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/18/160. 相交链表/">160. 相交链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/17/Java 练手项目/">Java 练手项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/142. 环形链表II/">142. 环形链表II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/148. 排序链表/">148. 排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/24/141. 环形链表/">141. 环形链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/138. 复制带随机指针的链表/">138. 复制带随机指针的链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/150. 逆波兰表达式求值/">150. 逆波兰表达式求值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/341. 扁平化嵌套列表迭代器/">341. 扁平化嵌套列表迭代器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/19/239. 滑动窗口最大值/">239. 滑动窗口最大值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/18/347. 前 K 个高频元素/">347. 前 K 个高频元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/12/Java编程思想-第二十二章 枚举阅读笔记/">Java编程思想-第二十二章 枚举阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/10/Latex极简教程/">Latex极简教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/09/378. 有序矩阵中第K小的元素/">378. 有序矩阵中第K小的元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/06/295. 数据流的中位数/">295. 数据流的中位数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/06/215. 数组中的第K个最大元素/">215. 数组中的第K个最大元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/238. 除自身以外数组的乘积/">238. 除自身以外数组的乘积</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/155.  最小栈/">155. 最小栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/240. 搜索二维矩阵II/">240. 搜索二维矩阵II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/74. 搜索二维矩阵/">74. 搜索二维矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/334.递增的三元子序列/">334. 递增的三元子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/350. 两个数组的交集II/">350. 两个数组的交集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/349. 两个数组的交集/">349. 两个数组的交集</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/384. 打乱数组/">384. 打乱数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/283. 移动零/">283. 移动零</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/Java之TreeSet类/">Java之TreeSet类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/220. 存在重复元素III/">220. 存在重复元素III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/217. 存在重复元素/">217. 存在重复元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/219. 存在重复元素II/">219. 存在重复元素II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/152. 乘积最大子数组/">152. 乘积最大子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/189. 旋转数组/">189. 旋转数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/63. 不同路径II/">63. 不同路径II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/980. 不同路径 III/">980. 不同路径 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/62. 不同路径/">62. 不同路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/212. 单词搜索II/">212. 单词搜索II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java编程思想-第二十三章 注解阅读笔记/">Java编程思想-第二十三章 注解阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java编程思想-第二十章 泛型阅读笔记/">Java编程思想-第二十章 泛型阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/27/79. 单词搜索/">79. 单词搜索</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/Java之数组/">Java之数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/《生事之屋：白宫回忆录》节选/">《生事之屋：白宫回忆录》节选</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/24/208. 实现 Trie (前缀树)/">208. 实现 Trie (前缀树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/23/数据库学习笔记-Sql_Mode/">数据库学习笔记-Sql_Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/ Java之String类/">Java之String类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/Java之可变参数/">Java之可变参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java之Queue、Deque、ArrayDeque/">Java之Queue、Deque、ArrayDeque</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java之instanceof关键字/">Java之instanceof关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/14/Java之transient关键字/">Java之transient关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java编程思想-第十章 接口阅读笔记/">Java编程思想-第十章 接口阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java集合之HashMap/">Java集合之HashMap</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念III-事务并发控制/">数据库基础概念III-事务并发控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-聚合函数/">数据库学习笔记-聚合函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库基础概念-索引/">数据库基础概念-索引</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/数据库学习笔记-INTERSECT/">数据库学习笔记-INTERSECT</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-UNION/">数据库学习笔记-UNION</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/数据库学习笔记-连接/">数据库学习笔记-连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库学习笔记-MySQL安装与使用/">数据库学习笔记-MySQL安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/数据库基础概念II-范式-关系代数-三值逻辑/">数据库基础概念II-范式-关系代数-三值逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/09/数据库学习笔记-SQL约束(Constraints)/">数据库学习笔记-SQL约束(Constraints)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第九章 多态阅读笔记/">Java编程思想-第九章 多态阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java编程思想-第二十四章 并发编程阅读笔记/">Java编程思想-第二十四章 并发编程阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/05/Maven快照机制(SNAPSHOT)/">Maven快照机制（SNAPSHOT）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/29/140. 单词拆分II/">140. 单词拆分II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/139. 单词拆分/">139. 单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/5. 最长回文子串/">5. 最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/131. 分割回文串/">131. 分割回文串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/887. 鸡蛋掉落/">887. 鸡蛋掉落</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/27/21. 合并两个有序链表/">21. 合并两个有序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/685.冗余链接II/">685.冗余链接II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/1226. 哲学家进餐/">1226. 哲学家进餐</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1195. 交替打印字符串/">1195. 交替打印字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1117. H2O 生成/">1117. H2O 生成</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1116. 打印零与奇偶数/">1116. 打印零与奇偶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/1115. 交替打印FooBar/">1115. 交替打印FooBar</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/Java并发编程/">Java并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/1114.按序打印/">1114.按序打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/19/684.冗余链接/">684.冗余链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Lombok的基本注解使用/">Lombok的基本注解使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/后端开发常用调试技巧集锦/">后端开发常用调试技巧集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/405. 数字转化为十六进制数/">405. 数字转化为十六进制数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/SpringBoot学习笔记VIII-MybatisPlus教程/">SpringBoot学习笔记VIII-MybatisPlus教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/设计模式学习笔记V-策略模式/">设计模式学习笔记V-策略模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/1046. 最后一块石头的重量/">1046. 最后一块石头的重量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/Java学习笔记XIV/">Java学习笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/257.二叉树的所有路径/">257.二叉树的所有路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/22/24.两两交换链表中的节点/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/微信公众平台开发学习笔记I/">微信公众平台开发学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/601.Human Traffic of Stadium体育馆的人流量/">601.Human Traffic of Stadium体育馆的人流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/185.Department Top Three Salaries/">185.Department Top Three Salaries</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/数据库学习笔记IX/">数据库学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/184.Department Highest Salary/">184.Department Highest Salary</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/数据库学习笔记VIII/">数据库学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/1179. Reformat Department Table/">1179. Reformat Department Table</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java阅读笔记XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java阅读笔记VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo的spfk主题修改/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java阅读笔记VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java阅读笔记VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git学习笔记III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java阅读笔记V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo标签与md文件冲突问题解决/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java开发中的易错点/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/设计模式学习笔记IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/数据库学习笔记VII/">数据库学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java开发规范/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java阅读笔记II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/设计模式学习笔记III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java阅读笔记I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala学习笔记V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java学习笔记XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java学习笔记XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala学习笔记III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java学习笔记X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/数据库学习笔记VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/设计模式学习笔记II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/设计模式学习笔记I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala学习笔记II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java学习笔记IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell学习笔记I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala学习笔记I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java学习笔记VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java学习笔记VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git学习笔记II-Git版本回滚/">Git学习笔记II-Git版本回滚</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/数据库学习笔记V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git学习笔记I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/数据库学习笔记IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/数据库学习笔记III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java学习笔记III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/数据库学习笔记II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java学习笔记II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java学习笔记I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot学习笔记VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/数据库学习笔记I-查询/">数据库学习笔记I-查询</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot学习笔记V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot学习笔记IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot学习笔记III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot学习笔记I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux配置问题小结/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/操作系统基础概念I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo博客多终端更新问题/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow入门-Mnist手写数字识别/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux学习笔记I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations全排列问题总结/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest Rectangle in Histogram柱状图中最大的矩形/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52. N-QueensIIN皇后II/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51. N-QueensN皇后/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary Tree Right Side View二叉树的右视图/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary of Binary Tree 二叉树的边界/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/操作系统面试高频题/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/数据库面试高频题/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++面试高频题/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792. Number of Matching Subsequences匹配子序列的单词数/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392. Is Subsequence判断子序列/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux基础面试高频题/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/算法面试高频题/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/计算机网络面试高频题/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/设计模式面试高频题/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/回溯法问题通解/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78. Subsets子集/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90. SubsetsII子集II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72. Edit Distance编辑距离/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find the Celebrity寻找名人/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148. Sort List排序链表/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692. Top K Frequent Words前K个高频单词/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450. Delete Node in a BST删除二叉搜索树中的节点/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435. Non-overlapping Intervals无重叠区间/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++基础概念VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75. Sort Colors颜色分类/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275. H-Index II H指数 II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274. H-IndexH指数/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/STL源码剖析之vector/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git分区概念/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486. Predict the Winner预测赢家/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/快速排序及其优化/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++基础概念IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682. Baseball Game棒球比赛/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542. 01 Matrix 01 矩阵/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++输入总结/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688. Knight Probability in Chessboard“马”在棋盘上的概率/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139. Word Break单词拆分/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626. Exchange Seats换座位/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485. Max Consecutive Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538. Convert BST to Greater Tree把二叉搜索树转换为累加树/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697. Degree of an Array数组的度/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885. Spiral Matrix III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/数据库基础概念I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/剑指Offer20.顺时针打印矩阵/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59. Spiral Matrix II螺旋矩阵 II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650. 2 Keys Keyboard只有两个键的键盘/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/在浏览器地址栏输入URL，按下回车后发生了什么/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指Offer59.对称的二叉树/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/剑指offer思路总结/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300. Longest Increasing Subsequence最长上升子序列/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/剑指Offer64.数据流中的中位数/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++基础概念III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/Hexo+github搭建个人博客问题总结/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/股票交易问题通解小结/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/前言/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2022 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：1021.8k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
