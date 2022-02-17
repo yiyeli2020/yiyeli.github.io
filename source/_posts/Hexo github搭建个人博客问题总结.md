@@ -1,11 +1,11 @@
 ---
 title: Hexo+github搭建个人博客问题总结
 
-date: 2021-02-17 09:58:44
+date: 2022-02-17 14:12:12
 
-categories: 2021年2月
+categories: 2022年2月
 
-tags: [Hexo,Github,Git]
+tags: [Hexo, Github, Git]
 
 
 ---
@@ -22,7 +22,9 @@ tags: [Hexo,Github,Git]
 
 https://www.jianshu.com/p/698f82e72415
 
+    ssh-keygen -t rsa -C "yiyeli@creditease.cn"
     ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C "15652771941@163.com"
+    ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitee -C "15652771941@163.com"
     
     ssh -T git@gitlab.creditease.corp
     
@@ -34,26 +36,26 @@ https://www.jianshu.com/p/698f82e72415
     
     ssh: connect to host github.com port 22: Operation timed out
 
-连接其它git时都成功了，只有github报错，可以换个端口
+连接其它git时都成功了，只有github报错，可以换个端口,在github下加一栏 Port 443，但还是没作用
 
-    #公司
-    Host gitlab.creditease.corp
-    Hostname gitlab.creditease.corp
-    IdentityFile ~/.ssh/id_rsa
-    User yiyeli
-      
-    #个人github
-    Host github.com
-    Hostname github.com
-    IdentityFile ~/.ssh/id_rsa_github
-    User yiyeli2020
-    Port 443
-    
-    #个人gitee
-    Host gitee.com
-    Hostname gitee.com
-    IdentityFile ~/.ssh/id_rsa_gitee
-    User liyiye2012
+#公司
+Host gitlab.creditease.corp
+Hostname gitlab.creditease.corp
+IdentityFile ~/.ssh/id_rsa
+User yiyeli
+  
+#个人github
+Host github.com
+Hostname github.com
+IdentityFile ~/.ssh/id_rsa_github
+User yiyeli2020
+# Port 443
+
+#个人gitee
+Host gitee.com
+Hostname gitee.com
+IdentityFile ~/.ssh/id_rsa_gitee
+User liyiye2012
 
 # 问题：本地同时配置多个github账号导致博客部署失败
 
@@ -93,3 +95,5 @@ Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，�
 	rm -rf .deploy_git
 	hexo generater
 	hexo deploy
+
+
