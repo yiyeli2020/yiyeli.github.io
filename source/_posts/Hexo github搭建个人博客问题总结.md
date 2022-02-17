@@ -1,7 +1,10 @@
 ---
 title: Hexo+github搭建个人博客问题总结
-date: 2018-08-21 09:58:44
-categories: 2018年8月
+
+date: 2021-02-17 09:58:44
+
+categories: 2021年2月
+
 tags: [Hexo,Github,Git]
 
 
@@ -13,7 +16,46 @@ tags: [Hexo,Github,Git]
 
 <!-- more -->
 
-## 问题1：本地同时配置多个github账号导致博客部署失败
+[TOC]
+
+# Mac 上配置多个git账号
+
+https://www.jianshu.com/p/698f82e72415
+
+    ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C "15652771941@163.com"
+    
+    ssh -T git@gitlab.creditease.corp
+    
+    ssh -T git@gitee.com
+    
+    
+    ssh -T git@github.com
+    
+    
+    ssh: connect to host github.com port 22: Operation timed out
+
+连接其它git时都成功了，只有github报错，可以换个端口
+
+    #公司
+    Host gitlab.creditease.corp
+    Hostname gitlab.creditease.corp
+    IdentityFile ~/.ssh/id_rsa
+    User yiyeli
+      
+    #个人github
+    Host github.com
+    Hostname github.com
+    IdentityFile ~/.ssh/id_rsa_github
+    User yiyeli2020
+    Port 443
+    
+    #个人gitee
+    Host gitee.com
+    Hostname gitee.com
+    IdentityFile ~/.ssh/id_rsa_gitee
+    User liyiye2012
+
+# 问题：本地同时配置多个github账号导致博客部署失败
 
 因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题
 
@@ -22,6 +64,7 @@ tags: [Hexo,Github,Git]
 	FATAL Something's wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
 	Error: remote: Permission to B/B.github.io.git denied to A.
 	fatal: unable to access 'https://github.com/B/B.github.io.git/': The requested URL returned error: 403
+
 原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: git@github.com:Name/Name.github.io.git，替换为repository: git@B:Name/Name.github.io.git。
 在原有的~\.ssh\config中配置内容如下：
 
@@ -38,10 +81,10 @@ tags: [Hexo,Github,Git]
 
 这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交
 
-## 问题2：历史删除文件仍存在于repository中
+# 问题：历史删除文件仍存在于repository中
 原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令
 
-## 问题3：Hexo deploy 发布不成功
+##问题3：Hexo deploy 发布不成功
 始终停留在
 
 	nothing to commit (working directory clean)
