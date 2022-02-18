@@ -37,25 +37,25 @@ https://www.jianshu.com/p/698f82e72415
     ssh: connect to host github.com port 22: Operation timed out
 
 连接其它git时都成功了，只有github报错，可以换个端口,在github下加一栏 Port 443，但还是没作用
-
-#公司
-Host gitlab.creditease.corp
-Hostname gitlab.creditease.corp
-IdentityFile ~/.ssh/id_rsa
-User yiyeli
-  
-#个人github
-Host github.com
-Hostname github.com
-IdentityFile ~/.ssh/id_rsa_github
-User yiyeli2020
-# Port 443
-
-#个人gitee
-Host gitee.com
-Hostname gitee.com
-IdentityFile ~/.ssh/id_rsa_gitee
-User liyiye2012
+    
+    #公司
+    Host gitlab.creditease.corp
+    Hostname gitlab.creditease.corp
+    IdentityFile ~/.ssh/id_rsa
+    User yiyeli
+      
+    #个人github
+    Host github.com
+    Hostname github.com
+    IdentityFile ~/.ssh/id_rsa_github
+    User yiyeli2020
+    # Port 443
+    
+    #个人gitee
+    Host gitee.com
+    Hostname gitee.com
+    IdentityFile ~/.ssh/id_rsa_gitee
+    User liyiye2012
 
 # 问题：本地同时配置多个github账号导致博客部署失败
 
