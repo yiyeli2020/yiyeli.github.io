@@ -22,11 +22,13 @@ tags: [Hexo, Github, Git]
 
 https://www.jianshu.com/p/698f82e72415
 
-    ssh-keygen -t rsa -C "yiyeli@creditease.cn"
+此处将公司gitlab地址假设为company.cn
+
+    ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitlab -C "yiyeli@company.cn"
     ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C "15652771941@163.com"
     ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitee -C "15652771941@163.com"
     
-    ssh -T git@gitlab.creditease.corp
+    ssh -T git@company.cn
     
     ssh -T git@gitee.com
     
@@ -39,23 +41,34 @@ https://www.jianshu.com/p/698f82e72415
 连接其它git时都成功了，只有github报错，可以换个端口,在github下加一栏 Port 443，但还是没作用
     
     #公司
-    Host gitlab.creditease.corp
-    Hostname gitlab.creditease.corp
-    IdentityFile ~/.ssh/id_rsa
-    User yiyeli
+    Host gitlab.company.corp
+    Hostname gitlab.company.corp
+    IdentityFile ~/.ssh/id_rsa_gitlab
+    User gitlabLoginName
       
     #个人github
     Host github.com
     Hostname github.com
     IdentityFile ~/.ssh/id_rsa_github
-    User yiyeli2020
+    User githubLoginName
     # Port 443
     
     #个人gitee
     Host gitee.com
     Hostname gitee.com
     IdentityFile ~/.ssh/id_rsa_gitee
-    User liyiye2012
+    User giteeLoginName
+
+## 使用公司gitlab时出错
+    
+    Total 10 (delta 4), reused 0 (delta 0), pack-reused 0
+    remote: git rev-list xxxx--after='2021-11-29 15:55:00'        
+    remote: GL-HOOK-ERR: 6xxxx的提交者xxxx@163.com不是公司邮箱，请修改您的邮箱为公司邮箱,若仍无法解决，请提交jira工单:
+    remote: error: hook declined to update refs/heads/feature-chinese2022        
+    error: failed to push some refs to 'gitlab.company.corp:ce-datamonitorsystem/grafana.git'
+
+从错误原因可以看到是提交的邮箱错误，原因是第一次commit时IDE会弹出一个Git User Name Is Not Defined的窗口，填完用户名和邮箱后会默认将Set properties globally的选项打上勾，这样在配置多个git账户时就会出错，因为邮箱等参数不能是全局一致的，记得每次把这个Set properties globally选项去掉就好了。
+
 
 # 问题：本地同时配置多个github账号导致博客部署失败
 
