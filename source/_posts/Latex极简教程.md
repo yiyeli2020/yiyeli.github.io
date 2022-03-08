@@ -1,9 +1,9 @@
 
 title: Latex极简教程
 
-date: 2020-7-10 23:55:12
+date: 2022-2-28 11:12:12
 
-categories: 2020年7月
+categories: 2022年2月
 
 tags: [Latex]
 
@@ -23,6 +23,16 @@ MacTex 安装包非常大，而且自带了很多图形应用。我更喜欢用�
 ```
 brew cask install basictex
 ```
+如果报错：
+
+Error: Unknown command: cask
+
+原因就是新版本的 homebrew 已经取消了 cask 这条命令，改用
+
+```
+brew install --cask basictex
+```
+
 安装完还不能直接使用，还需要把 texlive 添加到环境变量中，才能找到相关的命令。
 ```
 export PATH=/usr/local/texlive/2020basic/bin/x86_64-darwin:$PATH
