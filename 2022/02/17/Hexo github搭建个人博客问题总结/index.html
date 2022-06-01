@@ -301,7 +301,7 @@ FATAL Something&#39;s wrong. Maybe you can find the solution here: http://hexo.i
 Error: remote: Permission to B/B.github.io.git denied to A.
 fatal: unable to access &#39;https://github.com/B/B.github.io.git/&#39;: The requested URL returned error: 403
 </code></pre>
-<p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:&#103;&#x69;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#x69;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>:Name&#x2F;Name.github.io.git，替换为repository: git@B:Name&#x2F;Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p>
+<p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#103;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#109;</a>:Name&#x2F;Name.github.io.git，替换为repository: git@B:Name&#x2F;Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p>
 <pre><code># 该配置用于账户A
 Host A # Host 服务器别名
 HostName github.com  # HostName 服务器ip地址或机器名
