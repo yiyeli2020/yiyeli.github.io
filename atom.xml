@@ -59,27 +59,6 @@
   </entry>
   
   <entry>
-    <title>固态电子器件（Solid State Electronic Devices）</title>
-    <link href="http://yoursite.com/2022/03/10/%E5%9B%BA%E6%80%81%E7%94%B5%E5%AD%90%E5%99%A8%E4%BB%B6%EF%BC%88Solid%20State%20Electronic%20Devices%EF%BC%89/"/>
-    <id>http://yoursite.com/2022/03/10/%E5%9B%BA%E6%80%81%E7%94%B5%E5%AD%90%E5%99%A8%E4%BB%B6%EF%BC%88Solid%20State%20Electronic%20Devices%EF%BC%89/</id>
-    <published>2022-03-10T14:12:12.000Z</published>
-    <updated>2022-03-15T13:14:55.606Z</updated>
-    
-    <content type="html"><![CDATA[<p>Exam 1,2<br>春假前已经讲完第五章，第六章讲到6.1</p><span id="more"></span><p>[TOC]</p><h1 id="Exam-1"><a href="#Exam-1" class="headerlink" title="Exam 1"></a>Exam 1</h1><ol><li><p>Calculate: (1) the mass dennsity and (2) nearest distance between Sb atoms for single crystalline AlSb, which is a binary compound semiconductor with a zincblende lattice structure, biven the following:<br>计算：（1）单晶AlSb的质量密度和（2）Sb原子之间的最近距离，单晶AlSb是具有锌blende晶格结构的二元化合物半导体，其分辨如下：</p></li><li><p>Consider a one-dimensional, infinite potential well of width L with one of the two walls positioned at x&#x3D; L&#x2F;2.<br>Using first principle-based calculations, determine the normalized wavefunction and average momentum for the 11th particle in this well.<br>考虑一个宽度为 L 的一维、无限势阱，其中两个壁中的一个位于 x&#x3D; L&#x2F;2。<br>使用基于第一个原理的计算，确定该孔中第11个粒子的归一化波函数和平均动量。</p></li><li><p>Consider a piece of single crystal silicon at room temperature that is doped with phosphorus at 10^17 atmos&#x2F;cn^3 and an unspecified concentration of boron atoms. The Fermi energy is displaced from the intrinsic energy level by 0.3471 eV. For this piece of silicon, calculate:<br>考虑一块室温下的单晶硅，其中掺杂了10 ^ 17 atmos &#x2F; cn ^ 3的磷和未指定浓度的硼原子。费米能量从内在能级移位0.3471 eV。对于这块硅片，计算：</p></li></ol><p>a. The electron concentration in the conduction band<br>b. The hole concentration in the valence band<br>c. The Fermi Energy relative to the valence band</p><p>a. 导带中的电子浓度<br>b.价带中的孔浓度<br>c. 相对于价带的费米能量</p><ol start="4"><li>Consider a semiconductor that has the following properties: (1) the effective mass of electrons is significantly smaller than the effective mass for holes, and (2) electrons cannot transit the bandgap by only a change in their potential energy. For this semiconductor make a sketch of an E vs k plot. Justify key attributes of your sketch with some descriptive text.</li></ol><p>考虑具有以下性质的半导体：（1）电子的有效质量明显小于空穴的有效质量，以及（2）电子不能仅通过其势能的变化来传递带隙。对于此半导体，请绘制E与k图的草图。使用一些描述性文本对齐草图的关键属性。</p><ol start="5"><li>Arsenic is a commonly used dopant in silicon-based solid state devices.</li></ol><p>a. What type of conductivity is produced in silicon that is doped with arsenic?<br>b. Give three reasons as to why arsenic is an excellent dopant in silicon.<br>砷是硅基固态器件中常用的掺杂剂。</p><p>一个。掺杂砷的硅会产生什么类型的电导率？<br>b.给出三个理由来解释为什么砷是硅中一种极好的掺杂剂。</p><ol start="6"><li>Consider a rectangular piece of single crystal Si that is doped with phosphorus atoms and held at constant temperautre. A metal electrode is placed at each end of the Si and a positive potential is placed on the left electrode.<br>a. Draw the simplified energy band diagram for this piece of silicon<br>b. Indicate the behavior of electrons and holes in this piece of silicon</li></ol><p>考虑一块长方形的单晶Si，它掺杂了磷原子并保持恒定的温度。在Si的两端放置一个金属电极，并在左电极上放置一个正电位。<br>一个。为这块硅绘制简化的能带图<br>b.指示这块硅片中电子和空穴的行为</p><h1 id="Exam-2"><a href="#Exam-2" class="headerlink" title="Exam 2"></a>Exam 2</h1><p>建议还是讲讲这次我们的考试卷子Exam2</p><p>第三和第六题尤其不会，第一、二题也可以讲一下</p><p>我们上次作业⬆️，书上第四和第五章的习题 4.24,5.9,5.15<br>上上次作业⬆️，也是书上3.13, 4.6,4.15</p><p>每周一次课，北京时间周末早上，从第五六章开始讲</p><h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>For Si, the bandgap is 1.12eV, the intrinsic ccarrier concentration at 300K is 1.5x10^10 &#x2F;cm^3, The effective mass of electrons is 9.828x10^(-31)kg, the effective mass of holes is 7.371x10(-31)kg and the relative permittivity is 11.8. The permittivity of free space is 8.85 x 10^(-14) F&#x2F;cm, The charge on an electron is 1.6 x 10^(-19)C. 1µm &#x3D; 10^(-4)cm</p><p>对于Si，带隙为1.12eV，300K时本征载流子浓度为1.5x10^10 &#x2F;cm^3 ，电子有效质量为9.828x10^（-31）kg，空穴有效质量为7.371x10（-31）kg，相对介电常数为11.8。自由空间的介电常数ε为8.85 x 10^（-14） F&#x2F;cm，电子上的电荷为1.6 x 10^（-19）C。</p><h2 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h2><p>Consider an ideal p-n with a cross-sectional area is 0.001 cm^2.You know nothing about doping other than the dopant concerntrations which are 10^18 &#x2F; cm^2 and 10^15 &#x2F; cm^3.You have been told that the electric field extends deeper into the p-type side than the n-type side. For this structure,calculate:<br>考虑横截面积为 0.001 cm^2 的理想 p-n。除了掺杂剂关注的 10^18 &#x2F; cm^2 和 10^15 &#x2F; cm^3 之外，您对掺杂一无所知。您被告知电场延伸到 p 型侧比 n 型侧更深。对于此结构，请计算：</p><p>由xp0&gt;&gt;xno 得Na&lt;&lt;Nd, 故Na&#x3D;10^15 &#x2F;cm^3 ,Nd &#x3D; 10^18 &#x2F;cm^3</p><p>a. The Fermi level positions with respect to the intrinsic level in both neutral regions.<br>b. The contact potential<br>c. The penetration depths into the n-type and p-type regions<br>d. The total uncompensated charge on the n-side of the metallurgical junction<br>e.The maximum electric field</p><p>a. 费米能级相对于两个中性区域的内在能级。</p><p>参考 P93, e.g 3-5</p><p>b. 接触电势</p><p>参考P173，e.g 5-1 (b)(c)有两种计算方法</p><p>c. 渗透深度进入n型和p型区域<br>d. 冶金结n侧的未补偿电荷总量<br>e. 最大电场</p><h3 id="a-b参考P173，e-g-5-1"><a href="#a-b参考P173，e-g-5-1" class="headerlink" title="a,b参考P173，e.g 5-1"></a>a,b参考P173，e.g 5-1</h3><h3 id="c-d-e-参考P179-e-g-5-2"><a href="#c-d-e-参考P179-e-g-5-2" class="headerlink" title="c,d,e 参考P179, e.g 5-2"></a>c,d,e 参考P179, e.g 5-2</h3><h1 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h1><p>Consider a long, thin rectangular Si rod that is uniformly doped with phosphorus at a concentration of 10^17 &#x2F;cm^3 . As show in the diagram below, the top surface of the bar is uniformly illuminated by a small,<br>narrow sliver of light positioned ar the center of the bar. 10^20&#x2F;cm^3 electron-hole pairs are generated per second in the region of illuminations. The electron and hole lifetimes are both 10µs. The hole mobility is 500cm^2&#x2F;V-s and the electron diffusion coefficient is 36cm^2&#x2F;s. Calculate the position of the quasi fermi energy for holes with respect to the intrinsic energy level at a distance of 35 µm from the point of illumination?</p><p>考虑一根长而细的矩形Si棒，均匀地掺杂磷，浓度为10 ^ 17 &#x2F; cm ^ 3。如下图所示，条形图的顶部表面由一个小的，<br>狭窄的光线条位于杆的中心。在照明区域中每秒产生10 ^ 20 &#x2F; cm ^ 3电子 - 空穴对。电子和空穴寿命均为10μs。空穴迁移率µp为500cm^2 &#x2F;V-s，电子扩散系数Dn为36cm^2 &#x2F;s。计算相对于距照明点35μm距离的空穴的准费米能量固有能级的位置？</p><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>P81掺杂III族施主杂质 磷元素 N型半导体 </p><p>EHP 电子-空穴对</p><p>P101 迁移率<br>P130 4.3.3 稳态载流子产生：准费米能级</p><p>过剩载流子是指在外界因素影响下，非平衡态中比平衡态多的载流子。</p><p>δp 载流子浓度相对于热平衡载流子浓度的偏移<br>可以认为过剩载流子同时向两侧移动，所以分出一半来</p><p>P130 （4-11） gοp 光产生速率</p><p>P131 准费米能级的定义（存在过剩载流子时使用）<br>P135 Dp 空穴扩散系数</p><p>P136<br>爱因斯坦关系 （4-28）</p><p>D&#x2F;μ&#x3D;ΚΤ&#x2F;q</p><p>P141<br>空穴扩散长度Lp<br>过剩空穴注入半无限长的条状半导体中δp(x)&#x3D;Δp e^(-x&#x2F;Lp)</p><h1 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h1><p>Consider a long, thin rectangular Si rod that is uniformly doped with phosphorus at a concentration of 10^16&#x2F;cm^3. The electron and hole lifetimes are 10µs. The diffusion coefficients for electrons and holes are 36 cm&#x2F;s and 12 cm&#x2F;s, respectively. Initially, the rod is uniformly illuminated with light on its left cross-sectional face and 10^19&#x2F;cm^3 electron-hole pairs are generated per second in the region of illumination. The light source is then shut off. Calculate the diffusion current density for holes at a distance of 5x10^(-3)cm from the left end of the bar after the light source has been off for 50µs</p><p>考虑一根长而细的矩形Si棒，均匀掺杂磷，浓度为10 ^ 16 &#x2F; cm ^ 3。电子和空穴寿命为10μs。电子和空穴的扩散系数分别为36 cm&#x2F;s和12 cm&#x2F;s。最初，杆在其左侧横截面上均匀地被光照亮，并且在照明区域中每秒产生10 ^ 19 &#x2F; cm ^ 3电子 - 空穴对。然后关闭光源。计算光源关闭50μs后，距离棒材左端5x10^（-3）cm处的孔的扩散电流密度</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>P135 Dp 空穴扩散系数<br>P136 通过单位面积扩散的电流密度Jn(diff)， Jp(diff)<br>空穴扩散随时间和距离的变化<br>过剩载流子浓度随时间的衰减规律一般服从exp(-t&#x2F;τ）的关系，常数τ表示过剩载流子在复合前的平均生存时间，称为非平衡&#x2F;过剩载流子寿命</p><p>P125 84页的 （4-6）<br> <a href="https://baike.baidu.com/item/%E5%B0%91%E6%95%B0%E8%BD%BD%E6%B5%81%E5%AD%90%E5%AF%BF%E5%91%BD/3111959">https://baike.baidu.com/item/少数载流子寿命/3111959</a><br>空穴的寿命τ，也就是空穴的平均生存时间，1&#x2F;τ就是单位时间内空穴的复合几率，Δp&#x2F;τ称为非平衡空穴的复合率 （即n型半导体中单位时间、单位体积内、净复合消失的电子-空穴对的数目）；非平衡载流子空穴的浓度随时间的变化率为dΔp &#x2F;dt &#x3D;－Δp &#x2F;τp, 如果τp与Δp 无关， 则Δp 有指数衰减规律：Δp &#x3D; (Δp) exp( -t&#x2F;τp ) 。</p><p>δp(t)&#x3D;Δp(t&#x3D;0) e^(-t&#x2F;τp)<br>P141<br>从（4-33b）95页 P141上面的部分那里应该也能推算出来</p><h1 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h1><p>Consider a direct semiconductor the has been exposed to photons having an energy that is greater than the bandgap under steady state conditions. Much to your surprise, you oberve that this semiconductor does not emit light. Using a simplified energy band diagram and supporting text, provide an explanation for your observations.</p><p>考虑一个直接半导体，它暴露在光子中，其能量在稳态条件下大于带隙。令您惊讶的是，您怀疑这种半导体不会发光。使用简化的能量带图和支持文本，为您的观测提供解释。</p><p>A: The schihar describes a semiconductor with a trapping skfe. The trapping skfe introduces an availabel energy skfe in the bandgap. Transforms from the trapping skfe (also known as a recombination skfe or recombination center) to the valence band do not lead to the creaha of a photom because the energy difference is too small. The two energy transform lead to lathce vibrahms, not photom creathm</p><p>schihar描述了一种带有捕获skfe的半导体。陷印 skfe 在带隙中引入了可用的能量 skfe。从捕获skfe（也称为重组skfe或重组中心）到价带的转换不会导致光子的吱吱声，因为能量差太小。两种能量变换导致花边振动，而不是光刻</p><h1 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h1><p>The following plot has been generated for an ideal p-n junction that is under equilibrium conditions. For this p-n junction, do the following:</p><p>为处于平衡条件下的理想 p-n 结生成了以下图。对于此 p-n 结点，请执行以下操作：</p><p>a. Sketch a cross-sectional diagram of the p-n junction showing all relevant regions. Indicate the location and direction of the electric field</p><p>b. Make a sketch of the simplified energy band diagram for this p-n junction (no calculations are necessary. Relative energy positions are sufficient).</p><p>c. What 3 important assumptions are made about the ideal p-n junction that are relevant to your energy band diagram?</p><p>a. 绘制显示所有相关区域的 p-n 交汇点的横截面图。指示电场的位置和方向</p><p>b.为此 p-n 结绘制简化能带图的草图（无需计算。相对能量位置就足够了）。</p><p>c. 关于理想 p-n 结，有哪些 3 个重要假设与您的能带图相关？</p><h2 id="P176-P178"><a href="#P176-P178" class="headerlink" title="P176 P178"></a>P176 P178</h2><h1 id="6"><a href="#6" class="headerlink" title="6."></a>6.</h1><p>The figure below shows electron and hole concentrations in a single crystal silicon sample. Briefly describe key characteristics of the semiconductor and under what conditions this graph was likely collected.</p><p>下图显示了单个晶体硅样品中的电子和空穴浓度。简要描述半导体的关键特征以及在什么条件下可能收集此图。</p><p>横轴是时间，纵轴是空穴或电子浓度</p><p>（1）假设只掺杂了一种杂质，晶体硅是P型半导体,Na&#x3D;1x10^15 &#x2F;cm^3</p><p>（2） The semi conductor has been illuminated with photoms that have energy that is greater than then bandgap, so excess charge carriers are generated,<br>Δp&#x3D;Δn&#x3D;10^14 &#x2F;cm^3</p><p>半导体已经用光子照亮，这些光子的能量大于带隙，因此会产生多余的电荷载流子，<br>Δp&#x3D;Δn&#x3D;10^14 &#x2F;cm^3<br>因为少数载流子随时间衰减</p><p>(3)  electrons are the majority carriers<br>电子是多数载流子？ 此处应该是笔误，应该是空穴是多数载流子<br>Δn&#x3D;10^14 &#x2F;cm^3</p><p>no&#x3D;ni^2 &#x2F;po&#x3D;2.25x10^5 &#x2F;cm^3</p><p>？此时空穴浓度大于电子，所以是P型，而电子浓度低应该是P型半导体</p><p>(4) the photom source is shut off and the excess electron hole concentrations are exponentially decaying with time<br>光源被关闭，过剩电子空穴浓度随时间呈指数衰减</p><h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p>此题是P126 85页的e.g 4-2不是原题<br>图是一样的e.g 4-2不是硅晶，而此题是指定了硅晶体</p><p>掺杂砷是N型半导体，掺杂了Ga又是P型，此时空穴浓度大于电子，所以是P型，而电子浓度低应该是P型半导体</p><p>注意不是硅晶体所以本征载流子浓度近似为10^6 &#x2F;cm^-3</p><p>P84 56页掺杂两种GaAs<br>要看硅原子替换的是As原子的位置还是Ga原子的位置。如果取代的是As的位置，就会少一个成对电子（即对出一个空穴）就是P型半导体，如果取代的是Ga的位置就会多出一个成对电子，就是N型半导体</p><p>P96, 64页<br>P型半导体中Na 受主杂质浓度 &#x3D; p0</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;Exam 1,2&lt;br&gt;春假前已经讲完第五章，第六章讲到6.1&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="2022年3月" scheme="http://yoursite.com/categories/2022%E5%B9%B43%E6%9C%88/"/>
-    
-    
-    <category term="Electronic" scheme="http://yoursite.com/tags/Electronic/"/>
-    
-  </entry>
-  
-  <entry>
     <title>399. 除法求值</title>
     <link href="http://yoursite.com/2022/03/09/399.%20%E9%99%A4%E6%B3%95%E6%B1%82%E5%80%BC/"/>
     <id>http://yoursite.com/2022/03/09/399.%20%E9%99%A4%E6%B3%95%E6%B1%82%E5%80%BC/</id>
@@ -98,9 +77,9 @@
     
     <category term="Breadth-first Search" scheme="http://yoursite.com/tags/Breadth-first-Search/"/>
     
-    <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
     <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+    <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
     <category term="Depth-first Search" scheme="http://yoursite.com/tags/Depth-first-Search/"/>
     
@@ -157,9 +136,9 @@
     <category term="2022年3月" scheme="http://yoursite.com/categories/2022%E5%B9%B43%E6%9C%88/"/>
     
     
-    <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
     <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+    <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
     <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
@@ -184,9 +163,9 @@
     <category term="2022年3月" scheme="http://yoursite.com/categories/2022%E5%B9%B43%E6%9C%88/"/>
     
     
-    <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
     <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+    <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
     <category term="Dynamic Programming" scheme="http://yoursite.com/tags/Dynamic-Programming/"/>
     
@@ -210,11 +189,11 @@
     <category term="2022年3月" scheme="http://yoursite.com/categories/2022%E5%B9%B43%E6%9C%88/"/>
     
     
+    <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
     <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
     <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-    <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
     <category term="Greedy" scheme="http://yoursite.com/tags/Greedy/"/>
     
@@ -264,11 +243,11 @@
     <category term="2022年2月" scheme="http://yoursite.com/categories/2022%E5%B9%B42%E6%9C%88/"/>
     
     
+    <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
     <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
     <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
-    <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
     <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -285,7 +264,7 @@
     <published>2022-02-17T06:12:12.000Z</published>
     <updated>2022-03-08T02:49:20.811Z</updated>
     
-    <content type="html"><![CDATA[<p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><span id="more"></span><p>[TOC]</p><h1 id="Mac-上配置多个git账号"><a href="#Mac-上配置多个git账号" class="headerlink" title="Mac 上配置多个git账号"></a>Mac 上配置多个git账号</h1><p><a href="https://www.jianshu.com/p/698f82e72415">https://www.jianshu.com/p/698f82e72415</a></p><p>此处将公司gitlab地址假设为company.cn</p><pre><code>ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitlab -C &quot;yiyeli@company.cn&quot;ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C &quot;15652771941@163.com&quot;ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitee -C &quot;15652771941@163.com&quot;ssh -T git@company.cnssh -T git@gitee.comssh -T git@github.comssh: connect to host github.com port 22: Operation timed out</code></pre><p>连接其它git时都成功了，只有github报错，可以换个端口,在github下加一栏 Port 443，但还是没作用</p><pre><code>#公司Host gitlab.company.corpHostname gitlab.company.corpIdentityFile ~/.ssh/id_rsa_gitlabUser gitlabLoginName  #个人githubHost github.comHostname github.comIdentityFile ~/.ssh/id_rsa_githubUser githubLoginName# Port 443#个人giteeHost gitee.comHostname gitee.comIdentityFile ~/.ssh/id_rsa_giteeUser giteeLoginName</code></pre><h2 id="使用公司gitlab时出错"><a href="#使用公司gitlab时出错" class="headerlink" title="使用公司gitlab时出错"></a>使用公司gitlab时出错</h2><pre><code>Total 10 (delta 4), reused 0 (delta 0), pack-reused 0remote: git rev-list xxxx--after=&#39;2021-11-29 15:55:00&#39;        remote: GL-HOOK-ERR: 6xxxx的提交者xxxx@163.com不是公司邮箱，请修改您的邮箱为公司邮箱,若仍无法解决，请提交jira工单:remote: error: hook declined to update refs/heads/feature-chinese2022        error: failed to push some refs to &#39;gitlab.company.corp:ce-datamonitorsystem/grafana.git&#39;</code></pre><p>从错误原因可以看到是提交的邮箱错误，原因是第一次commit时IDE会弹出一个Git User Name Is Not Defined的窗口，填完用户名和邮箱后会默认将Set properties globally的选项打上勾，这样在配置多个git账户时就会出错，因为邮箱等参数不能是全局一致的，记得每次把这个Set properties globally选项去掉就好了。</p><h1 id="问题：本地同时配置多个github账号导致博客部署失败"><a href="#问题：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题：本地同时配置多个github账号导致博客部署失败"></a>问题：本地同时配置多个github账号导致博客部署失败</h1><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &#39;https://github.com/B/B.github.io.git/&#39;: The requested URL returned error: 403FATAL Something&#39;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &#39;https://github.com/B/B.github.io.git/&#39;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:&#103;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#109;">&#103;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#109;</a>:Name&#x2F;Name.github.io.git，替换为repository: git@B:Name&#x2F;Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h1 id="问题：历史删除文件仍存在于repository中"><a href="#问题：历史删除文件仍存在于repository中" class="headerlink" title="问题：历史删除文件仍存在于repository中"></a>问题：历史删除文件仍存在于repository中</h1><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><p>##问题3：Hexo deploy 发布不成功<br>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git&#x2F; 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法</p><span id="more"></span><p>[TOC]</p><h1 id="Mac-上配置多个git账号"><a href="#Mac-上配置多个git账号" class="headerlink" title="Mac 上配置多个git账号"></a>Mac 上配置多个git账号</h1><p><a href="https://www.jianshu.com/p/698f82e72415">https://www.jianshu.com/p/698f82e72415</a></p><p>此处将公司gitlab地址假设为company.cn</p><pre><code>ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitlab -C &quot;yiyeli@company.cn&quot;ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C &quot;15652771941@163.com&quot;ssh-keygen -t rsa -f ~/.ssh/id_rsa_gitee -C &quot;15652771941@163.com&quot;ssh -T git@company.cnssh -T git@gitee.comssh -T git@github.comssh: connect to host github.com port 22: Operation timed out</code></pre><p>连接其它git时都成功了，只有github报错，可以换个端口,在github下加一栏 Port 443，但还是没作用</p><pre><code>#公司Host gitlab.company.corpHostname gitlab.company.corpIdentityFile ~/.ssh/id_rsa_gitlabUser gitlabLoginName  #个人githubHost github.comHostname github.comIdentityFile ~/.ssh/id_rsa_githubUser githubLoginName# Port 443#个人giteeHost gitee.comHostname gitee.comIdentityFile ~/.ssh/id_rsa_giteeUser giteeLoginName</code></pre><h2 id="使用公司gitlab时出错"><a href="#使用公司gitlab时出错" class="headerlink" title="使用公司gitlab时出错"></a>使用公司gitlab时出错</h2><pre><code>Total 10 (delta 4), reused 0 (delta 0), pack-reused 0remote: git rev-list xxxx--after=&#39;2021-11-29 15:55:00&#39;        remote: GL-HOOK-ERR: 6xxxx的提交者xxxx@163.com不是公司邮箱，请修改您的邮箱为公司邮箱,若仍无法解决，请提交jira工单:remote: error: hook declined to update refs/heads/feature-chinese2022        error: failed to push some refs to &#39;gitlab.company.corp:ce-datamonitorsystem/grafana.git&#39;</code></pre><p>从错误原因可以看到是提交的邮箱错误，原因是第一次commit时IDE会弹出一个Git User Name Is Not Defined的窗口，填完用户名和邮箱后会默认将Set properties globally的选项打上勾，这样在配置多个git账户时就会出错，因为邮箱等参数不能是全局一致的，记得每次把这个Set properties globally选项去掉就好了。</p><h1 id="问题：本地同时配置多个github账号导致博客部署失败"><a href="#问题：本地同时配置多个github账号导致博客部署失败" class="headerlink" title="问题：本地同时配置多个github账号导致博客部署失败"></a>问题：本地同时配置多个github账号导致博客部署失败</h1><p>因为本地同时配置有两个github账号，在Hexo+github搭建个人博客部署到账号A成功后用相同方式部署到账号B时执行hexo d时出现问题</p><pre><code>remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &#39;https://github.com/B/B.github.io.git/&#39;: The requested URL returned error: 403FATAL Something&#39;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: remote: Permission to B/B.github.io.git denied to A.fatal: unable to access &#39;https://github.com/B/B.github.io.git/&#39;: The requested URL returned error: 403</code></pre><p>原因是在缺省设置下，github page只有该page对应的账号A才能push，为了解决该问题，在hexo的 _config.yml部署的repo地址改用ssh而不是用https，同时对ssh地址做Host别名替换，原有repo地址为repository: <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#46;&#99;&#111;&#109;">&#103;&#105;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#46;&#99;&#111;&#109;</a>:Name&#x2F;Name.github.io.git，替换为repository: git@B:Name&#x2F;Name.github.io.git。<br>在原有的~.ssh\config中配置内容如下：</p><pre><code># 该配置用于账户AHost A # Host 服务器别名HostName github.com  # HostName 服务器ip地址或机器名User A # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa # IdentityFile 密匙文件的具体路径# 该配置用于账户BHost B # Host 服务器别名HostName github.com # HostName 服务器ip地址或机器名User B # User连接服务器的用户名IdentityFile C:\Users\yiye\.ssh\id_rsa_new # IdentityFile 密匙文件的具体路径</code></pre><p>这样ssh解析的时候就会自动把B转换为 github.com，push的时候系统就会根据不同的仓库地址使用不同的账号提交</p><h1 id="问题：历史删除文件仍存在于repository中"><a href="#问题：历史删除文件仍存在于repository中" class="headerlink" title="问题：历史删除文件仍存在于repository中"></a>问题：历史删除文件仍存在于repository中</h1><p>原本删除的文件仍存在于生成的blog\public中，这是因为没有执行hexo clean命令</p><p>##问题3：Hexo deploy 发布不成功<br>始终停留在</p><pre><code>nothing to commit (working directory clean)</code></pre><p>Hexo的issue中有提到这个问题哦，原因就是第一次设置错了，然后即使正确设置 Repository 再次 Deploy 的时候它也会报错：nothing to commit, working directory clean；error: src refspec master does not match any。所以，当重新设置 Repo 的时候要把 .deploy_git&#x2F; 文件夹删掉，让 Hexo 再次初始化，否则 Hexo 只是执行 push 操作，所以会一直报错。解决方法是删除.deploy_git</p><pre><code>rm -rf .deploy_githexo generaterhexo deploy</code></pre>]]></content>
     
     
     <summary type="html">&lt;p&gt;总结Hexo+github搭建个人博客过程中两个费时较长的问题及其解决方法&lt;/p&gt;</summary>
@@ -320,9 +299,9 @@
     <category term="2022年1月" scheme="http://yoursite.com/categories/2022%E5%B9%B41%E6%9C%88/"/>
     
     
-    <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
-    
     <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+    <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
     <category term="Dynammic Programming" scheme="http://yoursite.com/tags/Dynammic-Programming/"/>
     
@@ -407,9 +386,9 @@
     
     <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
     
-    <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
-    
     <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+    <category term="Stack" scheme="http://yoursite.com/tags/Stack/"/>
     
     <category term="Monotonic Stack" scheme="http://yoursite.com/tags/Monotonic-Stack/"/>
     
@@ -459,13 +438,13 @@
     <category term="2022年1月" scheme="http://yoursite.com/categories/2022%E5%B9%B41%E6%9C%88/"/>
     
     
+    <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
+    
     <category term="Leetcode" scheme="http://yoursite.com/tags/Leetcode/"/>
     
     <category term="String" scheme="http://yoursite.com/tags/String/"/>
     
     <category term="Sliding Window" scheme="http://yoursite.com/tags/Sliding-Window/"/>
-    
-    <category term="Hash Table" scheme="http://yoursite.com/tags/Hash-Table/"/>
     
   </entry>
   
@@ -533,6 +512,29 @@
     <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
     <category term="Algorithm" scheme="http://yoursite.com/tags/Algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JAVA 学习笔记（YARN）</title>
+    <link href="http://yoursite.com/2022/01/07/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88YARN%EF%BC%89/"/>
+    <id>http://yoursite.com/2022/01/07/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88YARN%EF%BC%89/</id>
+    <published>2022-01-07T07:12:12.000Z</published>
+    <updated>2022-01-07T07:53:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>YARN 是一个资源管理、任务调度的框架，主要包含三大模块：ResourceManager（RM）、NodeManager（NM）、ApplicationMaster（AM）。</p><span id="more"></span><p>[TOC]</p><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>YARN 是一个资源管理、任务调度的框架，主要包含三大模块：ResourceManager（RM）、NodeManager（NM）、ApplicationMaster（AM）。其中，ResourceManager 负责所有资源的监控、分配和管理； ApplicationMaster 负责每一个具体应用程序的调度和协调；NodeManager 负责每一个节点的维护。对于所有的 applications，RM 拥有绝对的控制权和对资源的分配权。而每个 AM 则会和 RM 协商资源，同时和 NodeManager 通信来执行和监控 task。 几个模块之间的关系如图所示。</p><h1 id="ResourceManager"><a href="#ResourceManager" class="headerlink" title="ResourceManager"></a>ResourceManager</h1><ol><li><p>ResourceManager 负责整个集群的资源管理和分配，是一个全局的资源管理系统。</p></li><li><p>NodeManager 以心跳的方式向 ResourceManager 汇报资源使用情况（目前主要是 CPU 和内存的使用情况）。RM 只接受 NM 的资源回报信息，对于具体的资源处理则交给 NM 自己处理。</p></li><li><p>YARN Scheduler 根据 application 的请求为其分配资源，不负责 application job 的监控、追踪、运行状态反馈、启动等工作。</p></li></ol><h1 id="NodeManager"><a href="#NodeManager" class="headerlink" title="NodeManager"></a>NodeManager</h1><ol><li><p>NodeManager 是每个节点上的资源和任务管理器，它是管理这台机器的代理，负责该节点程序的运行，以及该节点资源的管理和监控。YARN集群每个节点都运行一个NodeManager</p></li><li><p>NodeManager 定时向 ResourceManager 汇报本节点资源（CPU、内存）的使用情况和Container 的运行状态。当 ResourceManager 宕机时 NodeManager 自动连接 RM 备用节点。</p></li><li><p>NodeManager 接收并处理来自 ApplicationMaster 的 Container 启动、停止等各种请求。</p></li></ol><h1 id="ApplicationMaster"><a href="#ApplicationMaster" class="headerlink" title="ApplicationMaster"></a>ApplicationMaster</h1><p>用户提交的每个应用程序均包含一个 ApplicationMaster，它可以运行在 ResourceManager 以外的机器上。</p><ol><li>负责与 RM 调度器协商以获取资源（用 Container 表示）。</li><li>将得到的任务进一步分配给内部的任务(资源的二次分配)。</li><li>与 NM 通信以启动&#x2F;停止任务。</li><li>监控所有任务运行状态，并在任务运行失败时重新为任务申请资源以重启任务。</li><li>当前 YARN 自带了两个 ApplicationMaster 实现，一个是用于演示 AM 编写方法的实例程序DistributedShell，它可以申请一定数目的 Container 以并行运行一个 Shell 命令或者 Shell脚本；另一个是运行 MapReduce 应用程序的 AM—MRAppMaster。</li></ol><p>注：RM 只负责监控 AM，并在 AM 运行失败时候启动它。RM 不负责 AM 内部任务的容错，任务的容错由 AM 完成。 </p><h1 id="YARN-运行流程"><a href="#YARN-运行流程" class="headerlink" title="YARN 运行流程"></a>YARN 运行流程</h1><ol><li>client 向 RM 提交应用程序，其中包括启动该应用的 ApplicationMaster 的必须信息，例如ApplicationMaster 程序、启动 ApplicationMaster 的命令、用户程序等。</li><li>ResourceManager 启动一个 container 用于运行 ApplicationMaster。</li><li>启动中的ApplicationMaster向ResourceManager注册自己，启动成功后与RM保持心跳。</li><li>ApplicationMaster 向 ResourceManager 发送请求，申请相应数目的 container。</li><li>ResourceManager 返回 ApplicationMaster 的申请的 containers 信息。申请成功的container，由 ApplicationMaster 进行初始化。container 的启动信息初始化后，AM 与对应的 NodeManager 通信，要求 NM 启动 container。AM 与 NM 保持心跳，从而对 NM 上运行的任务进行监控和管理。</li><li>container 运行期间，ApplicationMaster 对 container 进行监控。container 通过 RPC 协议向对应的 AM 汇报自己的进度和状态等信息。</li><li>应用运行期间，client 直接与 AM 通信获取应用的状态、进度更新等信息。</li><li>应用运行结束后，ApplicationMaster 向 ResourceManager 注销自己，并允许属于它的container 被收回</li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;YARN 是一个资源管理、任务调度的框架，主要包含三大模块：ResourceManager（RM）、NodeManager（NM）、ApplicationMaster（AM）。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="2022年1月" scheme="http://yoursite.com/categories/2022%E5%B9%B41%E6%9C%88/"/>
+    
+    
+    <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+    <category term="YARN" scheme="http://yoursite.com/tags/YARN/"/>
     
   </entry>
   
