@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java开发规范及示例 | Yiye Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常遇到的代码不规范问题及其示例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java开发规范及示例">
+<meta property="og:url" content="http://yoursite.com/2021/02/23/Java%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E5%8F%8A%E7%A4%BA%E4%BE%8B/index.html">
+<meta property="og:site_name" content="Yiye Li">
+<meta property="og:description" content="常遇到的代码不规范问题及其示例">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-02-23T02:53:12.000Z">
+<meta property="article:modified_time" content="2022-08-08T02:17:15.152Z">
+<meta property="article:author" content="Yiye Li">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Yiye Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate"></a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Algorithm/" style="font-size: 12px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 19.2px;">Array</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Backtracking/" style="font-size: 16.8px;">Backtracking</a> <a href="/tags/Binary-Indexed-Tree/" style="font-size: 10px;">Binary Indexed Tree</a> <a href="/tags/Binary-Search/" style="font-size: 16.8px;">Binary Search</a> <a href="/tags/Binary-Search-Tree/" style="font-size: 10px;">Binary Search Tree</a> <a href="/tags/Binary-Tree/" style="font-size: 10.8px;">Binary Tree</a> <a href="/tags/BinaryTree/" style="font-size: 10.4px;">BinaryTree</a> <a href="/tags/Bit-Manipulation/" style="font-size: 16.8px;">Bit Manipulation</a> <a href="/tags/Brainteaser/" style="font-size: 10.4px;">Brainteaser</a> <a href="/tags/Bread-first-Search/" style="font-size: 10.4px;">Bread-first Search</a> <a href="/tags/Breadth-First-Search/" style="font-size: 10px;">Breadth-First Search</a> <a href="/tags/Breadth-first-Search/" style="font-size: 15.2px;">Breadth-first Search</a> <a href="/tags/C/" style="font-size: 14.4px;">C++</a> <a href="/tags/Cache/" style="font-size: 10px;">Cache</a> <a href="/tags/Cassandra/" style="font-size: 10px;">Cassandra</a> <a href="/tags/Coding-Interviews/" style="font-size: 12px;">Coding Interviews</a> <a href="/tags/Collection/" style="font-size: 10px;">Collection</a> <a href="/tags/Combinatorics/" style="font-size: 10px;">Combinatorics</a> <a href="/tags/Computer-Network/" style="font-size: 10px;">Computer Network</a> <a href="/tags/Concurrency/" style="font-size: 13.6px;">Concurrency</a> <a href="/tags/Consistency/" style="font-size: 10px;">Consistency</a> <a href="/tags/Counting/" style="font-size: 10.4px;">Counting</a> <a href="/tags/Cracking-the-Coding-Interview/" style="font-size: 10.4px;">Cracking the Coding Interview</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Data-Structure/" style="font-size: 10px;">Data Structure</a> <a href="/tags/Database/" style="font-size: 16px;">Database</a> <a href="/tags/Database%EF%BC%8CMySQL/" style="font-size: 12.8px;">Database，MySQL</a> <a href="/tags/Depth-First-Search/" style="font-size: 10px;">Depth-First Search</a> <a href="/tags/Depth-first-Search/" style="font-size: 16.4px;">Depth-first Search</a> <a href="/tags/Depth-first-search/" style="font-size: 10px;">Depth-first search</a> <a href="/tags/Design/" style="font-size: 13.2px;">Design</a> <a href="/tags/Design-Pattern%EF%BC%8CJava/" style="font-size: 11.6px;">Design Pattern，Java</a> <a href="/tags/Divide-and-Conque/" style="font-size: 10px;">Divide and Conque</a> <a href="/tags/Divide-and-Conquer/" style="font-size: 12px;">Divide and Conquer</a> <a href="/tags/Division/" style="font-size: 10px;">Division</a> <a href="/tags/Dynamic-Programming/" style="font-size: 18.4px;">Dynamic Programming</a> <a href="/tags/Dynammic-Programming/" style="font-size: 11.2px;">Dynammic Programming</a> <a href="/tags/Encryption/" style="font-size: 10px;">Encryption</a> <a href="/tags/Git/" style="font-size: 11.6px;">Git</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Grafana/" style="font-size: 10px;">Grafana</a> <a href="/tags/Graph/" style="font-size: 12px;">Graph</a> <a href="/tags/Greedy/" style="font-size: 12.8px;">Greedy</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Hash-Function/" style="font-size: 10px;">Hash Function</a> <a href="/tags/Hash-Table/" style="font-size: 18px;">Hash Table</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/Hbase/" style="font-size: 10px;">Hbase</a> <a href="/tags/Heap/" style="font-size: 13.2px;">Heap</a> <a href="/tags/Hexo/" style="font-size: 11.6px;">Hexo</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Java/" style="font-size: 18.8px;">Java</a> <a href="/tags/KMP-Algorithm/" style="font-size: 10.8px;">KMP Algorithm</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Kickstart/" style="font-size: 10px;">Kickstart</a> <a href="/tags/Latex/" style="font-size: 10px;">Latex</a> <a href="/tags/LeetCode/" style="font-size: 19.6px;">LeetCode</a> <a href="/tags/Leetcode/" style="font-size: 20px;">Leetcode</a> <a href="/tags/LinkList/" style="font-size: 10px;">LinkList</a> <a href="/tags/Linked-List/" style="font-size: 15.6px;">Linked List</a> <a href="/tags/Linux/" style="font-size: 11.6px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Math/" style="font-size: 17.2px;">Math</a> <a href="/tags/Matrix/" style="font-size: 10.4px;">Matrix</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Max-Heap/" style="font-size: 10px;">Max Heap</a> <a href="/tags/Memoization/" style="font-size: 11.2px;">Memoization</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/Minimax/" style="font-size: 10px;">Minimax</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Monotonic-Stack/" style="font-size: 12.4px;">Monotonic Stack</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Note/" style="font-size: 10px;">Note</a> <a href="/tags/Operating-System/" style="font-size: 10.4px;">Operating System</a> <a href="/tags/Ordered-Map/" style="font-size: 10px;">Ordered Map</a> <a href="/tags/Prefix-Sum/" style="font-size: 11.2px;">Prefix Sum</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/RPC/" style="font-size: 10px;">RPC</a> <a href="/tags/Recursion/" style="font-size: 12.4px;">Recursion</a> <a href="/tags/Recursive/" style="font-size: 10px;">Recursive</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/STL/" style="font-size: 10px;">STL</a> <a href="/tags/Scala/" style="font-size: 11.6px;">Scala</a> <a href="/tags/Segment-Tree/" style="font-size: 10px;">Segment Tree</a> <a href="/tags/Shell/" style="font-size: 10.4px;">Shell</a> <a href="/tags/Simulation/" style="font-size: 10.4px;">Simulation</a> <a href="/tags/Sliding-Window/" style="font-size: 14.8px;">Sliding Window</a> <a href="/tags/Sort/" style="font-size: 13.2px;">Sort</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Spring/" style="font-size: 10.8px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 12px;">SpringBoot</a> <a href="/tags/Stack/" style="font-size: 16px;">Stack</a> <a href="/tags/Storm/" style="font-size: 10px;">Storm</a> <a href="/tags/String/" style="font-size: 17.6px;">String</a> <a href="/tags/String-Matching/" style="font-size: 11.2px;">String Matching</a> <a href="/tags/Suffix-Array/" style="font-size: 10px;">Suffix Array</a> <a href="/tags/TCPIP/" style="font-size: 10px;">TCPIP</a> <a href="/tags/Template/" style="font-size: 10.4px;">Template</a> <a href="/tags/TensorFlow/" style="font-size: 10px;">TensorFlow</a> <a href="/tags/Topological-Sort/" style="font-size: 10px;">Topological Sort</a> <a href="/tags/Topological-sort/" style="font-size: 10.8px;">Topological sort</a> <a href="/tags/Tree/" style="font-size: 16.4px;">Tree</a> <a href="/tags/TreeSet/" style="font-size: 10px;">TreeSet</a> <a href="/tags/Trie/" style="font-size: 12.4px;">Trie</a> <a href="/tags/Two-Pointers/" style="font-size: 16px;">Two Pointers</a> <a href="/tags/Two-pointers/" style="font-size: 10px;">Two pointers</a> <a href="/tags/Union-Find/" style="font-size: 12.4px;">Union Find</a> <a href="/tags/Virtual-function/" style="font-size: 10px;">Virtual function</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Wechat/" style="font-size: 10px;">Wechat</a> <a href="/tags/YARN/" style="font-size: 10px;">YARN</a> <a href="/tags/Zookeeper/" style="font-size: 10.4px;">Zookeeper</a> <a href="/tags/blog/" style="font-size: 11.2px;">blog</a> <a href="/tags/fstream/" style="font-size: 10px;">fstream</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/sizeof/" style="font-size: 10px;">sizeof</a> <a href="/tags/stdin/" style="font-size: 10px;">stdin</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 10px;">最短路</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://liyiye012.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">日拱一卒，功不唐捐</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me"></a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me"></a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=KBoeHhgdGBEQHhBoWVkGS0dF" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/liyiye012" title="github">github</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/yiye-li-864b3a99/" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Java开发规范及示例" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/02/23/Java%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E5%8F%8A%E7%A4%BA%E4%BE%8B/" class="article-date">
+      <time datetime="2021-02-23T02:53:12.000Z" itemprop="datePublished">2021-02-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java开发规范及示例
+    </h1>
+  
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/2021%E5%B9%B42%E6%9C%88/">2021年2月</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>常遇到的代码不规范问题及其示例</p>
+<span id="more"></span>
+
+<p>[TOC]</p>
+<h1 id="编程规约-1"><a href="#编程规约-1" class="headerlink" title="编程规约^1"></a>编程规约<a target="_blank" rel="noopener" href="https://kangroo.gitee.io/ajcg/#/?id=%e5%89%8d%e8%a8%80">^1</a></h1><blockquote>
+<p>命名风格</p>
+</blockquote>
+<blockquote>
+<p>【强制】 代码中的命名均不能以下划线或美元符号开始，也不能以下划线或美元符号结束。</p>
+</blockquote>
+<pre><code>反例： _name / __name / $Object / name_ / name$ / Object$
+</code></pre>
+<blockquote>
+<p>【强制】 代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。<br>说明：正确的英文拼写和语法可以让阅读者易于理解，避免歧义。注意，即使纯拼音命名方式<br>也要避免采用。</p>
+</blockquote>
+<pre><code>反例： DaZhePromotion [打折] / getPingfenByName() [评分] / int 某变量 = 3
+
+正例： alibaba / taobao / youku / hangzhou 等国际通用的名称，可视同英文。
+</code></pre>
+<blockquote>
+<p>【强制】类名使用 UpperCamelCase 风格，必须遵从驼峰形式，但以下情形例外：（领域模型的相关命名）DO &#x2F; BO &#x2F; DTO &#x2F; VO 等。</p>
+</blockquote>
+<pre><code>正例：MarcoPolo / UserDO / XmlService / TcpUdpDeal / TaPromotion
+
+反例：macroPolo / UserDo / XMLService / TCPUDPDeal / TAPromotion
+</code></pre>
+<p>项目中出现的命名反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WubaAuditNotifyVo</span><br><span class="line">WubaAgreementVo</span><br><span class="line">WubaConfirmRespVo</span><br><span class="line">WubaExternalConfirmReqVo</span><br><span class="line">WubaFeeDetailReqVo</span><br><span class="line">WubaLoanResultVo</span><br><span class="line">WubaRepayNotifyVo</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>【强制】方法名、参数名、成员变量、局部变量都统一使用 lowerCamelCase 风格，必须遵从驼峰形式。</p>
+</blockquote>
+<pre><code>正例： localValue / getHttpMessage() / inputUserId
+</code></pre>
+<p>项目中出现的命名反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String IdCard = WubaUserAccessForm.getPhoneIdCard();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【强制】常量命名全部大写，单词间用下划线隔开，力求语义表达完整清楚，不要嫌名字长。</p>
+</blockquote>
+<pre><code>正例： MAX_STOCK_COUNT
+反例： MAX_COUNT
+</code></pre>
+<p>项目中出现的命名反例：    </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static final int validDaysAfterAudit = 7;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【强制】抽象类命名使用 Abstract 或 Base 开头；异常类命名使用 Exception 结尾；测试类命名以它要测试的类的名称开始，以 Test 结尾。</p>
+</blockquote>
+<p>项目中出现的命名反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AnrongCreditReportService</span><br><span class="line">SignUtil</span><br><span class="line">ControllerMethodInputParameterInfomationGenerator</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【强制】中括号是数组类型的一部分，数组定义如下：String[] args;</p>
+</blockquote>
+<pre><code>反例：请勿使用 String args[]的方式来定义。
+</code></pre>
+<p>项目中出现的反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">private static final String hexDigits[] = &#123;&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;,</span><br><span class="line">            &quot;e&quot;, &quot;f&quot;&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>【强制】POJO 类中布尔类型的变量，都不要加 is，否则部分框架解析会引起序列化错误。</p>
+</blockquote>
+<pre><code>反例：定义为基本数据类型 boolean isSuccess；的属性，它的方法也是 isSuccess()，RPC
+框架在反向解析的时候，“以为”对应的属性名称是 success，导致属性获取不到，进而抛出异
+常。
+</code></pre>
+<p>项目中出现的命名反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private Boolean isAllowCredit;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>【强制】包名统一使用小写，点分隔符之间有且仅有一个自然语义的英语单词。包名统一使用单数形式，但是类名如果有复数含义，类名可以使用复数形式。</p>
+</blockquote>
+<pre><code>正例： 应用工具类包名为 com.alibaba.open.util、类名为 MessageUtils（此规则参考
+spring 的框架结构）
+</code></pre>
+<blockquote>
+<p>【强制】杜绝完全不规范的缩写，避免望文不知义。</p>
+</blockquote>
+<pre><code>反例： AbstractClass“缩写”命名成 AbsClass；condition“缩写”命名成 condi，此类
+随意缩写严重降低了代码的可阅读性。
+</code></pre>
+<blockquote>
+<p>【推荐】如果使用到了设计模式，建议在类名中体现出具体模式。</p>
+</blockquote>
+<pre><code>说明：将设计模式体现在名字中，有利于阅读者快速理解架构设计思想。
+正例：public class OrderFactory;
+public class LoginProxy;
+public class ResourceObserver;
+</code></pre>
+<blockquote>
+<p>【推荐】接口类中的方法和属性不要加任何修饰符号（public 也不要加），保持代码的简洁性，并加上有效的 Javadoc 注释。尽量不要在接口里定义变量，如果一定要定义变量，肯定是与接口方法相关，并且是整个应用的基础常量。</p>
+</blockquote>
+<pre><code>正例：接口方法签名：void f();
+接口基础常量表示：String COMPANY = &quot;alibaba&quot;;
+
+反例：接口方法定义：public abstract void f();
+说明：JDK8 中接口允许有默认实现，那么这个 default 方法，是对所有实现类都有价值的默
+认实现。
+</code></pre>
+<blockquote>
+<p> 接口和实现类的命名有两套规则：</p>
+</blockquote>
+<blockquote>
+<p>【强制】对于 Service 和 DAO 类，基于 SOA 的理念，暴露出来的服务一定是接口，内部的实现类用 Impl 的后缀与接口区别。</p>
+</blockquote>
+<pre><code>正例：CacheServiceImpl 实现 CacheService 接口。
+</code></pre>
+<blockquote>
+<p>【推荐】如果是形容能力的接口名称，取对应的形容词做接口名（通常是–able 的形式）。</p>
+</blockquote>
+<pre><code>正例：AbstractTranslator 实现 Translatable。
+</code></pre>
+<blockquote>
+<p>【参考】枚举类名建议带上 Enum 后缀，枚举成员名称需要全大写，单词间用下划线隔开。</p>
+</blockquote>
+<pre><code>说明：枚举其实就是特殊的常量类，且构造方法被默认强制是私有。
+正例：枚举名字：DealStatusEnum，成员名称：SUCCESS / UNKOWN_REASON。
+</code></pre>
+<blockquote>
+<p> 【参考】各层命名规约：</p>
+</blockquote>
+<blockquote>
+<p>Service&#x2F;DAO 层方法命名规约</p>
+</blockquote>
+<pre><code>1） 获取单个对象的方法用 get 做前缀。
+2） 获取多个对象的方法用 list 做前缀。
+3） 获取统计值的方法用 count 做前缀。
+4） 插入的方法用 save（推荐）或 insert 做前缀。
+5） 删除的方法用 remove（推荐）或 delete 做前缀。
+6） 修改的方法用 update 做前缀。
+</code></pre>
+<blockquote>
+<p>领域模型命名规约</p>
+</blockquote>
+<pre><code>1） 数据对象：xxxDO，xxx 即为数据表名。
+2） 数据传输对象：xxxDTO，xxx 为业务领域相关的名称。
+3） 展示对象：xxxVO，xxx 一般为网页名称。
+4） POJO 是 DO/DTO/BO/VO 的统称，禁止命名成 xxxPOJO
+</code></pre>
+<h1 id="常量定义"><a href="#常量定义" class="headerlink" title="常量定义"></a>常量定义</h1><blockquote>
+<p>【强制】不允许出现任何魔法值（即未经定义的常量）直接出现在代码中。</p>
+</blockquote>
+<pre><code>反例： String key=&quot;Id#taobao_&quot;+tradeId；
+cache.put(key, value);
+</code></pre>
+<blockquote>
+<p>【强制】long 或者 Long 初始赋值时，必须使用大写的 L，不能是小写的 l，小写容易跟数字1 混淆，造成误解。</p>
+</blockquote>
+<pre><code>说明：Long a = 2l; 写的是数字的 21，还是 Long 型的 2?
+</code></pre>
+<p>项目中出现的反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long finishTime = 0l;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【推荐】不要使用一个常量类维护所有常量，应该按常量功能进行归类，分开维护。</p>
+</blockquote>
+<p>如：缓存相关的常量放在类：CacheConsts 下；系统配置相关的常量放在类：ConfigConsts 下。<br>说明：大而全的常量类，非得使用查找功能才能定位到修改的常量，不利于理解和维护。</p>
+<blockquote>
+<p>【推荐】常量的复用层次有五层：跨应用共享常量、应用内共享常量、子工程内共享常量、包内共享常量、类内共享常量。</p>
+</blockquote>
+<pre><code>1） 跨应用共享常量：放置在二方库中，通常是 client.jar 中的 constant 目录下。
+2） 应用内共享常量：放置在一方库的 modules 中的 constant 目录下。
+
+反例：易懂变量也要统一定义成应用内共享常量，两位攻城师在两个类中分别定义了表示“是”的变量：
+类 A 中：public static final String YES = &quot;yes&quot;; 类 B 中：public static final String YES = &quot;y&quot;; A.YES.equals(B.YES)，预期是 true，但实际返回为 false，导致产生线上问题。
+
+3） 子工程内部共享常量：即在当前子工程的 constant 目录下。
+4） 包内共享常量：即在当前包下单独的 constant 目录下。
+5） 类内共享常量：直接在类内部 private static final 定义。
+</code></pre>
+<blockquote>
+<p>【推荐】如果变量值仅在一个范围内变化用 Enum 类。如果还带有名称之外的延伸属性，必须使用 Enum 类</p>
+</blockquote>
+<p>下面正例中的数字就是延伸信息，表示星期几。<br>正例：</p>
+<pre><code>public Enum&#123;
+  MONDAY(1), TUESDAY(2), WEDNESDAY(3), THURSDAY(4), FRIDAY(5),SATURDAY(6),SUNDAY(7);
+&#125;
+</code></pre>
+<h1 id="格式规约"><a href="#格式规约" class="headerlink" title="格式规约"></a>格式规约</h1><blockquote>
+<p>【强制】大括号的使用约定。</p>
+</blockquote>
+<pre><code>如果是大括号内为空，则简洁地写成&#123;&#125;即可，不需要换行；
+如果是非空代码块则：
+1） 左大括号前不换行。
+2） 左大括号后换行。
+3） 右大括号前换行。
+4） 右大括号后还有 else 等代码则不换行；表示终止右大括号后必须换行。
+</code></pre>
+<blockquote>
+<p>【强制】 左括号和后一个字符之间不出现空格；同样，右括号和前一个字符之间也不出现空<br>格。详见第 5 条下方正例ᨀ示。</p>
+</blockquote>
+<blockquote>
+<p>【强制】if&#x2F;for&#x2F;while&#x2F;switch&#x2F;do 等保留字与左右括号之间都必须加空格。</p>
+</blockquote>
+<blockquote>
+<p>【强制】任何运算符左右必须加一个空格。</p>
+</blockquote>
+<pre><code>说明：运算符包括赋值运算符=、逻辑运算符&amp;&amp;、加减乘除符号、三目运行符等。
+</code></pre>
+<blockquote>
+<p>【强制】缩进采用 4 个空格，禁止使用 tab 字符。</p>
+</blockquote>
+<pre><code>说明：如果使用 tab 缩进，必须设置 1 个 tab 为 4 个空格。IDEA 设置 tab 为 4 个空格时，
+请勿勾选 Use tab character；而在 eclipse 中，必须勾选 insert spaces for tabs。
+</code></pre>
+<p>正例： （涉及 1-5 点）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String args[]) &#123;</span><br><span class="line">    // 缩进 4 个空格</span><br><span class="line">    String say = &quot;hello&quot;;</span><br><span class="line">    // 运算符的左右必须有一个空格</span><br><span class="line">    int flag = 0;</span><br><span class="line">    // 关键词 if 与括号之间必须有一个空格，括号内的 f 与左括号，0 与右括号不需要空格</span><br><span class="line">    if (flag == 0) &#123;</span><br><span class="line">    System.out.println(say);</span><br><span class="line">    &#125;</span><br><span class="line">    // 左大括号前加空格且不换行；左大括号后换行</span><br><span class="line">    if (flag == 1) &#123;</span><br><span class="line">    System.out.println(&quot;world&quot;);</span><br><span class="line">    // 右大括号前换行，右大括号后有 else，不用换行</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">    System.out.println(&quot;ok&quot;);</span><br><span class="line">    // 在右大括号后直接结束，则必须换行</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【强制】单行字符数限制不超过 120 个，超出需要换行，换行时遵循如下原则：</p>
+</blockquote>
+<pre><code>1） 第二行相对第一行缩进 4 个空格，从第三行开始，不再继续缩进，参考示例。
+2） 运算符与下文一起换行。
+3） 方法调用的点符号与下文一起换行。
+4） 在多个参数超长，逗号后进行换行。
+5） 在括号前不要换行，见反例。
+</code></pre>
+<p>正例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">StringBuffer sb = new StringBuffer();</span><br><span class="line">//超过 120 个字符的情况下，换行缩进 4 个空格，并且方法前的点符号一起换行</span><br><span class="line">sb.append(&quot;zi&quot;).append(&quot;xin&quot;)...</span><br><span class="line">.append(&quot;huang&quot;)...</span><br><span class="line">.append(&quot;huang&quot;)...</span><br><span class="line">.append(&quot;huang&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">StringBuffer sb = new StringBuffer();</span><br><span class="line">//超过 120 个字符的情况下，不要在括号前换行</span><br><span class="line">sb.append(&quot;zi&quot;).append(&quot;xin&quot;)...append</span><br><span class="line">(&quot;huang&quot;);</span><br><span class="line">//参数很多的方法调用可能超过 120 个字符，不要在逗号前换行</span><br><span class="line">method(args1, args2, args3, ...</span><br><span class="line">, argsX);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【强制】方法参数在定义和传入时，多个参数逗号后边必须加空格。</p>
+</blockquote>
+<pre><code>正例：下例中实参的&quot;a&quot;,后边必须要有一个空格。
+method(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);
+</code></pre>
+<blockquote>
+<p>【强制】IDE 的 text file encoding 设置为 UTF-8; IDE 中文件的换行符使用 Unix 格式，不要使用 windows 格式。</p>
+</blockquote>
+<blockquote>
+<p>【推荐】没有必要增加若干空格来使某一行的字符与上一行的相应字符对齐。</p>
+</blockquote>
+<pre><code>正例：
+    int a = 3;
+    long b = 4L;
+    float c = 5F;
+    StringBuffer sb = new StringBuffer();
+说明：增加 sb 这个变量，如果需要对齐，则给 a、b、c 都要增加几个空格，在变量比较多的
+情况下，是一种累赘的事情。
+</code></pre>
+<blockquote>
+<p>【推荐】方法体内的执行语句组、变量的定义语句组、不同的业务逻辑之间或者不同的语义<br>之间插入一个空行。相同业务逻辑和语义之间不需要插入空行。</p>
+</blockquote>
+<pre><code>说明：没有必要插入多行空格进行隔开。
+</code></pre>
+<h1 id="OOP-规约"><a href="#OOP-规约" class="headerlink" title="OOP 规约"></a>OOP 规约</h1><blockquote>
+<p>【强制】避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可。</p>
+</blockquote>
+<p>项目中出现的反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.province = this.cityCodeMap.get(provinceId);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【强制】所有的覆写方法，必须加@Override 注解。</p>
+</blockquote>
+<pre><code>反例：getObject()与 get0bject()的问题。一个是字母的 O，一个是数字的 0，加@Override
+可以准确判断是否覆盖成功。另外，如果在抽象类中对方法签名进行修改，其实现类会马上编译报错。
+</code></pre>
+<p>项目中出现的反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public String onCompleted(Response response) throws Exception</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>【强制】相同参数类型，相同业务含义，才可以使用 Java 的可变参数，避免使用 Object。</p>
+</blockquote>
+<pre><code>说明：可变参数必须放置在参数列表的最后。（提倡同学们尽量不用可变参数编程）
+正例：public User getUsers(String type, Integer... ids)
+</code></pre>
+<blockquote>
+<p>【强制】对外暴露的接口签名，原则上不允许修改方法签名，避免对接口调用方产生影响。接口过时必须加@Deprecated 注解，并清晰地说明采用的新接口或者新服务是什么。</p>
+</blockquote>
+<blockquote>
+<p>【强制】不能使用过时的类或方法。</p>
+</blockquote>
+<pre><code>说明：java.net.URLDecoder 中的方法 decode(String encodeStr) 这个方法已经过时，应该使用双参数 decode(String source, String encode)。接口提供方既然明确是过时接口，
+那么有义务同时ᨀ供新的接口；作为调用方来说，有义务去考证过时方法的新实现是什么。
+</code></pre>
+<blockquote>
+<p>【强制】Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用equals。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">正例： &quot;test&quot;.equals(object);</span><br><span class="line">反例： object.equals(&quot;test&quot;);</span><br><span class="line">说明：推荐使用 java.util.Objects#equals （JDK7 引入的工具类）</span><br></pre></td></tr></table></figure>
+
+<p>项目中出现的反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (!apply.getStatus().equals(&quot;COMPLETED&quot;)) &#123;</span><br><span class="line"></span><br><span class="line">if (homeCity.equals(&quot;市辖区&quot;) || homeCity.equals(&quot;县&quot;)) &#123;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>【强制】所有的相同类型的包装类对象之间值的比较，全部使用 equals 方法比较。</p>
+</blockquote>
+<p><em><strong>说明：对于 Integer var&#x3D;?在-128 至 127 之间的赋值，Integer 对象是在IntegerCache.cache 产生，会复用已有对象，这个区间内的 Integer 值可以直接使用&#x3D;&#x3D;进行<br>判断，但是这个区间之外的所有数据，都会在堆上产生，并不会复用已有对象，这是一个大坑，<br>推荐使用 equals 方法进行判断。</strong></em></p>
+<blockquote>
+<p>【强制】关于基本数据类型与包装数据类型的使用标准如下：</p>
+</blockquote>
+<pre><code>1） 所有的 POJO 类属性必须使用包装数据类型。
+2） RPC 方法的返回值和参数必须使用包装数据类型。
+3） 所有的局部变量【推荐】使用基本数据类型。
+说明：POJO 类属性没有初值是ᨀ醒使用者在需要使用时，必须自己显式地进行赋值，任何
+NPE 问题，或者入库检查，都由使用者来保证。
+正例：数据库的查询结果可能是 null，因为自动拆箱，用基本数据类型接收有 NPE 风险。
+反例：比如显示成交总额涨跌情况，即正负 x%，x 为基本数据类型，调用的 RPC 服务，调用
+不成功时，返回的是默认值，页面显示：0%，这是不合理的，应该显示成中划线-。所以包装
+数据类型的 null 值，能够表示额外的信息，如：远程调用失败，异常退出。
+</code></pre>
+<blockquote>
+<p>【强制】定义 DO&#x2F;DTO&#x2F;VO 等 POJO 类时，不要设定任何属性默认值。</p>
+</blockquote>
+<pre><code>反例：POJO 类的 gmtCreate 默认值为 new Date();但是这个属性在数据ᨀ取时并没有置入具
+体值，在更新其它字段时又附带更新了此字段，导致创建时间被修改成当前时间。
+</code></pre>
+<blockquote>
+<p>【强制】序列化类新增属性时，请不要修改 serialVersionUID 字段，避免反序列失败；如果完全不兼容升级，避免反序列化混乱，那么请修改 serialVersionUID 值。</p>
+</blockquote>
+<pre><code>说明：注意 serialVersionUID 不一致会抛出序列化运行时异常。
+</code></pre>
+<blockquote>
+<p>【强制】构造方法里面禁止加入任何业务逻辑，如果有初始化逻辑，请放在 init 方法中。</p>
+</blockquote>
+<blockquote>
+<p>【强制】POJO 类必须写 toString 方法。</p>
+</blockquote>
+<pre><code>使用 IDE 的中工具：source&gt; generate toString时，如果继承了另一个 POJO 类，注意在前面加一下 super.toString。
+说明：在方法执行抛出异常时，可以直接调用 POJO 的 toString()方法打印其属性值，便于排
+查问题。
+</code></pre>
+<p>也可以使用@Data注解中有默认toString方法的重写。但是会有一个问题，详见 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozhang666/p/13623176.html">^2</a>,Lombok的toString方法在展示数据时默认调用的是Get方法，如果有逻辑需要在Get取值时进行计算，并且此值在创建对象以后为null值就会出现问题。</p>
+<blockquote>
+<p>【推荐】使用索引访问用 String 的 split 方法得到的数组时，需做最后一个分隔符后有无 内容的检查，否则会有抛 IndexOutOfBoundsException 的风险</p>
+</blockquote>
+<p>说明：</p>
+<pre><code>    String str = &quot;a,b,c,,&quot;;
+    String[] ary = str.split(&quot;,&quot;);
+    //预期大于 3，结果是 3
+    System.out.println(ary.length);
+    
+</code></pre>
+<blockquote>
+<p>【推荐】当一个类有多个构造方法，或者多个同名方法，这些方法应该按顺序放置在一起，便于阅读。</p>
+</blockquote>
+<blockquote>
+<p>【推荐】 类内方法定义顺序依次是：公有方法或保护方法 &gt; 私有方法 &gt; getter&#x2F;setter<br>方法。</p>
+</blockquote>
+<pre><code>说明：公有方法是类的调用者和维护者最关心的方法，首屏展示最好；保护方法虽然只是子类
+关心，也可能是“模板设计模式”下的核心方法；而私有方法外部一般不需要特别关心，是一个
+黑盒实现；因为方法信息价值较低，所有 Service 和 DAO 的 getter/setter 方法放在类体最
+后。
+</code></pre>
+<blockquote>
+<p>【推荐】setter 方法中，参数名称与类成员变量名称一致，this.成员名&#x3D;参数名。在getter&#x2F;setter 方法中，尽量不要增加业务逻辑，增加排查问题的难度。</p>
+</blockquote>
+<p>反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public Integer getData()&#123;</span><br><span class="line">    if(true) &#123;</span><br><span class="line">    return data + 100;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">    return data - 100;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【推荐】循环体内，字符串的联接方式，使用 StringBuilder 的 append 方法进行扩展。<br>反例：</p>
+</blockquote>
+<pre><code>  String str = &quot;start&quot;;
+    for(int i=0; i&lt;100; i++)&#123;
+      str = str + &quot;hello&quot;;
+  &#125;
+</code></pre>
+<p>说明：反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，然后进行<br>    append 操作，最后通过 toString 方法返回 String 对象，造成内存资源浪费。</p>
+<blockquote>
+<p>【推荐】final 可提高程序响应效率，声明成 final 的情况：</p>
+</blockquote>
+<pre><code>1） 不需要重新赋值的变量，包括类属性、局部变量。
+2） 对象参数前加 final，表示不允许修改引用的指向。
+3） 类方法确定不允许被重写。
+</code></pre>
+<blockquote>
+<p>【推荐】慎用 Object 的 clone 方法来拷贝对象。</p>
+</blockquote>
+<p>说明：对象的 clone 方法默认是浅拷贝，若想实现深拷贝需要重写 clone 方法实现属性对象的拷贝。</p>
+<blockquote>
+<p>【推荐】类成员与方法访问控制从严：</p>
+</blockquote>
+<pre><code>1） 如果不允许外部直接通过 new 来创建对象，那么构造方法必须是 private。
+2） 工具类不允许有 public 或 default 构造方法。
+3） 类非 static 成员变量并且与子类共享，必须是 protected。
+4） 类非 static 成员变量并且仅在本类使用，必须是 private。
+5） 类 static 成员变量如果仅在本类使用，必须是 private。
+6） 若是 static 成员变量，必须考虑是否为 final。
+7） 类成员方法只供类内部调用，必须是 private。
+8） 类成员方法只对继承类公开，那么限制为 protected。
+</code></pre>
+<p>说明：任何类、方法、参数、变量，严控访问范围。过宽泛的访问范围，不利于模块解耦。思考：如果是一个 private 的方法，想删除就删除，可是一个 public 的 Service 方法，或者一<br>个 public 的成员变量，删除一下，不得手心冒点汗吗？变量像自己的小孩，尽量在自己的视线内，变量作用域太大，如果无限制的到处跑，那么你会担心的。</p>
+<h1 id="集合处理"><a href="#集合处理" class="headerlink" title="集合处理"></a>集合处理</h1><blockquote>
+<p>【强制】关于 hashCode 和 equals 的处理，遵循如下规则：</p>
+</blockquote>
+<pre><code>1） 只要重写 equals，就必须重写 hashCode。
+2） 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的
+对象必须重写这两个方法。
+3） 如果自定义对象做为 Map 的键，那么必须重写 hashCode 和 equals。
+正例：String 重写了 hashCode 和 equals 方法，所以我们可以非常愉快地使用 String 对象
+作为 key 来使用。
+</code></pre>
+<blockquote>
+<p>【强制】ArrayList的subList结果不可强转成ArrayList，否则会抛出ClassCastException</p>
+</blockquote>
+<pre><code>异常：java.util.RandomAccessSubList cannot be cast to java.util.ArrayList ;
+说明：subList 返回的是 ArrayList 的内部类 SubList，并不是 ArrayList ，而是
+ArrayList 的一个视图，对于 SubList 子列表的所有操作最终会反映到原列表上。
+</code></pre>
+<blockquote>
+<p>【强制】 在 subList 场景中，高度注意对原集合元素个数的修改，会导致子列表的遍历、增<br>加、删除均产生 ConcurrentModificationException 异常。</p>
+</blockquote>
+<blockquote>
+<p>【强制】使用集合转数组的方法，必须使用集合的 toArray(T[] array)，传入的是类型完全<br>一样的数组，大小就是 list.size()。</p>
+</blockquote>
+<pre><code>反例：直接使用 toArray 无参方法存在问题，此方法返回值只能是 Object[]类，若强转其它
+类型数组将出现 ClassCastException 错误。
+正例：
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = new ArrayList&lt;String&gt;(2);</span><br><span class="line">list.add(&quot;guan&quot;);</span><br><span class="line">list.add(&quot;bao&quot;);</span><br><span class="line">String[] array = new String[list.size()];</span><br><span class="line">array = list.toArray(array);</span><br></pre></td></tr></table></figure>
+
+<pre><code>说明：使用 toArray 带参方法，入参分配的数组空间不够大时，toArray 方法内部将重新分配
+内存空间，并返回新数组地址；如果数组元素大于实际所需，下标为[ list.size() ]的数组
+元素将被置为 null，其它数组元素保持原值，因此最好将方法入参数组大小定义与集合元素
+个数一致。
+</code></pre>
+<blockquote>
+<p>【强制】使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法，它的 add&#x2F;remove&#x2F;clear 方法会抛出 UnsupportedOperationException 异常。</p>
+</blockquote>
+<pre><code>说明：asList 的返回对象是一个 Arrays 内部类，并没有实现集合的修改方法。Arrays.asList
+体现的是适配器模式，只是转换接口，后台的数据仍是数组。
+    String[] str = new String[] &#123; &quot;a&quot;, &quot;b&quot; &#125;;
+    List list = Arrays.asList(str);
+第一种情况：list.add(&quot;c&quot;); 运行时异常。
+第二种情况：str[0]= &quot;gujin&quot;; 那么 list.get(0)也会随之修改。
+</code></pre>
+<blockquote>
+<p>【强制】泛型通配符&lt;? extends T&gt;来接收返回的数据，此写法的泛型集合不能使用 add 方法。<br>说明：苹果装箱后返回一个&lt;? extends Fruits&gt;对象，此对象就不能往里加任何水果，包括苹果。</p>
+</blockquote>
+<blockquote>
+<p>【强制】不要在 foreach 循环里进行元素的 remove&#x2F;add 操作。remove 元素请使用 Iterator<br>方式，如果并发操作，需要对 Iterator 对象加锁。</p>
+</blockquote>
+<pre><code>反例：
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">List&lt;String&gt; a = new ArrayList&lt;String&gt;();</span><br><span class="line">            a.add(&quot;1&quot;);</span><br><span class="line">            a.add(&quot;2&quot;);</span><br><span class="line">            for (String temp : a) &#123;</span><br><span class="line">            if(&quot;1&quot;.equals(temp))&#123;</span><br><span class="line">            a.remove(temp);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>说明：以上代码的执行结果肯定会出乎意料，那么试一下把“1”换成“2”，会是同样的
+结果吗？
+正例：
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;String&gt; it = a.iterator();</span><br><span class="line">    while(it.hasNext())&#123;</span><br><span class="line">    String temp = it.next();</span><br><span class="line">    if(删除元素的条件)&#123;</span><br><span class="line">    it.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>【强制】在 JDK7 版本以上，Comparator 要满足自反性，传递性，对称性，不然 Arrays.sort，Collections.sort 会报 IllegalArgumentException 异常。</p>
+</blockquote>
+<pre><code>说明：
+1） 自反性：x，y 的比较结果和 y，x 的比较结果相反。
+2） 传递性：x&gt;y,y&gt;z,则 x&gt;z。 3） 对称性：x=y,则 x,z 比较结果和 y，z 比较结果相同。
+反例：下例中没有处理相等的情况，实际使用中可能会出现异常：
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new Comparator&lt;Student&gt;() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public int compare(Student o1, Student o2) &#123;</span><br><span class="line">        return o1.getId() &gt; o2.getId() ? 1 : -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>【推荐】集合初始化时，尽量指定集合初始值大小。</p>
+</blockquote>
+<p>说明：ArrayList 尽量使用 ArrayList(int initialCapacity) 初始化。</p>
+<blockquote>
+<p>【推荐】使用 entrySet 遍历 Map 类集合 KV，而不是 keySet 方式进行遍历。</p>
+</blockquote>
+<pre><code>说明：keySet 其实是遍历了 2 次，一次是转为 Iterator 对象，另一次是从 hashMap 中取出
+key 所对应的 value。而 entrySet 只是遍历了一次就把 key 和 value 都放到了 entry 中，效
+率更高。如果是 JDK8，使用 Map.foreach 方法。
+正例：values()返回的是 V 值集合，是一个 list 集合对象；keySet()返回的是 K 值集合，是
+一个 Set 集合对象；entrySet()返回的是 K-V 值组合集合。
+</code></pre>
+<blockquote>
+<p>【推荐】高度注意 Map 类集合 K&#x2F;V 能不能存储 null 值的情况，如下表格：</p>
+</blockquote>
+<pre><code>集合类 |  Key | Value | Super | 说明
+---|---|---|---|---|---
+Hashtable | 不允许为 null  | 不允许为 null | Dictionary  | 线程安全
+ConcurrentHashMap |  不允许为 null |  不允许为 null |  AbstractMap  | 分段锁技术
+TreeMap  | 不允许为 null  | 允许为 null  | AbstractMap  | 线程不安全
+HashMap  | 允许为 null  | 允许为 null  | AbstractMap |  线程不安全
+
+反例： 由于 HashMap 的干扰，很多人认为 ConcurrentHashMap 是可以置入 null 值，注意存储null 值时会抛出 NPE 异常。
+</code></pre>
+<blockquote>
+<p>【参考】合理利用好集合的有序性(sort)和稳定性(order)，避免集合的无序性(unsort)和不稳定性(unorder)带来的负面影响。</p>
+</blockquote>
+<pre><code>说明：稳定性指集合每次遍历的元素次序是一定的。有序性是指遍历的结果是按某种比较规则
+依次排列的。如：ArrayList 是 order/unsort；HashMap 是 unorder/unsort；TreeSet 是
+order/sort。
+</code></pre>
+<blockquote>
+<p>【参考】利用 Set 元素唯一的特性，可以快速对一个集合进行去重操作，避免使用 List 的contains 方法进行遍历、对比、去重操作。</p>
+</blockquote>
+<h1 id="并发处理"><a href="#并发处理" class="headerlink" title="并发处理"></a>并发处理</h1><blockquote>
+<p>【强制】获取单例对象需要保证线程安全，其中的方法也要保证线程安全。</p>
+</blockquote>
+<p>说明：资源驱动类、工具类、单例工厂类都需要注意。</p>
+<blockquote>
+<p>【强制】创建线程或线程池时请指定有意义的线程名称，方便出错时回溯。</p>
+</blockquote>
+<pre><code>正例：
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class TimerTaskThread extends Thread &#123;</span><br><span class="line">        public TimerTaskThread()&#123;</span><br><span class="line">        super.setName(&quot;TimerTaskThread&quot;); ...</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>【强制】线程资源必须通过线程池ᨀ供，不允许在应用中自行显式创建线程。</p>
+</blockquote>
+<pre><code>说明：使用线程池的好处是减少在创建和销毁线程上所花的时间以及系统资源的开销，解决资
+源不足的问题。如果不使用线程池，有可能造成系统创建大量同类线程而导致消耗完内存或者
+“过度切换”的问题。
+</code></pre>
+<blockquote>
+<p>【强制】线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor<br>的方式，这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。</p>
+</blockquote>
+<pre><code>说明：Executors 返回的线程池对象的弊端如下： 1）FixedThreadPool 和 SingleThreadPool:
+允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM。 2）CachedThreadPool 和 ScheduledThreadPool:
+允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程，从而导致 OOM。
+</code></pre>
+<blockquote>
+<p>【强制】SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，如果定义为static，必须加锁，或者使用 DateUtils 工具类。</p>
+</blockquote>
+<pre><code>正例：注意线程安全，使用 DateUtils。亦推荐如下处理：
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">private static final ThreadLocal&lt;DateFormat&gt; df = new ThreadLocal&lt;DateFormat&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected DateFormat initialValue() &#123;</span><br><span class="line">    return new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>说明：如果是 JDK8 的应用，可以使用 Instant 代替 Date，LocalDateTime 代替 Calendar，<br>    DateTimeFormatter代替Simpledateformatter，官方给出的解释：simple beautiful strong<br>    immutable thread-safe。</p>
+<blockquote>
+<p>【强制】高并发时，同步调用应该去考量锁的性能损耗。能用无锁数据结构，就不要用锁；能锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁。</p>
+</blockquote>
+<blockquote>
+<p>【强制】对多个资源、数据库表、对象同时加锁时，需要保持一致的加锁顺序，否则可能会造成死锁。</p>
+</blockquote>
+<p>说明：线程一需要对表 A、B、C 依次全部加锁后才可以进行更新操作，那么线程二的加锁顺序<br>也必须是 A、B、C，否则可能出现死锁。</p>
+<blockquote>
+<p>【强制】并发修改同一记录时，避免更新丢失，要么在应用层加锁，要么在缓存加锁，要么在数据库层使用乐观锁，使用 version 作为更新依据。</p>
+</blockquote>
+<p>说明：如果每次访问冲突概率小于 20%，推荐使用乐观锁，否则使用悲观锁。乐观锁的重试次<br>数不得小于 3 次。</p>
+<blockquote>
+<p>【强制】多线程并行处理定时任务时，Timer运行多个TimeTask时，只要其中之一没有捕获抛出异常，其它任务便会自动终止运行，使用 ScheduledExecutorService 则没有这个问题。</p>
+</blockquote>
+<blockquote>
+<p>【推荐】使用 CountDownLatch 进行异步转同步操作，每个线程退出前必须调用 countDown方法，线程执行代码注意 catch 异常，确保 countDown 方法可以执行，避免主线程无法执行至 countDown 方法，直到超时才返回结果。</p>
+</blockquote>
+<p>说明：注意，子线程抛出异常堆栈，不能在主线程 try-catch 到。</p>
+<blockquote>
+<p>【推荐】避免 Random 实例被多线程使用，虽然共享该实例是线程安全的，但会因竞争同一seed 导致的性能下降。</p>
+</blockquote>
+<pre><code>说明：Random 实例包括 java.util.Random 的实例或者 Math.random()实例。
+正例：在 JDK7 之后，可以直接使用 API ThreadLocalRandom，在 JDK7 之前，可以做到每个
+线程一个实例。
+</code></pre>
+<blockquote>
+<p>【推荐】通过双重检查锁（double-checked locking）（在并发场景）实现延迟初始化的优化问题隐患(可参考 The “Double-Checked Locking is Broken” Declaration),推荐问题解决方案中较为简单一种（适用于 JDK5 及以上版本），将目标属性声明为 volatile 型。</p>
+</blockquote>
+<pre><code>反例：
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Foo &#123;</span><br><span class="line">        private Helper helper = null;</span><br><span class="line">        public Helper getHelper() &#123;</span><br><span class="line">            if (helper == null) synchronized(this) &#123;</span><br><span class="line">            if (helper == null)</span><br><span class="line">            helper = new Helper();</span><br><span class="line">            &#125;</span><br><span class="line">            return helper;</span><br><span class="line">        &#125;</span><br><span class="line">        // other functions and members...</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>【参考】volatile 解决多线程内存不可见问题。</p>
+</blockquote>
+<pre><code>对于一写多读，是可以解决变量同步问题，
+但是如果多写，同样无法解决线程安全问题。如果是 count++操作，使用如下类实现：
+AtomicInteger count = new AtomicInteger(); count.addAndGet(1); 如果是 JDK8，推
+荐使用 LongAdder 对象，比 AtomicLong 性能更好（减少乐观锁的重试次数）。
+</code></pre>
+<blockquote>
+<p>【参考】 HashMap 在容量不够进行 resize 时由于高并发可能出现死链，导致 CPU 飙升，在开发过程中注意规避此风险。</p>
+</blockquote>
+<blockquote>
+<p>【参考】ThreadLocal 无法解决共享对象的更新问题，ThreadLocal 对象建议使用 static修饰。</p>
+</blockquote>
+<pre><code>这个变量是针对一个线程内所有操作共有的，所以设置为静态变量，所有此类实例共享
+此静态变量 ，也就是说在类第一次被使用时装载，只分配一块存储空间，所有此类的对象(只
+要是这个线程内定义的)都可以操控这个变量。
+</code></pre>
+<h1 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h1><blockquote>
+<p>【强制】在一个 switch 块内，每个 case 要么通过 break&#x2F;return 等来终止，要么注释说明程序将继续执行到哪一个 case 为止；</p>
+</blockquote>
+<pre><code>在一个 switch 块内，都必须包含一个 default 语句并且放在最后，即使它什么代码也没有。
+</code></pre>
+<blockquote>
+<p>【强制】在 if&#x2F;else&#x2F;for&#x2F;while&#x2F;do 语句中必须使用大括号，即使只有一行代码，<br>避免使用下面的形式：if (condition) statements;</p>
+</blockquote>
+<p>项目中出现的反例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (initialized)</span><br><span class="line">            return;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>【推荐】推荐尽量少用 else， if-else 的方式可以改写成：</p>
+</blockquote>
+<pre><code>if(condition)&#123;
+    ...
+    return obj;
+&#125;
+// 接着写 else 的业务逻辑代码;
+    
+说明：如果非得使用 if()...else if()...else...方式表达逻辑，
+</code></pre>
+<p><em><strong>【强制】请勿超过 3 层，超过请使用状态设计模式。</strong></em></p>
+<pre><code>正例：逻辑上超过 3 层的 if-else 代码可以使用卫语句，或者状态模式来实现。
+</code></pre>
+<blockquote>
+<p>【推荐】除常用方法（如 getXxx&#x2F;isXxx）等外，不要在条件判断中执行其它复杂的语句，将复杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性。</p>
+</blockquote>
+<pre><code>说明：很多 if 语句内的逻辑相当复杂，阅读者需要分析条件表达式的最终结果，才能明确什么
+样的条件执行什么样的语句，那么，如果阅读者分析逻辑表达式错误呢？
+    
+正例：
+    //伪代码如下
+    boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; (...) || (...);
+        if (existed) &#123;
+        ...
+    &#125;
+反例：
+    if ((file.open(fileName, &quot;w&quot;) != null) &amp;&amp; (...) || (...)) &#123;
+    ...
+    &#125;
+</code></pre>
+<blockquote>
+<p>【推荐】循环体中的语句要考量性能，以下操作尽量移至循环体外处理<br>如定义对象、变量、获取数据库连接，进行不必要的 try-catch 操作（这个 try-catch 是否可以移至循环体外）。</p>
+</blockquote>
+<blockquote>
+<p>【推荐】接口入参保护，这种场景常见的是用于做批量操作的接口。</p>
+</blockquote>
+<blockquote>
+<p>【参考】方法中需要进行参数校验的场景：</p>
+</blockquote>
+<pre><code>1） 调用频次低的方法。
+2） 执行时间开销很大的方法，参数校验时间几乎可以忽略不计，但如果因为参数错误导致
+中间执行回退，或者错误，那得不偿失。
+3） 需要极高稳定性和可用性的方法。
+4） 对外提供的开放接口，不管是 RPC/API/HTTP 接口。
+5） 敏感权限入口。
+</code></pre>
+<blockquote>
+<p>【参考】方法中不需要参数校验的场景：</p>
+</blockquote>
+<pre><code>1） 极有可能被循环调用的方法，不建议对参数进行校验。但在方法说明里必须注明外部参
+数检查。
+2） 底层的方法调用频度都比较高，一般不校验。毕竟是像纯净水过滤的最后一道，参数错
+误不太可能到底层才会暴露问题。一般 DAO 层与 Service 层都在同一个应用中，部署在同一
+台服务器中，所以 DAO 的参数校验，可以省略。
+3） 被声明成 private 只会被自己代码所调用的方法，如果能够确定调用方法的代码传入参
+数已经做过检查或者肯定不会有问题，此时可以不校验参数。
+</code></pre>
+<h1 id="注释规约"><a href="#注释规约" class="headerlink" title="注释规约"></a>注释规约</h1><blockquote>
+<p>【强制】类、类属性、类方法的注释必须使用 Javadoc 规范，使用 &#x2F;** 内容 * &#x2F; 格式，不得使用&#x2F;&#x2F;xxx 方式。</p>
+</blockquote>
+<p>说明：在 IDE 编辑窗口中，Javadoc 方式会提示相关注释，生成 Javadoc 可以正确输出相应注<br>释；在 IDE 中，工程调用方法时，不进入方法即可悬浮提示方法、参数、返回值的意义，提高<br>阅读效率。</p>
+<blockquote>
+<p>【强制】所有的抽象方法（包括接口中的方法）必须要用 Javadoc 注释、除了返回值、参数、异常说明外，还必须指出该方法做什么事情，实现什么功能。</p>
+</blockquote>
+<p>说明：对子类的实现要求，或者调用注意事项，请一并说明。</p>
+<blockquote>
+<p>【强制】所有的类都必须添加创建者信息。</p>
+</blockquote>
+<blockquote>
+<p>【强制】方法内部单行注释，在被注释语句上方另起一行，使用&#x2F;&#x2F;注释。方法内部多行注释<br>使用&#x2F;* *&#x2F;注释，注意与代码对齐。</p>
+</blockquote>
+<blockquote>
+<p>【强制】所有的枚举类型字段必须要有注释，说明每个数据项的用途。</p>
+</blockquote>
+<blockquote>
+<p>【推荐】与其“半吊子”英文来注释，不如用中文注释把问题说清楚。专有名词与关键字保持英文原文即可。</p>
+</blockquote>
+<p>反例：“TCP 连接超时”解释成“传输控制协议连接超时”，理解反而费脑筋。</p>
+<blockquote>
+<p>【推荐】代码修改的同时，注释也要进行相应的修改，尤其是参数、返回值、异常、核心逻辑等的修改。</p>
+</blockquote>
+<p>说明：代码与注释更新不同步，就像路网与导航软件更新不同步一样，如果导航软件严重滞后，<br>就失去了导航的意义。</p>
+<blockquote>
+<p>【参考】注释掉的代码尽量要配合说明，而不是简单的注释掉。</p>
+</blockquote>
+<p>说明：代码被注释掉有两种可能性：1）后续会恢复此段代码逻辑。2）永久不用。前者如果没<br>有备注信息，难以知晓注释动机。后者建议直接删掉（代码仓库保存了历史代码）。</p>
+<blockquote>
+<p>【参考】对于注释的要求：</p>
+</blockquote>
+<pre><code>第一、能够准确反应设计思想和代码逻辑；
+第二、能够阐述业务含义，使别的程序员能够迅速了解到代码背后的信息。完全没有注释的大段代码对于阅读者形同
+天书，注释是给自己看的，即使隔很长时间，也能清晰理解当时的思路；注释也是给继任者看
+的，使其能够快速接替自己的工作。
+</code></pre>
+<blockquote>
+<p>【参考】好的命名、代码结构是自解释的，注释力求精简准确、表达到位。</p>
+</blockquote>
+<pre><code>（这条对我来说要注意，因为我总倾向于把注释写的很详细，有时出现过度注释）
+避免出现注释的一个极端：过多过滥的注释，代码的逻辑一旦修改，修改注释是相当大的负担。
+反例：
+    // put elephant into fridge
+    put(elephant, fridge);
+
+方法名 put，加上两个有意义的变量名 elephant 和 fridge，已经说明了这是在干什么，语
+义清晰的代码不需要额外的注释。
+</code></pre>
+<blockquote>
+<p>【参考】特殊注释标记，请注明标记人与标记时间。</p>
+</blockquote>
+<pre><code>注意及时处理这些标记，通过标记扫描，经常清理此类标记。线上故障有时候就是来源于这些标记处的代码。
+
+1） 待办事宜（TODO）:（ 标记人，标记时间，[预计处理时间]）
+表示需要实现，但目前还未实现的功能。这实际上是一个 Javadoc 的标签，目前的 Javadoc
+还没有实现，但已经被广泛使用。只能应用于类，接口和方法（因为它是一个 Javadoc 标签）。
+2） 错误，不能工作（FIXME）:（标记人，标记时间，[预计处理时间]）
+在注释中用 FIXME 标记某代码是错误的，而且不能工作，需要及时纠正的情况。
+</code></pre>
+<h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h1><blockquote>
+<p>【强制】在使用正则表达式时，利用好其预编译功能，可以有效加快正则匹配速度。</p>
+</blockquote>
+<p>说明：不要在方法体内定义：Pattern pattern &#x3D; Pattern.compile(规则);</p>
+<blockquote>
+<p>【强制】velocity 调用 POJO 类的属性时，建议直接使用属性名取值即可，</p>
+</blockquote>
+<pre><code>模板引擎会自动按规范调用 POJO 的 getXxx()，如果是 boolean 基本数据类型变量（boolean 命名不需要加 is前缀），会自动调用 isXxx()方法。
+说明：注意如果是 Boolean 包装类对象，优先调用 getXxx()的方法。
+</code></pre>
+<blockquote>
+<p>【强制】后台输送给页面的变量必须加$!{var}——中间的感叹号。</p>
+</blockquote>
+<p>说明：如果 var&#x3D;null 或者不存在，那么${var}会直接显示在页面上。</p>
+<blockquote>
+<p>【强制】注意 Math.random() 这个方法返回是 double 类型，<br>注意取值的范围 0≤x&lt;1（能够取到零值，注意除零异常），如果想获取整数类型的随机数，不要将 x 放大 10 的若干倍然后<br>取整，直接使用 Random 对象的 nextInt 或者 nextLong 方法。</p>
+</blockquote>
+<blockquote>
+<p>【强制】获取当前毫秒数 System.currentTimeMillis(); 而不是 new Date().getTime();<br>说明：如果想获取更加精确的纳秒级时间值，用 System.nanoTime()。在 JDK8 中，针对统计时间等场景，推荐使用 Instant 类。</p>
+</blockquote>
+<blockquote>
+<p>【推荐】尽量不要在 vm 中加入变量声明、逻辑运算符，更不要在 vm 模板中加入任何复杂的逻辑。</p>
+</blockquote>
+<blockquote>
+<p>【推荐】任何数据结构的构造或初始化，都应指定大小，避免数据结构无限增长吃光内存。</p>
+</blockquote>
+<blockquote>
+<p>【推荐】对于“明确停止使用的代码和配置”，如方法、变量、类、配置文件、动态配置属性等要坚决从程序中清理出去，避免造成过多垃圾。</p>
+</blockquote>
+<h1 id="异常日志"><a href="#异常日志" class="headerlink" title="异常日志"></a>异常日志</h1><h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><blockquote>
+<p>【强制】Java 类库中定义的一类 RuntimeException 可以通过预先检查进行规避，而不应该 通过catch 来处理，比如:IndexOutOfBoundsException，NullPointerException等等。</p>
+</blockquote>
+<p>无法通过预检查的异常除外，如在解析一个外部传来的字符串形式数字时，通过 catch NumberFormatException 来实现。</p>
+<p>正例:</p>
+<pre><code>if (obj != null) &#123;...&#125;
+</code></pre>
+<p>反例:</p>
+<pre><code>try &#123; obj.method() &#125; catch (NullPointerException e) &#123;...&#125;
+</code></pre>
+<blockquote>
+<p>【强制】异常不要用来做流程控制，条件控制，因为异常的处理效率比条件分支低。</p>
+</blockquote>
+<blockquote>
+<p>【强制】对大段代码进行 try-catch，这是不负责任的表现。catch 时请分清稳定代码和非稳 定代码，稳定代码指的是无论如何不会出错的代码。对于非稳定代码的catch尽可能进行区分 异常类型，再做对应的异常处理。</p>
+</blockquote>
+<blockquote>
+<p>【强制】捕获异常是为了处理它，不要捕获了却什么都不处理而抛弃之，如果不想处理它，请 将该异常抛给它的调用者。最外层的业务使用者，必须处理异常，将其转化为用户可以理解的 内容。</p>
+</blockquote>
+<blockquote>
+<p>【强制】有 try 块放到了事务代码中，catch 异常后，如果需要回滚事务，一定要注意手动回 滚事务。</p>
+</blockquote>
+<blockquote>
+<p>【强制】finally 块必须对资源对象、流对象进行关闭，有异常也要做 try-catch。</p>
+</blockquote>
+<p>如果 JDK7 及以上，可以使用 try-with-resources 方式。</p>
+<blockquote>
+<p>【强制】不能在 finally 块中使用 return，finally 块中的 return 返回后方法结束执行，不 会再执行 try 块中的 return 语句。</p>
+</blockquote>
+<blockquote>
+<p>【强制】捕获异常与抛异常，必须是完全匹配，或者捕获异常是抛异常的父类。 </p>
+</blockquote>
+<p>如果预期对方抛的是绣球，实际接到的是铅球，就会产生意外情况。</p>
+<blockquote>
+<p>【推荐】方法的返回值可以为 null，不强制返回空集合，或者空对象等，必须添加注释充分 说明什么情况下会返回 null 值。调用方需要进行 null 判断防止 NPE 问题。 ?&gt; 本手册明确防止 NPE 是调用者的责任。即使被调用方法返回空集合或者空对象，对调用 者来说，也并非高枕无忧，必须考虑到远程调用失败、序列化失败、运行时异常等场景返回 null 的情况。</p>
+</blockquote>
+<blockquote>
+<p>【推荐】防止 NPE，是程序员的基本修养，注意 NPE 产生的场景:</p>
+</blockquote>
+<p>返回类型为基本数据类型，return 包装数据类型的对象时，自动拆箱有可能产生 NPE。<br>反例:</p>
+<p>public int f() { return Integer对象}， 如果为null，自动解箱抛NPE。<br>数据库的查询结果可能为null。<br>集合里的元素即使isNotEmpty，取出的数据元素也可能为null。<br>远程调用返回对象时，一律要求进行空指针判断，防止NPE。<br>对于Session中获取的数据，建议NPE检查，避免空指针。<br>级联调用obj.getA().getB().getC();一连串调用，易产生NPE。<br>正例:</p>
+<p>使用 JDK8 的 Optional 类来防止 NPE 问题。</p>
+<blockquote>
+<p>【推荐】定义时区分unchecked&#x2F;checked 异常，避免直接抛出newRuntimeException()， 更不允许抛出 Exception 或者 Throwable，应使用有业务含义的自定义异常。推荐业界已定义 过的自定义异常，如:DAOException &#x2F; ServiceException 等。</p>
+</blockquote>
+<blockquote>
+<p>【参考】在代码中使用“抛异常”还是“返回错误码”，对于公司外的 http&#x2F;api 开放接口必须 使用“错误码”;而应用内部推荐异常抛出;跨应用间 RPC 调用优先考虑使用 Result 方式，封 装 isSuccess()方法、“错误码”、“错误简短信息”。</p>
+</blockquote>
+<p>关于 RPC 方法返回方式使用 Result 方式的理由:</p>
+<p>使用抛异常返回方式，调用方如果没有捕获到就会产生运行时错误。</p>
+<p>如果不加栈信息，只是new自定义异常，加入自己的理解的error message，对于调用端解决问题的帮助不会太多。如果加了栈信息，在频繁调用出错的情况下，数据序列化和传输 的性能损耗也是问题。</p>
+<blockquote>
+<p>【参考】避免出现重复的代码(Don’t Repeat Yourself)，即DRY原则。</p>
+</blockquote>
+<p>随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是组件化。</p>
+<p>正例:</p>
+<pre><code>一个类中有多个 public 方法，都需要进行数行相同的参数校验操作，这个时候请抽取:
+private boolean checkParam(DTO dto) &#123;...&#125;
+</code></pre>
+<h2 id="日志规约"><a href="#日志规约" class="headerlink" title="日志规约"></a>日志规约</h2><blockquote>
+<p>【强制】应用中不可直接使用日志系统(Log4j、Logback)中的 API，而应依赖使用日志框架SLF4J 中的 API，使用门面模式的日志框架，有利于维护和各个类的日志处理方式统一。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line">private static final Logger logger = LoggerFactory.getLogger(Abc.class);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>【强制】日志文件推荐至少保存 15 天，因为有些异常具备以“周”为频次发生的特点。</p>
+</blockquote>
+<blockquote>
+<p>【强制】应用中的扩展日志(如打点、临时监控、访问日志等)命名方式: appName_logType_logName.log。logType:日志类型，推荐分类有 stats&#x2F;desc&#x2F;monitor&#x2F;visit 等;logName:日志 述。这种命名的好处:通过文件名就可知 道日志文件属于什么应用，什么类型，什么目的，也有利于归类查找。</p>
+</blockquote>
+<p>正例:</p>
+<p>mppserver 应用中单独监控时区转换异常，如:mppserver_monitor_timeZoneConvert.log</p>
+<p>推荐对日志进行分类，如将错误日志和业务日志分开存放，便于开发人员查看，也便于通过日志对系统进行及时监控。</p>
+<blockquote>
+<p>【强制】对 trace&#x2F;debug&#x2F;info 级别的日志输出，必须使用条件输出形式或者使用占位符的方式。</p>
+</blockquote>
+<pre><code>logger.debug(&quot;Processing trade with id: &quot; + id + &quot; and symbol: &quot; + symbol); 
+</code></pre>
+<p>如果日志级别是warn，上述日志不会打印，但是会执行字符串拼接操作，如果symbol是对象，会执行toString()方法，浪费了系统资源，执行了上述操作，最终日志却没有打印。</p>
+<p>正例:(条件)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (logger.isDebugEnabled()) &#123;</span><br><span class="line">    logger.debug(&quot;Processing trade with id: &quot; + id + &quot; and symbol: &quot; + symbol);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正例:(占位符)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger.debug(&quot;Processing trade with id: &#123;&#125; and symbol : &#123;&#125; &quot;, id, symbol);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>【强制】避免重复打印日志，浪费磁盘空间，务必在 log4j.xml 中设置 additivity&#x3D;false。</p>
+</blockquote>
+<p>正例:</p>
+<pre><code>&lt;logger name=&quot;com.taobao.dubbo.config&quot; additivity=&quot;false&quot;&gt;
+</code></pre>
+<blockquote>
+<p>【强制】异常信息应该包括两类信息:案发现场信息和异常堆栈信息。如果不处理，那么通过 关键字 throws 往上抛出。</p>
+</blockquote>
+<p>正例:</p>
+<pre><code>logger.error(各类参数或者对象 toString + &quot;_&quot; + e.getMessage(), e);
+</code></pre>
+<blockquote>
+<p>【推荐】谨慎地记录日志。生产环境禁止输出 debug 日志;有选择地输出 info 日志;如果使 用 warn 来记录刚上线时的业务行为信息，一定要注意日志输出量的问题，避免把服务器磁盘 撑爆，并记得及时删除这些观察日志。</p>
+</blockquote>
+<p>大量地输出无效日志，不利于系统性能 升，也不利于快速定位错误点。记录日志时请 思考:这些日志真的有人看吗?看到这条日志你能做什么?能不能给问题排查带来好处?</p>
+<blockquote>
+<p>【参考】可以使用 warn 日志级别来记录用户输入参数错误的情况，避免用户投诉时，无所适 从。注意日志输出的级别，error 级别只记录系统逻辑出错、异常等重要的错误信息。如非必 要，请不要在此场景打出 error 级别。</p>
+</blockquote>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2021/02/23/Java%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E5%8F%8A%E7%A4%BA%E4%BE%8B/">Java开发规范及示例</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问  的个人博客"></a></p>
+        <p><span>发布时间:</span>2021年02月23日 - 10时53分</p>
+        <p><span>最后更新:</span>2022年08月08日 - 10时17分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/02/23/Java%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E5%8F%8A%E7%A4%BA%E4%BE%8B/" title="Java开发规范及示例">http://yoursite.com/2021/02/23/Java%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E5%8F%8A%E7%A4%BA%E4%BE%8B/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2021/02/23/Java%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E5%8F%8A%E7%A4%BA%E4%BE%8B/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2021/02/27/269.%E7%81%AB%E6%98%9F%E8%AF%8D%E5%85%B8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          269.火星词典
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/02/22/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java基础知识-装箱和拆箱</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%A7%84%E7%BA%A6-1"><span class="toc-number">1.</span> <span class="toc-text">编程规约^1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">常量定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E8%A7%84%E7%BA%A6"><span class="toc-number">3.</span> <span class="toc-text">格式规约</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OOP-%E8%A7%84%E7%BA%A6"><span class="toc-number">4.</span> <span class="toc-text">OOP 规约</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%A4%84%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">集合处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">并发处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">7.</span> <span class="toc-text">控制语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A%E8%A7%84%E7%BA%A6"><span class="toc-number">8.</span> <span class="toc-text">注释规约</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-number">9.</span> <span class="toc-text">其它</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97"><span class="toc-number">10.</span> <span class="toc-text">异常日志</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">10.1.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E8%A7%84%E7%BA%A6"><span class="toc-number">10.2.</span> <span class="toc-text">日志规约</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yiye',
+      repo: 'liyiye012.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2021/02/27/269.%E7%81%AB%E6%98%9F%E8%AF%8D%E5%85%B8/" title="上一篇: 269.火星词典">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2021/02/22/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1/" title="下一篇: Java基础知识-装箱和拆箱">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/08/05/C++%E4%BA%8C%E7%BB%B4%E5%8A%A8%E6%80%81%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E4%BC%A0%E5%8F%82%E9%80%9F%E6%9F%A5/">C++二维动态静态数组传参速查</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/14/105.%20%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91(%E5%89%91%E6%8C%87%20Offer%2007.%20%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91)/">105. 从前序与中序遍历序列构造二叉树(剑指 Offer 07. 重建二叉树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/06/13/Flask%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Flask学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/05/22/%E4%BB%8E%E6%96%87%E6%9C%AC%E4%B8%AD%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE/">从文本中读取数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/09/399.%20%E9%99%A4%E6%B3%95%E6%B1%82%E5%80%BC/">399. 除法求值</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/09/394.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81/">394. 字符串解码</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/09/494.%20%E7%9B%AE%E6%A0%87%E5%92%8C/">494. 目标和</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/08/416.%20%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86/">416. 分割等和子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/08/581.%20%E6%9C%80%E7%9F%AD%E6%97%A0%E5%BA%8F%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">581. 最短无序连续子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/28/Latex%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B/">Latex极简教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/17/85.%20%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/">85. 最大矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/17/Hexo%20github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">Hexo+github搭建个人博客问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/312.%20%E6%88%B3%E6%B0%94%E7%90%83%E4%BA%8C%E5%88%B7/">312. 戳气球</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/114.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/">114. 二叉树展开为链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/145.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">145. 二叉树的后序遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/12/84.%20%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2/">84.柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/32.%20%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/">32. 最长有效括号</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/438.%20%E6%89%BE%E5%88%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E6%89%80%E6%9C%89%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/">438. 找到字符串中所有字母异位词</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/10/Hexo%E4%B8%8ENodejs%E7%89%88%E6%9C%AC%E4%B8%8D%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Hexo与Nodejs版本不匹配问题解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/10/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%89/">JAVA 学习笔记（数据结构）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E7%AE%97%E6%B3%95%EF%BC%89/">JAVA 学习笔记（算法）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88YARN%EF%BC%89/">JAVA 学习笔记（YARN）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%91%E8%AE%A1%E7%AE%97%EF%BC%89/">JAVA 学习笔记（云计算）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Spark%EF%BC%89/">JAVA 学习笔记（Spark）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Storm%EF%BC%89/">JAVA 学习笔记（Storm）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Hadoop%EF%BC%89/">JAVA 学习笔记（Hadoop）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/%20JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89/">JAVA 学习笔记（分布式缓存）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/%20JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%EF%BC%89/">JAVA 学习笔记（加密算法）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/Grafana%E6%B1%89%E5%8C%96%E6%8C%87%E5%8D%97/">Grafana汉化指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95%EF%BC%89/">JAVA 学习笔记（一致性算法）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/06/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89/">JAVA 学习笔记（数据库）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%89/">JAVA 学习笔记（负载均衡）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/686.%20%E9%87%8D%E5%A4%8D%E5%8F%A0%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/">686. 重复叠加字符串匹配</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Cassandra%EF%BC%89/">JAVA 学习笔记（Cassandra）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88MongoDB%EF%BC%89/">JAVA 学习笔记（MongoDB）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Hbase%EF%BC%89/">JAVA 学习笔记（Hbase）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/459.%20%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2/">459. 重复的子字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Kafka%EF%BC%89/">JAVA 学习笔记（Kafka）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E6%97%A5%E5%BF%97%EF%BC%89/">JAVA 学习笔记（日志）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/28.%20%E5%AE%9E%E7%8E%B0%20strStr()/">28. 实现 strStr()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E7%BD%91%E7%BB%9C7%E5%B1%82%E6%9E%B6%E6%9E%84%EF%BC%8CTCP%EF%BC%8CHTTP%E5%92%8CCDN%E5%8E%9F%E7%90%86%EF%BC%89/">JAVA 学习笔记（网络7层架构，TCP，HTTP和CDN原理）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/796.%20%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">796. 旋转字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/417.%20%E5%A4%AA%E5%B9%B3%E6%B4%8B%E5%A4%A7%E8%A5%BF%E6%B4%8B%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98/">417. 太平洋大西洋水流问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/03/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88NIO%EF%BC%89/">JAVA 学习笔记（NIO）</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/02/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Netty%20%E4%B8%8E%20RPC%EF%BC%89/">JAVA 学习笔记（Netty 与 RPC）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/31/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%BE%AE%E6%9C%8D%E5%8A%A1%EF%BC%89/">JAVA 学习笔记（微服务）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/30/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88IoC%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%EF%BC%89/">JAVA 学习笔记（IoC控制反转）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/30/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Bean%EF%BC%89/">JAVA 学习笔记（Bean）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/30/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88Spring%20%E5%8E%9F%E7%90%86%EF%BC%89/">JAVA 学习笔记（Spring 原理）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/29/JAVA%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%BC%82%E5%B8%B8%EF%BC%8C%E5%8F%8D%E5%B0%84%EF%BC%8C%E6%B3%A8%E8%A7%A3%EF%BC%8C%E5%86%85%E9%83%A8%E7%B1%BB%EF%BC%8C%E6%B3%9B%E5%9E%8B%EF%BC%8C%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%8C%E5%A4%8D%E5%88%B6%EF%BC%89/">JAVA 学习笔记（异常，反射，注解，内部类，泛型，序列化，复制）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/24/423.%20%E4%BB%8E%E8%8B%B1%E6%96%87%E4%B8%AD%E9%87%8D%E5%BB%BA%E6%95%B0%E5%AD%97/">423. 从英文中重建数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/22/JAVA%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E7%BA%BF%E7%A8%8B%EF%BC%8C%E9%94%81%EF%BC%8C%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%EF%BC%89/">JAVA 多线程并发学习笔记（线程，锁，进程调度）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/22/JAVA%20%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88set%EF%BC%8Clist%E5%92%8Cmap%EF%BC%89/">JAVA 集合学习笔记（set，list和map）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/21/518.%20%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2%20II/">518. 零钱兑换 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/21/%E5%89%91%E6%8C%87%20Offer%2017.%20%E6%89%93%E5%8D%B0%E4%BB%8E1%E5%88%B0%E6%9C%80%E5%A4%A7%E7%9A%84n%E4%BD%8D%E6%95%B0/">剑指 Offer 17. 打印从1到最大的n位数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/19/2103.%20%E7%8E%AF%E5%92%8C%E6%9D%86/">2103. 环和杆</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/19/2104.%20%E5%AD%90%E6%95%B0%E7%BB%84%E8%8C%83%E5%9B%B4%E5%92%8C/">2104. 子数组范围和</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E7%BA%BF%E7%A8%8B%EF%BC%8CJVM%EF%BC%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%8C%E5%BC%95%E7%94%A8%EF%BC%8CIO%EF%BC%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%EF%BC%89/">JVM学习笔记（线程，JVM，垃圾回收，引用，IO，类加载）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/875.%20%E7%88%B1%E5%90%83%E9%A6%99%E8%95%89%E7%9A%84%E7%8F%82%E7%8F%82/">875. 爱吃香蕉的珂珂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/%E5%89%91%E6%8C%87%20Offer%20II%20073.%20%E7%8B%92%E7%8B%92%E5%90%83%E9%A6%99%E8%95%89/">剑指 Offer II 073. 狒狒吃香蕉</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/17/403.%20%E9%9D%92%E8%9B%99%E8%BF%87%E6%B2%B3/">403. 青蛙过河</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1884.%20%E9%B8%A1%E8%9B%8B%E6%8E%89%E8%90%BD-%E4%B8%A4%E6%9E%9A%E9%B8%A1%E8%9B%8B/">1884. 鸡蛋掉落-两枚鸡蛋</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1377.%20T%20%E7%A7%92%E5%90%8E%E9%9D%92%E8%9B%99%E7%9A%84%E4%BD%8D%E7%BD%AE/">1377. T 秒后青蛙的位置</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1419.%20%E6%95%B0%E9%9D%92%E8%9B%99/">1419. 数青蛙</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/1936.%20%E6%96%B0%E5%A2%9E%E7%9A%84%E6%9C%80%E5%B0%91%E5%8F%B0%E9%98%B6%E6%95%B0/">1936. 新增的最少台阶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/746.%20%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF/">746. 使用最小花费爬楼梯</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/%E5%89%91%E6%8C%87%20Offer%20II%20088.%20%E7%88%AC%E6%A5%BC%E6%A2%AF%E7%9A%84%E6%9C%80%E5%B0%91%E6%88%90%E6%9C%AC/">剑指 Offer II 088. 爬楼梯的最少成本</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/70.%20%E7%88%AC%E6%A5%BC%E6%A2%AF/">70. 爬楼梯</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/16/%E5%89%91%E6%8C%87%20Offer%2010-%20II.%20%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/">剑指 Offer 10- II. 青蛙跳台阶问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/15/842.%20%E5%B0%86%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86%E6%88%90%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97/">1414. 和为 K 的最少斐波那契数字数目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/15/1414.%20%E5%92%8C%E4%B8%BA%20K%20%E7%9A%84%E6%9C%80%E5%B0%91%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%AD%97%E6%95%B0%E7%9B%AE/">1414. 和为 K 的最少斐波那契数字数目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/873.%20%E6%9C%80%E9%95%BF%E7%9A%84%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6/">873. 最长的斐波那契子序列的长度</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E5%89%91%E6%8C%87%20Offer%20II%20093.%20%E6%9C%80%E9%95%BF%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/">剑指 Offer II 093. 最长斐波那契数列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/372.%20%E8%B6%85%E7%BA%A7%E6%AC%A1%E6%96%B9/">372. 超级次方</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/69.%20x%20%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9(%E4%BA%8C%E5%88%86%E6%B3%95%E6%A8%A1%E6%9D%BF%E9%A2%98%E5%8F%8A%E7%BB%8F%E5%85%B8%E8%A7%A3%E9%87%8A%EF%BC%89/">69. x 的平方根(二分法模板题及经典解释）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/%E5%89%91%E6%8C%87%20Offer%20II%20072.%20%E6%B1%82%E5%B9%B3%E6%96%B9%E6%A0%B9(%E4%BA%8C%E5%88%86%E6%B3%95%E6%A8%A1%E6%9D%BF%E9%A2%98%E5%8F%8A%E7%BB%8F%E5%85%B8%E8%A7%A3%E9%87%8A%EF%BC%89/">剑指 Offer II072</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/50.%20Pow(x,%20n)%E5%BF%AB%E9%80%9F%E5%B9%82%E7%AE%97%E6%B3%95/">50. Pow(x, n)快速幂算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/509.%20%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/">509. 斐波那契数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/13/%E9%9D%A2%E8%AF%95%E9%A2%98%2008.06.%20%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98/">面试题 08.06. 汉诺塔问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/RabbitMQ%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E6%A6%82%E5%BF%B5%EF%BC%8C%E6%9E%B6%E6%9E%84%E5%92%8C%E6%B6%88%E6%81%AF%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%B1%BB%E5%9E%8B%EF%BC%89/">RabbitMQ学习笔记（概念，架构和消息交换机类型）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/%E9%9D%A2%E8%AF%95%E9%A2%98%2016.07.%20%E6%9C%80%E5%A4%A7%E6%95%B0%E5%80%BC/">面试题 16.07. 最大数值</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%20II%20079.%20%E6%89%80%E6%9C%89%E5%AD%90%E9%9B%86/">剑指 Offer II 079. 所有子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/12/%E5%89%91%E6%8C%87%20Offer%20II%20067.%20%E6%9C%80%E5%A4%A7%E7%9A%84%E5%BC%82%E6%88%96/">剑指 Offer II 067. 最大的异或</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/10/421.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E5%BC%82%E6%88%96%E5%80%BC/">421. 数组中两个数的最大异或值</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/10/%E9%9D%A2%E8%AF%95%E9%A2%98%2005.03.%20%E7%BF%BB%E8%BD%AC%E6%95%B0%E4%BD%8D/">面试题 05.03. 翻转数位</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/10/%E5%89%91%E6%8C%87%20Offer%2065.%20%E4%B8%8D%E7%94%A8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E5%81%9A%E5%8A%A0%E6%B3%95/">剑指 Offer 65. 不用加减乘除做加法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/09/%E5%89%91%E6%8C%87%20Offer%2064.%20%E6%B1%821+2+%E2%80%A6+n/">剑指 Offer 64. 求1+2+…+n</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/1863.%20%E6%89%BE%E5%87%BA%E6%89%80%E6%9C%89%E5%AD%90%E9%9B%86%E7%9A%84%E5%BC%82%E6%88%96%E6%80%BB%E5%92%8C%E5%86%8D%E6%B1%82%E5%92%8C/">1863. 找出所有子集的异或总和再求和</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2053%20-%20II.%200%EF%BD%9En-1%E4%B8%AD%E7%BC%BA%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/">剑指 Offer 53 - II. 0～n-1中缺失的数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20II.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0%20II/">剑指 Offer 56 - II. 数组中数字出现的次数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E5%89%91%E6%8C%87%20Offer%2056%20-%20I.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0/">剑指 Offer 56 - I. 数组中数字出现的次数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/07/477.%20%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%E6%80%BB%E5%92%8C/">477. 汉明距离总和</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/05/Zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%8D%8F%E8%AE%AE%EF%BC%8C%E6%8A%95%E7%A5%A8%E6%9C%BA%E5%88%B6%EF%BC%89/">Zookeeper学习笔记（概念，协议，投票机制）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E5%BF%B5I/">计算机网络概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/30/Linux%E6%96%87%E6%9C%AC%E4%B8%89%E5%89%91%E5%AE%A2%EF%BC%8Cawk%E3%80%81grep%E3%80%81sed/">Linux文本三剑客，awk、grep、sed</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/29/503.%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20II/">503. 下一个更大元素 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/29/556.%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20III/">556. 下一个更大元素 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/28/496.%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20I/">496. 下一个更大元素 I</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/26/739.%20%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/">739. 每日温度</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/396.%20%E6%97%8B%E8%BD%AC%E5%87%BD%E6%95%B0/">396. 旋转函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/525.%20%E8%BF%9E%E7%BB%AD%E6%95%B0%E7%BB%84/">525. 连续数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/18/%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E4%B8%80%E4%BB%BD%E4%BC%98%E7%A7%80%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%91%A8%E6%8A%A5/">如何写出一份优秀的工作周报？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/17/1044.%20%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2/">1044. 最长重复子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/16/1358.%20%E5%8C%85%E5%90%AB%E6%89%80%E6%9C%89%E4%B8%89%E7%A7%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E7%9B%AE/">1358. 包含所有三种字符的子字符串数目</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/16/1297.%20%E5%AD%90%E4%B8%B2%E7%9A%84%E6%9C%80%E5%A4%A7%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0/">1297. 子串的最大出现次数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/15/1109.%20%E8%88%AA%E7%8F%AD%E9%A2%84%E8%AE%A2%E7%BB%9F%E8%AE%A1/">1109. 航班预订统计</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/15/904.%20%E6%B0%B4%E6%9E%9C%E6%88%90%E7%AF%AE/">904. 水果成篮</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/12/%E3%80%8A%E5%A4%A9%E9%BE%99%E5%85%AB%E9%83%A8%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《天龙八部》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/12/795.%20%E5%8C%BA%E9%97%B4%E5%AD%90%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0/">795. 区间子数组个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/10/467.%20%E7%8E%AF%E7%BB%95%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%94%AF%E4%B8%80%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2/">467. 环绕字符串中唯一的子字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/992.%20K%20%E4%B8%AA%E4%B8%8D%E5%90%8C%E6%95%B4%E6%95%B0%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">992. K 个不同整数的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/340.%20%E8%87%B3%E5%A4%9A%E5%8C%85%E5%90%AB%20K%20%E4%B8%AA%E4%B8%8D%E5%90%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">340. 至多包含 K 个不同字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/159.%20%E8%87%B3%E5%A4%9A%E5%8C%85%E5%90%AB%E4%B8%A4%E4%B8%AA%E4%B8%8D%E5%90%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">159. 至多包含两个不同字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/05/3.%20%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">3. 无重复字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/03/991.%20%E5%9D%8F%E4%BA%86%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8/">991. 坏了的计算器</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/02/224.%20%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8/">224. 基本计算器</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/02/772.%20%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8III/">772. 基本计算器III</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/02/227.%20%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8%20II/">227.基本计算器 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/31/560.%20%E5%92%8C%E4%B8%BA%20K%20%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">560. 和为 K 的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/31/MySQL%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%9120%E9%97%AE/">MySQL面试高频20问</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/28/713.%20%E4%B9%98%E7%A7%AF%E5%B0%8F%E4%BA%8EK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">713. 乘积小于K的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/28/209.%20%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">209. 长度最小的子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/27/318.%20%E6%9C%80%E5%A4%A7%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E4%B9%98%E7%A7%AF/">318. 最大单词长度乘积</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/25/1531.%20%E5%8E%8B%E7%BC%A9%E5%AD%97%E7%AC%A6%E4%B8%B2%20II/">1531. 压缩字符串 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/25/443.%20%E5%8E%8B%E7%BC%A9%E5%AD%97%E7%AC%A6%E4%B8%B2/">443. 压缩字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/24/338.%20%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/">338. 比特位计数</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/21/262.%20%E8%A1%8C%E7%A8%8B%E5%92%8C%E7%94%A8%E6%88%B7/">262. 行程和用户</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/10/18/29.%20%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4/">29. 两数相除</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/04/1071.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E5%AD%90/">1071. 字符串的最大公因子</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/05/07/1206.%20%E8%AE%BE%E8%AE%A1%E8%B7%B3%E8%A1%A8/">1206. 设计跳表</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/26/707.%20%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/">707. 设计链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/09/706.%20%E8%AE%BE%E8%AE%A1%E5%93%88%E5%B8%8C%E6%98%A0%E5%B0%84/">706. 设计哈希映射</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/09/705.%20%E8%AE%BE%E8%AE%A1%E5%93%88%E5%B8%8C%E9%9B%86%E5%90%88/">705. 设计哈希集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/07/LCP%2029.%20%E4%B9%90%E5%9B%A2%E7%AB%99%E4%BD%8D/">LCP 29. 乐团站位</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/05/LCP%2028.%20%E9%87%87%E8%B4%AD%E6%96%B9%E6%A1%88/">LCP 28. 采购方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/294%20%C2%B7%20%E7%AE%80%E5%8C%96%E9%93%BE%E8%A1%A8/">294 · 简化链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/711.%20%E4%B8%8D%E5%90%8C%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%95%B0%E9%87%8FII/">711. 不同岛屿的数量II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/31/694.%20%E4%B8%8D%E5%90%8C%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%95%B0%E9%87%8F/">694. 不同岛屿的数量</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/30/305.%20%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F%20II/">305. 岛屿数量 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/29/572.%20%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%91%E7%9A%84%E5%AD%90%E6%A0%91/">572. 另一个树的子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/27/491.%20%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/">304. 二维区域和检索 - 矩阵不可变</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/27/304.%20%E4%BA%8C%E7%BB%B4%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2%20-%20%E7%9F%A9%E9%98%B5%E4%B8%8D%E5%8F%AF%E5%8F%98/">304. 二维区域和检索 - 矩阵不可变</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/25/456.%20132%20%E6%A8%A1%E5%BC%8F/">456. 132 模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/18/1188%20%E8%AE%BE%E8%AE%A1%E6%9C%89%E9%99%90%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/">1188 设计有限阻塞队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/18/1242.%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/">1242.多线程网页爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/17/1279.%20%E7%BA%A2%E7%BB%BF%E7%81%AF%E8%B7%AF%E5%8F%A3/">1279. 红绿灯路口</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/03/04/953.%20%E9%AA%8C%E8%AF%81%E5%A4%96%E6%98%9F%E8%AF%AD%E8%AF%8D%E5%85%B8/">953. 验证外星语词典</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/27/269.%E7%81%AB%E6%98%9F%E8%AF%8D%E5%85%B8/">269.火星词典</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/23/Java%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83%E5%8F%8A%E7%A4%BA%E4%BE%8B/">Java开发规范及示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1/">Java基础知识-装箱和拆箱</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/22/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E9%87%8D%E5%86%99%20%60equals%60%20%E6%97%B6%E4%B8%BA%E4%BD%95%E5%BF%85%E9%A1%BB%E9%87%8D%E5%86%99%20%60hashCode%60%20%E6%96%B9%E6%B3%95/">Java基础知识-重写 `equals` 时为何必须重写 `hashCode` 方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/20/JAVA%20%E5%BC%BA%E8%BD%AF%E5%BC%B1%E8%99%9A%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/">JAVA 强软弱虚四种引用类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/03/77.%20%E7%BB%84%E5%90%88/">77. 组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/02/57.%20%E6%8F%92%E5%85%A5%E5%8C%BA%E9%97%B4/">57. 插入区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/02/17.%20%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/">17. 电话号码的字母组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/28/909.%20%E8%9B%87%E6%A2%AF%E6%A3%8B/">909. 蛇梯棋</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/688.%20%E2%80%9C%E9%A9%AC%E2%80%9D%E5%9C%A8%E6%A3%8B%E7%9B%98%E4%B8%8A%E7%9A%84%E6%A6%82%E7%8E%87/">688. “马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/27/782.%20%E5%8F%98%E4%B8%BA%E6%A3%8B%E7%9B%98/">782. 变为棋盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/25/1275.%20%E6%89%BE%E5%87%BA%E4%BA%95%E5%AD%97%E6%A3%8B%E7%9A%84%E8%8E%B7%E8%83%9C%E8%80%85/">1275. 找出井字棋的获胜者</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/29/312.%20%E6%88%B3%E6%B0%94%E7%90%83/">312. 戳气球</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/23/406.%20%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/">406. 根据身高重建队列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/23/301.%20%E5%88%A0%E9%99%A4%E6%97%A0%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/">301. 删除无效的括号</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/17/76.%20%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2/">76. 最小覆盖子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/16/41.%20%E7%BC%BA%E5%A4%B1%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%95%B0/">41. 缺失的第一个正数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/16/89.%20%E6%A0%BC%E9%9B%B7%E7%BC%96%E7%A0%81/">89. 格雷编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/15/61.%20%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">61. 旋转链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/09/8.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0%20(atoi)/">8. 字符串转换整数 (atoi)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/02/1.%20%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">1. 两数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/30/176.%20%E7%AC%AC%E4%BA%8C%E9%AB%98%E7%9A%84%E8%96%AA%E6%B0%B4/">176. 第二高的薪水</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/30/393.%20UTF-8%20%E7%BC%96%E7%A0%81%E9%AA%8C%E8%AF%81/">393. UTF-8 编码验证</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/26/69.%20x%20%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/">69. x 的平方根</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/25/432.%20%E5%85%A8%20O(1)%20%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">432. 全 O(1) 的数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/354.%20%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83/">354. 俄罗斯套娃</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/120.%20%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/">120. 三角形最小路径和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/1277.%20%E7%BB%9F%E8%AE%A1%E5%85%A8%E4%B8%BA%201%20%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2%E5%AD%90%E7%9F%A9%E9%98%B5/">1277. 统计全为 1 的正方形子矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/24/53.%20%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/">53. 最大子序和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/221.%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/">221.最大正方形</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/122.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BAII/">122.买卖股票的最佳时机II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/121.%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/">121.买卖股票的最佳时机</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/102.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">102.二叉树的层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/103.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">103. 二叉树的锯齿形层次遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/23/107.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%20II/">107. 二叉树的层次遍历 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/20/23.%20%E5%90%88%E5%B9%B6K%E4%B8%AA%E5%8D%87%E5%BA%8F%E9%93%BE%E8%A1%A8/">23. 合并K个升序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/20/445.%20%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0II/">445. 两数相加II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/20/2.%20%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">2. 两数相加</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/19/407.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4II/">407. 接雨水II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/42.%20%E6%8E%A5%E9%9B%A8%E6%B0%B4/">42. 接雨水</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/56.%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">56. 合并区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/547.%20%E6%9C%8B%E5%8F%8B%E5%9C%88/">547. 朋友圈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/18/128.%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/">128. 最长连续序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/13/60.%20%E6%8E%92%E5%88%97%E5%BA%8F%E5%88%97/">60. 排列序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/13/674.%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E9%80%92%E5%A2%9E%E5%BA%8F%E5%88%97/">674. 最长连续递增序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/13/81.%20%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%20II/">81. 搜索旋转排序数组 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/11/33.%20%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/">33. 搜索旋转排序数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/11/695.%20%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF/">695. 岛屿的最大面积</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/16.%20%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">16. 最接近的三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/923.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C%E7%9A%84%E5%A4%9A%E7%A7%8D%E5%8F%AF%E8%83%BD/">923. 三数之和的多种可能</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/22/15.%20%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">15. 三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/93.%20%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80/">93. 复原IP地址</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/71.%20%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/">71. 简化路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/12/151.%20%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D/">151. 翻转字符串里的单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/12/415.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%8A%A0/">415. 字符串相加</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/12/43.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98/">43. 字符串相乘</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8.%E9%9D%A2%E8%AF%95%E9%A2%9808.08.%E6%9C%89%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/">程序员面试金典.面试题08.08.有重复字符串的排列组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%9D%A2%E8%AF%95%E9%87%91%E5%85%B8.%E9%9D%A2%E8%AF%95%E9%A2%9808.07.%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/">程序员面试金典.面试题08.07.无重复字符串的排列组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/10/%E5%89%91%E6%8C%87%20offer38.%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/">剑指 offer38.字符串的排列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/09/14.%20%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/">14. 最长公共前缀</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/09/567.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/">567. 字符串的排列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/09/784.%20%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%B0%8F%E5%86%99%E5%85%A8%E6%8E%92%E5%88%97/">784. 字母大小写全排列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/06/146.%20LRU%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/">146. LRU缓存机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/134.%20%E5%8A%A0%E6%B2%B9%E7%AB%99/">134. 加油站</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/412.%20Fizz%20Buzz/">412. Fizz Buzz</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/371.%20%E4%B8%A4%E6%95%B4%E6%95%B0%E4%B9%8B%E5%92%8C/">371. 两整数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/04/202.%20%E5%BF%AB%E4%B9%90%E6%95%B0/">202. 快乐数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/30/326.%203%E7%9A%84%E5%B9%82/">326. 3的幂</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/30/268.%20%E7%BC%BA%E5%A4%B1%E6%95%B0%E5%AD%97/">268. 缺失数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/29/204.%20%E8%AE%A1%E6%95%B0%E8%B4%A8%E6%95%B0/">204. 计数质数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/28/191.%20%E4%BD%8D1%E7%9A%84%E4%B8%AA%E6%95%B0/">191. 位1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/27/172.%20%E9%98%B6%E4%B9%98%E5%90%8E%E7%9A%84%E9%9B%B6/">172. 阶乘后的零</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/27/190.%20%E9%A2%A0%E5%80%92%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D/">190. 颠倒二进制位</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/18/166.%20%E5%88%86%E6%95%B0%E5%88%B0%E5%B0%8F%E6%95%B0/">166. 分数到小数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/18/149.%20%E7%9B%B4%E7%BA%BF%E4%B8%8A%E6%9C%80%E5%A4%9A%E7%9A%84%E7%82%B9%E6%95%B0/">149. 直线上最多的点数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/17/260.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97III/">260. 只出现一次的数字III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/16/137.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97II/">137. 只出现一次的数字II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/16/136.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/">136. 只出现一次的数字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/15/210.%20%E8%AF%BE%E7%A8%8B%E8%A1%A8II/">210. 课程表II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/14/207.%20%E8%AF%BE%E7%A8%8B%E8%A1%A8/">207. 课程表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/14/200.%20%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/">200. 岛屿数量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/09/127.%20%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99/">127. 单词接龙</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/08/322.%20%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/">322. 零钱兑换</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/08/329.%20%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E8%B7%AF%E5%BE%84/">329. 矩阵中的最长递增路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/08/300.%20%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/">300. 最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/279.%20%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/">279. 完全平方数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/337.%20%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DIII/">337. 打家劫舍III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/213.%20%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8DII/">213. 打家劫舍II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/03/198.%20%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/">198. 打家劫舍</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/31/124.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/">124. 二叉树中的最大路径和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/31/395.%20%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">395. 至少有K个重复字符的最长子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/%E5%89%91%E6%8C%87%20offer51.%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/">剑指 offer51.数组中的逆序对</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/26/315.%20%E8%AE%A1%E7%AE%97%E5%8F%B3%E4%BE%A7%E5%B0%8F%E4%BA%8E%E5%BD%93%E5%89%8D%E5%85%83%E7%B4%A0%E7%9A%84%E4%B8%AA%E6%95%B0/">315. 计算右侧小于当前元素的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/25/287.%20%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/">287. 寻找重复数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/162.%20%E5%AF%BB%E6%89%BE%E5%B3%B0%E5%80%BC/">162. 寻找峰值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/324.%20%E6%91%86%E5%8A%A8%E6%8E%92%E5%BA%8F%20II/">324. 摆动排序 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/179.%20%E6%9C%80%E5%A4%A7%E6%95%B0/">179. 最大数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/297.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">297. 二叉树的序列化与反序列化</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/24/236.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">236. 二叉树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/22/230.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%AC%ACK%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0/">230. 二叉搜索树中第K小的元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/380.%20%E5%B8%B8%E6%95%B0%E6%97%B6%E9%97%B4%E6%8F%92%E5%85%A5%E3%80%81%E5%88%A0%E9%99%A4%E5%92%8C%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E5%85%83%E7%B4%A0/">380. 常数时间插入、删除和获取随机元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/454.%20%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0%20II/">454. 四数相加 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/Excel%E8%A1%A8%E5%88%97%E5%BA%8F%E5%8F%B7/">171. Excel表列序号</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/328.%20%E5%A5%87%E5%81%B6%E9%93%BE%E8%A1%A8/">328. 奇偶链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/21/237.%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">237. 删除链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/20/234.%20%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/">234. 回文链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/19/92.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8II/">92. 反转链表II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/18/206.%20%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">206. 反转链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/18/160.%20%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/">160. 相交链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/17/Java%20%E7%BB%83%E6%89%8B%E9%A1%B9%E7%9B%AE/">Java 练手项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/142.%20%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/">142. 环形链表II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/25/148.%20%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/">148. 排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/24/141.%20%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/">141. 环形链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/138.%20%E5%A4%8D%E5%88%B6%E5%B8%A6%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8/">138. 复制带随机指针的链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/150.%20%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/">150. 逆波兰表达式求值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/23/341.%20%E6%89%81%E5%B9%B3%E5%8C%96%E5%B5%8C%E5%A5%97%E5%88%97%E8%A1%A8%E8%BF%AD%E4%BB%A3%E5%99%A8/">341. 扁平化嵌套列表迭代器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/19/239.%20%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC/">239. 滑动窗口最大值</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/18/347.%20%E5%89%8D%20K%20%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/">347. 前 K 个高频元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/12/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E7%AB%A0%20%E6%9E%9A%E4%B8%BE%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">Java编程思想-第二十二章 枚举阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/09/378.%20%E6%9C%89%E5%BA%8F%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%AC%ACK%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0/">378. 有序矩阵中第K小的元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/06/295.%20%E6%95%B0%E6%8D%AE%E6%B5%81%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/">295. 数据流的中位数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/06/215.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACK%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/">215. 数组中的第K个最大元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/238.%20%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/">238. 除自身以外数组的乘积</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/02/155.%20%20%E6%9C%80%E5%B0%8F%E6%A0%88/">155. 最小栈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/240.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5II/">240. 搜索二维矩阵II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/74.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/">74. 搜索二维矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/30/334.%E9%80%92%E5%A2%9E%E7%9A%84%E4%B8%89%E5%85%83%E5%AD%90%E5%BA%8F%E5%88%97/">334. 递增的三元子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/350.%20%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86II/">350. 两个数组的交集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/349.%20%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86/">349. 两个数组的交集</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/384.%20%E6%89%93%E4%B9%B1%E6%95%B0%E7%BB%84/">384. 打乱数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/283.%20%E7%A7%BB%E5%8A%A8%E9%9B%B6/">283. 移动零</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/Java%E4%B9%8BTreeSet%E7%B1%BB/">Java之TreeSet类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/220.%20%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0III/">220. 存在重复元素III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/217.%20%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/">217. 存在重复元素</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/219.%20%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0II/">219. 存在重复元素II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/152.%20%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/">152. 乘积最大子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/189.%20%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84/">189. 旋转数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/63.%20%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84II/">63. 不同路径II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/980.%20%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84%20III/">980. 不同路径 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/62.%20%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/">62. 不同路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/212.%20%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2II/">212. 单词搜索II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E7%AB%A0%20%E6%B3%A8%E8%A7%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">Java编程思想-第二十三章 注解阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E7%AC%AC%E4%BA%8C%E5%8D%81%E7%AB%A0%20%E6%B3%9B%E5%9E%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">Java编程思想-第二十章 泛型阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/27/79.%20%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2/">79. 单词搜索</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/Java%E4%B9%8B%E6%95%B0%E7%BB%84/">Java之数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/26/%E3%80%8A%E7%94%9F%E4%BA%8B%E4%B9%8B%E5%B1%8B%EF%BC%9A%E7%99%BD%E5%AE%AB%E5%9B%9E%E5%BF%86%E5%BD%95%E3%80%8B%E8%8A%82%E9%80%89/">《生事之屋：白宫回忆录》节选</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/24/208.%20%E5%AE%9E%E7%8E%B0%20Trie%20(%E5%89%8D%E7%BC%80%E6%A0%91)/">208. 实现 Trie (前缀树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/23/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Sql_Mode/">数据库学习笔记-Sql_Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/%20Java%E4%B9%8BString%E7%B1%BB/">Java之String类</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/18/Java%E4%B9%8B%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0/">Java之可变参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java%E4%B9%8BQueue%E3%80%81Deque%E3%80%81ArrayDeque/">Java之Queue、Deque、ArrayDeque</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/15/Java%E4%B9%8Binstanceof%E5%85%B3%E9%94%AE%E5%AD%97/">Java之instanceof关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/14/Java%E4%B9%8Btransient%E5%85%B3%E9%94%AE%E5%AD%97/">Java之transient关键字</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E7%AC%AC%E5%8D%81%E7%AB%A0%20%E6%8E%A5%E5%8F%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">Java编程思想-第十章 接口阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Java%E9%9B%86%E5%90%88%E4%B9%8BHashMap/">Java集合之HashMap</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5III-%E4%BA%8B%E5%8A%A1%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6/">数据库基础概念III-事务并发控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">数据库学习笔记-聚合函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-%E7%B4%A2%E5%BC%95/">数据库基础概念-索引</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-INTERSECT/">数据库学习笔记-INTERSECT</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-UNION/">数据库学习笔记-UNION</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%BF%9E%E6%8E%A5/">数据库学习笔记-连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-MySQL%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">数据库学习笔记-MySQL安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5II-%E8%8C%83%E5%BC%8F-%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0-%E4%B8%89%E5%80%BC%E9%80%BB%E8%BE%91/">数据库基础概念II-范式-关系代数-三值逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-SQL%E7%BA%A6%E6%9D%9F(Constraints)/">数据库学习笔记-SQL约束(Constraints)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E7%AC%AC%E4%B9%9D%E7%AB%A0%20%E5%A4%9A%E6%80%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">Java编程思想-第九章 多态阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/06/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%9B%9B%E7%AB%A0%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">Java编程思想-第二十四章 并发编程阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/05/Maven%E5%BF%AB%E7%85%A7%E6%9C%BA%E5%88%B6(SNAPSHOT)/">Maven快照机制（SNAPSHOT）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/29/140.%20%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86II/">140. 单词拆分II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/139.%20%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/">139. 单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/5.%20%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">5. 最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/131.%20%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/">131. 分割回文串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/28/887.%20%E9%B8%A1%E8%9B%8B%E6%8E%89%E8%90%BD/">887. 鸡蛋掉落</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/27/21.%20%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/">21. 合并两个有序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/685.%E5%86%97%E4%BD%99%E9%93%BE%E6%8E%A5II/">685.冗余链接II</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/26/1226.%20%E5%93%B2%E5%AD%A6%E5%AE%B6%E8%BF%9B%E9%A4%90/">1226. 哲学家进餐</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1195.%20%E4%BA%A4%E6%9B%BF%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6%E4%B8%B2/">1195. 交替打印字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1117.%20H2O%20%E7%94%9F%E6%88%90/">1117. H2O 生成</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/24/1116.%20%E6%89%93%E5%8D%B0%E9%9B%B6%E4%B8%8E%E5%A5%87%E5%81%B6%E6%95%B0/">1116. 打印零与奇偶数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/1115.%20%E4%BA%A4%E6%9B%BF%E6%89%93%E5%8D%B0FooBar/">1115. 交替打印FooBar</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">Java并发编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/21/1114.%E6%8C%89%E5%BA%8F%E6%89%93%E5%8D%B0/">1114.按序打印</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/19/684.%E5%86%97%E4%BD%99%E9%93%BE%E6%8E%A5/">684.冗余链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Lombok%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8/">Lombok的基本注解使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7%E9%9B%86%E9%94%A6/">后端开发常用调试技巧集锦</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/405.%20%E6%95%B0%E5%AD%97%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E6%95%B0/">405. 数字转化为十六进制数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VIII-MybatisPlus%E6%95%99%E7%A8%8B/">SpringBoot学习笔记VIII-MybatisPlus教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0V-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">设计模式学习笔记V-策略模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/16/1046.%20%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E7%9A%84%E9%87%8D%E9%87%8F/">1046. 最后一块石头的重量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0XIV/">Java学习笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/24/257.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">257.二叉树的所有路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/22/24.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">24.两两交换链表中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%B9%B3%E5%8F%B0%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0I/">微信公众平台开发学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/601.Human%20Traffic%20of%20Stadium%E4%BD%93%E8%82%B2%E9%A6%86%E7%9A%84%E4%BA%BA%E6%B5%81%E9%87%8F/">601.Human Traffic of Stadium体育馆的人流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/185.Department%20Top%20Three%20Salaries/">185.Department Top Three Salaries</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0IX/">数据库学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/19/184.Department%20Highest%20Salary/">184.Department Highest Salary</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VIII/">数据库学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/1179.%20Reformat%20Department%20Table/">1179. Reformat Department Table</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0XVII/">Effective-Java阅读笔记XVII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0XVI/">Effective-Java阅读笔记XVI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/17/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0XV/">Effective-Java阅读笔记XV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0XIV/">Effective-Java阅读笔记XIV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0XIII/">Effective-Java阅读笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0XII/">Effective-Java阅读笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0XI/">Effective-Java阅读笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0X/">Effective-Java阅读笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0IX/">Effective-Java阅读笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/16/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0VIII/">Effective-Java阅读笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Hexo%E7%9A%84spfk%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/">Hexo的spfk主题修改</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/15/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0VII/">Effective-Java阅读笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/14/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0VI/">Effective-Java阅读笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/13/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0III/">Git学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/06/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0V/">Effective-Java阅读笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Hexo%E6%A0%87%E7%AD%BE%E4%B8%8Emd%E6%96%87%E4%BB%B6%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">Hexo标签与md文件冲突问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/Java%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E6%98%93%E9%94%99%E7%82%B9/">Java开发中的易错点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0IV/">设计模式学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VII/">数据库学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/02/Java%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">Java开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0III/">Effective-Java阅读笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0IV/">Effective-Java阅读笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0II/">Effective-Java阅读笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0III/">设计模式学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/Effective-Java%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0I/">Effective-Java阅读笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/27/Scala%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0V/">Scala学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0XII/">Java学习笔记XII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0XIII/">Java学习笔记XIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0IV/">Scala学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0XI/">Java学习笔记XI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/Scala%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0III/">Scala学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/17/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0X/">Java学习笔记X</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VI/">数据库学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0II/">设计模式学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0I/">设计模式学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/25/Scala%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0II/">Scala学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/20/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0IX/">Java学习笔记IX</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/16/Shell%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0I/">Shell学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/10/Scala%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0I/">Scala学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VIII/">Java学习笔记VIII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VII/">Java学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VI/">Java学习笔记VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0II-Git%E7%89%88%E6%9C%AC%E5%9B%9E%E6%BB%9A/">Git学习笔记II-Git版本回滚</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/05/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0V/">数据库学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0I/">Git学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0IV/">数据库学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0III/">数据库学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0IV/">Java学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0V/">Java学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/12/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0III/">Java学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0II/">数据库学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/07/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0II/">Java学习笔记II</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0I/">Java学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/01/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0VII/">SpringBoot学习笔记VII</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/31/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0I-%E6%9F%A5%E8%AF%A2/">数据库学习笔记I-查询</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/30/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0V/">SpringBoot学习笔记V</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/26/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0IV/">SpringBoot学习笔记IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0III/">SpringBoot学习笔记III</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/17/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0I/">SpringBoot学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/03/Linux%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E5%B0%8F%E7%BB%93/">Linux配置问题小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/02/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5I/">操作系统基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/05/28/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E7%BB%88%E7%AB%AF%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/">Hexo博客多终端更新问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/TensorFlow%E5%85%A5%E9%97%A8-Mnist%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/">TensorFlow入门-Mnist手写数字识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/235.Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">235.Lowest Common Ancestor of a Binary Search Tree 二叉搜索树的最近公共祖先</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0I/">Linux学习笔记I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/11/Permutations%E5%85%A8%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">Permutations全排列问题总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/09/84.Largest%20Rectangle%20in%20Histogram%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2/">84.Largest Rectangle in Histogram柱状图中最大的矩形</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/52.%20N-QueensIIN%E7%9A%87%E5%90%8EII/">52. N-QueensNII皇后II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/05/51.%20N-QueensN%E7%9A%87%E5%90%8E/">51. N-QueensN皇后</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/117.Populating%20Next%20Right%20Pointers%20in%20Each%20NodeII%E5%A1%AB%E5%85%85%E5%90%8C%E4%B8%80%E5%B1%82%E7%9A%84%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9II/">117.Populating Next Right Pointers in Each NodeII填充同一层的兄弟节点II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/199.Binary%20Tree%20Right%20Side%20View%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%8F%B3%E8%A7%86%E5%9B%BE/">199.Binary Tree Right Side View二叉树的右视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/545.Boundary%20of%20Binary%20Tree%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E8%BE%B9%E7%95%8C/">545.Boundary of Binary Tree 二叉树的边界</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/04/116.Populating%20Next%20Right%20Pointers%20in%20Each%20Node%E5%A1%AB%E5%85%85%E5%90%8C%E4%B8%80%E5%B1%82%E7%9A%84%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9/">116.Populating Next Right Pointers in Each Node填充同一层的兄弟节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/C++%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E9%A2%98/">C++面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E9%A2%98/">操作系统面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E9%A2%98/">数据库面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/792.%20Number%20of%20Matching%20Subsequences%E5%8C%B9%E9%85%8D%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E5%8D%95%E8%AF%8D%E6%95%B0/">792. Number of Matching Subsequences匹配子序列的单词数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/392.%20Is%20Subsequence%E5%88%A4%E6%96%AD%E5%AD%90%E5%BA%8F%E5%88%97/">392. Is Subsequence判断子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/Linux%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E9%A2%98/">Linux基础面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E9%A2%98/">算法面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E9%A2%98/">计算机网络面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E9%A2%98/">设计模式面试高频题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/%E5%9B%9E%E6%BA%AF%E6%B3%95%E9%97%AE%E9%A2%98%E9%80%9A%E8%A7%A3/">回溯法问题通解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/78.%20Subsets%E5%AD%90%E9%9B%86/">78. Subsets子集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/90.%20SubsetsII%E5%AD%90%E9%9B%86II/">90. SubsetsII子集II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/72.%20Edit%20Distance%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">72. Edit Distance编辑距离</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/277.Find%20the%20Celebrity%E5%AF%BB%E6%89%BE%E5%90%8D%E4%BA%BA/">277.Find the Celebrity寻找名人</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/13/148.%20Sort%20List%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/">148. Sort List排序链表</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/692.%20Top%20K%20Frequent%20Words%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D/">692. Top K Frequent Words前K个高频单词</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/12/450.%20Delete%20Node%20in%20a%20BST%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">450. Delete Node in a BST删除二叉搜索树中的节点</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/435.%20Non-overlapping%20Intervals%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4/">435. Non-overlapping Intervals无重叠区间</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5VI/">C++基础概念VI</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/75.%20Sort%20Colors%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/">75. Sort Colors颜色分类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/11/275.%20H-Index%20II%20H%E6%8C%87%E6%95%B0%20II/">275. H-Index II H指数 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/274.%20H-IndexH%E6%8C%87%E6%95%B0/">274. H-IndexH指数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/10/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%E4%B9%8Bvector/">STL源码剖析之vector</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/Git%E5%88%86%E5%8C%BA%E6%A6%82%E5%BF%B5/">Git分区概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/06/486.%20Predict%20the%20Winner%E9%A2%84%E6%B5%8B%E8%B5%A2%E5%AE%B6/">486. Predict the Winner预测赢家</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%8F%8A%E5%85%B6%E4%BC%98%E5%8C%96/">快速排序及其优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5IV/">C++基础概念IV</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/682.%20Baseball%20Game%E6%A3%92%E7%90%83%E6%AF%94%E8%B5%9B/">682. Baseball Game棒球比赛</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/542.%2001%20Matrix%2001%20%E7%9F%A9%E9%98%B5/">542. 01 Matrix 01 矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/29/C++%E8%BE%93%E5%85%A5%E6%80%BB%E7%BB%93/">C++输入总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/688.%20Knight%20Probability%20in%20Chessboard%E2%80%9C%E9%A9%AC%E2%80%9D%E5%9C%A8%E6%A3%8B%E7%9B%98%E4%B8%8A%E7%9A%84%E6%A6%82%E7%8E%87/">688. Knight Probability in Chessboard“马”在棋盘上的概率</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/139.%20Word%20Break%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/">139. Word Break单词拆分</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/626.%20Exchange%20Seats%E6%8D%A2%E5%BA%A7%E4%BD%8D/">626. Exchange Seats换座位</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/26/Kickstart-Round-E-2018-ProblemA.Yogurt/">Kickstart-Round-E-2018-ProblemA.Yogurt</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/865.%20Smallest%20Subtree%20with%20all%20the%20Deepest%20Nodes%E5%85%B7%E6%9C%89%E6%89%80%E6%9C%89%E6%9C%80%E6%B7%B1%E7%BB%93%E7%82%B9%E7%9A%84%E6%9C%80%E5%B0%8F%E5%AD%90%E6%A0%91/">865. Smallest Subtree with all the Deepest Nodes具有所有最深结点的最小子树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/485.%20Max%20Consecutive%20Ones/">485. Max Consecutive Ones最大连续1的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/538.%20Convert%20BST%20to%20Greater%20Tree%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/">538. Convert BST to Greater Tree把二叉搜索树转换为累加树</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/697.%20Degree%20of%20an%20Array%E6%95%B0%E7%BB%84%E7%9A%84%E5%BA%A6/">697. Degree of an Array数组的度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/885.%20Spiral%20Matrix%20III/">885. Spiral Matrix III螺旋矩阵 III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5I/">数据库基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/%E5%89%91%E6%8C%87Offer20.%E9%A1%BA%E6%97%B6%E9%92%88%E6%89%93%E5%8D%B0%E7%9F%A9%E9%98%B5/">20.PrintMatrix顺时针打印矩阵(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/59.%20Spiral%20Matrix%20II%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/">59. Spiral Matrix II螺旋矩阵 II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/24/650.%202%20Keys%20Keyboard%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98/">650. 2 Keys Keyboard只有两个键的键盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5URL%EF%BC%8C%E6%8C%89%E4%B8%8B%E5%9B%9E%E8%BD%A6%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/">在浏览器地址栏输入URL，按下回车后发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/%E5%89%91%E6%8C%87Offer59.%E5%AF%B9%E7%A7%B0%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91/">59.SymmetricalBinaryTree对称的二叉树(CodingInterview)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/23/%E5%89%91%E6%8C%87offer%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">剑指offer思路总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/300.%20Longest%20Increasing%20Subsequence%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/">300. Longest Increasing Subsequence最长上升子序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/22/%E5%89%91%E6%8C%87Offer64.%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/">64.StreamMedian数据流中的中位数(Coding Interviews )</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5I/">C++基础概念I</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5II/">C++基础概念II</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/C++%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5III/">C++基础概念III</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/21/%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93%E9%97%AE%E9%A2%98%E9%80%9A%E8%A7%A3%E5%B0%8F%E7%BB%93/">股票交易问题通解小结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/16/%E5%89%8D%E8%A8%80/">前言</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2022 Yiye Li
+            </div>
+                <i class="fas fa-chart-area"></i>
+                    <span class="post-count">总字数：1085.6k</span>
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date();
+                        function createtime() {
+                            var grt= new Date("11/16/2017 21:14:20");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                            now.setTime(now.getTime()+250);
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+                        }
+                    setInterval("createtime()",250);
+                    </script>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        <span id="site-visit" >本站访客数:
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量:
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+
+  </div>
+</body>
+</html>
