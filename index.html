@@ -202,6 +202,392 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-256. 粉刷房子" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/09/21/256.%20%E7%B2%89%E5%88%B7%E6%88%BF%E5%AD%90/" class="article-date">
+      <time datetime="2022-09-21T02:53:44.947Z" itemprop="datePublished">2022-09-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>title: 256. 粉刷房子</p>
+<p>date: 2022-09-20 15:15:12</p>
+<p>categories: 2022年9月</p>
+<p>tags: [Leetcode, Dynamic Programming]</p>
+<hr>
+<p>假如有一排房子，共 n 个，每个房子可以被粉刷成红色、蓝色或者绿色这三种颜色中的一种，你需要粉刷所有的房子并且使其与相邻的两个房子颜色不能相同。</p>
+<p>[TOC]</p>
+<p>当然，因为市场上不同颜色油漆的价格不同，所以房子粉刷成不同颜色的花费成本也是不同的。每个房子粉刷成不同颜色的花费是以一个 n x 3 的矩阵来表示的。</p>
+<p>例如，costs[0][0] 表示第 0 号房子粉刷成红色的成本花费；costs[1][2] 表示第 1 号房子粉刷成绿色的花费，以此类推。请你计算出粉刷完所有房子最少的花费成本。</p>
+<p>注意：<br>所有花费均为正整数。</p>
+<p>示例：<br>输入: [[17,2,17],[16,16,5],[14,3,19]]<br>输出: 10<br>解释: 将 0 号房子粉刷成蓝色，1 号房子粉刷成绿色，2 号房子粉刷成蓝色。<br>最少花费: 2 + 5 + 3 &#x3D; 10。</p>
+<p>参考<a target="_blank" rel="noopener" href="https://codetop.cc/home">^1</a>是字节跳动商业变现是最近的高频题</p>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p>初始态</p>
+<pre><code>red[0] = costs[0][0]
+blue[0] = costs[0][0]
+green[0] = costs[0][0]
+</code></pre>
+<p>过程</p>
+<pre><code>red[i] = Min(blue[i-1], green[i-1]) + costs[i][0]
+blue[i] = Min(red[i-1], green[i-1]) + costs[i][1]
+green[i] = Min(red[i-1], blue[i-1]) + costs[i][2]
+</code></pre>
+<p>结果：</p>
+<pre><code>result = Min(red[n-1], blue[n-1], green[n-1])
+</code></pre>
+<p>时间复杂度为O(n).</p>
+<p>dp[i][c] 表示刷完 i 房子后，i 房子是 c 颜色时，花费最小多少</p>
+<details>
+    <summary>C++</summary>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minCost(vector&lt;vector&lt;int&gt;&gt;&amp; costs) &#123;</span><br><span class="line">    	int n = costs.size(), house, color;</span><br><span class="line">        if(n==0) return 0;</span><br><span class="line">    	vector&lt;vector&lt;int&gt;&gt; dp(n,vector&lt;int&gt;(3,INT_MAX));</span><br><span class="line">    	dp[0] = costs[0];</span><br><span class="line">    	for(house = 1; house &lt; n; house++)</span><br><span class="line">    	&#123;</span><br><span class="line">    		for(color = 0; color &lt; 3; ++color)</span><br><span class="line">    		&#123;</span><br><span class="line">    			dp[house][color] = min(dp[house][color], costs[house][color]+min(dp[house-1][(color+1)%3], dp[house-1][(color+2)%3]));</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    	return min(dp[n-1][0], min(dp[n-1][1], dp[n-1][2]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</details>
+
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-1259. 不相交的握手" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/09/21/1259.%20%E4%B8%8D%E7%9B%B8%E4%BA%A4%E7%9A%84%E6%8F%A1%E6%89%8B/" class="article-date">
+      <time datetime="2022-09-21T02:53:38.025Z" itemprop="datePublished">2022-09-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>title: 1259. 不相交的握手</p>
+<p>date: 2022-09-15 11:15:12</p>
+<p>categories: 2022年9月</p>
+<p>tags: [Leetcode, Math]</p>
+<hr>
+<p>偶数 个人站成一个圆，总人数为 n 。每个人与除自己外的一个人握手，所以总共会有 n &#x2F; 2 次握手。</p>
+<p>将握手的人之间连线，请你返回连线不会相交的握手方案数。</p>
+<p>[TOC]</p>
+<p>由于结果可能会很大，请你返回答案 模 10^9+7 后的结果<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/handshakes-that-dont-cross">^2</a></p>
+<p>示例 1：</p>
+<pre><code>输入：num_people = 2
+输出：1    
+</code></pre>
+<p>示例 2：</p>
+<pre><code>输入：num_people = 4
+输出：2 
+解释：总共有两种方案，
+第一种方案是 [(1,2),(3,4)] ，
+第二种方案是 [(2,3),(4,1)] 。
+</code></pre>
+<p>示例 3：</p>
+<pre><code>输入：num_people = 6
+输出：5
+</code></pre>
+<p>示例 4：</p>
+<pre><code>输入：num_people = 8
+输出：14
+</code></pre>
+<p>提示：<br>2 &lt;&#x3D; num_people &lt;&#x3D; 1000<br>num_people % 2 &#x3D;&#x3D; 0</p>
+<p>本题是一道字节跳动的面试题</p>
+<h1 id="递归-3"><a href="#递归-3" class="headerlink" title="递归^3"></a>递归<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32424059/article/details/103105435">^3</a></h1><p>当第一个人和第 i 个人握手了之后，剩下的人被分割成了两个部分：</p>
+<ol>
+<li><p>i - 2， 即前 i 个人去掉 第一个人和 第 i 个人。</p>
+</li>
+<li><p>num_people - i， 总人数去掉前 i 个人。</p>
+</li>
+</ol>
+<p>现在这两部分是和原问题种类相同，但规模更小的问题，因此可以采用递归求解。</p>
+<p>递归的问题在于，重复计算非常多，因此效率很低，当输入等于24的时候就会超时。</p>
+<details>
+    <summary>Python</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numberOfWays</span>(<span class="params">self, num_people</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type num_people: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> num_people:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, num_people + <span class="number">1</span>):</span><br><span class="line">            res += self.numberOfWays(i - <span class="number">2</span>) * self.numberOfWays(num_people - i)</span><br><span class="line">        <span class="keyword">return</span> res % (<span class="number">10</span> ** <span class="number">9</span> + <span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="卡特兰数"><a href="#卡特兰数" class="headerlink" title="卡特兰数"></a>卡特兰数</h1><p>观察一下前四项可以发现， 1， 2， 5， 14，</p>
+<p>这就是熟悉的卡特兰数，直接套公式：Cn&#x3D; C(2n, n)&#x2F;(n+1) &#x3D; (2n)!&#x2F;(n+1)!n!</p>
+<details>
+    <summary>Python</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> factorial <span class="keyword">as</span> fac</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numberOfWays</span>(<span class="params">self, num_people</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type num_people: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">catalan</span>(<span class="params">n</span>):</span><br><span class="line">            <span class="keyword">return</span> fac(<span class="number">2</span>*n) // (fac(n+<span class="number">1</span>) * fac(n))</span><br><span class="line">        <span class="keyword">return</span> catalan(num_people // <span class="number">2</span>) % ( <span class="number">10</span> ** <span class="number">9</span> + <span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p>时间复杂度： O((2n)!)，不过因为factorial是用c实现的，所以飞快</p>
+<p>空间复杂度：O（1）</p>
+<h1 id="动态规划解法1"><a href="#动态规划解法1" class="headerlink" title="动态规划解法1"></a>动态规划解法1</h1><p>用dp[i] 代表输入为 i 时的解，</p>
+<p>根据之前的分析， dp[i] &#x3D; sum(dp[j - 2] * dp[i - j] for j in range(2, i + 1, 2))</p>
+<p>时间复杂度：O(N ^ 2)</p>
+<p>空间复杂度：O(N)</p>
+<details>
+    <summary>Python</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numberOfWays</span>(<span class="params">self, num_people</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type num_people: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_people + <span class="number">1</span>)]</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, num_people + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, i + <span class="number">1</span>, <span class="number">2</span>):</span><br><span class="line">                dp[i] += (dp[j - <span class="number">2</span>] * dp[i - j]) % (<span class="number">10</span> ** <span class="number">9</span> + <span class="number">7</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[num_people] % (<span class="number">10</span> ** <span class="number">9</span> + <span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="动态规划2-4"><a href="#动态规划2-4" class="headerlink" title="动态规划2^4"></a><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92&spm=1001.2101.3001.7020">动态规划2</a><a target="_blank" rel="noopener" href="https://blog.csdn.net/yu_duan_hun/article/details/125948450">^4</a></h1><ol>
+<li>假设有 x 个人，我们从中任选了一个人 a,这个 a和一个人握手，要保证后续有解，则分割出的两部分必须都为偶数</li>
+<li>a 握手以后，还剩下，x-2个人没握手，x 握手以后，把剩余人员通过握手的连线分割为两部分，假设其中一个部分为 y 个人，则剩余部分为 x-2-y 个人</li>
+<li>这个 y 人握手问题，就化解为了 x 人握手的子问题，枚举 所有可行的 y 和 x-2-y 握手可能性，两者互不干涉，可相乘处理</li>
+</ol>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><ol>
+<li>由于都是偶数，我们只关心有多少对握手，可将空间范围缩减为 n&#x2F;2</li>
+<li>一边分割为 y 人，一边分割为 x-2-y 人，与反过来的结果是相同的，那么对于两边数目不同的情况，可以乘以2，从而减少一半循环次数，特别注意的是，当 y&#x3D;x-2-y时，只有一种可能性，</li>
+</ol>
+<details>
+    <summary></summary>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numberOfWays</span><span class="params">(<span class="type">int</span> numPeople)</span> &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">half</span> <span class="operator">=</span> numPeople/<span class="number">2</span>;</span><br><span class="line">            <span class="type">long</span>[] dp = <span class="keyword">new</span> <span class="title class_">long</span>[half+<span class="number">1</span>];</span><br><span class="line">            <span class="type">long</span> <span class="variable">MOD</span> <span class="operator">=</span> (<span class="type">long</span>) (<span class="number">1e9</span>+<span class="number">7</span>);</span><br><span class="line">            dp[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= half; i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i-j-<span class="number">1</span>; j++)&#123;</span><br><span class="line">                    dp[i]+=dp[j]*dp[i-j-<span class="number">1</span>]*<span class="number">2</span>;</span><br><span class="line">                    dp[i] = dp[i]%MOD;</span><br><span class="line">                &#125;</span><br><span class="line"> </span><br><span class="line">                <span class="keyword">if</span>(i%<span class="number">2</span>!=<span class="number">0</span>)&#123;</span><br><span class="line">                    dp[i]+=dp[i/<span class="number">2</span>]*dp[i-i/<span class="number">2</span>-<span class="number">1</span>];</span><br><span class="line">                    dp[i] = dp[i]%MOD;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> (<span class="type">int</span>) dp[half];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<h1 id="卡特兰数（Catalan-number）-1"><a href="#卡特兰数（Catalan-number）-1" class="headerlink" title="卡特兰数（Catalan number） ^1"></a>卡特兰数（Catalan number） <a target="_blank" rel="noopener" href="https://leetcode.cn/circle/article/lWYCzv/">^1</a></h1><h2 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h2><p>卡特兰数（Catalan number）是组合数学中一个常出现在各种计数问题中的数列。<br>以比利时的数学家欧仁·查理·卡塔兰 (1814–1894)命名。</p>
+<p>卡塔兰数的通项公式为</p>
+<p>Cn&#x3D; C(2n, n)&#x2F;(n+1) &#x3D; (2n)!&#x2F;(n+1)!n!</p>
+<p>令其为h(n)的话，满足<br>h(n)&#x3D;h(0)*h(n-1) + h(1)*h(n-2) + … + h(n-1)h(0)  (n&gt;&#x3D;2)</p>
+<p>数列的前几项为：1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862，…</p>
+<p>本文将会选取几个经典的卡特兰问题，难度先易后难，带领读者逐个击破解决，最后给出相关的解题模板。</p>
+<h2 id="二、经典问题"><a href="#二、经典问题" class="headerlink" title="二、经典问题"></a>二、经典问题</h2><h3 id="2-1-进出栈序列"><a href="#2-1-进出栈序列" class="headerlink" title="2.1 进出栈序列"></a>2.1 进出栈序列</h3><p>这是一道最经典的入门级卡特兰数题目，如果能把这题看懂，相信后面的题目也能迎刃而解。</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>n 个元素进栈序列为：1，2，3，4，…，n，则有多少种出栈序列</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>我们将进栈表示为 +1，出栈表示为 -1，则 1 3 2 的出栈序列可以表示为：+1 -1 +1 +1 -1 -1。</p>
+<p>根据栈本身的特点，每次出栈的时候，必定之前有元素入栈，即对于每个 -1 前面都有一个 +1 相对应。因此，出栈序列的所有前缀和必然大于等于 0，并且 +1 的数量等于 -1 的数量。</p>
+<p>接下来让我们观察一下 n &#x3D; 3 的一种出栈序列：+1 -1 -1 +1 -1 +1。序列前三项和小于 0，显然这是个非法的序列。</p>
+<p>如果将第一个前缀和小于 0 的前缀，即前三项元素都进行取反，就会得到：-1 +1 +1 +1 -1 +1。此时有 3 + 1 个 +1 以及 3 - 1 个 -1。</p>
+<p>因为这个小于 0 的前缀和必然是 -1，且 -1 比 +1 多一个，取反后，-1 比 +1 少一个，则 +1 变为 n + 1 个，且 -1 变为 n - 1 个。进一步推广，<strong>对于 n  元素的每种非法出栈序列，都会对应一个含有 n + 1 个 +1 以及 n - 1 个 -1 的序列。</strong></p>
+<p>如何证明这两种序列是一一对应的？</p>
+<p>假设非法序列为 A，对应的序列为 B。每个 A 只有一个”第一个前缀和小于 0 的前缀”，所以每个 A 只能产生一个 B。而每个 B 想要还原到 A，就需要找到”第一个前缀和大于 0 的前缀”，显然 B 也只能产生一个 A。</p>
+<p>每个 B 都有 n + 1 个 +1 以及 n - 1 个 -1，因此 B 的数量为C(2n, n+1)​ ，相当于在长度为 2n 的序列中找到 n + 1 个位置存放 +1。相应的，非法序列的数量也就等于 C(2n,n+1)</p>
+<p>出栈序列的总数量共有C(2n,n) ​ ，因此，合法的出栈序列的数量为 C(2n,n)-C(2n,n+1) &#x3D; C(2n,n)&#x2F;(n+1)</p>
+<p>此时我们就得到了卡特兰数的通项C(2n,n)&#x2F;(n+1) ，至于具体如何计算结果将会在后面进行介绍。</p>
+<h3 id="2-2-括号序列"><a href="#2-2-括号序列" class="headerlink" title="2.2 括号序列"></a>2.2 括号序列</h3><p><strong>题目描述</strong></p>
+<p>n 对括号，则有多少种 “括号匹配” 的括号序列</p>
+<p><strong>思路</strong></p>
+<p>左括号看成 +1，右括号看成 -1，那么就和上题的进出栈一样，共有C(2n,n)&#x2F;(n+1) 种序列。</p>
+<h3 id="2-3-二叉树"><a href="#2-3-二叉树" class="headerlink" title="2.3 二叉树"></a>2.3 二叉树</h3><p>题目描述</p>
+<p>n + 1 个叶子节点能够构成多少种形状不同的（国际）满二叉树</p>
+<p>国内教程定义：一个二叉树，如果每一个层的结点数都达到最大值，则这个二叉树就是满二叉树。也就是说，如果一个二叉树的深度为K，且结点总数是(2^k) -1 ，则它就是满二叉树。(一棵满二叉树的每一个结点要么是叶子结点，要么它有两个子结点，但是反过来不成立，因为完全二叉树也满足这个要求，但不是满二叉树)</p>
+<p>国外(国际)定义:a binary tree T is full if each node is either a leaf or possesses exactly two childnodes.</p>
+<p>大意为：如果一棵二叉树的结点要么是叶子结点，要么它有两个子结点，这样的树就是满二叉树。</p>
+<p>（国际）满二叉树定义：如果一棵二叉树的结点要么是叶子结点，要么它有两个子结点，这样的树就是满二叉树。</p>
+<p>思路</p>
+<p>使用深度优先搜索这个满二叉树，向左扩展时标记为 +1，向右扩展时标记为 -1。</p>
+<p>由于每个非叶子节点都有两个左右子节点，所有它必然会先向左扩展，再向右扩展。总体下来，左右扩展将会形成匹配，即变成进出栈的题型。n + 1 个叶子结点会有 2n 次扩展，构成​<br>种形状不同的满二叉树。</p>
+<h3 id="2-4-电影购票"><a href="#2-4-电影购票" class="headerlink" title="2.4 电影购票"></a>2.4 电影购票</h3><p>题目描述</p>
+<p>电影票一张 50 coin，且售票厅没有 coin。m 个人各自持有 50 coin，n 个人各自持有 100 coin。</p>
+<p>则有多少种排队方式，可以让每个人都买到电影票。</p>
+<p>思路</p>
+<p>持有 50 coin 的人每次购票时不需要找零，并且可以帮助后面持有 100 coin 的人找零；而对于持有 100 coin 的人每次购票时需要找零，但 100 coin 对后面的找零没有任何作用。</p>
+<p>因此，相当于每个持有 100 coin 的人都需要和一个持有 50 coin 的人进行匹配。我们将持有 50 coin 的标记为 +1，持有 100 coin 的标记为 -1，此时又回到了进出栈问题。</p>
+<p>不同的是，m 并一定等于 n，且排队序列是一种排列，需要考虑先后顺序，例如各自持有 50 coin 的甲和乙的前后关系会造成两种不同的排队序列。所以，将会有(C(m+n, m)-C(m+n,m+1)) * m! * n!</p>
+<p>第二项为什么是C(m+n,m+1)​ ，其实很简单，我们每次把第一个前缀小于0 的前缀取反后，会造成 +1 多了一个而 -1 少了一个。这里 +1 有 m 个，-1 有 n 个，取反后 +1 变成 m + 1 个，-1 变成 n - 1 个，总和不变。</p>
+<h2 id="三、解题模板"><a href="#三、解题模板" class="headerlink" title="三、解题模板"></a>三、解题模板</h2><p>最后我们需要来计算一下卡特兰数的通项Cn &#x3D; C(2n,n)&#x2F;(n+1)</p>
+<p>卡特兰数满足以下递推式：</p>
+<p>C1 &#x3D; 1, Cn &#x3D; Cn-1(4*n-2)&#x2F;(n+1) ​ （证明从略）</p>
+<p>因此，我们可以通过递推来得到第 n 个卡特兰数。</p>
+<details>
+    <summary>Java</summary>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.math.BigInteger;</span><br><span class="line"><span class="comment">// 打印前 n 个卡特兰数</span></span><br><span class="line"><span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">ans</span> <span class="operator">=</span> BigInteger.valueOf(<span class="number">1</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;1:&quot;</span> + ans.toString());</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">four</span> <span class="operator">=</span> BigInteger.valueOf(<span class="number">4</span>);</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">one</span> <span class="operator">=</span> BigInteger.valueOf(<span class="number">1</span>);</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">two</span> <span class="operator">=</span> BigInteger.valueOf(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">bi</span> <span class="operator">=</span> BigInteger.valueOf(i);</span><br><span class="line">ans = ans.multiply(four.multiply(bi).subtract(two)).divide(bi.add(one));</span><br><span class="line">System.out.println(i + <span class="string">&quot;:&quot;</span> + ans.toString());</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+    <summary>Python</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 打印前 n 个卡特兰数</span></span><br><span class="line"></span><br><span class="line">ans, n = <span class="number">1</span>, <span class="number">20</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;1:&quot;</span> + <span class="built_in">str</span>(ans))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">ans = ans \* (<span class="number">4</span> \* i - <span class="number">2</span>) // (i + <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>(i) + <span class="string">&quot;:&quot;</span> + <span class="built_in">str</span>(ans))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p>需要注意的是，由于卡特兰数增长速度较快，当 n 等于 17 时，卡特兰数将会超过 int 最大值，造成溢出（Python 除外）。对于 Java 语言来说，可以使用 BigInteger 来计算大整数。</p>
+<p>那如果 +1 的数量不等于 -1 的数量呢，如前面提到的电影购票问题。此时<br>，不是卡特兰数的通项，也就不能够继续使用原有的递推性质。</p>
+<p>那就推导新的公式，一般而言，为了降低难度，题目会要求我们计算排列数量An&#x3D;Cn * m! * n!&#x3D;(m+n)!*(m+1-n)&#x2F;(m+1)</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>基本上所有的卡特兰数问题经过一定的转换都可以还原成进出栈问题。因此，只要我们能够学会进出栈问题的解法，无论问题再怎么变化，本质还是不变的。</p>
+<p>卡特兰数问题中都会存在一种匹配关系，如进出栈匹配，括号匹配等，一旦计数问题中存在这种关系，那我们就需要去考虑这是否是卡特兰数问题。此外，我们还可以记住序列前四项：1, 1, 2, 5，这些将有利于我们联想到卡特兰数。1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786,…</p>
+<p>目前，LeetCode 已经出现一道卡特兰数问题 1259. 不相交的握手，这也是这篇文章编写的原因之一。同时，近年某巴巴，某讯的笔试题中也有出现过这类题目，无非将背景换成买烧饼，借书排队等，相信这些都难不倒读者。</p>
+<h2 id="五、扩展"><a href="#五、扩展" class="headerlink" title="五、扩展"></a>五、扩展</h2><p>最后留一道比较有意思的卡特兰数问题，欢迎读者留言，提出自己的看法。</p>
+<p>8 个高矮不同的人需要排成两队，每队 4 个人。其中，每排都是从低到高排列，且第二排的第 i 个人比第一排中第 i 个人高，则有多少种排队方式。</p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-卡特兰数(Catalan number)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/09/21/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0(Catalan%20number)/" class="article-date">
+      <time datetime="2022-09-21T02:53:30.081Z" itemprop="datePublished">2022-09-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>title: 卡特兰数(Catalan number)</p>
+<p>date: 2022-09-19 17:05:12</p>
+<p>categories: 2022年9月</p>
+<p>tags: [Leetcode, Math]</p>
+<hr>
+<p>卡特兰数（Catalan number）是组合数学中一个常出现在各种计数问题中的数列。<br>以比利时的数学家欧仁·查理·卡塔兰 (1814–1894)命名。</p>
+<p>[TOC]</p>
+<h1 id="卡特兰数（Catalan-number）-1"><a href="#卡特兰数（Catalan-number）-1" class="headerlink" title="卡特兰数（Catalan number） ^1"></a>卡特兰数（Catalan number） <a target="_blank" rel="noopener" href="https://leetcode.cn/circle/article/lWYCzv/">^1</a></h1><h2 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h2><p>卡特兰数（Catalan number）是组合数学中一个常出现在各种计数问题中的数列。<br>以比利时的数学家欧仁·查理·卡塔兰 (1814–1894)命名。</p>
+<p>卡塔兰数的通项公式为</p>
+<p>Cn&#x3D; C(2n, n)&#x2F;(n+1) &#x3D; (2n)!&#x2F;(n+1)!n!</p>
+<p>令其为h(n)的话，满足<br>h(n)&#x3D;h(0)*h(n-1) + h(1)*h(n-2) + … + h(n-1)h(0)  (n&gt;&#x3D;2)</p>
+<p>数列的前几项为：1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862，…</p>
+<p>本文将会选取几个经典的卡特兰问题，难度先易后难，带领读者逐个击破解决，最后给出相关的解题模板。</p>
+<h2 id="二、经典问题"><a href="#二、经典问题" class="headerlink" title="二、经典问题"></a>二、经典问题</h2><h3 id="2-1-进出栈序列"><a href="#2-1-进出栈序列" class="headerlink" title="2.1 进出栈序列"></a>2.1 进出栈序列</h3><p>这是一道最经典的入门级卡特兰数题目，如果能把这题看懂，相信后面的题目也能迎刃而解。</p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>n 个元素进栈序列为：1，2，3，4，…，n，则有多少种出栈序列</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>我们将进栈表示为 +1，出栈表示为 -1，则 1 3 2 的出栈序列可以表示为：+1 -1 +1 +1 -1 -1。</p>
+<p>根据栈本身的特点，每次出栈的时候，必定之前有元素入栈，即对于每个 -1 前面都有一个 +1 相对应。因此，出栈序列的所有前缀和必然大于等于 0，并且 +1 的数量等于 -1 的数量。</p>
+<p>接下来让我们观察一下 n &#x3D; 3 的一种出栈序列：+1 -1 -1 +1 -1 +1。序列前三项和小于 0，显然这是个非法的序列。</p>
+<p>如果将第一个前缀和小于 0 的前缀，即前三项元素都进行取反，就会得到：-1 +1 +1 +1 -1 +1。此时有 3 + 1 个 +1 以及 3 - 1 个 -1。</p>
+<p>因为这个小于 0 的前缀和必然是 -1，且 -1 比 +1 多一个，取反后，-1 比 +1 少一个，则 +1 变为 n + 1 个，且 -1 变为 n - 1 个。进一步推广，<strong>对于 n  元素的每种非法出栈序列，都会对应一个含有 n + 1 个 +1 以及 n - 1 个 -1 的序列。</strong></p>
+<p>如何证明这两种序列是一一对应的？</p>
+<p>假设非法序列为 A，对应的序列为 B。每个 A 只有一个”第一个前缀和小于 0 的前缀”，所以每个 A 只能产生一个 B。而每个 B 想要还原到 A，就需要找到”第一个前缀和大于 0 的前缀”，显然 B 也只能产生一个 A。</p>
+<p>每个 B 都有 n + 1 个 +1 以及 n - 1 个 -1，因此 B 的数量为C(2n, n+1)​ ，相当于在长度为 2n 的序列中找到 n + 1 个位置存放 +1。相应的，非法序列的数量也就等于 C(2n,n+1)</p>
+<p>出栈序列的总数量共有C(2n,n) ​ ，因此，合法的出栈序列的数量为 C(2n,n)-C(2n,n+1) &#x3D; C(2n,n)&#x2F;(n+1)</p>
+<p>此时我们就得到了卡特兰数的通项C(2n,n)&#x2F;(n+1) ，至于具体如何计算结果将会在后面进行介绍。</p>
+<h3 id="2-2-括号序列"><a href="#2-2-括号序列" class="headerlink" title="2.2 括号序列"></a>2.2 括号序列</h3><p><strong>题目描述</strong></p>
+<p>n 对括号，则有多少种 “括号匹配” 的括号序列</p>
+<p><strong>思路</strong></p>
+<p>左括号看成 +1，右括号看成 -1，那么就和上题的进出栈一样，共有C(2n,n)&#x2F;(n+1) 种序列。</p>
+<h3 id="2-3-二叉树"><a href="#2-3-二叉树" class="headerlink" title="2.3 二叉树"></a>2.3 二叉树</h3><p>题目描述</p>
+<p>n + 1 个叶子节点能够构成多少种形状不同的（国际）满二叉树</p>
+<p>国内教程定义：一个二叉树，如果每一个层的结点数都达到最大值，则这个二叉树就是满二叉树。也就是说，如果一个二叉树的深度为K，且结点总数是(2^k) -1 ，则它就是满二叉树。(一棵满二叉树的每一个结点要么是叶子结点，要么它有两个子结点，但是反过来不成立，因为完全二叉树也满足这个要求，但不是满二叉树)</p>
+<p>国外(国际)定义:a binary tree T is full if each node is either a leaf or possesses exactly two childnodes.</p>
+<p>大意为：如果一棵二叉树的结点要么是叶子结点，要么它有两个子结点，这样的树就是满二叉树。</p>
+<p>（国际）满二叉树定义：如果一棵二叉树的结点要么是叶子结点，要么它有两个子结点，这样的树就是满二叉树。</p>
+<p>思路</p>
+<p>使用深度优先搜索这个满二叉树，向左扩展时标记为 +1，向右扩展时标记为 -1。</p>
+<p>由于每个非叶子节点都有两个左右子节点，所有它必然会先向左扩展，再向右扩展。总体下来，左右扩展将会形成匹配，即变成进出栈的题型。n + 1 个叶子结点会有 2n 次扩展，构成​<br>种形状不同的满二叉树。</p>
+<h3 id="2-4-电影购票"><a href="#2-4-电影购票" class="headerlink" title="2.4 电影购票"></a>2.4 电影购票</h3><p>题目描述</p>
+<p>电影票一张 50 coin，且售票厅没有 coin。m 个人各自持有 50 coin，n 个人各自持有 100 coin。</p>
+<p>则有多少种排队方式，可以让每个人都买到电影票。</p>
+<p>思路</p>
+<p>持有 50 coin 的人每次购票时不需要找零，并且可以帮助后面持有 100 coin 的人找零；而对于持有 100 coin 的人每次购票时需要找零，但 100 coin 对后面的找零没有任何作用。</p>
+<p>因此，相当于每个持有 100 coin 的人都需要和一个持有 50 coin 的人进行匹配。我们将持有 50 coin 的标记为 +1，持有 100 coin 的标记为 -1，此时又回到了进出栈问题。</p>
+<p>不同的是，m 并一定等于 n，且排队序列是一种排列，需要考虑先后顺序，例如各自持有 50 coin 的甲和乙的前后关系会造成两种不同的排队序列。所以，将会有(C(m+n, m)-C(m+n,m+1)) * m! * n!</p>
+<p>第二项为什么是C(m+n,m+1)​ ，其实很简单，我们每次把第一个前缀小于0 的前缀取反后，会造成 +1 多了一个而 -1 少了一个。这里 +1 有 m 个，-1 有 n 个，取反后 +1 变成 m + 1 个，-1 变成 n - 1 个，总和不变。</p>
+<h2 id="三、解题模板"><a href="#三、解题模板" class="headerlink" title="三、解题模板"></a>三、解题模板</h2><p>最后我们需要来计算一下卡特兰数的通项Cn &#x3D; C(2n,n)&#x2F;(n+1)</p>
+<p>卡特兰数满足以下递推式：</p>
+<p>C1 &#x3D; 1, Cn &#x3D; Cn-1(4*n-2)&#x2F;(n+1) ​ （证明从略）</p>
+<p>因此，我们可以通过递推来得到第 n 个卡特兰数。</p>
+<details>
+    <summary>Java</summary>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.math.BigInteger;</span><br><span class="line"><span class="comment">// 打印前 n 个卡特兰数</span></span><br><span class="line"><span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">ans</span> <span class="operator">=</span> BigInteger.valueOf(<span class="number">1</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;1:&quot;</span> + ans.toString());</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">four</span> <span class="operator">=</span> BigInteger.valueOf(<span class="number">4</span>);</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">one</span> <span class="operator">=</span> BigInteger.valueOf(<span class="number">1</span>);</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">two</span> <span class="operator">=</span> BigInteger.valueOf(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line"><span class="type">BigInteger</span> <span class="variable">bi</span> <span class="operator">=</span> BigInteger.valueOf(i);</span><br><span class="line">ans = ans.multiply(four.multiply(bi).subtract(two)).divide(bi.add(one));</span><br><span class="line">System.out.println(i + <span class="string">&quot;:&quot;</span> + ans.toString());</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<details>
+    <summary>Python</summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 打印前 n 个卡特兰数</span></span><br><span class="line"></span><br><span class="line">ans, n = <span class="number">1</span>, <span class="number">20</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;1:&quot;</span> + <span class="built_in">str</span>(ans))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">ans = ans \* (<span class="number">4</span> \* i - <span class="number">2</span>) // (i + <span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>(i) + <span class="string">&quot;:&quot;</span> + <span class="built_in">str</span>(ans))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<p>需要注意的是，由于卡特兰数增长速度较快，当 n 等于 17 时，卡特兰数将会超过 int 最大值，造成溢出（Python 除外）。对于 Java 语言来说，可以使用 BigInteger 来计算大整数。</p>
+<p>那如果 +1 的数量不等于 -1 的数量呢，如前面提到的电影购票问题。此时<br>，不是卡特兰数的通项，也就不能够继续使用原有的递推性质。</p>
+<p>那就推导新的公式，一般而言，为了降低难度，题目会要求我们计算排列数量An&#x3D;Cn * m! * n!&#x3D;(m+n)!*(m+1-n)&#x2F;(m+1)</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>基本上所有的卡特兰数问题经过一定的转换都可以还原成进出栈问题。因此，只要我们能够学会进出栈问题的解法，无论问题再怎么变化，本质还是不变的。</p>
+<p>卡特兰数问题中都会存在一种匹配关系，如进出栈匹配，括号匹配等，一旦计数问题中存在这种关系，那我们就需要去考虑这是否是卡特兰数问题。此外，我们还可以记住序列前四项：1, 1, 2, 5，这些将有利于我们联想到卡特兰数。1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786,…</p>
+<p>目前，LeetCode 已经出现一道卡特兰数问题 1259. 不相交的握手 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/handshakes-that-dont-cross">^2</a>，这也是这篇文章编写的原因之一。同时，近年某巴巴，某讯的笔试题中也有出现过这类题目，无非将背景换成买烧饼，借书排队等，相信这些都难不倒读者。</p>
+<h2 id="五、扩展"><a href="#五、扩展" class="headerlink" title="五、扩展"></a>五、扩展</h2><p>最后留一道比较有意思的卡特兰数问题，欢迎读者留言，提出自己的看法。</p>
+<p>8 个高矮不同的人需要排成两队，每队 4 个人。其中，每排都是从低到高排列，且第二排的第 i 个人比第一排中第 i 个人高，则有多少种排队方式。</p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-829. 连续整数求和" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -685,204 +1071,9 @@
 
 
   
-    <article id="post-C++二维动态静态数组传参速查" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2022/08/05/C++%E4%BA%8C%E7%BB%B4%E5%8A%A8%E6%80%81%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E4%BC%A0%E5%8F%82%E9%80%9F%E6%9F%A5/" class="article-date">
-      <time datetime="2022-08-05T10:12:12.000Z" itemprop="datePublished">2022-08-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/05/C++%E4%BA%8C%E7%BB%B4%E5%8A%A8%E6%80%81%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E4%BC%A0%E5%8F%82%E9%80%9F%E6%9F%A5/">C++二维动态静态数组传参速查</a>
-    </h1>
-  
-
-        
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>动态静态数组传参数都是引用传递</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2022%E5%B9%B48%E6%9C%88/">2022年8月</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/" rel="tag">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2022/08/05/C++%E4%BA%8C%E7%BB%B4%E5%8A%A8%E6%80%81%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E4%BC%A0%E5%8F%82%E9%80%9F%E6%9F%A5/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-105. 从前序与中序遍历序列构造二叉树(剑指 Offer 07. 重建二叉树)" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2022/07/14/105.%20%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91(%E5%89%91%E6%8C%87%20Offer%2007.%20%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91)/" class="article-date">
-      <time datetime="2022-07-14T06:12:12.000Z" itemprop="datePublished">2022-07-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/07/14/105.%20%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91(%E5%89%91%E6%8C%87%20Offer%2007.%20%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91)/">105. 从前序与中序遍历序列构造二叉树(剑指 Offer 07. 重建二叉树)</a>
-    </h1>
-  
-
-        
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>剑指 Offer 07. 重建二叉树</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2022%E5%B9%B47%E6%9C%88/">2022年7月</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/" rel="tag">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Tree/" rel="tag">Binary Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Divide-and-Conquer/" rel="tag">Divide and Conquer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hash-Table/" rel="tag">Hash Table</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tree/" rel="tag">Tree</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2022/07/14/105.%20%E4%BB%8E%E5%89%8D%E5%BA%8F%E4%B8%8E%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91(%E5%89%91%E6%8C%87%20Offer%2007.%20%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91)/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Flask学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2022/06/13/Flask%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
-      <time datetime="2022-06-13T10:00:12.000Z" itemprop="datePublished">2022-06-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>Flask学习笔记</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/2022%E5%B9%B46%E6%9C%88/">2022年6月</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2022/06/13/Flask%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/48/">48</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/49/">49</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 </div>
@@ -893,7 +1084,7 @@
                 &copy; 2022 Yiye Li
             </div>
                 <i class="fas fa-chart-area"></i>
-                    <span class="post-count">总字数：1098.4k</span>
+                    <span class="post-count">总字数：1104.6k</span>
                 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
                     <script>
                         var now = new Date();
